@@ -262,6 +262,170 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/19/THUOJ-PA2-Proper-Rebuild/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/19/THUOJ-PA2-Proper-Rebuild/" itemprop="url">THUOJ PA2 Proper Rebuild</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-19T21:48:56+08:00">
+                2018-08-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/THUOJ/" itemprop="url" rel="index">
+                    <span itemprop="name">THUOJ</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>Given the preorder traversal sequence and postorder traversal sequence of a binary tree, we cannot determine the binary tree.<br><img src="https://dsa.cs.tsinghua.edu.cn/oj/attachment/7c7a/7c7a319cffe20865fa728afcdfccbccac25eeb46.png" alt="Figure1"><br>But for one proper binary tree, in which each internal node has two sons, we can uniquely determine it through its given preorder traversal sequence and postorder traversal sequence.</p>
+<p>Label n nodes in one binary tree using the integers in [1, n], we would like to output the inorder traversal sequence of a binary tree through its preorder and postorder traversal sequence.</p>
+<h1 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h1><ul>
+<li>1st line: integer n, the number of nodes in one given binary tree.</li>
+<li>2nd and 3rd: preorder and postorder traversal sequence </li>
+</ul>
+<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><ul>
+<li><p>Input</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">1 2 4 5 3</span><br><span class="line">4 5 2 3 1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Output</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4 2 5 1 3</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="Restrictions"><a href="#Restrictions" class="headerlink" title="Restrictions"></a>Restrictions</h1><ul>
+<li>95% 1 &lt;= n &lt;= 1,000,000</li>
+<li>100% 1 &lt;= n &lt;= 4,000,000</li>
+<li>input sequence is a permutation of {1,2,…,n}, corresponding to a legal binary tree.</li>
+<li>Time: 2s</li>
+<li>Memory: 256 MB</li>
+</ul>
+<h1 id="Hints"><a href="#Hints" class="headerlink" title="Hints"></a>Hints</h1><p><img src="https://dsa.cs.tsinghua.edu.cn/oj/attachment/047a/047a8ca961ff072a77e1429242c82031dc92851f.png" alt="Hints"><br>observe the positions of the left and right children in preorder and postorder traversal sequence.</p>
+<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>Note that the preordr is [PL…R…], whereas postorder is […L…RP].<br>So that we can determine the left child and right child for root P. Use recursion to build a tree. These inorder traverse the tree.</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">struct Tree &#123;</span><br><span class="line">	int data = 0;</span><br><span class="line">	Tree* lchild = NULL;</span><br><span class="line">	Tree* rchild = NULL;</span><br><span class="line">	Tree() &#123;&#125;</span><br><span class="line">	Tree(int d) : data(d) &#123; lchild = NULL; rchild = NULL; &#125;</span><br><span class="line">&#125;;</span><br><span class="line">void buildtree(Tree* root, int preorder[], int postorder[], int size) &#123; // initial size is 5</span><br><span class="line">	if (size == 1) &#123;</span><br><span class="line">		root-&gt;lchild = NULL;</span><br><span class="line">		root-&gt;rchild = NULL;</span><br><span class="line">		return;</span><br><span class="line">	&#125;</span><br><span class="line">	int left = preorder[1];    // left is 2</span><br><span class="line">	int right = postorder[size - 2];  // right is 3</span><br><span class="line">	int preright = 0;</span><br><span class="line">	while (preorder[preright++] != right);  // preright is 5</span><br><span class="line">	int leftsize = preright - 2;   // leftsize is 3</span><br><span class="line">	int rightsize = size - 1 - leftsize;  // rightsize is 1 </span><br><span class="line">	int *preLeft = new int[leftsize];    </span><br><span class="line">	int *preRight = new int[rightsize];</span><br><span class="line">	int *postLeft = new int[leftsize];</span><br><span class="line">	int *postRight = new int[rightsize];</span><br><span class="line">	for (int i = 1, j = 0; i &lt; preright - 1; i++) preLeft[j++] = preorder[i];       // i = [1, 3]  [2,4,5]</span><br><span class="line">	for (int i = preright - 1, j = 0; i &lt; size; i++) preRight[j++] = preorder[i];   // i = [4, 4]  [3]</span><br><span class="line">	for (int i = 0, j = 0; i &lt; leftsize; i++) postLeft[j++] = postorder[i];         // i = [0, 2]  [4,5,2]</span><br><span class="line">	for (int i = leftsize, j = 0; i &lt; size - 1; i++) postRight[j++] = postorder[i]; // i = [3, 3]  [3]</span><br><span class="line">	root-&gt;lchild = new Tree(preLeft[0]);</span><br><span class="line">	root-&gt;rchild = new Tree(preRight[0]);</span><br><span class="line">	buildtree(root-&gt;lchild, preLeft, postLeft, leftsize);     // leftsize is 3</span><br><span class="line">	delete[] preLeft;</span><br><span class="line">	delete[] postLeft;</span><br><span class="line">	buildtree(root-&gt;rchild, preRight, postRight, rightsize);  // rightsize is 1</span><br><span class="line">	delete[] preRight;</span><br><span class="line">	delete[] postRight;</span><br><span class="line">&#125;</span><br><span class="line">void inorder(Tree* root) &#123;</span><br><span class="line">	if (root == NULL)return;</span><br><span class="line">	inorder(root-&gt;lchild);</span><br><span class="line">	printf(&quot;%d &quot;, root-&gt;data);</span><br><span class="line">	inorder(root-&gt;rchild);</span><br><span class="line">&#125;</span><br><span class="line">int main() &#123;</span><br><span class="line">	int n;</span><br><span class="line">	scanf(&quot;%d&quot;, &amp;n);  // n is the number of nodes in the tree</span><br><span class="line">	int *preorder = new int[n];   // preorder sequence</span><br><span class="line">	int *postorder = new int[n];  // postorder sequence</span><br><span class="line">	for (int i = 0; i &lt; n; i++)</span><br><span class="line">		scanf(&quot;%d&quot;, &amp;preorder[i]);</span><br><span class="line">	for (int i = 0; i &lt; n; i++)</span><br><span class="line">		scanf(&quot;%d&quot;, &amp;postorder[i]);</span><br><span class="line">	//  preorder: [PL...R...]</span><br><span class="line">	//  postorder:[...L...RP]</span><br><span class="line">	Tree* root = new Tree(preorder[0]);</span><br><span class="line">	buildtree(root, preorder, postorder, n);</span><br><span class="line">	inorder(root);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/19/THUOJ-PA2-Train/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -389,8 +553,9 @@
 <h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>Trivial thought is that enumerate all the possibilities and see whether the output sequence is possible. However time consumption will be unbearable.<br>In my code I use one stack to simulate the stack permutation.</p>
 <ul>
 <li>given one number in the left list, check whether the top of the Stack equals it.</li>
-<li>If not, push another number into the stack until check succeed or stack is full or numbers are exhausted.<br>Note that we only need to check whether the top of the stack equals to current number instead of check the whole stack.</li>
+<li>If not, push another number into the stack until check succeed or stack is full or numbers are exhausted.</li>
 </ul>
+<p>Note that we only need to check whether the top of the stack equals to current number instead of check the whole stack.</p>
 <h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">struct Stack &#123;            // form a stack</span><br><span class="line">	int* nums;// stack that implemented using array</span><br><span class="line">	int size = -1;      // current size, also used to denote the top of the stack</span><br><span class="line">	int maxSize = 0;    // max size, defined by the input</span><br><span class="line">	Stack() &#123;&#125;   // constructor</span><br><span class="line">	Stack(int m) :maxSize(m) &#123;</span><br><span class="line">		nums = new int[m];</span><br><span class="line">	&#125;  // initialized using the max size m.</span><br><span class="line">	void clear() &#123; size = -1; &#125;</span><br><span class="line">	bool push(int num) &#123;</span><br><span class="line">		if ((size + 1) &gt;= maxSize)</span><br><span class="line">			return false;</span><br><span class="line">		else &#123;</span><br><span class="line">			nums[++size] = num;</span><br><span class="line">			return true;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;  // push operation</span><br><span class="line">	int pop() &#123; </span><br><span class="line">		if (size &gt;= 0)</span><br><span class="line">			return nums[size--];</span><br><span class="line">		else</span><br><span class="line">			return 0;</span><br><span class="line">	&#125;  // pop operation</span><br><span class="line">	int&amp; operator[](int n) &#123; return nums[n]; &#125; // subscript operator overload</span><br><span class="line">	bool find(int e) &#123;</span><br><span class="line">		bool flag = false;</span><br><span class="line">		if (e == nums[size])   // only need to check the top</span><br><span class="line">			flag = true;</span><br><span class="line">		return flag;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">/* </span><br><span class="line">simulate the operation of stack permutation.</span><br><span class="line">*/</span><br><span class="line">int main() &#123;</span><br><span class="line">	int n, m;   // m is the size of the stack</span><br><span class="line">	scanf(&quot;%d %d&quot;, &amp;n, &amp;m);</span><br><span class="line">	Stack S(m);  // now S have the size m</span><br><span class="line">	int opnum = 0;</span><br><span class="line">	char (*op)[6] = new char[n * 2][6];</span><br><span class="line">	bool flag = true;  // meas that the sequence is true</span><br><span class="line">	int A = 0;</span><br><span class="line">	for (int i = 0; i &lt; n; i++) &#123;  // for all elements in B</span><br><span class="line">		int num;</span><br><span class="line">		scanf(&quot;%d&quot;, &amp;num);</span><br><span class="line">		while (!S.find(num)) &#123; // if S don&apos;t find B[i]</span><br><span class="line">			if (A &lt;= n) &#123;   // make sure A don&apos;t exceed n</span><br><span class="line">				if (!S.push(++A)) &#123;// A pops one element and S pushes one element, if stack full, push fails</span><br><span class="line">					flag = false;</span><br><span class="line">					break;</span><br><span class="line">				&#125;</span><br><span class="line">				else sprintf(*(op + (opnum++)), &quot;push\0&quot;);</span><br><span class="line">			&#125;</span><br><span class="line">			else &#123;</span><br><span class="line">				flag = false;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if (!flag) break;</span><br><span class="line">		// now that S has the element that B needs</span><br><span class="line">		if (S.pop() != num) &#123;</span><br><span class="line">			flag = false;</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">		else sprintf(*(op + (opnum++)), &quot;pop\0&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	if (flag) &#123;</span><br><span class="line">		for (int i = 0; i &lt; opnum; i++)&#123;</span><br><span class="line">			printf(&quot;%s&quot;, *(op + i));</span><br><span class="line">			if (opnum - 1 - i) printf(&quot;\n&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	else</span><br><span class="line">		printf(&quot;No&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           
         
@@ -585,7 +750,7 @@
 <h1 id="Vocabulary"><a href="#Vocabulary" class="headerlink" title="Vocabulary"></a>Vocabulary</h1><ul>
 <li>preserve<ul>
 <li>The only way that they can preserve their history is to recount it as sagas–legands handed down from one generation of storytellers to another.</li>
-<li>Only when the rare china is broken have we realized the emergency to preserve such vulable cultural relics.</li>
+<li>Only when the rare china is broken have we realized the emergency to preserve such valuable cultural relics.</li>
 </ul>
 </li>
 <li>recount<ul>
@@ -1582,7 +1747,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1604,7 +1769,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
