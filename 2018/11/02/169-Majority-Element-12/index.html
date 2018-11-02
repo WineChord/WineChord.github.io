@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/blog-logo180.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog-logo32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog-logo16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="LeetCode,Array," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="问题描述寻找众数（出现次数大于$\lfloor n/2 \rfloor$ ） 方法一：暴力对每一个元素都数一下它自己出现的次数123456789101112131415161718// javapublic int majorityElement(int[] nums)&amp;#123;    int majorityCount = nums.length / 2;    for(int num: nu">
+<meta name="keywords" content="LeetCode,Array">
+<meta property="og:type" content="article">
+<meta property="og:title" content="169. Majority Element-12">
+<meta property="og:url" content="http://yoursite.com/2018/11/02/169-Majority-Element-12/index.html">
+<meta property="og:site_name" content="Wine&amp;Chord">
+<meta property="og:description" content="问题描述寻找众数（出现次数大于$\lfloor n/2 \rfloor$ ） 方法一：暴力对每一个元素都数一下它自己出现的次数123456789101112131415161718// javapublic int majorityElement(int[] nums)&amp;#123;    int majorityCount = nums.length / 2;    for(int num: nu">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-11-02T03:28:49.147Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="169. Majority Element-12">
+<meta name="twitter:description" content="问题描述寻找众数（出现次数大于$\lfloor n/2 \rfloor$ ） 方法一：暴力对每一个元素都数一下它自己出现的次数123456789101112131415161718// javapublic int majorityElement(int[] nums)&amp;#123;    int majorityCount = nums.length / 2;    for(int num: nu">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/02/169-Majority-Element-12/"/>
+
+
+
+
+
+  <title>169. Majority Element-12 | Wine&Chord</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <!-- <a href="https://github.com/WineChord"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a> -->
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wine&Chord</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/169-Majority-Element-12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">169. Majority Element-12</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-02T10:07:43+08:00">
+                2018-11-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>寻找众数（出现次数大于$\lfloor n/2 \rfloor$ ）</p>
+<h3 id="方法一：暴力"><a href="#方法一：暴力" class="headerlink" title="方法一：暴力"></a>方法一：暴力</h3><p>对每一个元素都数一下它自己出现的次数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// java</span><br><span class="line">public int majorityElement(int[] nums)&#123;</span><br><span class="line">    int majorityCount = nums.length / 2;</span><br><span class="line">    for(int num: nums)&#123;</span><br><span class="line">        int count = 0;</span><br><span class="line">        for(int elem: nums)</span><br><span class="line">            if(elem == num) count++;</span><br><span class="line">        if(count &gt; majorityCount) return num;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br><span class="line"># Python</span><br><span class="line">def majorityElement(self, nums):</span><br><span class="line">    majority_count = len(nums)/2</span><br><span class="line">    for num in nums:</span><br><span class="line">        count = sum(1 for elem in nums if elem == num)</span><br><span class="line">        if count &gt; majority_count:</span><br><span class="line">            return num</span><br></pre></td></tr></table></figure></p>
+<p>time: $O(n^2)$,  space: $O(1)$</p>
+<h3 id="方法二：HashMap"><a href="#方法二：HashMap" class="headerlink" title="方法二：HashMap"></a>方法二：HashMap</h3><p>使用 HashMap 来数每个元素出现的个数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">// java</span><br><span class="line">private Map&lt;Integer, Integer&gt; countNums(int[] nums)&#123;</span><br><span class="line">    Map&lt;Integer, Integer&gt; counts = new HashMap&lt;Integer, Integer&gt;();</span><br><span class="line">    for(int num: nums)&#123;</span><br><span class="line">        if(!counts.containsKey(num)) counts.put(num, 1);</span><br><span class="line">        else counts.put(num, counts.get(num)+1);</span><br><span class="line">    &#125;</span><br><span class="line">    return counts;</span><br><span class="line">&#125;</span><br><span class="line">public int majorityElement(int[] nums)&#123;</span><br><span class="line">    Map&lt;Integer, Integer&gt; counts = countNums(nums);</span><br><span class="line">    Map.Entry&lt;Integer, Integer&gt; majorityEntry = null;</span><br><span class="line">    for(Map.Entry&lt;Integer, Integer&gt; entry: counts.entrySet())</span><br><span class="line">        if(majorityEntry == null || entry.getValue() &gt; majorityEntry.getValue())</span><br><span class="line">            majorityEntry = entry;</span><br><span class="line">    return majorityEntry.getKey();</span><br><span class="line">&#125;</span><br><span class="line"># Python3</span><br><span class="line">def majorityElement(self, nums):</span><br><span class="line">    counts = collections.Counter(nums)</span><br><span class="line">    return max(counts.keys(), key=counts.get)</span><br><span class="line">// C++</span><br><span class="line">int majorityElement(vector&lt;int&gt;&amp; nums)&#123;</span><br><span class="line">    unordered_map&lt;int, int&gt; counts;</span><br><span class="line">    int n = nums.size();</span><br><span class="line">    for(int i = 0; i &lt; n; i++)</span><br><span class="line">        if(++counts[nums[i]] &gt; n/2)</span><br><span class="line">            return nums[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>time: O(n)</p>
+<p>space: O(n)</p>
+<h3 id="方法三：排序"><a href="#方法三：排序" class="headerlink" title="方法三：排序"></a>方法三：排序</h3><p>将数组进行排序，那么众数应该出现在 $\lfloor n/2 \rfloor$（n是奇数），或者 $\lfloor n/2 \rfloor+1$ （n为偶数）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// java</span><br><span class="line">public int majorityElement(int[] nums)&#123;</span><br><span class="line">    Arrays.sort(nums);</span><br><span class="line">    return nums[nums.length/2];</span><br><span class="line">&#125;</span><br><span class="line"># Python3</span><br><span class="line">def majorityElement(self, nums):</span><br><span class="line">    nums.sort()</span><br><span class="line">    return nums[len(nums)//2]</span><br><span class="line">// C++</span><br><span class="line">int majorityElement(vector&lt;int&gt;&amp; nums)&#123;</span><br><span class="line">    nth_element(nums.begin(), nums.begin()+nums.size()/2, nums.end());</span><br><span class="line">    return nums[nums.size()/2];</span><br><span class="line">&#125;</span><br><span class="line">// C++ sort</span><br><span class="line">int majorityElement(vector&lt;int&gt;&amp; nums)&#123;</span><br><span class="line">    sort(nums);</span><br><span class="line">    return nums[nums.size()/2];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="方法四：随机"><a href="#方法四：随机" class="headerlink" title="方法四：随机"></a>方法四：随机</h3><p>随机选取一个数，判断它是不是众数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">// Java</span><br><span class="line">private int randRange(Random rand, int min, int max)&#123;</span><br><span class="line">    return rand.naxInt(max-min) + min;</span><br><span class="line">&#125;</span><br><span class="line">private int countOccurences(int[] nums, int num)&#123;</span><br><span class="line">    int count = 0;</span><br><span class="line">    for(int i = 0; i &lt; nums.length; i++)</span><br><span class="line">        if(nums[i] == num) count++;</span><br><span class="line">    return count;</span><br><span class="line">&#125;</span><br><span class="line">public int majorityElement(int[] nums)&#123;</span><br><span class="line">    Random rand = new Random();</span><br><span class="line">    int majorityCount = nums.length/2;</span><br><span class="line">    while(1)&#123;</span><br><span class="line">        int candidate = nums[randRange(rand, 0, nums.length)];</span><br><span class="line">        if(countOccurences(nums, candidate) &gt; majorityCount)</span><br><span class="line">            return candidate;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"># Python</span><br><span class="line">import random</span><br><span class="line">def majorityElement(self, nums):</span><br><span class="line">    majority_count = len(nums) // 2</span><br><span class="line">    while True:</span><br><span class="line">        candidate = random.choice(nums)</span><br><span class="line">        if sum(1 for elem in nums if elem == candidate) &gt; majority_count:</span><br><span class="line">            return candidate</span><br><span class="line">// C++</span><br><span class="line">int majorityElement(vector&lt;int&gt;&amp; nums)&#123;</span><br><span class="line">    int n = nums.size();</span><br><span class="line">    srand(unsigned(time(NULL)));</span><br><span class="line">    while(1)&#123;</span><br><span class="line">        int idx = rand() % n;</span><br><span class="line">        int candidate = nums[idx];</span><br><span class="line">        int counts = 0;</span><br><span class="line">        for(int i = 0; i &lt; n; i++)</span><br><span class="line">            if(nums[i] == candidate) counts++;</span><br><span class="line">        if(counts &gt; n/2) return candidate;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="方法五：分治法"><a href="#方法五：分治法" class="headerlink" title="方法五：分治法"></a>方法五：分治法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">private int countInRange(int[] nums, int num, int lo, int hi)&#123;</span><br><span class="line">    int count = 0;</span><br><span class="line">    for(int i = lo; i &lt;= hi; i++) // [lo, hi] all inclusive</span><br><span class="line">        if(nums[i] == num) count++;</span><br><span class="line">    return count;</span><br><span class="line">&#125;</span><br><span class="line">private int majorityElementRec(int[] nums, int lo, int hi)&#123;</span><br><span class="line">    if(lo == hi) return nums[lo];</span><br><span class="line">    int mid = (hi-lo)/2 + lo;</span><br><span class="line">    int left = majorityElementRec(nums, lo, mid);</span><br><span class="line">    int right = majorityElementRec(nums, mid+1, hi);</span><br><span class="line">    if(left == right) return left;</span><br><span class="line">    int leftCount = countInRange(nums, left, lo, hi);</span><br><span class="line">    int rightCount = countInRange(nums, right, lo, hi);</span><br><span class="line">    return leftCount &gt; rightCount ? left : right;</span><br><span class="line">&#125;</span><br><span class="line">public int majorityElement(int[] nums)&#123;</span><br><span class="line">    return majorityElementRec(nums, 0, nums.length-1);</span><br><span class="line">&#125;</span><br><span class="line"># Python3</span><br><span class="line">def majorityElement(self, nums, lo=0, hi=None):</span><br><span class="line">    def majority_element_rec(lo, hi):</span><br><span class="line">        if lo == hi:</span><br><span class="line">            return nums[lo]</span><br><span class="line">        mid = (hi-lo)//2 + lo</span><br><span class="line">        left = majority_element_rec(lo, mid)</span><br><span class="line">        right = majority_element_rec(mid+1, hi)</span><br><span class="line">        if left == right:</span><br><span class="line">            return left</span><br><span class="line">        left_count = sum(1 for i in range(lo, hi+1) if nums[i] == left)</span><br><span class="line">        right_count = sum(1 for i in range(lo, hi+1) if nums[i] == right)</span><br><span class="line">        return left if left_count &gt; right_count else right</span><br><span class="line">    return majority_element_rec(0, len(nums-1))</span><br><span class="line">// C++</span><br><span class="line">int majorityElement(vector&lt;int&gt;&amp; nums)&#123;</span><br><span class="line">    return majority(nums, 0, nums.size()-1);</span><br><span class="line">&#125;</span><br><span class="line">int majority(vector&lt;int&gt;&amp; nums, int left, int right)&#123;</span><br><span class="line">    if(left == right) return nums[left];</span><br><span class="line">    int mid = left + ((right-left)&gt;&gt;1);</span><br><span class="line">    int lm = majority(nums, left, mid);</span><br><span class="line">    int rm = majority(nums, mid+1, right);</span><br><span class="line">    if(lm == rm) return lm;</span><br><span class="line">    int lcount = count(nums.begin()+left, nums.begin()+right+1, lm);</span><br><span class="line">    int rcount = count(nums.begin()+left, nums.begin()+right+1, rm);</span><br><span class="line">    return lcount &gt; rcount ? lm : rm;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="方法六：Boyer-Moore-Voting"><a href="#方法六：Boyer-Moore-Voting" class="headerlink" title="方法六：Boyer-Moore Voting"></a>方法六：Boyer-Moore Voting</h3><p>从前向后遍历数组，首先把当前的元素认为是众数，用一个变量 count 来表示这个认为是众数的数出现的次数。往后依次处理元素，假如碰到了这个数，count加一，假如碰到的不是这个数，count减一，当 count 减为 0 时，重新选取下一个元素作为众数。相当于不断舍弃一个前缀，这个前缀中可能的众数和非众数的数量是相同的，所以可以保证的是即使舍弃的前缀中包含众数，这个众数在后缀中仍为众数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">// java</span><br><span class="line">public int majorityElement(int[] nums)&#123;</span><br><span class="line">    int count = 0;</span><br><span class="line">    Integer candidate = null;</span><br><span class="line">    for(int num: nums)&#123;</span><br><span class="line">        if(count == 0) candidate = num;</span><br><span class="line">        count += (num == candidate)?1:-1;</span><br><span class="line">    &#125;</span><br><span class="line">    return candidate;</span><br><span class="line">&#125;</span><br><span class="line"># Python</span><br><span class="line">def majorityElement(self, nums)</span><br><span class="line">    count = 0</span><br><span class="line">    candidate = None</span><br><span class="line">    for num in nums:</span><br><span class="line">        if count == 0:</span><br><span class="line">            candidate = num</span><br><span class="line">        count + (1 if num == candidate else -1)</span><br><span class="line">    return candidate</span><br><span class="line">// C++</span><br><span class="line">int majorityElement(vector&lt;int&gt;&amp; nums)&#123;</span><br><span class="line">    int major, counts = 0, n = nums.size();</span><br><span class="line">    for(int i = 0; i &lt; n; i++)&#123;</span><br><span class="line">        if(!counts)&#123;</span><br><span class="line">            major = nums[i];</span><br><span class="line">            counts = 1;</span><br><span class="line">        &#125; </span><br><span class="line">        else counts += (nums[i] == major) ? 1 : -1;</span><br><span class="line">    &#125;</span><br><span class="line">    return major;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="方法七：Bit-manipulation"><a href="#方法七：Bit-manipulation" class="headerlink" title="方法七：Bit manipulation"></a>方法七：Bit manipulation</h3><p>找出这n个数，32bit中每个bit最多的的那一种情况<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">int majorityElement(vector&lt;int&gt;&amp; nums)&#123;</span><br><span class="line">    int major = 0, n = nums.size();</span><br><span class="line">    for(int i = 0, mask = 1; i &lt; 32; i++, mask &lt;&lt;= 1)&#123;</span><br><span class="line">        int bitCounts = 0;</span><br><span class="line">        for(int j = 0; j &lt; n; j++)&#123;</span><br><span class="line">            if(nums[j] &amp; mask) bitCounts++;</span><br><span class="line">            if(bitCounts &gt; n/2)&#123;</span><br><span class="line">                major |= mask;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return major;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+          
+            <a href="/tags/Array/" rel="tag"># Array</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/02/448-Find-All-Numbers-Disappeared-in-an-Array-11/" rel="next" title="448. Find All Numbers Disappeared in an Array-11">
+                <i class="fa fa-chevron-left"></i> 448. Find All Numbers Disappeared in an Array-11
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/02/121-Best-Time-to-Buy-and-Sell-Stock-13/" rel="prev" title="121. Best Time to Buy and Sell Stock-13">
+                121. Best Time to Buy and Sell Stock-13 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/blog-logo.png"
+                alt="Wine&Chord" />
+            
+              <p class="site-author-name" itemprop="name">Wine&Chord</p>
+              <p class="site-description motion-element" itemprop="description">Primarily for recording my learning routes and practicing English writing skills.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法一：暴力"><span class="nav-number">2.</span> <span class="nav-text">方法一：暴力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法二：HashMap"><span class="nav-number">3.</span> <span class="nav-text">方法二：HashMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法三：排序"><span class="nav-number">4.</span> <span class="nav-text">方法三：排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法四：随机"><span class="nav-number">5.</span> <span class="nav-text">方法四：随机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法五：分治法"><span class="nav-number">6.</span> <span class="nav-text">方法五：分治法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法六：Boyer-Moore-Voting"><span class="nav-number">7.</span> <span class="nav-text">方法六：Boyer-Moore Voting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法七：Bit-manipulation"><span class="nav-number">8.</span> <span class="nav-text">方法七：Bit manipulation</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" >Wine&Chord</span>
+
+  
+</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- <script type="text/javascript" src="/js/src/love.js"></script>script> -->

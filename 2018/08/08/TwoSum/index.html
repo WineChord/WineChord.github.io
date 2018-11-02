@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Array,LeetCode," />
+  <meta name="keywords" content="LeetCode,Array,Hash," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Primarily for recording my learning routes and practicing English writing skills.">
-<meta name="keywords" content="Array,LeetCode">
+<meta name="description" content="问题描述给定一个数组和一个目标值，问数组中的哪两个元素相加可以得到这个值，返回这两个元素的下标 思路使用散列表，对于每一个元素 $num[i]$，另一半的值应为 $numToFind=target-num[i]$，直接在散列表中查找该关键码是否存在，若存在，该关键码对应的值即为其下标 $j$，有因为当前元素的下标为 $i$，故应返回 $[i,j]$；若不存在，则将 ${num[i],i}$ 这一">
+<meta name="keywords" content="LeetCode,Array,Hash">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TwoSum">
+<meta property="og:title" content="1.TwoSum">
 <meta property="og:url" content="http://yoursite.com/2018/08/08/TwoSum/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="Primarily for recording my learning routes and practicing English writing skills.">
+<meta property="og:description" content="问题描述给定一个数组和一个目标值，问数组中的哪两个元素相加可以得到这个值，返回这两个元素的下标 思路使用散列表，对于每一个元素 $num[i]$，另一半的值应为 $numToFind=target-num[i]$，直接在散列表中查找该关键码是否存在，若存在，该关键码对应的值即为其下标 $j$，有因为当前元素的下标为 $i$，故应返回 $[i,j]$；若不存在，则将 ${num[i],i}$ 这一">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-08-08T03:28:46.551Z">
+<meta property="og:updated_time" content="2018-11-01T07:12:46.609Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TwoSum">
-<meta name="twitter:description" content="Primarily for recording my learning routes and practicing English writing skills.">
+<meta name="twitter:title" content="1.TwoSum">
+<meta name="twitter:description" content="问题描述给定一个数组和一个目标值，问数组中的哪两个元素相加可以得到这个值，返回这两个元素的下标 思路使用散列表，对于每一个元素 $num[i]$，另一半的值应为 $numToFind=target-num[i]$，直接在散列表中查找该关键码是否存在，若存在，该关键码对应的值即为其下标 $j$，有因为当前元素的下标为 $i$，故应返回 $[i,j]$；若不存在，则将 ${num[i],i}$ 这一">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>TwoSum | Wine&Chord</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>1.TwoSum | Wine&Chord</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">TwoSum</h1>
+          <h1 class="post-title" itemprop="name headline">1.TwoSum</h1>
         
 
         <div class="post-meta">
@@ -315,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithm-Ploblems/" itemprop="url" rel="index">
-                    <span itemprop="name">Algorithm Ploblems</span>
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
                   </a>
                 </span>
 
@@ -352,7 +352,11 @@
       
 
       
-        
+        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定一个数组和一个目标值，问数组中的哪两个元素相加可以得到这个值，返回这两个元素的下标</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>使用散列表，对于每一个元素 $num[i]$，另一半的值应为 $numToFind=target-num[i]$，直接在散列表中查找该关键码是否存在，若存在，该关键码对应的值即为其下标 $j$，有因为当前元素的下标为 $i$，故应返回 $[i,j]$；若不存在，则将 ${num[i],i}$ 这一 $key-value \ pair$ 存入散列表中。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; nums, int target)&#123;</span><br><span class="line">	unordered_map&lt;int, int&gt; hash;</span><br><span class="line">	vector&lt;int&gt; result;</span><br><span class="line">	for(int i = 0; i &lt; nums.size(); i++)&#123;</span><br><span class="line">		int numberToFind = target - nums[i]; // 找到要查找的值</span><br><span class="line">		if(hash.find(numberToFind) != hash.end())&#123;</span><br><span class="line">			result.push_back(hash[numberToFind]); // 找到了</span><br><span class="line">			result.push_back(i);</span><br><span class="line">			return result;</span><br><span class="line">		&#125;</span><br><span class="line">		hash[nums[i]] = i;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>对每个元素只需操作一次，故时间复杂度为 $O(n)$，需要维护一个 $O(n)$ 的散列表，故空间复杂度为 $O(n)$</p>
+
       
     </div>
     
@@ -369,9 +373,11 @@
       
         <div class="post-tags">
           
+            <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+          
             <a href="/tags/Array/" rel="tag"># Array</a>
           
-            <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+            <a href="/tags/Hash/" rel="tag"># Hash</a>
           
         </div>
       
@@ -448,8 +454,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -468,7 +483,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">73</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -479,7 +494,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -490,7 +505,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -513,6 +528,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">3.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂度分析"><span class="nav-number">4.</span> <span class="nav-text">复杂度分析</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
