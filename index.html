@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/706-Design-HashMap-HT-13/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/15/博客Win10本地配置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -281,7 +281,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/03/706-Design-HashMap-HT-13/" itemprop="url">706. Design HashMap-HT-13</a></h1>
+                <a class="post-title-link" href="/2019/01/15/博客Win10本地配置/" itemprop="url">博客Win10本地配置</a></h1>
         
 
         <div class="post-meta">
@@ -293,8 +293,1110 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-03T23:42:18+08:00">
-                2018-11-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-15T21:31:10+08:00">
+                2019-01-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>大概2019.1.10左右的时候在电脑的SSD上装了一个Win10（顿时觉得这孩子寿命又长了两年）。需要重新配置一下本地运行blog的环境，故记录之。</p>
+<h2 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h2><p><a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js</a></p>
+<h2 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h2><p><a href="http://git-scm.com/download/" target="_blank" rel="noopener">http://git-scm.com/download/</a></p>
+<h2 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h2><p>在blog目录下右键：’Git Bash here’<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure></p>
+<p>PS:执行上一步时出现了一个小插曲，显示了如下错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">npm ERR! code ECONNRESET</span><br><span class="line">npm ERR! errno ECONNRESET</span><br><span class="line">npm ERR! network request to https://registry.npmjs.org/escape-string-regexp failed, reason: Client network socket disconnected before secure TLS connection was established</span><br><span class="line">npm ERR! network This is a problem related to network connectivity.</span><br><span class="line">npm ERR! network In most cases you are behind a proxy or have bad network settings.</span><br><span class="line">npm ERR! network</span><br><span class="line">npm ERR! network If you are behind a proxy, please make sure that the</span><br><span class="line">npm ERR! network &apos;proxy&apos; config is set properly.  See: &apos;npm help config&apos;</span><br><span class="line"></span><br><span class="line">npm ERR! A complete log of this run can be found in:</span><br><span class="line">npm ERR!     C:\Users\wine&amp;chord\AppData\Roaming\npm-cache\_logs\2019-01-15T13_08_57_636Z-debug.log</span><br></pre></td></tr></table></figure></p>
+<p>解决方法：换成淘宝的npm源。<a href="https://www.oschina.net/question/2443995_2155065" target="_blank" rel="noopener">参考资料</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm config set registry &quot;https://registry.npm.taobao.org&quot;</span><br></pre></td></tr></table></figure></p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g # 生成静态文件</span><br><span class="line">$ hexo s # 启动本地服务器</span><br><span class="line">$ hexo d # 部署远端服务器</span><br><span class="line">$ hexo d -g # 生成部署</span><br><span class="line">$ hexo s -g # 生成预览</span><br><span class="line">$ hexo new &quot;Post Name&quot; # 新建一篇文章</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/883-Projection-Area-of-3D-Shapes-Math-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/04/883-Projection-Area-of-3D-Shapes-Math-2/" itemprop="url">883. Projection Area of 3D Shapes-Math-2</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-04T20:42:41+08:00">
+                2018-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>一个三维物体的投影区域面积</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/728-Self-Dividing-Numbers-Math-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/04/728-Self-Dividing-Numbers-Math-1/" itemprop="url">728. Self Dividing Numbers-Math-1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-04T20:35:41+08:00">
+                2018-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>问一个范围内有哪些数是可以被他们的每一位整除的？</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># Python</span><br><span class="line">is_self_dividing = lambda num: &apos;0&apos; not in str(num) and all([num%int(digit)==0 for digit in str(num)])</span><br><span class="line">return filter(is_self_dividing, range(left, right+1))</span><br><span class="line">// C++</span><br><span class="line">vector&lt;int&gt; res;</span><br><span class="line">for(int i = left, n = 0; i &lt;= right; i++)&#123;</span><br><span class="line">    for(n = i; n &gt; 0; n /= 10)</span><br><span class="line">        if(!(n%10) || i%(n%10)) break;</span><br><span class="line">    if(!n) res.push_back(i);</span><br><span class="line">&#125;</span><br><span class="line">return res;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/788-Rotated-Digits-String-12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/04/788-Rotated-Digits-String-12/" itemprop="url">788. Rotated Digits-String-12</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-04T20:26:36+08:00">
+                2018-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>找出一个范围内有多少个好数。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def rotatedDigits(self, N):</span><br><span class="line">    s1 = set([1,8,0])</span><br><span class="line">    s2 = set([1,8,0,6,9,2,5])</span><br><span class="line">    def isGood(x):</span><br><span class="line">        s = set([int(i) for i in str(x)])</span><br><span class="line">        return s.issubset(s2) and not s.issubset(s1)</span><br><span class="line">    return sum(isGood(i) for i in range(N+1))</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/696-Count-Binary-Substrings-String-11/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/04/696-Count-Binary-Substrings-String-11/" itemprop="url">696. Count Binary Substrings-String-11</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-04T20:20:20+08:00">
+                2018-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>一个字符串中连续且长度相等的 ‘1’ ‘0’ 子串个数。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// C++</span><br><span class="line">int cur = 1, pre = 0, res = 0;</span><br><span class="line">for(int i = 1; i &lt; s.size(); i++)&#123;</span><br><span class="line">    if(s[i] == s[i-1]) cur++;</span><br><span class="line">    else&#123;</span><br><span class="line">        res += min(cur, pre);</span><br><span class="line">        pre = cur;</span><br><span class="line">        cur = 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">return res + min(cur, pre);</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/520-Detect-Capital-String-10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/04/520-Detect-Capital-String-10/" itemprop="url">520. Detect Capital-String-10</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-04T20:15:57+08:00">
+                2018-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>检测大小写使用是否正确</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int cnt = 0;</span><br><span class="line">for(char c: word)</span><br><span class="line">    if(&apos;Z&apos; - c &gt;= 0) cnt++;</span><br><span class="line">return (cnt==0 || cnt == word.size()) || (cnt==1 &amp;&amp; &apos;Z&apos; - word[0] &gt;= 0);</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/520-String-10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/04/520-String-10/" itemprop="url">520-String-10</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-04T20:15:26+08:00">
+                2018-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/824-Goat-Latin-String-9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/04/824-Goat-Latin-String-9/" itemprop="url">824. Goat Latin-String-9</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-04T20:06:46+08:00">
+                2018-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>说羊语</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul>
+<li>建立一个元音集</li>
+<li>把字符串分割成单词</li>
+<li>检查每个单词是否以元音开头</li>
+<li>不是的话首字母后置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">unordered_set&lt;char&gt; vowel(&#123;&apos;a&apos;, &apos;e&apos;, &apos;i&apos;, &apos;o&apos;, &apos;u&apos;, &apos;A&apos;, &apos;E&apos;, &apos;I&apos;, &apos;O&apos;, &apos;U&apos;&#125;);</span><br><span class="line">istringstream iss(S);</span><br><span class="line">string res, w;</span><br><span class="line">int i = 0, j;</span><br><span class="line">while(iss &gt;&gt; w)&#123;</span><br><span class="line">    res += &apos; &apos; + (vowel.count(w[0]) == 1 ? w : w.substr(1) + w[0] + &quot;ma&quot;);</span><br><span class="line">    for(j = 0, ++i; j &lt; i; j++) res += &quot;a&quot;;</span><br><span class="line">&#125;</span><br><span class="line">return res.substr(1);</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/521-Longest-Uncommon-Subsequence-I-String-8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/04/521-Longest-Uncommon-Subsequence-I-String-8/" itemprop="url">521. Longest Uncommon Subsequence I-String-8</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-04T20:01:19+08:00">
+                2018-11-04
               </time>
             
 
@@ -403,7 +1505,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/242-Valid-Anagram-HT-12/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/893-Groups-of-Special-Equivalent-Strings-String-7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -422,7 +1524,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/03/242-Valid-Anagram-HT-12/" itemprop="url">242. Valid Anagram-HT-12</a></h1>
+                <a class="post-title-link" href="/2018/11/04/893-Groups-of-Special-Equivalent-Strings-String-7/" itemprop="url">893. Groups of Special-Equivalent Strings-String-7</a></h1>
         
 
         <div class="post-meta">
@@ -434,8 +1536,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-03T23:30:59+08:00">
-                2018-11-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-04T19:53:30+08:00">
+                2018-11-04
               </time>
             
 
@@ -496,1198 +1598,8 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>anagram: 字谜。确定一个字符串是不是另外一个字符串的字谜（他的排列形式）</p>
-<h3 id="方法一：排序"><a href="#方法一：排序" class="headerlink" title="方法一：排序"></a>方法一：排序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public boolean isAnagram(String s, String t)&#123;</span><br><span class="line">    if(s.length() != t.length()) return false;</span><br><span class="line">    char[] str1 = s.toCharArray();</span><br><span class="line">    char[] str2 = t.toCharArray();</span><br><span class="line">    Arrays.sort(str1);</span><br><span class="line">    Arrays.sort(str2);</span><br><span class="line">    return Arrays.equals(str1, str2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>time: $O(nlogn)$</li>
-<li>space: $O(1)$<h3 id="方法二：Hash-Table"><a href="#方法二：Hash-Table" class="headerlink" title="方法二：Hash Table"></a>方法二：Hash Table</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public boolean isAnagram(String s, String t)&#123;</span><br><span class="line">    if(s.length() != t.length()) return false;</span><br><span class="line">    int[] counter = new int[26];</span><br><span class="line">    for(int i = 0; i &lt; s.length; i++)&#123;</span><br><span class="line">        counter[s.charAt(i)-&apos;a&apos;]++;</span><br><span class="line">        counter[t.charAt(i)-&apos;a&apos;]--;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int count: counter)</span><br><span class="line">        if(count) return false;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/349-Interection-of-Two-Arrays-HT-11/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/03/349-Interection-of-Two-Arrays-HT-11/" itemprop="url">349. Interection of Two Arrays-HT-11</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-03T23:24:49+08:00">
-                2018-11-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给两个数组，找出他们公有的元素。</p>
-<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/690-Employee-Importance-HT-10/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/03/690-Employee-Importance-HT-10/" itemprop="url">690. Employee Importance-HT-10</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-03T23:06:41+08:00">
-                2018-11-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定一个员工的数据结构，包括他特有的id和重要度和他直接下属的id。找出某一个员工及其下属的中重要度。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">// Employee info</span><br><span class="line">class Employee&#123;</span><br><span class="line">public:</span><br><span class="line">    int id;</span><br><span class="line">    int importance;</span><br><span class="line">    vector&lt;int&gt; subordinates;</span><br><span class="line">&#125;</span><br><span class="line">// use depth-first search</span><br><span class="line">// Java</span><br><span class="line">Map&lt;Integer, Employee&gt; emap;</span><br><span class="line">public int getImportance(List&lt;Employee&gt; employees, int queryid)&#123;</span><br><span class="line">    emap = new HashMap();</span><br><span class="line">    for(Employee e: employees) emap.put(e.id, e);</span><br><span class="line">    return dfs(queryid);</span><br><span class="line">&#125;</span><br><span class="line">public int dfs(int eid)&#123;</span><br><span class="line">    Employee employee = emap.get(eid);</span><br><span class="line">    int ans = employee.importance;</span><br><span class="line">    for(Integer subid: employee.subordinates)</span><br><span class="line">        ans += dfs(subid);</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br><span class="line"># Python</span><br><span class="line">def getImportance(self, employee, query_id):</span><br><span class="line">    emap = &#123;e.id: e for e in employees&#125;</span><br><span class="line">    def dfs(eid):</span><br><span class="line">        employee = emap[eid]</span><br><span class="line">        return (employee.importance+sum(dfs(eid) for eid in employee.subordinates))</span><br><span class="line">    return dfs(query_id)</span><br><span class="line">// C++</span><br><span class="line">int getImportance(vector&lt;Employee*&gt; employees, int id)&#123;</span><br><span class="line">    unordered_map&lt;int, Employee*&gt; map;</span><br><span class="line">    for(const auto element: employees)</span><br><span class="line">        map[element-&gt;id] = element;</span><br><span class="line">    return help(map, id);</span><br><span class="line">&#125;</span><br><span class="line">int help(unordered_map&lt;int, Employee*&gt;&amp; map, const int id)&#123;</span><br><span class="line">    auto sum = map[id]-&gt;importance;</span><br><span class="line">    for(const auto element: map[id]-&gt;subordinates)</span><br><span class="line">        sum += help(map, element);</span><br><span class="line">    return sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>time: $O(n)$</li>
-<li>space: $O(n)$</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/389-Find-the-Difference-HT-9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/03/389-Find-the-Difference-HT-9/" itemprop="url">389. Find the Difference-HT-9</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-03T22:55:00+08:00">
-                2018-11-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>两个字符串只有小写字母，其中一个是有另一个随机排序并在随机位置上增加的一个字母，问新增加的字母是什么？</p>
-<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">// bit manipulation</span><br><span class="line">char findTheDifference(string s, string t)&#123;</span><br><span class="line">    char r = 0;</span><br><span class="line">    for(char c:s) r ^= c;</span><br><span class="line">    for(char c:t) r ^= c;</span><br><span class="line">    return r;</span><br><span class="line">&#125;</span><br><span class="line"># Python </span><br><span class="line"># dict</span><br><span class="line">def findTheDifference(self, s, t):</span><br><span class="line">    dic = &#123;&#125;</span><br><span class="line">    for ch in s:</span><br><span class="line">        dic[ch] = dic.get(ch, 0) + 1</span><br><span class="line">    for ch in t:</span><br><span class="line">        if dic.get(ch, 0) == 0:</span><br><span class="line">            return ch</span><br><span class="line">        else:</span><br><span class="line">            dic[ch] -= 1</span><br><span class="line"># difference</span><br><span class="line">def findTheDifference(self, s, t):</span><br><span class="line">    diff = 0</span><br><span class="line">    for i in range(len(s)):</span><br><span class="line">        diff -= ord(s[i])</span><br><span class="line">        diff += ord(t[i])</span><br><span class="line">    diff += ord(t[-1])</span><br><span class="line">    return chr(diff)</span><br><span class="line"># xor</span><br><span class="line">def findTheDifference(self, s, t):</span><br><span class="line">    code = 0</span><br><span class="line">    for ch in s+t:</span><br><span class="line">        code ^= ord(ch)</span><br><span class="line">    return chr(code)</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/748-Shorest-Completing-Word-HT-8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/03/748-Shorest-Completing-Word-HT-8/" itemprop="url">748. Shorest Completing Word-HT-8</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-03T22:30:45+08:00">
-                2018-11-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>找到最短的且含有模板中所有字母的单词。</p>
-<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">// Java</span><br><span class="line">public String shortestCompletingWord(String licensePlate, String[] words)&#123;</span><br><span class="line">    String target = licensePlate.toLowerCase();</span><br><span class="line">    int[] charMap = new int[26];</span><br><span class="line">    for(int i = 0; i &lt; target.length(); i++)</span><br><span class="line">        if(Character.isLetter(target.charAt(i)))</span><br><span class="line">            charMap[target.charAt(i)-&apos;a&apos;]++;</span><br><span class="line">    int minLength = Integer.MAX_VALUE;</span><br><span class="line">    String result = null;</span><br><span class="line">    for(int i = 0; i &lt; words.length; i++)&#123;</span><br><span class="line">        String word = words[i].toLowerCase();</span><br><span class="line">        if(matches(word, charMap) &amp;&amp; word.length() &lt; minLength)&#123;</span><br><span class="line">            minLength = word.length();</span><br><span class="line">            result = words[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br><span class="line">private boolean matches(String word, int[] charMap)&#123;</span><br><span class="line">    int[] targetMap = nre int[26];</span><br><span class="line">    for(int i = 0; i &lt; word.length(); i++)</span><br><span class="line">        if(Character.isLetter(word.charAt(i)))</span><br><span class="line">            targetMap[word.charAt(i)-&apos;a&apos;]++;</span><br><span class="line">    for(int i = 0; i &lt; 26; i++)</span><br><span class="line">        if(charMap[i]!=0 &amp;&amp; target&lt;ap[i] &lt; charMap[i])</span><br><span class="line">            return false;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br><span class="line">// C++</span><br><span class="line">string shortestCompletingWord(string s, vector&lt;string&gt;&amp; words)&#123;</span><br><span class="line">    std::transform(s.begin(), s.end(), s.begin(), ::tolower);</span><br><span class="line">    map&lt;char, int&gt; counts;</span><br><span class="line">    int total = 0;</span><br><span class="line">    for(char c: s)</span><br><span class="line">        if(isalpha(c))&#123;</span><br><span class="line">            counts[c]++;</span><br><span class="line">            total++;</span><br><span class="line">        &#125;</span><br><span class="line">    string res;</span><br><span class="line">    for(string w: words)&#123;</span><br><span class="line">        int n = total;</span><br><span class="line">        map&lt;char, int&gt; cnts = counts;</span><br><span class="line">        for(int i = 0; i &lt; w.size(); i++)</span><br><span class="line">            n -= (cnts[w[i]]--) &gt; 0;</span><br><span class="line">        if(n==0 &amp;&amp; (res.empty() || w.size() &lt; res.size()))</span><br><span class="line">            res = w;</span><br><span class="line">    &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/136-Single-Number-HT-7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/03/136-Single-Number-HT-7/" itemprop="url">136. Single Number-HT-7</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-03T22:13:59+08:00">
-                2018-11-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个非空的整数数组，除了一个元素出现了一次之外每个元素都出现了两次。找出那个只出现一次的元素。</p>
-<h3 id="方法一：List-operation"><a href="#方法一：List-operation" class="headerlink" title="方法一：List operation"></a>方法一：List operation</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def singleNumber(self, nums):</span><br><span class="line">    no_duplicate_list = []</span><br><span class="line">    for i in nums:</span><br><span class="line">        if i not in no_duplicate_list:</span><br><span class="line">            no_duplicate_list.append(i)</span><br><span class="line">        else:</span><br><span class="line">            no_duplicate_list.remove(i)</span><br><span class="line">    return no_duplicate_list.pop()</span><br></pre></td></tr></table></figure>
-<ul>
-<li>time: $O(n^2)$</li>
-<li><p>space: $O(n)$</p>
-<h3 id="方法二：Hash-Table"><a href="#方法二：Hash-Table" class="headerlink" title="方法二：Hash Table"></a>方法二：Hash Table</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def singleNumber(self, nums):</span><br><span class="line">    hash_table = []</span><br><span class="line">    for i in nums:</span><br><span class="line">        try:</span><br><span class="line">            hash_table.pop(i)</span><br><span class="line">        except:</span><br><span class="line">            hash_table[i] = 1</span><br><span class="line">    return hash_table.popitem()[0]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>time: $O(n)$</p>
-</li>
-<li><p>space: $O(n)$</p>
-<h3 id="方法三：数学"><a href="#方法三：数学" class="headerlink" title="方法三：数学"></a>方法三：数学</h3><p>$$<br>2 \times (a+b+c) - (a+a+b+b+c) = c<br>$$</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def singleNUmber(self, nums):</span><br><span class="line">    return 2*sum(set(nums)) - sum(nums)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>time: $O(n+n)=O(n)$, see it as <code>sum(list(i for i in nums)</code></p>
-</li>
-<li><p>space: $O(n+n)=O(n)$</p>
-<h3 id="方法四：位操作"><a href="#方法四：位操作" class="headerlink" title="方法四：位操作"></a>方法四：位操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def singleNumber(self, nums):</span><br><span class="line">    a = 0</span><br><span class="line">    for i in nums:</span><br><span class="line">        a ^= i</span><br><span class="line">    return a</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>time: $O(n)$</p>
-</li>
-<li>space: $O(1)$</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/575-Distribute-Candies-HT-6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/03/575-Distribute-Candies-HT-6/" itemprop="url">575. Distribute Candies-HT-6</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-03T21:33:13+08:00">
-                2018-11-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个长度为偶数的整数数组，不同的数字代表不同类型的糖果。将糖果均分给哥哥姐姐，问姐姐可以得到的糖果种类总数最大是多少？</p>
-<h3 id="方法一：暴力"><a href="#方法一：暴力" class="headerlink" title="方法一：暴力"></a>方法一：暴力</h3><p>生成糖果的所有排列，然后确定前半个数组中的种类个数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// Java</span><br><span class="line">int max_kind = 0;</span><br><span class="line">public int distributeCandies(int[] nums)&#123;</span><br><span class="line">    permute(nums, 0);</span><br><span class="line">    return max_kind;</span><br><span class="line">&#125;</span><br><span class="line">public void permute(int[] nums, int l)&#123;</span><br><span class="line">    if(l == nums.length-1)&#123;</span><br><span class="line">        HashSet&lt;Integer&gt; set = new HashSet&lt;&gt;();</span><br><span class="line">        for(int i = 0; i &lt; nums.length/2; i++)</span><br><span class="line">            set.add(nums[i]);</span><br><span class="line">        max_kind = Math.max(max_kind, set.size());</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i = l; i &lt; nums.length; i++)&#123;</span><br><span class="line">        swap(nums, i, l);</span><br><span class="line">        permute(nums, l+1);</span><br><span class="line">        swap(nums, i, l);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public void swap(int[] nums, int x, int y)&#123;</span><br><span class="line">    int temp = nums[x];</span><br><span class="line">    nums[x] = nums[y];</span><br><span class="line">    nums[y] = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>time: $O(n!)$</li>
-<li><p>space: $O(n)$</p>
-<h3 id="方法二：更好的暴力"><a href="#方法二：更好的暴力" class="headerlink" title="方法二：更好的暴力"></a>方法二：更好的暴力</h3><p>观察到姐姐最多可以拿到的种类数是 n/2，对于种类数少于 n/2 的情况，我们可以把所有种类数的糖果都给姐姐。所以我们遍历数组，找出糖果的种类总数。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// Java</span><br><span class="line">public int distributeCandies(int[] candies)&#123;</span><br><span class="line">    int count = 0;</span><br><span class="line">    for(int i = 0; i &lt; candies.length &amp;&amp; count &lt; candies.length/2; i++)&#123;</span><br><span class="line">        if(candies[i] != Integer.MIN_VALUE)&#123;</span><br><span class="line">            count++;</span><br><span class="line">            for(int j = i+1; j &lt; candies.length; j++)</span><br><span class="line">                if(candies[j] == candies[i])</span><br><span class="line">                    candies[j] == Integer.MIN_VALUE;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>time: $O(n^2)$</p>
-</li>
-<li><p>space: $O(1)$</p>
-<h3 id="方法三：使用排序"><a href="#方法三：使用排序" class="headerlink" title="方法三：使用排序"></a>方法三：使用排序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public int distributeCandies(int[] candies)&#123;</span><br><span class="line">    Array.sort(candies);</span><br><span class="line">    int count = 1;</span><br><span class="line">    for(int i = 1; i &lt; candies.length &amp;&amp; count &lt; candies.length/2; i++)</span><br><span class="line">        if(candies[i] &gt; candies[i-1])</span><br><span class="line">            count++;</span><br><span class="line">    return count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>time: $O(nlogn)$</p>
-</li>
-<li><p>space: $O(1)$</p>
-<h3 id="方法四：使用-set"><a href="#方法四：使用-set" class="headerlink" title="方法四：使用 set"></a>方法四：使用 set</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public int distributeCandies(int[] candies)&#123;</span><br><span class="line">    HashSet&lt;Integer&gt; set = new HashSet&lt;&gt;();</span><br><span class="line">    for(int candy: candies)&#123;</span><br><span class="line">        set.add(candy);</span><br><span class="line">    &#125;</span><br><span class="line">    return Math.min(set.size(), candies.length/2);</span><br><span class="line">&#125;</span><br><span class="line">// C++</span><br><span class="line">int distributeCandies(vector&lt;int&gt;&amp; candies)&#123;</span><br><span class="line">    unordered_set&lt;int&gt; kinds;</span><br><span class="line">    for(int kind: candies)</span><br><span class="line">        kinds.insert(kind);</span><br><span class="line">    return min(kinds.size(), candies.size()/2);</span><br><span class="line">&#125;</span><br><span class="line">int distributeCandies(vector&lt;int&gt;&amp; candies)&#123;</span><br><span class="line">    return min(unordered_set&lt;int&gt;(begin(c), end(c)).size(), c.size()/2);</span><br><span class="line">&#125;</span><br><span class="line">int distributeCandies(vector&lt;int&gt;&amp; candies)&#123;</span><br><span class="line">    bitset&lt;200001&gt; hash;</span><br><span class="line">    int count = 0;</span><br><span class="line">    for(int i: candies)&#123;</span><br><span class="line">        if(!hash.test(i+100000))&#123;</span><br><span class="line">            count++;</span><br><span class="line">            hash.set(i+100000);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    int n = candies.size();</span><br><span class="line">    return min(count, n/2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>time: $O(n)$</p>
-</li>
-<li>space: $O(n)$</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/463-Island-Perimeter-HT-5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/03/463-Island-Perimeter-HT-5/" itemprop="url">463 Island Perimeter-HT-5</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-03T21:24:43+08:00">
-                2018-11-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>perimeter:周长。给一个二维数组，1代表陆地，0代表海洋。格子是水平或者垂直连接的。确定岛的周长</p>
-<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>找到陆地总数，再找到重复边的个数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int islandPerimeter(vector&lt;vector&lt;int&gt;&gt;&amp; grid)&#123;</span><br><span class="line">    int count = 0, repeat = 0;</span><br><span class="line">    for(int i = 0; i &lt; grid.size(); i++)&#123;</span><br><span class="line">        for(int j = 0; j &lt; grid[i].size(); j++)&#123;</span><br><span class="line">            if(grid[i][j] == 1)&#123;</span><br><span class="line">                count++;</span><br><span class="line">                if(i!=0&amp;&amp;grid[i-1][j]==1) repeat++;</span><br><span class="line">                if(j!=0&amp;&amp;grid[i][j-1]==1) repeat++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return 4*count-repeat*2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/884-Uncommon-Words-from-Two-Sentences-HT-4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/03/884-Uncommon-Words-from-Two-Sentences-HT-4/" itemprop="url">884. Uncommon Words from Two Sentences-HT-4</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-03T21:11:38+08:00">
-                2018-11-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给两个句子，句子由单词以及单词间的空格构成，每个单词只有小写形式。一个不常见的单词只出现在所有的句子中一次，找出所有的不常见单词。</p>
-<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">// Java</span><br><span class="line">public String[] uncommonFromSentences(String A, String B)&#123;</span><br><span class="line">    Map&lt;String, Integer&gt; count = new HashMap();</span><br><span class="line">    for(String word: A.split(&quot; &quot;))</span><br><span class="line">        count.put(word, count.getOrDefault(word, 0)+1);</span><br><span class="line">    for(String word: B.split(&quot; &quot;))</span><br><span class="line">        count.put(word, count.getOrDefault(word, 0)+1);</span><br><span class="line">    List&lt;String&gt; ans = new LinkedList();</span><br><span class="line">    for(String word: count.keySet())</span><br><span class="line">        if(count.get(word) == 1)</span><br><span class="line">            ans.add(word);</span><br><span class="line">    return ans.toArray(new String[ans.size()]);</span><br><span class="line">&#125;</span><br><span class="line"># Python</span><br><span class="line">def uncommonFromSentences(self, A, B):</span><br><span class="line">    count = &#123;&#125;</span><br><span class="line">    for word in A.split():</span><br><span class="line">        count[word] = count.get(word, 0) + 1</span><br><span class="line">    for word in B.split():</span><br><span class="line">        count[word] = count.get(word, 0) + 1</span><br><span class="line">    # Alternatively:</span><br><span class="line">    # count = collections.Counter(A.split())</span><br><span class="line">    # count += collections.Counter(B.split())</span><br><span class="line">    return [word for word in count if count[word] == 1]</span><br><span class="line">// C++</span><br><span class="line">vector&lt;string&gt; uncommonFromSentences(string A, string B)&#123;</span><br><span class="line">    unordered_map&lt;string, int&gt; count;</span><br><span class="line">    istringstream iss(A + &quot; &quot; + B);</span><br><span class="line">    while(iss &gt;&gt; A) count[A]++;</span><br><span class="line">    vector&lt;string&gt; res;</span><br><span class="line">    for(auto w: count)</span><br><span class="line">        if(w.second == 1)</span><br><span class="line">            res.push_back(w.first);</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>找到字符串数组中有多少组是相等价的。</p>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;String&gt; seen = new HashSet();</span><br><span class="line">for(String S: A)&#123;</span><br><span class="line">    int[] count = new int[52];</span><br><span class="line">    for(int i =0; i &lt; S.length(); i++)</span><br><span class="line">        count[S.charAt(i) - &apos;a&apos; + 26*(i%2)]++;</span><br><span class="line">    seen.add(Arrays.toString(count));</span><br><span class="line">&#125;</span><br><span class="line">return seen.size();</span><br><span class="line">// C++</span><br><span class="line">set&lt;pair&lt;string, string&gt;&gt; s;</span><br><span class="line">for(const auto&amp; w: A)&#123;</span><br><span class="line">    pair&lt;string, string&gt; p;</span><br><span class="line">    for(int i = 0; i &lt; w.size(); i++)&#123;</span><br><span class="line">        if(i % 2) p.first += w[i];</span><br><span class="line">        else p.second += w[i];</span><br><span class="line">    &#125;</span><br><span class="line">    sort(p.first.begin(), p.first.end());</span><br><span class="line">    sort(p.second.begin(), p.second.end());</span><br><span class="line">    s.insert(p);</span><br><span class="line">&#125;</span><br><span class="line">return s.size();</span><br></pre></td></tr></table></figure>
           
         
       
@@ -1726,7 +1638,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1776,7 +1688,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-count">126</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1798,7 +1710,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1835,7 +1747,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

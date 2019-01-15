@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/169-Majority-Element-12/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/104-Maximum-Depth-of-Binary-Tree-Tree-9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -281,7 +281,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/02/169-Majority-Element-12/" itemprop="url">169. Majority Element-12</a></h1>
+                <a class="post-title-link" href="/2018/11/04/104-Maximum-Depth-of-Binary-Tree-Tree-9/" itemprop="url">104. Maximum Depth of Binary Tree-Tree-9</a></h1>
         
 
         <div class="post-meta">
@@ -293,8 +293,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-02T10:07:43+08:00">
-                2018-11-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-04T11:35:04+08:00">
+                2018-11-04
               </time>
             
 
@@ -355,17 +355,18 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>寻找众数（出现次数大于$\lfloor n/2 \rfloor$ ）</p>
-<h3 id="方法一：暴力"><a href="#方法一：暴力" class="headerlink" title="方法一：暴力"></a>方法一：暴力</h3><p>对每一个元素都数一下它自己出现的次数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// java</span><br><span class="line">public int majorityElement(int[] nums)&#123;</span><br><span class="line">    int majorityCount = nums.length / 2;</span><br><span class="line">    for(int num: nums)&#123;</span><br><span class="line">        int count = 0;</span><br><span class="line">        for(int elem: nums)</span><br><span class="line">            if(elem == num) count++;</span><br><span class="line">        if(count &gt; majorityCount) return num;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br><span class="line"># Python</span><br><span class="line">def majorityElement(self, nums):</span><br><span class="line">    majority_count = len(nums)/2</span><br><span class="line">    for num in nums:</span><br><span class="line">        count = sum(1 for elem in nums if elem == num)</span><br><span class="line">        if count &gt; majority_count:</span><br><span class="line">            return num</span><br></pre></td></tr></table></figure></p>
-<p>time: $O(n^2)$,  space: $O(1)$</p>
-<h3 id="方法二：HashMap"><a href="#方法二：HashMap" class="headerlink" title="方法二：HashMap"></a>方法二：HashMap</h3><p>使用 HashMap 来数每个元素出现的个数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">// java</span><br><span class="line">private Map&lt;Integer, Integer&gt; countNums(int[] nums)&#123;</span><br><span class="line">    Map&lt;Integer, Integer&gt; counts = new HashMap&lt;Integer, Integer&gt;();</span><br><span class="line">    for(int num: nums)&#123;</span><br><span class="line">        if(!counts.containsKey(num)) counts.put(num, 1);</span><br><span class="line">        else counts.put(num, counts.get(num)+1);</span><br><span class="line">    &#125;</span><br><span class="line">    return counts;</span><br><span class="line">&#125;</span><br><span class="line">public int majorityElement(int[] nums)&#123;</span><br><span class="line">    Map&lt;Integer, Integer&gt; counts = countNums(nums);</span><br><span class="line">    Map.Entry&lt;Integer, Integer&gt; majorityEntry = null;</span><br><span class="line">    for(Map.Entry&lt;Integer, Integer&gt; entry: counts.entrySet())</span><br><span class="line">        if(majorityEntry == null || entry.getValue() &gt; majorityEntry.getValue())</span><br><span class="line">            majorityEntry = entry;</span><br><span class="line">    return majorityEntry.getKey();</span><br><span class="line">&#125;</span><br><span class="line"># Python3</span><br><span class="line">def majorityElement(self, nums):</span><br><span class="line">    counts = collections.Counter(nums)</span><br><span class="line">    return max(counts.keys(), key=counts.get)</span><br><span class="line">// C++</span><br><span class="line">int majorityElement(vector&lt;int&gt;&amp; nums)&#123;</span><br><span class="line">    unordered_map&lt;int, int&gt; counts;</span><br><span class="line">    int n = nums.size();</span><br><span class="line">    for(int i = 0; i &lt; n; i++)</span><br><span class="line">        if(++counts[nums[i]] &gt; n/2)</span><br><span class="line">            return nums[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>time: O(n)</p>
-<p>space: O(n)</p>
-<h3 id="方法三：排序"><a href="#方法三：排序" class="headerlink" title="方法三：排序"></a>方法三：排序</h3><p>将数组进行排序，那么众数应该出现在 $\lfloor n/2 \rfloor$（n是奇数），或者 $\lfloor n/2 \rfloor+1$ （n为偶数）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// java</span><br><span class="line">public int majorityElement(int[] nums)&#123;</span><br><span class="line">    Arrays.sort(nums);</span><br><span class="line">    return nums[nums.length/2];</span><br><span class="line">&#125;</span><br><span class="line"># Python3</span><br><span class="line">def majorityElement(self, nums):</span><br><span class="line">    nums.sort()</span><br><span class="line">    return nums[len(nums)//2]</span><br><span class="line">// C++</span><br><span class="line">int majorityElement(vector&lt;int&gt;&amp; nums)&#123;</span><br><span class="line">    nth_element(nums.begin(), nums.begin()+nums.size()/2, nums.end());</span><br><span class="line">    return nums[nums.size()/2];</span><br><span class="line">&#125;</span><br><span class="line">// C++ sort</span><br><span class="line">int majorityElement(vector&lt;int&gt;&amp; nums)&#123;</span><br><span class="line">    sort(nums);</span><br><span class="line">    return nums[nums.size()/2];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="方法四：随机"><a href="#方法四：随机" class="headerlink" title="方法四：随机"></a>方法四：随机</h3><p>随机选取一个数，判断它是不是众数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">// Java</span><br><span class="line">private int randRange(Random rand, int min, int max)&#123;</span><br><span class="line">    return rand.naxInt(max-min) + min;</span><br><span class="line">&#125;</span><br><span class="line">private int countOccurences(int[] nums, int num)&#123;</span><br><span class="line">    int count = 0;</span><br><span class="line">    for(int i = 0; i &lt; nums.length; i++)</span><br><span class="line">        if(nums[i] == num) count++;</span><br><span class="line">    return count;</span><br><span class="line">&#125;</span><br><span class="line">public int majorityElement(int[] nums)&#123;</span><br><span class="line">    Random rand = new Random();</span><br><span class="line">    int majorityCount = nums.length/2;</span><br><span class="line">    while(1)&#123;</span><br><span class="line">        int candidate = nums[randRange(rand, 0, nums.length)];</span><br><span class="line">        if(countOccurences(nums, candidate) &gt; majorityCount)</span><br><span class="line">            return candidate;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"># Python</span><br><span class="line">import random</span><br><span class="line">def majorityElement(self, nums):</span><br><span class="line">    majority_count = len(nums) // 2</span><br><span class="line">    while True:</span><br><span class="line">        candidate = random.choice(nums)</span><br><span class="line">        if sum(1 for elem in nums if elem == candidate) &gt; majority_count:</span><br><span class="line">            return candidate</span><br><span class="line">// C++</span><br><span class="line">int majorityElement(vector&lt;int&gt;&amp; nums)&#123;</span><br><span class="line">    int n = nums.size();</span><br><span class="line">    srand(unsigned(time(NULL)));</span><br><span class="line">    while(1)&#123;</span><br><span class="line">        int idx = rand() % n;</span><br><span class="line">        int candidate = nums[idx];</span><br><span class="line">        int counts = 0;</span><br><span class="line">        for(int i = 0; i &lt; n; i++)</span><br><span class="line">            if(nums[i] == candidate) counts++;</span><br><span class="line">        if(counts &gt; n/2) return candidate;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="方法五：分治法"><a href="#方法五：分治法" class="headerlink" title="方法五：分治法"></a>方法五：分治法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">private int countInRange(int[] nums, int num, int lo, int hi)&#123;</span><br><span class="line">    int count = 0;</span><br><span class="line">    for(int i = lo; i &lt;= hi; i++) // [lo, hi] all inclusive</span><br><span class="line">        if(nums[i] == num) count++;</span><br><span class="line">    return count;</span><br><span class="line">&#125;</span><br><span class="line">private int majorityElementRec(int[] nums, int lo, int hi)&#123;</span><br><span class="line">    if(lo == hi) return nums[lo];</span><br><span class="line">    int mid = (hi-lo)/2 + lo;</span><br><span class="line">    int left = majorityElementRec(nums, lo, mid);</span><br><span class="line">    int right = majorityElementRec(nums, mid+1, hi);</span><br><span class="line">    if(left == right) return left;</span><br><span class="line">    int leftCount = countInRange(nums, left, lo, hi);</span><br><span class="line">    int rightCount = countInRange(nums, right, lo, hi);</span><br><span class="line">    return leftCount &gt; rightCount ? left : right;</span><br><span class="line">&#125;</span><br><span class="line">public int majorityElement(int[] nums)&#123;</span><br><span class="line">    return majorityElementRec(nums, 0, nums.length-1);</span><br><span class="line">&#125;</span><br><span class="line"># Python3</span><br><span class="line">def majorityElement(self, nums, lo=0, hi=None):</span><br><span class="line">    def majority_element_rec(lo, hi):</span><br><span class="line">        if lo == hi:</span><br><span class="line">            return nums[lo]</span><br><span class="line">        mid = (hi-lo)//2 + lo</span><br><span class="line">        left = majority_element_rec(lo, mid)</span><br><span class="line">        right = majority_element_rec(mid+1, hi)</span><br><span class="line">        if left == right:</span><br><span class="line">            return left</span><br><span class="line">        left_count = sum(1 for i in range(lo, hi+1) if nums[i] == left)</span><br><span class="line">        right_count = sum(1 for i in range(lo, hi+1) if nums[i] == right)</span><br><span class="line">        return left if left_count &gt; right_count else right</span><br><span class="line">    return majority_element_rec(0, len(nums-1))</span><br><span class="line">// C++</span><br><span class="line">int majorityElement(vector&lt;int&gt;&amp; nums)&#123;</span><br><span class="line">    return majority(nums, 0, nums.size()-1);</span><br><span class="line">&#125;</span><br><span class="line">int majority(vector&lt;int&gt;&amp; nums, int left, int right)&#123;</span><br><span class="line">    if(left == right) return nums[left];</span><br><span class="line">    int mid = left + ((right-left)&gt;&gt;1);</span><br><span class="line">    int lm = majority(nums, left, mid);</span><br><span class="line">    int rm = majority(nums, mid+1, right);</span><br><span class="line">    if(lm == rm) return lm;</span><br><span class="line">    int lcount = count(nums.begin()+left, nums.begin()+right+1, lm);</span><br><span class="line">    int rcount = count(nums.begin()+left, nums.begin()+right+1, rm);</span><br><span class="line">    return lcount &gt; rcount ? lm : rm;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="方法六：Boyer-Moore-Voting"><a href="#方法六：Boyer-Moore-Voting" class="headerlink" title="方法六：Boyer-Moore Voting"></a>方法六：Boyer-Moore Voting</h3><p>从前向后遍历数组，首先把当前的元素认为是众数，用一个变量 count 来表示这个认为是众数的数出现的次数。往后依次处理元素，假如碰到了这个数，count加一，假如碰到的不是这个数，count减一，当 count 减为 0 时，重新选取下一个元素作为众数。相当于不断舍弃一个前缀，这个前缀中可能的众数和非众数的数量是相同的，所以可以保证的是即使舍弃的前缀中包含众数，这个众数在后缀中仍为众数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">// java</span><br><span class="line">public int majorityElement(int[] nums)&#123;</span><br><span class="line">    int count = 0;</span><br><span class="line">    Integer candidate = null;</span><br><span class="line">    for(int num: nums)&#123;</span><br><span class="line">        if(count == 0) candidate = num;</span><br><span class="line">        count += (num == candidate)?1:-1;</span><br><span class="line">    &#125;</span><br><span class="line">    return candidate;</span><br><span class="line">&#125;</span><br><span class="line"># Python</span><br><span class="line">def majorityElement(self, nums)</span><br><span class="line">    count = 0</span><br><span class="line">    candidate = None</span><br><span class="line">    for num in nums:</span><br><span class="line">        if count == 0:</span><br><span class="line">            candidate = num</span><br><span class="line">        count + (1 if num == candidate else -1)</span><br><span class="line">    return candidate</span><br><span class="line">// C++</span><br><span class="line">int majorityElement(vector&lt;int&gt;&amp; nums)&#123;</span><br><span class="line">    int major, counts = 0, n = nums.size();</span><br><span class="line">    for(int i = 0; i &lt; n; i++)&#123;</span><br><span class="line">        if(!counts)&#123;</span><br><span class="line">            major = nums[i];</span><br><span class="line">            counts = 1;</span><br><span class="line">        &#125; </span><br><span class="line">        else counts += (nums[i] == major) ? 1 : -1;</span><br><span class="line">    &#125;</span><br><span class="line">    return major;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="方法七：Bit-manipulation"><a href="#方法七：Bit-manipulation" class="headerlink" title="方法七：Bit manipulation"></a>方法七：Bit manipulation</h3><p>找出这n个数，32bit中每个bit最多的的那一种情况<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">int majorityElement(vector&lt;int&gt;&amp; nums)&#123;</span><br><span class="line">    int major = 0, n = nums.size();</span><br><span class="line">    for(int i = 0, mask = 1; i &lt; 32; i++, mask &lt;&lt;= 1)&#123;</span><br><span class="line">        int bitCounts = 0;</span><br><span class="line">        for(int j = 0; j &lt; n; j++)&#123;</span><br><span class="line">            if(nums[j] &amp; mask) bitCounts++;</span><br><span class="line">            if(bitCounts &gt; n/2)&#123;</span><br><span class="line">                major |= mask;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return major;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>找出一个二叉树的最大深度<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct TreeNode&#123;</span><br><span class="line">    int val;</span><br><span class="line">    TreeNode *left;</span><br><span class="line">    TreeNode *right;</span><br><span class="line">    TreeNode(int x): val(x), left(NULL), right(NULL)&#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// C++</span><br><span class="line">int maxDepth(TreeNode *root)&#123;</span><br><span class="line">    if(root == NULL) return 0;</span><br><span class="line">    return max(1+maxDepth(root-&gt;left), 1+maxDepth(root-&gt;right));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>time: $O(N)$</li>
+<li><p>space: $O(N)$, best case: $O(logN)$</p>
+<h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><p>使用一个栈，通过深度优先搜索来访问每一个结点，用max来记录其最大深度</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># Python</span><br><span class="line">def maxDepth(self, root):</span><br><span class="line">    stack = []</span><br><span class="line">    if root is not None:</span><br><span class="line">        stack.append((1, root))</span><br><span class="line">    depth = 0</span><br><span class="line">    while stack:</span><br><span class="line">        current_depth, root = stack.pop()</span><br><span class="line">        if root is not None:</span><br><span class="line">            depth = max(depth, current_depth)</span><br><span class="line">            stack.append((current_depth+1, root.left))</span><br><span class="line">            stack.append((current_depth+1, root.right))</span><br><span class="line">    return depth</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>time: $O(N)$</p>
+</li>
+<li>space: $O(N)$<h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">int maxDepth(TreeNode *root)&#123;</span><br><span class="line">    if(root == NULL) return 0;</span><br><span class="line">    int res = 0;</span><br><span class="line">    queue&lt;TreeNode*&gt; q;</span><br><span class="line">    q.push(root);</span><br><span class="line">    while(!q.empty())&#123;</span><br><span class="line">        res++;</span><br><span class="line">        for(int i = 0, n = q.size(); i &lt; n; i++)&#123;</span><br><span class="line">            TreeNode *p = q.front();</span><br><span class="line">            q.pop();</span><br><span class="line">            if(p-&gt;left != NULL) q.push(p-&gt;left);</span><br><span class="line">            if(p-&gt;right != NULL) q.push(p-&gt;right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
 
           
         
@@ -414,7 +415,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/448-Find-All-Numbers-Disappeared-in-an-Array-11/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/559-Maximum-Depth-of-N-ary-Tree-Tree-8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -433,7 +434,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/02/448-Find-All-Numbers-Disappeared-in-an-Array-11/" itemprop="url">448. Find All Numbers Disappeared in an Array-11</a></h1>
+                <a class="post-title-link" href="/2018/11/04/559-Maximum-Depth-of-N-ary-Tree-Tree-8/" itemprop="url">559. Maximum Depth of N-ary Tree-Tree-8</a></h1>
         
 
         <div class="post-meta">
@@ -445,8 +446,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-02T09:49:09+08:00">
-                2018-11-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-04T11:31:03+08:00">
+                2018-11-04
               </time>
             
 
@@ -507,153 +508,18 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个数组，找到数组中按顺序缺少的元素。（数组长度为n，数组中元素的取值范围为[1,n]（说明有重复元素））</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>遍历数组用数组中的元素值作为下标，将该下标对应的数组元素的绝对值取负。这样到最后所有访问过的下标中，其对应的数组元素值为负，那些元素值为正的说明其下标未被访问过，因此该下标对应的元素不存在。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Python</span><br><span class="line">def findDisappearedNumbers(self, nums):</span><br><span class="line">    for i in xrange(len(nums)):</span><br><span class="line">        index = abs(nums[i]) - 1;</span><br><span class="line">        nums[index] = -abs(nums[index])</span><br><span class="line">    return [i+1 for i in range(len(nums)) if nums[i] &gt; 0]</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// C++</span><br><span class="line">vector&lt;int&gt; findDisappearedNumbers(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">    for(int i = 0; i &lt; nums.size(); i++)&#123;</span><br><span class="line">        int index = abs(nums[i]) - 1;</span><br><span class="line">        if(nums[index] &gt; 0) nums[index] *= -1;</span><br><span class="line">    &#125;</span><br><span class="line">    vector&lt;int&gt; ans;</span><br><span class="line">    for(int i = 0; i &lt; nums.size(); i++)</span><br><span class="line">        if(nums[i] &gt; 0) ans.push_back(i+1);</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/283-Move-Zeros-10/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/02/283-Move-Zeros-10/" itemprop="url">283. Move Zeros-10</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-02T09:24:24+08:00">
-                2018-11-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个数组，把里面的0移动到最后，并且不能改变其他元素的相对位置。</p>
-<h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>数出0的个数，然后把非0元素放到向量中，最后再把0放入向量中。time: O(n), space: O(n)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">void moveZers(vector&lt;int&gt;&amp; nums)&#123;</span><br><span class="line">    int n = nums.size();</span><br><span class="line">    int numZeros = 0;</span><br><span class="line">    for(int i = 0; i &lt; n; i++) numZeros += (nums[i] == 0);</span><br><span class="line">    vector&lt;int&gt; ans;</span><br><span class="line">    for(int i = 0; i &lt; n; i++)</span><br><span class="line">        if(nums[i] != 0) ans.push_back(nums[i]);</span><br><span class="line">    while(numZeros--) ans.push_back(0);</span><br><span class="line">    for(int i = 0; i &lt; n; i++) nums[i] = ans[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="方法二：使用两个指针"><a href="#方法二：使用两个指针" class="headerlink" title="方法二：使用两个指针"></a>方法二：使用两个指针</h3><p>一个指针用来遍历整个数组，另外一个指针将非0元素重写到数组前面。<br>time: O(n), space: O(1)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">void moveZeros(vector&lt;int&gt;&amp; nums)&#123;</span><br><span class="line">    int lastNonZeroFoundAt = 0;</span><br><span class="line">    for(int i = 0; i &lt; num.size(); i++)</span><br><span class="line">        if(nums[i] != 0)</span><br><span class="line">            nums[lastNonZeroFoundAt++] = nums[i];</span><br><span class="line">    for(int i = lastNonZeroFoundAt; i &lt; nums.size(); i++)</span><br><span class="line">        nums[i] = 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="方法三：最优解，使操作同时也最少"><a href="#方法三：最优解，使操作同时也最少" class="headerlink" title="方法三：最优解，使操作同时也最少"></a>方法三：最优解，使操作同时也最少</h3><p>碰到一个非0时只需与前面的进行交换。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">void moveZeros(vector&lt;int&gt;&amp; nums)&#123;</span><br><span class="line">    for(int lastNonZeroFoundAt = 0, cur = 0; cur &lt; nums.size(); cur++)</span><br><span class="line">        if(nums[cur] != 0)</span><br><span class="line">            swap(nums[lastNonZeroFoundAt++], nums[cur]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个N叉树，找到最大深度。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Node&#123;</span><br><span class="line">public: </span><br><span class="line">    int val;</span><br><span class="line">    vector&lt;Node*&gt; children;</span><br><span class="line">    Node() &#123;&#125;</span><br><span class="line">    Node(int _val, vector&lt;Node*&gt; _children)&#123;</span><br><span class="line">        val = _val;</span><br><span class="line">        children = _children;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>使用深度优先搜索<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">// Java</span><br><span class="line">public int maxDepth(Node root)&#123;</span><br><span class="line">    if(root == null) return 0;</span><br><span class="line">    else if(root.children.isEmpty()) return 1;</span><br><span class="line">    else&#123;</span><br><span class="line">        List&lt;Integer&gt; heights = new LinkedList&lt;&gt;();</span><br><span class="line">        for(Node item: root.children)</span><br><span class="line">            heights.add(maxDepth(item));</span><br><span class="line">        return Collections.max(heights) + 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"># Python</span><br><span class="line">def maxDepth(self, root):</span><br><span class="line">    if root is None:</span><br><span class="line">        return 0;</span><br><span class="line">    elif root.children == []:</span><br><span class="line">        return 1</span><br><span class="line">    else:</span><br><span class="line">        height = [self.maxDepth(c) for c in root.children]</span><br><span class="line">        return max(height) + 1</span><br><span class="line">// C++</span><br><span class="line">int maxDepth(Node* root)&#123;</span><br><span class="line">    if(!root) return 0;</span><br><span class="line">    int res = 1;</span><br><span class="line">    for(Node* child: root-&gt;children)</span><br><span class="line">        res = max(res, maxDepth(child)+1);</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>time: $O(N)$</li>
+<li><p>space: worst case:$O(N)$, best case:$O(logN)$</p>
+<h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><p>使用一个栈来把递归变为迭代</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">// Java</span><br><span class="line">import javafx.util.Pair;</span><br><span class="line">import java.lang.Math;</span><br><span class="line">public int maxDepth(Node root)&#123;</span><br><span class="line">    Queue&lt;Pair&lt;Node, Integer&gt;&gt; stack = new LinkedList&lt;&gt;();</span><br><span class="line">    if(root != null) stack.add(new Pair(root, 1));</span><br><span class="line">&#125;</span><br><span class="line">int depth = 0;</span><br><span class="line">while(!stack.isEmpty())&#123;</span><br><span class="line">    Pair&lt;Node, Integer&gt; current = stack.poll();</span><br><span class="line">    root = current.getKey();</span><br><span class="line">    int current_depth = current.getValue();</span><br><span class="line">    if(root != null)&#123;</span><br><span class="line">        depth = Math.max(depth, current_depth);</span><br><span class="line">        for(Node c: root.children)&#123;</span><br><span class="line">            stack.add(new Pair(c, current_depth + 1));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return depth;</span><br><span class="line">&#125;</span><br><span class="line"># Python</span><br><span class="line">def maxDepth(self, root):</span><br><span class="line">    stack = []</span><br><span class="line">    if root is not None:</span><br><span class="line">        stack.append((1, root))</span><br><span class="line">    depth = 0</span><br><span class="line">    while stack != []:</span><br><span class="line">        current_depth, root = stack.pop()</span><br><span class="line">        if root is not None:</span><br><span class="line">            depth = max(depth, current_depth)</span><br><span class="line">            for c in root.children:</span><br><span class="line">                stack.append((current_depth+1, c))</span><br><span class="line">    return depth</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>time: $O(N)$</p>
+</li>
+<li>space: $O(N)$<h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">int maxDepth(Node* root)&#123;</span><br><span class="line">    if(root == nullptr) return 0;</span><br><span class="line">    queue&lt;Node*&gt; q;</span><br><span class="line">    q.push(root);</span><br><span class="line">    int depth = 0;</span><br><span class="line">    while(!q.empty())&#123;</span><br><span class="line">        depth += 1;</span><br><span class="line">        int breadth = q.size();</span><br><span class="line">        for(int _ = 0; _ &lt; breadth; _++)&#123;</span><br><span class="line">            auto node = q.front(); q.pop();</span><br><span class="line">            for(auto child: node-&gt;children)</span><br><span class="line">                if(child)</span><br><span class="line">                    q.push(child);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return depth;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
 
           
         
@@ -702,7 +568,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/888-Fair-Candy-Swap-9/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/700-Search-in-a-Binary-Search-Tree-Tree-7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -721,7 +587,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/02/888-Fair-Candy-Swap-9/" itemprop="url">888. Fair Candy Swap-9</a></h1>
+                <a class="post-title-link" href="/2018/11/04/700-Search-in-a-Binary-Search-Tree-Tree-7/" itemprop="url">700. Search in a Binary Search Tree-Tree-7</a></h1>
         
 
         <div class="post-meta">
@@ -733,8 +599,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-02T09:10:02+08:00">
-                2018-11-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-04T11:19:51+08:00">
+                2018-11-04
               </time>
             
 
@@ -795,10 +661,609 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>交换两个人的糖果，使两个人的糖果总大小一样</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public int[] fairCandySwap(int[] A, int[] B)&#123;</span><br><span class="line">    int sa = 0, sb = 0; // sum of A, B respectively</span><br><span class="line">    for(int x: A) sa += x;</span><br><span class="line">    for(int x: B) sb += x;</span><br><span class="line">    int delta = (sb-sa)/2;</span><br><span class="line">    // Alice gives x, she expects to receive x + delta</span><br><span class="line">    Set&lt;Integer&gt; setB = new HashSet();</span><br><span class="line">    for(int x: B) setB.add(x);</span><br><span class="line">    for(int x: A)</span><br><span class="line">        if(setB.contain(x+delta))</span><br><span class="line">            return new int[]&#123;x, x+delta&#125;;</span><br><span class="line">&#125;</span><br><span class="line">// C++</span><br><span class="line">vector&lt;int&gt; fairCandySwap(vector&lt;int&gt; A, vector&lt;int&gt; B)&#123;</span><br><span class="line">    int dif = (accumulate(A.begin(), A.end(), 0) - accumulate(B.begin(), B.end(), 0)) / 2;</span><br><span class="line">    unordered_set&lt;int&gt; S(A.begin(), A.end());</span><br><span class="line">    for(int b:B)</span><br><span class="line">        if(S.count(b+dif))</span><br><span class="line">            return &#123;b+dif, b&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>time: O(A.length+B.length)</p>
-<p>space: O(B.length)</p>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>实现二叉搜索树的查找功能<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct TreeNode&#123;</span><br><span class="line">    int val;</span><br><span class="line">    TreeNode *left;</span><br><span class="line">    TreeNode *right;</span><br><span class="line">    TreeNode(int x): val(x), left(NULL), right(NULL)&#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// iterative</span><br><span class="line">TreeNode* searchBST(TreeNode* root, int val)&#123;</span><br><span class="line">    while(root != nullptr &amp;&amp; root-&gt;val != val)&#123;</span><br><span class="line">        root = (root-&gt;val &gt; val) ? root-&gt;left : root-&gt;right;</span><br><span class="line">    &#125;</span><br><span class="line">    return root;</span><br><span class="line">&#125;</span><br><span class="line">// recursive</span><br><span class="line">TreeNode* searchBST(TreeNode* root, int val)&#123;</span><br><span class="line">    if(root == null) return root;</span><br><span class="line">    if(root-&gt;val == val) return root;</span><br><span class="line">    return root-&gt;val &gt; val ? searchBST(root-&gt;left, val) : searchBST(root-&gt;right, val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/94-Binary-Tree-Inorder-Traversal-Tree-6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/04/94-Binary-Tree-Inorder-Traversal-Tree-6/" itemprop="url">94. Binary Tree Inorder Traversal-Tree-6</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-04T10:35:19+08:00">
+                2018-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>二叉树中序遍历<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct TreeNode&#123;</span><br><span class="line">    int val;</span><br><span class="line">    TreeNode* left;</span><br><span class="line">    TreeNode* right;</span><br><span class="line">    TreeNode(int x): val(x), left(NULL), right(NULL)&#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public List&lt;Integer&gt; inorderTraversal(TreeNode root)&#123;</span><br><span class="line">    List&lt;Integer&gt; res = new ArrayList&lt;&gt;();</span><br><span class="line">    helper(root, res);</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br><span class="line">public void helper(TreeNode root, List&lt;Integer&gt; res)&#123;</span><br><span class="line">    if(root != null)&#123;</span><br><span class="line">        if(root.left != null)</span><br><span class="line">            helper(root.left, res);</span><br><span class="line">        res.add(root.val);</span><br><span class="line">        if(root.right != null)</span><br><span class="line">            helper(root.right, res);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>time: $O(n)$</li>
+<li><p>space: $O(n)$, average: $O(logn)$</p>
+<h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public List&lt;Integer&gt; inorderTraversal(TreeNode root)&#123;</span><br><span class="line">    List&lt;Integer&gt; res = new ArrayList&lt;&gt;();</span><br><span class="line">    Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;();</span><br><span class="line">    TreeNode curr = root;</span><br><span class="line">    while(curr != null || !stack.isEmpty())&#123;</span><br><span class="line">        while(curr != null)&#123;</span><br><span class="line">            stack.push(curr);</span><br><span class="line">            curr = curr.left;</span><br><span class="line">        &#125;</span><br><span class="line">        curr = stack.pop();</span><br><span class="line">        res.add(curr.val);</span><br><span class="line">        curr = curr.right;</span><br><span class="line">    &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>time: $O(n)$</p>
+</li>
+<li>space: $O(n)$<h3 id="Morris"><a href="#Morris" class="headerlink" title="Morris"></a>Morris</h3>需要使用线索二叉树。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">step 1: initialize current as root</span><br><span class="line">step 2: while current is not NULL</span><br><span class="line">    if current does not have left child</span><br><span class="line">        a. Add current&apos;s value</span><br><span class="line">        b. Go to the right, i.e., current = current.right</span><br><span class="line">    else</span><br><span class="line">        a. In current&apos;s left subtree, make current the right child of the rightmost node</span><br><span class="line">        b. Go to this left child, i.e., current = current.left</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public List&lt;Integer&gt; inorderTraversal(TreeNode root)&#123;</span><br><span class="line">    List&lt;Integer&gt; res = new ArrayList&lt;&gt;();</span><br><span class="line">    TreeNode curr = root;</span><br><span class="line">    TreeNode pre;</span><br><span class="line">    while(curr != null)&#123;</span><br><span class="line">        if(curr.left == null)&#123;</span><br><span class="line">            res.add(curr.val);</span><br><span class="line">            curr = curr.right;  // move to next right node</span><br><span class="line">        &#125; else &#123;  // has a left subtree</span><br><span class="line">            pre = curr.left;</span><br><span class="line">            while(pre.right != null)  // find rightmost</span><br><span class="line">                pre = pre.right;</span><br><span class="line">            pre.right = curr; // put cur after the pre node</span><br><span class="line">            TreeNode temp = curr;  // store cur node</span><br><span class="line">            curr = curr.left;  // move cur to the top of the new tree</span><br><span class="line">            temp.left = null;  // original cur left be null, avoid infinite loops</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>time: $O(n)$</li>
+<li>space: $O(n)$</li>
+</ul>
+<h3 id="C-Interative-Recursive-and-Morris"><a href="#C-Interative-Recursive-and-Morris" class="headerlink" title="C++ Interative, Recursive and Morris"></a>C++ Interative, Recursive and Morris</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">// iterative</span><br><span class="line">vector&lt;int&gt; inorderTraversal(TreeNode* root)&#123;</span><br><span class="line">    vector&lt;int&gt; nodes;</span><br><span class="line">    stack&lt;TreeNode*&gt; todo;</span><br><span class="line">    TreeNode* cur = root;</span><br><span class="line">    while(cur || !todo.empty())&#123;</span><br><span class="line">        if(cur) &#123;</span><br><span class="line">            todo.push(cur);</span><br><span class="line">            cur = cur-&gt;left;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            cur = todo.top();</span><br><span class="line">            todo.pop();</span><br><span class="line">            nodes.push_back(cur-&gt;val);</span><br><span class="line">            cur = cur-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return nodes;</span><br><span class="line">&#125;</span><br><span class="line">// recursive</span><br><span class="line">vector&lt;int&gt; inorderTraversal(TreeNode* root)&#123;</span><br><span class="line">    vector&lt;int&gt; nodes;</span><br><span class="line">    inorder(root, nodes);</span><br><span class="line">    return nodes;</span><br><span class="line">&#125;</span><br><span class="line">void inorder(TreeNode* root, vector&lt;int&gt;&amp; nodes)&#123;</span><br><span class="line">    if(!root) return;</span><br><span class="line">    inorder(root-&gt;left, nodes);</span><br><span class="line">    nodes.push_back(root-&gt;val);</span><br><span class="line">    inorder(root-&gt;right, nodes);</span><br><span class="line">&#125;</span><br><span class="line">// Morris traversal</span><br><span class="line">vector&lt;int&gt; inorderTraversal(TreeNode* root)&#123;</span><br><span class="line">    TreeNode* cur = root;</span><br><span class="line">    vector&lt;int&gt; nodes;</span><br><span class="line">    while(cur)&#123;</span><br><span class="line">        if(cur-&gt;left)&#123;</span><br><span class="line">            TreeNode* pre = cur-&gt;left;</span><br><span class="line">            while(pre-&gt;right &amp;&amp; (pre-&gt;right != cur))</span><br><span class="line">                pre = pre-&gt;right;</span><br><span class="line">            if(!(pre-&gt;right))&#123;</span><br><span class="line">                pre-&gt;right = cur;</span><br><span class="line">                cur = cur-&gt;left;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                pre-&gt;right = NULL;</span><br><span class="line">                nodes.push_back(cur-&gt;val);</span><br><span class="line">                cur = cur-&gt;right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            nodes.push_bakc(cur-&gt;val);</span><br><span class="line">            cur = cur-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return nodes;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/590-N-ary-Tree-Postorder-Traversal-Tree-5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/04/590-N-ary-Tree-Postorder-Traversal-Tree-5/" itemprop="url">590. N-ary Tree Postorder Traversal-Tree-5</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-04T10:21:02+08:00">
+                2018-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>多叉树后序遍历<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Node&#123;</span><br><span class="line">public:</span><br><span class="line">    int val;</span><br><span class="line">    vector&lt;Node*&gt; children;</span><br><span class="line">    Node() &#123;&#125;</span><br><span class="line">    Node(int _val, vector&lt;Node*&gt; _children)&#123;</span><br><span class="line">        val = _val;</span><br><span class="line">        chilren = _children;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">// Java</span><br><span class="line">public List&lt;Integer&gt; postorder(Node root)&#123;</span><br><span class="line">    LinkedList&lt;Node&gt; stack = new LinkedList&lt;&gt;();</span><br><span class="line">    LinkedList&lt;Integer&gt; output = new LinkedList&lt;&gt;();</span><br><span class="line">    if(root == null) return output;</span><br><span class="line">    stack.add(root);</span><br><span class="line">    while(!stack.isEmpty())&#123;</span><br><span class="line">        Node node = stack.pollLast();</span><br><span class="line">        output.addFirst(node.val);</span><br><span class="line">        for(Node item: node.children)&#123;</span><br><span class="line">            if(item != null) stack.add(item);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return output;</span><br><span class="line">&#125;</span><br><span class="line"># Python</span><br><span class="line">def postorder(self, root):</span><br><span class="line">    if root is None:</span><br><span class="line">        return []</span><br><span class="line">    stack, output = [root, ], []</span><br><span class="line">    while stack:</span><br><span class="line">        root = stack.pop()</span><br><span class="line">        if root is not None:</span><br><span class="line">            output.append(root.val)</span><br><span class="line">        for c in root.children:</span><br><span class="line">            stack.append(c)</span><br><span class="line">    return output[::-1]</span><br><span class="line">// C++</span><br><span class="line">vector&lt;int&gt; postorder(Node* root)&#123;</span><br><span class="line">    if(root == NULL) return &#123;&#125;;</span><br><span class="line">    vector&lt;int&gt; res;</span><br><span class="line">    stack&lt;Node*&gt; stk;</span><br><span class="line">    stk.push(root);</span><br><span class="line">    while(!stk.empty())&#123;</span><br><span class="line">        Node* temp = stk.top();</span><br><span class="line">        stk.pop();</span><br><span class="line">        for(int i = 0; i &lt; temp-&gt;children.size(); i++)</span><br><span class="line">            stk.push(temp-&gt;children[i]);</span><br><span class="line">        res.push_back(temp-&gt;val);</span><br><span class="line">    &#125;</span><br><span class="line">    reverse(res.begin(), res.end());</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/145-Binary-Tree-Postorder-Traversal-Tree-4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/04/145-Binary-Tree-Postorder-Traversal-Tree-4/" itemprop="url">145. Binary Tree Postorder Traversal-Tree-4</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-04T09:40:50+08:00">
+                2018-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>二叉树的后序遍历<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// definition for a binary tree node</span><br><span class="line">struct TreeNode&#123;</span><br><span class="line">    int val;</span><br><span class="line">    TreeNode *left;</span><br><span class="line">    TreeNode *right;</span><br><span class="line">    TreeNode(int x): val(x), left(NULL), right(NULL)&#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">// Java</span><br><span class="line">public class TreeNode&#123;</span><br><span class="line">    int val;</span><br><span class="line">    TreeNode left;</span><br><span class="line">    TreeNode right;</span><br><span class="line">    TreeNode(int x)&#123;</span><br><span class="line">        val = x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public List&lt;Integer&gt; postorderTraversal(TreeNode root)&#123;</span><br><span class="line">    LinkedList&lt;TreeNode&gt; stack = new LinkedList&lt;&gt;();</span><br><span class="line">    LinkedList&lt;Integer&gt; output = new LinkedList&lt;&gt;();</span><br><span class="line">    if(root == null) return output;</span><br><span class="line">    stack.add(root);</span><br><span class="line">    while(!stack.isEmpty())&#123;</span><br><span class="line">        TreeNode node = stack.pollLast();</span><br><span class="line">        output.addFirst(node.val);</span><br><span class="line">        if(node.left!=null) stack.add(node.left);</span><br><span class="line">        if(node.right!=null) stack.add(node.right);</span><br><span class="line">    &#125;</span><br><span class="line">    return output;</span><br><span class="line">&#125;</span><br><span class="line"># Python</span><br><span class="line">class TreeNode(object):</span><br><span class="line">    def __init__(self, x):</span><br><span class="line">        self.val = x</span><br><span class="line">        self.left = None</span><br><span class="line">        self.right = None</span><br><span class="line">def postorderTraversal(self, root):</span><br><span class="line">    if root is None:</span><br><span class="line">        return []</span><br><span class="line">    stack, output = [root, ], []</span><br><span class="line">    while stack:</span><br><span class="line">        root = stack.pop()</span><br><span class="line">        output.append(root.val)</span><br><span class="line">        if root.left is not None:</span><br><span class="line">            stack.append(root.left)</span><br><span class="line">        if root.right is not None:</span><br><span class="line">            stack.append(root.right)</span><br><span class="line">    return output[::-1]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>time: $O(n)$</li>
+<li>space: $O(n)$<h3 id="先序、中序、后序遍历总结"><a href="#先序、中序、后序遍历总结" class="headerlink" title="先序、中序、后序遍历总结"></a>先序、中序、后序遍历总结</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">// Pre Order Traversal</span><br><span class="line">public List&lt;Integer&gt; preorderTraversal(TreeNode root)&#123;</span><br><span class="line">    List&lt;Integer&gt; result = new ArrayList&lt;&gt;();</span><br><span class="line">    Seque&lt;TreeNode&gt; stack = new ArrayDeque&lt;&gt;();</span><br><span class="line">    TreeNode p = root;</span><br><span class="line">    while(!stack.isEmpty() || p != null)&#123;</span><br><span class="line">        if(p != null)&#123;</span><br><span class="line">            stack.push(p);</span><br><span class="line">            result.add(p.val);</span><br><span class="line">            p = p.left;</span><br><span class="line">        &#125;</span><br><span class="line">        else&#123;</span><br><span class="line">            TreeNode node = stack.pop();</span><br><span class="line">            p = node.right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br><span class="line">// In Order Traversal</span><br><span class="line">public List&lt;Integer&gt; inorderTraversal(TreeNode root)&#123;</span><br><span class="line">    List&lt;Integer&gt; result = new ArrayList&lt;&gt;();</span><br><span class="line">    Deque&lt;TreeNode&gt; stack = new ArrayDeque&lt;&gt;();</span><br><span class="line">    TreeNode p = root;</span><br><span class="line">    while(!stack.isEmpty() || p != null)&#123;</span><br><span class="line">        if(p != null)&#123;</span><br><span class="line">            stack.push(p);</span><br><span class="line">            p = p.left;</span><br><span class="line">        &#125;</span><br><span class="line">        else&#123;</span><br><span class="line">            TreeNode node = stack.pop();</span><br><span class="line">            result.add(node.val);</span><br><span class="line">            p = node.right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br><span class="line">// Post Order Traversal</span><br><span class="line">public List&lt;Integer&gt; postorderTraversal(TreeNode root)&#123;</span><br><span class="line">    LinkedList&lt;Integer&gt; result = new LinkedList&lt;&gt;();</span><br><span class="line">    Deque&lt;TreeNode&gt; stack = new ArrayDeque&lt;&gt;();</span><br><span class="line">    TreeNode p = root;</span><br><span class="line">    while(!stack.isEmpty() || p != null)&#123;</span><br><span class="line">        if(p != null)&#123;</span><br><span class="line">            stack.push(p);</span><br><span class="line">            result.addFirst(p.val); // add in the front of list</span><br><span class="line">            p = p.right;  // reverse the process of preorder</span><br><span class="line">        &#125;</span><br><span class="line">        else&#123;</span><br><span class="line">            TreeNode node = stack.pop();</span><br><span class="line">            p = node.left;  // reverse the process of preorder</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="C-Iterative-Recursive-and-Morris-Traversal"><a href="#C-Iterative-Recursive-and-Morris-Traversal" class="headerlink" title="C++ Iterative, Recursive and Morris Traversal"></a>C++ Iterative, Recursive and Morris Traversal</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">// iterative with a stack</span><br><span class="line">vector&lt;int&gt; postorderTraversal(TreeNode* root)&#123;</span><br><span class="line">    vector&lt;int&gt; nodes;</span><br><span class="line">    stack&lt;TreeNode*&gt; todo;</span><br><span class="line">    TreeNode* cur = root;</span><br><span class="line">    TreeNode* last = NULL;</span><br><span class="line">    while(cur || !todo.empty())&#123;</span><br><span class="line">        if(cur)&#123;</span><br><span class="line">            todo.push(cur);</span><br><span class="line">            cur = cur-&gt;left;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            TreeNode* top = todo.top();</span><br><span class="line">            if(top-&gt;right &amp;&amp; (last != top-&gt;right))</span><br><span class="line">                cur = top-&gt;right;</span><br><span class="line">            else &#123;</span><br><span class="line">                nodes.push_back(top-&gt;val);</span><br><span class="line">                last = top;</span><br><span class="line">                todo.pop();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return nodes;</span><br><span class="line">&#125;</span><br><span class="line">// recursive</span><br><span class="line">vector&lt;int&gt; postorderTraversal(TreeNode* root)&#123;</span><br><span class="line">    vector&lt;int&gt; nodes;</span><br><span class="line">    postorder(root, nodes);</span><br><span class="line">    return nodes;</span><br><span class="line">&#125;</span><br><span class="line">void postorder(TreeNode* root, vector&lt;int&gt;&amp; nodes)&#123;</span><br><span class="line">    if(!root) return;</span><br><span class="line">    postorder(root-&gt;left, nodes);</span><br><span class="line">    postorder(root-&gt;right, nodes);</span><br><span class="line">    nodes.push_back(root-&gt;val);</span><br><span class="line">&#125;</span><br><span class="line">// Morris traversal</span><br><span class="line">vector&lt;int&gt; postorderTraversal(TreeNode* root)&#123;</span><br><span class="line">    vector&lt;int&gt; nodes;</span><br><span class="line">    TreeNode* dummy = new TreeNode(0);</span><br><span class="line">    dummy-&gt;left = root;</span><br><span class="line">    TreeNode* cur = dummy;</span><br><span class="line">    while(cur)&#123;</span><br><span class="line">        if(cur-&gt;left)&#123;</span><br><span class="line">            TreeNode* pre = cur-&gt;left;</span><br><span class="line">            while(pre-&gt;right &amp;&amp; (pre-&gt;right != cur))&#123;</span><br><span class="line">                pre = pre-&gt;right;</span><br><span class="line">            &#125;</span><br><span class="line">            if(!(pre-&gt;right))&#123;</span><br><span class="line">                pre-&gt;right = cur;</span><br><span class="line">                cur = cur-&gt;left;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                reverseAddNodes(cur-&gt;left, pre, nodes);</span><br><span class="line">                pre-&gt;right = NULL;</span><br><span class="line">                cur = cur-&gt;right;</span><br><span class="line">            &#125; </span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            cur = cur-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return nodes;</span><br><span class="line">&#125;</span><br><span class="line">void reverseNodes(TreeNode* start, TreeNode* end)&#123;</span><br><span class="line">    if(start == end) return;</span><br><span class="line">    TreeNode* x = start;</span><br><span class="line">    TreeNode* y = start-&gt;right;</span><br><span class="line">    TreeNode* z;</span><br><span class="line">    while(x != end)&#123;</span><br><span class="line">        z = y-&gt;right;</span><br><span class="line">        y-&gt;right = x;</span><br><span class="line">        x = y;</span><br><span class="line">        y = z;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">void reverseAddNodes(TreeNode* start, TreeNode* end, vector&lt;int&gt;&amp; nodes)&#123;</span><br><span class="line">    reverseNodes(start, end);</span><br><span class="line">    TreeNode* node = end;</span><br><span class="line">    while(true)&#123;</span><br><span class="line">        nodes.push_back(node-&gt;val);</span><br><span class="line">        if(node == start) break;</span><br><span class="line">        node = node-&gt;right;</span><br><span class="line">    &#125;</span><br><span class="line">    reverseNodes(end, start);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/144-Binary-Tree-Preorder-Traversal-Tree-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/04/144-Binary-Tree-Preorder-Traversal-Tree-3/" itemprop="url">144. Binary Tree Preorder Traversal-Tree-3</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-04T08:11:58+08:00">
+                2018-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>二叉树的先序遍历</p>
+<h3 id="递归-迭代"><a href="#递归-迭代" class="headerlink" title="递归+迭代"></a>递归+迭代</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line">// recursive</span><br><span class="line">public List&lt;Integer&gt; preorderTraversal(TreeNode root)&#123;</span><br><span class="line">    List&lt;Integer&gt; pre = new LinkedList&lt;Integer&gt;();</span><br><span class="line">    if(root==null) return pre;</span><br><span class="line">    pre.add(root.val);</span><br><span class="line">    pre.addAll(preorderTraversal(root.left));</span><br><span class="line">    pre.addAll(preorderTraversal(root.right));</span><br><span class="line">    return pre;</span><br><span class="line">&#125;</span><br><span class="line">// recursive with a helper</span><br><span class="line">public List&lt;Integer&gt; preorderTraversal(TreeNode root)&#123;</span><br><span class="line">    List&lt;Integer&gt; pre = new LinkedList&lt;Integer&gt;();</span><br><span class="line">    preHelper(root, pre);</span><br><span class="line">    return pre;</span><br><span class="line">&#125;</span><br><span class="line">public void preHelper(TreeNode root, List&lt;Integer&gt; pre)&#123;</span><br><span class="line">    if(root==null) return;</span><br><span class="line">    pre.add(root.left, pre);</span><br><span class="line">    preHelper(root.left, pre);</span><br><span class="line">    preHelper(root.right, pre);</span><br><span class="line">&#125;</span><br><span class="line">// iterative with stack</span><br><span class="line">public List&lt;Integer&gt; preorderIt(TreeNode root)&#123;</span><br><span class="line">    List&lt;Integer&gt; pre = new LinkedList&lt;Integer&gt;();</span><br><span class="line">    if(root == null) return pre;</span><br><span class="line">    Stack&lt;TreeNode&gt; tovisit = new Stack&lt;TreeNode&gt;();</span><br><span class="line">    tovisit.push(root);</span><br><span class="line">    while(!tovisit.empty())&#123;</span><br><span class="line">        TreeNode visiting = tovisit.pop();</span><br><span class="line">        pre.add(visiting.val);</span><br><span class="line">        if(visiting.right != null) tovisit.push(visiting.right);</span><br><span class="line">        if(visiting.left != null) tovisit.push(visiting.left);</span><br><span class="line">    &#125;</span><br><span class="line">    return pre;</span><br><span class="line">&#125;</span><br><span class="line">// C++ four methods</span><br><span class="line">// recursive</span><br><span class="line">vector&lt;int&gt; preorderTraversal(TreeNode* root)&#123;</span><br><span class="line">    vector&lt;int&gt; v;</span><br><span class="line">    preTraversal(root, v);</span><br><span class="line">    return v;</span><br><span class="line">&#125;</span><br><span class="line">void preTraversal(TreeNode* root, vector&lt;int&gt;&amp; v)&#123;</span><br><span class="line">    if(!root) return ;</span><br><span class="line">    v.push_back(root-&gt;val);</span><br><span class="line">    preTraversal(root-&gt;left, v);</span><br><span class="line">    preTraversal(root-&gt;right, v);</span><br><span class="line">&#125;</span><br><span class="line">// iterate using a stack</span><br><span class="line">vector&lt;int&gt; preorderTraversal(TreeNode* root)&#123;</span><br><span class="line">    vector&lt;int&gt; v;</span><br><span class="line">    if(!root) return v;</span><br><span class="line">    TreeNode* temp = root;</span><br><span class="line">    stack&lt;TreeNode*&gt; s;</span><br><span class="line">    s.push(root);</span><br><span class="line">    while(!s.empty())&#123;</span><br><span class="line">        temp = s.top();</span><br><span class="line">        s.pop();</span><br><span class="line">        v.push_back(temp-&gt;val);</span><br><span class="line">        if(temp-&gt;right) s.push(temp-&gt;right);</span><br><span class="line">        if(temp-&gt;left) s.push(temp-&gt;left);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">vector&lt;int&gt; preorderTraversal(TreeNode* root)&#123;</span><br><span class="line">    vector&lt;int&gt; v;</span><br><span class="line">    if(!root) return v;</span><br><span class="line">    TreeNode* temp = root;</span><br><span class="line">    stack&lt;TreeNode*&gt; s;</span><br><span class="line">    while(true)&#123;</span><br><span class="line">        while(temp)&#123;</span><br><span class="line">            v.push_back(temp-&gt;val);</span><br><span class="line">            if(temp-&gt;right) s.push(temp-&gt;right);</span><br><span class="line">            temp = temp-&gt;left;</span><br><span class="line">        &#125;</span><br><span class="line">        if(s.empty()) break;</span><br><span class="line">        temp = s.top();</span><br><span class="line">        s.pop();</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">// morris traversal, O(1) space</span><br><span class="line">vector&lt;int&gt; preorderTraversal(TreeNode* root)&#123;</span><br><span class="line">    vector&lt;int&gt; v;</span><br><span class="line">    if(!root) return v;</span><br><span class="line">    TreeNode* temp = root, *prev;</span><br><span class="line">    while(temp)&#123;</span><br><span class="line">        if(!temp-&gt;left)&#123;</span><br><span class="line">            v.push_back(temp-&gt;val);</span><br><span class="line">            temp = temp-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">        else&#123;</span><br><span class="line">            prev = temp-&gt;left;</span><br><span class="line">            while(prev-&gt;right &amp;&amp; (prev-&gt;right != temp))</span><br><span class="line">                prev = prev-&gt;right;</span><br><span class="line">            if(!prev-&gt;right)&#123;</span><br><span class="line">                v.push_back(temp-&gt;val);</span><br><span class="line">                prev-&gt;right = temp;</span><br><span class="line">                temp = temp-&gt;left;</span><br><span class="line">            &#125;</span><br><span class="line">            else&#123;</span><br><span class="line">                prev-&gt;right = NULL;</span><br><span class="line">                temp = temp-&gt;right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">// Java</span><br><span class="line">public int TreeNode&#123;</span><br><span class="line">    int val;</span><br><span class="line">    TreeNode left;</span><br><span class="line">    TreeNode right;</span><br><span class="line">    TreeNode(int x)&#123;</span><br><span class="line">        val = x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public List&lt;Integer&gt; preorderTraversal(TreeNode root)&#123;</span><br><span class="line">    LinkedList&lt;TreeNode&gt; stack = new LinkedList&lt;&gt;();</span><br><span class="line">    LinkedList&lt;Integer&gt; output = new LinkedList&lt;&gt;();</span><br><span class="line">    if(root == null) return output;</span><br><span class="line">    stack.add(root);</span><br><span class="line">    while(!stack.isEmpty())&#123;</span><br><span class="line">        TreeNode node = stack.pollLast();</span><br><span class="line">        output.add(node.val);</span><br><span class="line">        if(node.right != null) stack.add(node.right);</span><br><span class="line">        if(node.left != null) stack.add(node.left);</span><br><span class="line">    &#125;</span><br><span class="line">    return output;</span><br><span class="line">&#125;</span><br><span class="line"># Python</span><br><span class="line">class TreeNode(object):</span><br><span class="line">    def __init__(self, x):</span><br><span class="line">        self.val = x</span><br><span class="line">        self.left = None</span><br><span class="line">        self.right = None</span><br><span class="line">def preorderTraversal(self, root):</span><br><span class="line">    if root is None:</span><br><span class="line">        return []</span><br><span class="line">    stack, output = [root, ], []</span><br><span class="line">    while stack:</span><br><span class="line">        root = stack.pop()</span><br><span class="line">        if root is not None:</span><br><span class="line">            output.append(root.val)</span><br><span class="line">            if root.right is not None:</span><br><span class="line">                stack.append(root.right)</span><br><span class="line">            if root.left is not None:</span><br><span class="line">                stack.append(root.left)</span><br><span class="line">    return output</span><br></pre></td></tr></table></figure>
+<ul>
+<li>time: $O(N)$</li>
+<li><p>space: $O(N)$</p>
+<h3 id="Morris-traversal"><a href="#Morris-traversal" class="headerlink" title="Morris traversal"></a>Morris traversal</h3><p>主要用来优化空间复杂度。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">// Java</span><br><span class="line">public List&lt;Integer&gt; preorderTraversal(TreeNode root)&#123;</span><br><span class="line">    LinkedList&lt;Integer&gt; output = new LinkedList&lt;&gt;();</span><br><span class="line">    TreeNode node = root;</span><br><span class="line">    while(node != null)&#123;</span><br><span class="line">        if(node.left == null)&#123;</span><br><span class="line">            output.add(node.val);</span><br><span class="line">            node = node.right;</span><br><span class="line">        &#125;</span><br><span class="line">        else&#123;</span><br><span class="line">            TreeNode predecessor = node.left;</span><br><span class="line">            while((predecessor.right != null) &amp;&amp; (predecessor.right != node))&#123;</span><br><span class="line">                predecessor = predecessor.right;</span><br><span class="line">            &#125;</span><br><span class="line">            if(predecessor.right == null)&#123;</span><br><span class="line">                output.add(node.val);</span><br><span class="line">                predecessor.right = node;</span><br><span class="line">                node = node.left;</span><br><span class="line">            &#125;</span><br><span class="line">            else&#123;</span><br><span class="line">                predecessor.right = null;</span><br><span class="line">                node = node.right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return output;</span><br><span class="line">&#125;</span><br><span class="line"># Python </span><br><span class="line">def preorderTraversal(self, root):</span><br><span class="line">    node, output = root, []</span><br><span class="line">    while node:</span><br><span class="line">        if not node.left:</span><br><span class="line">            output.append(node.val)</span><br><span class="line">            node = node.right</span><br><span class="line">        else:</span><br><span class="line">            predecessor = node.left</span><br><span class="line">            while predecessor.right and predecessor.right is not node:</span><br><span class="line">                predecessor = predecessor.right</span><br><span class="line">            if not predecessor.right:</span><br><span class="line">                output.append(node.val)</span><br><span class="line">                predecessor.right = node</span><br><span class="line">                node = node.left</span><br><span class="line">            else:</span><br><span class="line">                predecessor.right = None</span><br><span class="line">                node = node.right</span><br><span class="line">    return output</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>time: $O(N)$</p>
+</li>
+<li>space: $O(N)$</li>
+</ul>
 
           
         
@@ -847,7 +1312,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/485-Max-Consecutive-Ones-8/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/589-N-ary-Tree-Preorder-Traversal-Tree-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -866,7 +1331,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/02/485-Max-Consecutive-Ones-8/" itemprop="url">485. Max Consecutive Ones-8</a></h1>
+                <a class="post-title-link" href="/2018/11/04/589-N-ary-Tree-Preorder-Traversal-Tree-2/" itemprop="url">589. N-ary Tree Preorder Traversal-Tree-2</a></h1>
         
 
         <div class="post-meta">
@@ -878,8 +1343,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-02T09:04:38+08:00">
-                2018-11-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-04T08:09:50+08:00">
+                2018-11-04
               </time>
             
 
@@ -940,437 +1405,12 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个只含有0和1的数组，问里面最多的连续1的长度</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public int findMaxConsecutiveOnes(int[] nums)&#123;</span><br><span class="line">    int maxHere = 0, max = 0;</span><br><span class="line">    for(int n: nums)</span><br><span class="line">        max = Maxth.max(max, maxHere = (n==0)?0:maxHere+1);</span><br><span class="line">    return max;</span><br><span class="line">&#125;</span><br><span class="line">// C++</span><br><span class="line">int findMaxConsecutiveOnes(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        int maxHere = 0, m = 0;</span><br><span class="line">        for(auto &amp; n: nums)</span><br><span class="line">            m = max(m, maxHere=(n==0)?0:maxHere+1);</span><br><span class="line">        return m;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/896-Monotonic-Array-7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/02/896-Monotonic-Array-7/" itemprop="url">896. Monotonic Array-7</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-02T08:52:44+08:00">
-                2018-11-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>判断一个数组是否单调</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">bool isMonotonic(vector&lt;int&gt;&amp; A) &#123;</span><br><span class="line">    int size = A.size();</span><br><span class="line">    if(size &lt;= 1) return true;</span><br><span class="line">    bool incr = true;</span><br><span class="line">    bool decr = true;</span><br><span class="line">    for(int i = 1; i &lt; size; i++)&#123;</span><br><span class="line">        if(A[i-1] &gt; A[i]) incr = false;</span><br><span class="line">        if(A[i-1] &lt; A[i]) decr = false;</span><br><span class="line">        // if(!incr &amp;&amp; !decr) break;</span><br><span class="line">    &#125;</span><br><span class="line">    return incr || decr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/566-Reshape-the-Matrix-6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/02/566-Reshape-the-Matrix-6/" itemprop="url">566 Reshape the Matrix-6</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-02T08:28:15+08:00">
-                2018-11-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>实现矩阵的 reshape 操作</p>
-<h3 id="方法一：使用队列"><a href="#方法一：使用队列" class="headerlink" title="方法一：使用队列"></a>方法一：使用队列</h3><p>$time: O(m<em>n)    space: O(m</em>n)$<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public int[][] matrixReshape(int[][] nums, int r, int c)&#123;</span><br><span class="line">    int[][] res = new int[r][c];</span><br><span class="line">    if(nums.length == 0 || r*c != nums.length * nums[0].length)</span><br><span class="line">        return nums;</span><br><span class="line">    int count = 0;</span><br><span class="line">    Queue&lt;Integer&gt; queue = new LinkedList&lt;&gt;();</span><br><span class="line">    for(int i = 0; i &lt; nums.length; i++)</span><br><span class="line">        for(int j = 0; j &lt; nums[0].length; j++)</span><br><span class="line">            queue.add(nums[i][j]);</span><br><span class="line">    for(int i = 0; i &lt; r; i++)</span><br><span class="line">        for(int j = 0; j &lt; c; j++)</span><br><span class="line">            res[i][j] = queue.remove();</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br><span class="line">// C++</span><br><span class="line">vector&lt;vector&lt;int&gt;&gt; matrixReshape(vector&lt;vector&lt;int&gt;&gt;&amp; nums, int r, int c) &#123;</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; res(r, vector&lt;int&gt;(c, 0));</span><br><span class="line">    int preR = nums.size(), preC = nums[0].size();</span><br><span class="line">    if(preR==0 || r*c != preR*preC) return nums;</span><br><span class="line">    int count = 0;</span><br><span class="line">    queue&lt;int&gt; q;</span><br><span class="line">    for(int i = 0; i &lt; preR; i++)</span><br><span class="line">        for(int j = 0; j &lt; preC; j++)</span><br><span class="line">            q.push(nums[i][j]);</span><br><span class="line">    for(int i = 0; i &lt; r; i++)</span><br><span class="line">        for(int j = 0; j &lt; c; j++)&#123;</span><br><span class="line">            res[i][j] = q.front();</span><br><span class="line">            q.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="方法二：不使用队列"><a href="#方法二：不使用队列" class="headerlink" title="方法二：不使用队列"></a>方法二：不使用队列</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">for(int i = 0; i &lt; nums.length; i++)</span><br><span class="line">    for(int j = 0; j &lt; nums[0].length; j++)&#123;</span><br><span class="line">        res[rows][cols] = nums[i][j];</span><br><span class="line">        cols++;</span><br><span class="line">        if(cols == c)&#123;</span><br><span class="line">            rows++;</span><br><span class="line">            cols = 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="方法三：使用除法和余数"><a href="#方法三：使用除法和余数" class="headerlink" title="方法三：使用除法和余数"></a>方法三：使用除法和余数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// inside the for loop:</span><br><span class="line">res[count/c][count%c] = nums[i][j];</span><br><span class="line">count++</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/766-Toeplitz-Matrix-5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/02/766-Toeplitz-Matrix-5/" itemprop="url">766. Toeplitz Matrix-5</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-02T08:18:07+08:00">
-                2018-11-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>判断一个矩阵是否是 Toeplitz 矩阵。<br>矩阵的特性是：每一个从左上到右下的对角线上元素相等。</p>
-<h3 id="方法一：根据对角线性质"><a href="#方法一：根据对角线性质" class="headerlink" title="方法一：根据对角线性质"></a>方法一：根据对角线性质</h3><p>time: O(M*N)  space: O(M+N)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// r1 - c1 == r2 - c2  -&gt; 这样的元素在同一组中</span><br><span class="line">public boolean isToeplitzMatrix(int[][] matrix)&#123;</span><br><span class="line">    Map&lt;Integer, Integer&gt; groups = new HashMap();</span><br><span class="line">    for(int r = 0; r &lt; matrix.length; r++)&#123;</span><br><span class="line">        for(int c = 0; c &lt; matrix[0].length; c++)</span><br><span class="line">            if(!groups.containsKey(r-c))</span><br><span class="line">                groups.put(r-c, matrix[r][c]);</span><br><span class="line">            else if (groups.get(r-c) != matrix[r][c])</span><br><span class="line">                return false;</span><br><span class="line">    &#125;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="方法二：每一个元素与它左上角元素作比较"><a href="#方法二：每一个元素与它左上角元素作比较" class="headerlink" title="方法二：每一个元素与它左上角元素作比较"></a>方法二：每一个元素与它左上角元素作比较</h3><p>time: O(M*N)   space: O(1)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public boolean isToeplitzMatrix(int[][] matrix)&#123;</span><br><span class="line">    for(int r = 0; r &lt; matrix.length; r++)</span><br><span class="line">        for(int c = 0; c &lt; matrix[0].length; c++)</span><br><span class="line">            if(r &gt; 0 &amp;&amp; c &gt; 0 &amp;&amp; matrix[r-1][c-1] != matrix[r][c]) return false;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br><span class="line">// C++</span><br><span class="line">bool isToeplitzMatrix(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) &#123;</span><br><span class="line">    int R = matrix.size();  // 只计算一次，相比上一个用时会更短</span><br><span class="line">    int C = matrix[0].size();</span><br><span class="line">    for(int r = 0; r &lt; R; r++)</span><br><span class="line">        for(int c = 0; c &lt; C; c++)</span><br><span class="line">            if(r &gt; 0 &amp;&amp; c &gt; 0 &amp;&amp; matrix[r-1][c-1] != matrix[r][c]) return false;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>N叉树先序遍历</p>
+<h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">// Java</span><br><span class="line">// Definition for a node</span><br><span class="line">class Node&#123;</span><br><span class="line">    public int val;</span><br><span class="line">    public List&lt;Node&gt; children;</span><br><span class="line">    public Node()&#123;&#125;</span><br><span class="line">    public Node(int _val, List&lt;Node&gt; _children)&#123;</span><br><span class="line">        val = _val;</span><br><span class="line">        children = _children;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">public List&lt;Integer&gt; preorder(Node root)&#123;</span><br><span class="line">    LinkedList&lt;Node&gt; stack = new LinkedList&lt;&gt;();</span><br><span class="line">    LinkedList&lt;Integer&gt; output = new LinkedList&lt;&gt;();</span><br><span class="line">    if(root == null) return output;</span><br><span class="line">    stack.add(root);</span><br><span class="line">    while(!stack.isEmpty())&#123;</span><br><span class="line">        Node node = stack.pollLast();</span><br><span class="line">        output.add(node.val);</span><br><span class="line">        Collections.reverse(node.children);</span><br><span class="line">        for(Node item: node.children) stack.add(item);</span><br><span class="line">    &#125;</span><br><span class="line">    return output;</span><br><span class="line">&#125;</span><br><span class="line"># Python</span><br><span class="line"># Definition for a node</span><br><span class="line">class Node(object):</span><br><span class="line">    def __init__(self, val, children):</span><br><span class="line">        self.val = val</span><br><span class="line">        self.children = children</span><br><span class="line">class Solution(object):</span><br><span class="line">    def preorder(self, root):</span><br><span class="line">        if root is None:</span><br><span class="line">            return []</span><br><span class="line">        stack, output = [root, ], []</span><br><span class="line">        while stack:</span><br><span class="line">            root = stack.pop()</span><br><span class="line">            output.append(root.val)</span><br><span class="line">            stack.extend(root.children[::-1])</span><br><span class="line">        return output</span><br></pre></td></tr></table></figure>
+<ul>
+<li>time: $O(N)$</li>
+<li>space: $O(N)$<h3 id="C-version"><a href="#C-version" class="headerlink" title="C++ version"></a>C++ version</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">// Definition for a node</span><br><span class="line">class Node&#123;</span><br><span class="line">public:</span><br><span class="line">    int val;</span><br><span class="line">    vector&lt;Node*&gt; children;</span><br><span class="line">    Node()&#123;&#125;</span><br><span class="line">    Node(int _val, vector&lt;Node*&gt; _children)&#123;</span><br><span class="line">        val = _val;</span><br><span class="line">        children = _children;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">// recursive</span><br><span class="line">void travel(Node* root, vector&lt;int&gt;&amp; result)&#123;</span><br><span class="line">    if(root == nullptr) return;</span><br><span class="line">    result.push_back(root-&gt;val);</span><br><span class="line">    for(Node* child: root-&gt;child) travel(child, result);</span><br><span class="line">&#125;</span><br><span class="line">vector&lt;int&gt; preorder(Node* root)&#123;</span><br><span class="line">    vector&lt;int&gt; result;</span><br><span class="line">    travel(root, result);</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br><span class="line">// iterative</span><br><span class="line">vector&lt;int&gt; preorder(Node* root)&#123;</span><br><span class="line">    vector&lt;int&gt; result;</span><br><span class="line">    if(root == nullptr) return result;</span><br><span class="line">    stack&lt;Node*&gt; stk;</span><br><span class="line">    stk.push(root);</span><br><span class="line">    while(!stk.empty())&#123;</span><br><span class="line">        Node* cur = stk.top();</span><br><span class="line">        stk.pop();</span><br><span class="line">        result.push_back(cur-&gt;val);</span><br><span class="line">        for(int i = cur-&gt;children.size()-1; i &gt;= 0; i--)&#123;</span><br><span class="line">            if(cur-&gt;children[i] != nullptr)</span><br><span class="line">                stk.push(cur-&gt;children[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
 
           
         
@@ -1419,7 +1459,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/867-Transpose-Matrix-4/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/617-Merge-Two-Binary-Trees-Tree-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -1438,7 +1478,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/02/867-Transpose-Matrix-4/" itemprop="url">867. Transpose Matrix-4</a></h1>
+                <a class="post-title-link" href="/2018/11/04/617-Merge-Two-Binary-Trees-Tree-1/" itemprop="url">617. Merge Two Binary Trees-Tree-1</a></h1>
         
 
         <div class="post-meta">
@@ -1450,8 +1490,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-02T07:48:13+08:00">
-                2018-11-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-04T07:40:31+08:00">
+                2018-11-04
               </time>
             
 
@@ -1512,8 +1552,17 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>实现矩阵的转置</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>直接复制<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public int[][] transpose(int[][] A)&#123;</span><br><span class="line">    int R = A.length, C = A[0].length;</span><br><span class="line">    int[][] ans = new int[C][R];</span><br><span class="line">    for(int r = 0; r &lt; R; r++)</span><br><span class="line">        for(int c = 0; c &lt; R; c++)</span><br><span class="line">            ans[c][r] = A[r][c];</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br><span class="line">// C++</span><br><span class="line">vector&lt;vector&lt;int&gt;&gt; transpose(vector&lt;vector&lt;int&gt;&gt;&amp; A) &#123;</span><br><span class="line">    int R = A.size(), C = A[0].size();</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; ans(C, vector&lt;int&gt;(R, 0));</span><br><span class="line">    for(int r = 0; r &lt; R; r++)</span><br><span class="line">        for(int c = 0; c &lt; C; c++)</span><br><span class="line">            ans[c][r] = A[r][c];</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>合并两棵二叉树</p>
+<h3 id="方法一：使用递归"><a href="#方法一：使用递归" class="headerlink" title="方法一：使用递归"></a>方法一：使用递归</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// Java</span><br><span class="line">public class TreeNode&#123;</span><br><span class="line">    int val;</span><br><span class="line">    TreeNode left;</span><br><span class="line">    TreeNode right;</span><br><span class="line">    TreeNode(int x)&#123; val = x; &#125;</span><br><span class="line">&#125;</span><br><span class="line">public TreeNode mergeTrees(TreeNode t1, TreeNode t2)&#123;</span><br><span class="line">    if(t1 == null) return t2;</span><br><span class="line">    if(t2 == null) return t1;</span><br><span class="line">    t1.val += t2.val;</span><br><span class="line">    t1.left = mergeTrees(t1.left, t2.left);</span><br><span class="line">    t1.right = mergeTrees(t1.right, t2.right);</span><br><span class="line">    return t1;</span><br><span class="line">&#125;</span><br><span class="line"># Python</span><br><span class="line">def mergeTrees(self, t1, t2):</span><br><span class="line">    if not t1 and not t2: return None</span><br><span class="line">    ans = TreeNode((t1.val if t1 else 0) + (t2.val if t2 else 0))</span><br><span class="line">    ans.left = self.mergeTrees(t1 and t1.left, t2 and t2.left)</span><br><span class="line">    ans.right = self.mergeTrees(t1 and t1.right, t2 and t2.right)</span><br><span class="line">    return ans</span><br></pre></td></tr></table></figure>
+<ul>
+<li>time: $O(m)$</li>
+<li><p>space: $O(m)$, average: $O(logm)$</p>
+<h3 id="方法二：使用迭代"><a href="#方法二：使用迭代" class="headerlink" title="方法二：使用迭代"></a>方法二：使用迭代</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public TreeNode mergeTrees(TreeNode t1, TreeNode t2)&#123;</span><br><span class="line">    if(t1 == null) return t2;</span><br><span class="line">    Stack&lt;TreeNode[]&gt; stack = new Stack&lt;&gt;();</span><br><span class="line">    stack.push(new TreeNode[]&#123;t1, t2&#125;);</span><br><span class="line">    while(!stack.isEmpty())&#123;</span><br><span class="line">        TreeNode[] t = stack.pop();</span><br><span class="line">        if(t[0] == null || t[1] == null) continue;</span><br><span class="line">        t[0].val += t[1].val;</span><br><span class="line">        if(t[0].left == null) t[0].left = t[1].left;</span><br><span class="line">        else stack.push(new TreeNode[] &#123;t[0].left, t[1].left&#125;);</span><br><span class="line">        if(t[0].right == null) t[0].right = t[1].right;</span><br><span class="line">        else stack.push(new TreeNode[]&#123;t[0].right, t[1].right&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    return t1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>time: $O(n)$</p>
+</li>
+<li>space: $O(n)$</li>
+</ul>
 
           
         
@@ -1562,7 +1611,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/561-Array-Partition-I-3/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/706-Design-HashMap-HT-13/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -1581,7 +1630,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/02/561-Array-Partition-I-3/" itemprop="url">561. Array Partition I-3</a></h1>
+                <a class="post-title-link" href="/2018/11/03/706-Design-HashMap-HT-13/" itemprop="url">706. Design HashMap-HT-13</a></h1>
         
 
         <div class="post-meta">
@@ -1593,8 +1642,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-02T07:44:13+08:00">
-                2018-11-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-03T23:42:18+08:00">
+                2018-11-03
               </time>
             
 
@@ -1655,9 +1704,10 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个数组，使数组中的元素两两结合后取小者相加，问和最大是多少</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>对数组进行排序，然后从第0个元素开始每个2个元素取。时间复杂度取决于排序的时间复杂度<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int arrayPairSum(vector&lt;int&gt;&amp; nums)&#123;</span><br><span class="line">    int sum = 0;</span><br><span class="line">    std::sort(nums.begin(), nums.end());</span><br><span class="line">    for(int i = 0; i &lt; nums.size()-1; i+=2)</span><br><span class="line">        sum += nums[i];</span><br><span class="line">    return sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 一种类似于桶排序的思路</span><br><span class="line">int arrayPairSum(vector&lt;int&gt;&amp; nums)&#123;</span><br><span class="line">    int hash[20001] = &#123;0&#125;;</span><br><span class="line">    for(int n: nums)</span><br><span class="line">        ++hash[n+10000];</span><br><span class="line">    bool flag = true;</span><br><span class="line">    int sum = 0;</span><br><span class="line">    for(int i = 0; i &lt; 20001; i++)&#123;</span><br><span class="line">        if(hash[i] == 0) continue;</span><br><span class="line">        if(flag == true) sum+= ((hash[i] + 1)/2) * (i-10000);</span><br><span class="line">        else sum += (hash[i]/2) * (i-10000);</span><br><span class="line">        if(hash[i]&amp;0x01) flag = !flag;</span><br><span class="line">    &#125;</span><br><span class="line">    return sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>设计一个 Hash Map<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class MyHashMap&#123;</span><br><span class="line">public:</span><br><span class="line">    MyHashMap()&#123;&#125;</span><br><span class="line">    void put(int key, int value)&#123;&#125;</span><br><span class="line">    int get(int key)&#123;&#125;</span><br><span class="line">    void remove(int key)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line">/**</span><br><span class="line">* MyHashMap obj = new MyHashMap();</span><br><span class="line">* obj.put(key, value);</span><br><span class="line">* int param_2 = obj.get(key);</span><br><span class="line">* obj.remove(key);</span><br><span class="line">*/</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">// Java</span><br><span class="line">classMyHashMap&#123;</span><br><span class="line">    final Bucket[] buckets = new Bucket[10000];</span><br><span class="line">    public void put(int key, int value)&#123;</span><br><span class="line">        int i = idx(key);</span><br><span class="line">        if(bucket[i] == null)</span><br><span class="line">            bucket[i] = new Bucket();</span><br><span class="line">        ListNode prev = find(buckets[i], key);</span><br><span class="line">        if(prev.next == null)</span><br><span class="line">            prev.next = new ListNode(key, value);</span><br><span class="line">        else prev.next.val = value;</span><br><span class="line">    &#125;</span><br><span class="line">    public int get(int key)&#123;</span><br><span class="line">        int i = idx(key);</span><br><span class="line">        if(buckets[i] == null)</span><br><span class="line">            return -1;</span><br><span class="line">        ListNode node = find(buckets[i], key);</span><br><span class="line">        return node.next == null?-1:node.next.val;</span><br><span class="line">    &#125;</span><br><span class="line">    public void remove(int key)&#123;</span><br><span class="line">        int i = idx(key);</span><br><span class="line">        if(buckets[i] == null) return;</span><br><span class="line">        ListNode prev = find(buckets[i], key);</span><br><span class="line">        if(prev.next == null) return;</span><br><span class="line">        prev.next = prev.next.next;</span><br><span class="line">    &#125;</span><br><span class="line">    int idx(int key)&#123; return Integer.hashCode(key) % buckets.length;&#125;</span><br><span class="line">    ListNode find(Bucket bucket, int key)&#123;</span><br><span class="line">        ListNode node = bucket.head, prev = null;</span><br><span class="line">        While(node != null &amp;&amp; node.key != key)&#123;</span><br><span class="line">            prev = node;</span><br><span class="line">            node = node.next;</span><br><span class="line">        &#125;</span><br><span class="line">        return prev;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class Bucket&#123;</span><br><span class="line">    final ListNode head = new ListNode(-1, -1);</span><br><span class="line">&#125;</span><br><span class="line">class ListNode&#123;</span><br><span class="line">    int key, val;</span><br><span class="line">    ListNode next;</span><br><span class="line">    ListNode(int key, int val)&#123;</span><br><span class="line">        this.key = key;</span><br><span class="line">        this.val = val;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">// C++</span><br><span class="line">class MyHashMap(</span><br><span class="line">const static int size = 1000;</span><br><span class="line">std::array&lt;vector&lt;int&gt;, size&gt; vv;</span><br><span class="line">public:</span><br><span class="line">    MyHashMap()&#123;&#125;</span><br><span class="line">    void put(const int key, const int value)&#123;</span><br><span class="line">        int x = key / size;</span><br><span class="line">        int y = key % size;</span><br><span class="line">        if(vv[s].empty())&#123;</span><br><span class="line">            vv[x] = vector&lt;int&gt;(size+1, -1);</span><br><span class="line">            vv[x][size] = 0;   </span><br><span class="line">        &#125;</span><br><span class="line">        vv[x][y] = value;</span><br><span class="line">        vv[x][size]++;</span><br><span class="line">    &#125;</span><br><span class="line">    int get(const int key)&#123;</span><br><span class="line">        int x = key/size;</span><br><span class="line">        int y = key%size;</span><br><span class="line">        if(vv[x].empty() || vv[x][y] == -1) return -1;</span><br><span class="line">        return vv[x][y];</span><br><span class="line">    &#125;</span><br><span class="line">    void remove(const int key)&#123;</span><br><span class="line">        int x = key/size;</span><br><span class="line">        int y = key%size;</span><br><span class="line">        if(vv[x].empty() || vv[x][y]==-1) return ;</span><br><span class="line">        vv[x][y] = -1;</span><br><span class="line">        if(--vv[x][size] == 0) vv[x].clear();</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// C++ using vector</span><br><span class="line">class MyHashMap&#123;</span><br><span class="line">public:</span><br><span class="line">    MyHashMap()&#123;</span><br><span class="line">        vec = std::vector&lt;int&gt;(1000001, -1);</span><br><span class="line">    &#125;</span><br><span class="line">    void put(int key, int value)&#123;</span><br><span class="line">        vec[key] = value;</span><br><span class="line">    &#125;</span><br><span class="line">    int get(int key)&#123;</span><br><span class="line">        return vec[key];</span><br><span class="line">    &#125;</span><br><span class="line">    void remove(int key)&#123;</span><br><span class="line">        vec[key] = -1;</span><br><span class="line">    &#125;</span><br><span class="line">private:</span><br><span class="line">    std::vector&lt;int&gt; vec;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -1696,7 +1746,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1746,7 +1796,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-count">126</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1768,7 +1818,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1805,7 +1855,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

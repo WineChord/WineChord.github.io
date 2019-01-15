@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/7-Reverse-Integer/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/811-Subdomain-Visit-Count-HT-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -281,7 +281,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/01/7-Reverse-Integer/" itemprop="url">7. Reverse Integer</a></h1>
+                <a class="post-title-link" href="/2018/11/03/811-Subdomain-Visit-Count-HT-2/" itemprop="url">811. Subdomain Visit Count-HT-2</a></h1>
         
 
         <div class="post-meta">
@@ -293,8 +293,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-01T20:18:37+08:00">
-                2018-11-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-03T20:34:32+08:00">
+                2018-11-03
               </time>
             
 
@@ -355,8 +355,9 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个32bit有符号整数，翻转各位输出，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入 123</span><br><span class="line">输出 321</span><br><span class="line">输入 -123</span><br><span class="line">输出 -321</span><br></pre></td></tr></table></figure></p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int reverse(int x) &#123;</span><br><span class="line">    long long res = 0;</span><br><span class="line">    while(x)&#123;</span><br><span class="line">        res = res*10 + x%10;</span><br><span class="line">        x /= 10;</span><br><span class="line">    &#125;</span><br><span class="line">    return (res &lt; INT_MIN || res &gt; INT_MAX) ? 0 : res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>子域名访问的次数。当访问一个域名时，他的众多子域名也会被访问。<br>问给一个有很多要访问的域名以及访问的次数，问对于各子域名都需要访问多少次？</p>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>使用 Hash Map，对于 <code>a.b.c</code>，数的是 <code>a.b.c</code> <code>b.c</code> <code>c</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">// Java</span><br><span class="line">public List&lt;String&gt; subdomainVisits(String[] cpdomains)&#123;</span><br><span class="line">	Map&lt;String, Integer&gt; counts = new HashMap();</span><br><span class="line">	for(String domain: cpdomains)&#123;</span><br><span class="line">		String[] cpinfo = domain.split(&quot;\\s+&quot;);</span><br><span class="line">		String[] frags = cpinfo[1].split(&quot;\\.&quot;);</span><br><span class="line">		int count = Integer.valueOf(cpinfo[0]);</span><br><span class="line">		String cur = &quot;&quot;;</span><br><span class="line">		for(int i = frags.length-1; i &gt;= 0; i--)&#123;</span><br><span class="line">			cur = frags[i] + (i &lt; frags.length-1?&quot;.&quot;:&quot;&quot;) + cur;</span><br><span class="line">			counts.put(cur, counts.getOrDefault(cur, 0)+count);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	List&lt;String&gt; ans = new ArrayList();</span><br><span class="line">	for(String dom: counts.keySet())</span><br><span class="line">		ans.add(&quot;&quot;+counts.get(dom)+&quot; &quot;+dom);</span><br><span class="line">	return ans;</span><br><span class="line">&#125;</span><br><span class="line"># Python</span><br><span class="line">def subdomainVisits(self, cpdomains):</span><br><span class="line">	ans = collections.Counter()</span><br><span class="line">	for domain in cpdomains:</span><br><span class="line">		count, domain = domain.split()</span><br><span class="line">		count = int(count)</span><br><span class="line">		frags = domain.split(&apos;.&apos;)</span><br><span class="line">		for i in xrange(len(frags)):</span><br><span class="line">			ans[&quot;.&quot;.join(frags[i:])] += count</span><br><span class="line">	return [&quot;&#123;&#125; &#123;&#125;&quot;.format(ct, dom) for dom, ct in ans.items()]</span><br><span class="line">// C++</span><br><span class="line">vector&lt;string&gt; subdomainVisits(vector&lt;string&gt;&amp; cpdomains)&#123;</span><br><span class="line">	unordered_map&lt;string, int&gt; c;</span><br><span class="line">	for(auto cd: cpdomains)&#123;</span><br><span class="line">		int i = cd.find(&quot; &quot;);</span><br><span class="line">		int n = stoi(cd.substr(0,i));</span><br><span class="line">		string s = cd.substr(i+1, cd.size()-i-1);</span><br><span class="line">		for(int i = 0; i &lt; s.size(); i++)</span><br><span class="line">			if(s[i] == &apos;.&apos;)</span><br><span class="line">				c[s.substr(i+1, s.size()-i)] += n;</span><br><span class="line">		c[s] += n;</span><br><span class="line">	&#125;</span><br><span class="line">	vector&lt;string&gt; res;</span><br><span class="line">	for(auto k: c) res.push_back(to_string(k.second)+&quot; &quot;+k.first);</span><br><span class="line">	return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
           
         
       
@@ -404,7 +405,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/6-ZigZag-Conversion/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/771-Jewels-and-Stones-HT-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -423,7 +424,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/01/6-ZigZag-Conversion/" itemprop="url">6. ZigZag Conversion</a></h1>
+                <a class="post-title-link" href="/2018/11/03/771-Jewels-and-Stones-HT-1/" itemprop="url">771 Jewels and Stones-HT-1</a></h1>
         
 
         <div class="post-meta">
@@ -435,8 +436,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-01T19:44:11+08:00">
-                2018-11-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-03T20:24:14+08:00">
+                2018-11-03
               </time>
             
 
@@ -497,14 +498,11 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个字符串，再给一个行数，把这个字符串按照一个ZigZag的方式进行排列。比如字符串为 $”ABCDEFGHIJ”$，行数为3，排列如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A   E   I</span><br><span class="line">B D F H J</span><br><span class="line">C   G</span><br></pre></td></tr></table></figure></p>
-<p>然后每一行依次读为 $”AEIBDFHJCG”$，目标就是求出对应的字符串</p>
-<h3 id="方法一：按行来排"><a href="#方法一：按行来排" class="headerlink" title="方法一：按行来排"></a>方法一：按行来排</h3><p>遍历这个字符串，用一个标记来记录当前运动的方向，运动的方向决定了下一个字符要存放在哪一行中。<br>时间空间复杂度均为 $O(n)$<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">string convert(string s, int numRows)&#123;</span><br><span class="line">    if(numRows == 1) return s; </span><br><span class="line">    vector&lt;string&gt; rows(min(numRows, int(s.size())));</span><br><span class="line">    int curRow = 0;</span><br><span class="line">    bool goingdown = false;</span><br><span class="line">    for(char c: s)&#123;</span><br><span class="line">        rows[curRow] += c;</span><br><span class="line">        if(curRow == 0 || curRow == numRows-1) goingdown = !goingdown;</span><br><span class="line">        curRow += (goingdown? 1: -1);</span><br><span class="line">    &#125; </span><br><span class="line">    string ret;</span><br><span class="line">    for(string row: rows) ret += row;</span><br><span class="line">    return ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="方法二：根据行来访问"><a href="#方法二：根据行来访问" class="headerlink" title="方法二：根据行来访问"></a>方法二：根据行来访问</h3><p>可知，对于一个数 $k$，有</p>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>有一个字符串 J 来表示珠宝，用字符串 S 来表示石头。<br>S 中的每一个字符都是你拥有的一种石头，你想知道这些石头里面有多少是珠宝。</p>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>用 J 来建立一个 hash set，读 S 来数珠宝的数量。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// C++</span><br><span class="line">int numJewelsInStones(string J, string S)&#123;</span><br><span class="line">    int res = 0;</span><br><span class="line">    unordered_set&lt;char&gt; setJ(J.begin(), J.end());</span><br><span class="line">    for(char s: S) if(setJ.count(s)) res++;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br><span class="line">// Java</span><br><span class="line">public int numJewelsInstones(String J, String S)&#123;</span><br><span class="line">    int res = 0;</span><br><span class="line">    Set setJ = new HashSet();</span><br><span class="line">    for(char j: J.toCharArray()) setJ.add();</span><br><span class="line">    for(char s: S.toCharArray()) if(setJ.contains(s)) res++;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br><span class="line"># Python</span><br><span class="line">def numJewelsInStones(self, J, S):</span><br><span class="line">    setJ = set(J)</span><br><span class="line">    return sum(s in setJ for s in S)</span><br></pre></td></tr></table></figure></p>
 <ul>
-<li>第0行的字符在下标 $k(2 \cdot numRows-2)$</li>
-<li>第numRows-1行的字符在 $k(2 \cdot numRows-2)+numRows-1$</li>
-<li>中间第i行的字符在 $k(2 \cdot numRows-2)+i$ 和 $(k+1)(2 \cdot numRows-2)-i$<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">string convert(string s, int numRows)&#123;</span><br><span class="line">    if(numRows == 1) return s;</span><br><span class="line">    string ret;</span><br><span class="line">    int n = s.size();</span><br><span class="line">    int cycleLen = 2 * numRows - 2;</span><br><span class="line">    for(int i = 0; i &lt; numRows; i++)&#123;</span><br><span class="line">        for(int j = 0; j+i &lt; n; j += cycleLen)&#123;</span><br><span class="line">            ret += s[j+i];</span><br><span class="line">            if(i != 0 &amp;&amp; numRows-1 &amp;&amp; j+cycleLen-i &lt; n)</span><br><span class="line">                ret += s[j+cycleLen-i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>time: $O(M+N)$(use O(1) to check if it contains an element)</li>
+<li>space: $O(M)$</li>
 </ul>
 
           
@@ -554,7 +552,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/5-Longest-Palindromic-Substring/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/记录练习方法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -573,7 +571,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/01/5-Longest-Palindromic-Substring/" itemprop="url">5. Longest Palindromic Substring</a></h1>
+                <a class="post-title-link" href="/2018/11/03/记录练习方法/" itemprop="url">记录练习方法</a></h1>
         
 
         <div class="post-meta">
@@ -585,8 +583,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-01T16:41:16+08:00">
-                2018-11-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-03T20:18:43+08:00">
+                2018-11-03
               </time>
             
 
@@ -595,28 +593,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -647,171 +623,16 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>在一个字符串中找到最长的回文子串</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><h4 id="解法一：运用最长公共子串（Longest-Common-Substring）"><a href="#解法一：运用最长公共子串（Longest-Common-Substring）" class="headerlink" title="解法一：运用最长公共子串（Longest Common Substring）"></a>解法一：运用最长公共子串（Longest Common Substring）</h4><p>但是直接用会有问题，比如考虑如下解法：</p>
-<p>$原字符串为\ S，将字符串进行翻转，翻转之后的字符串为\ S’$，认为 $S\ 和\ S’$ 的最长公共子串为原字符串的最长公共回文串。</p>
-<p>以上解法有小问题，比如，当 $S=”abacdecaba”$ 时，$S’=”abacedcaba”$，此时他们的最长公共子串为 $”abac”$，明显答案是错误的。即当原字符串中有一个逆序的非回文子串时，这种方法就会出现错误。</p>
-<p>解决的办法是对于每一个找到的子串候选者，判断子串的下标是否和逆子串的原始下标一样，如果一样，则认为是子回文串，否则跳过。比如 $”abac”的下标是”0123”$，逆子串为 $”caba”$，其原始下标为 $”6789”$，两者不一样，所以跳过。而对于$S=”caba”$，子串$”aba”的下标是”123”$，逆子串为 $”aba”$，其原始下标为 $”123”$，是一样的，所以认为是符合回文子串的要求的。</p>
-<p>故问题转化为寻找两个子串的最长公共子串，可以使用动态规划法，时间复杂度为 $O(n^2)$，空间复杂度为 $O(n^2)$（可优化为$O(n)$）。</p>
-<h4 id="解法二：暴力"><a href="#解法二：暴力" class="headerlink" title="解法二：暴力"></a>解法二：暴力</h4><p>枚举所有可能，<br>时间复杂度 $O(n^3)$</p>
-<h4 id="解法三：直接使用动态规划"><a href="#解法三：直接使用动态规划" class="headerlink" title="解法三：直接使用动态规划"></a>解法三：直接使用动态规划</h4><p>如果已经知道一个子串为回文串，那么只要判断两边的字符是否相等就可以知道扩展的子串是否是回文串。<br>定义：<br>$$<br>P(i,j) = \begin{cases}<br>true &amp; S_i…S_j \ 是回文串 \<br>false &amp; S_i…S_j \ 不是回文串<br>\end{cases}<br>$$<br>则有<br>$$<br>P(i, j) = (P(i-1, j-1)\ and\ S_i == S_j)<br>$$<br>初始条件为<br>$$<br>P(i,i) = true<br>$$<br>$$<br>P(i,i+1) = (S_i==S_{i+1})<br>$$<br>所以可以对每一个位置初始化长度为1或者2的回文串，然后找到最长的回文串。</p>
-<h4 id="解法四：在中心扩展"><a href="#解法四：在中心扩展" class="headerlink" title="解法四：在中心扩展"></a>解法四：在中心扩展</h4><p>对于一个长度为 $n$ 的字符串来说，可以作为回文串的中心有 $2n-1$ 个位置（考虑中心在两个字符之间的情况）。</p>
-<p>所以可以遍历这些位置，然后依次地在中心进行扩展。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public String longestPalindrome(String s)&#123;</span><br><span class="line">    if(s == null || s.length() &lt; 1) return &quot;&quot;; // s in not null or s is not empty</span><br><span class="line">    int start = 0, end = 0;</span><br><span class="line">    for(int i = 0; i &lt; s.length(); i++)&#123;</span><br><span class="line">        int len1 = expandAroundCenter(s, i, i); // center is i</span><br><span class="line">        int len2 = expandAroundCenter(s, i, i+1); // center is the space between i and i+1</span><br><span class="line">        int len = Math.max(len1, len2);</span><br><span class="line">        if(len &gt; end - start)&#123;</span><br><span class="line">            start = i - (len-1)/2;</span><br><span class="line">            end = i + len/2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return s.substring(start, end+1);</span><br><span class="line">&#125;</span><br><span class="line">private int expandAroundCenter(String s, int left, int right)&#123;</span><br><span class="line">    int L = left, R = right;</span><br><span class="line">    while(L &gt;= 0 &amp;&amp; R &lt; s.length() &amp;&amp; s.charAt(L) == s.charAt(R))&#123; // if two characters are the same, expand.</span><br><span class="line">        L--; R++;</span><br><span class="line">    &#125;</span><br><span class="line">    return R-L-1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># Python version</span><br><span class="line">def longestPalindrome(self, s):</span><br><span class="line">    res = &quot;&quot;</span><br><span class="line">    for i in xrange(len(s)):</span><br><span class="line">        # odd case, like &quot;aba&quot;</span><br><span class="line">        tmp = self.helper(s, i, i)</span><br><span class="line">        if len(tmp) &gt; len(res):</span><br><span class="line">            res = tmp</span><br><span class="line">        # even case, like &quot;abba&quot;</span><br><span class="line">        tmp = self.helper(s, i, i+1)</span><br><span class="line">        if len(tmp) &gt; len(res):</span><br><span class="line">            res = tmp</span><br><span class="line">    return res</span><br><span class="line"># get the longest palindrome, l, r are the middle indices</span><br><span class="line"># from inner to outer</span><br><span class="line">def helper(self, s, l, r):</span><br><span class="line">    while l &gt;= 0 and r &lt; len(s) and s[l] == s[r]:</span><br><span class="line">        l -= 1; r += 1</span><br><span class="line">    return s[l+1:r]</span><br></pre></td></tr></table></figure>
-<p>时间复杂度为 $O(n^2)$，空间复杂度为 $O(1)$</p>
-<h4 id="方法五：Manacher’s-Algorithm"><a href="#方法五：Manacher’s-Algorithm" class="headerlink" title="方法五：Manacher’s Algorithm"></a>方法五：Manacher’s Algorithm</h4><p>可以达到 $O(n)$ 时间复杂度。<br>思路如下：</p>
-<p>首先将字符串的空隙填满一个辅助字符 $’#‘$，比如对于字符串 $S=”abaaba”$，填充之后为 $T=”#a#b#a#a#b#a#“$。用 $P[i]$ 表示以 $T_i$ 为中心的最长回文子串的长度。如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">T:  # a # b # a # a # b # a #</span><br><span class="line">P:  0 1 0 3 0 1 6 1 0 3 0 1 0</span><br></pre></td></tr></table></figure></p>
-<p>假设 $”C”$ 为一个已知回文子串的中心下标，该回文子串最右侧下标为 $”R”$，最左侧下标为 $”L”$，则当求下标 $i$ 处的 $P[i]$ 值时，有一下结论成立（$i’$ 为 $i$ 关于 $C$ 对称的下标）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if P[i&apos;] &lt;= R - i</span><br><span class="line">    P[i] = P[i&apos;]</span><br><span class="line">else </span><br><span class="line">    P[i] &gt;= P[i&apos;] (需要通过扩展右边界R来寻找P[i]的值)</span><br></pre></td></tr></table></figure></p>
-<p>代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">// &quot;abba&quot; =&gt; &quot;^#a#b#b#a#$&quot;</span><br><span class="line">string preProcess(string s)&#123;</span><br><span class="line">    int n = s.length();</span><br><span class="line">    if(n == 0) return &quot;^$&quot;;</span><br><span class="line">    string ret = &quot;^&quot;;</span><br><span class="line">    for(int i = 0; i &lt; n; i++)</span><br><span class="line">        ret += &quot;#&quot; + s.substr(i, 1);</span><br><span class="line">    ret += &quot;#$&quot;;</span><br><span class="line">    return ret;</span><br><span class="line">&#125;</span><br><span class="line">string longestPalindrome(string s)&#123;</span><br><span class="line">    string T = preProcess(s);</span><br><span class="line">    int n = T.length();</span><br><span class="line">    int *P = new int[n]; // P denotes the maximum length of a palindrome substring</span><br><span class="line">    int C = 0, R = 0;</span><br><span class="line">    for(int i = 1; i &lt; n-1; i++)&#123;</span><br><span class="line">        int i_mirror = 2*C-1; // i&apos; = C - (i-C)</span><br><span class="line">        P[i] = (R&gt;i) ? min(R-i, P[i_mirror]):0;</span><br><span class="line">        // Attempt to expand palindrome centered at i</span><br><span class="line">        while(T[i+1+P[i]] == T[i-1-P[i]]) P[i]++;</span><br><span class="line">        // if palindrome centered at i expand past R,</span><br><span class="line">        // adjust center based on expanded palindrome.</span><br><span class="line">        if(i + P[i] &gt; R)&#123;</span><br><span class="line">            C = i;</span><br><span class="line">            R = i + P[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    // Find the maximum element in P</span><br><span class="line">    int maxLen = 0;</span><br><span class="line">    int centerIndex = 0;</span><br><span class="line">    for(int i = 1; i &lt; n-1; i++)&#123;</span><br><span class="line">        if(P[i] &gt; maxLen)&#123;</span><br><span class="line">            maxLen = P[i];</span><br><span class="line">            centerIndex = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    delete[] P;</span><br><span class="line">    return s.substr((centerIndex - maxLen)/2, maxLen);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/4-Median-of-Two-Sorted-Arrays/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/01/4-Median-of-Two-Sorted-Arrays/" itemprop="url">4. Median of Two Sorted Arrays</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-01T16:08:10+08:00">
-                2018-11-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>找到两个有序数组的中位数。<br>要求时间复杂度为 $O(log(m+n))$</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>将两个数组各自分成两部分，假设其为 $aLeft$，$aRight$，$bLeft$，$bRight$，只要保证两个数组左半部分的长度之和等于右半部分的长度之和并且，左半部分中的任何一个元素都不大于右半部分，那么左半部分的最大值加上右半部分的最小值再除以二就是中位数。</p>
+            <ul>
+<li>针对要准备的科目，刷题。</li>
+<li>疯狂提高速度，使之成为本能。</li>
+<li>一定要计时。</li>
+</ul>
+<p><a href="https://www.zhihu.com/question/40481755/answer/86816870" target="_blank" rel="noopener">参考文章1</a><br><a href="https://www.zhihu.com/question/20894671/answer/87633185" target="_blank" rel="noopener">参考文章2</a></p>
 <ul>
-<li>假设 $a$ 被分为 $a[0\sim i-1]\ \ \ a[i\sim m-1]$</li>
-<li>假设 $b$ 被分为 $b[0\sim j-1]\ \ \ b[j\sim n-1]$</li>
+<li>本文用时：3:01</li>
 </ul>
-<p>$则\ i,j\ 满足关系$<br>$$<br>i+j=m-i+n-j \tag{1}<br>$$<br>$$<br>a[i-1] \le b[j] \tag{2}<br>$$<br>$$<br>b[j-1] \le a[i] \tag{3}<br>$$<br>其中根据 $(1)$ 可得：<br>$$<br>j = \frac{m+n-2i}{2} \tag{4}<br>$$<br>故为使 $j$ 保持为正数，在开头确保 $m\le n$。<br>则现在问题归结为在 $[0,m-1]中找一数\ i$，使得 $(2)(3)$ 成立。可以考虑使用二分法，最后达到的时间复杂度为 $O(log(m+n))$</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">double findMedianSortedArrays(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) &#123;</span><br><span class="line">    int m = nums1.size();</span><br><span class="line">    int n = nums2.size();</span><br><span class="line">    if(m &gt; n)&#123; // 通过交换保证 nums1 的大小小于 nums2</span><br><span class="line">        vector&lt;int&gt; temp(nums1); nums1 = nums2; nums2 = temp;</span><br><span class="line">        int tmp = m; m = n; n = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    int iMin = 0, iMax = m, halfLen = (m + n + 1)/2;</span><br><span class="line">    while(iMin &lt;= iMax)&#123;</span><br><span class="line">        int i = (iMin + iMax) / 2;</span><br><span class="line">        int j = halfLen - i;</span><br><span class="line">        if(i &lt; iMax &amp;&amp; nums2[j-1] &gt; nums1[i])&#123;</span><br><span class="line">            iMin = i + 1;</span><br><span class="line">        &#125;</span><br><span class="line">        else if(i &gt; iMin &amp;&amp; nums1[i-1] &gt; nums2[j])&#123;</span><br><span class="line">            iMax = iMax - 1;</span><br><span class="line">        &#125;</span><br><span class="line">        else&#123;</span><br><span class="line">            int maxLeft = 0;</span><br><span class="line">            if(i == 0) maxLeft = nums2[j-1];</span><br><span class="line">            else if(j == 0) maxLeft = nums1[i-1];</span><br><span class="line">            else &#123;maxLeft = std::max(nums1[i-1], nums2[j-1]);&#125;</span><br><span class="line">            if((m+n) % 2 == 1) return maxLeft;</span><br><span class="line">            </span><br><span class="line">            int minRight = 0;</span><br><span class="line">            if(i == m) minRight = nums2[j];</span><br><span class="line">            else if(j == n) minRight = nums1[i];</span><br><span class="line">            else &#123;minRight = std::min(nums2[j], nums1[i]);&#125;</span><br><span class="line">            </span><br><span class="line">            return (maxLeft + minRight) / 2.0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0.0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
           
         
       
@@ -859,7 +680,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/3-Longest-Substring-Without-Repeating-Characters/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/300-Longest-Increasing-Subsequence-DP-12/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -878,7 +699,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/01/3-Longest-Substring-Without-Repeating-Characters/" itemprop="url">3. Longest Substring Without Repeating Characters</a></h1>
+                <a class="post-title-link" href="/2018/11/02/300-Longest-Increasing-Subsequence-DP-12/" itemprop="url">300. Longest Increasing Subsequence-DP-12</a></h1>
         
 
         <div class="post-meta">
@@ -890,8 +711,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-01T15:10:54+08:00">
-                2018-11-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-02T20:25:12+08:00">
+                2018-11-02
               </time>
             
 
@@ -952,26 +773,172 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个字符串，找到一个没有重复字符的最长子串长度。</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><h4 id="方法一：暴力"><a href="#方法一：暴力" class="headerlink" title="方法一：暴力"></a>方法一：暴力</h4><p>考察所有的子串，分析是否是无重复字符的最长子串。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// 时间复杂度：O(n^3)</span><br><span class="line">int lengthOfLongestSubstring(String s)&#123;</span><br><span class="line">    int n = s.length();</span><br><span class="line">    int ans = 0;</span><br><span class="line">    for(int i = 0; i &lt; n; i++)</span><br><span class="line">        for(int j = i+1; j &lt;= n; j++)</span><br><span class="line">            if(allUnique(s,i,j)) ans = Math.max(ans, j-i);</span><br><span class="line">    return ans;</span><br><span class="line">&#125;   </span><br><span class="line">boolean allUnique(String s, int start, int end)&#123;</span><br><span class="line">    Set&lt;Character&gt; set = new HashSet&lt;&gt;();</span><br><span class="line">    for(int i = start; i &lt; end; i++)&#123;</span><br><span class="line">        Character ch = s.charAt(i);</span><br><span class="line">        if(set.contsins(ch)) return false;</span><br><span class="line">        set.add(ch);</span><br><span class="line">    &#125;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="方法二：滑动窗口法"><a href="#方法二：滑动窗口法" class="headerlink" title="方法二：滑动窗口法"></a>方法二：滑动窗口法</h3><p>只需要查看新加入的元素是否在现有的子串中，如果不在，那么把这个新元素加入子串，如果在，则将子串最左的下标向后移动直到没有重复元素。<br>查看是否存在可以使用散列，此查找操作复杂度为 $O(1)$<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int lengthOfLongestSubstring(String s)&#123;</span><br><span class="line">    int n = s.length(); // total length</span><br><span class="line">    Set&lt;Character&gt; set = new HashSet&lt;&gt;(); // use hashset</span><br><span class="line">    int ans = 0, i = 0, j = 0;</span><br><span class="line">    while(i &lt; n &amp;&amp; j &lt; n)&#123;</span><br><span class="line">        // try to extend the range[i,j]</span><br><span class="line">        if(!set.contains(s.charAt(j)))&#123; // if it doesn&apos;t contain the character to be added</span><br><span class="line">            set.add(s.charAt(j++)); </span><br><span class="line">            and = Math.max(ans, j-i);</span><br><span class="line">        &#125; else set.remove(s.charAt(i++));</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>寻找一个序列中的最长上升子序列</p>
+<h3 id="方法一：暴力"><a href="#方法一：暴力" class="headerlink" title="方法一：暴力"></a>方法一：暴力</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public int lengthOfLIS(int[] nums)&#123;</span><br><span class="line">    return lengthofLIS(nums, Integer.MIN_VALUE, 0);</span><br><span class="line">&#125;</span><br><span class="line">public int lengthofLIS(int[] nums, int prev, int curpos)&#123;</span><br><span class="line">    if(curpos == nums.length) return 0;</span><br><span class="line">    int taken = 0;</span><br><span class="line">    if(nums[curpos] &gt; prev)&#123;</span><br><span class="line">        taken = 1 + lengthofLIS(nums, nums[curpos], curpos+1);</span><br><span class="line">    &#125;</span><br><span class="line">    int nottaken = lengthofLIS(nums, nums[curpos], curpos+1);</span><br><span class="line">    return Math.max(taken, nottaken);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>time: $O(2^n)$,<br>space: $O(n^2)$</p>
+<h3 id="方法二：带记忆的递归"><a href="#方法二：带记忆的递归" class="headerlink" title="方法二：带记忆的递归"></a>方法二：带记忆的递归</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public int lengthOfLIS(int[] nums)&#123;</span><br><span class="line">    int memo[][] = new int[nums.length + 1][nums.length];</span><br><span class="line">    for(int[] l: memo) Arrays.fill(l, -1);</span><br><span class="line">    return lengthofLIS(nums, -1, 0, memo);</span><br><span class="line">&#125;</span><br><span class="line">public int lengthofLIS(int[] nums, int precindex, int curpos, int[][] memo)&#123;</span><br><span class="line">    if(curpos == nums.length) return 0;</span><br><span class="line">    if(memo[previndex+1][curpos] &gt;= 0) return memo[previndex+1][curpos];</span><br><span class="line">    int taken = 0;</span><br><span class="line">    if(previndex &lt; 0 || nums[curpos] &gt; nums[previndex])&#123;</span><br><span class="line">        taken = 1 + lengthofLIS(nums, curpos, curpos+1, memo);</span><br><span class="line">    &#125;</span><br><span class="line">    int nottaken = lengthofLIS(nums, previndex, curpos+1, memo);</span><br><span class="line">    memo[previndex+1][curpos] = Math.max(taken, nottaken);</span><br><span class="line">    return memo[previndex+1][curpos];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>time: $O(n^2)$,<br>space: $O(n^2)$</p>
+<h3 id="方法三：动态规划"><a href="#方法三：动态规划" class="headerlink" title="方法三：动态规划"></a>方法三：动态规划</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public int lengthOfLIS(int[] nums)&#123;</span><br><span class="line">    if(nums.length == 0) return 0;</span><br><span class="line">    int[] dp = new int[nums.length];</span><br><span class="line">    dp[0] = 1;</span><br><span class="line">    int maxans = 1;</span><br><span class="line">    for(int i = 1; i &lt; dp.length; i++)&#123;</span><br><span class="line">        int maxval = 0;</span><br><span class="line">        for(int j = 0; j &lt; i; j++)&#123;</span><br><span class="line">            if(nums[i] &gt; nums[j])</span><br><span class="line">                maxval = Math.max(maxval, dp[j]);</span><br><span class="line">        &#125;</span><br><span class="line">        dp[i] = maxval + 1;</span><br><span class="line">        maxans = Math.max(maxans, dp[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    return maxans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>time: $O(n^2)$,<br>space: $O(n)$</p>
+<h3 id="方法四：使用了二分搜索的动态规划"><a href="#方法四：使用了二分搜索的动态规划" class="headerlink" title="方法四：使用了二分搜索的动态规划"></a>方法四：使用了二分搜索的动态规划</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public int lengthOfLIS(int[] nums)&#123;</span><br><span class="line">    int[] dp = new int[nums.length];</span><br><span class="line">    int len = 0; </span><br><span class="line">    for(int num: nums)&#123;</span><br><span class="line">        int i = Arrays.binarySearch(dp, 0, len, num);</span><br><span class="line">        if(i &lt; 0) i = -(i+1);</span><br><span class="line">        dp[i] = num;</span><br><span class="line">        if(i == len) len++;</span><br><span class="line">    &#125;</span><br><span class="line">    return len;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>time: $O(nlogn)$,<br>space: $O(n)$</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/714-Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee-DP-11/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/02/714-Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee-DP-11/" itemprop="url">714. Best Time to Buy and Sell Stock with Transaction Fee-DP-11</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-02T19:35:48+08:00">
+                2018-11-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>带手续费的买卖股票最佳时间。可以买卖多次，但是买之前必须先卖出已经有的。手续费只在卖的时候收。<br>问最大的盈利可以是多少？</p>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>在第i天结束的时候，用 cash 来表示我们手上没有股票的时候拥有的最大利润，用 hold 来表示我们手上有股票时拥有的最大利润。对于 cash 变量而言，有两种情况</p>
 <ul>
-<li>时间复杂度为 $O(n)$，最坏情况下每一个字符会被访问两次</li>
-<li><p>空间复杂度为 $O(min(m,n))$，m是字符集的大小，n是字符总数</p>
-<h3 id="方法三：优化的滑动窗口法"><a href="#方法三：优化的滑动窗口法" class="headerlink" title="方法三：优化的滑动窗口法"></a>方法三：优化的滑动窗口法</h3><p>当发现新的元素产生一个重复时，不用一点点地增加开头的下标，而是直接加到前面重复的那个元素后面去。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">int lengthOfLongestSubstring(String s)&#123;</span><br><span class="line">    int n = s.length(), ans = 0;</span><br><span class="line">    Map&lt;Character, Integer&gt; map = new HashMap&lt;&gt;(); // current index of character</span><br><span class="line">    // try to extend the range[i,j]</span><br><span class="line">    for(int j = 0, i = 0; j &lt; n; j++)&#123;</span><br><span class="line">        if(map.containsKey(s.charAt(j)))</span><br><span class="line">            i = Math.max(map.get(s.charAt(j)), i); // index+1 if exists</span><br><span class="line">        ans = Math.max(ans, j-i+1);</span><br><span class="line">        map.put(s.charAt(j), j+1); // value is index+1</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">// can replace map with an array if charset is rather small</span><br><span class="line">int lengthOfLongestSubstring(String s)&#123;</span><br><span class="line">    int n = s.length(), ans = 0;</span><br><span class="line">    int[] index = new int[128]; // current index of character</span><br><span class="line">    // try to extend the range</span><br><span class="line">    for(int j = 0, i = 0; j &lt; n; j++)&#123;</span><br><span class="line">        i = Math.max(index[s.charAt(j)], i);</span><br><span class="line">        ans = Math.max(ans, j-i+1);</span><br><span class="line">        index[s.charAt(j)] = j+1;</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>时间复杂度：$O(n)$</p>
-</li>
-<li>空间复杂度：<ul>
-<li>hashmap: $O(min(m,n))$</li>
-<li>table: $O(m)$</li>
+<li>我们前一天手上就没有股票，那么我们今天也不再买，这样就保持了手上没有股票，该利润用 cash 来表示。即 <code>cash = cash</code></li>
+<li>我们前一天手上是有股票的，为了满足 cash 这个变量的要求（它只表示手上没有股票时的最大利润），我们在今天必须卖出，由于前一天手上是有股票的，所以前一天的最大利润用 hold 表示，这样 <code>cash = hold + prices[i] - fee</code></li>
 </ul>
-</li>
+<p>我们的目标是利润最大化，所以：<br><code>cash = max(cash, hold + prices[i] - fee)</code>。</p>
+<p>对于 hold 变量而言，也有两种情况：</p>
+<ul>
+<li>我们前一天手上就有股票，那么今天保留股票就可以满足要求：<code>hold = hold</code></li>
+<li>我们前一天没有股票，为了手上能够有股票，我们需要在这一天买入，而因为前一天手上没有股票，所以前一天的利润用 cash 来表示。故：<code>hold = cash - prices[i]</code></li>
 </ul>
-<p>m 是字符集的大小。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">int lengthOfLongestSubstring(string s)&#123;</span><br><span class="line">    vector&lt;int&gt; dict(256, -1);   // 使用一个向量来存储每个字符出现的下标</span><br><span class="line">    int maxLen = 0, start = -1;</span><br><span class="line">    for(int i = 0; i != s.length(); i++)&#123;</span><br><span class="line">        if(dict[s[i]] &gt; start) start = dict[s[i]];</span><br><span class="line">        dict[s[i]] = i;</span><br><span class="line">        maxLen = max(maxLen, i - start);</span><br><span class="line">    &#125;</span><br><span class="line">    return maxLen;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int lengthOfLongestSubstring(string s)&#123;</span><br><span class="line">    int ans = 0;</span><br><span class="line">    std::map&lt;char, int&gt; hashmap;</span><br><span class="line">    for(int j = 0; j &lt; s.length(); j++)&#123;   // 使用 hashmap，思路跟之前的相似</span><br><span class="line">        if(hashmap.count(s[j]))&#123;</span><br><span class="line">            // -&gt;second denotes value in [key, value]</span><br><span class="line">            i = std::max(hashmap.find(s[j])-&gt;second, i);</span><br><span class="line">            hashmap.find(s[j])-&gt;second = j + 1;</span><br><span class="line">        &#125; else hashmap.insert(pair&lt;char, int&gt;(s[j], j+1));</span><br><span class="line">        ans = std::max(ans, j-i+1);</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">int p[256] = &#123;0&#125;;</span><br><span class="line">int ans = 0;</span><br><span class="line">int start = 0;</span><br><span class="line">for(int i = 0; i &lt; s.size(); i++)&#123; // 方法与之前大致类似</span><br><span class="line">    if(p[s[i]] &gt; 0) &#123;</span><br><span class="line">        if(p[s[i]] &gt; 0)&#123;</span><br><span class="line">            ans = max(ans, i-start);</span><br><span class="line">            for(start; start &lt; p[s[i]] - 1; start++) </span><br><span class="line">                p[s[start]] = 0; // start 表示新的重复元素的位置</span><br><span class="line">            start = p[s[i]];</span><br><span class="line">        &#125;</span><br><span class="line">        p[s[i]] = i+1; // 此处的值为下标+1，最后的结果长度是 i-start (没有加一)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>目标是利润最大化，故：<br><code>hold = max(hold, cash - prices[i])</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># Python</span><br><span class="line">def maxProfit(self, prices, fee):</span><br><span class="line">    cash, hold = 0, -prices[0]</span><br><span class="line">    for i in range(1, len(prices)):</span><br><span class="line">        cash = max(cash, hold + prices[i] - fee)</span><br><span class="line">        hold = max(hold, cash - prices[i])</span><br><span class="line">    return cash</span><br><span class="line">// Java</span><br><span class="line">public int maxProfit(int[] prices, int fee)&#123;</span><br><span class="line">    int cash = 0, hold = -prices[0];</span><br><span class="line">    for(int i = 1; i &lt; prices.length; i++)&#123;</span><br><span class="line">        cash = Math.max(cash, hold + prices[i] - fee);</span><br><span class="line">        hold = Math.max(hold, cash - prices[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    return cash;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>time: $O(N)$,<br>space: $O(1)$</p>
+
           
         
       
@@ -1019,7 +986,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/2-Add-Two-Numbers/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/712-Minimum-ASCII-Delete-Sum-for-Two-Strings-DP-10/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -1038,7 +1005,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/01/2-Add-Two-Numbers/" itemprop="url">2. Add Two Numbers</a></h1>
+                <a class="post-title-link" href="/2018/11/02/712-Minimum-ASCII-Delete-Sum-for-Two-Strings-DP-10/" itemprop="url">712. Minimum ASCII Delete Sum for Two Strings-DP-10</a></h1>
         
 
         <div class="post-meta">
@@ -1050,8 +1017,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-01T14:47:21+08:00">
-                2018-11-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-02T19:10:06+08:00">
+                2018-11-02
               </time>
             
 
@@ -1112,9 +1079,10 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给两个链表，每个链表逆序存放了两个正整数，每个节点是一个数字。将这两个正整数相加，仍以链表的形式返回和。</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>对链表进行操作，一位一位加，注意进位以及两个整数长度不同时的处理。</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) &#123;</span><br><span class="line">    int carry = 0;  // carry value</span><br><span class="line">    int sum = 0;  // current sum</span><br><span class="line">    int remainder = 0; // current remainder</span><br><span class="line">    ListNode *result = NULL;  // result</span><br><span class="line">    ListNode *p = result;</span><br><span class="line">    ListNode *p1 = l1;</span><br><span class="line">    ListNode *p2 = l2;</span><br><span class="line">    while(p1 != NULL || p2 != NULL || carry)&#123;</span><br><span class="line">        sum = (p1?p1-&gt;val:0) + (p2?p2-&gt;val:0) + carry;</span><br><span class="line">        carry = sum / 10;</span><br><span class="line">        remainder = sum % 10;</span><br><span class="line">        ListNode *newNode = new ListNode(remainder); // store the value</span><br><span class="line">        if(result == NULL)&#123; // the first position</span><br><span class="line">            result = newNode;</span><br><span class="line">            p = result;</span><br><span class="line">        &#125;</span><br><span class="line">        else&#123; // other positions</span><br><span class="line">            p-&gt;next = newNode;</span><br><span class="line">            p = newNode;</span><br><span class="line">        &#125;</span><br><span class="line">        p1 = p1?p1-&gt;next:p1;</span><br><span class="line">        p2 = p2?p2-&gt;next:p2;</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给两个字符串，两边各删除一些字符使得两个字符串最终能够相等，问删除的字符ASCII之和最小是多少？</p>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>用 dp[i][j] 表示对于 s1[i:] 和 s2[j:] 的解。<br>其中一个字符串为空时，答案是另一个字符串的 ASCII 总和：<br>$$<br>dp[i][s2.length()] = dp[i+1][s2.length()] + s1.codePointAt(i)<br>$$<br>如果 s1[i] == s2[j]，有 dp[i][j] = dp[i+1][j+1]。<br>如果 s1[i] != s2[j]，需要进行删除<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">def minimumDeleteSum(self, s1, s2):</span><br><span class="line">    dp = [[0] * (len(s2)+1) for _ in xrange(len(s1)+1)]</span><br><span class="line">    for i in xrange(len(s1) - 1, -1, -1):</span><br><span class="line">        dp[i][len(s2)] = dp[i+1][len(s2)] + ord(s1[i])</span><br><span class="line">    for j in xrange(len(s2) - 1, -1, -1):</span><br><span class="line">        dp[len(s1)][j] = dp[len(s1)[j+1]] + ord(s2[j])</span><br><span class="line">    for i in xrange(len(s1) - 1, -1, -1):</span><br><span class="line">        for j in xrange(len(s1) - 1, -1, -1):</span><br><span class="line">            if s1[i] == s2[j]:</span><br><span class="line">                dp[i][j] = dp[i+1][j+1]</span><br><span class="line">            else:</span><br><span class="line">                dp[i][j] = min(dp[i+1][j] + ord(s1[i]), dp[i][j+1] + ord(s2[j]))</span><br><span class="line">    return dp[0][0]</span><br><span class="line">    </span><br><span class="line">// C++ version</span><br><span class="line">int minimumDeleteSum(string s1, string s2) &#123;</span><br><span class="line">    int len1 = s1.size();</span><br><span class="line">    int len2 = s2.size();</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; dp(len1+1, vector&lt;int&gt;(len2+1, 0));</span><br><span class="line">    for(int i = len1-1; i &gt;= 0; i--)</span><br><span class="line">        dp[i][len2] = dp[i+1][len2] + s1[i];</span><br><span class="line">    for(int j = len2-1; j &gt;= 0; j--)</span><br><span class="line">        dp[len1][j] = dp[len1][j+1] + s2[j];</span><br><span class="line">    for(int i = len1-1; i &gt;= 0; i--)</span><br><span class="line">        for(int j = len2-1; j &gt;= 0; j--)&#123;</span><br><span class="line">            if(s1[i] == s2[j])</span><br><span class="line">                dp[i][j] = dp[i+1][j+1];</span><br><span class="line">            else</span><br><span class="line">                dp[i][j] = min(dp[i+1][j]+s1[i], dp[i][j+1]+s2[j]);</span><br><span class="line">        &#125;</span><br><span class="line">    return dp[0][0];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>time: O(M<em>N), where M, N are the lengths of the given strings.<br>space: O(M</em>N)</p>
+
           
         
       
@@ -1162,7 +1130,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/编程之美-4-1-金刚坐飞机问题/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/647-Palindromic-Substrings-DP-9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -1181,7 +1149,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/01/编程之美-4-1-金刚坐飞机问题/" itemprop="url">编程之美 4.1 金刚坐飞机问题</a></h1>
+                <a class="post-title-link" href="/2018/11/02/647-Palindromic-Substrings-DP-9/" itemprop="url">647. Palindromic Substrings-DP-9</a></h1>
         
 
         <div class="post-meta">
@@ -1193,127 +1161,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-01T14:12:47+08:00">
-                2018-11-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/编程之美-3-11-程序改错/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/01/编程之美-3-11-程序改错/" itemprop="url">编程之美 3.11 程序改错</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-01T07:25:12+08:00">
-                2018-11-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-02T18:20:32+08:00">
+                2018-11-02
               </time>
             
 
@@ -1335,8 +1184,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程之美/" itemprop="url" rel="index">
-                    <span itemprop="name">编程之美</span>
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
                   </a>
                 </span>
 
@@ -1374,8 +1223,11 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>找出一个有序字符串数组中等于字符串v的元素的序号，如果有多个元素满足，则返回序号最大的。</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 纠正之后的</span><br><span class="line">int bisearch(char** arr, int b, int e, char* v)&#123;</span><br><span class="line">    int minIndex = b, maxIndex = e, midIndex;</span><br><span class="line">    while(minIndex &lt; maxIndex - 1)&#123;</span><br><span class="line">        midIndex = minInde + (maxIndex - minIndex) / 2;</span><br><span class="line">        if(strcmp(arr[midIndex], v) &lt;= 0) minIndex = midIndex;</span><br><span class="line">        else maxIndex = midIndex;</span><br><span class="line">    &#125;</span><br><span class="line">    // 先判断序号大的</span><br><span class="line">    if(!strcmp(arr[maxIndex], v)) return maxIndex;</span><br><span class="line">    else if (!strcmp(arr[minIndex], v)) return minIndex;</span><br><span class="line">    else return -1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>数一下一个字符串中回文子串的个数</p>
+<h3 id="方法一：在中心扩张"><a href="#方法一：在中心扩张" class="headerlink" title="方法一：在中心扩张"></a>方法一：在中心扩张</h3><p>枚举所有可能为回文子串中心的下标。注意区分奇数长度和偶数长度。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public int countSubstrings(String S)&#123;</span><br><span class="line">    int N = S.length(), ans = 0;</span><br><span class="line">    for(int center = 0; center &lt;= 2*N-1; center++)&#123;</span><br><span class="line">        int left = center/2;</span><br><span class="line">        int right = left + center%2; // 用来处理奇偶</span><br><span class="line">        while(left &gt;= 0 &amp;&amp; right &lt; N &amp;&amp; S.charAt(left) == S.charAt(right))&#123;</span><br><span class="line">            ans++;</span><br><span class="line">            left--;</span><br><span class="line">            right++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br><span class="line">// 另一种写法</span><br><span class="line">int count = 0;</span><br><span class="line">public int countSubstring(String s)&#123;</span><br><span class="line">    if(s==null || s.length() == 0) return 0;</span><br><span class="line">    for(int i = 0; i &lt; s.length(); i++)&#123;</span><br><span class="line">        extendPalindrome(s, i, i); // odd length</span><br><span class="line">        extendPalindrome(s, i, i+1); // even length</span><br><span class="line">    &#125;</span><br><span class="line">    return count;</span><br><span class="line">&#125;</span><br><span class="line">private void extendPalindrome(String s, int left, int right)&#123;</span><br><span class="line">    while(left &gt;= 0 &amp;&amp; right &lt; s.length() &amp;&amp; s.charAt(left) == s.charAt(right))&#123;</span><br><span class="line">        count++; left--; right++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>time: $O(n^2)$,<br>space: $O(1)$</p>
+<h3 id="方法二：Manacher’s-Algorithm"><a href="#方法二：Manacher’s-Algorithm" class="headerlink" title="方法二：Manacher’s Algorithm"></a>方法二：Manacher’s Algorithm</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public int countSubstrings(String S)&#123;</span><br><span class="line">    char[] A = new char[2 * S.length() + 3];</span><br><span class="line">    A[0] = &apos;@&apos;;</span><br><span class="line">    A[1] = &apos;#&apos;;</span><br><span class="line">    A[A.length-1] = &apos;$&apos;;</span><br><span class="line">    int t = 2;</span><br><span class="line">    for(char c: S.toCharArray())&#123;</span><br><span class="line">        A[t++] = c;</span><br><span class="line">        A[t++] = &apos;#&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">    int[] Z = new int[A.length];</span><br><span class="line">    int center = 0, right = 0;</span><br><span class="line">    for(int i = 1; i &lt; Z.length-1; i++)&#123;</span><br><span class="line">        if(i &lt; right)</span><br><span class="line">            Z[i] = Math.min(right-i, Z[2*center-i]);</span><br><span class="line">        while(A[i + Z[i] + 1] == A[i - Z[i] - 1]) Z[i]++;</span><br><span class="line">        if(i + Z[i] &gt; right)&#123;</span><br><span class="line">            center = i;</span><br><span class="line">            right = i + Z[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    int ans = 0;</span><br><span class="line">    for(int v: Z) ans += (v+1)/2; // for v is the longest </span><br><span class="line">    // polindromic substring centered at C, then the substrings </span><br><span class="line">    // with radius R-1, R-2 ... 0, also form polindrome</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>time: $O(N)$,<br>space: $O(N)$</p>
 
           
         
@@ -1424,7 +1276,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/编程之美-3-5-最短摘要的生成/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/413-Arithmetic-Slices-DP-8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -1443,7 +1295,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/01/编程之美-3-5-最短摘要的生成/" itemprop="url">编程之美 3.5 最短摘要的生成</a></h1>
+                <a class="post-title-link" href="/2018/11/02/413-Arithmetic-Slices-DP-8/" itemprop="url">413. Arithmetic Slices-DP-8</a></h1>
         
 
         <div class="post-meta">
@@ -1455,8 +1307,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-01T07:13:51+08:00">
-                2018-11-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-02T17:27:26+08:00">
+                2018-11-02
               </time>
             
 
@@ -1478,8 +1330,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程之美/" itemprop="url" rel="index">
-                    <span itemprop="name">编程之美</span>
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
                   </a>
                 </span>
 
@@ -1517,11 +1369,17 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>找到一串包含用户关键词的分词序列</p>
-<h3 id="方法一：暴力"><a href="#方法一：暴力" class="headerlink" title="方法一：暴力"></a>方法一：暴力</h3><ul>
-<li>从W数组的每一位开始遍历，找到一段含有关键字的序列，不断地计算最短长度</li>
-</ul>
-<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>将每一次新扫描开始位置放在上次查找到的用户关键词之后。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">int nTargetLen = N+1;  // 目标长度</span><br><span class="line">int pBegin = 0;  // 初始指针</span><br><span class="line">int pEnd = N;  // 结束指针</span><br><span class="line">int nAbstractBegin = 0;  // 摘要的起始地址</span><br><span class="line">int nAbstractEnd = 0; // 摘要的结束地址</span><br><span class="line">while(true)&#123;</span><br><span class="line">    // 假设包含所有关键词，且后边数组未越界，往后移动指针</span><br><span class="line">    while(!isAllExisted() &amp;&amp; pEnd &amp;&amp; pEnd &lt; nLen) pEnd++;</span><br><span class="line">    // 假设找到一段包含所有关键词信息的字符串</span><br><span class="line">    while(isAllExisted())&#123;</span><br><span class="line">        if(pEnd - pBegin &lt; nTargetLen)&#123;</span><br><span class="line">            nTargetLen = pEnd - pBegin;</span><br><span class="line">            nAbstractBegin = pBegin;</span><br><span class="line">            nAbstractEnd = pEnd - 1;</span><br><span class="line">        &#125;</span><br><span class="line">        pBegin++;</span><br><span class="line">    &#125;</span><br><span class="line">    if(pEnd &gt;= N) break;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个数组，找出其中可以切分出的算术级数序列的个数</p>
+<h3 id="方法一：暴力"><a href="#方法一：暴力" class="headerlink" title="方法一：暴力"></a>方法一：暴力</h3><p>枚举所有可能出现的情况。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public int numberOfArithmeticSlices(int[] A)&#123;</span><br><span class="line">    int count = 0;</span><br><span class="line">    for(int s = 0; s &lt; A.length-2; s++)&#123; // s denotes start</span><br><span class="line">        int d = A[s+1] - A[s];</span><br><span class="line">        for(int e = s+2; e &lt; A.length; e++)&#123; // e denotes end</span><br><span class="line">            int i = 0;</span><br><span class="line">            for(i = s+1; i &lt;= e; i++)</span><br><span class="line">                if(A[i] - A[i-1] != d)</span><br><span class="line">                    break;</span><br><span class="line">            if(i &gt; e) count++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>time: $O(n^3)$,<br>space: $O(1)$</p>
+<h3 id="方法二：暴力优化"><a href="#方法二：暴力优化" class="headerlink" title="方法二：暴力优化"></a>方法二：暴力优化</h3><p>之前的方法在检查[s,e+1]时还要再重复[s,e]中的部分，所以是多余的，可以进行优化：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public int numberOfArithmeticSlices(int[] A)&#123;</span><br><span class="line">    int count = 0;</span><br><span class="line">    for(int s = 0; s &lt; A.length - 2; s++)</span><br><span class="line">        int d = A[s+1] - A[s];</span><br><span class="line">        for(int e = s+2; e &lt; A.length; e++)</span><br><span class="line">            if(A[e] - A[e - 1] == d) count++;</span><br><span class="line">            else break;</span><br><span class="line">    return count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>time: $O(n^2)$,<br>space: $O(1)$</p>
+<h3 id="方法三：使用递归"><a href="#方法三：使用递归" class="headerlink" title="方法三：使用递归"></a>方法三：使用递归</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">int sum = 0;</span><br><span class="line">public int numberOfArithmeticSlices(int[] A)&#123;</span><br><span class="line">    slices(A, A.length - 1);</span><br><span class="line">    return sum;</span><br><span class="line">&#125;</span><br><span class="line">public int slices(int[] A, int i)&#123;</span><br><span class="line">    if(i &lt; 2) return 0;</span><br><span class="line">    int ap = 0;</span><br><span class="line">    if(A[i] - A[i-1] == A[i-1] - A[i-2])&#123;</span><br><span class="line">        ap = 1 + slices(A, i-1);</span><br><span class="line">        sum += ap;</span><br><span class="line">    &#125; else</span><br><span class="line">        slices(A, i-1);</span><br><span class="line">    return ap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>time: $O(n)$,<br>space: $O(n)$</p>
+<h3 id="方法四：动态规划"><a href="#方法四：动态规划" class="headerlink" title="方法四：动态规划"></a>方法四：动态规划</h3><p>dp[i]表示(k,j)范围内可能的切片数量。k在满足(k,j)形成算术级数时尽可能小。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public int numberOfArithmeticSlices(int[] A)&#123;</span><br><span class="line">    int[] dp = new int[A.length];</span><br><span class="line">    int sum = 0;</span><br><span class="line">    for(int i = 2; i &lt; dp.length; i++)&#123;</span><br><span class="line">        if(A[i] - A[i-1] == A[i-1] - A[i-2])&#123;</span><br><span class="line">            dp[i] = 1+dp[i-1];</span><br><span class="line">            sum += dp[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>time: $O(n)$,<br>space: $O(n)$<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 可改进为只用一个变量，因为每次循环只用了dp[i-1]</span><br><span class="line">public int numberOfArithmeticSlices(int[] A)&#123;</span><br><span class="line">    int dp = 0;</span><br><span class="line">    int sum = 0;</span><br><span class="line">    for(int i = 2; i &lt; A.length; i++)&#123;</span><br><span class="line">        if(A[i] - A[i-1] == A[i-1] - A[i-2])&#123;</span><br><span class="line">            dp = 1 + dp;</span><br><span class="line">            sum += dp;</span><br><span class="line">        &#125; else dp = 0;</span><br><span class="line">    &#125;</span><br><span class="line">    return sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>time: $O(n)$,<br>space: $O(1)$ </p>
+<h3 id="方法六：使用公式"><a href="#方法六：使用公式" class="headerlink" title="方法六：使用公式"></a>方法六：使用公式</h3><p>可以观察到，对于连续发现k个间距相同的元素时，我们对总和依次加上了1,2,3,…k，所以每当数到一个连续时，给count变量加上1，当发现不连续时，在总和里面直接加上 $count*(count+1)/2$<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public int numberOfArithmeticSlices(int[] A)&#123;</span><br><span class="line">    int count = 0;</span><br><span class="line">    int sum = 0;</span><br><span class="line">    for(int i = 2; i &lt; A.length; i++)&#123;</span><br><span class="line">        if(A[i] - A[i-1] == A[i-1] - A[i-2]) count++;</span><br><span class="line">        else&#123;</span><br><span class="line">            sum += (count+1)*count/2;</span><br><span class="line">            count = 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return sum += (count+1)*count/2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -1570,7 +1428,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/编程之美-3-1-字符串移位包含问题/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/877-Stone-Game-DP-7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -1589,7 +1447,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/31/编程之美-3-1-字符串移位包含问题/" itemprop="url">编程之美 3.1 字符串移位包含问题</a></h1>
+                <a class="post-title-link" href="/2018/11/02/877-Stone-Game-DP-7/" itemprop="url">877. Stone Game-DP-7</a></h1>
         
 
         <div class="post-meta">
@@ -1601,8 +1459,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-31T23:56:46+08:00">
-                2018-10-31
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-02T15:45:04+08:00">
+                2018-11-02
               </time>
             
 
@@ -1624,8 +1482,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程之美/" itemprop="url" rel="index">
-                    <span itemprop="name">编程之美</span>
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
                   </a>
                 </span>
 
@@ -1663,10 +1521,152 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>判断一个字符串是否能被另一个字符串进行循环移位后包含。</p>
-<h3 id="解法一：暴力"><a href="#解法一：暴力" class="headerlink" title="解法一：暴力"></a>解法一：暴力</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">char src = &quot;AABBCD&quot;;</span><br><span class="line">char des = &quot;CDAA&quot;;</span><br><span class="line">int len = strlen(src);</span><br><span class="line">for(int i = 0; i &lt; len; i++)&#123;</span><br><span class="line">    char tempchar = src[0];</span><br><span class="line">    for(int j = 0; j &lt; len - 1; j++)</span><br><span class="line">        src[j] = src[j+1];</span><br><span class="line">    src[len - 1] = tempchar;</span><br><span class="line">    if(strstr(src, des)) return true; </span><br><span class="line">&#125;</span><br><span class="line">return false;</span><br></pre></td></tr></table></figure>
-<h3 id="解法二：观察"><a href="#解法二：观察" class="headerlink" title="解法二：观察"></a>解法二：观察</h3><p>可以看到 $s_1$ 做循环移位之后得到的字符串都是 $s_1s_1$ 的子串。则问题转化为判断 $s_2$ 是否在 $s_1s_1$ 子串上。</p>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>有偶数摞石块，第i摞用 piles[i] 来表示。石块的总数是奇数，两个人轮流取一摞石块，问到最后第一个取石块的人是否永远拥有一个可以胜出的策略？</p>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>dp(i, j) 表示当剩余的石头堆为 piles[i],…piles[j] 时可以得到的最大分数（这个分数指的是A得到的分数减去B得到的分数，对于A来讲，他如果想赢的话，就要让这个分数最大，对于B来讲，他要让这个分数最小）。对于 A ，我们要让这个分数最大：<br>$$<br>dp(i, j) = max(piles[i] + dp(i+1, j), piles[j] + dp(i, j-1))<br>$$<br>对于 B，我们要让这个分数最小（B拿的石块会减小总分数）：<br>$$<br>dp(i, j) = min(-piles[i] + dp(i+1, j), -piles[j] + dp(i, j-1))<br>$$<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">bool stoneGame(vector&lt;int&gt;&amp; piles)&#123;</span><br><span class="line">    int N = piles.size();</span><br><span class="line">    // dp[i+1][j+1] = the value of the game [piles[i]...piles[j]]</span><br><span class="line">    int dp[N+2][N+2];</span><br><span class="line">    memset(dp, 0, sizeof(dp));</span><br><span class="line">    for(int size = 1; size &lt;= N; size++)</span><br><span class="line">        for(int i = 0, j = size-1; j &lt; N; i++, j++)&#123;</span><br><span class="line">            int parity = (j-i-N) % 2;</span><br><span class="line">            if(parity) </span><br><span class="line">                dp[i+1][j+1] = max(piles[i]+dp[i+2][j+1], piles[j]+dp[i+1][j]);</span><br><span class="line">            else</span><br><span class="line">                dp[i+1][j+1] = min(-piles[i]+dp[i+2][j+1], -piles[j]+dp[i+1][j]);</span><br><span class="line">        &#125;</span><br><span class="line">    return dp[1][N] &gt; 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/338-Counting-Bits-DP-6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/02/338-Counting-Bits-DP-6/" itemprop="url">338. Counting Bits-DP-6</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-02T15:23:39+08:00">
+                2018-11-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个数字num，对于所有的在 [0, num] 范围内的数字 i，计算他们二进制形式中1的个数，返回为一个数组。<br>如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：2</span><br><span class="line">输出：[0,1,1]</span><br></pre></td></tr></table></figure></p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>递推方程为：<br>$$<br>f[i] = f[i/2] + i\%2<br>$$<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;int&gt; countBits(int num)&#123;</span><br><span class="line">    vector&lt;int&gt; ans;</span><br><span class="line">    ans.push_back(0);</span><br><span class="line">    for(int i = 1; i &lt;= num; i++)&#123;</span><br><span class="line">        ans.push_back(ans[i/2] + i%2);</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// 直接判断</span><br><span class="line">vector&lt;int&gt; countBits(int num) &#123;</span><br><span class="line">    vector&lt;int&gt; ans;</span><br><span class="line">    for(int i = 0; i &lt;= num; i++)&#123;</span><br><span class="line">        int c = 0, a = i;</span><br><span class="line">        while(a)&#123;</span><br><span class="line">            a &amp;= a-1;</span><br><span class="line">            c++;</span><br><span class="line">        &#125;</span><br><span class="line">        ans.push_back(c);</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br><span class="line">// 另外一种解法</span><br><span class="line">vector&lt;int&gt; countBits(int num) &#123;</span><br><span class="line">    vector&lt;int&gt; ans;</span><br><span class="line">    ans.push_back(0);</span><br><span class="line">    for(int i = 1; i &lt;= num; i++)</span><br><span class="line">        ans.push_back(ans[i&amp;(i-1)] + 1);</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -1705,7 +1705,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1755,7 +1755,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-count">126</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1777,7 +1777,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1814,7 +1814,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
