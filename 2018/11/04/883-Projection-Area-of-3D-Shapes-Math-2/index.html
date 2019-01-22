@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="问题描述一个三维物体的投影区域面积 实现">
+<meta name="description" content="问题描述leetcode 883将一个由小方块组成的物体放置在一个三维空间xyz里，考察这个物体在xy，yz，zx面上的投影。要求计算这三个投影的总面积。输入 $v=grid[i][j]$ 表示 $(i,j)$ 处的高度为 $v$。123456789101112input:[[2]]output:5  # 2+2+1input:[[1,2],[3,4]] # (0,0)处高度为1# (0,1)处高">
 <meta name="keywords" content="LeetCode,Math">
 <meta property="og:type" content="article">
 <meta property="og:title" content="883. Projection Area of 3D Shapes-Math-2">
 <meta property="og:url" content="http://yoursite.com/2018/11/04/883-Projection-Area-of-3D-Shapes-Math-2/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="问题描述一个三维物体的投影区域面积 实现">
+<meta property="og:description" content="问题描述leetcode 883将一个由小方块组成的物体放置在一个三维空间xyz里，考察这个物体在xy，yz，zx面上的投影。要求计算这三个投影的总面积。输入 $v=grid[i][j]$ 表示 $(i,j)$ 处的高度为 $v$。123456789101112input:[[2]]output:5  # 2+2+1input:[[1,2],[3,4]] # (0,0)处高度为1# (0,1)处高">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-06T08:35:54.015Z">
+<meta property="og:updated_time" content="2019-01-22T11:22:07.450Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="883. Projection Area of 3D Shapes-Math-2">
-<meta name="twitter:description" content="问题描述一个三维物体的投影区域面积 实现">
+<meta name="twitter:description" content="问题描述leetcode 883将一个由小方块组成的物体放置在一个三维空间xyz里，考察这个物体在xy，yz，zx面上的投影。要求计算这三个投影的总面积。输入 $v=grid[i][j]$ 表示 $(i,j)$ 处的高度为 $v$。123456789101112input:[[2]]output:5  # 2+2+1input:[[1,2],[3,4]] # (0,0)处高度为1# (0,1)处高">
 
 
 
@@ -397,8 +397,25 @@
       
 
       
-        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>一个三维物体的投影区域面积</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3>
+        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p><a href="https://leetcode.com/problems/projection-area-of-3d-shapes/" target="_blank" rel="noopener">leetcode 883</a><br>将一个由小方块组成的物体放置在一个三维空间xyz里，考察这个物体在xy，yz，zx面上的投影。要求计算这三个投影的总面积。<br>输入 $v=grid[i][j]$ 表示 $(i,j)$ 处的高度为 $v$。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">[[2]]</span><br><span class="line">output:</span><br><span class="line">5  # 2+2+1</span><br><span class="line">input:</span><br><span class="line">[[1,2],[3,4]] </span><br><span class="line"># (0,0)处高度为1</span><br><span class="line"># (0,1)处高度为2</span><br><span class="line"># (1,0)处高度为3</span><br><span class="line"># (1,1)处高度为4</span><br><span class="line">output:</span><br><span class="line">17 # 4+7+6 (xy+yz+zx)</span><br></pre></td></tr></table></figure></p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>首先得出 $grid$ 每一个维度的最大值，假如为 $m\times n$，并数出 $grid$ 中一共有 $k$ 个元素。则</p>
+<ul>
+<li>对于xy面上：</li>
+</ul>
+<p>$$<br>S_{xy} = k<br>$$</p>
+<ul>
+<li>对于yz面上，令 $h_y[j]$ 为 $y=j$ 时 $z$ 的取值，则有</li>
+</ul>
+<p>$$<br>h_y[j] = \max_{0\le i\le m-1}(grid[i][j])<br>$$<br>则</p>
+<p>$$<br>S_{yz} = \sum_{j=0}^{n-1}h_y[j]<br>$$</p>
+<ul>
+<li>对于zx面上，令 $h_x[i]$ 为 $x=i$ 时 $z$ 的取值，则有</li>
+</ul>
+<p>$$<br>h_x[i] = \max_{0\le j \le n-1}(grid[i][j])<br>$$<br>从而</p>
+<p>$$<br>S_{zx} = \sum_{i=0}^{m-1}h_x[i]<br>$$<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># 伪代码</span><br><span class="line">S_xy = 0  # 用于记录xy上的面积</span><br><span class="line">m = grid.size</span><br><span class="line">n = grid[0].size</span><br><span class="line">S_yz = 0 # 记录yz上的面积</span><br><span class="line">for j = 0 to n-1</span><br><span class="line">  h_y = 0</span><br><span class="line">  for i = 0 to m-1</span><br><span class="line">    if grid[i][j] &gt; 0</span><br><span class="line">	  S_xy++</span><br><span class="line">    if grid[i][j] &gt; h_y</span><br><span class="line">	  h_y = grid[i][j]</span><br><span class="line">  S_yz += h_y</span><br><span class="line"></span><br><span class="line">S_zx = 0 # 记录zx上的面积</span><br><span class="line">for i = 0 to m-1</span><br><span class="line">  h_x = 0</span><br><span class="line">  for j = 0 to n-1</span><br><span class="line">    if grid[i][j] &gt; h_x</span><br><span class="line">	  h_x = grid[i][j]</span><br><span class="line">  S_zx += h_x</span><br><span class="line">S_total = S_xy + S_yz + S_zx</span><br></pre></td></tr></table></figure></p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">int projectionArea(vector&lt;vector&lt;int&gt;&gt;&amp; grid) &#123;</span><br><span class="line">	int m = grid.size();</span><br><span class="line">    int n = m; //grid[0].size();</span><br><span class="line">	int S_xy, S_yz, S_zx;</span><br><span class="line">	S_xy = S_yz = S_zx = 0;</span><br><span class="line">	for(int j = 0; j &lt; n; j++)&#123;</span><br><span class="line">		int h_y = 0;</span><br><span class="line">		for(int i = 0; i &lt; m; i++)&#123;</span><br><span class="line">			if(grid[i][j]) S_xy++;</span><br><span class="line">			h_y = grid[i][j] &gt; h_y ? grid[i][j] : h_y;</span><br><span class="line">		&#125;</span><br><span class="line">		S_yz += h_y;</span><br><span class="line">	&#125;</span><br><span class="line">	for(int i = 0; i &lt; m; i++)&#123;</span><br><span class="line">		int h_x = 0;</span><br><span class="line">		for(int j = 0; j &lt; n; j++)</span><br><span class="line">			h_x = grid[i][j] &gt; h_x ? grid[i][j] : h_x;</span><br><span class="line">		S_zx += h_x;</span><br><span class="line">	&#125;         </span><br><span class="line">	return S_xy + S_yz + S_zx;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://leetcode.com/problems/projection-area-of-3d-shapes/solution/" target="_blank" rel="noopener">题解</a>把两重循环简化成一重循环了，还有一点就是它直接认为是 $N \times N$ 的大小，所以只用了一个变量（题目中确实有说），我想复杂了，认为每一行的长度可能不同，如果题目这样出的话我觉着可能少不了一次遍历，找到列数的最大值，不过这样的话后面的循环就必须重复两次了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">int N = grid.size();</span><br><span class="line">int ans = 0;</span><br><span class="line"></span><br><span class="line">for (int i = 0; i &lt; N;  ++i) &#123;</span><br><span class="line">	int bestRow = 0;  // largest of grid[i][j]</span><br><span class="line">	int bestCol = 0;  // largest of grid[j][i]</span><br><span class="line">	for (int j = 0; j &lt; N; ++j) &#123;</span><br><span class="line">		if (grid[i][j] &gt; 0) ans++;  // top shadow</span><br><span class="line">		bestRow = max(bestRow, grid[i][j]);</span><br><span class="line">		bestCol = max(bestCol, grid[j][i]);</span><br><span class="line">	&#125;</span><br><span class="line">	ans += bestRow + bestCol;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">return ans;</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
     
@@ -588,7 +605,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">3.</span> <span class="nav-text">实现</span></a></li></ol></div>
             
 
           </div>

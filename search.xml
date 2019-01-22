@@ -11,7 +11,7 @@
   <entry>
     <title><![CDATA[883. Projection Area of 3D Shapes-Math-2]]></title>
     <url>%2F2018%2F11%2F04%2F883-Projection-Area-of-3D-Shapes-Math-2%2F</url>
-    <content type="text"><![CDATA[问题描述一个三维物体的投影区域面积 实现]]></content>
+    <content type="text"><![CDATA[问题描述leetcode 883将一个由小方块组成的物体放置在一个三维空间xyz里，考察这个物体在xy，yz，zx面上的投影。要求计算这三个投影的总面积。输入 $v=grid[i][j]$ 表示 $(i,j)$ 处的高度为 $v$。123456789101112input:[[2]]output:5 # 2+2+1input:[[1,2],[3,4]] # (0,0)处高度为1# (0,1)处高度为2# (1,0)处高度为3# (1,1)处高度为4output:17 # 4+7+6 (xy+yz+zx) 思路首先得出 $grid$ 每一个维度的最大值，假如为 $m\times n$，并数出 $grid$ 中一共有 $k$ 个元素。则 对于xy面上： $$S_{xy} = k$$ 对于yz面上，令 $h_y[j]$ 为 $y=j$ 时 $z$ 的取值，则有 $$h_y[j] = \max_{0\le i\le m-1}(grid[i][j])$$则 $$S_{yz} = \sum_{j=0}^{n-1}h_y[j]$$ 对于zx面上，令 $h_x[i]$ 为 $x=i$ 时 $z$ 的取值，则有 $$h_x[i] = \max_{0\le j \le n-1}(grid[i][j])$$从而 $$S_{zx} = \sum_{i=0}^{m-1}h_x[i]$$12345678910111213141516171819202122# 伪代码S_xy = 0 # 用于记录xy上的面积m = grid.sizen = grid[0].sizeS_yz = 0 # 记录yz上的面积for j = 0 to n-1 h_y = 0 for i = 0 to m-1 if grid[i][j] &gt; 0 S_xy++ if grid[i][j] &gt; h_y h_y = grid[i][j] S_yz += h_yS_zx = 0 # 记录zx上的面积for i = 0 to m-1 h_x = 0 for j = 0 to n-1 if grid[i][j] &gt; h_x h_x = grid[i][j] S_zx += h_xS_total = S_xy + S_yz + S_zx 实现123456789101112131415161718192021int projectionArea(vector&lt;vector&lt;int&gt;&gt;&amp; grid) &#123; int m = grid.size(); int n = m; //grid[0].size(); int S_xy, S_yz, S_zx; S_xy = S_yz = S_zx = 0; for(int j = 0; j &lt; n; j++)&#123; int h_y = 0; for(int i = 0; i &lt; m; i++)&#123; if(grid[i][j]) S_xy++; h_y = grid[i][j] &gt; h_y ? grid[i][j] : h_y; &#125; S_yz += h_y; &#125; for(int i = 0; i &lt; m; i++)&#123; int h_x = 0; for(int j = 0; j &lt; n; j++) h_x = grid[i][j] &gt; h_x ? grid[i][j] : h_x; S_zx += h_x; &#125; return S_xy + S_yz + S_zx;&#125; 题解把两重循环简化成一重循环了，还有一点就是它直接认为是 $N \times N$ 的大小，所以只用了一个变量（题目中确实有说），我想复杂了，认为每一行的长度可能不同，如果题目这样出的话我觉着可能少不了一次遍历，找到列数的最大值，不过这样的话后面的循环就必须重复两次了。123456789101112131415int N = grid.size();int ans = 0;for (int i = 0; i &lt; N; ++i) &#123; int bestRow = 0; // largest of grid[i][j] int bestCol = 0; // largest of grid[j][i] for (int j = 0; j &lt; N; ++j) &#123; if (grid[i][j] &gt; 0) ans++; // top shadow bestRow = max(bestRow, grid[i][j]); bestCol = max(bestCol, grid[j][i]); &#125; ans += bestRow + bestCol;&#125;return ans;]]></content>
       <categories>
         <category>LeetCode</category>
       </categories>
@@ -98,8 +98,8 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[893. Groups of Special-Equivalent Strings-String-7]]></title>
-    <url>%2F2018%2F11%2F04%2F893-%C2%96Groups-of-Special-Equivalent-Strings-String-7%2F</url>
+    <title><![CDATA[893.Groups of Special-Equivalent Strings-String-7]]></title>
+    <url>%2F2018%2F11%2F04%2F893-Groups-of-Special-Equivalent-Strings-String-7%2F</url>
     <content type="text"><![CDATA[问题描述找到字符串数组中有多少组是相等价的。 解法123456789101112131415161718192021Set&lt;String&gt; seen = new HashSet();for(String S: A)&#123; int[] count = new int[52]; for(int i =0; i &lt; S.length(); i++) count[S.charAt(i) - &apos;a&apos; + 26*(i%2)]++; seen.add(Arrays.toString(count));&#125;return seen.size();// C++set&lt;pair&lt;string, string&gt;&gt; s;for(const auto&amp; w: A)&#123; pair&lt;string, string&gt; p; for(int i = 0; i &lt; w.size(); i++)&#123; if(i % 2) p.first += w[i]; else p.second += w[i]; &#125; sort(p.first.begin(), p.first.end()); sort(p.second.begin(), p.second.end()); s.insert(p);&#125;return s.size();]]></content>
       <categories>
         <category>LeetCode</category>
