@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Wine&amp;Chord">
 <meta property="og:description" content="问题描述 教练ABC从编号为1-n的队员中选队员，根据他们各自的喜好来进行排序 a,b,c三个数组表示三个教练对队员的喜好程度 每个数组为1-n的一个排列 喜好程度从高到低：a[0],a[1]…a[n-1] 分配规则： 从未分配队员中找A最喜欢的队员分之 然后再找B,C的   问队员k分给了哪个教练？ 12345678input:3  # 队员个数 n1 2 3  # 数组a1 2 3  # 数组">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-23T14:33:16.810Z">
+<meta property="og:updated_time" content="2019-01-23T15:07:10.430Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="THUOJ PA1 1-1 Team">
 <meta name="twitter:description" content="问题描述 教练ABC从编号为1-n的队员中选队员，根据他们各自的喜好来进行排序 a,b,c三个数组表示三个教练对队员的喜好程度 每个数组为1-n的一个排列 喜好程度从高到低：a[0],a[1]…a[n-1] 分配规则： 从未分配队员中找A最喜欢的队员分之 然后再找B,C的   问队员k分给了哪个教练？ 12345678input:3  # 队员个数 n1 2 3  # 数组a1 2 3  # 数组">
@@ -421,11 +421,15 @@
 <li>gen.py 随机生成测试数据的程序。</li>
 <li>main.exe 一个待验证的程序，正确性未知。</li>
 <li>std.py 一个蛮力的python代码。</li>
-<li>test.cmd 自我检测运行文件。<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2></li>
+<li>test.cmd 自我检测运行文件。<br>做了一些整理，放github上了：<a href="https://github.com/WineChord/OJ-Auxiliary" target="_blank" rel="noopener">https://github.com/WineChord/OJ-Auxiliary</a></li>
+</ul>
+<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><ul>
 <li>大体上，1 sec内，O(n)的算法可以通过 n = 10,000,000 规模的数据，O(nlogn) 通过 500,000 规模，O(n^2) 通过 5,000 规模。</li>
 <li>本题等一些复杂度是 O(n) 的题目受限于 scanf(“%d”, …) 的读入速度，但又不希望通过读取二进制文件等不直观的方式增加同学们的负担。</li>
 <li>“懒删除”策略：从序列中移除一个元素时，可以只标记它，下次读取时跳过它，而不需要将它后面的元素都向前挪一位。思考如何做标记，能在每个教练员选队员时，快速地知道该队员是否已被选走。</li>
-<li>Tips:清零或赋值时，memset 比手动赋值快几倍。输入数据时，有时 scanf 比 cin 快一些。关于读写速度，请参考 Tutorial Collection #1 5.大数据(Big)。<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2></li>
+<li>Tips:清零或赋值时，memset 比手动赋值快几倍。输入数据时，有时 scanf 比 cin 快一些。关于读写速度，请参考 Tutorial Collection #1 5.大数据(Big)。</li>
+</ul>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
 <li>用一个数组<code>s[n]</code>来表示队员是否已被选走，被选走则为1，初始值为0。</li>
 <li>用<code>i,j,m</code>来表示数组<code>a,b,c</code>正在处理的喜好下标。</li>
 <li>然后按顺序访问<code>a,b,c</code>三个数组，每次每个数组能够成功标记一个队员</li>

@@ -408,8 +408,8 @@
 <h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ul>
 <li>第一行是两个整数n,m。接下来是m行，每行是以下内容之一：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">I a c		// Log In：员工 a 登录，code 为 c。若 a 已登录，则将 code 更新为 c</span><br><span class="line">O a		// Log Out：编号为 a 的员工注销。若 a 未登录，则注销无效</span><br><span class="line">C		// Close：到下班时间，所有员工注销</span><br><span class="line">N		// Number：询问有多少员工正在上班</span><br><span class="line">Q a		// Query：询问员工 a 的 code（若未登录或已注销，视为 -1）</span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">* 输出是所有询问的答案之和</span><br></pre></td></tr></table></figure>
-<p>input:<br>10 8<br>I 1 2<br>I 1 4<br>Q 1<br>C<br>I 2 4<br>O 2<br>Q 2<br>N<br>output:<br>3<br>//“Q 1” 答案是 4，“Q 2” 答案是 -1，“N” 答案是 0，所有答案之和为 3<br><code>`</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">I a c		// Log In：员工 a 登录，code 为 c。若 a 已登录，则将 code 更新为 c</span><br><span class="line">O a		// Log Out：编号为 a 的员工注销。若 a 未登录，则注销无效</span><br><span class="line">C		// Close：到下班时间，所有员工注销</span><br><span class="line">N		// Number：询问有多少员工正在上班</span><br><span class="line">Q a		// Query：询问员工 a 的 code（若未登录或已注销，视为 -1）</span><br><span class="line"></span><br><span class="line">```</span><br></pre></td></tr></table></figure>
+<p>input:<br>10 8<br>I 1 2<br>I 1 4<br>Q 1<br>C<br>I 2 4<br>O 2<br>Q 2<br>N<br>output:<br>3   # 输出为所有答案之和<br>//“Q 1” 答案是 4，“Q 2” 答案是 -1，“N” 答案是 0，所有答案之和为 3<br><code>`</code></p>
 <ul>
 <li>限制<ul>
 <li>n &lt;= 10,000,000</li>
@@ -615,11 +615,15 @@
 <li>gen.py 随机生成测试数据的程序。</li>
 <li>main.exe 一个待验证的程序，正确性未知。</li>
 <li>std.py 一个蛮力的python代码。</li>
-<li>test.cmd 自我检测运行文件。<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2></li>
+<li>test.cmd 自我检测运行文件。<br>做了一些整理，放github上了：<a href="https://github.com/WineChord/OJ-Auxiliary" target="_blank" rel="noopener">https://github.com/WineChord/OJ-Auxiliary</a></li>
+</ul>
+<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><ul>
 <li>大体上，1 sec内，O(n)的算法可以通过 n = 10,000,000 规模的数据，O(nlogn) 通过 500,000 规模，O(n^2) 通过 5,000 规模。</li>
 <li>本题等一些复杂度是 O(n) 的题目受限于 scanf(“%d”, …) 的读入速度，但又不希望通过读取二进制文件等不直观的方式增加同学们的负担。</li>
 <li>“懒删除”策略：从序列中移除一个元素时，可以只标记它，下次读取时跳过它，而不需要将它后面的元素都向前挪一位。思考如何做标记，能在每个教练员选队员时，快速地知道该队员是否已被选走。</li>
-<li>Tips:清零或赋值时，memset 比手动赋值快几倍。输入数据时，有时 scanf 比 cin 快一些。关于读写速度，请参考 Tutorial Collection #1 5.大数据(Big)。<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2></li>
+<li>Tips:清零或赋值时，memset 比手动赋值快几倍。输入数据时，有时 scanf 比 cin 快一些。关于读写速度，请参考 Tutorial Collection #1 5.大数据(Big)。</li>
+</ul>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
 <li>用一个数组<code>s[n]</code>来表示队员是否已被选走，被选走则为1，初始值为0。</li>
 <li>用<code>i,j,m</code>来表示数组<code>a,b,c</code>正在处理的喜好下标。</li>
 <li>然后按顺序访问<code>a,b,c</code>三个数组，每次每个数组能够成功标记一个队员</li>
