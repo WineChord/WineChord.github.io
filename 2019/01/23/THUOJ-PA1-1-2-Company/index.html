@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="主要用于记录学习经历">
+<meta name="description" content="问题描述 公司有n个员工，编号为1~n。 员工上班时登陆管理系统登记一个code，离开时进行注销。 管理人员随时想知道多少员工上班以及任一个员工登记的code。  输入输出 第一行是两个整数n,m。接下来是m行，每行是以下内容之一：1234567I a c		// Log In：员工 a 登录，code 为 c。若 a 已登录，则将 code 更新为 cO a		// Log Out：编号为 a">
 <meta property="og:type" content="article">
 <meta property="og:title" content="THUOJ PA1 1-2 Company">
 <meta property="og:url" content="http://yoursite.com/2019/01/23/THUOJ-PA1-1-2-Company/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="主要用于记录学习经历">
+<meta property="og:description" content="问题描述 公司有n个员工，编号为1~n。 员工上班时登陆管理系统登记一个code，离开时进行注销。 管理人员随时想知道多少员工上班以及任一个员工登记的code。  输入输出 第一行是两个整数n,m。接下来是m行，每行是以下内容之一：1234567I a c		// Log In：员工 a 登录，code 为 c。若 a 已登录，则将 code 更新为 cO a		// Log Out：编号为 a">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-23T12:59:21.018Z">
+<meta property="og:updated_time" content="2019-01-23T14:51:30.031Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="THUOJ PA1 1-2 Company">
-<meta name="twitter:description" content="主要用于记录学习经历">
+<meta name="twitter:description" content="问题描述 公司有n个员工，编号为1~n。 员工上班时登陆管理系统登记一个code，离开时进行注销。 管理人员随时想知道多少员工上班以及任一个员工登记的code。  输入输出 第一行是两个整数n,m。接下来是m行，每行是以下内容之一：1234567I a c		// Log In：员工 a 登录，code 为 c。若 a 已登录，则将 code 更新为 cO a		// Log Out：编号为 a">
 
 
 
@@ -396,7 +396,43 @@
       
 
       
-        
+        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><ul>
+<li>公司有n个员工，编号为1~n。</li>
+<li>员工上班时登陆管理系统登记一个code，离开时进行注销。</li>
+<li>管理人员随时想知道多少员工上班以及任一个员工登记的code。</li>
+</ul>
+<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ul>
+<li>第一行是两个整数n,m。接下来是m行，每行是以下内容之一：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">I a c		// Log In：员工 a 登录，code 为 c。若 a 已登录，则将 code 更新为 c</span><br><span class="line">O a		// Log Out：编号为 a 的员工注销。若 a 未登录，则注销无效</span><br><span class="line">C		// Close：到下班时间，所有员工注销</span><br><span class="line">N		// Number：询问有多少员工正在上班</span><br><span class="line">Q a		// Query：询问员工 a 的 code（若未登录或已注销，视为 -1）</span><br><span class="line">``` </span><br><span class="line">* 输出是所有询问的答案之和</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>input:<br>10 8<br>I 1 2<br>I 1 4<br>Q 1<br>C<br>I 2 4<br>O 2<br>Q 2<br>N<br>output:<br>3<br>//“Q 1” 答案是 4，“Q 2” 答案是 -1，“N” 答案是 0，所有答案之和为 3<br><code>`</code></p>
+<ul>
+<li>限制<ul>
+<li>n &lt;= 10,000,000</li>
+<li>m &lt;= 1,000,000<br>1 &lt;= a &lt;= n<br>code 为 [0, 2^31) 的整数</li>
+</ul>
+</li>
+</ul>
+<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><h3 id="一级提示"><a href="#一级提示" class="headerlink" title="一级提示"></a>一级提示</h3><blockquote>
+<p>测试数据中，每种操作都可能频繁出现，或很少出现。因此，你的算法需要应对所有可能的情况。</p>
+</blockquote>
+<blockquote>
+<p>答案会超出 int 范围，要注意各种数据类型可表示的范围，尤其是溢出问题。可选用 long long int 或 int64_t 等类型。注意各种数据类型的正确输入、输出方式。</p>
+</blockquote>
+<ul>
+<li>Bitmap / 常数时间初始化的数组——讲义 02XA</li>
+<li>Bitmap: 习题解析 <code>[2-34]</code><h3 id="二级提示"><a href="#二级提示" class="headerlink" title="二级提示"></a>二级提示</h3></li>
+<li>避免频繁初始化整个数组。</li>
+<li>可以借助Bitmap记录数组的各元素是否已被初始化。将一个（或所有）元素置为未初始化状态，实质上只需要打破“校验环”两个验证条件中的任何一个，考虑如何打破校验条件的复杂度最低。</li>
+<li>另一种解题思路是，数组初始化 1 次后，记录改变了的元素，今后不再初始化整个数组，只初始化改变了的元素。</li>
+</ul>
+<blockquote>
+<p>用 scanf(“%c”, …) 或 getchar() 读入一个字符时，可能会读到空格、制表符、回车符或换行符，尽量避免使用这个方法。使用 scanf(“%s”, …) 会自动过滤空白字符。</p>
+</blockquote>
+<blockquote>
+<p>Windows 和 Linux 上换行符有 “\r\n” 跟 “\n” 的差别，你的程序最好有一定鲁棒性，能处理两种情况。</p>
+</blockquote>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2>
       
     </div>
     
@@ -490,8 +526,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -555,6 +600,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入输出"><span class="nav-number">2.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提示"><span class="nav-number">3.</span> <span class="nav-text">提示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一级提示"><span class="nav-number">3.1.</span> <span class="nav-text">一级提示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二级提示"><span class="nav-number">3.2.</span> <span class="nav-text">二级提示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">4.</span> <span class="nav-text">思路</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
