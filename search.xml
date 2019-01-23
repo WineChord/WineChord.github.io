@@ -1,6 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[THUOJ PA1 1-2 Company]]></title>
+    <url>%2F2019%2F01%2F23%2FTHUOJ-PA1-1-2-Company%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[THUOJ PA1 1-1 Team]]></title>
+    <url>%2F2019%2F01%2F23%2FTHUOJ-PA1-1-1-Team%2F</url>
+    <content type="text"><![CDATA[问题描述 教练ABC从编号为1-n的队员中选队员，根据他们各自的喜好来进行排序 a,b,c三个数组表示三个教练对队员的喜好程度 每个数组为1-n的一个排列 喜好程度从高到低：a[0],a[1]…a[n-1] 分配规则： 从未分配队员中找A最喜欢的队员分之 然后再找B,C的 问队员k分给了哪个教练？ 12345678input:3 # 队员个数 n1 2 3 # 数组a1 2 3 # 数组b1 2 3 # 数组c3 # 队员 koutput:C # k 分给了 C 限制： 1 &lt;= n &lt;= 500,000 1 &lt;= k &lt;= n工具还提供了一个对拍工具其中： gen.py 随机生成测试数据的程序。 main.exe 一个待验证的程序，正确性未知。 std.py 一个蛮力的python代码。 test.cmd 自我检测运行文件。提示 大体上，1 sec内，O(n)的算法可以通过 n = 10,000,000 规模的数据，O(nlogn) 通过 500,000 规模，O(n^2) 通过 5,000 规模。 本题等一些复杂度是 O(n) 的题目受限于 scanf(“%d”, …) 的读入速度，但又不希望通过读取二进制文件等不直观的方式增加同学们的负担。 “懒删除”策略：从序列中移除一个元素时，可以只标记它，下次读取时跳过它，而不需要将它后面的元素都向前挪一位。思考如何做标记，能在每个教练员选队员时，快速地知道该队员是否已被选走。 Tips:清零或赋值时，memset 比手动赋值快几倍。输入数据时，有时 scanf 比 cin 快一些。关于读写速度，请参考 Tutorial Collection #1 5.大数据(Big)。思路 用一个数组s[n]来表示队员是否已被选走，被选走则为1，初始值为0。 用i,j,m来表示数组a,b,c正在处理的喜好下标。 然后按顺序访问a,b,c三个数组，每次每个数组能够成功标记一个队员 12345678910111213141516171819202122232425262728# Python# -*- coding: utf-8 -*-n = int(input())orders = [[],[],[]]for i in range(3): orders[i] = [int(x) for x in input().split()][a,b,c] = ordersk = int(input())s = [0 for _ in range(n+1)]i = j = m = 0def check(a, i, num): if i &gt; n-1: return i if s[a[i]] == 0: s[a[i]] = num else: while i &lt;= n-1 and s[a[i]] != 0: i += 1 if i &lt;= n-1: s[a[i]] = num i += 1 return ifor _ in range(n): i = check(a, i, 1); j = check(b, j, 2); m = check(c, m, 3);print(&apos;ABC&apos;[s[k]-1]) 对应C++ (直译版) test result worst case time memory 10 224 22664 123456789101112131415161718192021222324252627282930313233343536373839404142#include&lt;cstdio&gt;int a[1&lt;&lt;19] = &#123;0&#125;;int b[1&lt;&lt;19] = &#123;0&#125;;int c[1&lt;&lt;19] = &#123;0&#125;;int s[1&lt;&lt;19] = &#123;0&#125;;int n;int check(int* a, int&amp; i, int num)&#123; if(i &gt; n-1) return i; if(!s[a[i]]) s[a[i]] = num; else&#123; while(i&lt;=n-1 &amp;&amp; s[a[i]]!=0) i++; if(i &lt;= n-1) s[a[i]] = num; &#125; i++; return i;&#125;int main()&#123; setvbuf(stdin, new char[1&lt;&lt;20], _IOFBF, 1&lt;&lt;20); setvbuf(stdout, new char[1&lt;&lt;20], _IOFBF, 1&lt;&lt;20); int k, n0; scanf(&quot;%d&quot;, &amp;n); n0 = n; while(n0--) scanf(&quot;%d&quot;, &amp;a[n-n0-1]); n0 = n; while(n0--) scanf(&quot;%d&quot;, &amp;b[n-n0-1]); n0 = n; while(n0--) scanf(&quot;%d&quot;, &amp;c[n-n0-1]); n0 = n; scanf(&quot;%d&quot;, &amp;k); int i, j, m; i = j = m = 0; while(n0--)&#123; i = check(a, i, 1); j = check(b, j, 2); m = check(c, m, 3); &#125; char ans; switch(s[k])&#123; case 1: ans = &apos;A&apos;;break; case 2: ans = &apos;B&apos;;break; case 3: ans = &apos;C&apos;;break; default: break; &#125; printf(&quot;%c\n&quot;, ans); return 0;&#125; 稍微改进了一下空间利用效率，开的空间更加节省了，看排行榜有的时间可以再短些，我猜是scanf那边还可以再优化一下？后来加上了memset好像没有很大的效果。123456789101112131415161718192021222324252627282930313233343536373839#include&lt;cstdio&gt;#define MAXLEN 500000+1int abc[3][MAXLEN];int s[MAXLEN] = &#123;0&#125;;int n;int check(int&amp; i, int num)&#123; if(i &gt; n-1) return i; if(!s[abc[num-1][i]]) s[abc[num-1][i]] = num; else&#123; while(i&lt;=n-1 &amp;&amp; s[abc[num-1][i]]!=0) i++; if(i &lt;= n-1) s[abc[num-1][i]] = num; &#125; i++; return i;&#125;int main()&#123; setvbuf(stdin, new char[MAXLEN], _IOFBF, MAXLEN); setvbuf(stdout, new char[MAXLEN], _IOFBF, MAXLEN); int k, n0; scanf(&quot;%d&quot;, &amp;n); for(int i = 0; i &lt; 3; i++) for(int j = 0; j &lt; n; j++) scanf(&quot;%d&quot;, &amp;abc[i][j]); scanf(&quot;%d&quot;, &amp;k); int i, j, m; i = j = m = 0; n0 = n; while(n0--)&#123; check(i, 1); check(j, 2); check(m, 3); &#125; char ans; switch(s[k])&#123; case 1: ans = &apos;A&apos;;break; case 2: ans = &apos;B&apos;;break; case 3: ans = &apos;C&apos;;break; default: break; &#125; printf(&quot;%c\n&quot;, ans); return 0;&#125;]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[THUOJ 索引贴]]></title>
+    <url>%2F2019%2F01%2F23%2FTHUOJ-%E7%B4%A2%E5%BC%95%E8%B4%B4%2F</url>
+    <content type="text"><![CDATA[THU数据结构（2018秋）PA1 1-1 Team 1-2 Company 1-3-2 Super Interview 1-4 AlarmPA2 2-1 Train 2-2-2 凸包2 2-3-3 Zerone 2-4 Stock]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>索引贴</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[2018 THU 上机考试：1葱的战争]]></title>
+    <url>%2F2019%2F01%2F22%2F2018-THU-%E4%B8%8A%E6%9C%BA%E8%80%83%E8%AF%95%EF%BC%9A1%E8%91%B1%E7%9A%84%E6%88%98%E4%BA%89%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[2017 THU 上机考试：3多项式求和]]></title>
+    <url>%2F2019%2F01%2F22%2F2017-THU-%E4%B8%8A%E6%9C%BA%E8%80%83%E8%AF%95%EF%BC%9A3%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%B1%82%E5%92%8C%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[2017 THU 上机考试：2扫雷]]></title>
+    <url>%2F2019%2F01%2F22%2F2017-THU-%E4%B8%8A%E6%9C%BA%E8%80%83%E8%AF%95%EF%BC%9A2%E6%89%AB%E9%9B%B7%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[2017 THU 上机考试：1面试]]></title>
+    <url>%2F2019%2F01%2F22%2F2017-THU-%E4%B8%8A%E6%9C%BA%E8%80%83%E8%AF%95%EF%BC%9A1%E9%9D%A2%E8%AF%95%2F</url>
+    <content type="text"><![CDATA[主要参考文献：机试讲解]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[博客Win10本地配置+添加搜索和Disqus]]></title>
     <url>%2F2019%2F01%2F15%2F%E5%8D%9A%E5%AE%A2Win10%E6%9C%AC%E5%9C%B0%E9%85%8D%E7%BD%AE%2F</url>
     <content type="text"><![CDATA[大概2019.1.10左右的时候在电脑的SSD上装了一个Win10（顿时觉得这孩子寿命又长了两年）。需要重新配置一下本地运行blog的环境，故记录之。 安装Node.jsNode.js 安装githttp://git-scm.com/download/ 安装Hexo在blog目录下右键：’Git Bash here’1$ npm install -g hexo-cli PS:执行上一步时出现了一个小插曲，显示了如下错误：1234567891011npm ERR! code ECONNRESETnpm ERR! errno ECONNRESETnpm ERR! network request to https://registry.npmjs.org/escape-string-regexp failed, reason: Client network socket disconnected before secure TLS connection was establishednpm ERR! network This is a problem related to network connectivity.npm ERR! network In most cases you are behind a proxy or have bad network settings.npm ERR! networknpm ERR! network If you are behind a proxy, please make sure that thenpm ERR! network &apos;proxy&apos; config is set properly. See: &apos;npm help config&apos;npm ERR! A complete log of this run can be found in:npm ERR! C:\Users\wine&amp;chord\AppData\Roaming\npm-cache\_logs\2019-01-15T13_08_57_636Z-debug.log 解决方法：换成淘宝的npm源。参考资料1$ npm config set registry &quot;https://registry.npm.taobao.org&quot; 常用命令123456$ hexo g # 生成静态文件$ hexo s # 启动本地服务器$ hexo d # 部署远端服务器$ hexo d -g # 生成部署$ hexo s -g # 生成预览$ hexo new &quot;Post Name&quot; # 新建一篇文章 2019.1.20 Update: 添加搜索功能参考资料 Git Bash Here 1npm install hexo-generator-searchdb --save blog/_config.yml中添加： 12345search： path: search.xml field: post format: html limit: 10000 以上每一个冒号后都有空格。 blog/themes/next/_config.yml中修改12local_search: enable: true 添加 DISQUS参考资料先按Disqus网站步骤来，然后在blog/themes/next/_config.yml中进行修改：1234disqus: enable: true shortname: wineandchord #your name count: true]]></content>
@@ -510,8 +557,8 @@
       </categories>
       <tags>
         <tag>LeetCode</tag>
-        <tag>Two Pointers</tag>
         <tag>Hash Table</tag>
+        <tag>Two Pointers</tag>
         <tag>Sort</tag>
         <tag>Binary Search</tag>
       </tags>

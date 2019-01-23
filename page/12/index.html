@@ -296,6 +296,1114 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题15-二进制中1的个数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/31/剑指Offer-面试题15-二进制中1的个数/" itemprop="url">剑指Offer 面试题15 二进制中1的个数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T20:17:48+08:00">
+                2018-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/剑指Offer/" itemprop="url" rel="index">
+                    <span itemprop="name">剑指Offer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/31/剑指Offer-面试题15-二进制中1的个数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/31/剑指Offer-面试题15-二进制中1的个数/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="二进制中1的个数"><a href="#二进制中1的个数" class="headerlink" title="二进制中1的个数"></a>二进制中1的个数</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>计算一个整数对应的二进制数中1的个数</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>对原数进行移位，然后和 $1$ 相与</li>
+<li>原数不变，将 $1$ 不断移位，进行与操作</li>
+<li>利用 $n\&amp;(n-1)$ 可以将 $n$ 最右边的 $1$ 变成 $0$ 的性质，有多少个 $1$ 就能执行多少次操作。<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">// 可能由于负数造成死循环的解法</span><br><span class="line">int NumberOf1(int n)&#123;</span><br><span class="line">    int count = 0;</span><br><span class="line">    while(n)&#123;</span><br><span class="line">        if(n&amp;1) count++;</span><br><span class="line">        n = n &gt;&gt; 1;</span><br><span class="line">    &#125;</span><br><span class="line">    return count;</span><br><span class="line">&#125;</span><br><span class="line">// 常规解法</span><br><span class="line">int NumberOf1(int n)&#123;</span><br><span class="line">    int count = 0;</span><br><span class="line">    unsigned int flag = 1;</span><br><span class="line">    while(flag)&#123;</span><br><span class="line">        if(n &amp; flag) count++;</span><br><span class="line">        flag = flag &lt;&lt; 1;</span><br><span class="line">    &#125;</span><br><span class="line">    return count;</span><br><span class="line">&#125;</span><br><span class="line">// 利用 n&amp;(n-1) 可以去掉最右侧 1</span><br><span class="line">int NumberOf1(int n)&#123;</span><br><span class="line">    int count = 0;</span><br><span class="line">    while(n)&#123;</span><br><span class="line">        count++;</span><br><span class="line">        n = (n-1) &amp; n;</span><br><span class="line">    &#125;</span><br><span class="line">    return count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题14-剪绳子/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/31/剑指Offer-面试题14-剪绳子/" itemprop="url">剑指Offer 面试题14 剪绳子</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T19:59:33+08:00">
+                2018-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/剑指Offer/" itemprop="url" rel="index">
+                    <span itemprop="name">剑指Offer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/31/剑指Offer-面试题14-剪绳子/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/31/剑指Offer-面试题14-剪绳子/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="剪绳子"><a href="#剪绳子" class="headerlink" title="剪绳子"></a>剪绳子</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>绳子长度为 $n$，剪成 $m$ 段，要求 $n,m&gt;1$，问剪下来的绳子长度的乘积最大是多少？</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>使用动态规划，自底向上依次计算</li>
+<li>使用贪婪算法，尽可能多的切长度为 $3$ 的段，最后长度为 $4$ 不需要切出 $3$ 来。需要数学证明。<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">// Dynamic Programming</span><br><span class="line">int maxProductAfterCutting_solution1(int length)&#123;</span><br><span class="line">    if(length &lt; 2) return 0;  // 因为必须切一刀</span><br><span class="line">    if(length == 2) return 1;</span><br><span class="line">    if(length == 3) return 2;</span><br><span class="line">    int* products = new int[length + 1];</span><br><span class="line">    products[0] = 0;</span><br><span class="line">    products[1] = 1;</span><br><span class="line">    products[2] = 2;</span><br><span class="line">    products[3] = 3;</span><br><span class="line">    int max = 0;</span><br><span class="line">    for(int i = 4; i &lt;= length; i++)&#123;</span><br><span class="line">        max = 0;</span><br><span class="line">        for(int j = 1; j &lt;= i/2; j++)&#123;</span><br><span class="line">            int product = products[j]*products[i-j];</span><br><span class="line">            if(max &lt; product) max = product;</span><br><span class="line">            products[i] = max;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    max = products[length];</span><br><span class="line">    delete[] products;</span><br><span class="line">    return max;</span><br><span class="line">&#125;</span><br><span class="line">// Greedy Algorithm</span><br><span class="line">int maxProductAfterCutting_solution2(int length)&#123;</span><br><span class="line">    if(length &lt; 2) return 0;</span><br><span class="line">    if(length == 2) return 1;</span><br><span class="line">    if(length == 3) return 2;</span><br><span class="line">    // 多切3</span><br><span class="line">    int timesOf3 = length / 3;</span><br><span class="line">    // 最后剩下4时，不能切3</span><br><span class="line">    if(length - timesOf3*3 == 1) timesOf3 -= 1;</span><br><span class="line">    int timesOf2 = (length - timesOf3*3) / 2;</span><br><span class="line">    return (int)(pow(3, timesOf3)) * (int)(pow(2, timesOf2));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题13-机器人的运动范围/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/31/剑指Offer-面试题13-机器人的运动范围/" itemprop="url">剑指Offer 面试题13 机器人的运动范围</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T19:44:08+08:00">
+                2018-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/剑指Offer/" itemprop="url" rel="index">
+                    <span itemprop="name">剑指Offer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/31/剑指Offer-面试题13-机器人的运动范围/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/31/剑指Offer-面试题13-机器人的运动范围/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="机器人的运动范围"><a href="#机器人的运动范围" class="headerlink" title="机器人的运动范围"></a>机器人的运动范围</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>一个机器人从 $(0,0)$ 开始移动，每次可以移动上下左右，但是不能移动到坐标数字之和大于 $k$ 的格子中，比如对于格子 $(35, 23)$，假设 $k=12$，$3+5+2+3=13&gt;k$ ，所以该格子无法进入。</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>使用回溯法。在上下左右进行相应的判断。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">int movingCount(int threshold, int rows, int cols)&#123;</span><br><span class="line">    if(threshold &lt; 0 || rows &lt;= 0 || cols &lt;= 0) return 0;</span><br><span class="line">    bool *visited = new bool[rows*cols];</span><br><span class="line">    for(int i = 0; i &lt; rows*cols; i++) visited = false;</span><br><span class="line">    int count = movingCountCore(threshold, rows, cols, 0, 0, visited);</span><br><span class="line">    delete[] visited;</span><br><span class="line">    return count;</span><br><span class="line">&#125;</span><br><span class="line">int movingCountCore(int threshold, int rows, int cols, int row, int col, bool* visited)&#123;</span><br><span class="line">    int count = 0; </span><br><span class="line">    if(check(threshold, rows, cols, row, col, visited))&#123;</span><br><span class="line">        // 该格子满足条件</span><br><span class="line">        visited[row*cols + col] = true;</span><br><span class="line">        count = 1 + movingCountCore(threshold, rows, cols, row-1, col, visited) + movingCountCore(threshold, rows, cols, row, col-1, visited) + movingCountCore(threshold, rows, cols, row+1, col, visited) + movingCountCore(threshold, rows, cols, row, col+1, visited);</span><br><span class="line">    &#125;</span><br><span class="line">    return count;</span><br><span class="line">&#125;</span><br><span class="line">bool check(int threshold, int rows, int cols, int row, int col, bool* visited)&#123;</span><br><span class="line">    if(row &gt;= 0 &amp;&amp; row &lt; rows &amp;&amp; col &gt;=0 &amp;&amp; col &lt; cols &amp;&amp; getDIgitSum(row) + getDigitSum(col) &lt;= threshold &amp;&amp; !visited[row*cols+col]) return true;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line">int getDigitSum(int number)&#123;</span><br><span class="line">    int sum = 0;</span><br><span class="line">    while(number &gt; 0)&#123;</span><br><span class="line">        sum += number % 10;</span><br><span class="line">        number /= 10;</span><br><span class="line">    &#125;</span><br><span class="line">    return sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题12-矩阵中的路径/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/31/剑指Offer-面试题12-矩阵中的路径/" itemprop="url">剑指Offer 面试题12 矩阵中的路径</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T19:30:05+08:00">
+                2018-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/剑指Offer/" itemprop="url" rel="index">
+                    <span itemprop="name">剑指Offer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/31/剑指Offer-面试题12-矩阵中的路径/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/31/剑指Offer-面试题12-矩阵中的路径/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="矩阵中的路径"><a href="#矩阵中的路径" class="headerlink" title="矩阵中的路径"></a>矩阵中的路径</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>一个矩阵中包含各种字母，给定一个字符串，问是否能在该矩阵中找到一条路径，使路径上的字母可以形成字符串。矩阵中的每个元素只能走一次。</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>使用回溯法。<br>走到每一格时递归判断走上下左右格子是否存在路径，如果不存在，则回退一步。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">bool hasPath(char* matrix, int rows, int cols, char* str)&#123;</span><br><span class="line">    if(matrix == nullptr || rows &lt; 1 || cols &lt; 1 || str == nullptr) return false;</span><br><span class="line">    bool *visited = new bool[rows*cols];</span><br><span class="line">    memset(visited, 0, rows*cols);</span><br><span class="line">    int pathLength = 0;</span><br><span class="line">    for(int row = 0; row &lt; rows; row++)&#123;</span><br><span class="line">        for(int col = 0; col &lt; cols; col++)&#123;</span><br><span class="line">            if(hasPathCore(matrix, rows, cols, row, col, str, pathLength, visited)) return true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    delete[] visited;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line">bool hasPathCore(const char* matrix, int rows, int cols, int row, int col, const char* str, int&amp; pathLength, bool* visited)&#123;</span><br><span class="line">    if(str[pathLength] == &apos;\0&apos;) return true;</span><br><span class="line">    bool hasPath = false;</span><br><span class="line">    if(row &gt;= 0 &amp;&amp; row &lt; rows &amp;&amp; col &gt;= 0 &amp;&amp; col &lt; cols &amp;&amp; matrix[row * cols + col] == str[pathLength] &amp;&amp; !visited[row * cols + col])&#123;</span><br><span class="line">        pathLength++;</span><br><span class="line">        visited[row * cols + col] = true;</span><br><span class="line">        hasPath = hasPathCore(matrix, rows, cols, row, col-1, str, pathLength, visited) || hasPathcore(matrix, rows, cols, row-1, col, str, pathLength, visited) || hasPathCore(matrix, rows, cols, row, col+1, str, pathLength, visited) || hasPathCore(matrix, rows, cols, row+1, col, str, pathLength, visited);</span><br><span class="line">        if(!hasPath)&#123; // 如果相邻的四个格子都没有匹配的，则需要回到前一个字符</span><br><span class="line">            pathLength--;</span><br><span class="line">            visited[row * cols + col] = false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return hasPath;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题11-旋转数组的最小数字/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/31/剑指Offer-面试题11-旋转数组的最小数字/" itemprop="url">剑指Offer 面试题11 旋转数组的最小数字</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T18:57:04+08:00">
+                2018-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/剑指Offer/" itemprop="url" rel="index">
+                    <span itemprop="name">剑指Offer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/31/剑指Offer-面试题11-旋转数组的最小数字/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/31/剑指Offer-面试题11-旋转数组的最小数字/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="旋转数组的最小数字"><a href="#旋转数组的最小数字" class="headerlink" title="旋转数组的最小数字"></a>旋转数组的最小数字</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>数组 ${3,4,5,1,2}$ 为 ${1,2,3,4,5}$ 的一个旋转，求旋转数组中的最小值</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>使用二分查找</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">// My solution</span><br><span class="line">int Min(int* numbers, int length)&#123;</span><br><span class="line">    int start = 0; // 起始指针</span><br><span class="line">    int end = length - 1;  // 末尾指针</span><br><span class="line">    return findMin(numbers, start, end);</span><br><span class="line">&#125;</span><br><span class="line">int findMin(int* numbers, int start, int end)&#123;</span><br><span class="line">    if(start + 1 == end) return numbers[end]; // 递归基</span><br><span class="line">    int middle = start + (end - start)/2;</span><br><span class="line">    if(numbers[middle] &gt; numbers[start])</span><br><span class="line">        start = middle;</span><br><span class="line">    else if(numbers[middle] &lt; numbers[start])</span><br><span class="line">        end = middle;</span><br><span class="line">    return findMin(numbers, start, end);</span><br><span class="line">&#125;</span><br><span class="line">// book&apos;s solution</span><br><span class="line">int Min(int* numbers, int length)&#123;</span><br><span class="line">    if(numbers == nullptr || length &lt;= 0)</span><br><span class="line">        throw new std::exception(&quot;Invalid&quot;);</span><br><span class="line">    int index1 = 0;</span><br><span class="line">    int index2 = length - 1;</span><br><span class="line">    int indexMid = index1;</span><br><span class="line">    while(numbers[index1] &gt;= numbers[index2])&#123;</span><br><span class="line">        if(index2 - index1 == 1)&#123;</span><br><span class="line">            indexMid = index2;</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">        indexMid = (index1 + index2) / 2;</span><br><span class="line">        if(numbers[indexMid] &gt;= numbers[index1])</span><br><span class="line">            index1 = indexMid;</span><br><span class="line">        else if(numbers[indexMid] &lt;= numbers[index2])</span><br><span class="line">            index2 = indexMid;</span><br><span class="line">    &#125; </span><br><span class="line">    return numbers[indexMid];</span><br><span class="line">&#125;</span><br><span class="line">// improvement</span><br><span class="line">int Min(int* numbers, int length)&#123;</span><br><span class="line">    if(numbers == nulptr || length &lt;= 0)</span><br><span class="line">        throw new std::exception(&quot;Invalid parameters&quot;);</span><br><span class="line">    int index1 = 0;</span><br><span class="line">    int index2 = length - 1;</span><br><span class="line">    int indexMid = index1;</span><br><span class="line">    while(numbers[index1] &gt;= numbers[index2])&#123;</span><br><span class="line">        if(index2 - index1 == 1)&#123;</span><br><span class="line">            indexMid = index2;</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">        indexMid = (index1 + index2) / 2;</span><br><span class="line">        // 若三者相等，则顺序查找</span><br><span class="line">        if(numbers[index1] == numbers[index2] &amp;&amp; numbers[index1] == numbers[indexMid]) </span><br><span class="line">            return MinInOrder(numbers, index1, index2);</span><br><span class="line">        if(numbers[indexMid] &gt;= numbers[index1])</span><br><span class="line">            index1 = indexMid;</span><br><span class="line">        else if(nnumbers[indexMid] &lt;= numbers[index2])</span><br><span class="line">            index2 = indexMid;</span><br><span class="line">    &#125;</span><br><span class="line">    return numbers[indexMid];</span><br><span class="line">&#125;</span><br><span class="line">int MinInOrder(int* numbers, int index1, int index2)&#123;</span><br><span class="line">    int result = numbers[index1];</span><br><span class="line">    for(int i = index1 = 1; i &lt;= index2; i++)&#123;</span><br><span class="line">        int result = numbers[index1];</span><br><span class="line">        if(result &gt; numbers[i])</span><br><span class="line">            result = numbers[i];</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题10-斐波那契数列/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/31/剑指Offer-面试题10-斐波那契数列/" itemprop="url">剑指Offer 面试题10 斐波那契数列</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T12:10:25+08:00">
+                2018-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/剑指Offer/" itemprop="url" rel="index">
+                    <span itemprop="name">剑指Offer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/31/剑指Offer-面试题10-斐波那契数列/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/31/剑指Offer-面试题10-斐波那契数列/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="题目一：斐波那契数列"><a href="#题目一：斐波那契数列" class="headerlink" title="题目一：斐波那契数列"></a>题目一：斐波那契数列</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>求斐波那契数列的第 $n$ 项</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>使用动态规划，自底向上求。时间复杂度 $O(n)$</li>
+<li>使用矩阵乘方公式法。时间复杂度 $O(logn)$<br>$$<br>\begin{bmatrix}<br> f(n) &amp; f(n-1) \<br> f(n-1) &amp; f(n-2) \<br>\end{bmatrix}<br>=<br>\begin{bmatrix}<br> 1 &amp; 1 \<br> 1 &amp; 0 \<br>\end{bmatrix} ^{n-1} \tag{1}<br>$$<br>使用分而治之法求：<br>$$<br>a^n = \begin{cases}<br>a^{n/2} \cdot a^{n/2}  &amp; n 为偶数 \<br>a^{(n-1)/2} \cdot a^{(n-1)/2} \cdot a &amp; n为奇数<br>\end{cases}  \tag{2}<br>$$<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">// O(n) 自底向上</span><br><span class="line">long long Fibonacci(unsigned n)&#123;</span><br><span class="line">    int result[2] = &#123;0, 1&#125;;</span><br><span class="line">    if(n &lt; 2) return result[n];</span><br><span class="line">    long long f = 0;</span><br><span class="line">    long long g = 1;</span><br><span class="line">    for(unsigned int i = 2; i &lt;= n; i++)&#123;</span><br><span class="line">        g = g + f;</span><br><span class="line">        f = g - f;</span><br><span class="line">    &#125;</span><br><span class="line">    return g;</span><br><span class="line">&#125;</span><br><span class="line">// O(long) 矩阵乘法</span><br><span class="line">struct Matrix&#123;</span><br><span class="line">    Matrix(long long m00=0, long long m01=0, long long m10=0, long long m11=0):m_00(m00),m_01(m01),m_10(m10),m_11(m11)&#123;&#125;</span><br><span class="line">    long long m_00, m_01, m_10, m_11;</span><br><span class="line">&#125;;</span><br><span class="line">Matrix MMultiply(const Matrix m1, Matrix m2)&#123;</span><br><span class="line">    return Matrix(</span><br><span class="line">        matrix1.m_00 * matrix2.m_00 + matrix1.m_01 * matrix2.m_10,</span><br><span class="line">        matrix1.m_00 * matrix2.m_01 + matrix1.m_01 * matrix2.m_11,</span><br><span class="line">        matrix1.m_10 * matrix2.m_00 + matrix1.m_11 * matrix2.m_10,</span><br><span class="line">        matrix1.m_10 * matrix2.m_01 + matrix1.m_11 * matrix2.m_11);</span><br><span class="line">&#125;</span><br><span class="line">Matrix MPower(unsigned int n)&#123;</span><br><span class="line">    Matrix m;</span><br><span class="line">    if(n == 1) m = Matrix(1,1,1,0);</span><br><span class="line">    else if(n % 2 == 0)&#123; // n 为偶数</span><br><span class="line">        m = MPower(n / 2);</span><br><span class="line">        m = MMultiply(m, m);</span><br><span class="line">    &#125;</span><br><span class="line">    else if(n % 2 == 1)&#123;  // n 为奇数</span><br><span class="line">        m = MPower((n - 1) / 2);</span><br><span class="line">        m = MMultiply(m, m);</span><br><span class="line">        m = MMultiply(m, Matrix(1,1,1,0));</span><br><span class="line">    &#125;</span><br><span class="line">    return m;</span><br><span class="line">&#125;</span><br><span class="line">long long Fib(unsigned int n)&#123;</span><br><span class="line">    int result[2] = &#123;0, 1&#125;;</span><br><span class="line">    if(n &lt; 2) return result[n];</span><br><span class="line">    Matrix m = MPower(n - 1);</span><br><span class="line">    return m.m_00;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="题目二：青蛙跳台阶问题"><a href="#题目二：青蛙跳台阶问题" class="headerlink" title="题目二：青蛙跳台阶问题"></a>题目二：青蛙跳台阶问题</h2><h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><p>青蛙一次可以跳 $1$ 级或者 $2$ 级台阶，总共有 $n$ 级台阶，问总共有多少种跳法。</p>
+<h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><p>$$<br>frog(1) = 1<br>$$<br>$$<br>frog(2) = 2<br>$$<br>$$<br>frog(3) = frog(2) + frog(1)<br>$$<br>故有：<br>$$<br>frog(n) = fib(n+1)<br>$$</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题9-用两个栈实现队列/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/31/剑指Offer-面试题9-用两个栈实现队列/" itemprop="url">剑指Offer 面试题9 用两个栈实现队列</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T11:47:16+08:00">
+                2018-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/剑指Offer/" itemprop="url" rel="index">
+                    <span itemprop="name">剑指Offer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/31/剑指Offer-面试题9-用两个栈实现队列/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/31/剑指Offer-面试题9-用两个栈实现队列/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="用两个栈实现队列"><a href="#用两个栈实现队列" class="headerlink" title="用两个栈实现队列"></a>用两个栈实现队列</h1><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>用两个栈来实现队列，该队列的部分定义如下：<br>请实现他的 <code>appendTail</code> 和 <code>deleteHead</code> 函数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt; class CQueue&#123;</span><br><span class="line">public:</span><br><span class="line">    CQueue(void);</span><br><span class="line">    ~CQueue(void);</span><br><span class="line">    void appendTail(const T&amp; node);</span><br><span class="line">    T deleteHead();</span><br><span class="line">private:</span><br><span class="line">    stack&lt;T&gt; stack1;</span><br><span class="line">    stack&lt;T&gt; stack2;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>插入时直接压入栈 <code>stack1</code> 中。</li>
+<li>删除时：<ul>
+<li>若 <code>stack2</code> 为空，则将 <code>stack1</code> 中的元素依次弹出到 <code>stack2</code> 中。<code>stack2</code> 顶部元素即为要出队的元素。</li>
+<li>若 <code>stack2</code> 不为空，其顶部元素即为要出队元素。<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt; void CQueue&lt;T&gt;::appendTail(const T&amp; element)&#123;</span><br><span class="line">    stack1.push(element);</span><br><span class="line">&#125;</span><br><span class="line">template&lt;typename T&gt; T CQueue&lt;T&gt;::deleteHead()&#123;</span><br><span class="line">    if(stack2.size() &lt;= 0)&#123; // stack2 为空，则把 stack1 中的元素依次压入</span><br><span class="line">        while(stack1.size() &gt; 0)&#123;</span><br><span class="line">            T&amp; data = stack1.top();</span><br><span class="line">            stack1.pop();</span><br><span class="line">            stack2.push(data);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if(stack2.size() == 0) // 说明两个栈都没有元素</span><br><span class="line">        throw new exception(&quot;queue is empty&quot;);</span><br><span class="line">    T head = stack2.top();  // stack2 的顶部元素即是队首元素</span><br><span class="line">    stack2.pop();</span><br><span class="line">    return head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h3><p>考虑用两个队列来实现栈：</p>
+<ul>
+<li>入栈时寻找一个不为空的队列（若都为空则任意）入队</li>
+<li>出栈时：<ul>
+<li>两个队列中必有一个为空，一个不为空。把不为空的队列中的元素依次入队到空队列中，原队列只剩下最后一个元素，这个元素出队即是出栈操作需要的元素。</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题8-二叉树的下一个结点/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -757,1429 +1865,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题5-替换空格/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/31/剑指Offer-面试题5-替换空格/" itemprop="url">剑指Offer 面试题5 替换空格</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T10:06:35+08:00">
-                2018-10-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/剑指Offer/" itemprop="url" rel="index">
-                    <span itemprop="name">剑指Offer</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/31/剑指Offer-面试题5-替换空格/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/10/31/剑指Offer-面试题5-替换空格/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="替换空格"><a href="#替换空格" class="headerlink" title="替换空格"></a>替换空格</h1><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>将字符串中的每一个空格替换为 “%20”</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
-<li>如果从前往后替换，边替换边移动的话需要的时间复杂度是 $O(n^2)$。</li>
-<li>考虑首先遍历字符串，得到空格个数，然后计算出替换之后的字符串长度，替换时从后往前进行替换。<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">void ReplaceBlank(char string[], int length)&#123;</span><br><span class="line">    if(string == nullptr || length &lt;= 0) return;</span><br><span class="line">    int len0 = 0; // 原始长度</span><br><span class="line">    int len1 = 0; // 替换后长度</span><br><span class="line">    int i = 0;</span><br><span class="line">    while(string[i] != &apos;\0&apos;)&#123;</span><br><span class="line">        len0++;</span><br><span class="line">        if(string[i] == &apos; &apos;) len1 += 3;</span><br><span class="line">        i++; </span><br><span class="line">    &#125;</span><br><span class="line">    if(len1 &gt; length) return; // 字符串的空间不够</span><br><span class="line">    int p2 = len1;  // p2 指向新长度尾</span><br><span class="line">    int p1 = len0;  // p1 指向旧长度尾</span><br><span class="line">    while(p1 &gt;= 0)&#123;</span><br><span class="line">        if(string[p1] == &apos; &apos;)&#123;  // 遇到空格则替换</span><br><span class="line">            string[p2--] = &apos;0&apos;;</span><br><span class="line">            string[p2--] = &apos;2&apos;;</span><br><span class="line">            string[p2--] = &apos;%&apos;;</span><br><span class="line">        &#125; else &#123;  // 未遇到空格则直接复制</span><br><span class="line">            string[p2--] = string[p1];</span><br><span class="line">        &#125;</span><br><span class="line">        p1--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>从后往前，每个元素只复制或者移动了一次，所以时间复杂度是 $O(n)$</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题4-二维数组中的查找/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/31/剑指Offer-面试题4-二维数组中的查找/" itemprop="url">剑指Offer 面试题4 二维数组中的查找</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T09:50:09+08:00">
-                2018-10-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/剑指Offer/" itemprop="url" rel="index">
-                    <span itemprop="name">剑指Offer</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/31/剑指Offer-面试题4-二维数组中的查找/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/10/31/剑指Offer-面试题4-二维数组中的查找/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="二维数组中的查找"><a href="#二维数组中的查找" class="headerlink" title="二维数组中的查找"></a>二维数组中的查找</h1><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个二维数组，每一行从左到右递增，每一列从上到下递增，给一个整数，判断该整数是否在数组中。</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>选取数组的右上角元素进行比较，如果该数字等于要查找的数字，则结束。如果大于，说明要查找元素只可能出现在该列的左侧，故剔除该列后再对剩下数组的右上角元素进行比较。如果小于，说明要查找元素只可能出现在该行的下侧，剔除该行后再对剩余数组的右上角元素进行查找。</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">bool find(int* matrix, int rows, int columns, int number)&#123;</span><br><span class="line">    bool found = false;</span><br><span class="line">    if(matrix != nullptr &amp;&amp; rows &gt; 0 &amp;&amp; columns &gt; 0)&#123;</span><br><span class="line">        int row = 0;  // 表示右上角坐标</span><br><span class="line">        int column = columns - 1;</span><br><span class="line">        while(row &lt; rows &amp;&amp; column &gt;= 0)&#123;</span><br><span class="line">            if(matrix[row * columns + column] == number)&#123;</span><br><span class="line">                found = true;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">            else if(matrix[row * columns + column] &gt; number) column--; // 大于则剔除列</span><br><span class="line">            else row++; // 小于则剔除行</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return found;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>每次如果没有找到，要么列减少，要么行减少，所以总的时间复杂度为 $O(m+n)$。（$m$ $n$ 为矩阵的行和列）</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题3-数组中的重复数字/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/31/剑指Offer-面试题3-数组中的重复数字/" itemprop="url">剑指Offer 面试题3 数组中的重复数字</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T08:36:25+08:00">
-                2018-10-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/剑指Offer/" itemprop="url" rel="index">
-                    <span itemprop="name">剑指Offer</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/31/剑指Offer-面试题3-数组中的重复数字/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/10/31/剑指Offer-面试题3-数组中的重复数字/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="数组中的重复数字"><a href="#数组中的重复数字" class="headerlink" title="数组中的重复数字"></a>数组中的重复数字</h1><h2 id="题目一：找出数组中的重复数字"><a href="#题目一：找出数组中的重复数字" class="headerlink" title="题目一：找出数组中的重复数字"></a>题目一：找出数组中的重复数字</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>长度为 $n$ 的数组中所有数字都在 $0$ ~ $n-1$ 范围内，找出任意重复数字。</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
-<li>可以先排序，后遍历数组，找出重复元素。时间复杂度 $O(nlogn)$</li>
-<li>还可以使用哈希表，从头到尾扫描数组，对每一个元素都可以用 $O(1)$ 时间判断哈希表中是否含有该元素。如果没有，就加入该元素，如果有，就说明找到了重复数字。其时间复杂度为 $O(n)$，需要一个 $O(n)$ 的哈希表，空间复杂度也是 $O(n)$。</li>
-<li>从头到尾扫描数组，扫描下标为 $i$ ，首先判断 $i$ 是否等于扫描的数字（记为$m$），如果相等则继续，否则判断 $m$ 和处于第 $m$ 位的数字是否相等，如果相等则表明出现了重复数字，不相等则交换 $m$ 和 $i$ ，重复对当前数的判断。<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">bool duplicate(int numbers[], int length, int* duplication)&#123;</span><br><span class="line">    if(numbers == nullptr || length &lt;= 0) // 无效输入测试用例：输入空指针</span><br><span class="line">        return false;</span><br><span class="line">    for(int i = 0; i &lt; length; i++) // 无效输入测试用例：数组包含 0~n-1 以外的数字</span><br><span class="line">        if(numbers[i] &lt; 0 || numbers[i] &gt;= length - 1)</span><br><span class="line">            return false;</span><br><span class="line">    for(int i = 0; i &lt; length; i++)&#123; // 从头到尾扫描数组</span><br><span class="line">        while(numbers[i] != i)&#123;  // 判断扫描的数字numbers[i]与下标i是否相等，相等时重复for循环，不相等时执行以下语句</span><br><span class="line">            if(numbers[i] == numbers[numbers[i]])&#123; // 表明m与第m位数字相等，此时发现重复数字</span><br><span class="line">                *duplication = numbers[i];</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">            // 到此时说明m与第m位数字不相等，则两者交换</span><br><span class="line">            int temp = numbers[i];</span><br><span class="line">            numbers[i] = numbers[temp];</span><br><span class="line">            numbers[temp] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;  // 循环结束，说明没有重复元素</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>尽管有两重循环，但是每个数字最多只要进行两次交换即可到位，因此总的时间复杂度为 $O(n)$。操作未用额外的空间，故空间复杂度为 $O(1)$。</p>
-<h2 id="题目二：不修改数组找出重复的数字"><a href="#题目二：不修改数组找出重复的数字" class="headerlink" title="题目二：不修改数组找出重复的数字"></a>题目二：不修改数组找出重复的数字</h2><h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><p>数组长度为 $n+1$，所有数字都在 $1$ ~ $n$ 范围内，要求不能修改原数组找出重复元素。</p>
-<h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><ul>
-<li>可以开辟一个辅助数组，将原数组的元素 $m$ 复制到新数组第 $m$ 位处。空间复杂度为 $O(n)$。</li>
-<li>为了降低空间复杂度，考虑使用二分法，$1$ ~ $n$ 分为 $1$ ~ $m$ 和 $m+1$ ~ $n$ 两部分，如果整个数组元素在 $1$ ~ $m$ 范围中的计数大于 $m$，说明该范围内含有重复数字，对于后半部分同理。然后再对前半部分或后半部分进行二分处理。<h3 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">int getDuplication(const int* numbers, int length)&#123;</span><br><span class="line">    if(numbers == nullptr || length &lt;= 0) // 输入不能为空指针</span><br><span class="line">        return -1;</span><br><span class="line">    int start = 1;</span><br><span class="line">    int end = length - 1;</span><br><span class="line">    while(end &gt;= start)&#123;</span><br><span class="line">        int middle = ((end - start) &gt;&gt; 1) + start;</span><br><span class="line">        // 查找在范围内的数字个数</span><br><span class="line">        int count = countRange(numbers, length, start, middle);</span><br><span class="line">        if(end == start)&#123;  // 范围中只有一个数</span><br><span class="line">            if(count &gt; 1) return start; // 该数出现的次数大于1，说明重复</span><br><span class="line">            else break;</span><br><span class="line">        &#125;</span><br><span class="line">        if(count &gt; (mi - start + 1)) // 在前半部分出现的元素次数大于前半部分范围数</span><br><span class="line">            end = middle;</span><br><span class="line">        else start = middle + 1;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br><span class="line">int countRange(const int* numbers, int length, int start, int end)&#123;</span><br><span class="line">    if(numbers == nullptr) return 0;</span><br><span class="line">    int count = 0;</span><br><span class="line">    for(int i = 0; i &lt; length; i++)</span><br><span class="line">        if(numbers[i] &gt;= start &amp;&amp; numbers[i] &lt;= end)</span><br><span class="line">            count++;</span><br><span class="line">    return count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="复杂度分析-1"><a href="#复杂度分析-1" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>$countRange$ 函数要调用 $O(logn)$ 次，每次需要 $O(n)$ 时间，总的时间复杂度是 $O(nlong(n))$，空间复杂度为 $O(1)$。与之前的方法相比属于用时间换空间。</p>
-<p>但是注意这个算法不能保证找到所有重复数字。比如他不能找出 { $2,3,5,4,3,2,6,7$ }中的重复数字 $2$（$3$ 是可以找到的）。这是因为在 $1$ ~ $2$ 中刚好有两个数字，所以无法确定是每个数字出现了一次还是其中的一个数字出现了两次。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/20/compiler-intro/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/20/compiler-intro/" itemprop="url">compiler intro</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-20T18:36:14+08:00">
-                2018-09-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Compiler/" itemprop="url" rel="index">
-                    <span itemprop="name">Compiler</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/09/20/compiler-intro/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/09/20/compiler-intro/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="6-004-Fall-2015-L11-Compilers"><a href="#6-004-Fall-2015-L11-Compilers" class="headerlink" title="6.004 Fall 2015 L11: Compilers"></a>6.004 Fall 2015 L11: Compilers</h1><h2 id="Implementations-Interpretation-vs-compilation"><a href="#Implementations-Interpretation-vs-compilation" class="headerlink" title="Implementations: Interpretation vs compilation"></a>Implementations: Interpretation vs compilation</h2><h3 id="Interpretation"><a href="#Interpretation" class="headerlink" title="Interpretation"></a>Interpretation</h3><h4 id="Model-of-Interpretation"><a href="#Model-of-Interpretation" class="headerlink" title="Model of Interpretation:"></a>Model of Interpretation:</h4><p><img src="/images/Model_of_Interpretation.png" alt=""></p>
-<ul>
-<li>Start with some hard-to-program machine, say $M_1$</li>
-<li>Write a single program for $M_1$ that mimics the behavior of some easier machine, $M_2$</li>
-<li>Result: a “virtual” $M_2$ </li>
-</ul>
-<h4 id="Layers-of-interpretation"><a href="#Layers-of-interpretation" class="headerlink" title="Layers of interpretation:"></a>Layers of interpretation:</h4><p><img src="/images/Layers_of_interpretation.png" alt=""></p>
-<ul>
-<li>Often we use several layers of interpretation to achieve desired behavior.</li>
-<li>x86 CPU, running <ul>
-<li>Python, running<ul>
-<li>Application, interpreting<ul>
-<li>Data.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Compilation"><a href="#Compilation" class="headerlink" title="Compilation"></a>Compilation</h3><h4 id="Model-of-Compilation"><a href="#Model-of-Compilation" class="headerlink" title="Model of Compilation"></a>Model of Compilation</h4><p><img src="/images/Model_of_Compilation.png" alt=""></p>
-<ul>
-<li>Given some hard-to-program machine, say $M_1$…</li>
-<li>Find some easier-to-program language $L_2$ (perhaps for a more complicated machine, $M_2$); write programs in that language</li>
-<li>Build a translator (compiler) that translates programs from $M_2$$’s$ language to $M_1$$’s$ language. May run on $M_1$, $M_2$, or some other machine. </li>
-</ul>
-<p>Interpretation and compilation: two ways to execute high-level languages</p>
-<ul>
-<li><code>Both</code> allow changes in the programming labguage</li>
-<li><code>Both</code> afford programming applications in platform (e.g., processor) independent languages</li>
-<li><code>Both</code> are widely used in modern computer systems!</li>
-</ul>
-<h2 id="Interpretation-vs-Compilation"><a href="#Interpretation-vs-Compilation" class="headerlink" title="Interpretation vs Compilation"></a>Interpretation vs Compilation</h2><ul>
-<li>Characteristic differences:</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">\</th>
-<th style="text-align:center">Interpretation</th>
-<th style="text-align:center">Compilation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">How it treats input “x+2”</td>
-<td style="text-align:center">Computes x+2</td>
-<td style="text-align:center">Generates a program that computes x+2</td>
-</tr>
-<tr>
-<td style="text-align:center">When it happens</td>
-<td style="text-align:center">During execution</td>
-<td style="text-align:center">Before execution</td>
-</tr>
-<tr>
-<td style="text-align:center">What it complicates/slows</td>
-<td style="text-align:center">Program execution</td>
-<td style="text-align:center">Program development</td>
-</tr>
-<tr>
-<td style="text-align:center">Decisions made at</td>
-<td style="text-align:center">Run time</td>
-<td style="text-align:center">Compile time</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>Major choice we’ll see repeatedly: do it at compile time or at un time?<ul>
-<li>Which is faster?</li>
-<li>Which is more general?</li>
-</ul>
-</li>
-</ul>
-<h2 id="Compilers"><a href="#Compilers" class="headerlink" title="Compilers"></a>Compilers</h2><ul>
-<li>Bare minimum for a functional compiler:<br><img src="/images/Compilers.png" alt=""></li>
-<li>Good compilers:<ul>
-<li>Produce meaningful errors on incorrect programs<ul>
-<li>Even better: meaningful warnings</li>
-</ul>
-</li>
-<li>Produce fast, optimized code</li>
-</ul>
-</li>
-<li>This lecture:<ul>
-<li>Simple techniques to compile a C procedure into assembly</li>
-<li>Overview of how modern compilers work</li>
-</ul>
-</li>
-</ul>
-<h2 id="Anatomy-of-a-Modern-Compiler"><a href="#Anatomy-of-a-Modern-Compiler" class="headerlink" title="Anatomy of a Modern Compiler"></a>Anatomy of a Modern Compiler</h2><p><img src="/images/anatomy.png" alt=""></p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left"></th>
-<th style="text-align:left"></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Read source program</td>
-<td style="text-align:left">Optimize IR</td>
-</tr>
-<tr>
-<td style="text-align:left">Break it up into basic elements</td>
-<td style="text-align:left">Translate IR to ASM</td>
-</tr>
-<tr>
-<td style="text-align:left">Check correctness, produce errors</td>
-<td style="text-align:left">Optimize ASM</td>
-</tr>
-<tr>
-<td style="text-align:left">Translate to generic <code>intermediate representation(IR)</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="Frontend-Stages"><a href="#Frontend-Stages" class="headerlink" title="Frontend Stages"></a>Frontend Stages</h2><ul>
-<li>Lexical analysis (scanning): Source -&gt; List of tokens<br><img src="/images/lexical.png" alt=""></li>
-<li>Syntactic analysis (parsing): Tokens -&gt; Syntax tree<br><img src="/images/syntactic.png" alt=""></li>
-<li>Semantic analysis (mainly, type checking)<br><img src="/images/semantic.png" alt=""></li>
-</ul>
-<h2 id="Intermediate-Representation-IR"><a href="#Intermediate-Representation-IR" class="headerlink" title="Intermediate Representation (IR)"></a>Intermediate Representation (IR)</h2><ul>
-<li>Internal compiler language that is:<ul>
-<li>Language-independent</li>
-<li>Machine-independent</li>
-<li>Easy to optimize<br><img src="/images/IR.png" alt=""></li>
-</ul>
-</li>
-<li>Why yet another language?<ul>
-<li>Assembly does not have enough info to optimize it well</li>
-<li>Enables modularity and reuse<br><img src="/images/reuse.png" alt=""></li>
-</ul>
-</li>
-</ul>
-<h2 id="Common-IR-Control-Flow-Graph"><a href="#Common-IR-Control-Flow-Graph" class="headerlink" title="Common IR: Control Flow Graph"></a>Common IR: Control Flow Graph</h2><ul>
-<li>Assignments:<br><img src="/images/assignment.png" alt=""></li>
-<li><p>Basic block: Sequence of assignments with an optional branch at the end\<br><img src="/images/block.png" alt=""></p>
-</li>
-<li><p>Control flow graph:</p>
-<ul>
-<li>Nodes: Basic blocks</li>
-<li>Edges: Jumps or branches between basic blocks </li>
-</ul>
-</li>
-</ul>
-<h2 id="Control-Flow-Graph-for-GCD"><a href="#Control-Flow-Graph-for-GCD" class="headerlink" title="Control Flow Graph for GCD"></a>Control Flow Graph for GCD</h2><p><img src="/images\graph_GCD.png" alt=""></p>
-<h2 id="IR-Optimization"><a href="#IR-Optimization" class="headerlink" title="IR Optimization"></a>IR Optimization</h2><ul>
-<li>Perform a set of passes over the CFG<ul>
-<li>Each pass does a specific, simple task over the CFG</li>
-<li>By repeating multiple simple passes on the CFG over and over, compilers achieve very complex optimizations</li>
-</ul>
-</li>
-<li>Example optimizations:<ul>
-<li>Dead code elimination: Eliminate assignments to variables that are never used, or basic blocks that are never reached</li>
-<li>Constant propagation: Identify variables that are constant, substitute the constant elsewhere</li>
-<li>Constant folding: Compute and substitute constant expressions</li>
-</ul>
-</li>
-</ul>
-<h2 id="Example-IR-Optimizations"><a href="#Example-IR-Optimizations" class="headerlink" title="Example IR Optimizations"></a>Example IR Optimizations</h2><p><img src="/images/IR_opt.png" alt=""><br><img src="/images/IR_done.png" alt=""></p>
-<ul>
-<li>More optimizations by adding passes: Common subexpression elimination, loop-invariant code motion, loop unrolling…</li>
-</ul>
-<h2 id="Code-Generation"><a href="#Code-Generation" class="headerlink" title="Code Generation"></a>Code Generation</h2><ul>
-<li>Translate generated IR to assembly</li>
-<li>Register allocation: Map variables to registers<ul>
-<li>If variables &gt; registers, map some to memory, and load/store them when needed</li>
-</ul>
-</li>
-<li>Translate each assignment to instructions<ul>
-<li>Some assignments may require &gt; 1 instr if our ISA doesn’t have op</li>
-</ul>
-</li>
-<li>Emit each basic block: label, assignments, and branch or jump</li>
-<li>Lay out basic blocks, removing superfluous jumps</li>
-<li>ISA and CPU-specific optimizations<ul>
-<li>e.g., I possible, reorder instructions to improve performance</li>
-</ul>
-</li>
-</ul>
-<h2 id="Putting-it-All-Together-GCD"><a href="#Putting-it-All-Together-GCD" class="headerlink" title="Putting it All Together: GCD"></a>Putting it All Together: GCD</h2><p><img src="/images/all_together.png" alt=""></p>
-<h2 id="Summary-Modern-Compilers"><a href="#Summary-Modern-Compilers" class="headerlink" title="Summary: Modern Compilers"></a>Summary: Modern Compilers</h2><p><img src="/images/summary.png" alt=""></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/19/THUOJ-PA2-Proper-Rebuild/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/19/THUOJ-PA2-Proper-Rebuild/" itemprop="url">THUOJ PA2 Proper Rebuild</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-19T21:48:56+08:00">
-                2018-08-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/THUOJ/" itemprop="url" rel="index">
-                    <span itemprop="name">THUOJ</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/08/19/THUOJ-PA2-Proper-Rebuild/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/08/19/THUOJ-PA2-Proper-Rebuild/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>Given the preorder traversal sequence and postorder traversal sequence of a binary tree, we cannot determine the binary tree.<br><img src="https://dsa.cs.tsinghua.edu.cn/oj/attachment/7c7a/7c7a319cffe20865fa728afcdfccbccac25eeb46.png" alt="Figure1"><br>But for one proper binary tree, in which each internal node has two sons, we can uniquely determine it through its given preorder traversal sequence and postorder traversal sequence.</p>
-<p>Label n nodes in one binary tree using the integers in [1, n], we would like to output the inorder traversal sequence of a binary tree through its preorder and postorder traversal sequence.</p>
-<h1 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h1><ul>
-<li>1st line: integer n, the number of nodes in one given binary tree.</li>
-<li>2nd and 3rd: preorder and postorder traversal sequence </li>
-</ul>
-<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><ul>
-<li><p>Input</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">1 2 4 5 3</span><br><span class="line">4 5 2 3 1</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Output</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4 2 5 1 3</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="Restrictions"><a href="#Restrictions" class="headerlink" title="Restrictions"></a>Restrictions</h1><ul>
-<li>95% 1 &lt;= n &lt;= 1,000,000</li>
-<li>100% 1 &lt;= n &lt;= 4,000,000</li>
-<li>input sequence is a permutation of {1,2,…,n}, corresponding to a legal binary tree.</li>
-<li>Time: 2s</li>
-<li>Memory: 256 MB</li>
-</ul>
-<h1 id="Hints"><a href="#Hints" class="headerlink" title="Hints"></a>Hints</h1><p><img src="https://dsa.cs.tsinghua.edu.cn/oj/attachment/047a/047a8ca961ff072a77e1429242c82031dc92851f.png" alt="Hints"><br>observe the positions of the left and right children in preorder and postorder traversal sequence.</p>
-<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>Note that the preordr is [PL…R…], whereas postorder is […L…RP].<br>So that we can determine the left child and right child for root P. Use recursion to build a tree. These inorder traverse the tree.</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">struct Tree &#123;</span><br><span class="line">	int data = 0;</span><br><span class="line">	Tree* lchild = NULL;</span><br><span class="line">	Tree* rchild = NULL;</span><br><span class="line">	Tree() &#123;&#125;</span><br><span class="line">	Tree(int d) : data(d) &#123; lchild = NULL; rchild = NULL; &#125;</span><br><span class="line">&#125;;</span><br><span class="line">void buildtree(Tree* root, int preorder[], int postorder[], int size) &#123; // initial size is 5</span><br><span class="line">	if (size == 1) &#123;</span><br><span class="line">		root-&gt;lchild = NULL;</span><br><span class="line">		root-&gt;rchild = NULL;</span><br><span class="line">		return;</span><br><span class="line">	&#125;</span><br><span class="line">	int left = preorder[1];    // left is 2</span><br><span class="line">	int right = postorder[size - 2];  // right is 3</span><br><span class="line">	int preright = 0;</span><br><span class="line">	while (preorder[preright++] != right);  // preright is 5</span><br><span class="line">	int leftsize = preright - 2;   // leftsize is 3</span><br><span class="line">	int rightsize = size - 1 - leftsize;  // rightsize is 1 </span><br><span class="line">	int *preLeft = new int[leftsize];    </span><br><span class="line">	int *preRight = new int[rightsize];</span><br><span class="line">	int *postLeft = new int[leftsize];</span><br><span class="line">	int *postRight = new int[rightsize];</span><br><span class="line">	for (int i = 1, j = 0; i &lt; preright - 1; i++) preLeft[j++] = preorder[i];       // i = [1, 3]  [2,4,5]</span><br><span class="line">	for (int i = preright - 1, j = 0; i &lt; size; i++) preRight[j++] = preorder[i];   // i = [4, 4]  [3]</span><br><span class="line">	for (int i = 0, j = 0; i &lt; leftsize; i++) postLeft[j++] = postorder[i];         // i = [0, 2]  [4,5,2]</span><br><span class="line">	for (int i = leftsize, j = 0; i &lt; size - 1; i++) postRight[j++] = postorder[i]; // i = [3, 3]  [3]</span><br><span class="line">	root-&gt;lchild = new Tree(preLeft[0]);</span><br><span class="line">	root-&gt;rchild = new Tree(preRight[0]);</span><br><span class="line">	buildtree(root-&gt;lchild, preLeft, postLeft, leftsize);     // leftsize is 3</span><br><span class="line">	delete[] preLeft;</span><br><span class="line">	delete[] postLeft;</span><br><span class="line">	buildtree(root-&gt;rchild, preRight, postRight, rightsize);  // rightsize is 1</span><br><span class="line">	delete[] preRight;</span><br><span class="line">	delete[] postRight;</span><br><span class="line">&#125;</span><br><span class="line">void inorder(Tree* root) &#123;</span><br><span class="line">	if (root == NULL)return;</span><br><span class="line">	inorder(root-&gt;lchild);</span><br><span class="line">	printf(&quot;%d &quot;, root-&gt;data);</span><br><span class="line">	inorder(root-&gt;rchild);</span><br><span class="line">&#125;</span><br><span class="line">int main() &#123;</span><br><span class="line">	int n;</span><br><span class="line">	scanf(&quot;%d&quot;, &amp;n);  // n is the number of nodes in the tree</span><br><span class="line">	int *preorder = new int[n];   // preorder sequence</span><br><span class="line">	int *postorder = new int[n];  // postorder sequence</span><br><span class="line">	for (int i = 0; i &lt; n; i++)</span><br><span class="line">		scanf(&quot;%d&quot;, &amp;preorder[i]);</span><br><span class="line">	for (int i = 0; i &lt; n; i++)</span><br><span class="line">		scanf(&quot;%d&quot;, &amp;postorder[i]);</span><br><span class="line">	//  preorder: [PL...R...]</span><br><span class="line">	//  postorder:[...L...RP]</span><br><span class="line">	Tree* root = new Tree(preorder[0]);</span><br><span class="line">	buildtree(root, preorder, postorder, n);</span><br><span class="line">	inorder(root);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/19/THUOJ-PA2-Train/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/19/THUOJ-PA2-Train/" itemprop="url">THUOJ PA2 Train</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-19T12:15:34+08:00">
-                2018-08-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/THUOJ/" itemprop="url" rel="index">
-                    <span itemprop="name">THUOJ</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/08/19/THUOJ-PA2-Train/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/08/19/THUOJ-PA2-Train/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>Figure below shows the structure of a station for train dispatching<br><img src="https://dsa.cs.tsinghua.edu.cn/oj/attachment/03bc/03bc70595803464554b5f6b69a21962beb038264.png" alt="Train"><br>A is the entrance and B is the exit. S is the transfer end. All single tracks are one-way, which means that the train can enter the station from A to S, and pull out from S to B. Note that the overtaking is not allowed. Because of the limited capacity of S, no more than m compartments can reside at S simultaneously.<br>Assume that a train consist of n compartments labeled {1,2,…,n}. A dispatcher wants to know whether these compartments can pull out at B in the order of {a1, a2, … an}(a sequence). If can, in what order he should operate it?</p>
-<h1 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h1><ul>
-<li>1st line: two integers n and m.</li>
-<li>2nd line: n integers separated by spaces, which is a permutation of {1,2,…,n}. This is a compartment sequence that is to be judged regarding the feasibility.</li>
-</ul>
-<h1 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h1><ul>
-<li>If feasible, output the sequence of operations using “push” and “pop”</li>
-<li>If infeasible, output a “No”</li>
-</ul>
-<h1 id="Example-1"><a href="#Example-1" class="headerlink" title="Example 1"></a>Example 1</h1><ul>
-<li><p>Input</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5 2</span><br><span class="line">1 2 3 5 4</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Output</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">push</span><br><span class="line">pop</span><br><span class="line">push</span><br><span class="line">pop</span><br><span class="line">push</span><br><span class="line">pop</span><br><span class="line">push</span><br><span class="line">push</span><br><span class="line">pop</span><br><span class="line">pop</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="Example-2"><a href="#Example-2" class="headerlink" title="Example 2"></a>Example 2</h1><ul>
-<li><p>Input</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5 5</span><br><span class="line">3 1 2 4 5</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Output</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">No</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="Restrictions"><a href="#Restrictions" class="headerlink" title="Restrictions"></a>Restrictions</h1><ul>
-<li>1 &lt;= n &lt;= 1,600,000</li>
-<li>0 &lt;= m &lt;= 1,600,000</li>
-<li>Time: 2 s</li>
-<li>Memory: 256MB</li>
-</ul>
-<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>Trivial thought is that enumerate all the possibilities and see whether the output sequence is possible. However time consumption will be unbearable.<br>In my code I use one stack to simulate the stack permutation.</p>
-<ul>
-<li>given one number in the left list, check whether the top of the Stack equals it.</li>
-<li>If not, push another number into the stack until check succeed or stack is full or numbers are exhausted.</li>
-</ul>
-<p>Note that we only need to check whether the top of the stack equals to current number instead of check the whole stack.</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">struct Stack &#123;            // form a stack</span><br><span class="line">	int* nums;// stack that implemented using array</span><br><span class="line">	int size = -1;      // current size, also used to denote the top of the stack</span><br><span class="line">	int maxSize = 0;    // max size, defined by the input</span><br><span class="line">	Stack() &#123;&#125;   // constructor</span><br><span class="line">	Stack(int m) :maxSize(m) &#123;</span><br><span class="line">		nums = new int[m];</span><br><span class="line">	&#125;  // initialized using the max size m.</span><br><span class="line">	void clear() &#123; size = -1; &#125;</span><br><span class="line">	bool push(int num) &#123;</span><br><span class="line">		if ((size + 1) &gt;= maxSize)</span><br><span class="line">			return false;</span><br><span class="line">		else &#123;</span><br><span class="line">			nums[++size] = num;</span><br><span class="line">			return true;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;  // push operation</span><br><span class="line">	int pop() &#123; </span><br><span class="line">		if (size &gt;= 0)</span><br><span class="line">			return nums[size--];</span><br><span class="line">		else</span><br><span class="line">			return 0;</span><br><span class="line">	&#125;  // pop operation</span><br><span class="line">	int&amp; operator[](int n) &#123; return nums[n]; &#125; // subscript operator overload</span><br><span class="line">	bool find(int e) &#123;</span><br><span class="line">		bool flag = false;</span><br><span class="line">		if (e == nums[size])   // only need to check the top</span><br><span class="line">			flag = true;</span><br><span class="line">		return flag;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">/* </span><br><span class="line">simulate the operation of stack permutation.</span><br><span class="line">*/</span><br><span class="line">int main() &#123;</span><br><span class="line">	int n, m;   // m is the size of the stack</span><br><span class="line">	scanf(&quot;%d %d&quot;, &amp;n, &amp;m);</span><br><span class="line">	Stack S(m);  // now S have the size m</span><br><span class="line">	int opnum = 0;</span><br><span class="line">	char (*op)[6] = new char[n * 2][6];</span><br><span class="line">	bool flag = true;  // meas that the sequence is true</span><br><span class="line">	int A = 0;</span><br><span class="line">	for (int i = 0; i &lt; n; i++) &#123;  // for all elements in B</span><br><span class="line">		int num;</span><br><span class="line">		scanf(&quot;%d&quot;, &amp;num);</span><br><span class="line">		while (!S.find(num)) &#123; // if S don&apos;t find B[i]</span><br><span class="line">			if (A &lt;= n) &#123;   // make sure A don&apos;t exceed n</span><br><span class="line">				if (!S.push(++A)) &#123;// A pops one element and S pushes one element, if stack full, push fails</span><br><span class="line">					flag = false;</span><br><span class="line">					break;</span><br><span class="line">				&#125;</span><br><span class="line">				else sprintf(*(op + (opnum++)), &quot;push\0&quot;);</span><br><span class="line">			&#125;</span><br><span class="line">			else &#123;</span><br><span class="line">				flag = false;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if (!flag) break;</span><br><span class="line">		// now that S has the element that B needs</span><br><span class="line">		if (S.pop() != num) &#123;</span><br><span class="line">			flag = false;</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">		else sprintf(*(op + (opnum++)), &quot;pop\0&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	if (flag) &#123;</span><br><span class="line">		for (int i = 0; i &lt; opnum; i++)&#123;</span><br><span class="line">			printf(&quot;%s&quot;, *(op + i));</span><br><span class="line">			if (opnum - 1 - i) printf(&quot;\n&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	else</span><br><span class="line">		printf(&quot;No&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/18/Lesson-1-Finding-fossil-man/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/18/Lesson-1-Finding-fossil-man/" itemprop="url">Lesson 1 Finding fossil man</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-18T23:44:02+08:00">
-                2018-08-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/New-Concept-English-4/" itemprop="url" rel="index">
-                    <span itemprop="name">New Concept English 4</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/08/18/Lesson-1-Finding-fossil-man/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/08/18/Lesson-1-Finding-fossil-man/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Words"><a href="#Words" class="headerlink" title="Words"></a>Words</h1><table>
-<thead>
-<tr>
-<th style="text-align:center">Words</th>
-<th style="text-align:center">Explanation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">recount</td>
-<td style="text-align:center">tell someone about something; give an account of an event or experience</td>
-</tr>
-<tr>
-<td style="text-align:center">saga</td>
-<td style="text-align:center">a long history of heroic achievement, especially a medieval prose narrative in Old Norse or Old Icelandic</td>
-</tr>
-<tr>
-<td style="text-align:center">flint</td>
-<td style="text-align:center">a hard gray rock consisting of nearly pure chert, occurring chiefly as nodules in chalk</td>
-</tr>
-</tbody>
-</table>
-<h1 id="Phrases"><a href="#Phrases" class="headerlink" title="Phrases"></a>Phrases</h1><table>
-<thead>
-<tr>
-<th style="text-align:center">Phrase</th>
-<th style="text-align:center">Explanation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">read of</td>
-<td style="text-align:center">same meaning as read about</td>
-</tr>
-<tr>
-<td style="text-align:center">the first people</td>
-<td style="text-align:center">primitive people</td>
-</tr>
-</tbody>
-</table>
-<h1 id="Comprehension"><a href="#Comprehension" class="headerlink" title="Comprehension"></a>Comprehension</h1><ul>
-<li>How can anthropologists learn about the history of ancient peoples who have not left written records?<ul>
-<li>Anthropologists can use sagas that left by storytellers to learn about the history of ancient people.</li>
-</ul>
-</li>
-<li>Why did ancient men prefer to use flint for making tools?<ul>
-<li>Because flint is easier to shape than other kinds.</li>
-</ul>
-</li>
-</ul>
-<h1 id="Vocabulary"><a href="#Vocabulary" class="headerlink" title="Vocabulary"></a>Vocabulary</h1><ul>
-<li>preserve<ul>
-<li>The only way that they can preserve their history is to recount it as sagas–legands handed down from one generation of storytellers to another.</li>
-<li>Only when the rare china is broken have we realized the emergency to preserve such valuable cultural relics.</li>
-</ul>
-</li>
-<li>recount<ul>
-<li>He recounted the concept of entropy as something that is the measure of uncertainty.</li>
-</ul>
-</li>
-<li>migrations<ul>
-<li>These legends are useful because they can tell us something about migrations of people who lived long ago, but none could write down what they did.</li>
-<li>Repid migrations to these ancient continent lead to the irreversible climat change and environmental damage.</li>
-</ul>
-</li>
-<li>anthropologists<ul>
-<li>Anthropologists wondered where the remote ancestors of the Polynesian peoples now living in the Pacific Islands came from.</li>
-<li>Some anthropologists firmly hold the belief that sagas can perfectly explain the history of the Polynesian peoples.</li>
-</ul>
-</li>
-<li>remote<ul>
-<li>Knowing that Qichao Liang is one of his remote ancestor who still have great influence on today’s world, he uplifted his spirit and carried on writing his first monography.</li>
-</ul>
-</li>
-<li>decay<ul>
-<li>Stone does not decay, and so the tools of long ago have remained when even the bones of the men who made them have disappeared without trace.</li>
-<li>The role of the extended family has been decaying for some time.</li>
-<li>Pollution has decayed the surface of the stonework on the front of the cathedral.</li>
-<li>the smell of decaying meat.</li>
-</ul>
-</li>
-<li>without trace<ul>
-<li>My notebook is haunted, every time I put it in my desk, the next morning it will disappear without trace.</li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2229,7 +1919,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">126</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2251,7 +1941,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
