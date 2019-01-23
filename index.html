@@ -406,7 +406,7 @@
 <li>管理人员随时想知道多少员工上班以及任一个员工登记的code。</li>
 </ul>
 <h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ul>
-<li>第一行是两个整数n,m。接下来是m行，每行是以下内容之一：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">I a c		// Log In：员工 a 登录，code 为 c。若 a 已登录，则将 code 更新为 c</span><br><span class="line">O a		// Log Out：编号为 a 的员工注销。若 a 未登录，则注销无效</span><br><span class="line">C		// Close：到下班时间，所有员工注销</span><br><span class="line">N		// Number：询问有多少员工正在上班</span><br><span class="line">Q a		// Query：询问员工 a 的 code（若未登录或已注销，视为 -1）</span><br><span class="line">``` </span><br><span class="line">* 输出是所有询问的答案之和</span><br></pre></td></tr></table></figure>
+<li>第一行是两个整数n,m。接下来是m行，每行是以下内容之一：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">I a c		// Log In：员工 a 登录，code 为 c。若 a 已登录，则将 code 更新为 c</span><br><span class="line">O a		// Log Out：编号为 a 的员工注销。若 a 未登录，则注销无效</span><br><span class="line">C		// Close：到下班时间，所有员工注销</span><br><span class="line">N		// Number：询问有多少员工正在上班</span><br><span class="line">Q a		// Query：询问员工 a 的 code（若未登录或已注销，视为 -1）</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">* 输出是所有询问的答案之和</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>input:<br>10 8<br>I 1 2<br>I 1 4<br>Q 1<br>C<br>I 2 4<br>O 2<br>Q 2<br>N<br>output:<br>3<br>//“Q 1” 答案是 4，“Q 2” 答案是 -1，“N” 答案是 0，所有答案之和为 3<br><code>`</code></p>
@@ -425,7 +425,9 @@
 </blockquote>
 <ul>
 <li>Bitmap / 常数时间初始化的数组——讲义 02XA</li>
-<li>Bitmap: 习题解析 <code>[2-34]</code><h3 id="二级提示"><a href="#二级提示" class="headerlink" title="二级提示"></a>二级提示</h3></li>
+<li>Bitmap: 习题解析 <code>[2-34]</code></li>
+</ul>
+<h3 id="二级提示"><a href="#二级提示" class="headerlink" title="二级提示"></a>二级提示</h3><ul>
 <li>避免频繁初始化整个数组。</li>
 <li>可以借助Bitmap记录数组的各元素是否已被初始化。将一个（或所有）元素置为未初始化状态，实质上只需要打破“校验环”两个验证条件中的任何一个，考虑如何打破校验条件的复杂度最低。</li>
 <li>另一种解题思路是，数组初始化 1 次后，记录改变了的元素，今后不再初始化整个数组，只初始化改变了的元素。</li>
