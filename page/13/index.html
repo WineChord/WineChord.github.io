@@ -296,6 +296,337 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题9-用两个栈实现队列/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/31/剑指Offer-面试题9-用两个栈实现队列/" itemprop="url">剑指Offer 面试题9 用两个栈实现队列</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T11:47:16+08:00">
+                2018-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/剑指Offer/" itemprop="url" rel="index">
+                    <span itemprop="name">剑指Offer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/31/剑指Offer-面试题9-用两个栈实现队列/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/31/剑指Offer-面试题9-用两个栈实现队列/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="用两个栈实现队列"><a href="#用两个栈实现队列" class="headerlink" title="用两个栈实现队列"></a>用两个栈实现队列</h1><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>用两个栈来实现队列，该队列的部分定义如下：<br>请实现他的 <code>appendTail</code> 和 <code>deleteHead</code> 函数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt; class CQueue&#123;</span><br><span class="line">public:</span><br><span class="line">    CQueue(void);</span><br><span class="line">    ~CQueue(void);</span><br><span class="line">    void appendTail(const T&amp; node);</span><br><span class="line">    T deleteHead();</span><br><span class="line">private:</span><br><span class="line">    stack&lt;T&gt; stack1;</span><br><span class="line">    stack&lt;T&gt; stack2;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>插入时直接压入栈 <code>stack1</code> 中。</li>
+<li>删除时：<ul>
+<li>若 <code>stack2</code> 为空，则将 <code>stack1</code> 中的元素依次弹出到 <code>stack2</code> 中。<code>stack2</code> 顶部元素即为要出队的元素。</li>
+<li>若 <code>stack2</code> 不为空，其顶部元素即为要出队元素。<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt; void CQueue&lt;T&gt;::appendTail(const T&amp; element)&#123;</span><br><span class="line">    stack1.push(element);</span><br><span class="line">&#125;</span><br><span class="line">template&lt;typename T&gt; T CQueue&lt;T&gt;::deleteHead()&#123;</span><br><span class="line">    if(stack2.size() &lt;= 0)&#123; // stack2 为空，则把 stack1 中的元素依次压入</span><br><span class="line">        while(stack1.size() &gt; 0)&#123;</span><br><span class="line">            T&amp; data = stack1.top();</span><br><span class="line">            stack1.pop();</span><br><span class="line">            stack2.push(data);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if(stack2.size() == 0) // 说明两个栈都没有元素</span><br><span class="line">        throw new exception(&quot;queue is empty&quot;);</span><br><span class="line">    T head = stack2.top();  // stack2 的顶部元素即是队首元素</span><br><span class="line">    stack2.pop();</span><br><span class="line">    return head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h3><p>考虑用两个队列来实现栈：</p>
+<ul>
+<li>入栈时寻找一个不为空的队列（若都为空则任意）入队</li>
+<li>出栈时：<ul>
+<li>两个队列中必有一个为空，一个不为空。把不为空的队列中的元素依次入队到空队列中，原队列只剩下最后一个元素，这个元素出队即是出栈操作需要的元素。</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题8-二叉树的下一个结点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/31/剑指Offer-面试题8-二叉树的下一个结点/" itemprop="url">剑指Offer 面试题8 二叉树的下一个结点</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T11:36:40+08:00">
+                2018-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/剑指Offer/" itemprop="url" rel="index">
+                    <span itemprop="name">剑指Offer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/31/剑指Offer-面试题8-二叉树的下一个结点/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/31/剑指Offer-面试题8-二叉树的下一个结点/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="二叉树的下一个结点"><a href="#二叉树的下一个结点" class="headerlink" title="二叉树的下一个结点"></a>二叉树的下一个结点</h1><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定一个二叉树，找出中序遍历序列的下一个结点</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>右子树存在时：下一结点为右子树的最左结点</li>
+<li>右子树不存在时：<ul>
+<li>若其为父左子：下一结点为其父</li>
+<li>若其为父右子：向上遍历父结点直到找到一个结点为其父的左子，该结点的父节点即为下一结点<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">BinaryTreeNode* GetNext(BinaryTreeNode* pNode)&#123;</span><br><span class="line">    if(pNode == nullptr) return nullptr;</span><br><span class="line">    BinaryTreeNode* pNext = nullptr;</span><br><span class="line">    if(pNode-&gt;m_pRight != nullptr)&#123; // 右子树存在</span><br><span class="line">        BinaryTreeNode* pRight = pNode-&gt;m_pRight; // 指向右子树</span><br><span class="line">        while(pRight-&gt;m_pLeft != nullptr)  // 一直找到最左结点</span><br><span class="line">            pRight = pRight-&gt;m_pLeft;</span><br><span class="line">        pNext = pRight;</span><br><span class="line">    &#125; else if (pNode-&gt;m_pParent != nullptr)&#123; // 父亲存在</span><br><span class="line">        BinaryTreeNode* pCurrent = pNode;</span><br><span class="line">        BinaryTreeNode* pParent = pNode-&gt;m_pParent;</span><br><span class="line">        while(pParent != nullptr &amp;&amp; pCurrent == pParent-&gt;m_pRight)&#123; // 直到当前结点不为其父节点的右孩子</span><br><span class="line">            pCurrent = pParent;</span><br><span class="line">            pParent = pParent-&gt;m_pParent;</span><br><span class="line">        &#125;</span><br><span class="line">        pNext = pParent;</span><br><span class="line">    &#125;</span><br><span class="line">    return pNext;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题7-重建二叉树/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1776,420 +2107,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/18/Lesson-1-Finding-fossil-man/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/18/Lesson-1-Finding-fossil-man/" itemprop="url">Lesson 1 Finding fossil man</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-18T23:44:02+08:00">
-                2018-08-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/New-Concept-English-4/" itemprop="url" rel="index">
-                    <span itemprop="name">New Concept English 4</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/08/18/Lesson-1-Finding-fossil-man/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/08/18/Lesson-1-Finding-fossil-man/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Words"><a href="#Words" class="headerlink" title="Words"></a>Words</h1><table>
-<thead>
-<tr>
-<th style="text-align:center">Words</th>
-<th style="text-align:center">Explanation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">recount</td>
-<td style="text-align:center">tell someone about something; give an account of an event or experience</td>
-</tr>
-<tr>
-<td style="text-align:center">saga</td>
-<td style="text-align:center">a long history of heroic achievement, especially a medieval prose narrative in Old Norse or Old Icelandic</td>
-</tr>
-<tr>
-<td style="text-align:center">flint</td>
-<td style="text-align:center">a hard gray rock consisting of nearly pure chert, occurring chiefly as nodules in chalk</td>
-</tr>
-</tbody>
-</table>
-<h1 id="Phrases"><a href="#Phrases" class="headerlink" title="Phrases"></a>Phrases</h1><table>
-<thead>
-<tr>
-<th style="text-align:center">Phrase</th>
-<th style="text-align:center">Explanation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">read of</td>
-<td style="text-align:center">same meaning as read about</td>
-</tr>
-<tr>
-<td style="text-align:center">the first people</td>
-<td style="text-align:center">primitive people</td>
-</tr>
-</tbody>
-</table>
-<h1 id="Comprehension"><a href="#Comprehension" class="headerlink" title="Comprehension"></a>Comprehension</h1><ul>
-<li>How can anthropologists learn about the history of ancient peoples who have not left written records?<ul>
-<li>Anthropologists can use sagas that left by storytellers to learn about the history of ancient people.</li>
-</ul>
-</li>
-<li>Why did ancient men prefer to use flint for making tools?<ul>
-<li>Because flint is easier to shape than other kinds.</li>
-</ul>
-</li>
-</ul>
-<h1 id="Vocabulary"><a href="#Vocabulary" class="headerlink" title="Vocabulary"></a>Vocabulary</h1><ul>
-<li>preserve<ul>
-<li>The only way that they can preserve their history is to recount it as sagas–legands handed down from one generation of storytellers to another.</li>
-<li>Only when the rare china is broken have we realized the emergency to preserve such valuable cultural relics.</li>
-</ul>
-</li>
-<li>recount<ul>
-<li>He recounted the concept of entropy as something that is the measure of uncertainty.</li>
-</ul>
-</li>
-<li>migrations<ul>
-<li>These legends are useful because they can tell us something about migrations of people who lived long ago, but none could write down what they did.</li>
-<li>Repid migrations to these ancient continent lead to the irreversible climat change and environmental damage.</li>
-</ul>
-</li>
-<li>anthropologists<ul>
-<li>Anthropologists wondered where the remote ancestors of the Polynesian peoples now living in the Pacific Islands came from.</li>
-<li>Some anthropologists firmly hold the belief that sagas can perfectly explain the history of the Polynesian peoples.</li>
-</ul>
-</li>
-<li>remote<ul>
-<li>Knowing that Qichao Liang is one of his remote ancestor who still have great influence on today’s world, he uplifted his spirit and carried on writing his first monography.</li>
-</ul>
-</li>
-<li>decay<ul>
-<li>Stone does not decay, and so the tools of long ago have remained when even the bones of the men who made them have disappeared without trace.</li>
-<li>The role of the extended family has been decaying for some time.</li>
-<li>Pollution has decayed the surface of the stonework on the front of the cathedral.</li>
-<li>the smell of decaying meat.</li>
-</ul>
-</li>
-<li>without trace<ul>
-<li>My notebook is haunted, every time I put it in my desk, the next morning it will disappear without trace.</li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/18/THUOJ-PA1-Lighthouse/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/18/THUOJ-PA1-Lighthouse/" itemprop="url">THUOJ PA1 Lighthouse</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-18T22:31:44+08:00">
-                2018-08-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/THUOJ/" itemprop="url" rel="index">
-                    <span itemprop="name">THUOJ</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/08/18/THUOJ-PA1-Lighthouse/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/08/18/THUOJ-PA1-Lighthouse/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>If another lighthouse is in grey area, they can beacon each other.<br><img src="https://dsa.cs.tsinghua.edu.cn/oj/attachment/c6c8/c6c8562b88ed7fd518cacf0264ae624f59598ed7.png" alt="Lighthouse"></p>
-<h1 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h1><ul>
-<li>First line: the total number of lighthouse N</li>
-<li>Second to (N+1)th line: lighthouse is on the point (X, Y)</li>
-</ul>
-<h1 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h1><p>How many pairs of lighthouses can beacon each other.</p>
-<h1 id="Restrictions"><a href="#Restrictions" class="headerlink" title="Restrictions"></a>Restrictions</h1><ul>
-<li>90% : 1 &lt;= n &lt;= 3 * 10^5</li>
-<li>95% : 1 &lt;= n &lt;= 10^6</li>
-<li>All : 1 &lt;= n &lt;= 4 * 10^6</li>
-<li>For every lighthouses, X coordinates won’t be the same, Y coordinates won’t be the same.</li>
-<li>1 &lt;= x, y &lt;= 10^8</li>
-<li>Time: 2s</li>
-<li>Memory: 256 MB</li>
-</ul>
-<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><ul>
-<li><p>input</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">2 2</span><br><span class="line">4 3</span><br><span class="line">5 1</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>output</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>It is trivial to think that use two for loops can solve the problem. However the time consumption will be too large. First construct a point struct. Use quick sort to make the point is sorted according to it X coordinate. Then calculate the inversions in the Y coordinates. The total inversions mean that they cannot form lighthouses that beacon each other. Thus the result equals to the total permutation number minus the total inversions.<br>The hard point is how to calculate inversions. Here uses a variation of merge sort. When doing mergesort to their Y coordinates, keep a count value to record inversions.</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstdlib&gt;</span><br><span class="line">#define MAXLEN 4000000 + 5</span><br><span class="line"></span><br><span class="line">struct Point&#123;</span><br><span class="line">	long x;</span><br><span class="line">	long y;</span><br><span class="line">	Point&amp; operator=(Point&amp; point) &#123;</span><br><span class="line">		x = point.x;</span><br><span class="line">		y = point.y;</span><br><span class="line">		return *this;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">Point points[MAXLEN];</span><br><span class="line">long A[MAXLEN];</span><br><span class="line">long t[MAXLEN];</span><br><span class="line">void swap(Point &amp;x, Point &amp;y) &#123;</span><br><span class="line">	Point tmp = x;</span><br><span class="line">	x = y;</span><br><span class="line">	y = tmp;</span><br><span class="line">&#125;</span><br><span class="line">void myqsort(Point points[], int low, int high) &#123;</span><br><span class="line">	int i = low, j = high;</span><br><span class="line">	long x = points[(low + high) / 2].x;</span><br><span class="line">	do &#123;</span><br><span class="line">		while (points[i].x &lt; x) i++;</span><br><span class="line">		while (points[j].x &gt; x) j--;</span><br><span class="line">		if (i &lt;= j) swap(points[i++], points[j--]);</span><br><span class="line">	&#125; while (i &lt; j);</span><br><span class="line">	if (i &lt; high) myqsort(points, i, high);</span><br><span class="line">	if (j &gt; low) myqsort(points, low, j);</span><br><span class="line">&#125;</span><br><span class="line">long inverMerge(long low, long high) &#123;</span><br><span class="line">	if (low &gt;= high) return 0;</span><br><span class="line">	long mid = (low + high) / 2;</span><br><span class="line">	long count = 0;</span><br><span class="line">	count += inverMerge(low, mid);</span><br><span class="line">	count += inverMerge(mid + 1, high);</span><br><span class="line">	long p1 = low;</span><br><span class="line">	long p2 = mid + 1;</span><br><span class="line">	long i = low;</span><br><span class="line">	while(p1 &lt;= mid || p2 &lt;= high)</span><br><span class="line">		if (p2 &gt; high || (p1 &lt;= mid &amp;&amp; A[p1] &lt;= A[p2])) &#123;</span><br><span class="line">			t[i++] = A[p1++];</span><br><span class="line">		&#125;</span><br><span class="line">		else &#123;</span><br><span class="line">			t[i++] = A[p2++];</span><br><span class="line">			count += mid - p1 + 1;</span><br><span class="line">		&#125;</span><br><span class="line">	for (i = low; i &lt;= high; i++) A[i] = t[i];</span><br><span class="line">	return count;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	long n;</span><br><span class="line">	scanf(&quot;%ld&quot;, &amp;n);</span><br><span class="line">	long i = 0;</span><br><span class="line">	while (i &lt; n) &#123;</span><br><span class="line">		scanf(&quot;%ld %ld&quot;, &amp;points[i].x, &amp;points[i].y);</span><br><span class="line">		i++;</span><br><span class="line">	&#125;</span><br><span class="line">	myqsort(points, 0, n - 1);</span><br><span class="line">	for (i = 0; i&lt;n; i++)</span><br><span class="line">		A[i] = points[i].y;</span><br><span class="line">	long count = inverMerge(0, n - 1);</span><br><span class="line">	long tmp = (n*(n - 1)) &gt;&gt; 1;</span><br><span class="line">	printf(&quot;%ld\n&quot;, tmp - count);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2244,7 +2161,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">135</span>
+                  <span class="site-state-item-count">137</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2266,7 +2183,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

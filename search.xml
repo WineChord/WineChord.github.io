@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[THUOJ PA2 2-2-2 凸包2]]></title>
+    <url>%2F2019%2F01%2F25%2FTHUOJ-PA2-2-2-2-%E5%87%B8%E5%8C%852%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[THUOJ PA2 2-1 Train]]></title>
+    <url>%2F2019%2F01%2F24%2FTHUOJ-PA2-2-1-Train%2F</url>
+    <content type="text"><![CDATA[题目描述 如图，一列车可以从A到S，再从S到B，也可以直接到B，S中最多可以中转的车辆数为m。某列车编号车厢依次为{a1,a2,…,an}，问这些车厢能否以{1,2,…,n}的次序，重新排列后从B端驶出。 输入输出 输入： 第一行： n, m 第二行： 以空格分隔的n个整数，保证为{1,2,…,n}的一个排列，表示待判断可行性的驶入序列{a1,a2,…,an}。 输出： 若不可行，输出No 若可行，输出步骤数最少的操作方式。 输入输出样例123456789101112131415input:5 21 2 3 5 4output: # I: A-&gt;S1 P # O: S-&gt;B2 P # P: A-&gt;B3 P5 I4 P5 Oinput:5 51 2 4 5 3output:No 限制 1&lt;=n&lt;=100,000 0&lt;=m&lt;=100,000 思路 考察的是栈混洗，只不过反了一下 直觉的思路是模拟 实现1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586#include&lt;iostream&gt;#define MAXSIZE 100000*4 + 5using namespace std;class Stack&#123;public: int *s; int size, top; Stack(int n)&#123; s = new int[n]; size = n; top = 0; &#125; ~Stack()&#123;delete[] s;&#125; bool push(int k)&#123; if(top == size) return false; s[top++] = k; return true; &#125; int pop()&#123; if(!top) return 0; return s[--top]; &#125; int get_top()&#123; if(!top) return 0; return s[top-1]; &#125; bool empty()&#123; return !top; &#125;&#125;;class List&#123;public: int num; char op; List* next; List(int n, char o)&#123; num = n; op = o; next = NULL; &#125; void append(int n, char o)&#123; List* l = new List(n, o); this-&gt;next = l; &#125;&#125;;int main()&#123; int n, m; setvbuf(stdin, new char[MAXSIZE], _IOFBF, MAXSIZE); setvbuf(stdout, new char[MAXSIZE], _IOFBF, MAXSIZE); scanf(&quot;%d%d&quot;, &amp;n, &amp;m); Stack s(m); List* head = new List(0, &apos;O&apos;); List* p = head; bool flag = true; int* a = new int[n]; for(int i = 0; i &lt; n; i++) scanf(&quot;%d&quot;, &amp;a[i]); for(int i = 1, j = 0; i &lt;= n; i++)&#123; if(!s.empty() &amp;&amp; s.get_top() == i)&#123; p-&gt;append(s.pop(), &apos;O&apos;); p = p-&gt;next; continue; &#125; while(j &lt; n &amp;&amp; a[j] != i)&#123; if(!s.push(a[j]))&#123; flag = false; break; &#125; p-&gt;append(a[j], &apos;I&apos;); p = p-&gt;next; j++; &#125; if(!flag) break; if(j == n) &#123; flag = false; break; &#125; if(j &lt; n &amp;&amp; a[j] == i)&#123; p-&gt;append(a[j], &apos;P&apos;); p = p-&gt;next; j++; &#125; &#125; if(!flag) printf(&quot;No\n&quot;); else&#123; p = head-&gt;next; while(p != NULL)&#123; printf(&quot;%d %c\n&quot;, p-&gt;num, p-&gt;op); p = p-&gt;next; &#125; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[THUOJ PA1 1-4 Alarm]]></title>
     <url>%2F2019%2F01%2F24%2FTHUOJ-PA1-1-4-Alarm%2F</url>
     <content type="text"><![CDATA[题目描述 如图，图中的线为红外线，所有红外线不相交。 n个发射器和n个接收器将平面分为n+1个区域，从左到右记为0,1…n 判断给定的点在哪个区域上。若正好在红外线上，则认为处于右边的区域。 输入输出 输入 第一行：n m 以下n行：每行a b，表示发射器在(a,0)，接收器在(0,b)，每行a,b都比前一行大 以下m行：每行x y，表示求(x,y)所在的区域 输出 m行，每行一个数，代表该点所在区域 输入输出样例1234567891011input:4 21 13 24 46 51 34 1output:33 限制 1&lt;=n&lt;=200,000 1&lt;=m&lt;=200,000 1&lt;={a,b,x,y}&lt;2^31 提示 可以用向量积判断点与直线的位置关系 http://www.cnblogs.com/bfshm/articles/3620500.html 普通的遍历搜索是不能满足时间要求的，考虑使用二分查找等方法。 一些中间结果（例如向量积做乘法后的中间结果）可能会超出 int 范围，参考编程作业说明“附：一些常见编程错误”节。 编程作业说明 附：一些常见编程错误 :计算溢出。错误示例：int a = 1000000, b = 1000000;long long c = a * b;程序会先在 int 范围内计算 a b，最后把溢出后的结果赋值给 c。正确写法是 `c = (long long)a (long long)b`。 思路 根据两个点建立起直线的方程，然后根据向量积判断点和直线的位置关系，找到该点在哪两条线之间，从而判断在哪个区域 关键在于怎么快速地判断在哪两条线之间，根据提示，使用二分查找（二分查找的灵活应用还是挺多的，比如2017THU机试） 点和直线的位置关系的判断方法 利用矢量叉积： $\boldsymbol{P} = (x_1, y_1)$, $\boldsymbol{Q} = (x_2, y_2)$, $\boldsymbol{P} \times \boldsymbol{Q} = x_1y_2 - x_2y_1$ 若$\boldsymbol{P} \times \boldsymbol{Q} &gt; 0$，则$\boldsymbol{P}$在$\boldsymbol{Q}$的顺时针方向。 若$\boldsymbol{P} \times \boldsymbol{Q} &lt; 0$，则$\boldsymbol{P}$在$\boldsymbol{Q}$的逆时针方向。 若$\boldsymbol{P} \times \boldsymbol{Q} = 0$，则$\boldsymbol{P}$与$\boldsymbol{Q}$共线。 由此，设点为$O$，$x$轴上的点为$A$，$y$轴上的点为$B$，令： $\boldsymbol{P} = \overrightarrow{OA}$ $\boldsymbol{Q} = \overrightarrow{OB}$ 从而有： 令$s = \boldsymbol{P} \times \boldsymbol{Q}$ $s&gt;0 \Rightarrow$ 点在线的左侧 $s&lt;0 \Rightarrow$ 点在线的右侧 实现1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556#include&lt;iostream&gt;#define MAXSIZE 1&lt;&lt;20using namespace std;class Line &#123;public: int a, b; Line(int x, int y) &#123; a = x; b = y; &#125;&#125;;class Point &#123; int x, y;public: Point(int a, int b) &#123; x = a; y = b; &#125; int check(Line** lvec, int lo, int hi) &#123; while (lo &lt; hi) &#123; int mi = lo + (hi - lo) / 2; long long x1 = lvec[mi]-&gt;a - x; long long y1 = -y; long long x2 = -x; long long y2 = lvec[mi]-&gt;b - y; long long s = x1 * y2 - x2 * y1; if (s == 0) return mi + 1; if (s &gt; 0) // 点在该线的左侧 hi = mi; // return check(lvec, lo, mi); if (s &lt; 0) lo = mi + 1; // return check(lvec, mi+1, hi); &#125; return lo; &#125;&#125;;int main() &#123; int n, m; setvbuf(stdin, new char[MAXSIZE], _IOFBF, MAXSIZE); setvbuf(stdout, new char[MAXSIZE], _IOFBF, MAXSIZE); scanf(&quot;%d%d&quot;, &amp;n, &amp;m); Line** lvec = new Line*[n]; // 指针数组 Point** pvec = new Point*[m]; for (int i = 0; i &lt; n; i++) &#123; int a, b; scanf(&quot;%d%d&quot;, &amp;a, &amp;b); lvec[i] = new Line(a, b); &#125; for (int i = 0; i &lt; m; i++) &#123; int x, y; scanf(&quot;%d%d&quot;, &amp;x, &amp;y); pvec[i] = new Point(x, y); &#125; for (int i = 0; i &lt; m; i++) &#123; int area = pvec[i]-&gt;check(lvec, 0, n); // [0, n) printf(&quot;%d\n&quot;, area); &#125; return 0;&#125;]]></content>
       <categories>
         <category>THUOJ</category>
       </categories>
+      <tags>
+        <tag>二分查找</tag>
+        <tag>计算几何</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[THUOJ-PA1-1-3-2-Super Interview]]></title>
@@ -579,10 +596,10 @@
       </categories>
       <tags>
         <tag>LeetCode</tag>
-        <tag>Two Pointers</tag>
         <tag>Hash Table</tag>
-        <tag>Sort</tag>
+        <tag>Two Pointers</tag>
         <tag>Binary Search</tag>
+        <tag>Sort</tag>
       </tags>
   </entry>
   <entry>

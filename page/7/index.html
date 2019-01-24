@@ -296,6 +296,313 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/500-Keyboard-Row-HT-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/03/500-Keyboard-Row-HT-3/" itemprop="url">500. Keyboard Row-HT-3</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-03T20:53:44+08:00">
+                2018-11-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/03/500-Keyboard-Row-HT-3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/03/500-Keyboard-Row-HT-3/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一列表的单词，只返回那些可以用键盘上的一行字母打出来的单词。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># Python</span><br><span class="line">def findWords(self, words):</span><br><span class="line">    line1, line2, line3 = set(&apos;qwertyuiop&apos;), set(&apos;asdfghjkl&apos;), set(&apos;zxcvbnm&apos;)</span><br><span class="line">    ret = []</span><br><span class="line">    for word in words:</span><br><span class="line">        w = set(word.lower())</span><br><span class="line">        if w.issubset(line1) or w.issubset(line2) or w.issubset(line3):</span><br><span class="line">            ret.append(word)</span><br><span class="line">    return ret</span><br><span class="line">// C++</span><br><span class="line">vector&lt;string&gt; findWords(vector&lt;string&gt;&amp; words)&#123;</span><br><span class="line">    vector&lt;int&gt; dict(26);</span><br><span class="line">    vector&lt;string&gt; rows = &#123;&quot;QWERTYUIOP&quot;, &quot;ASDFGHJKL&quot;, &quot;ZXCVBNM&quot;&#125;;</span><br><span class="line">    for(int i = 0; i &lt; rows.size(); i++)</span><br><span class="line">        for(auto c: rows[i]) dict[c-&apos;A&apos;] = 1&lt;&lt;i;</span><br><span class="line">    vector&lt;string&gt; res;</span><br><span class="line">    for(auto w: words)&#123;</span><br><span class="line">        int r = 7;</span><br><span class="line">        for(char c: w)&#123;</span><br><span class="line">            r &amp;= dict[toupper(c)-&apos;A&apos;];</span><br><span class="line">            if(r==0) break;</span><br><span class="line">        &#125;</span><br><span class="line">        if(r) res.push_back(w);</span><br><span class="line">    &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/811-Subdomain-Visit-Count-HT-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/03/811-Subdomain-Visit-Count-HT-2/" itemprop="url">811. Subdomain Visit Count-HT-2</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-03T20:34:32+08:00">
+                2018-11-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/03/811-Subdomain-Visit-Count-HT-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/03/811-Subdomain-Visit-Count-HT-2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>子域名访问的次数。当访问一个域名时，他的众多子域名也会被访问。<br>问给一个有很多要访问的域名以及访问的次数，问对于各子域名都需要访问多少次？</p>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>使用 Hash Map，对于 <code>a.b.c</code>，数的是 <code>a.b.c</code> <code>b.c</code> <code>c</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">// Java</span><br><span class="line">public List&lt;String&gt; subdomainVisits(String[] cpdomains)&#123;</span><br><span class="line">	Map&lt;String, Integer&gt; counts = new HashMap();</span><br><span class="line">	for(String domain: cpdomains)&#123;</span><br><span class="line">		String[] cpinfo = domain.split(&quot;\\s+&quot;);</span><br><span class="line">		String[] frags = cpinfo[1].split(&quot;\\.&quot;);</span><br><span class="line">		int count = Integer.valueOf(cpinfo[0]);</span><br><span class="line">		String cur = &quot;&quot;;</span><br><span class="line">		for(int i = frags.length-1; i &gt;= 0; i--)&#123;</span><br><span class="line">			cur = frags[i] + (i &lt; frags.length-1?&quot;.&quot;:&quot;&quot;) + cur;</span><br><span class="line">			counts.put(cur, counts.getOrDefault(cur, 0)+count);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	List&lt;String&gt; ans = new ArrayList();</span><br><span class="line">	for(String dom: counts.keySet())</span><br><span class="line">		ans.add(&quot;&quot;+counts.get(dom)+&quot; &quot;+dom);</span><br><span class="line">	return ans;</span><br><span class="line">&#125;</span><br><span class="line"># Python</span><br><span class="line">def subdomainVisits(self, cpdomains):</span><br><span class="line">	ans = collections.Counter()</span><br><span class="line">	for domain in cpdomains:</span><br><span class="line">		count, domain = domain.split()</span><br><span class="line">		count = int(count)</span><br><span class="line">		frags = domain.split(&apos;.&apos;)</span><br><span class="line">		for i in xrange(len(frags)):</span><br><span class="line">			ans[&quot;.&quot;.join(frags[i:])] += count</span><br><span class="line">	return [&quot;&#123;&#125; &#123;&#125;&quot;.format(ct, dom) for dom, ct in ans.items()]</span><br><span class="line">// C++</span><br><span class="line">vector&lt;string&gt; subdomainVisits(vector&lt;string&gt;&amp; cpdomains)&#123;</span><br><span class="line">	unordered_map&lt;string, int&gt; c;</span><br><span class="line">	for(auto cd: cpdomains)&#123;</span><br><span class="line">		int i = cd.find(&quot; &quot;);</span><br><span class="line">		int n = stoi(cd.substr(0,i));</span><br><span class="line">		string s = cd.substr(i+1, cd.size()-i-1);</span><br><span class="line">		for(int i = 0; i &lt; s.size(); i++)</span><br><span class="line">			if(s[i] == &apos;.&apos;)</span><br><span class="line">				c[s.substr(i+1, s.size()-i)] += n;</span><br><span class="line">		c[s] += n;</span><br><span class="line">	&#125;</span><br><span class="line">	vector&lt;string&gt; res;</span><br><span class="line">	for(auto k: c) res.push_back(to_string(k.second)+&quot; &quot;+k.first);</span><br><span class="line">	return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/771-Jewels-and-Stones-HT-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1537,321 +1844,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/338-Counting-Bits-DP-6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/02/338-Counting-Bits-DP-6/" itemprop="url">338. Counting Bits-DP-6</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T15:23:39+08:00">
-                2018-11-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/02/338-Counting-Bits-DP-6/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/02/338-Counting-Bits-DP-6/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个数字num，对于所有的在 [0, num] 范围内的数字 i，计算他们二进制形式中1的个数，返回为一个数组。<br>如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：2</span><br><span class="line">输出：[0,1,1]</span><br></pre></td></tr></table></figure></p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>递推方程为：<br>$$<br>f[i] = f[i/2] + i\%2<br>$$<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;int&gt; countBits(int num)&#123;</span><br><span class="line">    vector&lt;int&gt; ans;</span><br><span class="line">    ans.push_back(0);</span><br><span class="line">    for(int i = 1; i &lt;= num; i++)&#123;</span><br><span class="line">        ans.push_back(ans[i/2] + i%2);</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// 直接判断</span><br><span class="line">vector&lt;int&gt; countBits(int num) &#123;</span><br><span class="line">    vector&lt;int&gt; ans;</span><br><span class="line">    for(int i = 0; i &lt;= num; i++)&#123;</span><br><span class="line">        int c = 0, a = i;</span><br><span class="line">        while(a)&#123;</span><br><span class="line">            a &amp;= a-1;</span><br><span class="line">            c++;</span><br><span class="line">        &#125;</span><br><span class="line">        ans.push_back(c);</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br><span class="line">// 另外一种解法</span><br><span class="line">vector&lt;int&gt; countBits(int num) &#123;</span><br><span class="line">    vector&lt;int&gt; ans;</span><br><span class="line">    ans.push_back(0);</span><br><span class="line">    for(int i = 1; i &lt;= num; i++)</span><br><span class="line">        ans.push_back(ans[i&amp;(i-1)] + 1);</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/303-Range-Sum-Query-Immutable-DP-5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/02/303-Range-Sum-Query-Immutable-DP-5/" itemprop="url">303. Range Sum Query-Immutable-DP-5</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T15:06:07+08:00">
-                2018-11-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/02/303-Range-Sum-Query-Immutable-DP-5/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/02/303-Range-Sum-Query-Immutable-DP-5/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个数组，给一个下标范围，求范围内数组的和。</p>
-<h3 id="方法一：暴力"><a href="#方法一：暴力" class="headerlink" title="方法一：暴力"></a>方法一：暴力</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">private int[] data;</span><br><span class="line">public NumArray(int[] nums)&#123;</span><br><span class="line">    data = nums;</span><br><span class="line">&#125;</span><br><span class="line">public int sumRange(int i, int j)&#123;</span><br><span class="line">    int sum = 0;</span><br><span class="line">    for(int k = i; k &lt;= j; k++)</span><br><span class="line">        sum += data[k];</span><br><span class="line">    return sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>time: O(n),<br>space: O(1) (data is a reference to nums and is not a copy of it)</p>
-<h3 id="方法二：Caching"><a href="#方法二：Caching" class="headerlink" title="方法二：Caching"></a>方法二：Caching</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">private Map&lt;Pair&lt;Integer, Integer&gt;, Integer&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">public NumArray(int[] nums)&#123;</span><br><span class="line">    for(int i = 0; i &lt; nums.length; i++)&#123;</span><br><span class="line">        int sum = 0;</span><br><span class="line">        for(int j = i; j &lt; nums.length; j++)&#123;</span><br><span class="line">            sum += nums[j];</span><br><span class="line">            map.put(Pair.create(i, j), sum);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public int sumRange(int i, int j)&#123;</span><br><span class="line">    return map.get(Pair.create(i, j));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>time: $O(1)$ time per query, $O(n^2)$ time pre-computation,</p>
-<p>space: $O(n^2)$</p>
-<h3 id="方法三：Caching"><a href="#方法三：Caching" class="headerlink" title="方法三：Caching"></a>方法三：Caching</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// sum[k] 是 nums[0...k-1] 的和</span><br><span class="line">// sumRange(i, j) = sum[j+1] - sum[i]</span><br><span class="line">private int[] sum;</span><br><span class="line">public NumArray(int[] nums)&#123;</span><br><span class="line">    sum = new int[nums.length+1];</span><br><span class="line">    for(int i = 0; i &lt; nums.length; i++)</span><br><span class="line">        sum[i+1] = sum[i] + nums[i];</span><br><span class="line">&#125;</span><br><span class="line">public int sumRange(int i, int j)&#123;</span><br><span class="line">    return sum[j+1] - sum[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>time: $O(1)$ time per query, $O(n)$ time pre-computation</p>
-<p>space: $O(n)$<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// C++</span><br><span class="line">class NumArray &#123;</span><br><span class="line">private:</span><br><span class="line">    vector&lt;int&gt; sum;</span><br><span class="line">public:</span><br><span class="line">    NumArray(vector&lt;int&gt; nums) &#123;</span><br><span class="line">        sum.push_back(0);</span><br><span class="line">        for(int&amp; num: nums)</span><br><span class="line">            sum.push_back(sum.back() + num);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    int sumRange(int i, int j) &#123;</span><br><span class="line">        return sum[j+1] - sum[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1906,7 +1898,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">135</span>
+                  <span class="site-state-item-count">137</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1928,7 +1920,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
