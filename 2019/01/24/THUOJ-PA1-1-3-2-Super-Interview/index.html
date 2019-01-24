@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="双向链表," />
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="主要用于记录学习经历">
+<meta name="description" content="问题描述 选出n个人进行面试，每个应聘者被分配了一个整数ID。要注意人数非常多（数据量很大） 根据以下规则决定面试顺序 来一张圆桌，第一个到的人随意坐 之后每一个到的人从前一个人出发逆时针走过m个人（前一个人算第一个），然后紧邻第m个人的右侧就座。所有人入座后，从最后到达者出发，绕圆桌顺时针面试。 请确定面试顺序。  输入输出 输入： 第一行：n m 第二行：n个整数，表示先后到达的人的ID">
+<meta name="keywords" content="双向链表">
 <meta property="og:type" content="article">
 <meta property="og:title" content="THUOJ-PA1-1-3-2-Super Interview">
 <meta property="og:url" content="http://yoursite.com/2019/01/24/THUOJ-PA1-1-3-2-Super-Interview/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="主要用于记录学习经历">
+<meta property="og:description" content="问题描述 选出n个人进行面试，每个应聘者被分配了一个整数ID。要注意人数非常多（数据量很大） 根据以下规则决定面试顺序 来一张圆桌，第一个到的人随意坐 之后每一个到的人从前一个人出发逆时针走过m个人（前一个人算第一个），然后紧邻第m个人的右侧就座。所有人入座后，从最后到达者出发，绕圆桌顺时针面试。 请确定面试顺序。  输入输出 输入： 第一行：n m 第二行：n个整数，表示先后到达的人的ID">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-24T06:55:46.390Z">
+<meta property="og:updated_time" content="2019-01-24T07:51:56.089Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="THUOJ-PA1-1-3-2-Super Interview">
-<meta name="twitter:description" content="主要用于记录学习经历">
+<meta name="twitter:description" content="问题描述 选出n个人进行面试，每个应聘者被分配了一个整数ID。要注意人数非常多（数据量很大） 根据以下规则决定面试顺序 来一张圆桌，第一个到的人随意坐 之后每一个到的人从前一个人出发逆时针走过m个人（前一个人算第一个），然后紧邻第m个人的右侧就座。所有人入座后，从最后到达者出发，绕圆桌顺时针面试。 请确定面试顺序。  输入输出 输入： 第一行：n m 第二行：n个整数，表示先后到达的人的ID">
 
 
 
@@ -336,6 +337,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/THUOJ/" itemprop="url" rel="index">
+                    <span itemprop="name">THUOJ</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -374,7 +397,49 @@
       
 
       
-        
+        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><ul>
+<li>选出n个人进行面试，每个应聘者被分配了一个整数ID。要注意人数非常多（数据量很大）</li>
+<li>根据以下规则决定面试顺序</li>
+<li>来一张圆桌，第一个到的人随意坐</li>
+<li>之后每一个到的人从前一个人出发逆时针走过m个人（前一个人算第一个），然后紧邻第m个人的右侧就座。所有人入座后，从最后到达者出发，绕圆桌顺时针面试。</li>
+<li>请确定面试顺序。</li>
+</ul>
+<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ul>
+<li>输入：<ul>
+<li>第一行：n m</li>
+<li>第二行：n个整数，表示先后到达的人的ID</li>
+</ul>
+</li>
+<li>输出：<ul>
+<li>共一行：以空格分隔的n个整数，分别是按顺序面试的ID</li>
+</ul>
+</li>
+</ul>
+<h2 id="测试用例"><a href="#测试用例" class="headerlink" title="测试用例"></a>测试用例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">5 3</span><br><span class="line">6 7 8 9 10 </span><br><span class="line">output:</span><br><span class="line">10 6 8 9 7</span><br></pre></td></tr></table></figure>
+<h2 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h2><ul>
+<li>1&lt;=n&lt;=10^6</li>
+<li>1&lt;=n*m&lt;=10^7</li>
+<li>输入的ID保证在int类型的范围内</li>
+</ul>
+<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><h3 id="一级提示"><a href="#一级提示" class="headerlink" title="一级提示"></a>一级提示</h3><ul>
+<li>循环链表</li>
+</ul>
+<h3 id="二级提示"><a href="#二级提示" class="headerlink" title="二级提示"></a>二级提示</h3><ul>
+<li>因为找座位按逆时针方向，面试按顺时针发现，所以建议使用双向循环链表。</li>
+<li>往链表中插入元素时，要小心地修改前驱指针和后继指针。</li>
+<li>一次性new n个节点，比分n次每次new一个节点快一些。</li>
+</ul>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
+<li>用循环链表进行模拟</li>
+<li>很像约瑟夫问题</li>
+</ul>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><ul>
+<li>最初版本，可通过所有测试用例，worst case 是19，time:712，memory:51524</li>
+<li>关键在于实现一个双向链表，难度不大。</li>
+<li>排行榜最好情况是 time:128 memory:24152</li>
+<li>加上两行<code>setvbuf(stdin, new char[MAXSIZE], _IOFBF, MAXSIZE);</code><br>  <code>setvbuf(stdout, new char[MAXSIZE], _IOFBF, MAXSIZE);</code>（<code>MAXSIZE=4000000 + 5</code>）之后，最坏测例19的时间是472，空间是59332。加快了一倍。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">class dlist&#123;</span><br><span class="line">public:</span><br><span class="line">    int ID;</span><br><span class="line">    dlist* pre;</span><br><span class="line">    dlist* next;</span><br><span class="line">    dlist(int n)&#123;</span><br><span class="line">        ID = n;</span><br><span class="line">        pre = this;</span><br><span class="line">        next = this;</span><br><span class="line">    &#125;</span><br><span class="line">    void add_after(dlist* cur)&#123;</span><br><span class="line">        cur-&gt;pre = this;</span><br><span class="line">        cur-&gt;next = this-&gt;next;</span><br><span class="line">        this-&gt;next-&gt;pre = cur;</span><br><span class="line">        this-&gt;next = cur;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">int main()&#123;</span><br><span class="line">    int n, m;</span><br><span class="line">    scanf(&quot;%d%d&quot;, &amp;n, &amp;m);</span><br><span class="line">    dlist** pID = new dlist*[n]; // 一次性new n个意思是搞一个指针数组？</span><br><span class="line">    for(int i = 0; i &lt; n; i++)&#123;</span><br><span class="line">        int ID;</span><br><span class="line">        scanf(&quot;%d&quot;, &amp;ID);</span><br><span class="line">        pID[i] = new dlist(ID);</span><br><span class="line">    &#125;</span><br><span class="line">    dlist* start = pID[0];</span><br><span class="line">    for(int i = 1; i &lt; n; i++)&#123;</span><br><span class="line">        int count = m - 1;</span><br><span class="line">        while(count--) start = start-&gt;next;</span><br><span class="line">        start-&gt;add_after(pID[i]);</span><br><span class="line">        start = start-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i = 0; i &lt; n; i++)&#123;</span><br><span class="line">        printf(&quot;%d &quot;, start-&gt;ID);</span><br><span class="line">        start = start-&gt;pre;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
       
     </div>
     
@@ -388,6 +453,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/双向链表/" rel="tag"># 双向链表</a>
+          
+        </div>
       
 
       
@@ -468,8 +539,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -510,7 +590,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">46</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -533,6 +613,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入输出"><span class="nav-number">2.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试用例"><span class="nav-number">3.</span> <span class="nav-text">测试用例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#限制"><span class="nav-number">4.</span> <span class="nav-text">限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提示"><span class="nav-number">5.</span> <span class="nav-text">提示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一级提示"><span class="nav-number">5.1.</span> <span class="nav-text">一级提示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二级提示"><span class="nav-number">5.2.</span> <span class="nav-text">二级提示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">6.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">7.</span> <span class="nav-text">实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

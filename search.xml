@@ -3,7 +3,13 @@
   <entry>
     <title><![CDATA[THUOJ-PA1-1-3-2-Super Interview]]></title>
     <url>%2F2019%2F01%2F24%2FTHUOJ-PA1-1-3-2-Super-Interview%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[问题描述 选出n个人进行面试，每个应聘者被分配了一个整数ID。要注意人数非常多（数据量很大） 根据以下规则决定面试顺序 来一张圆桌，第一个到的人随意坐 之后每一个到的人从前一个人出发逆时针走过m个人（前一个人算第一个），然后紧邻第m个人的右侧就座。所有人入座后，从最后到达者出发，绕圆桌顺时针面试。 请确定面试顺序。 输入输出 输入： 第一行：n m 第二行：n个整数，表示先后到达的人的ID 输出： 共一行：以空格分隔的n个整数，分别是按顺序面试的ID 测试用例12345input:5 36 7 8 9 10 output:10 6 8 9 7 限制 1&lt;=n&lt;=10^6 1&lt;=n*m&lt;=10^7 输入的ID保证在int类型的范围内 提示一级提示 循环链表 二级提示 因为找座位按逆时针方向，面试按顺时针发现，所以建议使用双向循环链表。 往链表中插入元素时，要小心地修改前驱指针和后继指针。 一次性new n个节点，比分n次每次new一个节点快一些。 思路 用循环链表进行模拟 很像约瑟夫问题 实现 最初版本，可通过所有测试用例，worst case 是19，time:712，memory:51524 关键在于实现一个双向链表，难度不大。 排行榜最好情况是 time:128 memory:24152 加上两行setvbuf(stdin, new char[MAXSIZE], _IOFBF, MAXSIZE); setvbuf(stdout, new char[MAXSIZE], _IOFBF, MAXSIZE);（MAXSIZE=4000000 + 5）之后，最坏测例19的时间是472，空间是59332。加快了一倍。12345678910111213141516171819202122232425262728293031323334353637383940#include&lt;iostream&gt;class dlist&#123;public: int ID; dlist* pre; dlist* next; dlist(int n)&#123; ID = n; pre = this; next = this; &#125; void add_after(dlist* cur)&#123; cur-&gt;pre = this; cur-&gt;next = this-&gt;next; this-&gt;next-&gt;pre = cur; this-&gt;next = cur; &#125;&#125;;int main()&#123; int n, m; scanf(&quot;%d%d&quot;, &amp;n, &amp;m); dlist** pID = new dlist*[n]; // 一次性new n个意思是搞一个指针数组？ for(int i = 0; i &lt; n; i++)&#123; int ID; scanf(&quot;%d&quot;, &amp;ID); pID[i] = new dlist(ID); &#125; dlist* start = pID[0]; for(int i = 1; i &lt; n; i++)&#123; int count = m - 1; while(count--) start = start-&gt;next; start-&gt;add_after(pID[i]); start = start-&gt;next; &#125; for(int i = 0; i &lt; n; i++)&#123; printf(&quot;%d &quot;, start-&gt;ID); start = start-&gt;pre; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>双向链表</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[THUOJ PA1 1-2 Company]]></title>
