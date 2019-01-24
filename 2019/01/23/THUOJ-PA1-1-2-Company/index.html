@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="bitmap," />
 
 
 
@@ -80,13 +80,14 @@
 
 
 <meta name="description" content="问题描述 公司有n个员工，编号为1~n。 员工上班时登陆管理系统登记一个code，离开时进行注销。 管理人员随时想知道多少员工上班以及任一个员工登记的code。  输入输出 第一行是两个整数n,m。接下来是m行，每行是以下内容之一：  12345678I a c		// Log In：员工 a 登录，code 为 c。若 a 已登录，则将 code 更新为 cO a		// Log Out：编号为">
+<meta name="keywords" content="bitmap">
 <meta property="og:type" content="article">
 <meta property="og:title" content="THUOJ PA1 1-2 Company">
 <meta property="og:url" content="http://yoursite.com/2019/01/23/THUOJ-PA1-1-2-Company/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
 <meta property="og:description" content="问题描述 公司有n个员工，编号为1~n。 员工上班时登陆管理系统登记一个code，离开时进行注销。 管理人员随时想知道多少员工上班以及任一个员工登记的code。  输入输出 第一行是两个整数n,m。接下来是m行，每行是以下内容之一：  12345678I a c		// Log In：员工 a 登录，code 为 c。若 a 已登录，则将 code 更新为 cO a		// Log Out：编号为">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-23T16:25:53.903Z">
+<meta property="og:updated_time" content="2019-01-24T06:54:12.831Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="THUOJ PA1 1-2 Company">
 <meta name="twitter:description" content="问题描述 公司有n个员工，编号为1~n。 员工上班时登陆管理系统登记一个code，离开时进行注销。 管理人员随时想知道多少员工上班以及任一个员工登记的code。  输入输出 第一行是两个整数n,m。接下来是m行，每行是以下内容之一：  12345678I a c		// Log In：员工 a 登录，code 为 c。若 a 已登录，则将 code 更新为 cO a		// Log Out：编号为">
@@ -404,44 +405,14 @@
 <h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ul>
 <li>第一行是两个整数n,m。接下来是m行，每行是以下内容之一：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">I a c		// Log In：员工 a 登录，code 为 c。若 a 已登录，则将 code 更新为 c</span><br><span class="line">O a		// Log Out：编号为 a 的员工注销。若 a 未登录，则注销无效</span><br><span class="line">C		// Close：到下班时间，所有员工注销</span><br><span class="line">N		// Number：询问有多少员工正在上班</span><br><span class="line">Q a		// Query：询问员工 a 的 code（若未登录或已注销，视为 -1）</span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line">输入输出举例：</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">I a c		// Log In：员工 a 登录，code 为 c。若 a 已登录，则将 code 更新为 c</span><br><span class="line">O a		// Log Out：编号为 a 的员工注销。若 a 未登录，则注销无效</span><br><span class="line">C		// Close：到下班时间，所有员工注销</span><br><span class="line">N		// Number：询问有多少员工正在上班</span><br><span class="line">Q a		// Query：询问员工 a 的 code（若未登录或已注销，视为 -1）</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">&gt; 输入输出举例：</span><br></pre></td></tr></table></figure>
 <p>input:<br>10 8<br>I 1 2<br>I 1 4<br>Q 1<br>C<br>I 2 4<br>O 2<br>Q 2<br>N<br>output:<br>3   # 输出为所有答案之和<br>//“Q 1” 答案是 4，“Q 2” 答案是 -1，“N” 答案是 0，所有答案之和为 3</p>
-<p><code>`</code></p>
-<ul>
-<li>限制<ul>
-<li>n &lt;= 10,000,000</li>
-<li>m &lt;= 1,000,000<br>1 &lt;= a &lt;= n<br>code 为 [0, 2^31) 的整数</li>
-</ul>
-</li>
-</ul>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><h3 id="一级提示"><a href="#一级提示" class="headerlink" title="一级提示"></a>一级提示</h3><blockquote>
-<p>测试数据中，每种操作都可能频繁出现，或很少出现。因此，你的算法需要应对所有可能的情况。</p>
-</blockquote>
-<blockquote>
-<p>答案会超出 int 范围，要注意各种数据类型可表示的范围，尤其是溢出问题。可选用 long long int 或 int64_t 等类型。注意各种数据类型的正确输入、输出方式。</p>
-</blockquote>
-<ul>
-<li>Bitmap / 常数时间初始化的数组——讲义 02XA</li>
-<li>Bitmap: 习题解析 <code>[2-34]</code></li>
-</ul>
-<h3 id="二级提示"><a href="#二级提示" class="headerlink" title="二级提示"></a>二级提示</h3><ul>
-<li>避免频繁初始化整个数组。</li>
-<li>可以借助Bitmap记录数组的各元素是否已被初始化。将一个（或所有）元素置为未初始化状态，实质上只需要打破“校验环”两个验证条件中的任何一个，考虑如何打破校验条件的复杂度最低。</li>
-<li>另一种解题思路是，数组初始化 1 次后，记录改变了的元素，今后不再初始化整个数组，只初始化改变了的元素。</li>
-</ul>
-<blockquote>
-<p>用 scanf(“%c”, …) 或 getchar() 读入一个字符时，可能会读到空格、制表符、回车符或换行符，尽量避免使用这个方法。使用 scanf(“%s”, …) 会自动过滤空白字符。</p>
-</blockquote>
-<blockquote>
-<p>Windows 和 Linux 上换行符有 “\r\n” 跟 “\n” 的差别，你的程序最好有一定鲁棒性，能处理两种情况。</p>
-</blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
-<li>由于每个员工的状态只有登陆和注销两种状态，可以用1和0来分别表示，故考虑用bitmap来表示n个员工的状态。写一个类，将操作写成其成员函数即可。</li>
-<li>相应的可以定义接口函数：<ul>
-<li>log_in(): </li>
-</ul>
-</li>
-</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 限制</span><br><span class="line">    * n &lt;= 10,000,000</span><br><span class="line">    * m &lt;= 1,000,000</span><br><span class="line">    1 &lt;= a &lt;= n</span><br><span class="line">    code 为 [0, 2^31) 的整数</span><br><span class="line"></span><br><span class="line">## 提示</span><br><span class="line">### 一级提示</span><br><span class="line">&gt; 测试数据中，每种操作都可能频繁出现，或很少出现。因此，你的算法需要应对所有可能的情况。</span><br><span class="line"></span><br><span class="line">&gt; 答案会超出 int 范围，要注意各种数据类型可表示的范围，尤其是溢出问题。可选用 long long int 或 int64_t 等类型。注意各种数据类型的正确输入、输出方式。</span><br><span class="line"></span><br><span class="line">* Bitmap / 常数时间初始化的数组——讲义 02XA</span><br><span class="line">* Bitmap: 习题解析 `[2-34]`</span><br><span class="line"></span><br><span class="line">### 二级提示</span><br><span class="line">* 避免频繁初始化整个数组。</span><br><span class="line">* 可以借助Bitmap记录数组的各元素是否已被初始化。将一个（或所有）元素置为未初始化状态，实质上只需要打破“校验环”两个验证条件中的任何一个，考虑如何打破校验条件的复杂度最低。</span><br><span class="line">* 另一种解题思路是，数组初始化 1 次后，记录改变了的元素，今后不再初始化整个数组，只初始化改变了的元素。</span><br><span class="line"></span><br><span class="line">&gt; 用 scanf(&quot;%c&quot;, ...) 或 getchar() 读入一个字符时，可能会读到空格、制表符、回车符或换行符，尽量避免使用这个方法。使用 scanf(&quot;%s&quot;, ...) 会自动过滤空白字符。</span><br><span class="line"></span><br><span class="line">&gt; Windows 和 Linux 上换行符有 &quot;\r\n&quot; 跟 &quot;\n&quot; 的差别，你的程序最好有一定鲁棒性，能处理两种情况。</span><br><span class="line"></span><br><span class="line">## 思路</span><br><span class="line">* 先实现低效版，再思考改进。</span><br><span class="line"></span><br><span class="line">## 低效版</span><br><span class="line">* 先写一个低效版。其中通过`while (isspace(op)) scanf(&quot;%c&quot;, &amp;op);`来滤去空格以及换行制表等符号。</span><br><span class="line">* 算法低效之处主要在于`close()`函数，当下班时只能对所有的元素进行赋值-1，而不能仅仅只针对已上班的员工。其他的主要函数时间复杂度都是O(1).</span><br><span class="line">* 总的时间复杂度为O(n)，空间复杂都为O(n)</span><br><span class="line">* 除了9,10,19测试点超时，其余测试点均可以通过。</span><br><span class="line">* 将此算法生成的执行文件作为对拍的标准程序。</span><br></pre></td></tr></table></figure>
+<p>// 低效版<br>// std_company.cpp</p>
+<p>#include<iostream></iostream></p>
+<p>#include<cstring><br>using namespace std;<br>class Company {<br>    int num, N;<br>    long long int score;<br>    int* code;<br>public:<br>    Company(int n) {<br>        N = n;<br>        code = new int[N + 1];<br>        for (int i = 0; i &lt; N + 1; i++) code[i] = -1;<br>        num = 0;<br>        score = 0;<br>    }<br>    ~Company() {<br>        delete[] code;<br>    }<br>    void log_in(int a, int c) {<br>        if (code[a] == -1) num++;<br>        code[a] = c;<br>    }<br>    void log_out(int a) {<br>        if (code[a] != -1) {<br>            code[a] = -1;<br>            num–;<br>        }<br>    }<br>    void close() {<br>        for (int i = 0; i &lt; N + 1; i++) code[i] = -1;<br>        num = 0;<br>    }<br>    void number() {<br>        score += num;<br>    }<br>    void query(int a) {<br>        score += code[a];<br>    }<br>    void show_ans() {<br>        printf(“%lld\n”, score);<br>    }<br>};<br>int main() {<br>    int n, m;<br>    scanf(“%d%d”, &amp;n, &amp;m);<br>    Company mycp(n);<br>    while (m–) {<br>        char op;<br>        int a, c;<br>        scanf(“%c”, &amp;op);<br>        while (isspace(op)) scanf(“%c”, &amp;op);<br>        switch (op) {<br>        case ‘I’: scanf(“%d%d”, &amp;a, &amp;c); mycp.log_in(a, c); break;<br>        case ‘O’: scanf(“%d”, &amp;a); mycp.log_out(a); break;<br>        case ‘C’: mycp.close(); break;<br>        case ‘N’: mycp.number(); break;<br>        case ‘Q’: scanf(“%d”, &amp;a); mycp.query(a); break;<br>        default: break;<br>        }<br>    }<br>    mycp.show_ans();<br>    return 0;<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 思考改进</span><br><span class="line">* 考虑加上习题解析`[2-34]`中bitmap的思路</span><br><span class="line">* 采用同时支持`set()` `clear()`这两样操作的类，参考代码`x2.9`。</span><br><span class="line">* 可以在O(1)时间隐式初始化（但是还有至少要有O(n)的分配内存的时间的）</span><br><span class="line">* 查上班人数时还是沿用低效版的思路，用一个变量表示上班人数，log_in时加一，log_out时减一，都下班时清零。</span><br><span class="line">* 仿照bitmap设置两个向量，`F[]`来记录`[k]`被标记的次序，向量`T[]`来记录依次被标记的值。</span><br><span class="line">* `clear()`时的改进：只需将top置零，时间复杂度O(1)</span><br><span class="line">* 同时，`code[]`也不用全部初始化，只需每次修改`code[F[k]]`即可</span><br><span class="line">* 如此，所有的操作时间复杂度都是O(1)</span><br></pre></td></tr></table></figure></cstring></p>
+<p>#include<iostream></iostream></p>
+<p>#include<cstring><br>using namespace std;<br>class Company {<br>    int num, N;<br>    long long int score;<br>    int<em> code; int</em> F; int<em> T; int top;<br>protected:<br>    bool valid(int r) {return (0&lt;=r)&amp;&amp;(r&lt;top);}<br>    bool erased(int a) {<br>        return valid(F[a])&amp;&amp;!(T[F[a]]+1+a); // 删除时T[F[a]] = -1-a<br>    }<br>public:<br>    Company(int n) {<br>        N = n;<br>        code = new int[N + 1];<br>        F = new int[N + 1];<br>        T = new int[N + 1];<br>        top = 0; num = 0; score = 0;<br>    }<br>    ~Company() {<br>        delete[] code; delete[] F; delete[] T;<br>    }<br>    bool test(int a){<br>        return valid(F[a]) &amp;&amp; (a==T[F[a]]);<br>    }<br>    /</em><br>    登陆需要考虑：<br>    1.从未登陆过<br>    2.登陆过又再次登陆<br>    3.登陆后进行注销后又再次登陆<br>    */<br>    void log_in(int a, int c) {<br>        if(!test(a)){  // 测试不对，说明注销过或者从未登陆<br>            if(!erased(a)) // 从未登陆过<br>                F[a] = top++; // 创建新的校验环<br>            num++;  // 登陆人数加一<br>            T[F[a]] = a; // 若注销过则需恢复原校验环<br>        }<br>        code[F[a]] = c;<br>    }<br>    void log_out(int a) {<br>        if(test(a)) {  // 已登陆<br>            T[F[a]] = -1-a;<br>            num–;  // 登陆人数减一<br>        }<br>    }<br>    void close() {<br>        top = 0; // 直接 top 置零，和低效版相比有所改进<br>        num = 0;<br>    }<br>    void number() {<br>        score += num;<br>    }<br>    void query(int a) {<br>        if(test(a)) score += code[F[a]];<br>        else score += -1;<br>    }<br>    void show_ans() {<br>        printf(“%lld\n”, score);<br>    }<br>};<br>int main() {<br>    int n, m;<br>    scanf(“%d%d”, &amp;n, &amp;m);<br>    Company mycp(n);<br>    while (m–) {<br>        char op;<br>        int a, c;<br>        scanf(“%c”, &amp;op);<br>        while (isspace(op)) scanf(“%c”, &amp;op);<br>        switch (op) {<br>        case ‘I’: scanf(“%d%d”, &amp;a, &amp;c); mycp.log_in(a, c); break;<br>        case ‘O’: scanf(“%d”, &amp;a); mycp.log_out(a); break;<br>        case ‘C’: mycp.close(); break;<br>        case ‘N’: mycp.number(); break;<br>        case ‘Q’: scanf(“%d”, &amp;a); mycp.query(a); break;<br>        default: break;<br>        }<br>    }<br>    mycp.show_ans();<br>    return 0;<br>}<br><code>`</code></cstring></p>
 
       
     </div>
@@ -456,6 +427,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/bitmap/" rel="tag"># bitmap</a>
+          
+        </div>
       
 
       
@@ -475,6 +452,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/24/THUOJ-PA1-1-3-2-Super-Interview/" rel="prev" title="THUOJ-PA1-1-3-2-Super Interview">
+                THUOJ-PA1-1-3-2-Super Interview <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -565,7 +546,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">133</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -587,7 +568,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -620,7 +601,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入输出"><span class="nav-number">2.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提示"><span class="nav-number">3.</span> <span class="nav-text">提示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一级提示"><span class="nav-number">3.1.</span> <span class="nav-text">一级提示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二级提示"><span class="nav-number">3.2.</span> <span class="nav-text">二级提示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">4.</span> <span class="nav-text">思路</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入输出"><span class="nav-number">2.</span> <span class="nav-text">输入输出</span></a></li></ol></div>
             
 
           </div>

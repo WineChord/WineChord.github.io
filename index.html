@@ -296,6 +296,136 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/24/THUOJ-PA1-1-3-2-Super-Interview/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/24/THUOJ-PA1-1-3-2-Super-Interview/" itemprop="url">THUOJ-PA1-1-3-2-Super Interview</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-24T14:55:46+08:00">
+                2019-01-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/24/THUOJ-PA1-1-3-2-Super-Interview/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/01/24/THUOJ-PA1-1-3-2-Super-Interview/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/23/THUOJ-PA1-1-2-Company/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -408,44 +538,14 @@
 <h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ul>
 <li>第一行是两个整数n,m。接下来是m行，每行是以下内容之一：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">I a c		// Log In：员工 a 登录，code 为 c。若 a 已登录，则将 code 更新为 c</span><br><span class="line">O a		// Log Out：编号为 a 的员工注销。若 a 未登录，则注销无效</span><br><span class="line">C		// Close：到下班时间，所有员工注销</span><br><span class="line">N		// Number：询问有多少员工正在上班</span><br><span class="line">Q a		// Query：询问员工 a 的 code（若未登录或已注销，视为 -1）</span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line">输入输出举例：</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">I a c		// Log In：员工 a 登录，code 为 c。若 a 已登录，则将 code 更新为 c</span><br><span class="line">O a		// Log Out：编号为 a 的员工注销。若 a 未登录，则注销无效</span><br><span class="line">C		// Close：到下班时间，所有员工注销</span><br><span class="line">N		// Number：询问有多少员工正在上班</span><br><span class="line">Q a		// Query：询问员工 a 的 code（若未登录或已注销，视为 -1）</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">&gt; 输入输出举例：</span><br></pre></td></tr></table></figure>
 <p>input:<br>10 8<br>I 1 2<br>I 1 4<br>Q 1<br>C<br>I 2 4<br>O 2<br>Q 2<br>N<br>output:<br>3   # 输出为所有答案之和<br>//“Q 1” 答案是 4，“Q 2” 答案是 -1，“N” 答案是 0，所有答案之和为 3</p>
-<p><code>`</code></p>
-<ul>
-<li>限制<ul>
-<li>n &lt;= 10,000,000</li>
-<li>m &lt;= 1,000,000<br>1 &lt;= a &lt;= n<br>code 为 [0, 2^31) 的整数</li>
-</ul>
-</li>
-</ul>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><h3 id="一级提示"><a href="#一级提示" class="headerlink" title="一级提示"></a>一级提示</h3><blockquote>
-<p>测试数据中，每种操作都可能频繁出现，或很少出现。因此，你的算法需要应对所有可能的情况。</p>
-</blockquote>
-<blockquote>
-<p>答案会超出 int 范围，要注意各种数据类型可表示的范围，尤其是溢出问题。可选用 long long int 或 int64_t 等类型。注意各种数据类型的正确输入、输出方式。</p>
-</blockquote>
-<ul>
-<li>Bitmap / 常数时间初始化的数组——讲义 02XA</li>
-<li>Bitmap: 习题解析 <code>[2-34]</code></li>
-</ul>
-<h3 id="二级提示"><a href="#二级提示" class="headerlink" title="二级提示"></a>二级提示</h3><ul>
-<li>避免频繁初始化整个数组。</li>
-<li>可以借助Bitmap记录数组的各元素是否已被初始化。将一个（或所有）元素置为未初始化状态，实质上只需要打破“校验环”两个验证条件中的任何一个，考虑如何打破校验条件的复杂度最低。</li>
-<li>另一种解题思路是，数组初始化 1 次后，记录改变了的元素，今后不再初始化整个数组，只初始化改变了的元素。</li>
-</ul>
-<blockquote>
-<p>用 scanf(“%c”, …) 或 getchar() 读入一个字符时，可能会读到空格、制表符、回车符或换行符，尽量避免使用这个方法。使用 scanf(“%s”, …) 会自动过滤空白字符。</p>
-</blockquote>
-<blockquote>
-<p>Windows 和 Linux 上换行符有 “\r\n” 跟 “\n” 的差别，你的程序最好有一定鲁棒性，能处理两种情况。</p>
-</blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
-<li>由于每个员工的状态只有登陆和注销两种状态，可以用1和0来分别表示，故考虑用bitmap来表示n个员工的状态。写一个类，将操作写成其成员函数即可。</li>
-<li>相应的可以定义接口函数：<ul>
-<li>log_in(): </li>
-</ul>
-</li>
-</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 限制</span><br><span class="line">    * n &lt;= 10,000,000</span><br><span class="line">    * m &lt;= 1,000,000</span><br><span class="line">    1 &lt;= a &lt;= n</span><br><span class="line">    code 为 [0, 2^31) 的整数</span><br><span class="line"></span><br><span class="line">## 提示</span><br><span class="line">### 一级提示</span><br><span class="line">&gt; 测试数据中，每种操作都可能频繁出现，或很少出现。因此，你的算法需要应对所有可能的情况。</span><br><span class="line"></span><br><span class="line">&gt; 答案会超出 int 范围，要注意各种数据类型可表示的范围，尤其是溢出问题。可选用 long long int 或 int64_t 等类型。注意各种数据类型的正确输入、输出方式。</span><br><span class="line"></span><br><span class="line">* Bitmap / 常数时间初始化的数组——讲义 02XA</span><br><span class="line">* Bitmap: 习题解析 `[2-34]`</span><br><span class="line"></span><br><span class="line">### 二级提示</span><br><span class="line">* 避免频繁初始化整个数组。</span><br><span class="line">* 可以借助Bitmap记录数组的各元素是否已被初始化。将一个（或所有）元素置为未初始化状态，实质上只需要打破“校验环”两个验证条件中的任何一个，考虑如何打破校验条件的复杂度最低。</span><br><span class="line">* 另一种解题思路是，数组初始化 1 次后，记录改变了的元素，今后不再初始化整个数组，只初始化改变了的元素。</span><br><span class="line"></span><br><span class="line">&gt; 用 scanf(&quot;%c&quot;, ...) 或 getchar() 读入一个字符时，可能会读到空格、制表符、回车符或换行符，尽量避免使用这个方法。使用 scanf(&quot;%s&quot;, ...) 会自动过滤空白字符。</span><br><span class="line"></span><br><span class="line">&gt; Windows 和 Linux 上换行符有 &quot;\r\n&quot; 跟 &quot;\n&quot; 的差别，你的程序最好有一定鲁棒性，能处理两种情况。</span><br><span class="line"></span><br><span class="line">## 思路</span><br><span class="line">* 先实现低效版，再思考改进。</span><br><span class="line"></span><br><span class="line">## 低效版</span><br><span class="line">* 先写一个低效版。其中通过`while (isspace(op)) scanf(&quot;%c&quot;, &amp;op);`来滤去空格以及换行制表等符号。</span><br><span class="line">* 算法低效之处主要在于`close()`函数，当下班时只能对所有的元素进行赋值-1，而不能仅仅只针对已上班的员工。其他的主要函数时间复杂度都是O(1).</span><br><span class="line">* 总的时间复杂度为O(n)，空间复杂都为O(n)</span><br><span class="line">* 除了9,10,19测试点超时，其余测试点均可以通过。</span><br><span class="line">* 将此算法生成的执行文件作为对拍的标准程序。</span><br></pre></td></tr></table></figure>
+<p>// 低效版<br>// std_company.cpp</p>
+<p>#include<iostream></iostream></p>
+<p>#include<cstring><br>using namespace std;<br>class Company {<br>    int num, N;<br>    long long int score;<br>    int* code;<br>public:<br>    Company(int n) {<br>        N = n;<br>        code = new int[N + 1];<br>        for (int i = 0; i &lt; N + 1; i++) code[i] = -1;<br>        num = 0;<br>        score = 0;<br>    }<br>    ~Company() {<br>        delete[] code;<br>    }<br>    void log_in(int a, int c) {<br>        if (code[a] == -1) num++;<br>        code[a] = c;<br>    }<br>    void log_out(int a) {<br>        if (code[a] != -1) {<br>            code[a] = -1;<br>            num–;<br>        }<br>    }<br>    void close() {<br>        for (int i = 0; i &lt; N + 1; i++) code[i] = -1;<br>        num = 0;<br>    }<br>    void number() {<br>        score += num;<br>    }<br>    void query(int a) {<br>        score += code[a];<br>    }<br>    void show_ans() {<br>        printf(“%lld\n”, score);<br>    }<br>};<br>int main() {<br>    int n, m;<br>    scanf(“%d%d”, &amp;n, &amp;m);<br>    Company mycp(n);<br>    while (m–) {<br>        char op;<br>        int a, c;<br>        scanf(“%c”, &amp;op);<br>        while (isspace(op)) scanf(“%c”, &amp;op);<br>        switch (op) {<br>        case ‘I’: scanf(“%d%d”, &amp;a, &amp;c); mycp.log_in(a, c); break;<br>        case ‘O’: scanf(“%d”, &amp;a); mycp.log_out(a); break;<br>        case ‘C’: mycp.close(); break;<br>        case ‘N’: mycp.number(); break;<br>        case ‘Q’: scanf(“%d”, &amp;a); mycp.query(a); break;<br>        default: break;<br>        }<br>    }<br>    mycp.show_ans();<br>    return 0;<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 思考改进</span><br><span class="line">* 考虑加上习题解析`[2-34]`中bitmap的思路</span><br><span class="line">* 采用同时支持`set()` `clear()`这两样操作的类，参考代码`x2.9`。</span><br><span class="line">* 可以在O(1)时间隐式初始化（但是还有至少要有O(n)的分配内存的时间的）</span><br><span class="line">* 查上班人数时还是沿用低效版的思路，用一个变量表示上班人数，log_in时加一，log_out时减一，都下班时清零。</span><br><span class="line">* 仿照bitmap设置两个向量，`F[]`来记录`[k]`被标记的次序，向量`T[]`来记录依次被标记的值。</span><br><span class="line">* `clear()`时的改进：只需将top置零，时间复杂度O(1)</span><br><span class="line">* 同时，`code[]`也不用全部初始化，只需每次修改`code[F[k]]`即可</span><br><span class="line">* 如此，所有的操作时间复杂度都是O(1)</span><br></pre></td></tr></table></figure></cstring></p>
+<p>#include<iostream></iostream></p>
+<p>#include<cstring><br>using namespace std;<br>class Company {<br>    int num, N;<br>    long long int score;<br>    int<em> code; int</em> F; int<em> T; int top;<br>protected:<br>    bool valid(int r) {return (0&lt;=r)&amp;&amp;(r&lt;top);}<br>    bool erased(int a) {<br>        return valid(F[a])&amp;&amp;!(T[F[a]]+1+a); // 删除时T[F[a]] = -1-a<br>    }<br>public:<br>    Company(int n) {<br>        N = n;<br>        code = new int[N + 1];<br>        F = new int[N + 1];<br>        T = new int[N + 1];<br>        top = 0; num = 0; score = 0;<br>    }<br>    ~Company() {<br>        delete[] code; delete[] F; delete[] T;<br>    }<br>    bool test(int a){<br>        return valid(F[a]) &amp;&amp; (a==T[F[a]]);<br>    }<br>    /</em><br>    登陆需要考虑：<br>    1.从未登陆过<br>    2.登陆过又再次登陆<br>    3.登陆后进行注销后又再次登陆<br>    */<br>    void log_in(int a, int c) {<br>        if(!test(a)){  // 测试不对，说明注销过或者从未登陆<br>            if(!erased(a)) // 从未登陆过<br>                F[a] = top++; // 创建新的校验环<br>            num++;  // 登陆人数加一<br>            T[F[a]] = a; // 若注销过则需恢复原校验环<br>        }<br>        code[F[a]] = c;<br>    }<br>    void log_out(int a) {<br>        if(test(a)) {  // 已登陆<br>            T[F[a]] = -1-a;<br>            num–;  // 登陆人数减一<br>        }<br>    }<br>    void close() {<br>        top = 0; // 直接 top 置零，和低效版相比有所改进<br>        num = 0;<br>    }<br>    void number() {<br>        score += num;<br>    }<br>    void query(int a) {<br>        if(test(a)) score += code[F[a]];<br>        else score += -1;<br>    }<br>    void show_ans() {<br>        printf(“%lld\n”, score);<br>    }<br>};<br>int main() {<br>    int n, m;<br>    scanf(“%d%d”, &amp;n, &amp;m);<br>    Company mycp(n);<br>    while (m–) {<br>        char op;<br>        int a, c;<br>        scanf(“%c”, &amp;op);<br>        while (isspace(op)) scanf(“%c”, &amp;op);<br>        switch (op) {<br>        case ‘I’: scanf(“%d%d”, &amp;a, &amp;c); mycp.log_in(a, c); break;<br>        case ‘O’: scanf(“%d”, &amp;a); mycp.log_out(a); break;<br>        case ‘C’: mycp.close(); break;<br>        case ‘N’: mycp.number(); break;<br>        case ‘Q’: scanf(“%d”, &amp;a); mycp.query(a); break;<br>        default: break;<br>        }<br>    }<br>    mycp.show_ans();<br>    return 0;<br>}<br><code>`</code></cstring></p>
 
           
         
@@ -814,8 +914,8 @@
           
             <h1 id="THU数据结构（2018秋）"><a href="#THU数据结构（2018秋）" class="headerlink" title="THU数据结构（2018秋）"></a>THU数据结构（2018秋）</h1><h2 id="PA1"><a href="#PA1" class="headerlink" title="PA1"></a>PA1</h2><ul>
 <li><a href="./2019/01/23/THUOJ-PA1-1-1-Team">1-1 Team</a></li>
-<li><a href="">1-2 Company</a></li>
-<li><a href="">1-3-2 Super Interview</a></li>
+<li><a href="./2019/01/23/THUOJ-PA1-1-2-Company">1-2 Company</a></li>
+<li><a href="./2019/01/24/THUOJ-PA1-1-3-2-Super-Interview">1-3-2 Super Interview</a></li>
 <li><a href="">1-4 Alarm</a><h2 id="PA2"><a href="#PA2" class="headerlink" title="PA2"></a>PA2</h2></li>
 <li><a href="">2-1 Train</a></li>
 <li><a href="">2-2-2 凸包2</a></li>
@@ -1701,159 +1801,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/728-Self-Dividing-Numbers-Math-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/04/728-Self-Dividing-Numbers-Math-1/" itemprop="url">728. Self Dividing Numbers-Math-1</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T20:35:41+08:00">
-                2018-11-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/04/728-Self-Dividing-Numbers-Math-1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/04/728-Self-Dividing-Numbers-Math-1/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>问一个范围内有哪些数是可以被他们的每一位整除的？</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># Python</span><br><span class="line">is_self_dividing = lambda num: &apos;0&apos; not in str(num) and all([num%int(digit)==0 for digit in str(num)])</span><br><span class="line">return filter(is_self_dividing, range(left, right+1))</span><br><span class="line">// C++</span><br><span class="line">vector&lt;int&gt; res;</span><br><span class="line">for(int i = left, n = 0; i &lt;= right; i++)&#123;</span><br><span class="line">    for(n = i; n &gt; 0; n /= 10)</span><br><span class="line">        if(!(n%10) || i%(n%10)) break;</span><br><span class="line">    if(!n) res.push_back(i);</span><br><span class="line">&#125;</span><br><span class="line">return res;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1908,7 +1855,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">133</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1930,7 +1877,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
