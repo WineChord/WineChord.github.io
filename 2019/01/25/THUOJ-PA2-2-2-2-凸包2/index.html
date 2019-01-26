@@ -92,7 +92,7 @@
 <meta property="og:image" content="https://github.com/WineChord/Blog-pic/raw/master/THUOJ/convexHull.png">
 <meta property="og:image" content="https://github.com/WineChord/Blog-pic/raw/master/THUOJ/clock_CV.png">
 <meta property="og:image" content="https://github.com/WineChord/Blog-pic/raw/master/THUOJ/clock_CV_start.png">
-<meta property="og:updated_time" content="2019-01-26T13:53:20.604Z">
+<meta property="og:updated_time" content="2019-01-26T13:56:46.208Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="THUOJ PA2 2-2-2 凸包2">
 <meta name="twitter:description" content="题目描述 二维平面上给n个点，求凸包  输入输出 输入 输入文件为二进制格式存储。即所有数据连续存储，没有行的概念。 第一个为整数n，代表点的数量。 随后连续存储了2*n个整数，每两个数为每个点的坐标(xi, yi)   输出 每行表示凸包上一个点的坐标。 选择凸包上纵坐标最小的点作为第一个输出的点，按逆时针顺序依次输出所有凸包上的点。 注：只需输出凸包上位于顶点的点。    输入输出样例1234">
@@ -441,11 +441,13 @@
 </li>
 <li><p>输出请不要使用二进制方式输出，直接以人可读的方式输出结果即可。</p>
 </li>
-<li>若想用二进制数据进行测试，可以自己输出二进制数据到文件中。要注意由于不同的操作系统对于换行符格式并不统一，故自己生成二进制测试数据文件时，若使用命令行重定向的方式向二进制文件输出，可能会出现错误。可参考如下代码对生成的测试数据进行输出：</li>
-</ul>
+<li><p>若想用二进制数据进行测试，可以自己输出二进制数据到文件中。要注意由于不同的操作系统对于换行符格式并不统一，故自己生成二进制测试数据文件时，若使用命令行重定向的方式向二进制文件输出，可能会出现错误。可参考如下代码对生成的测试数据进行输出：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">freopen(&quot;test.in&quot;, &quot;wb&quot;, stdout);</span><br><span class="line">fwrite(&amp;testData, sizeof(int), 1, stdout);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>凸包：<a href="http:\\baike.baidu.com\view\707209.htm" target="_blank" rel="noopener">http:\baike.baidu.com\view\707209.htm</a><h3 id="二级提示"><a href="#二级提示" class="headerlink" title="二级提示"></a>二级提示</h3></li>
+</li>
+<li><p>凸包：<a href="http:\\baike.baidu.com\view\707209.htm" target="_blank" rel="noopener">http:\baike.baidu.com\view\707209.htm</a></p>
+</li>
+</ul>
+<h3 id="二级提示"><a href="#二级提示" class="headerlink" title="二级提示"></a>二级提示</h3><ul>
 <li>数据特点：输入数据不像《凸包1》这题一样是随机的，这n个点经过特殊设计，凸包上的点较多。</li>
 <li>适用算法：凸包上的点数量较多，使用JarvisMarch算法会超时。可以使用快速凸包算法，该算法复杂度为VlogV，其中V表示点的总数</li>
 </ul>
