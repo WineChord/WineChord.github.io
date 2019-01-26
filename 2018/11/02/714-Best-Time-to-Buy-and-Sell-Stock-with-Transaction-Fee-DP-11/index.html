@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Wine&amp;Chord">
 <meta property="og:description" content="问题描述带手续费的买卖股票最佳时间。可以买卖多次，但是买之前必须先卖出已经有的。手续费只在卖的时候收。问最大的盈利可以是多少？ 动态规划在第i天结束的时候，用 cash 来表示我们手上没有股票的时候拥有的最大利润，用 hold 来表示我们手上有股票时拥有的最大利润。对于 cash 变量而言，有两种情况  我们前一天手上就没有股票，那么我们今天也不再买，这样就保持了手上没有股票，该利润用 cash">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-02T12:16:36.665Z">
+<meta property="og:updated_time" content="2019-01-26T14:42:21.914Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="714. Best Time to Buy and Sell Stock with Transaction Fee-DP-11">
 <meta name="twitter:description" content="问题描述带手续费的买卖股票最佳时间。可以买卖多次，但是买之前必须先卖出已经有的。手续费只在卖的时候收。问最大的盈利可以是多少？ 动态规划在第i天结束的时候，用 cash 来表示我们手上没有股票的时候拥有的最大利润，用 hold 来表示我们手上有股票时拥有的最大利润。对于 cash 变量而言，有两种情况  我们前一天手上就没有股票，那么我们今天也不再买，这样就保持了手上没有股票，该利润用 cash">
@@ -410,7 +410,8 @@
 <li>我们前一天没有股票，为了手上能够有股票，我们需要在这一天买入，而因为前一天手上没有股票，所以前一天的利润用 cash 来表示。故：<code>hold = cash - prices[i]</code></li>
 </ul>
 <p>目标是利润最大化，故：<br><code>hold = max(hold, cash - prices[i])</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># Python</span><br><span class="line">def maxProfit(self, prices, fee):</span><br><span class="line">    cash, hold = 0, -prices[0]</span><br><span class="line">    for i in range(1, len(prices)):</span><br><span class="line">        cash = max(cash, hold + prices[i] - fee)</span><br><span class="line">        hold = max(hold, cash - prices[i])</span><br><span class="line">    return cash</span><br><span class="line">// Java</span><br><span class="line">public int maxProfit(int[] prices, int fee)&#123;</span><br><span class="line">    int cash = 0, hold = -prices[0];</span><br><span class="line">    for(int i = 1; i &lt; prices.length; i++)&#123;</span><br><span class="line">        cash = Math.max(cash, hold + prices[i] - fee);</span><br><span class="line">        hold = Math.max(hold, cash - prices[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    return cash;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxProfit</span><span class="params">(self, prices, fee)</span>:</span></span><br><span class="line">    cash, hold = <span class="number">0</span>, -prices[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(prices)):</span><br><span class="line">        cash = max(cash, hold + prices[i] - fee)</span><br><span class="line">        hold = max(hold, cash - prices[i])</span><br><span class="line">    <span class="keyword">return</span> cash</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices, <span class="keyword">int</span> fee)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> cash = <span class="number">0</span>, hold = -prices[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; prices.length; i++)&#123;</span><br><span class="line">        cash = Math.max(cash, hold + prices[i] - fee);</span><br><span class="line">        hold = Math.max(hold, cash - prices[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cash;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>time: $O(N)$,<br>space: $O(1)$</p>
 
       
@@ -549,7 +550,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">136</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

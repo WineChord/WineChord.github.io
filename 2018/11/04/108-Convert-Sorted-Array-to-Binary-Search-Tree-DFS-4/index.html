@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Wine&amp;Chord">
 <meta property="og:description" content="问题描述给一个升序的数组，将其转化为平衡二叉树。 递归1234567891011TreeNode* sortedArrayToBST(vector&amp;lt;int&amp;gt;&amp;amp; num)&amp;#123;    if(num.size() == 0) return NULL;    if(num.size() == 1) return new TreeNode(num[0]);    int midd">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-04T05:53:01.005Z">
+<meta property="og:updated_time" content="2019-01-26T14:27:53.679Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="108. Convert Sorted Array to Binary Search Tree-DFS-4">
 <meta name="twitter:description" content="问题描述给一个升序的数组，将其转化为平衡二叉树。 递归1234567891011TreeNode* sortedArrayToBST(vector&amp;lt;int&amp;gt;&amp;amp; num)&amp;#123;    if(num.size() == 0) return NULL;    if(num.size() == 1) return new TreeNode(num[0]);    int midd">
@@ -398,7 +398,7 @@
 
       
         <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个升序的数组，将其转化为平衡二叉树。</p>
-<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">TreeNode* sortedArrayToBST(vector&lt;int&gt;&amp; num)&#123;</span><br><span class="line">    if(num.size() == 0) return NULL;</span><br><span class="line">    if(num.size() == 1) return new TreeNode(num[0]);</span><br><span class="line">    int middle = num.size()/2;</span><br><span class="line">    TreeNode* root = new TreeNode(num[middle]);</span><br><span class="line">    vector&lt;int&gt; leftInts(num.begin(), num.begin()+middle);</span><br><span class="line">    vector&lt;int&gt; rightInts(num.begin()+middle+1, num.end());</span><br><span class="line">    root-&gt;left = sortedArrayToBST(leftInts);</span><br><span class="line">    root-&gt;right = sortedArrayToBST(rightInts);</span><br><span class="line">    return root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TreeNode* <span class="title">sortedArrayToBST</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; num)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(num.size() == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">if</span>(num.size() == <span class="number">1</span>) <span class="keyword">return</span> <span class="keyword">new</span> TreeNode(num[<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">int</span> middle = num.size()/<span class="number">2</span>;</span><br><span class="line">    TreeNode* root = <span class="keyword">new</span> TreeNode(num[middle]);</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; leftInts(num.begin(), num.begin()+middle);</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; rightInts(num.begin()+middle+<span class="number">1</span>, num.end());</span><br><span class="line">    root-&gt;left = sortedArrayToBST(leftInts);</span><br><span class="line">    root-&gt;right = sortedArrayToBST(rightInts);</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -535,7 +535,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">136</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

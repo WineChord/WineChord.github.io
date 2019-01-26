@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Wine&amp;Chord">
 <meta property="og:description" content="问题描述给一个非空的整数数组，除了一个元素出现了一次之外每个元素都出现了两次。找出那个只出现一次的元素。 方法一：List operation12345678def singleNumber(self, nums):    no_duplicate_list = []    for i in nums:        if i not in no_duplicate_list:">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-03T14:29:01.326Z">
+<meta property="og:updated_time" content="2019-01-26T14:28:56.177Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="136. Single Number-HT-7">
 <meta name="twitter:description" content="问题描述给一个非空的整数数组，除了一个元素出现了一次之外每个元素都出现了两次。找出那个只出现一次的元素。 方法一：List operation12345678def singleNumber(self, nums):    no_duplicate_list = []    for i in nums:        if i not in no_duplicate_list:">
@@ -398,22 +398,22 @@
 
       
         <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个非空的整数数组，除了一个元素出现了一次之外每个元素都出现了两次。找出那个只出现一次的元素。</p>
-<h3 id="方法一：List-operation"><a href="#方法一：List-operation" class="headerlink" title="方法一：List operation"></a>方法一：List operation</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def singleNumber(self, nums):</span><br><span class="line">    no_duplicate_list = []</span><br><span class="line">    for i in nums:</span><br><span class="line">        if i not in no_duplicate_list:</span><br><span class="line">            no_duplicate_list.append(i)</span><br><span class="line">        else:</span><br><span class="line">            no_duplicate_list.remove(i)</span><br><span class="line">    return no_duplicate_list.pop()</span><br></pre></td></tr></table></figure>
+<h3 id="方法一：List-operation"><a href="#方法一：List-operation" class="headerlink" title="方法一：List operation"></a>方法一：List operation</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">singleNumber</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">    no_duplicate_list = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> nums:</span><br><span class="line">        <span class="keyword">if</span> i <span class="keyword">not</span> <span class="keyword">in</span> no_duplicate_list:</span><br><span class="line">            no_duplicate_list.append(i)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            no_duplicate_list.remove(i)</span><br><span class="line">    <span class="keyword">return</span> no_duplicate_list.pop()</span><br></pre></td></tr></table></figure>
 <ul>
 <li>time: $O(n^2)$</li>
 <li><p>space: $O(n)$</p>
-<h3 id="方法二：Hash-Table"><a href="#方法二：Hash-Table" class="headerlink" title="方法二：Hash Table"></a>方法二：Hash Table</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def singleNumber(self, nums):</span><br><span class="line">    hash_table = []</span><br><span class="line">    for i in nums:</span><br><span class="line">        try:</span><br><span class="line">            hash_table.pop(i)</span><br><span class="line">        except:</span><br><span class="line">            hash_table[i] = 1</span><br><span class="line">    return hash_table.popitem()[0]</span><br></pre></td></tr></table></figure>
+<h3 id="方法二：Hash-Table"><a href="#方法二：Hash-Table" class="headerlink" title="方法二：Hash Table"></a>方法二：Hash Table</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">singleNumber</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">    hash_table = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> nums:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            hash_table.pop(i)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            hash_table[i] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> hash_table.popitem()[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>time: $O(n)$</p>
 </li>
 <li><p>space: $O(n)$</p>
 <h3 id="方法三：数学"><a href="#方法三：数学" class="headerlink" title="方法三：数学"></a>方法三：数学</h3><p>$$<br>2 \times (a+b+c) - (a+a+b+b+c) = c<br>$$</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def singleNUmber(self, nums):</span><br><span class="line">    return 2*sum(set(nums)) - sum(nums)</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">singleNUmber</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span>*sum(set(nums)) - sum(nums)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>time: $O(n+n)=O(n)$, see it as <code>sum(list(i for i in nums)</code></p>
 </li>
 <li><p>space: $O(n+n)=O(n)$</p>
-<h3 id="方法四：位操作"><a href="#方法四：位操作" class="headerlink" title="方法四：位操作"></a>方法四：位操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def singleNumber(self, nums):</span><br><span class="line">    a = 0</span><br><span class="line">    for i in nums:</span><br><span class="line">        a ^= i</span><br><span class="line">    return a</span><br></pre></td></tr></table></figure>
+<h3 id="方法四：位操作"><a href="#方法四：位操作" class="headerlink" title="方法四：位操作"></a>方法四：位操作</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">singleNumber</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">    a = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> nums:</span><br><span class="line">        a ^= i</span><br><span class="line">    <span class="keyword">return</span> a</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>time: $O(n)$</p>
 </li>
@@ -554,7 +554,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">136</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

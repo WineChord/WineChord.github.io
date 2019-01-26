@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Wine&amp;Chord">
 <meta property="og:description" content="问题描述买卖股票，可以买卖多次 实现水题，直接做12345678int maxProfit(vector&amp;lt;int&amp;gt;&amp;amp; prices) &amp;#123;        int total = 0;        for(int i = 1; i &amp;lt; prices.size(); i++)&amp;#123;            if(prices[i] &amp;gt; prices[i-1">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-02T03:58:31.542Z">
+<meta property="og:updated_time" content="2019-01-26T14:28:32.349Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="122. Best Time to Buy and Sell StockII-14">
 <meta name="twitter:description" content="问题描述买卖股票，可以买卖多次 实现水题，直接做12345678int maxProfit(vector&amp;lt;int&amp;gt;&amp;amp; prices) &amp;#123;        int total = 0;        for(int i = 1; i &amp;lt; prices.size(); i++)&amp;#123;            if(prices[i] &amp;gt; prices[i-1">
@@ -398,7 +398,7 @@
 
       
         <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>买卖股票，可以买卖多次</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>水题，直接做<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int maxProfit(vector&lt;int&gt;&amp; prices) &#123;</span><br><span class="line">        int total = 0;</span><br><span class="line">        for(int i = 1; i &lt; prices.size(); i++)&#123;</span><br><span class="line">            if(prices[i] &gt; prices[i-1])</span><br><span class="line">                total += prices[i] - prices[i-1];</span><br><span class="line">        &#125;</span><br><span class="line">        return total;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>水题，直接做<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> total = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; prices.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(prices[i] &gt; prices[i<span class="number">-1</span>])</span><br><span class="line">                total += prices[i] - prices[i<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> total;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -534,7 +534,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">136</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

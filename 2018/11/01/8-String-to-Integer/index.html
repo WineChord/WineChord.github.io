@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="问题描述字符串转换为整数 实现1234567891011121314int atoi(const char* str)&amp;#123;    int sign = 1, base = 0, i = 0;    while(str[i] == &amp;apos; &amp;apos;) i++;    if(str[i] == &amp;apos;-&amp;apos; || str[i] == &amp;apos;+&amp;apos;)">
+<meta name="description" content="问题描述字符串转换为整数 实现1234567891011121314int atoi(const char* str)&amp;#123;    int sign = 1, base = 0, i = 0;    while(str[i] == &apos; &apos;) i++;    if(str[i] == &apos;-&apos; || str[i] == &apos;+&apos;)        sign = 1 - 2 * (str[i++] =">
 <meta name="keywords" content="LeetCode,String">
 <meta property="og:type" content="article">
 <meta property="og:title" content="8. String to Integer">
 <meta property="og:url" content="http://yoursite.com/2018/11/01/8-String-to-Integer/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="问题描述字符串转换为整数 实现1234567891011121314int atoi(const char* str)&amp;#123;    int sign = 1, base = 0, i = 0;    while(str[i] == &amp;apos; &amp;apos;) i++;    if(str[i] == &amp;apos;-&amp;apos; || str[i] == &amp;apos;+&amp;apos;)">
+<meta property="og:description" content="问题描述字符串转换为整数 实现1234567891011121314int atoi(const char* str)&amp;#123;    int sign = 1, base = 0, i = 0;    while(str[i] == &apos; &apos;) i++;    if(str[i] == &apos;-&apos; || str[i] == &apos;+&apos;)        sign = 1 - 2 * (str[i++] =">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-02T11:06:24.024Z">
+<meta property="og:updated_time" content="2019-01-26T14:23:06.251Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="8. String to Integer">
-<meta name="twitter:description" content="问题描述字符串转换为整数 实现1234567891011121314int atoi(const char* str)&amp;#123;    int sign = 1, base = 0, i = 0;    while(str[i] == &amp;apos; &amp;apos;) i++;    if(str[i] == &amp;apos;-&amp;apos; || str[i] == &amp;apos;+&amp;apos;)">
+<meta name="twitter:description" content="问题描述字符串转换为整数 实现1234567891011121314int atoi(const char* str)&amp;#123;    int sign = 1, base = 0, i = 0;    while(str[i] == &apos; &apos;) i++;    if(str[i] == &apos;-&apos; || str[i] == &apos;+&apos;)        sign = 1 - 2 * (str[i++] =">
 
 
 
@@ -398,7 +398,7 @@
 
       
         <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>字符串转换为整数</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">int atoi(const char* str)&#123;</span><br><span class="line">    int sign = 1, base = 0, i = 0;</span><br><span class="line">    while(str[i] == &apos; &apos;) i++;</span><br><span class="line">    if(str[i] == &apos;-&apos; || str[i] == &apos;+&apos;)</span><br><span class="line">        sign = 1 - 2 * (str[i++] == &apos;-&apos;);</span><br><span class="line">    while(str[i] &gt;= &apos;0&apos; &amp;&amp; str[i] &lt;= &apos;9&apos;)&#123;</span><br><span class="line">        if(base &gt; INT_MAX/10 || (base == INT_MAX/10 &amp;&amp; str[i] - &apos;0&apos; &gt; 7))&#123; // because INT_MAX = 2147483647</span><br><span class="line">            if(sign == 1) return INT_MAX;</span><br><span class="line">            else return INT_MIN;</span><br><span class="line">        &#125;</span><br><span class="line">        base = 10*base + (str[i++] - &apos;0&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">    return base * sign;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">atoi</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* str)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sign = <span class="number">1</span>, base = <span class="number">0</span>, i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(str[i] == <span class="string">' '</span>) i++;</span><br><span class="line">    <span class="keyword">if</span>(str[i] == <span class="string">'-'</span> || str[i] == <span class="string">'+'</span>)</span><br><span class="line">        sign = <span class="number">1</span> - <span class="number">2</span> * (str[i++] == <span class="string">'-'</span>);</span><br><span class="line">    <span class="keyword">while</span>(str[i] &gt;= <span class="string">'0'</span> &amp;&amp; str[i] &lt;= <span class="string">'9'</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(base &gt; INT_MAX/<span class="number">10</span> || (base == INT_MAX/<span class="number">10</span> &amp;&amp; str[i] - <span class="string">'0'</span> &gt; <span class="number">7</span>))&#123; <span class="comment">// because INT_MAX = 2147483647</span></span><br><span class="line">            <span class="keyword">if</span>(sign == <span class="number">1</span>) <span class="keyword">return</span> INT_MAX;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">return</span> INT_MIN;</span><br><span class="line">        &#125;</span><br><span class="line">        base = <span class="number">10</span>*base + (str[i++] - <span class="string">'0'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> base * sign;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -533,7 +533,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">136</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

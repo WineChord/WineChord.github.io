@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="问题描述罗马数字转换为整数 实现123456789101112131415int romanToInt(string s)&amp;#123;    unordered_map&amp;lt;char, int&amp;gt; T = &amp;#123; &amp;#123; &amp;apos;I&amp;apos; , 1 &amp;#125;,                                   &amp;#123; &amp;apos;V&amp;apos;">
+<meta name="description" content="问题描述罗马数字转换为整数 实现123456789101112131415int romanToInt(string s)&amp;#123;    unordered_map&amp;lt;char, int&amp;gt; T = &amp;#123; &amp;#123; &apos;I&apos; , 1 &amp;#125;,                                   &amp;#123; &apos;V&apos; , 5 &amp;#125;,">
 <meta name="keywords" content="LeetCode,Math,String">
 <meta property="og:type" content="article">
 <meta property="og:title" content="13. Roman to Integer">
 <meta property="og:url" content="http://yoursite.com/2018/11/01/13-Roman-to-Integer/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="问题描述罗马数字转换为整数 实现123456789101112131415int romanToInt(string s)&amp;#123;    unordered_map&amp;lt;char, int&amp;gt; T = &amp;#123; &amp;#123; &amp;apos;I&amp;apos; , 1 &amp;#125;,                                   &amp;#123; &amp;apos;V&amp;apos;">
+<meta property="og:description" content="问题描述罗马数字转换为整数 实现123456789101112131415int romanToInt(string s)&amp;#123;    unordered_map&amp;lt;char, int&amp;gt; T = &amp;#123; &amp;#123; &apos;I&apos; , 1 &amp;#125;,                                   &amp;#123; &apos;V&apos; , 5 &amp;#125;,">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-01T15:04:01.801Z">
+<meta property="og:updated_time" content="2019-01-26T14:24:12.979Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="13. Roman to Integer">
-<meta name="twitter:description" content="问题描述罗马数字转换为整数 实现123456789101112131415int romanToInt(string s)&amp;#123;    unordered_map&amp;lt;char, int&amp;gt; T = &amp;#123; &amp;#123; &amp;apos;I&amp;apos; , 1 &amp;#125;,                                   &amp;#123; &amp;apos;V&amp;apos;">
+<meta name="twitter:description" content="问题描述罗马数字转换为整数 实现123456789101112131415int romanToInt(string s)&amp;#123;    unordered_map&amp;lt;char, int&amp;gt; T = &amp;#123; &amp;#123; &apos;I&apos; , 1 &amp;#125;,                                   &amp;#123; &apos;V&apos; , 5 &amp;#125;,">
 
 
 
@@ -398,7 +398,7 @@
 
       
         <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>罗马数字转换为整数</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">int romanToInt(string s)&#123;</span><br><span class="line">    unordered_map&lt;char, int&gt; T = &#123; &#123; &apos;I&apos; , 1 &#125;,</span><br><span class="line">                                   &#123; &apos;V&apos; , 5 &#125;,</span><br><span class="line">                                   &#123; &apos;X&apos; , 10 &#125;,</span><br><span class="line">                                   &#123; &apos;L&apos; , 50 &#125;,</span><br><span class="line">                                   &#123; &apos;C&apos; , 100 &#125;,</span><br><span class="line">                                   &#123; &apos;D&apos; , 500 &#125;,</span><br><span class="line">                                   &#123; &apos;M&apos; , 1000 &#125; &#125;;</span><br><span class="line">    int sum = T[s.back()];</span><br><span class="line">    for(int i = s.length() - 2; i &gt;= 0; --i)&#123;</span><br><span class="line">        if(T[s[i]] &lt; T[s[i+1]]) sum -= T[s[i]];</span><br><span class="line">        else sum += T[s[i]];</span><br><span class="line">    &#125;</span><br><span class="line">    return sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">romanToInt</span><span class="params">(<span class="built_in">string</span> s)</span></span>&#123;</span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt; T = &#123; &#123; <span class="string">'I'</span> , <span class="number">1</span> &#125;,</span><br><span class="line">                                   &#123; <span class="string">'V'</span> , <span class="number">5</span> &#125;,</span><br><span class="line">                                   &#123; <span class="string">'X'</span> , <span class="number">10</span> &#125;,</span><br><span class="line">                                   &#123; <span class="string">'L'</span> , <span class="number">50</span> &#125;,</span><br><span class="line">                                   &#123; <span class="string">'C'</span> , <span class="number">100</span> &#125;,</span><br><span class="line">                                   &#123; <span class="string">'D'</span> , <span class="number">500</span> &#125;,</span><br><span class="line">                                   &#123; <span class="string">'M'</span> , <span class="number">1000</span> &#125; &#125;;</span><br><span class="line">    <span class="keyword">int</span> sum = T[s.back()];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = s.length() - <span class="number">2</span>; i &gt;= <span class="number">0</span>; --i)&#123;</span><br><span class="line">        <span class="keyword">if</span>(T[s[i]] &lt; T[s[i+<span class="number">1</span>]]) sum -= T[s[i]];</span><br><span class="line">        <span class="keyword">else</span> sum += T[s[i]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -535,7 +535,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">136</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

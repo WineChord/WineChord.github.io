@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Wine&amp;Chord">
 <meta property="og:description" content="问题描述找出一个范围内有多少个好数。 实现1234567def rotatedDigits(self, N):    s1 = set([1,8,0])    s2 = set([1,8,0,6,9,2,5])    def isGood(x):        s = set([int(i) for i in str(x)])        return s.issubset(s2) and no">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-06T08:35:57.280Z">
+<meta property="og:updated_time" content="2019-01-26T14:43:55.086Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="788. Rotated Digits-String-12">
 <meta name="twitter:description" content="问题描述找出一个范围内有多少个好数。 实现1234567def rotatedDigits(self, N):    s1 = set([1,8,0])    s2 = set([1,8,0,6,9,2,5])    def isGood(x):        s = set([int(i) for i in str(x)])        return s.issubset(s2) and no">
@@ -398,7 +398,7 @@
 
       
         <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>找出一个范围内有多少个好数。</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def rotatedDigits(self, N):</span><br><span class="line">    s1 = set([1,8,0])</span><br><span class="line">    s2 = set([1,8,0,6,9,2,5])</span><br><span class="line">    def isGood(x):</span><br><span class="line">        s = set([int(i) for i in str(x)])</span><br><span class="line">        return s.issubset(s2) and not s.issubset(s1)</span><br><span class="line">    return sum(isGood(i) for i in range(N+1))</span><br></pre></td></tr></table></figure>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rotatedDigits</span><span class="params">(self, N)</span>:</span></span><br><span class="line">    s1 = set([<span class="number">1</span>,<span class="number">8</span>,<span class="number">0</span>])</span><br><span class="line">    s2 = set([<span class="number">1</span>,<span class="number">8</span>,<span class="number">0</span>,<span class="number">6</span>,<span class="number">9</span>,<span class="number">2</span>,<span class="number">5</span>])</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isGood</span><span class="params">(x)</span>:</span></span><br><span class="line">        s = set([int(i) <span class="keyword">for</span> i <span class="keyword">in</span> str(x)])</span><br><span class="line">        <span class="keyword">return</span> s.issubset(s2) <span class="keyword">and</span> <span class="keyword">not</span> s.issubset(s1)</span><br><span class="line">    <span class="keyword">return</span> sum(isGood(i) <span class="keyword">for</span> i <span class="keyword">in</span> range(N+<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -533,7 +533,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">136</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

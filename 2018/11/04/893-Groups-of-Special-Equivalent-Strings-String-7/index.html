@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="问题描述找到字符串数组中有多少组是相等价的。 解法123456789101112131415161718192021Set&amp;lt;String&amp;gt; seen = new HashSet();for(String S: A)&amp;#123;    int[] count = new int[52];    for(int i =0; i &amp;lt; S.length(); i++)        co">
+<meta name="description" content="问题描述找到字符串数组中有多少组是相等价的。 解法12345678Set&amp;lt;String&amp;gt; seen = new HashSet();for(String S: A)&amp;#123;    int[] count = new int[52];    for(int i =0; i &amp;lt; S.length(); i++)        count[S.charAt(i) - &apos;a&apos; + 2">
 <meta name="keywords" content="LeetCode,String">
 <meta property="og:type" content="article">
 <meta property="og:title" content="893.Groups of Special-Equivalent Strings-String-7">
 <meta property="og:url" content="http://yoursite.com/2018/11/04/893-Groups-of-Special-Equivalent-Strings-String-7/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="问题描述找到字符串数组中有多少组是相等价的。 解法123456789101112131415161718192021Set&amp;lt;String&amp;gt; seen = new HashSet();for(String S: A)&amp;#123;    int[] count = new int[52];    for(int i =0; i &amp;lt; S.length(); i++)        co">
+<meta property="og:description" content="问题描述找到字符串数组中有多少组是相等价的。 解法12345678Set&amp;lt;String&amp;gt; seen = new HashSet();for(String S: A)&amp;#123;    int[] count = new int[52];    for(int i =0; i &amp;lt; S.length(); i++)        count[S.charAt(i) - &apos;a&apos; + 2">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-22T01:51:22.023Z">
+<meta property="og:updated_time" content="2019-01-26T14:47:07.795Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="893.Groups of Special-Equivalent Strings-String-7">
-<meta name="twitter:description" content="问题描述找到字符串数组中有多少组是相等价的。 解法123456789101112131415161718192021Set&amp;lt;String&amp;gt; seen = new HashSet();for(String S: A)&amp;#123;    int[] count = new int[52];    for(int i =0; i &amp;lt; S.length(); i++)        co">
+<meta name="twitter:description" content="问题描述找到字符串数组中有多少组是相等价的。 解法12345678Set&amp;lt;String&amp;gt; seen = new HashSet();for(String S: A)&amp;#123;    int[] count = new int[52];    for(int i =0; i &amp;lt; S.length(); i++)        count[S.charAt(i) - &apos;a&apos; + 2">
 
 
 
@@ -398,7 +398,8 @@
 
       
         <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>找到字符串数组中有多少组是相等价的。</p>
-<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;String&gt; seen = new HashSet();</span><br><span class="line">for(String S: A)&#123;</span><br><span class="line">    int[] count = new int[52];</span><br><span class="line">    for(int i =0; i &lt; S.length(); i++)</span><br><span class="line">        count[S.charAt(i) - &apos;a&apos; + 26*(i%2)]++;</span><br><span class="line">    seen.add(Arrays.toString(count));</span><br><span class="line">&#125;</span><br><span class="line">return seen.size();</span><br><span class="line">// C++</span><br><span class="line">set&lt;pair&lt;string, string&gt;&gt; s;</span><br><span class="line">for(const auto&amp; w: A)&#123;</span><br><span class="line">    pair&lt;string, string&gt; p;</span><br><span class="line">    for(int i = 0; i &lt; w.size(); i++)&#123;</span><br><span class="line">        if(i % 2) p.first += w[i];</span><br><span class="line">        else p.second += w[i];</span><br><span class="line">    &#125;</span><br><span class="line">    sort(p.first.begin(), p.first.end());</span><br><span class="line">    sort(p.second.begin(), p.second.end());</span><br><span class="line">    s.insert(p);</span><br><span class="line">&#125;</span><br><span class="line">return s.size();</span><br></pre></td></tr></table></figure>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;String&gt; seen = <span class="keyword">new</span> HashSet();</span><br><span class="line"><span class="keyword">for</span>(String S: A)&#123;</span><br><span class="line">    <span class="keyword">int</span>[] count = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">52</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>; i &lt; S.length(); i++)</span><br><span class="line">        count[S.charAt(i) - <span class="string">'a'</span> + <span class="number">26</span>*(i%<span class="number">2</span>)]++;</span><br><span class="line">    seen.add(Arrays.toString(count));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> seen.size();</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="built_in">set</span>&lt;pair&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;&gt; s;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; w: A)&#123;</span><br><span class="line">    pair&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; p;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; w.size(); i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(i % <span class="number">2</span>) p.first += w[i];</span><br><span class="line">        <span class="keyword">else</span> p.second += w[i];</span><br><span class="line">    &#125;</span><br><span class="line">    sort(p.first.begin(), p.first.end());</span><br><span class="line">    sort(p.second.begin(), p.second.end());</span><br><span class="line">    s.insert(p);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> s.size();</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -533,7 +534,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">136</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

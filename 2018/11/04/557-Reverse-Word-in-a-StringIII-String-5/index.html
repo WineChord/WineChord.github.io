@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="问题描述对字符串中每个单词进行字母翻转 实现123456789for(int i = 0; i &amp;lt; s.length(); i++)&amp;#123;    if(s[i] != &amp;apos; &amp;apos;)&amp;#123;        int j = i;        for(;j &amp;lt; s.length() &amp;amp;&amp;amp; s[j] != &amp;apos; &amp;apos;; j++);">
+<meta name="description" content="问题描述对字符串中每个单词进行字母翻转 实现123456789for(int i = 0; i &amp;lt; s.length(); i++)&amp;#123;    if(s[i] != &apos; &apos;)&amp;#123;        int j = i;        for(;j &amp;lt; s.length() &amp;amp;&amp;amp; s[j] != &apos; &apos;; j++);        reverse(s.begi">
 <meta name="keywords" content="LeetCode,String">
 <meta property="og:type" content="article">
 <meta property="og:title" content="557. Reverse Word in a StringIII-String-5">
 <meta property="og:url" content="http://yoursite.com/2018/11/04/557-Reverse-Word-in-a-StringIII-String-5/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="问题描述对字符串中每个单词进行字母翻转 实现123456789for(int i = 0; i &amp;lt; s.length(); i++)&amp;#123;    if(s[i] != &amp;apos; &amp;apos;)&amp;#123;        int j = i;        for(;j &amp;lt; s.length() &amp;amp;&amp;amp; s[j] != &amp;apos; &amp;apos;; j++);">
+<meta property="og:description" content="问题描述对字符串中每个单词进行字母翻转 实现123456789for(int i = 0; i &amp;lt; s.length(); i++)&amp;#123;    if(s[i] != &apos; &apos;)&amp;#123;        int j = i;        for(;j &amp;lt; s.length() &amp;amp;&amp;amp; s[j] != &apos; &apos;; j++);        reverse(s.begi">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-06T08:35:57.276Z">
+<meta property="og:updated_time" content="2019-01-26T14:36:55.001Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="557. Reverse Word in a StringIII-String-5">
-<meta name="twitter:description" content="问题描述对字符串中每个单词进行字母翻转 实现123456789for(int i = 0; i &amp;lt; s.length(); i++)&amp;#123;    if(s[i] != &amp;apos; &amp;apos;)&amp;#123;        int j = i;        for(;j &amp;lt; s.length() &amp;amp;&amp;amp; s[j] != &amp;apos; &amp;apos;; j++);">
+<meta name="twitter:description" content="问题描述对字符串中每个单词进行字母翻转 实现123456789for(int i = 0; i &amp;lt; s.length(); i++)&amp;#123;    if(s[i] != &apos; &apos;)&amp;#123;        int j = i;        for(;j &amp;lt; s.length() &amp;amp;&amp;amp; s[j] != &apos; &apos;; j++);        reverse(s.begi">
 
 
 
@@ -398,7 +398,7 @@
 
       
         <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>对字符串中每个单词进行字母翻转</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">for(int i = 0; i &lt; s.length(); i++)&#123;</span><br><span class="line">    if(s[i] != &apos; &apos;)&#123;</span><br><span class="line">        int j = i;</span><br><span class="line">        for(;j &lt; s.length() &amp;&amp; s[j] != &apos; &apos;; j++);</span><br><span class="line">        reverse(s.begin()+i, s.begin()+j);</span><br><span class="line">        i = j-1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">return s;</span><br></pre></td></tr></table></figure>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(s[i] != <span class="string">' '</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> j = i;</span><br><span class="line">        <span class="keyword">for</span>(;j &lt; s.length() &amp;&amp; s[j] != <span class="string">' '</span>; j++);</span><br><span class="line">        reverse(s.begin()+i, s.begin()+j);</span><br><span class="line">        i = j<span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> s;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -533,7 +533,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">136</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

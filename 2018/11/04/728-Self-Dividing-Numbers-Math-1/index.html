@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="问题描述问一个范围内有哪些数是可以被他们的每一位整除的？ 实现1234567891011# Pythonis_self_dividing = lambda num: &amp;apos;0&amp;apos; not in str(num) and all([num%int(digit)==0 for digit in str(num)])return filter(is_self_dividing, range">
+<meta name="description" content="问题描述问一个范围内有哪些数是可以被他们的每一位整除的？ 实现123# Pythonis_self_dividing = lambda num: &apos;0&apos; not in str(num) and all([num%int(digit)==0 for digit in str(num)])return filter(is_self_dividing, range(left, right+1)) 123">
 <meta name="keywords" content="LeetCode,Math">
 <meta property="og:type" content="article">
 <meta property="og:title" content="728. Self Dividing Numbers-Math-1">
 <meta property="og:url" content="http://yoursite.com/2018/11/04/728-Self-Dividing-Numbers-Math-1/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="问题描述问一个范围内有哪些数是可以被他们的每一位整除的？ 实现1234567891011# Pythonis_self_dividing = lambda num: &amp;apos;0&amp;apos; not in str(num) and all([num%int(digit)==0 for digit in str(num)])return filter(is_self_dividing, range">
+<meta property="og:description" content="问题描述问一个范围内有哪些数是可以被他们的每一位整除的？ 实现123# Pythonis_self_dividing = lambda num: &apos;0&apos; not in str(num) and all([num%int(digit)==0 for digit in str(num)])return filter(is_self_dividing, range(left, right+1)) 123">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-06T08:35:57.283Z">
+<meta property="og:updated_time" content="2019-01-26T14:42:34.330Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="728. Self Dividing Numbers-Math-1">
-<meta name="twitter:description" content="问题描述问一个范围内有哪些数是可以被他们的每一位整除的？ 实现1234567891011# Pythonis_self_dividing = lambda num: &amp;apos;0&amp;apos; not in str(num) and all([num%int(digit)==0 for digit in str(num)])return filter(is_self_dividing, range">
+<meta name="twitter:description" content="问题描述问一个范围内有哪些数是可以被他们的每一位整除的？ 实现123# Pythonis_self_dividing = lambda num: &apos;0&apos; not in str(num) and all([num%int(digit)==0 for digit in str(num)])return filter(is_self_dividing, range(left, right+1)) 123">
 
 
 
@@ -398,7 +398,8 @@
 
       
         <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>问一个范围内有哪些数是可以被他们的每一位整除的？</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># Python</span><br><span class="line">is_self_dividing = lambda num: &apos;0&apos; not in str(num) and all([num%int(digit)==0 for digit in str(num)])</span><br><span class="line">return filter(is_self_dividing, range(left, right+1))</span><br><span class="line">// C++</span><br><span class="line">vector&lt;int&gt; res;</span><br><span class="line">for(int i = left, n = 0; i &lt;= right; i++)&#123;</span><br><span class="line">    for(n = i; n &gt; 0; n /= 10)</span><br><span class="line">        if(!(n%10) || i%(n%10)) break;</span><br><span class="line">    if(!n) res.push_back(i);</span><br><span class="line">&#125;</span><br><span class="line">return res;</span><br></pre></td></tr></table></figure>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line">is_self_dividing = <span class="keyword">lambda</span> num: <span class="string">'0'</span> <span class="keyword">not</span> <span class="keyword">in</span> str(num) <span class="keyword">and</span> all([num%int(digit)==<span class="number">0</span> <span class="keyword">for</span> digit <span class="keyword">in</span> str(num)])</span><br><span class="line"><span class="keyword">return</span> filter(is_self_dividing, range(left, right+<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = left, n = <span class="number">0</span>; i &lt;= right; i++)&#123;</span><br><span class="line">    <span class="keyword">for</span>(n = i; n &gt; <span class="number">0</span>; n /= <span class="number">10</span>)</span><br><span class="line">        <span class="keyword">if</span>(!(n%<span class="number">10</span>) || i%(n%<span class="number">10</span>)) <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">if</span>(!n) res.push_back(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> res;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -533,7 +534,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">136</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

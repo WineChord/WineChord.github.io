@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="问题描述给一个只含有0和1的数组，问里面最多的连续1的长度 实现12345678910111213public int findMaxConsecutiveOnes(int[] nums)&amp;#123;    int maxHere = 0, max = 0;    for(int n: nums)        max = Maxth.max(max, maxHere = (n==0)?0:max">
+<meta name="description" content="问题描述给一个只含有0和1的数组，问里面最多的连续1的长度 实现123456public int findMaxConsecutiveOnes(int[] nums)&amp;#123;    int maxHere = 0, max = 0;    for(int n: nums)        max = Maxth.max(max, maxHere = (n==0)?0:maxHere+1);">
 <meta name="keywords" content="LeetCode,Array">
 <meta property="og:type" content="article">
 <meta property="og:title" content="485. Max Consecutive Ones-8">
 <meta property="og:url" content="http://yoursite.com/2018/11/02/485-Max-Consecutive-Ones-8/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="问题描述给一个只含有0和1的数组，问里面最多的连续1的长度 实现12345678910111213public int findMaxConsecutiveOnes(int[] nums)&amp;#123;    int maxHere = 0, max = 0;    for(int n: nums)        max = Maxth.max(max, maxHere = (n==0)?0:max">
+<meta property="og:description" content="问题描述给一个只含有0和1的数组，问里面最多的连续1的长度 实现123456public int findMaxConsecutiveOnes(int[] nums)&amp;#123;    int maxHere = 0, max = 0;    for(int n: nums)        max = Maxth.max(max, maxHere = (n==0)?0:maxHere+1);">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-02T01:08:43.549Z">
+<meta property="og:updated_time" content="2019-01-26T14:36:26.835Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="485. Max Consecutive Ones-8">
-<meta name="twitter:description" content="问题描述给一个只含有0和1的数组，问里面最多的连续1的长度 实现12345678910111213public int findMaxConsecutiveOnes(int[] nums)&amp;#123;    int maxHere = 0, max = 0;    for(int n: nums)        max = Maxth.max(max, maxHere = (n==0)?0:max">
+<meta name="twitter:description" content="问题描述给一个只含有0和1的数组，问里面最多的连续1的长度 实现123456public int findMaxConsecutiveOnes(int[] nums)&amp;#123;    int maxHere = 0, max = 0;    for(int n: nums)        max = Maxth.max(max, maxHere = (n==0)?0:maxHere+1);">
 
 
 
@@ -398,7 +398,8 @@
 
       
         <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个只含有0和1的数组，问里面最多的连续1的长度</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public int findMaxConsecutiveOnes(int[] nums)&#123;</span><br><span class="line">    int maxHere = 0, max = 0;</span><br><span class="line">    for(int n: nums)</span><br><span class="line">        max = Maxth.max(max, maxHere = (n==0)?0:maxHere+1);</span><br><span class="line">    return max;</span><br><span class="line">&#125;</span><br><span class="line">// C++</span><br><span class="line">int findMaxConsecutiveOnes(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        int maxHere = 0, m = 0;</span><br><span class="line">        for(auto &amp; n: nums)</span><br><span class="line">            m = max(m, maxHere=(n==0)?0:maxHere+1);</span><br><span class="line">        return m;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findMaxConsecutiveOnes</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> maxHere = <span class="number">0</span>, max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> n: nums)</span><br><span class="line">        max = Maxth.max(max, maxHere = (n==<span class="number">0</span>)?<span class="number">0</span>:maxHere+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findMaxConsecutiveOnes</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> maxHere = <span class="number">0</span>, m = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp; n: nums)</span><br><span class="line">            m = max(m, maxHere=(n==<span class="number">0</span>)?<span class="number">0</span>:maxHere+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> m;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -533,7 +534,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">136</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
