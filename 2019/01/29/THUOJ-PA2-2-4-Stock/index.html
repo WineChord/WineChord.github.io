@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Wine&amp;Chord">
 <meta property="og:description" content="问题描述 股票交易所的交易规则如下：  股票可以通过报价指令以某个报价进入市场，市场中可以存在某只股票的多个报价。 股票可以通过推出指令取消一次报价。但每次退出指令只会取消当前事情中该股票最早的那次报价。 股票某时刻的总价值为在市场中最高报价和总报价数的乘积。总价值可能是负值。   请设计一款软件，用来自动处理报价/退出指令以及计算每个指令被运行后该股票的价值。   输入输出 输入： 第一行：n">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-29T14:25:25.772Z">
+<meta property="og:updated_time" content="2019-01-29T14:31:22.619Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="THUOJ PA2 2-4 Stock">
 <meta name="twitter:description" content="问题描述 股票交易所的交易规则如下：  股票可以通过报价指令以某个报价进入市场，市场中可以存在某只股票的多个报价。 股票可以通过推出指令取消一次报价。但每次退出指令只会取消当前事情中该股票最早的那次报价。 股票某时刻的总价值为在市场中最高报价和总报价数的乘积。总价值可能是负值。   请设计一款软件，用来自动处理报价/退出指令以及计算每个指令被运行后该股票的价值。   输入输出 输入： 第一行：n">
@@ -412,7 +412,7 @@
 <li>第一行：n 表示指令总数</li>
 <li>以下n行：依次对股票执行的n个命令<ul>
 <li>命令格式：<ul>
-<li>E x // $-2^{31}\le x\l 2^{31}$，表示将股票以报价$x$进入市场，市场中可以存在该股票的多个报价。可以存在相同的报价。</li>
+<li>E x // $-2^{31}\le x\lt 2^{31}$，表示将股票以报价$x$进入市场，市场中可以存在该股票的多个报价。可以存在相同的报价。</li>
 <li>D // 表示取消当前市场中该股票最早的那次报价。</li>
 </ul>
 </li>
@@ -483,6 +483,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/29/THU机试索引帖/" rel="prev" title="THU机试索引帖">
+                THU机试索引帖 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -573,7 +577,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">139</span>
+                  <span class="site-state-item-count">143</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -584,7 +588,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -595,7 +599,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

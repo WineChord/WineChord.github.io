@@ -1,9 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[THU2018推研机试 八四的鹅卵石]]></title>
+    <url>%2F2019%2F01%2F29%2FTHU2018%E6%8E%A8%E7%A0%94%E6%9C%BA%E8%AF%95-%E5%85%AB%E5%9B%9B%E7%9A%84%E9%B9%85%E5%8D%B5%E7%9F%B3%2F</url>
+    <content type="text"><![CDATA[时间：2018年9月16日 13:30~17:30问题描述 八四的鹅卵石（$lics$） 小八拿出 $n$ 块鹅卵石排成一个序列，排在第 $i$ 位的鹅卵石的美丽度为 $a_i$ 按照原序列的挑选出一个子序列，使得在该子序列中，后一个鹅卵石的美丽度不比前一块低。 问如此做能得到的最长的子序列长度是多少？ 小四认为这个问题很 $naive$（神TM…），于是他决定将小八的鹅卵石序列首尾相连，组成一个鹅卵石环，然后计算在这个环上的满足要求的最长子序列的长度。 形式化地，对于一个子序列 $a_{x_1},a_{x_2},…,a_{x_i},…,a_{x_m}(1\le x_1\lt x_2\lt … \lt x_m\le n)$，它是一个满足要求的子序列当且仅当它满足一下两个条件： $a_{x_1}\le a_{x_2}\le …\le a_{x_m}$。 $1\le x_1\lt x_2\lt …\lt x_m\le n$ 或 $1\lt x_1\lt x_2\lt…\lt x_t\le n,\ 1\le x_{t+1}\lt x_{t+2}\lt …\lt x_m\lt x_1(\exists t\in \mathbb{N}, 1\lt t\lt m)$。 输入 第一行：T 表示数据组数 以下 $2T$ 行：每两行一组数据 第一行：n 表示鹅卵石的个数 第二行：n 个非负整数，依次是 $a_1,a_2,…,a_n$，代表 $n$ 个鹅卵石各自的美丽程度。 保证所有数据随机生成。具体地，每一项 $a_i$ 独立地从 $[1,n]$ 内的整数中等概率选取。 输出 共 $T$ 行：每行一个正整数 $m$，表示满足要求的子序列的最长的长度。 样例输入12345233 1 2101 3 8 8 1 7 9 3 10 10 样例输出1237 样例解释 对于第一组数据，选取的子序列为 $a_2,a_3,a_1$。 子任务 测试点 $n$ $T$ $1,2$ $=10$ $\le10$ $3,4$ $=10^2$ $\le10$ $5,6$ $=10^3$ $\le10$ $7,8,9,10$ $=10^4$ $\le10$ 思路 最长上升子序列的变形版本 实现]]></content>
+      <categories>
+        <category>THU 机试</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[THU2018推研机试 过去的项链]]></title>
+    <url>%2F2019%2F01%2F29%2FTHU2018%E6%8E%A8%E7%A0%94%E6%9C%BA%E8%AF%95-%E8%BF%87%E5%8E%BB%E7%9A%84%E9%A1%B9%E9%93%BE%2F</url>
+    <content type="text"><![CDATA[时间：2018年9月16日 13:30~17:30题目描述 过去的项链（$reverse$） 过去有一个项链。这个项链上串了 $N$ 个珠子，其中第 $i$ 个珠子上有 $a_i$ 的能量值（$a_i$ 不一定非负）。 对于一段连续的珠子，过去定义其美丽程度为它们的能量值之和。自然地，一个项链的美观值定义为它的所有连续子段的美丽程度的最大值。 过去得到了一把神奇的剪刀，他可以把这个项链的恰好一个连续子段剪下来，然后反转这个子段，再拼接回去得到一个新项链。 过去想利用这把剪刀，得到一个美观值尽可能大的新项链。 问新项链的美观值最大可以是多少，以及为了达到这个最大值，应该选择原项链的哪一段去切？ 输入格式 第一行：正整数N $1\le N\le 2\times 10^5$ 第二行： $N$ 个整数，描述序列 ${a_i}$，此处下标从 $1$ 开始，保证 $a_i$ 的绝对值不超过 $10^8$ 输出格式 第一行：一个整数，表示美观值的最大值 第二行：两个整数 $l,r$，表示选择把 $a_l,a_{l+1},…,a_r$ 这一段切下来，反转再拼接回去。 注意：此处是一个闭区间，特别的，当 $l\gt r$ 时，表示选择的是 $a_l,a_{l+1},…,a_N,a_1,a_2,…,a_r$ 这一段；当 $l=r$ 时，单个珠子被反转相当于什么也没有发生。 样例1 输入1263 2 -1 1 -1 5 样例1 输出12113 4 样例1 解释 反转 $a_3,a_4$ 后，美丽程度的最大值在子段 $[5,3,2,1]$ 上取到，故答案为 $11$。 子任务 1（30分）：$N\le 50$ 2（25分）：$N\le 400$ 3（25分）：$N\le 3000$ 4（20分）：$N\le 2\times 10^5$ 思路 动态规划，变成一个 maximumSubarray 问题 实现]]></content>
+      <categories>
+        <category>THU 机试</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[THU2018推研机试 贪吃蛇]]></title>
+    <url>%2F2019%2F01%2F29%2FTHU2018%E6%8E%A8%E7%A0%94%E6%9C%BA%E8%AF%95-%E8%B4%AA%E5%90%83%E8%9B%87%2F</url>
+    <content type="text"><![CDATA[时间：2018年9月16日 13:30~17:30题目描述 贪吃蛇(snake) 模拟贪吃蛇游戏，规则如下： 游戏地图为 $64\times 64$ 的网格地图，左上角格子坐标为 $(0,0)$，右下角格子坐标为 $(63,63)$，格子 $(x,y)$ 代表位于从上往下数第 $x$ 行，从左往右数第 $y$ 列的格子。 游戏可以有任意多个玩家，每个玩家有一定数量的蛇（数量在游戏开始时设定）。同一时刻每个玩家只能有最多一条蛇在场上。当某个玩家的蛇死亡后，若他还有剩余的蛇，则在一段时间后重新上场，若无剩余的蛇，则他游戏失败。 每条蛇出生时长度为 $2$，在系统指定位置出生，且保证出生位置一定为空，若出生指令涉及的坐标再指令执行的时刻被其他物体（蛇，墙，豆子）占据或坐标不合法，该出生指令无效，保证出生指令指定的蛇的头尾位置一定相邻。蛇出生后若无玩家操作则静止不动，直至玩家发出移动指令后才开始移动（若玩家指定的移动方向恰好从头指向尾，则视为头尾交换），并且直至死亡再也不会停止。 蛇每一秒移动一格，若玩家在这一秒指定了蛇头的移动方向，则蛇头按指定方向移动；若未指定，则按上一秒的方向移动；若指定的移动方向与原先移动方向正好相反，则不会生效。若在某一秒蛇头移动到了豆子的位置，则豆子被吃掉，同时蛇身长度增加。每吃掉一个豆子，身子长度加一。 蛇头碰到自己的蛇身，对方的蛇身，墙或越过地图边界，即会死亡；若碰撞时刻恰好有多条蛇且长度均为最大，则发生碰撞的所有蛇均死亡。 系统会不定期通过指令指示随机撒一些豆子在某些格子上，或者在一些格子上随机生成墙。若该指令涉及的某些坐标再指令执行的时刻被其他物体（蛇，墙，豆子）占据或坐标不合法，整条指令作废；若该指令中有重复的坐标，只在该坐标生成一个豆子（墙）。 已知按时间顺序给出的玩家操作记录（若某玩家在同一秒进行了多个移动操作，只取记录顺序最后的一个，无论它是否有效）和系统生成墙和豆子的记录，请根据这份记录来判断哪位玩家取得了胜利。 若同一秒内同时有系统的操作和玩家的操作，系统的操作会首先按记录顺序执行，玩家的操作按照记录的先后顺序依次执行。 同一秒内，每条蛇的移动操作也有先后顺序，若这一秒内玩家通过有效的操作指定了蛇的移动方向，则这条蛇在这条操作得到执行时发生移动，否则按原有顺序移动；按原有方向移动的蛇，在这一秒内所有的操作执行完成后，按最开始给出玩家 $ID$ 时的顺序发生移动。发生移动后触发的事件（如蛇变长，碰撞等）均在当前移动发生后立即结算。 若某条指令执行时刻条件不能满足或与上述规则冲突，如玩家发出移动指令但场上并没有他的蛇存在，或系统给出了蛇出生指令但该玩家已经没有剩余的蛇，系统给出了蛇出生指令但该玩家场上尚有存活的蛇等，则该指令自动忽略。 在记录内容结束时场上仍有存活或剩余的蛇的玩家（们）取得游戏的胜利，若记录结束时所有玩家的蛇均死亡且没有剩余的蛇，则没有玩家取得胜利。 输入 从标准输入读入数据。 第一行：n 表示有 $n$ 个玩家 以下 $n$ 行：每行一个字符串（保证仅由英文字母，下划线，阿拉伯数字组成，不会超过 $20$ 个字符，且不会是 &quot;System&quot; &quot;Bean&quot; Wall）和一个正整数，字符串表示一个玩家的 $ID$，正整数表示该玩家的蛇的数量。 接下来一行：L 表示有 $L$ 条记录 以下 $L$ 行：每行表示一条记录，行内的字符串或整数以一个空格分开。 每一行开头有一个非负整数 $S$，表示该操作发生在游戏开始后的第几秒。 若接下来的字符串为某个玩家的 $ID$，则表示是这个玩家进行的操作。再接下来的字符串若为 &quot;UP&quot; &quot;DOWN&quot; &quot;LEFT&quot; &quot;RIGHT&quot;，则分别表示操作自己的蛇向上下左右移动。 若 $S$ 后面的字符串为 &quot;System&quot;，表示是游戏系统进行的操作，若接下来的字符串为 &quot;Wall&quot;，表示生成墙，若接下来字符串为 &quot;Bean&quot;，表示生成豆子，接下来跟着一个正整数 $n$，后面跟着 $2n$ 个整数 $x_1,y_1,x_2,y_2,…,x_n,y_n$，代表在坐标分别为 $(x_1,y_1),(x_2,y_2),…,(x_n,y_n)$ 的格子添加墙或一个豆子。若 &quot;System&quot; 后面的字符串是一个玩家的 $ID$，表示该玩家的蛇出生了，后面跟着四个整数 $x_1,y_1,x_2,y_2$，表示该蛇蛇头在 $(x_1,y_1)$，蛇身在 $(x_2,y_2)$。 保证 $S\le 3,000$，保证后给出的 $S$ 一定不小于先给出的 $S$。 保证输入数据中所有整数均在 $32$ 位带符号整型范围内。 输出 输出到标准输出 输出 $n$ 行 每行开头一个字符串，为一个玩家 $ID$，若该玩家胜利，后面跟一字符串 &quot;WIN&quot;，若失败，后面跟一个整数，表示在第多少秒失败。 各玩家按游戏失败的时间顺序输出，若有多个胜者，按照输入最开始给出玩家的相对顺序输出所有胜者。 样例输入1234567891011122Wangxz 1Bakser 180 System Wangxz 1 0 0 00 System Bakser 62 63 63 631 Bakser UP1 Wangxz DOWN5 System Wall 2 20 20 26 2330 Wangxz RIGHT38 Wangxz DOWN65 System Wall 2 20 20 26 23 样例输出12Bakser 63Wangxz WIN 样例解释 第 $63$ 秒，$Bakser$ 的蛇越过地图上边界而死，$Wangxz$ 胜利。 子任务 子任务 $n$ $L$ 每个玩家蛇的数量 特殊性质 分值 $1$ $=1$ $\le 10^2$ $\le1$ 没有墙和豆子 $15$ $2$ $=1$ $\le 10^2$ $\le1$ 没有豆子 $15$ $3$ $=1$ $\le 10^2$ $\le1$ 无 $15$ $4$ $=2$ $\le 3,000$ $\le1$ 无 $15$ $5$ $=10$ $\le 3,000$ $\le1$ 无 $20$ $6$ $=10$ $\le 3,000$ $\le10$ 无 $20$ 思路 大模拟 实现]]></content>
+      <categories>
+        <category>THU 机试</category>
+      </categories>
+      <tags>
+        <tag>模拟</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[THU机试索引帖]]></title>
+    <url>%2F2019%2F01%2F29%2FTHU%E6%9C%BA%E8%AF%95%E7%B4%A2%E5%BC%95%E5%B8%96%2F</url>
+    <content type="text"><![CDATA[THU 2018 推研机试courtesy of XZK 贪吃蛇 过去的项链 八四的鹅卵石]]></content>
+      <categories>
+        <category>索引贴</category>
+      </categories>
+      <tags>
+        <tag>索引贴</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[THUOJ PA2 2-4 Stock]]></title>
     <url>%2F2019%2F01%2F29%2FTHUOJ-PA2-2-4-Stock%2F</url>
-    <content type="text"><![CDATA[问题描述 股票交易所的交易规则如下： 股票可以通过报价指令以某个报价进入市场，市场中可以存在某只股票的多个报价。 股票可以通过推出指令取消一次报价。但每次退出指令只会取消当前事情中该股票最早的那次报价。 股票某时刻的总价值为在市场中最高报价和总报价数的乘积。总价值可能是负值。 请设计一款软件，用来自动处理报价/退出指令以及计算每个指令被运行后该股票的价值。 输入输出 输入： 第一行：n 表示指令总数 以下n行：依次对股票执行的n个命令 命令格式： E x // $-2^{31}\le x\l 2^{31}$，表示将股票以报价$x$进入市场，市场中可以存在该股票的多个报价。可以存在相同的报价。 D // 表示取消当前市场中该股票最早的那次报价。 输出： 共 $n$ 行：依次表示执行完每条命令后市场中股票的总价值。 输入输出样例12345678910111213input:5E 5E 6E 2DDoutput:51218122 限制 $0\le n\le 1,000,000$ 提示 讲义 [04-XA] Queap。 思路 根据提示，使用Queap $Queap$ 是一个优先级队列，允许任意元素的插入和删除以及最高优先级元素的索引。 每个删除分摊时间复杂度为 $O(logn)$，$n$ 为比要删除的元素在队列时间更长的元素的个数。插入的分摊时间复杂度为 $O(1)$。 数据结构包含一个双向链表和一个 $2-4$ 树，每种结构中都记录着最小优先级的元素。 基本的操作是将新元素插入到双向链表中，当从链表中删除元素时，该元素会移动至 $2-4$ 树中。$2-4$ 树按照插入的顺序来储存元素。 实现两个双向队列 $P$ 和 $Q$，$Q$ 就是相应的队列，$P$ 也同样是一个双向队列，和 $Q$ 不同之处在于 $P$ 的最前端存储的永远是队列中的最大值。 操作如下（引用自讲义[04-XA]）： 出元素：Q.dequeue(); P.dequeue(); //O(1) 入元素：Q.enqueue(e); P.enqueue(e); for(x=P.rear();x&amp;&amp;(x-&gt;key&lt;=e);x=x-&gt;pred) x-&gt;key=e; 最坏情况 O(n) 按照讲义的操作进行实现即可。 实现1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192#include&lt;iostream&gt;using namespace std;struct Node&#123; Node *pred, *next; int val; Node(int e=0)&#123; val = e; pred = next = NULL; &#125;&#125;;struct Q&#123; Node* head = NULL; Node* tail = NULL; Q()&#123; head = new Node; tail = new Node; head-&gt;pred = tail; head-&gt;next = tail; tail-&gt;pred = head; tail-&gt;next = tail; &#125; void enqueue(int e)&#123; Node* cur = new Node(e); tail-&gt;pred-&gt;next = cur; cur-&gt;pred = tail-&gt;pred; tail-&gt;pred = cur; cur-&gt;next = tail; &#125; int dequeue()&#123; Node* p0 = head-&gt;next; Node* p1 = p0-&gt;next; p1-&gt;pred = head; head-&gt;next = p1; p0-&gt;next = p0-&gt;pred = NULL; int v = p0-&gt;val; delete p0; return v; &#125;&#125;;struct P&#123; Node* head = NULL; Node* tail = NULL; P()&#123; head = new Node; tail = new Node; head-&gt;pred = tail; head-&gt;next = tail; tail-&gt;pred = head; tail-&gt;next = tail; &#125; void enqueue(int e)&#123; Node* cur = new Node(e); tail-&gt;pred-&gt;next = cur; cur-&gt;pred = tail-&gt;pred; tail-&gt;pred = cur; cur-&gt;next = tail; Node* p = tail-&gt;pred; for(; p != head &amp;&amp; (p-&gt;val&lt;=e); p = p-&gt;pred) p-&gt;val = e; &#125; int dequeue()&#123; Node* p0 = head-&gt;next; Node* p1 = p0-&gt;next; p1-&gt;pred = head; head-&gt;next = p1; p0-&gt;next = p0-&gt;pred = NULL; int v = p0-&gt;val; delete p0; return v; &#125; int front()&#123; return head-&gt;next-&gt;val; &#125;&#125;;int main()&#123; int n; setvbuf(stdin, new char[1&lt;&lt;20], _IOFBF, 1&lt;&lt;20); setvbuf(stdout, new char[1&lt;&lt;20], _IOFBF, 1&lt;&lt;20); scanf("%d", &amp;n); P heap; Q queue; int size = 0; while(n--)&#123; char op; int num; scanf("%c", &amp;op); while(isspace(op)) scanf("%c", &amp;op); if(op == 'E')&#123; size++; scanf("%d", &amp;num); queue.enqueue(num); heap.enqueue(num); printf("%lld\n", heap.front()*(long long)size); &#125; else&#123; if(size != 0) &#123; size--; queue.dequeue(); heap.dequeue(); &#125; printf("%lld\n", heap.front()*(long long)size); &#125; &#125; return 0;&#125;]]></content>
+    <content type="text"><![CDATA[问题描述 股票交易所的交易规则如下： 股票可以通过报价指令以某个报价进入市场，市场中可以存在某只股票的多个报价。 股票可以通过推出指令取消一次报价。但每次退出指令只会取消当前事情中该股票最早的那次报价。 股票某时刻的总价值为在市场中最高报价和总报价数的乘积。总价值可能是负值。 请设计一款软件，用来自动处理报价/退出指令以及计算每个指令被运行后该股票的价值。 输入输出 输入： 第一行：n 表示指令总数 以下n行：依次对股票执行的n个命令 命令格式： E x // $-2^{31}\le x\lt 2^{31}$，表示将股票以报价$x$进入市场，市场中可以存在该股票的多个报价。可以存在相同的报价。 D // 表示取消当前市场中该股票最早的那次报价。 输出： 共 $n$ 行：依次表示执行完每条命令后市场中股票的总价值。 输入输出样例12345678910111213input:5E 5E 6E 2DDoutput:51218122 限制 $0\le n\le 1,000,000$ 提示 讲义 [04-XA] Queap。 思路 根据提示，使用Queap $Queap$ 是一个优先级队列，允许任意元素的插入和删除以及最高优先级元素的索引。 每个删除分摊时间复杂度为 $O(logn)$，$n$ 为比要删除的元素在队列时间更长的元素的个数。插入的分摊时间复杂度为 $O(1)$。 数据结构包含一个双向链表和一个 $2-4$ 树，每种结构中都记录着最小优先级的元素。 基本的操作是将新元素插入到双向链表中，当从链表中删除元素时，该元素会移动至 $2-4$ 树中。$2-4$ 树按照插入的顺序来储存元素。 实现两个双向队列 $P$ 和 $Q$，$Q$ 就是相应的队列，$P$ 也同样是一个双向队列，和 $Q$ 不同之处在于 $P$ 的最前端存储的永远是队列中的最大值。 操作如下（引用自讲义[04-XA]）： 出元素：Q.dequeue(); P.dequeue(); //O(1) 入元素：Q.enqueue(e); P.enqueue(e); for(x=P.rear();x&amp;&amp;(x-&gt;key&lt;=e);x=x-&gt;pred) x-&gt;key=e; 最坏情况 O(n) 按照讲义的操作进行实现即可。 实现1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192#include&lt;iostream&gt;using namespace std;struct Node&#123; Node *pred, *next; int val; Node(int e=0)&#123; val = e; pred = next = NULL; &#125;&#125;;struct Q&#123; Node* head = NULL; Node* tail = NULL; Q()&#123; head = new Node; tail = new Node; head-&gt;pred = tail; head-&gt;next = tail; tail-&gt;pred = head; tail-&gt;next = tail; &#125; void enqueue(int e)&#123; Node* cur = new Node(e); tail-&gt;pred-&gt;next = cur; cur-&gt;pred = tail-&gt;pred; tail-&gt;pred = cur; cur-&gt;next = tail; &#125; int dequeue()&#123; Node* p0 = head-&gt;next; Node* p1 = p0-&gt;next; p1-&gt;pred = head; head-&gt;next = p1; p0-&gt;next = p0-&gt;pred = NULL; int v = p0-&gt;val; delete p0; return v; &#125;&#125;;struct P&#123; Node* head = NULL; Node* tail = NULL; P()&#123; head = new Node; tail = new Node; head-&gt;pred = tail; head-&gt;next = tail; tail-&gt;pred = head; tail-&gt;next = tail; &#125; void enqueue(int e)&#123; Node* cur = new Node(e); tail-&gt;pred-&gt;next = cur; cur-&gt;pred = tail-&gt;pred; tail-&gt;pred = cur; cur-&gt;next = tail; Node* p = tail-&gt;pred; for(; p != head &amp;&amp; (p-&gt;val&lt;=e); p = p-&gt;pred) p-&gt;val = e; &#125; int dequeue()&#123; Node* p0 = head-&gt;next; Node* p1 = p0-&gt;next; p1-&gt;pred = head; head-&gt;next = p1; p0-&gt;next = p0-&gt;pred = NULL; int v = p0-&gt;val; delete p0; return v; &#125; int front()&#123; return head-&gt;next-&gt;val; &#125;&#125;;int main()&#123; int n; setvbuf(stdin, new char[1&lt;&lt;20], _IOFBF, 1&lt;&lt;20); setvbuf(stdout, new char[1&lt;&lt;20], _IOFBF, 1&lt;&lt;20); scanf("%d", &amp;n); P heap; Q queue; int size = 0; while(n--)&#123; char op; int num; scanf("%c", &amp;op); while(isspace(op)) scanf("%c", &amp;op); if(op == 'E')&#123; size++; scanf("%d", &amp;num); queue.enqueue(num); heap.enqueue(num); printf("%lld\n", heap.front()*(long long)size); &#125; else&#123; if(size != 0) &#123; size--; queue.dequeue(); heap.dequeue(); &#125; printf("%lld\n", heap.front()*(long long)size); &#125; &#125; return 0;&#125;]]></content>
       <categories>
         <category>THUOJ</category>
       </categories>
@@ -19,7 +60,7 @@
   <entry>
     <title><![CDATA[THUOJ PA2 2-2-3 凸包3]]></title>
     <url>%2F2019%2F01%2F28%2FTHUOJ-PA2-2-2-3-%E5%87%B8%E5%8C%853%2F</url>
-    <content type="text"><![CDATA[问题描述 平面上给 $n$ 个点，求凸包 $n$ 可能很大 输入数据已经按照点的横坐标大小进行了排序 输入输出 和凸包2一样，输入文件仍采用二进制格式存储 输出时选择凸包上纵坐标最小（纵坐标相等则选横坐标最小的）的点作为第一个输出的点，按逆时针顺序依次输出凸包上的所有点。 若有重合的点，只需输出一次，不需输出凸包上非顶点的点。 输入输出12345678910111213141516171819202122input:111 61 04 115 57 117 07 78 18 129 310 6output:1 07 08 19 310 68 124 111 6 限制 $5\le n \le 10,000,000$ $-2^{25} \le x,y \le 2^25$ 提示 数据特点：点的数量可能很大，输入数据已按点的横坐标从小到大排序 适用算法：由于点的数量很大，使用复杂度为VH的JarvisMarch算法和复杂度为VlogV的快速凸包算法均会超时。可以使用GrahamScan算法，该算法在数据有序的情况下复杂度为V，其中V为点的总数。 思路 使用 $GrahamScan$ 算法。 GrahamScan 算法 参考wiki 首先找到有最小 $y$ 坐标的点 $P$（$y$ 坐标相同则找具有最小 $x$ 坐标的点）$O(n)$ 然后将所有的点按照与 $P$ 点形成的极角大小进行排序 $O(nlogn)$ 算极角时不一定非要算出来角度，只要能比较出大小即可。可以使用任何在 $[0,\pi]$ 之间单调的函数来进行衡量，比如可以用 $cos(x)$ 函数 当三个点形成“右转”关系时，说明中间那个点不是凸包点，舍弃该点，再取下一个点进行判断。 三点共线时，根据需要进行取舍。 判断三点关系，实际上就是判断两个向量的顺逆时针关系，举例如下： 考虑三个点 $P_1=(x_1,y_1)$ $P_2=(x_2,y_2)$ $P_3=(x_3,y_3)$ 考虑两个向量 $\overrightarrow{P_1P_2}$ $\overrightarrow{P_1P_3}$ 两个向量的叉积为 $(x_2-x_1)(y_3-y_1)-(y_2-y_1)(x_3-x_1)$ 如叉积等于0，则三点共线 若叉积大于0，则向量形成逆时针关系，为“左转” 若叉积小于0，则向量形成顺时针关系，为“右转” 伪代码123456789101112def ccw(p1, p2, p3): return (p2.x-p1.x)*(p3.y-p1.y)-(p2.y-p1.y)*(p3.x-p1.x)N = len(points)swap(points[0], points[indexOfLowestY])sort(points) # sort it by polar angle with points[0]stack = []stack.push(points[0])stack.push(points[1])for i=2 to N-1: while len(stack) &gt;= 2 and ccw(stack.next_to_top(), stack.top(), points[i]) &lt;= 0 stack.pop() stack.push(points[i]) 实现1234567891011121314151617181920212223242526272829#include&lt;iostream&gt;using namespace std;struct Point&#123; int x, y;&#125;;template&lt;class T&gt;class vector&#123; T* _a; int _size; int _maxsize; vector(int n=4)&#123; _a = new T[n]; _size = 0; _maxsize = n; &#125; void resize(int n)&#123; T* b = _a; _a = new T[n]; _size = _maxsize = n; delete[] b; &#125;&#125;;vector&lt;Point&gt; p;int main()&#123; int n; scanf("%d", &amp;n); p.resize(n); for(int i = 0; i &lt; n; i++)&#123; scanf("%d%d", &amp;p[i].x, &amp;p[i].y); &#125;&#125;]]></content>
+    <content type="text"><![CDATA[问题描述 平面上给 $n$ 个点，求凸包 $n$ 可能很大 输入数据已经按照点的横坐标大小进行了排序 输入输出 和凸包2一样，输入文件仍采用二进制格式存储 输出时选择凸包上纵坐标最小（纵坐标相等则选横坐标最小的）的点作为第一个输出的点，按逆时针顺序依次输出凸包上的所有点。 若有重合的点，只需输出一次，不需输出凸包上非顶点的点。 输入输出12345678910111213141516171819202122input:111 61 04 115 57 117 07 78 18 129 310 6output:1 07 08 19 310 68 124 111 6 限制 $5\le n \le 10,000,000$ $-2^{25} \le x,y \le 2^{25}$ 提示 数据特点：点的数量可能很大，输入数据已按点的横坐标从小到大排序 适用算法：由于点的数量很大，使用复杂度为VH的JarvisMarch算法和复杂度为VlogV的快速凸包算法均会超时。可以使用GrahamScan算法，该算法在数据有序的情况下复杂度为V，其中V为点的总数。 思路 使用 $GrahamScan$ 算法。 GrahamScan 算法 参考wiki 首先找到有最小 $y$ 坐标的点 $P$（$y$ 坐标相同则找具有最小 $x$ 坐标的点）$O(n)$ 然后将所有的点按照与 $P$ 点形成的极角大小进行排序 $O(nlogn)$ 算极角时不一定非要算出来角度，只要能比较出大小即可。可以使用任何在 $[0,\pi]$ 之间单调的函数来进行衡量，比如可以用 $cos(x)$ 函数 当三个点形成“右转”关系时，说明中间那个点不是凸包点，舍弃该点，再取下一个点进行判断。 三点共线时，根据需要进行取舍。 判断三点关系，实际上就是判断两个向量的顺逆时针关系，举例如下： 考虑三个点 $P_1=(x_1,y_1)$ $P_2=(x_2,y_2)$ $P_3=(x_3,y_3)$ 考虑两个向量 $\overrightarrow{P_1P_2}$ $\overrightarrow{P_1P_3}$ 两个向量的叉积为 $(x_2-x_1)(y_3-y_1)-(y_2-y_1)(x_3-x_1)$ 如叉积等于0，则三点共线 若叉积大于0，则向量形成逆时针关系，为“左转” 若叉积小于0，则向量形成顺时针关系，为“右转” 伪代码123456789101112def ccw(p1, p2, p3): return (p2.x-p1.x)*(p3.y-p1.y)-(p2.y-p1.y)*(p3.x-p1.x)N = len(points)swap(points[0], points[indexOfLowestY])sort(points) # sort it by polar angle with points[0]stack = []stack.push(points[0])stack.push(points[1])for i=2 to N-1: while len(stack) &gt;= 2 and ccw(stack.next_to_top(), stack.top(), points[i]) &lt;= 0 stack.pop() stack.push(points[i]) 实现1234567891011121314151617181920212223242526272829#include&lt;iostream&gt;using namespace std;struct Point&#123; int x, y;&#125;;template&lt;class T&gt;class vector&#123; T* _a; int _size; int _maxsize; vector(int n=4)&#123; _a = new T[n]; _size = 0; _maxsize = n; &#125; void resize(int n)&#123; T* b = _a; _a = new T[n]; _size = _maxsize = n; delete[] b; &#125;&#125;;vector&lt;Point&gt; p;int main()&#123; int n; scanf("%d", &amp;n); p.resize(n); for(int i = 0; i &lt; n; i++)&#123; scanf("%d%d", &amp;p[i].x, &amp;p[i].y); &#125;&#125;]]></content>
       <categories>
         <category>THUOJ</category>
       </categories>
@@ -634,8 +675,8 @@
         <tag>LeetCode</tag>
         <tag>Two Pointers</tag>
         <tag>Hash Table</tag>
-        <tag>Binary Search</tag>
         <tag>Sort</tag>
+        <tag>Binary Search</tag>
       </tags>
   </entry>
   <entry>
@@ -796,8 +837,8 @@
       </categories>
       <tags>
         <tag>LeetCode</tag>
-        <tag>String</tag>
         <tag>Dynamic Programming</tag>
+        <tag>String</tag>
       </tags>
   </entry>
   <entry>
@@ -809,8 +850,8 @@
       </categories>
       <tags>
         <tag>LeetCode</tag>
-        <tag>String</tag>
         <tag>Dynamic Programming</tag>
+        <tag>String</tag>
       </tags>
   </entry>
   <entry>
@@ -822,8 +863,8 @@
       </categories>
       <tags>
         <tag>LeetCode</tag>
-        <tag>Math</tag>
         <tag>Dynamic Programming</tag>
+        <tag>Math</tag>
       </tags>
   </entry>
   <entry>
@@ -835,8 +876,8 @@
       </categories>
       <tags>
         <tag>LeetCode</tag>
-        <tag>Math</tag>
         <tag>Dynamic Programming</tag>
+        <tag>Math</tag>
       </tags>
   </entry>
   <entry>
