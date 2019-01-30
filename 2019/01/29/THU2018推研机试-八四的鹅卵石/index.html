@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="时间：2018年9月16日 13:30~17:30问题描述 八四的鹅卵石（$lics$） 小八拿出 $n$ 块鹅卵石排成一个序列，排在第 $i$ 位的鹅卵石的美丽度为 $a_i$ 按照原序列的挑选出一个子序列，使得在该子序列中，后一个鹅卵石的美丽度不比前一块低。 问如此做能得到的最长的子序列长度是多少？ 小四认为这个问题很 $naive$（神TM…），于是他决定将小八的鹅卵石序列首尾相连，组成一">
+<meta name="description" content="时间：2018年9月16日 13:30~17:30问题描述 八四的鹅卵石（$lics​$） 小八拿出 $n$ 块鹅卵石排成一个序列，排在第 $i$ 位的鹅卵石的美丽度为 $a_i$ 按照原序列的挑选出一个子序列，使得在该子序列中，后一个鹅卵石的美丽度不比前一块低。 问如此做能得到的最长的子序列长度是多少？ 小四认为这个问题很 $naive$（神TM…），于是他决定将小八的鹅卵石序列首尾相连，组成">
 <meta property="og:type" content="article">
 <meta property="og:title" content="THU2018推研机试 八四的鹅卵石">
 <meta property="og:url" content="http://yoursite.com/2019/01/29/THU2018推研机试-八四的鹅卵石/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="时间：2018年9月16日 13:30~17:30问题描述 八四的鹅卵石（$lics$） 小八拿出 $n$ 块鹅卵石排成一个序列，排在第 $i$ 位的鹅卵石的美丽度为 $a_i$ 按照原序列的挑选出一个子序列，使得在该子序列中，后一个鹅卵石的美丽度不比前一块低。 问如此做能得到的最长的子序列长度是多少？ 小四认为这个问题很 $naive$（神TM…），于是他决定将小八的鹅卵石序列首尾相连，组成一">
+<meta property="og:description" content="时间：2018年9月16日 13:30~17:30问题描述 八四的鹅卵石（$lics​$） 小八拿出 $n$ 块鹅卵石排成一个序列，排在第 $i$ 位的鹅卵石的美丽度为 $a_i$ 按照原序列的挑选出一个子序列，使得在该子序列中，后一个鹅卵石的美丽度不比前一块低。 问如此做能得到的最长的子序列长度是多少？ 小四认为这个问题很 $naive$（神TM…），于是他决定将小八的鹅卵石序列首尾相连，组成">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-29T16:26:27.620Z">
+<meta property="og:updated_time" content="2019-01-30T01:18:20.557Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="THU2018推研机试 八四的鹅卵石">
-<meta name="twitter:description" content="时间：2018年9月16日 13:30~17:30问题描述 八四的鹅卵石（$lics$） 小八拿出 $n$ 块鹅卵石排成一个序列，排在第 $i$ 位的鹅卵石的美丽度为 $a_i$ 按照原序列的挑选出一个子序列，使得在该子序列中，后一个鹅卵石的美丽度不比前一块低。 问如此做能得到的最长的子序列长度是多少？ 小四认为这个问题很 $naive$（神TM…），于是他决定将小八的鹅卵石序列首尾相连，组成一">
+<meta name="twitter:description" content="时间：2018年9月16日 13:30~17:30问题描述 八四的鹅卵石（$lics​$） 小八拿出 $n$ 块鹅卵石排成一个序列，排在第 $i$ 位的鹅卵石的美丽度为 $a_i$ 按照原序列的挑选出一个子序列，使得在该子序列中，后一个鹅卵石的美丽度不比前一块低。 问如此做能得到的最长的子序列长度是多少？ 小四认为这个问题很 $naive$（神TM…），于是他决定将小八的鹅卵石序列首尾相连，组成">
 
 
 
@@ -398,22 +398,22 @@
       
         <ul>
 <li>时间：2018年9月16日 13:30~17:30<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2></li>
-<li>八四的鹅卵石（$lics$）</li>
+<li>八四的鹅卵石（$lics​$）</li>
 <li>小八拿出 $n$ 块鹅卵石排成一个序列，排在第 $i$ 位的鹅卵石的美丽度为 $a_i$</li>
 <li>按照原序列的挑选出一个子序列，使得在该子序列中，后一个鹅卵石的美丽度不比前一块低。</li>
 <li>问如此做能得到的最长的子序列长度是多少？</li>
 <li>小四认为这个问题很 $naive$（神TM…），于是他决定将小八的鹅卵石序列首尾相连，组成一个鹅卵石环，然后计算在这个环上的满足要求的最长子序列的长度。</li>
-<li>形式化地，对于一个子序列 $a_{x_1},a_{x_2},…,a_{x_i},…,a_{x_m}(1\le x_1\lt x_2\lt … \lt x_m\le n)$，它是一个满足要求的子序列当且仅当它满足一下两个条件：<ol>
-<li>$a_{x_1}\le a_{x_2}\le …\le a_{x_m}$。</li>
-<li>$1\le x_1\lt x_2\lt …\lt x_m\le n$ 或 $1\lt x_1\lt x_2\lt…\lt x_t\le n,\ 1\le x_{t+1}\lt x_{t+2}\lt …\lt x_m\lt x_1(\exists t\in \mathbb{N}, 1\lt t\lt m)$。</li>
+<li>形式化地，对于一个子序列 $a_{x_1},a_{x_2},…,a_{x_i},…,a_{x_m}$ $(1\le x_1\lt x_2\lt … \lt x_m\le n)$，它是一个满足要求的子序列当且仅当它满足一下两个条件：<ol>
+<li>$a_{x_1}\le a_{x_2}\le …\le a_{x_m}​$。</li>
+<li>$1\le x_1\lt x_2\lt …\lt x_m\le n$ 或 $1\lt x_1\lt x_2\lt…\lt x_t\le n,$ $\ 1\le x_{t+1}\lt x_{t+2}\lt …\lt x_m\lt x_1$ $(\exists t\in \mathbb{N}, 1\lt t\lt m)$。</li>
 </ol>
 </li>
 </ul>
 <h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2><ul>
-<li>第一行：T  表示数据组数</li>
+<li>第一行：$T$  表示数据组数</li>
 <li>以下 $2T$ 行：每两行一组数据<ul>
-<li>第一行：n  表示鹅卵石的个数</li>
-<li>第二行：n 个非负整数，依次是 $a_1,a_2,…,a_n$，代表 $n$ 个鹅卵石各自的美丽程度。</li>
+<li>第一行：$n$  表示鹅卵石的个数</li>
+<li>第二行：$n$ 个非负整数，依次是 $a_1,a_2,…,a_n$，代表 $n$ 个鹅卵石各自的美丽程度。</li>
 </ul>
 </li>
 <li>保证所有数据随机生成。具体地，每一项 $a_i$ 独立地从 $[1,n]$ 内的整数中等概率选取。</li>
@@ -460,9 +460,7 @@
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
 <li>最长上升子序列的变形版本</li>
 </ul>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><pre><code class="cpp">
-</code></pre>
-
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -607,7 +605,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
