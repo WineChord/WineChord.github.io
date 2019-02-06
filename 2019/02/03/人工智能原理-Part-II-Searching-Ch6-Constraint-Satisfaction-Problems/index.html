@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/blog-logo180.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog-logo32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog-logo16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Artificial Intelligence," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Ch6. Constraint Satisfaction Problems6.1 Constraint Satisfaction Problems约束满足问题 6.1.1 What is CSP? 是数学问题，定义为其状态必须满足若干约束和限制的一组对象 将问题中的实体表示为对变量进行有限约束的同质集合，通过约束满足方法加以解决。 是人工智能和运筹学共同的研究课题 因为其形式化的规则性提供了用于分">
+<meta name="keywords" content="Artificial Intelligence">
+<meta property="og:type" content="article">
+<meta property="og:title" content="人工智能原理 Part II. Searching Ch6.Constraint Satisfaction Problems">
+<meta property="og:url" content="http://yoursite.com/2019/02/03/人工智能原理-Part-II-Searching-Ch6-Constraint-Satisfaction-Problems/index.html">
+<meta property="og:site_name" content="Wine&amp;Chord">
+<meta property="og:description" content="Ch6. Constraint Satisfaction Problems6.1 Constraint Satisfaction Problems约束满足问题 6.1.1 What is CSP? 是数学问题，定义为其状态必须满足若干约束和限制的一组对象 将问题中的实体表示为对变量进行有限约束的同质集合，通过约束满足方法加以解决。 是人工智能和运筹学共同的研究课题 因为其形式化的规则性提供了用于分">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-04T02:34:45.503Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="人工智能原理 Part II. Searching Ch6.Constraint Satisfaction Problems">
+<meta name="twitter:description" content="Ch6. Constraint Satisfaction Problems6.1 Constraint Satisfaction Problems约束满足问题 6.1.1 What is CSP? 是数学问题，定义为其状态必须满足若干约束和限制的一组对象 将问题中的实体表示为对变量进行有限约束的同质集合，通过约束满足方法加以解决。 是人工智能和运筹学共同的研究课题 因为其形式化的规则性提供了用于分">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/03/人工智能原理-Part-II-Searching-Ch6-Constraint-Satisfaction-Problems/"/>
+
+
+
+
+
+  <title>人工智能原理 Part II. Searching Ch6.Constraint Satisfaction Problems | Wine&Chord</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <!-- <a href="https://github.com/WineChord"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a> -->
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wine&Chord</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/03/人工智能原理-Part-II-Searching-Ch6-Constraint-Satisfaction-Problems/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">人工智能原理 Part II. Searching Ch6.Constraint Satisfaction Problems</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-03T22:40:38+08:00">
+                2019-02-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/03/人工智能原理-Part-II-Searching-Ch6-Constraint-Satisfaction-Problems/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/03/人工智能原理-Part-II-Searching-Ch6-Constraint-Satisfaction-Problems/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Ch6-Constraint-Satisfaction-Problems"><a href="#Ch6-Constraint-Satisfaction-Problems" class="headerlink" title="Ch6. Constraint Satisfaction Problems"></a>Ch6. Constraint Satisfaction Problems</h2><h3 id="6-1-Constraint-Satisfaction-Problems"><a href="#6-1-Constraint-Satisfaction-Problems" class="headerlink" title="6.1 Constraint Satisfaction Problems"></a>6.1 Constraint Satisfaction Problems</h3><p>约束满足问题</p>
+<h4 id="6-1-1-What-is-CSP"><a href="#6-1-1-What-is-CSP" class="headerlink" title="6.1.1 What is CSP?"></a>6.1.1 What is CSP?</h4><ul>
+<li>是数学问题，定义为其状态必须满足若干约束和限制的一组对象</li>
+<li>将问题中的实体表示为对变量进行有限约束的同质集合，通过约束满足方法加以解决。</li>
+<li>是人工智能和运筹学共同的研究课题<ul>
+<li>因为其形式化的规则性提供了用于分析和解决许多不相关问题的共同基础</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-1-2-Standard-Search-vs-Constraint-Satisfaction-Problem"><a href="#6-1-2-Standard-Search-vs-Constraint-Satisfaction-Problem" class="headerlink" title="6.1.2 Standard Search vs. Constraint Satisfaction Problem"></a>6.1.2 Standard Search vs. Constraint Satisfaction Problem</h4><ul>
+<li>Standard search problem 标准搜索问题<ul>
+<li>其状态是原子的或不可分割的，一个没有内部结构的黑盒子</li>
+</ul>
+</li>
+<li>Constraint satisfaction problem 约束满足问题<ul>
+<li>状态用因子表示，是一系列变量，每个有相应的值</li>
+<li>发挥状态结构的长处</li>
+<li>采用一般用途而不是问题特有的启发式</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-1-3-Why-Study-CSP"><a href="#6-1-3-Why-Study-CSP" class="headerlink" title="6.1.3 Why Study CSP?"></a>6.1.3 Why Study CSP?</h4><ul>
+<li>CSP 通常呈现出高复杂性，需要将启发式与组合搜索方法相结合</li>
+<li>某些形式的 CSP<ul>
+<li>Boolean Satisfiability Problem 布尔可满足性问题</li>
+<li>Satisfiability Modulo Theories 可满足性模理论</li>
+<li>Answer Set Programming 答案集编排</li>
+</ul>
+</li>
+<li>可建模为 CSP 的例子<ul>
+<li>8-queens puzzle 8 皇后问题</li>
+<li>Map coloring problem 地图着色问题</li>
+<li>Ctyptarithmetic 密码算术</li>
+<li>Sudoku 数独</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-1-4-Formal-Def-of-CSP"><a href="#6-1-4-Formal-Def-of-CSP" class="headerlink" title="6.1.4 Formal Def of CSP"></a>6.1.4 Formal Def of CSP</h4><ul>
+<li>A CSP is defined as a triple &lt;X,D,C&gt;<ul>
+<li>X is a set of variables, ${X_1,…,X_n}$</li>
+<li>D is a set of domains, ${ D_1, …, D_n}$. One $D_i$ for each variable $X_i$ , consisting of a set of values ${V_1,…,V_k}$ </li>
+<li>C is a set of constraints, ${ C_1,…,C_m}$. Each $C_i$ consists of a pair &lt;scope,rel&gt; where, scope is a tuple of variables that participate in the constraint, rel is a relation that defines the values that those variables can take on.</li>
+</ul>
+</li>
+<li>To solve a CSP, we need to define a state space and the notion of a solution.</li>
+<li>Each state is defined by assignment of values to variables: ${X_i=v_i,X_j=v_j,…}$.<ul>
+<li>Consistent assignment 一致性赋值<ul>
+<li>一种不违反任何约束的合法赋值</li>
+</ul>
+</li>
+<li>Complete assignment 完整性赋值<ul>
+<li>每个变量都被赋值，并且该赋值是一致的，完整的</li>
+</ul>
+</li>
+<li>Partial assignment 局部性赋值<ul>
+<li>仅对某些变量进行赋值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-1-5-Appendix-Four-Color-Theorem"><a href="#6-1-5-Appendix-Four-Color-Theorem" class="headerlink" title="6.1.5 Appendix: Four Color Theorem"></a>6.1.5 Appendix: Four Color Theorem</h4><ul>
+<li>四色定理</li>
+</ul>
+<h4 id="6-1-6-Why-Formulate-a-Problem-as-a-CSP"><a href="#6-1-6-Why-Formulate-a-Problem-as-a-CSP" class="headerlink" title="6.1.6 Why Formulate a Problem as a CSP?"></a>6.1.6 Why Formulate a Problem as a CSP?</h4><ul>
+<li>是对很多种问题的一种自然表示</li>
+<li>与其他搜索技术相比，CSP求解系统更容易解决问题</li>
+<li>CSP 求解速度比状态空间搜索更快，因为可以快速排除大的搜索空间样本</li>
+</ul>
+<h4 id="6-1-7-Variations-on-the-CSP-Formalism"><a href="#6-1-7-Variations-on-the-CSP-Formalism" class="headerlink" title="6.1.7 Variations on the CSP Formalism"></a>6.1.7 Variations on the CSP Formalism</h4><ul>
+<li>Domains</li>
+<li>Constraints</li>
+</ul>
+<h4 id="6-1-8-Cryptarithmetic-算式迷"><a href="#6-1-8-Cryptarithmetic-算式迷" class="headerlink" title="6.1.8 Cryptarithmetic 算式迷"></a>6.1.8 Cryptarithmetic 算式迷</h4><ul>
+<li>是一种数学游戏，由未知数字之间的数学等式组成，这些数字被表示成字母</li>
+<li>目标是识别出每个字母的值</li>
+</ul>
+<h4 id="6-1-9-A-Theoretical-Aspect-of-CSPs-Decision-Problems"><a href="#6-1-9-A-Theoretical-Aspect-of-CSPs-Decision-Problems" class="headerlink" title="6.1.9 A Theoretical Aspect of CSPs: Decision Problems"></a>6.1.9 A Theoretical Aspect of CSPs: Decision Problems</h4><ul>
+<li>CSPs 也是计算复杂性理论和优有限模型论所要研究的问题</li>
+<li>大多数被认为是易处理的 CSPs 是这样一些问题<ul>
+<li>约束的超图具有有界的树宽</li>
+<li>约束本质上存在约束关系集的非一元多态性</li>
+</ul>
+</li>
+<li>每个 CSP 也可以被看做是合取查询包含问题</li>
+</ul>
+<h4 id="6-1-10-Real-World-CSPs"><a href="#6-1-10-Real-World-CSPs" class="headerlink" title="6.1.10 Real-World CSPs"></a>6.1.10 Real-World CSPs</h4><ul>
+<li>许多现实世界的问题涉及实值变量</li>
+</ul>
+<h4 id="6-1-11-Resolution-of-CSPs"><a href="#6-1-11-Resolution-of-CSPs" class="headerlink" title="6.1.11 Resolution of CSPs"></a>6.1.11 Resolution of CSPs</h4><ul>
+<li>有限范畴中的 CSPs 问题通常采用某种形式的搜索来解决</li>
+<li>常用的技法如下：<ul>
+<li>Constraint Propagation 约束传播</li>
+<li>Backtracking Search 回溯</li>
+<li>Local Search 局部搜索</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-2-Constraint-Propagation-Inference-in-CSPs"><a href="#6-2-Constraint-Propagation-Inference-in-CSPs" class="headerlink" title="6.2 Constraint Propagation: Inference in CSPs"></a>6.2 Constraint Propagation: Inference in CSPs</h3><h4 id="6-2-1-Overview-of-Constraint-Propagation"><a href="#6-2-1-Overview-of-Constraint-Propagation" class="headerlink" title="6.2.1 Overview of Constraint Propagation"></a>6.2.1 Overview of Constraint Propagation</h4><ul>
+<li>Regular state-space search<ul>
+<li>can do only one thing: search</li>
+</ul>
+</li>
+<li>CSPs:<ul>
+<li>can do search, choose a new variable assignment from several possibilities</li>
+<li>can also do a specific type of inference, called constraint propagation</li>
+</ul>
+</li>
+<li>Constraint Propagation<ul>
+<li>uses the constraints to reduce the number of legal values for a variable, which in turn can reduce the legal values for another variable, and so on.</li>
+</ul>
+</li>
+<li>Those techniques are used to modify a constraint satisfaction problem</li>
+<li>More precisely, they enforce a form of local consistency, which are conditions related to the consistency of a group of variables and/or constraints</li>
+<li>Constraint propagation has various uses:<ul>
+<li>1) turns a problem into one that is equivalent but is usually simpler to solve,</li>
+<li>2) may prove satisfiability/unsatisfiability of problems</li>
+</ul>
+</li>
+<li>This always happens for some certain kinds of problems.</li>
+<li>There are different types of local consistency:<ul>
+<li>Node consistency 结点一致性</li>
+<li>Arc consistency 弧一致性</li>
+<li>Path consistency 路径一致性</li>
+<li>k-consistency k 一致性</li>
+</ul>
+</li>
+<li>Most popular method is AC-3 algorithm which enforces arc consistency</li>
+</ul>
+<h4 id="6-2-2-Node-Consistency"><a href="#6-2-2-Node-Consistency" class="headerlink" title="6.2.2 Node Consistency"></a>6.2.2 Node Consistency</h4><ul>
+<li>Def: A single variable(node) is node-consistent, if all the values in the variable’s domain satisfy the variable’s unary constraints.</li>
+</ul>
+<h4 id="6-2-3-Arc-Consistency"><a href="#6-2-3-Arc-Consistency" class="headerlink" title="6.2.3 Arc Consistency"></a>6.2.3 Arc Consistency</h4><ul>
+<li>Def: A variable is arc-consistent, if every value in its domain satisfies the variable’s binary constraints.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function AC-3(csp) returns false if an inconsistency is found and true otherwise</span><br><span class="line">  inputs: csp, a binary CSP with components(X,D,C)</span><br><span class="line">  local variables: queue, a queue of arcs, initially all the arcs in csp</span><br><span class="line">  while queue is not empty do</span><br><span class="line">    (X_i,X_j)&lt;-REMOVE-FIRST(queue)</span><br><span class="line">    if REVISE(csp,X_i,X_j)then</span><br><span class="line">      if size of D_i=0 then return false</span><br><span class="line">      for each X_k in X_i.NEIGHBORS-&#123;X_j&#125; do</span><br><span class="line">        add(X_k,X_i)to queue</span><br><span class="line">  return true</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function REVISE(csp,X_i,X_j) returns true iff we revise the domain of X_i</span><br><span class="line">  revised &lt;- false</span><br><span class="line">  for each x in D_i do</span><br><span class="line">    if no value y in D_j allows (x,y) to satisfy the constraint between X_i and X_j then</span><br><span class="line">      delete x from D_i</span><br><span class="line">  revised &lt;- true</span><br><span class="line">  return revised</span><br></pre></td></tr></table></figure>
+<h4 id="6-2-4-Path-Consistency"><a href="#6-2-4-Path-Consistency" class="headerlink" title="6.2.4 Path Consistency"></a>6.2.4 Path Consistency</h4><ul>
+<li>Def: A two-variable set ${X_i,X_j}$ is path-consistent with respect to a third variable $X_m$ if, for every assignment ${X_i=a,X_j=b}$ consistent with the constraints on ${X_i,X_j}$, there is an assignment to $X_m$ that satisfies the constraints on ${X_i,X_m}$ and ${X_m,X_j}$.</li>
+<li>Why called path consistency<ul>
+<li>because it as looking at a path from $X_i$ to $X_j$ with $X_m$ in the middle.</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-2-5-k-Consistency"><a href="#6-2-5-k-Consistency" class="headerlink" title="6.2.5 k-Consistency"></a>6.2.5 k-Consistency</h4><ul>
+<li>Def: A CSP is k-consistent if, for any set of k-1 variables and for any consistent assignment to those variables, a consistent value can always be assigned to any $k^{th}$ variable.</li>
+<li>The notion of k-consistency is the stronger forms of propagation.</li>
+<li>Features of k-consistency<ul>
+<li>k=1: same as node consistency</li>
+<li>k=2: same as arc consistency</li>
+<li>k=3: same as path consistency</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-3-Backtracking-Search-for-CSPs"><a href="#6-3-Backtracking-Search-for-CSPs" class="headerlink" title="6.3 Backtracking Search for CSPs"></a>6.3 Backtracking Search for CSPs</h3><h4 id="6-3-1-Overview-of-Backtracking-Search"><a href="#6-3-1-Overview-of-Backtracking-Search" class="headerlink" title="6.3.1 Overview of Backtracking Search"></a>6.3.1 Overview of Backtracking Search</h4><ul>
+<li>是一种深度优先搜索的通用算法，用于查找某些计算问题的答案，尤其是 CSPs</li>
+<li>回溯搜索递增地构建解的候选，而且一旦确定部分候选c不能成为一个合法的解，就将c抛弃（回溯）</li>
+<li>例：8皇后</li>
+<li>是基本的无信息算法，一种具有两种改进的深度优先搜索，用于求解 CSPs 问题</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function BACKTRACK-SEARCH(csp) returns a solution, or failure</span><br><span class="line">  return BACKTRACK(&#123;&#125;,csp)</span><br><span class="line">function BACKTRACK(assignment,csp) returns a solution, or failure</span><br><span class="line">  if assignment is complete then return assignment</span><br><span class="line">  var &lt;- SELECT-UNASSIGNED-VALUES(var,assignment,csp) do</span><br><span class="line">  for each value in ORDER-DOMAIN-VALUES(var,assignment,csp)do</span><br><span class="line">    if value is consistent with assignment then</span><br><span class="line">      add &#123;var=value&#125; to assignment</span><br><span class="line">      inferences &lt;- INFERENCE(csp,var,value)</span><br><span class="line">      if inferences!=failure then</span><br><span class="line">        add inferences to assignment</span><br><span class="line">        result&lt;-BACKTRACK(assignment,csp)</span><br><span class="line">        if result=failure then return result</span><br><span class="line">  remove &#123;var=value&#125; and inferences from assignment</span><br><span class="line">return failure</span><br></pre></td></tr></table></figure>
+<h4 id="6-3-2-Questions-to-Improve-Backtracking"><a href="#6-3-2-Questions-to-Improve-Backtracking" class="headerlink" title="6.3.2 Questions to Improve Backtracking"></a>6.3.2 Questions to Improve Backtracking</h4><h3 id="6-4-Local-Search-for-CSPs"><a href="#6-4-Local-Search-for-CSPs" class="headerlink" title="6.4 Local Search for CSPs"></a>6.4 Local Search for CSPs</h3><h4 id="6-4-1-Local-Search-for-CSPs"><a href="#6-4-1-Local-Search-for-CSPs" class="headerlink" title="6.4.1 Local Search for CSPs"></a>6.4.1 Local Search for CSPs</h4><ul>
+<li>CSPs 中的局部搜索算法，采用完整状态形式化<ul>
+<li>初始状态：为每个变量赋值</li>
+<li>搜索：一次改变一个变量的值</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-4-2-Min-conflicts-Heuristic-最小冲突启发式"><a href="#6-4-2-Min-conflicts-Heuristic-最小冲突启发式" class="headerlink" title="6.4.2 Min-conflicts Heuristic 最小冲突启发式"></a>6.4.2 Min-conflicts Heuristic 最小冲突启发式</h4><ul>
+<li>一个最明显的启发式是对一个变量选择一个新的值</li>
+<li><p>特点</p>
+<ul>
+<li>变量选择：随机选择任意一个冲突变量</li>
+<li>值得选择：选择导致与其他变量呈现最少冲突的新值</li>
+</ul>
+</li>
+<li>对许多CSPs出奇有效</li>
+</ul>
+<h4 id="6-4-3-Algorithm-Solving-CSPs-by-Local-Search"><a href="#6-4-3-Algorithm-Solving-CSPs-by-Local-Search" class="headerlink" title="6.4.3 Algorithm Solving CSPs by Local Search"></a>6.4.3 Algorithm Solving CSPs by Local Search</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function MIN-CONFLiCTS(csp,max_steps) returns a solution or failure</span><br><span class="line">  inputs:csp, a constraint satisfaction problem</span><br><span class="line">  		 max_steps, the number of steps allowed befre giving up</span><br><span class="line">  current &lt;- an initial complete assignment for csp</span><br><span class="line">  for i=1 to max_steps do</span><br><span class="line">    if current is a solution for csp then return current</span><br><span class="line">    var &lt;- a randomly chosen conflicted variable from csp.VARIABLES</span><br><span class="line">    value &lt;- the value v for var that minimizes CONFLICTS(var,v,current,csp)</span><br><span class="line">    set var=value in current</span><br><span class="line">  return failure</span><br></pre></td></tr></table></figure>
+<h4 id="6-4-4-Constraint-Weighting"><a href="#6-4-4-Constraint-Weighting" class="headerlink" title="6.4.4 Constraint Weighting"></a>6.4.4 Constraint Weighting</h4><ul>
+<li>Constraint Weighting 约束加权<ul>
+<li>能聚焦于重要的约束</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-5-The-Structure-of-Problems"><a href="#6-5-The-Structure-of-Problems" class="headerlink" title="6.5 The Structure of Problems"></a>6.5 The Structure of Problems</h3><h4 id="6-5-1-Decomposing-Problem"><a href="#6-5-1-Decomposing-Problem" class="headerlink" title="6.5.1 Decomposing Problem"></a>6.5.1 Decomposing Problem</h4><ul>
+<li>问题分解<ul>
+<li>由约束图所表征的问题结构，可以用于寻找解</li>
+<li>求解一个 CSP 问题的复杂性，与约束图的结构密切相关</li>
+<li>现实世界的问题可以被分解为许多子问题</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-5-2-Independent-Sub-problems"><a href="#6-5-2-Independent-Sub-problems" class="headerlink" title="6.5.2 Independent Sub-problems"></a>6.5.2 Independent Sub-problems</h4><ul>
+<li>独立子问题可被标识为约束图的连接组件</li>
+<li>设 $n$ 个变量的图可分解为仅有c个变量的子问题：每个最坏解的代价是 $O((n/c)\cdot d^c)$ ，与 $n$ 成线性关系</li>
+<li>如果不分解，则总的运行时间是 $O(dn)$</li>
+</ul>
+<h4 id="6-5-3-Tree-structured-Problems"><a href="#6-5-3-Tree-structured-Problems" class="headerlink" title="6.5.3 Tree-structured Problems"></a>6.5.3 Tree-structured Problems</h4><ul>
+<li>任何树结构的 CSP 都可以用变量数中的时间线性加以解决</li>
+<li>求解树结构 CSP 的方法：先挑选任意变量作为树的根，然后再选择一个序列（称为拓扑排序）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function TREE-CSP-SOLVER(csp) returns a solution, or failure</span><br><span class="line">  inputs: csp, a CSP with components X,D,C</span><br><span class="line">  n &lt;- number of variables in X</span><br><span class="line">  assignment &lt;- an empty assignment</span><br><span class="line">  root &lt;- any variable in X</span><br><span class="line">  X &lt;- TOPOLOGICAL-SORT(X,root)</span><br><span class="line">  for j=n downto 2 do</span><br><span class="line">    MAKE-ARC-CONSISTENT(PARENT(X_j),X_j)</span><br><span class="line">    if it cannot be made consistent then return failure</span><br><span class="line">  for i=1 to n do</span><br><span class="line">    assignment[X_i] &lt;- any consistent value from D_i</span><br><span class="line">    if there is no consistent value then return failure</span><br><span class="line">  return assignment</span><br></pre></td></tr></table></figure>
+<h4 id="6-5-4-Reduce-Constraint-Graphs-to-Tree-Structures"><a href="#6-5-4-Reduce-Constraint-Graphs-to-Tree-Structures" class="headerlink" title="6.5.4 Reduce Constraint Graphs to Tree Structures"></a>6.5.4 Reduce Constraint Graphs to Tree Structures</h4><ul>
+<li>$1^{st}$ approach: cutset conditioning 割集调节<ul>
+<li>可以将一个通用CSP问题简化为一个树结构CSP，并且若能够找到一个小割集则相当有效</li>
+</ul>
+</li>
+<li>Conditioning: Instantiate a variable, prune its neighbors’ domains</li>
+<li>$2^{nd}$ approach: tree decomposition 树分解<ul>
+<li>将CSP转换为一棵子问题树，并且当该约束图的树宽较小时很有效</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Artificial-Intelligence/" rel="tag"># Artificial Intelligence</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/03/人工智能原理-Part-II-Searching-Ch5-Adversarial-Search/" rel="next" title="人工智能原理 Part II. Searching Ch5.Adversarial Search">
+                <i class="fa fa-chevron-left"></i> 人工智能原理 Part II. Searching Ch5.Adversarial Search
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/04/人工智能原理-Part-III-Reasoning-Ch7-Reasoning-by-Knowledge/" rel="prev" title="人工智能原理 Part III. Reasoning Ch7.Reasoning by Knowledge">
+                人工智能原理 Part III. Reasoning Ch7.Reasoning by Knowledge <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/blog-logo.png"
+                alt="Wine&Chord" />
+            
+              <p class="site-author-name" itemprop="name">Wine&Chord</p>
+              <p class="site-description motion-element" itemprop="description">主要用于记录学习经历</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ch6-Constraint-Satisfaction-Problems"><span class="nav-number">1.</span> <span class="nav-text">Ch6. Constraint Satisfaction Problems</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-Constraint-Satisfaction-Problems"><span class="nav-number">1.1.</span> <span class="nav-text">6.1 Constraint Satisfaction Problems</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-1-What-is-CSP"><span class="nav-number">1.1.1.</span> <span class="nav-text">6.1.1 What is CSP?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-2-Standard-Search-vs-Constraint-Satisfaction-Problem"><span class="nav-number">1.1.2.</span> <span class="nav-text">6.1.2 Standard Search vs. Constraint Satisfaction Problem</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-3-Why-Study-CSP"><span class="nav-number">1.1.3.</span> <span class="nav-text">6.1.3 Why Study CSP?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-4-Formal-Def-of-CSP"><span class="nav-number">1.1.4.</span> <span class="nav-text">6.1.4 Formal Def of CSP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-5-Appendix-Four-Color-Theorem"><span class="nav-number">1.1.5.</span> <span class="nav-text">6.1.5 Appendix: Four Color Theorem</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-6-Why-Formulate-a-Problem-as-a-CSP"><span class="nav-number">1.1.6.</span> <span class="nav-text">6.1.6 Why Formulate a Problem as a CSP?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-7-Variations-on-the-CSP-Formalism"><span class="nav-number">1.1.7.</span> <span class="nav-text">6.1.7 Variations on the CSP Formalism</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-8-Cryptarithmetic-算式迷"><span class="nav-number">1.1.8.</span> <span class="nav-text">6.1.8 Cryptarithmetic 算式迷</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-9-A-Theoretical-Aspect-of-CSPs-Decision-Problems"><span class="nav-number">1.1.9.</span> <span class="nav-text">6.1.9 A Theoretical Aspect of CSPs: Decision Problems</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-10-Real-World-CSPs"><span class="nav-number">1.1.10.</span> <span class="nav-text">6.1.10 Real-World CSPs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-11-Resolution-of-CSPs"><span class="nav-number">1.1.11.</span> <span class="nav-text">6.1.11 Resolution of CSPs</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-Constraint-Propagation-Inference-in-CSPs"><span class="nav-number">1.2.</span> <span class="nav-text">6.2 Constraint Propagation: Inference in CSPs</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-1-Overview-of-Constraint-Propagation"><span class="nav-number">1.2.1.</span> <span class="nav-text">6.2.1 Overview of Constraint Propagation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-2-Node-Consistency"><span class="nav-number">1.2.2.</span> <span class="nav-text">6.2.2 Node Consistency</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-3-Arc-Consistency"><span class="nav-number">1.2.3.</span> <span class="nav-text">6.2.3 Arc Consistency</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-4-Path-Consistency"><span class="nav-number">1.2.4.</span> <span class="nav-text">6.2.4 Path Consistency</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-5-k-Consistency"><span class="nav-number">1.2.5.</span> <span class="nav-text">6.2.5 k-Consistency</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-Backtracking-Search-for-CSPs"><span class="nav-number">1.3.</span> <span class="nav-text">6.3 Backtracking Search for CSPs</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-1-Overview-of-Backtracking-Search"><span class="nav-number">1.3.1.</span> <span class="nav-text">6.3.1 Overview of Backtracking Search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-2-Questions-to-Improve-Backtracking"><span class="nav-number">1.3.2.</span> <span class="nav-text">6.3.2 Questions to Improve Backtracking</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-Local-Search-for-CSPs"><span class="nav-number">1.4.</span> <span class="nav-text">6.4 Local Search for CSPs</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-4-1-Local-Search-for-CSPs"><span class="nav-number">1.4.1.</span> <span class="nav-text">6.4.1 Local Search for CSPs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-4-2-Min-conflicts-Heuristic-最小冲突启发式"><span class="nav-number">1.4.2.</span> <span class="nav-text">6.4.2 Min-conflicts Heuristic 最小冲突启发式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-4-3-Algorithm-Solving-CSPs-by-Local-Search"><span class="nav-number">1.4.3.</span> <span class="nav-text">6.4.3 Algorithm Solving CSPs by Local Search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-4-4-Constraint-Weighting"><span class="nav-number">1.4.4.</span> <span class="nav-text">6.4.4 Constraint Weighting</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-The-Structure-of-Problems"><span class="nav-number">1.5.</span> <span class="nav-text">6.5 The Structure of Problems</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-5-1-Decomposing-Problem"><span class="nav-number">1.5.1.</span> <span class="nav-text">6.5.1 Decomposing Problem</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-5-2-Independent-Sub-problems"><span class="nav-number">1.5.2.</span> <span class="nav-text">6.5.2 Independent Sub-problems</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-5-3-Tree-structured-Problems"><span class="nav-number">1.5.3.</span> <span class="nav-text">6.5.3 Tree-structured Problems</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-5-4-Reduce-Constraint-Graphs-to-Tree-Structures"><span class="nav-number">1.5.4.</span> <span class="nav-text">6.5.4 Reduce Constraint Graphs to Tree Structures</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" >Wine&Chord</span>
+
+  
+</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://wineandchord.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/02/03/人工智能原理-Part-II-Searching-Ch6-Constraint-Satisfaction-Problems/';
+          this.page.identifier = '2019/02/03/人工智能原理-Part-II-Searching-Ch6-Constraint-Satisfaction-Problems/';
+          this.page.title = '人工智能原理 Part II. Searching Ch6.Constraint Satisfaction Problems';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://wineandchord.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- <script type="text/javascript" src="/js/src/love.js"></script>script> -->

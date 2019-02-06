@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/blog-logo180.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog-logo32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog-logo16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Artificial Intelligence," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Ch4. Local Search and Swarm Intelligence4.1 Overview4.1.1 Beyond Classical Search 超越经典搜索 Ch3讨论单一类别的问题，其解决方案是具有如下特点的一系列动作： observable: 可观测的 deterministic: 确定性 known environments: 已知环境   本章讨论：局部搜索和群体智能">
+<meta name="keywords" content="Artificial Intelligence">
+<meta property="og:type" content="article">
+<meta property="og:title" content="人工智能原理 Part II. Searching Ch4.Local Search and Swarm Intelligence">
+<meta property="og:url" content="http://yoursite.com/2019/02/02/人工智能原理-Part-II-Searching-Ch4-Local-Search-and-Swarm-Intelligence/index.html">
+<meta property="og:site_name" content="Wine&amp;Chord">
+<meta property="og:description" content="Ch4. Local Search and Swarm Intelligence4.1 Overview4.1.1 Beyond Classical Search 超越经典搜索 Ch3讨论单一类别的问题，其解决方案是具有如下特点的一系列动作： observable: 可观测的 deterministic: 确定性 known environments: 已知环境   本章讨论：局部搜索和群体智能">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-02T23:37:35.993Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="人工智能原理 Part II. Searching Ch4.Local Search and Swarm Intelligence">
+<meta name="twitter:description" content="Ch4. Local Search and Swarm Intelligence4.1 Overview4.1.1 Beyond Classical Search 超越经典搜索 Ch3讨论单一类别的问题，其解决方案是具有如下特点的一系列动作： observable: 可观测的 deterministic: 确定性 known environments: 已知环境   本章讨论：局部搜索和群体智能">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/02/人工智能原理-Part-II-Searching-Ch4-Local-Search-and-Swarm-Intelligence/"/>
+
+
+
+
+
+  <title>人工智能原理 Part II. Searching Ch4.Local Search and Swarm Intelligence | Wine&Chord</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <!-- <a href="https://github.com/WineChord"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a> -->
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wine&Chord</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/02/人工智能原理-Part-II-Searching-Ch4-Local-Search-and-Swarm-Intelligence/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">人工智能原理 Part II. Searching Ch4.Local Search and Swarm Intelligence</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-02T22:44:54+08:00">
+                2019-02-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/02/人工智能原理-Part-II-Searching-Ch4-Local-Search-and-Swarm-Intelligence/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/02/人工智能原理-Part-II-Searching-Ch4-Local-Search-and-Swarm-Intelligence/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Ch4-Local-Search-and-Swarm-Intelligence"><a href="#Ch4-Local-Search-and-Swarm-Intelligence" class="headerlink" title="Ch4. Local Search and Swarm Intelligence"></a>Ch4. Local Search and Swarm Intelligence</h2><h3 id="4-1-Overview"><a href="#4-1-Overview" class="headerlink" title="4.1 Overview"></a>4.1 Overview</h3><h4 id="4-1-1-Beyond-Classical-Search-超越经典搜索"><a href="#4-1-1-Beyond-Classical-Search-超越经典搜索" class="headerlink" title="4.1.1 Beyond Classical Search 超越经典搜索"></a>4.1.1 Beyond Classical Search 超越经典搜索</h4><ul>
+<li>Ch3讨论单一类别的问题，其解决方案是具有如下特点的一系列动作：<ul>
+<li>observable: 可观测的</li>
+<li>deterministic: 确定性</li>
+<li>known environments: 已知环境</li>
+</ul>
+</li>
+<li>本章讨论：局部搜索和群体智能</li>
+</ul>
+<h4 id="4-1-2-Classic-Search-经典搜索"><a href="#4-1-2-Classic-Search-经典搜索" class="headerlink" title="4.1.2 Classic Search 经典搜索"></a>4.1.2 Classic Search 经典搜索</h4><ul>
+<li>已学的搜索算法被设计为系统地探索问题的空间<ul>
+<li>该系统性是由以下方法得到的：在内存中保持一条或多条路径，并且在沿着该路径的每个点上记录哪些已被探索过</li>
+<li>当目标被找到时，该路径也就构成问题的一个解</li>
+</ul>
+</li>
+<li>然而，在许多问题中，到达目标的路径是无关紧要的。</li>
+</ul>
+<h4 id="4-1-3-Local-Search-局部搜索"><a href="#4-1-3-Local-Search-局部搜索" class="headerlink" title="4.1.3 Local Search 局部搜索"></a>4.1.3 Local Search 局部搜索</h4><ul>
+<li>是一种不同类型的算法，不介意什么路径</li>
+<li>使用一个当前结点（而不是多条路径），并且通常仅移动到该结点相邻的结点</li>
+<li>通常，搜索后不保留该路径</li>
+<li><p>有两个主要优点：</p>
+<ul>
+<li>使用空间少</li>
+<li>在大的或无限（连续）状态空间内，能发现合理的解</li>
+</ul>
+</li>
+<li><p>应用：许多应用问题是与路径无关的，目标状态本身就是解，如：</p>
+<ul>
+<li>integrated-circuit design</li>
+<li>factory-floor layout</li>
+<li>job-shop scheduling</li>
+<li>automatic programming</li>
+<li>telecommunications</li>
+<li>network optimization</li>
+<li>vehicle routing</li>
+<li>portfolio management</li>
+</ul>
+</li>
+<li>Optimization Problem of Local Search <ul>
+<li>对解决纯优化问题也很有效</li>
+<li>优化目的是根据一个目标函数找到其最好的状态</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-1-4-Swarm-Intelligence"><a href="#4-1-4-Swarm-Intelligence" class="headerlink" title="4.1.4 Swarm Intelligence"></a>4.1.4 Swarm Intelligence</h4><ul>
+<li>研究来自于“collective intelligence”的计算系统</li>
+<li>集群智能是环境中大量的同类智能体通过合作来实现的。例如：鱼群，鸟群，以及蚁群</li>
+<li>这样的智能是分散式，自组织，并且在一个环境内分布</li>
+<li>事实上，这类系统通常用于：有效觅食，猎物躲避，群体搬迁等</li>
+<li>Algorithms of Swarm Intelligence <ul>
+<li>Altruism algorithm 利他算法</li>
+<li>Ant colony optimization 蚁群优化</li>
+<li>Bee colony algorithm 蜂群算法</li>
+<li>Artificial immune systems 人工免疫系统</li>
+<li>Bat algorithm 蝙蝠算法</li>
+<li>Differential evolution 差分进化</li>
+<li>Multi-swarm optimization 多群体优化</li>
+<li>Gravitational search algorithm 引力搜索算法</li>
+<li>Glowworm swarm optimization 萤火虫群优化</li>
+<li>Particle swarm optimization 粒子群优化</li>
+<li>Bacterial colony optimization 细菌群优化</li>
+<li>River formation dynamics 河流形成动力学</li>
+<li>Self-propelled particles 自行式粒子系统</li>
+<li>Stochastic diffusion search 随机扩散搜索</li>
+</ul>
+</li>
+<li>Typical Algorithms of Swarm Intelligence 群体智能的典型算法<ul>
+<li>Ant Colony Optimization 蚁群优化（受蚁群的行为所启发）<ul>
+<li>stigmergy 间接协调</li>
+<li>foraging 觅食</li>
+</ul>
+</li>
+<li>Particle Swarm Optimization 粒子群优化（受鸟群和鱼群的社会行为所启发）<ul>
+<li>flocking 群集</li>
+<li>herding 从众</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-2-Local-Search-Algorithms"><a href="#4-2-Local-Search-Algorithms" class="headerlink" title="4.2 Local Search Algorithms"></a>4.2 Local Search Algorithms</h3><h4 id="4-2-1-Hill-Climbing-Search"><a href="#4-2-1-Hill-Climbing-Search" class="headerlink" title="4.2.1 Hill-Climbing Search"></a>4.2.1 Hill-Climbing Search</h4><ul>
+<li>是一种属于局部搜索家族的数学优化方法</li>
+<li>是一种迭代算法：开始时选择问题的一个任意解，然后递增地修改该解的一个元素，若得到一个更好的解，则将该修改作为新的解；重复直到无法找到进一步的改善。</li>
+<li>大多数基本的局部搜索算法都不保持一颗搜索树</li>
+<li>State-Space Landscape<ul>
+<li>可通过局部搜索算法对其进行搜索</li>
+<li>一个完备的局部搜索算法总能找到一个存在的目标</li>
+<li>一个最优的局部搜索算法总能找到一个全局的最小或最大值</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function HILL-CLIMBING(problem) returns a state that is local maximum</span><br><span class="line">  persistent: current, a node</span><br><span class="line">  			  neighbor, a node</span><br><span class="line">  current &lt;- MAKE-NODE(problem.INITIAL-STATE)</span><br><span class="line">  loop do</span><br><span class="line">    neighbor &lt;- a successor of current</span><br><span class="line">    if neighbor.VALUE &lt;= current.VALUE then return current.STATE</span><br><span class="line">    current &lt;- neighbor</span><br></pre></td></tr></table></figure>
+<ul>
+<li>最基本的局部搜索算法</li>
+<li>常常会朝着一个解快速进展</li>
+<li>被称为贪婪局部搜索</li>
+<li>贪婪往往表现的相当好</li>
+<li>Weaknesses:<ul>
+<li>Local maxima</li>
+<li>Plateaux 高原</li>
+<li>Ridges 山岭</li>
+</ul>
+</li>
+<li>变形：<ul>
+<li>Stochastic hill-climbing 随机爬山法<ul>
+<li>在向上移动的过程中随机选择</li>
+</ul>
+</li>
+<li>First-choice hill-climbing 首选爬山法<ul>
+<li>通过随机生成后继点来实现随机爬山</li>
+</ul>
+</li>
+<li>Random-restart hill-climbing 随机重启爬山法<ul>
+<li>好于其他爬山算法</li>
+<li>If each hill-climbing search has a probability p of success, then the expected number of restarts required is 1/p.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-2-2-Local-Beam-Search"><a href="#4-2-2-Local-Beam-Search" class="headerlink" title="4.2.2 Local Beam Search"></a>4.2.2 Local Beam Search</h4><ul>
+<li>局部束搜索</li>
+<li>Keeping just one node in memory might seem to be an extreme reaction to the problem of memory limitations.</li>
+<li>Local beam search keeps track of k states rather than just 1<ul>
+<li>It begins with k randomly generated states</li>
+<li>At each step, all the successors of all k states are generated.</li>
+<li>If any one is a goal, the algorithm halts, else it selects the k best successors from the complete list, and repeats.</li>
+</ul>
+</li>
+<li>Variant of LBS<ul>
+<li>Stochastic Beam Search 随机束搜索<ul>
+<li>局部束搜索会很快地集中在状态空间的某个小区域内，使得搜索代价比爬山法还要昂贵</li>
+<li>模仿随机爬山法，有助于缓解这个问题</li>
+<li>Instead of choosing best k successors, it chooses k successors randomly, with the probability of choosing a successor being an increasing function of its value.</li>
+<li>Stochastic beam search bears some similar to the process of natural selection.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-2-3-Tabu-Search-禁忌搜索"><a href="#4-2-3-Tabu-Search-禁忌搜索" class="headerlink" title="4.2.3 Tabu Search 禁忌搜索"></a>4.2.3 Tabu Search 禁忌搜索</h4><ul>
+<li>Tabu, indicates things that cannot be touched.</li>
+<li>Tabu search is created by Fred Glover in 1986 and formalized in 1989</li>
+<li>是一种元启发式算法，用于解决组合优化问题</li>
+<li>使用一种局部搜索或邻域搜索过程，从一个潜在的解 x 到改进的相邻解 x’ 之间反复移动，直到满足某些停止条件</li>
+<li>The memory structure to determine the solutions is called tabu list.</li>
+<li>Three Strategies of Tabu Search<ul>
+<li>Forbidding strategy 禁止策略</li>
+<li>Freeing strategy 释放策略</li>
+<li>Short-term strategy 短期策略</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function TABU-SEARCH(s&apos;) return a best candidate</span><br><span class="line">  sBest &lt;- s &lt;- s&apos;</span><br><span class="line">  tabuList &lt;- null list</span><br><span class="line">  while(not STOPPING-CONDITION())</span><br><span class="line">    candidateList &lt;- null list</span><br><span class="line">    bestCandidate &lt;- null</span><br><span class="line">    for(sCandidate in sNeighborhood)</span><br><span class="line">      if((not tabuList.CONTAINS(sCandidate))</span><br><span class="line">        and (FITNESS(sCandidate)&gt;FITNESS(bestCandidate)))</span><br><span class="line">      then bestCandidate &lt;- sCandidate</span><br><span class="line">    s &lt;- bestCandidate</span><br><span class="line">    if(FITNESS(bestCandidate)&gt;FITNESS(sBest))then sBest&lt;-bestCandidate</span><br><span class="line">    tabuList.PUSH(bestCandidate)</span><br><span class="line">    if(tabuList.SIZE&gt;maxTabuSize)then tabuList.REMOVE-FIRST()</span><br><span class="line">  return sBest</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Problems Can be Solved by Tabu Search<ul>
+<li>Traveling Salesperson Problem</li>
+<li>Traveling Tournament Problem</li>
+<li>Job-shop Scheduling Problem</li>
+<li>Network Loading Problem</li>
+<li>The Graph Coloring Problem</li>
+<li>Hardware/Software Partitioning</li>
+<li>Minimum Spanning Tree Problem</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-3-Optimization-and-Evolutionary-Algorithms"><a href="#4-3-Optimization-and-Evolutionary-Algorithms" class="headerlink" title="4.3 Optimization and Evolutionary Algorithms"></a>4.3 Optimization and Evolutionary Algorithms</h3><h4 id="4-3-1-Simulated-Annealing-模拟退火"><a href="#4-3-1-Simulated-Annealing-模拟退火" class="headerlink" title="4.3.1 Simulated Annealing 模拟退火"></a>4.3.1 Simulated Annealing 模拟退火</h4><ul>
+<li>In metallurgy, annealing is used to temper or harden metals and glass</li>
+<li>A solid is heated in a hot bath, increasing the temperature up to a maximum value. At this temperature, all material is in liquid state and the particles arrange themselves randomly.</li>
+<li>As the temperature of the hot bath is cooled gradually, all the particles of this structure will be arranged in the state of lower energy.</li>
+<li>模拟退火是一种给定函数逼近全局最优解的概率方法，发表于1953</li>
+<li>是一种在大搜索空间逼近全局最优解的元启发式方法</li>
+<li>Optimization and Thermodynamics 优化与热力学<ul>
+<li>Objective function &lt;=&gt; Energy level</li>
+<li>Admissible solution &lt;=&gt; System state</li>
+<li>Neighbor solution &lt;=&gt; Change of state</li>
+<li>Control parameter &lt;=&gt; Temperature</li>
+<li>Better solution &lt;=&gt; Solidification state</li>
+</ul>
+</li>
+<li>Simulated Annealing Algorithm<ul>
+<li>Initial Solution 初始解<ul>
+<li>使用启发式方法生成，随机选择</li>
+</ul>
+</li>
+<li>Neighborhood 相邻节点<ul>
+<li>随机生成，当前解的变异</li>
+</ul>
+</li>
+<li>Acceptance 接受条件<ul>
+<li>相邻节点具有较低代价值，具有较高代价值得相邻节点则以概率P接受</li>
+</ul>
+</li>
+<li>Stopping Criteria 停止判据<ul>
+<li>有比阈值低的值，已达到迭代最大总次数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function SIMULATED-ANNEALING(problem, schedule) returns a solution state</span><br><span class="line">  inputs:problem, a problem</span><br><span class="line">  		 schedule, a mapping from time to &quot;temperature&quot;</span><br><span class="line">  current &lt;- MAKE-NODE(problem.INITIAL-STATE)</span><br><span class="line">  for t=1 to inifinite do</span><br><span class="line">    T &lt;- schedule(t)</span><br><span class="line">    if T=0 then return current</span><br><span class="line">    next &lt;- a randomly selected successor of current</span><br><span class="line">    deltaE &lt;- next.VALUE-current.VALUE</span><br><span class="line">    if deltaE&gt;0 then current&lt;-next</span><br><span class="line">    else current&lt;-next only with probability e^&#123;deltaE/T&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>以上是一种允许部分下山移动的随机爬山法的版本，下山移动在退火调度的早期容易被接受，随着时间的推移逐步降低。</li>
+</ul>
+<h4 id="4-3-2-Genetic-Algorithms-遗传算法"><a href="#4-3-2-Genetic-Algorithms-遗传算法" class="headerlink" title="4.3.2 Genetic Algorithms 遗传算法"></a>4.3.2 Genetic Algorithms 遗传算法</h4><ul>
+<li>是一种模仿自然选择过程的搜索启发式算法</li>
+<li>是随机束搜索的一个变型，其中后继结点是由两个父辈状态的组合而不是修改单一状态生成的。其处理过程是有性繁殖，而不是无性繁殖</li>
+<li>遗传算法属于进化算法这个大分类</li>
+<li>采用自然进化所派生的技法，如：<ul>
+<li>inheritance, mutation, selection, and crossover</li>
+<li>遗传，突变，选择，杂交</li>
+</ul>
+</li>
+<li>开始时具有一组 $k$ 个随机生成的状态，称其为种群</li>
+<li>每个状态（个体）表示为有限字母表上的一个字符串，通常为0 1</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function GENETIC-ALGORITHM(population, FITNESS-FN) returns an individual</span><br><span class="line">  inputs: population, a set of individuals</span><br><span class="line">  		  FITNESS-FN, a function that measures the fitness of an individual</span><br><span class="line">  repeat</span><br><span class="line">    new_population &lt;- empty set</span><br><span class="line">    for i=1 to SIZE(population) do</span><br><span class="line">      x &lt;- RANDOM-SELECTION(population, FITNESS-FN)</span><br><span class="line">      y &lt;- RANDOM-SELECTION(population, FITNESS-FN)</span><br><span class="line">      child &lt;- REPRODUCE(x,y)</span><br><span class="line">      if(small random probability)then child &lt;- MUTATE(child)</span><br><span class="line">      add child to new_population</span><br><span class="line">    population &lt;- new_population</span><br><span class="line">  until some individual is fit enough, or enough time has elapsed</span><br><span class="line">  return the best individual in population, according to FITNESS-FN</span><br></pre></td></tr></table></figure>
+<h3 id="4-4-Swarm-Intelligence-and-Optimization"><a href="#4-4-Swarm-Intelligence-and-Optimization" class="headerlink" title="4.4 Swarm Intelligence and Optimization"></a>4.4 Swarm Intelligence and Optimization</h3><h4 id="4-4-1-Ant-Colony-Optimization-蚁群优化"><a href="#4-4-1-Ant-Colony-Optimization-蚁群优化" class="headerlink" title="4.4.1 Ant Colony Optimization 蚁群优化"></a>4.4.1 Ant Colony Optimization 蚁群优化</h4><ul>
+<li>是一种解决计算问题的概率技术，可用于发现一个图上的最佳路径</li>
+<li>受蚂蚁在蚁巢和食物源之间寻找路径行为的启发而形成</li>
+<li>蚂蚁从蚁巢到食物源之间盲目地游荡：<ul>
+<li>最短路径是通过费洛蒙（pheromone）嗅迹发现的</li>
+<li>每个蚂蚁随机地移动</li>
+<li>费洛蒙就遗留在路径上</li>
+<li>蚂蚁察觉到前面蚂蚁的路径，跟随而去</li>
+<li>路径上更多的费洛蒙增加了跟随该路径的概率</li>
+</ul>
+</li>
+<li>在路径段上积累”虚拟“嗅迹</li>
+<li>开始时随机选择某个节点</li>
+<li>随机选择一条路径：基于从初始节点至合适路径上出现嗅迹的量；具有较多嗅迹的路径则具有较高的概率</li>
+<li>蚂蚁到达下一节点后，再选择下一个路径</li>
+<li>重复直到更多的蚂蚁在每个循环中都选择同一个路径</li>
+</ul>
+<h4 id="4-4-2-Particle-Swarm-Optimization-粒子群优化"><a href="#4-4-2-Particle-Swarm-Optimization-粒子群优化" class="headerlink" title="4.4.2 Particle Swarm Optimization 粒子群优化"></a>4.4.2 Particle Swarm Optimization 粒子群优化</h4><ul>
+<li>受鸟类和鱼类的社会行为的启发</li>
+<li>采用若干粒子构成一个围绕搜索空间移动的群体来寻找最优解</li>
+<li>搜索空间的每个粒子根据它自己的飞行经验和其他粒子的飞行经验调整它”飞行“</li>
+<li>Bird Flocking 鸟群<ul>
+<li>一群鸟在一个区域随机地寻找食物</li>
+<li>在该被搜索区域仅有一块食物</li>
+<li>所有的鸟都不知道食物在哪儿</li>
+<li>但他们在经过每次环飞后知道食物有多远</li>
+<li>发现食物最好的方法是跟随距离食物最近的鸟</li>
+<li>仅需三个规则<ul>
+<li>避免与相邻的鸟碰撞</li>
+<li>保持与相邻的鸟相同的速度</li>
+<li>靠近相邻的鸟</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Algorithm of Particle Swarm Optimization (PSO) 粒子群优化算法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">For each particle</span><br><span class="line">  Initialize particle</span><br><span class="line">Do</span><br><span class="line">  For each particle</span><br><span class="line">    Calculate fitness value</span><br><span class="line">    If fitness value &gt; best fitness value(pBest) in history</span><br><span class="line">      set fitness value as new pBest</span><br><span class="line">  Choose particle with best fitness value of all particles as gBest</span><br><span class="line">  For each particle</span><br><span class="line">    Calculate particle velocity</span><br><span class="line">    Update particle position</span><br><span class="line">While maximum iterations or minimum error criteria is not attained</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Artificial Neural Network(ANN) and PSO<ul>
+<li>ANN 是一种大脑简单模型的计算泛型，而反向传播算法是训练ANN最受欢迎方法之一</li>
+<li>There have been significant research efforts to apply evolutionary computation(EC) techniques for the purposes of evolving one or more aspects of ANNs.</li>
+<li>Several papers reported using PSO to replace the back-propagation learning algorithm in ANN</li>
+<li>It showed PSO is a promising method to train ANN. It is faster and gets better results in most cases.</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Artificial-Intelligence/" rel="tag"># Artificial Intelligence</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/02/人工智能原理-Part-II-Searching-Ch3-Solving-Problems-by-Search/" rel="next" title="人工智能原理 Part II. Searching Ch3.Solving Problems by Search">
+                <i class="fa fa-chevron-left"></i> 人工智能原理 Part II. Searching Ch3.Solving Problems by Search
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/03/人工智能原理-Part-II-Searching-Ch5-Adversarial-Search/" rel="prev" title="人工智能原理 Part II. Searching Ch5.Adversarial Search">
+                人工智能原理 Part II. Searching Ch5.Adversarial Search <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/blog-logo.png"
+                alt="Wine&Chord" />
+            
+              <p class="site-author-name" itemprop="name">Wine&Chord</p>
+              <p class="site-description motion-element" itemprop="description">主要用于记录学习经历</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ch4-Local-Search-and-Swarm-Intelligence"><span class="nav-number">1.</span> <span class="nav-text">Ch4. Local Search and Swarm Intelligence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-Overview"><span class="nav-number">1.1.</span> <span class="nav-text">4.1 Overview</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-1-Beyond-Classical-Search-超越经典搜索"><span class="nav-number">1.1.1.</span> <span class="nav-text">4.1.1 Beyond Classical Search 超越经典搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-2-Classic-Search-经典搜索"><span class="nav-number">1.1.2.</span> <span class="nav-text">4.1.2 Classic Search 经典搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-3-Local-Search-局部搜索"><span class="nav-number">1.1.3.</span> <span class="nav-text">4.1.3 Local Search 局部搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-4-Swarm-Intelligence"><span class="nav-number">1.1.4.</span> <span class="nav-text">4.1.4 Swarm Intelligence</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-Local-Search-Algorithms"><span class="nav-number">1.2.</span> <span class="nav-text">4.2 Local Search Algorithms</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-1-Hill-Climbing-Search"><span class="nav-number">1.2.1.</span> <span class="nav-text">4.2.1 Hill-Climbing Search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-2-Local-Beam-Search"><span class="nav-number">1.2.2.</span> <span class="nav-text">4.2.2 Local Beam Search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-3-Tabu-Search-禁忌搜索"><span class="nav-number">1.2.3.</span> <span class="nav-text">4.2.3 Tabu Search 禁忌搜索</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-Optimization-and-Evolutionary-Algorithms"><span class="nav-number">1.3.</span> <span class="nav-text">4.3 Optimization and Evolutionary Algorithms</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-1-Simulated-Annealing-模拟退火"><span class="nav-number">1.3.1.</span> <span class="nav-text">4.3.1 Simulated Annealing 模拟退火</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-2-Genetic-Algorithms-遗传算法"><span class="nav-number">1.3.2.</span> <span class="nav-text">4.3.2 Genetic Algorithms 遗传算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-Swarm-Intelligence-and-Optimization"><span class="nav-number">1.4.</span> <span class="nav-text">4.4 Swarm Intelligence and Optimization</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-4-1-Ant-Colony-Optimization-蚁群优化"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.4.1 Ant Colony Optimization 蚁群优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-4-2-Particle-Swarm-Optimization-粒子群优化"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.4.2 Particle Swarm Optimization 粒子群优化</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" >Wine&Chord</span>
+
+  
+</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://wineandchord.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/02/02/人工智能原理-Part-II-Searching-Ch4-Local-Search-and-Swarm-Intelligence/';
+          this.page.identifier = '2019/02/02/人工智能原理-Part-II-Searching-Ch4-Local-Search-and-Swarm-Intelligence/';
+          this.page.title = '人工智能原理 Part II. Searching Ch4.Local Search and Swarm Intelligence';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://wineandchord.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- <script type="text/javascript" src="/js/src/love.js"></script>script> -->

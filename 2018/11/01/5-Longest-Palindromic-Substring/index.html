@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="问题描述在一个字符串中找到最长的回文子串 思路解法一：运用最长公共子串（Longest Common Substring）但是直接用会有问题，比如考虑如下解法： $原字符串为\ S，将字符串进行翻转，翻转之后的字符串为\ S’$，认为 $S\ 和\ S’$ 的最长公共子串为原字符串的最长公共回文串。 以上解法有小问题，比如，当 $S=”abacdecaba”$ 时，$S’=”abacedcaba”">
+<meta name="description" content="问题描述在一个字符串中找到最长的回文子串 思路解法一：运用最长公共子串（Longest Common Substring）但是直接用会有问题，比如考虑如下解法： $原字符串为\ S，将字符串进行翻转，翻转之后的字符串为\ S’$，认为 $S\ 和\ S’$ 的最长公共子串为原字符串的最长公共回文串。 以上解法有小问题，比如，当  $S=”abacdecaba”$ 时，$S’=”abacedcaba">
 <meta name="keywords" content="LeetCode,String,Palindromic">
 <meta property="og:type" content="article">
 <meta property="og:title" content="5. Longest Palindromic Substring">
 <meta property="og:url" content="http://yoursite.com/2018/11/01/5-Longest-Palindromic-Substring/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="问题描述在一个字符串中找到最长的回文子串 思路解法一：运用最长公共子串（Longest Common Substring）但是直接用会有问题，比如考虑如下解法： $原字符串为\ S，将字符串进行翻转，翻转之后的字符串为\ S’$，认为 $S\ 和\ S’$ 的最长公共子串为原字符串的最长公共回文串。 以上解法有小问题，比如，当 $S=”abacdecaba”$ 时，$S’=”abacedcaba”">
+<meta property="og:description" content="问题描述在一个字符串中找到最长的回文子串 思路解法一：运用最长公共子串（Longest Common Substring）但是直接用会有问题，比如考虑如下解法： $原字符串为\ S，将字符串进行翻转，翻转之后的字符串为\ S’$，认为 $S\ 和\ S’$ 的最长公共子串为原字符串的最长公共回文串。 以上解法有小问题，比如，当  $S=”abacdecaba”$ 时，$S’=”abacedcaba">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-26T14:22:37.671Z">
+<meta property="og:updated_time" content="2019-02-02T07:17:16.972Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="5. Longest Palindromic Substring">
-<meta name="twitter:description" content="问题描述在一个字符串中找到最长的回文子串 思路解法一：运用最长公共子串（Longest Common Substring）但是直接用会有问题，比如考虑如下解法： $原字符串为\ S，将字符串进行翻转，翻转之后的字符串为\ S’$，认为 $S\ 和\ S’$ 的最长公共子串为原字符串的最长公共回文串。 以上解法有小问题，比如，当 $S=”abacdecaba”$ 时，$S’=”abacedcaba”">
+<meta name="twitter:description" content="问题描述在一个字符串中找到最长的回文子串 思路解法一：运用最长公共子串（Longest Common Substring）但是直接用会有问题，比如考虑如下解法： $原字符串为\ S，将字符串进行翻转，翻转之后的字符串为\ S’$，认为 $S\ 和\ S’$ 的最长公共子串为原字符串的最长公共回文串。 以上解法有小问题，比如，当  $S=”abacdecaba”$ 时，$S’=”abacedcaba">
 
 
 
@@ -400,7 +400,7 @@
         <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>在一个字符串中找到最长的回文子串</p>
 <h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><h4 id="解法一：运用最长公共子串（Longest-Common-Substring）"><a href="#解法一：运用最长公共子串（Longest-Common-Substring）" class="headerlink" title="解法一：运用最长公共子串（Longest Common Substring）"></a>解法一：运用最长公共子串（Longest Common Substring）</h4><p>但是直接用会有问题，比如考虑如下解法：</p>
 <p>$原字符串为\ S，将字符串进行翻转，翻转之后的字符串为\ S’$，认为 $S\ 和\ S’$ 的最长公共子串为原字符串的最长公共回文串。</p>
-<p>以上解法有小问题，比如，当 $S=”abacdecaba”$ 时，$S’=”abacedcaba”$，此时他们的最长公共子串为 $”abac”$，明显答案是错误的。即当原字符串中有一个逆序的非回文子串时，这种方法就会出现错误。</p>
+<p>以上解法有小问题，比如，当  $S=”abacdecaba”$ 时，$S’=”abacedcaba”$，此时他们的最长公共子串为 $”abac”$，明显答案是错误的。即当原字符串中有一个逆序的非回文子串时，这种方法就会出现错误。</p>
 <p>解决的办法是对于每一个找到的子串候选者，判断子串的下标是否和逆子串的原始下标一样，如果一样，则认为是子回文串，否则跳过。比如 $”abac”的下标是”0123”$，逆子串为 $”caba”$，其原始下标为 $”6789”$，两者不一样，所以跳过。而对于$S=”caba”$，子串$”aba”的下标是”123”$，逆子串为 $”aba”$，其原始下标为 $”123”$，是一样的，所以认为是符合回文子串的要求的。</p>
 <p>故问题转化为寻找两个子串的最长公共子串，可以使用动态规划法，时间复杂度为 $O(n^2)$，空间复杂度为 $O(n^2)$（可优化为$O(n)$）。</p>
 <h4 id="解法二：暴力"><a href="#解法二：暴力" class="headerlink" title="解法二：暴力"></a>解法二：暴力</h4><p>枚举所有可能，<br>时间复杂度 $O(n^3)$</p>
@@ -550,7 +550,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">143</span>
+                  <span class="site-state-item-count">153</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -561,7 +561,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -572,7 +572,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">49</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

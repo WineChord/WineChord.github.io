@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/blog-logo180.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog-logo32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog-logo16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Artificial Intelligence," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Ch5 Adversarial Search To examine the problems that arise when we try to plan ahead in a world where other agents are planning against us.  5.1 GamesSearch vs. Adversarial Search 搜索与对抗搜索   Search 搜索 A">
+<meta name="keywords" content="Artificial Intelligence">
+<meta property="og:type" content="article">
+<meta property="og:title" content="人工智能原理 Part II. Searching Ch5.Adversarial Search">
+<meta property="og:url" content="http://yoursite.com/2019/02/03/人工智能原理-Part-II-Searching-Ch5-Adversarial-Search/index.html">
+<meta property="og:site_name" content="Wine&amp;Chord">
+<meta property="og:description" content="Ch5 Adversarial Search To examine the problems that arise when we try to plan ahead in a world where other agents are planning against us.  5.1 GamesSearch vs. Adversarial Search 搜索与对抗搜索   Search 搜索 A">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-03T14:39:34.559Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="人工智能原理 Part II. Searching Ch5.Adversarial Search">
+<meta name="twitter:description" content="Ch5 Adversarial Search To examine the problems that arise when we try to plan ahead in a world where other agents are planning against us.  5.1 GamesSearch vs. Adversarial Search 搜索与对抗搜索   Search 搜索 A">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/03/人工智能原理-Part-II-Searching-Ch5-Adversarial-Search/"/>
+
+
+
+
+
+  <title>人工智能原理 Part II. Searching Ch5.Adversarial Search | Wine&Chord</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <!-- <a href="https://github.com/WineChord"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a> -->
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wine&Chord</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/03/人工智能原理-Part-II-Searching-Ch5-Adversarial-Search/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">人工智能原理 Part II. Searching Ch5.Adversarial Search</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-03T07:38:29+08:00">
+                2019-02-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/03/人工智能原理-Part-II-Searching-Ch5-Adversarial-Search/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/03/人工智能原理-Part-II-Searching-Ch5-Adversarial-Search/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Ch5-Adversarial-Search"><a href="#Ch5-Adversarial-Search" class="headerlink" title="Ch5 Adversarial Search"></a>Ch5 Adversarial Search</h2><ul>
+<li>To examine the problems that arise when we try to plan ahead in a world where other agents are planning against us.</li>
+</ul>
+<h3 id="5-1-Games"><a href="#5-1-Games" class="headerlink" title="5.1 Games"></a>5.1 Games</h3><h4 id="Search-vs-Adversarial-Search-搜索与对抗搜索"><a href="#Search-vs-Adversarial-Search-搜索与对抗搜索" class="headerlink" title="Search vs. Adversarial Search 搜索与对抗搜索"></a>Search vs. Adversarial Search 搜索与对抗搜索</h4><table>
+<thead>
+<tr>
+<th style="text-align:center">Search 搜索</th>
+<th style="text-align:center">Adversarial Search 对抗搜索</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Single agent</td>
+<td style="text-align:center">Multiple agents</td>
+</tr>
+<tr>
+<td style="text-align:center">Solution is (heuristic) method for finding goal</td>
+<td style="text-align:center">Solution is strategy (strategy specifies move for every possible opponent reply)</td>
+</tr>
+<tr>
+<td style="text-align:center">Heuristics can find optimal solution</td>
+<td style="text-align:center">Time limits force an approximate solution</td>
+</tr>
+<tr>
+<td style="text-align:center">Evaluation function: estimate of cost from start to goal through given node</td>
+<td style="text-align:center">Evaluation function: evaluate “goodness” of game position</td>
+</tr>
+</tbody>
+</table>
+<h4 id="Adversarial-Search-often-Known-as-Games-对抗搜索通常称为博弈"><a href="#Adversarial-Search-often-Known-as-Games-对抗搜索通常称为博弈" class="headerlink" title="Adversarial Search often Known as Games 对抗搜索通常称为博弈"></a>Adversarial Search often Known as Games 对抗搜索通常称为博弈</h4><ul>
+<li>Definitions of Game theory<ul>
+<li>Study of strategic decision making. Specifically, study of mathematical models of conflict and cooperation between intelligent rational decision-makers.</li>
+<li>An alternative term is interactive decision decision theory.</li>
+</ul>
+</li>
+<li>Applications of Game theory<ul>
+<li>Economics, political science, psychology, logic, computer science, and biology</li>
+<li>Behavioral relations and decision science, including both humans and non-humans(e.g. computers)</li>
+</ul>
+</li>
+</ul>
+<h4 id="Games-are-Good-Problems-for-AI"><a href="#Games-are-Good-Problems-for-AI" class="headerlink" title="Games are Good Problems for AI"></a>Games are Good Problems for AI</h4><ul>
+<li>Machines need “human-like” intelligence</li>
+<li>Requiring to make decision within limited time</li>
+<li>Features of games:<ul>
+<li>Two, or more players(agents)</li>
+<li>Turn-taking vs. simultaneous moves</li>
+<li>Perfect information vs. imperfect information</li>
+<li>Deterministic vs. stochastic</li>
+<li>Cooperative vs. competitive</li>
+<li>Zero-sum vs. non-zero-sum</li>
+</ul>
+</li>
+</ul>
+<h4 id="Zero-Sum-vs-Non-zero-Sum"><a href="#Zero-Sum-vs-Non-zero-Sum" class="headerlink" title="Zero Sum vs. Non-zero Sum"></a>Zero Sum vs. Non-zero Sum</h4><ul>
+<li>Zero sum games 零和博弈</li>
+<li>Non-zero sum games 非零和博弈</li>
+</ul>
+<h4 id="Games-are-Interesting-but-Too-Hard-to-Solve"><a href="#Games-are-Interesting-but-Too-Hard-to-Solve" class="headerlink" title="Games are Interesting but Too Hard to Solve"></a>Games are Interesting but Too Hard to Solve</h4><h4 id="Types-of-Games"><a href="#Types-of-Games" class="headerlink" title="Types of Games"></a>Types of Games</h4><table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Deterministic</th>
+<th style="text-align:center">Stochastic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Perfect information(fully observable)</td>
+<td style="text-align:center">Chess, Checkers, Go, Othello</td>
+<td style="text-align:center">Backgammon, Monopoly</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Deterministic</th>
+<th style="text-align:center">Stochastic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Imperfect information(partially observable)</td>
+<td style="text-align:center">Stratego 西洋陆军棋, Battleships 海战棋</td>
+<td style="text-align:center">Bridge 桥牌,Poker 扑克, Scrabble 拼字游戏</td>
+</tr>
+</tbody>
+</table>
+<h4 id="Origins-of-Game-Playing-Algorithms"><a href="#Origins-of-Game-Playing-Algorithms" class="headerlink" title="Origins of Game Playing Algorithms"></a>Origins of Game Playing Algorithms</h4><ul>
+<li>1912 Ernst Zermelo: Minimax algorithm</li>
+<li>1949 Claude Shannon: Chess playing with evaluation function, selective search</li>
+<li>1956 John McCarthy: Alpha-beta search</li>
+<li>1956 Arthur Samuel: Checkers program that learns its own evaluation function</li>
+</ul>
+<h4 id="Two-Players-Game"><a href="#Two-Players-Game" class="headerlink" title="Two Players Game"></a>Two Players Game</h4><ul>
+<li>Feature <ul>
+<li>deterministic, perfect information, turn-taking, two players, zero-sum</li>
+</ul>
+</li>
+<li>Calling the two players:<ul>
+<li>MAX, MIN</li>
+</ul>
+</li>
+<li>MAX move first, and then they take turns moving, until the game is over</li>
+<li>At game end<ul>
+<li>winner: award points</li>
+<li>loser: give penalties</li>
+</ul>
+</li>
+</ul>
+<h4 id="Formally-Defined-as-a-Search-Problem"><a href="#Formally-Defined-as-a-Search-Problem" class="headerlink" title="Formally Defined as a Search Problem"></a>Formally Defined as a Search Problem</h4><ul>
+<li>$S_0$ : Initial state, specifies how the game is set up at the start</li>
+<li>$PLAYER(s)$ : Defines which player has the move in a state</li>
+<li>$ACTIONS(s)$ : Returns the set of legal moves in a state</li>
+<li>$RESULT(s, a)$ : Transition model, defines the result of a move</li>
+<li>$TERMINAL-TEST(s)$: Terminal test, true when the game is over and false otherwise</li>
+<li>$UTILITY(s,p)$ : Utility function, defines the value in state s for a player p </li>
+</ul>
+<h3 id="5-2-Optimal-Decisions-in-Games"><a href="#5-2-Optimal-Decisions-in-Games" class="headerlink" title="5.2 Optimal Decisions in Games"></a>5.2 Optimal Decisions in Games</h3><h4 id="Optimal-Solution-最优解"><a href="#Optimal-Solution-最优解" class="headerlink" title="Optimal Solution 最优解"></a>Optimal Solution 最优解</h4><ul>
+<li>In normal search<ul>
+<li>The optimal solution would be a sequence of actions leading to a goal state (terminal state) that is a win</li>
+</ul>
+</li>
+<li>In adversarial search<ul>
+<li>Both of MAX and MIN could have an optimal strategy<ul>
+<li>In initial state, MAX must find a strategy to specify MAX’s move,</li>
+<li>then MAX’s moves in the states resulting from every possible response by MIN, and so on.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Minimax-Theorem"><a href="#Minimax-Theorem" class="headerlink" title="Minimax Theorem"></a>Minimax Theorem</h4><blockquote>
+<p>For every two-player, zero-sum game with finitely many strategies, there exists a value V and a mixed strategy for each player, s.t.</p>
+<p>(a) Given player 2’s strategy, the best payoff possible for player 1 is V</p>
+<p>(b) Given player 1’s strategy, the best payoff possible for player 2 is -V</p>
+</blockquote>
+<ul>
+<li>对于零和博弈来说，其名称 minimax 由来是因为每个玩家会使对手可能的最大收益变得最小，还会使自己的最大损失变得最小。</li>
+</ul>
+<h4 id="Optimal-Solution-in-Adversarial-Search"><a href="#Optimal-Solution-in-Adversarial-Search" class="headerlink" title="Optimal Solution in Adversarial Search"></a>Optimal Solution in Adversarial Search</h4><ul>
+<li>Given a game tree, the optimal strategy can be determined from the minimax value of each node, write as MINIMAX(n)</li>
+<li>Assume that both players play optimally from there to the end of the game</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function MINIMAX(s) returns an action</span><br><span class="line">  if TERMINAL-TEST(s) then return UTILITY(s)</span><br><span class="line">  if PLAYER(s) = MAX then return max_&#123;a\in ACTION(s)&#125;MINIMAX(RESULT(s,a))</span><br><span class="line">  if PLAYER(s) = MIN then return min_&#123;a\in ACTION(s)&#125;MINIMAX(RESULT(s,a))</span><br></pre></td></tr></table></figure>
+<h4 id="Minimax-Algorithm"><a href="#Minimax-Algorithm" class="headerlink" title="Minimax Algorithm"></a>Minimax Algorithm</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function MINIMAX-DECISION(state) returns an action</span><br><span class="line">  return argmax_&#123;a\in ACTION(s)&#125;MIN-VALUE(RESULT(state,a))</span><br><span class="line">function MAX-VALUE(state) returns a utility value</span><br><span class="line">  if TERMINAL-TEST(state) then return UTILITY(state)</span><br><span class="line">  v &lt;- -infinite</span><br><span class="line">  for each a in ACTIONS(sate) do v &lt;- MAX(v, MIN-VALUE(RESULT(state,a)))</span><br><span class="line">  return v</span><br><span class="line">function MIN-VALUE(state) returns a utility value</span><br><span class="line">  if TERMINAL-TEST(state) then return UTILITY(state)</span><br><span class="line">  v &lt;- +infinite</span><br><span class="line">  for each a in ACTIONS(state) do v&lt;- MIN(v, MAX-VALUE(RESULT(state,a)))</span><br><span class="line">  return v</span><br></pre></td></tr></table></figure>
+<h4 id="Properties-of-Minimax-Decision-最小最大决策的性质"><a href="#Properties-of-Minimax-Decision-最小最大决策的性质" class="headerlink" title="Properties of Minimax Decision 最小最大决策的性质"></a>Properties of Minimax Decision 最小最大决策的性质</h4><ul>
+<li>最小最大算法表现为博弈树的深度优先搜索</li>
+<li>Time: $O(b^m)$ </li>
+<li>Space: <ul>
+<li>$O(bm)$ 算法同时生成所有动作</li>
+<li>$O(m)$ 算法一次生成一个动作</li>
+<li>b: 分支因子</li>
+<li>m: 任一结点的最大深度</li>
+</ul>
+</li>
+</ul>
+<h4 id="Optimal-Decisions-in-Multi-player-Games-多玩家博弈中最优决策"><a href="#Optimal-Decisions-in-Multi-player-Games-多玩家博弈中最优决策" class="headerlink" title="Optimal Decisions in Multi-player Games 多玩家博弈中最优决策"></a>Optimal Decisions in Multi-player Games 多玩家博弈中最优决策</h4><ul>
+<li>将minimax思想扩展到多玩家博弈</li>
+<li>将每个节点的单一值-&gt;一个值得向量</li>
+<li>对于终端状态，从每个玩家的角度来看，这个向量给定该状态的效用。实现的最简单方法是拥有一个返回效用向量的 $UTILITY$ 函数 </li>
+</ul>
+<h3 id="5-3-Alpha-Beta-Pruning"><a href="#5-3-Alpha-Beta-Pruning" class="headerlink" title="5.3 Alpha-Beta Pruning"></a>5.3 Alpha-Beta Pruning</h3><h4 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h4><ul>
+<li>The problem with minimax search:<ul>
+<li>Number of game states is exponential in depth of the tree.</li>
+<li>We can’t eliminate the exponent, but we can effectively cut it in half.</li>
+</ul>
+</li>
+<li>The trick to solve the problem:<ul>
+<li>Compute correct minimax decision without looking at every node in game tree.</li>
+<li>That is, use “pruning” to eliminate large parts of the tree</li>
+</ul>
+</li>
+<li>What is alpha-beta pruning?<ul>
+<li>It is a search algorithm that seeks to decrease the number of nodes that are evaluated by the minimax algorithm</li>
+</ul>
+</li>
+</ul>
+<h4 id="Why-Called-Alpha-Beta"><a href="#Why-Called-Alpha-Beta" class="headerlink" title="Why Called Alpha-Beta"></a>Why Called Alpha-Beta</h4><ul>
+<li>Alpha-beta pruning gets its name from the following two parameters:<ul>
+<li>$\alpha$ : 沿着 MAX 路径上的任意选择点，迄今为止我们已经发现的最高值</li>
+<li>$\beta$ : 沿着 MIN 路径上的任意选择点，迄今为止我们已经发现的最低值</li>
+</ul>
+</li>
+<li>Alpha-beta search respectively:<ul>
+<li>updates the values of $\alpha$ and $\beta$ as it goes along, and</li>
+<li>prunes the remaining branches at a node as soon as the value of the current node is known to be worse than the current $\alpha$ or $\beta$ value for MAX or MIN.</li>
+</ul>
+</li>
+</ul>
+<h4 id="Alpha-Beta-Search-Algorithm"><a href="#Alpha-Beta-Search-Algorithm" class="headerlink" title="Alpha-Beta Search Algorithm"></a>Alpha-Beta Search Algorithm</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function ALPHA-BETA-SEARCH(state)returns an action</span><br><span class="line">  v &lt;- MAX-VALUE(state, -inf, +inf)</span><br><span class="line">  return the action in ACTIONS(state) with value v</span><br><span class="line">function MAX-VALUE(state, \alpha, \beta) returns a utility value</span><br><span class="line">  if TERMINAL-TEST(state) then return UTILITY(state)</span><br><span class="line">  v &lt;- -inf</span><br><span class="line">  for each a in ACTIONS(state) do</span><br><span class="line">    v &lt;- MAX(v, MIN-VALUE(RESULT(state,a),\alpha,\beta))</span><br><span class="line">    if v &gt;= \beta then return v else \alpha &lt;- MAX(a,v)</span><br><span class="line">  return v</span><br><span class="line">function MIN-VALUE(state, \alpha, \beta)returns a utility value</span><br><span class="line">  if TERMINAL-TEST(state) then return UTILITY(state)</span><br><span class="line">  v &lt;- +inf</span><br><span class="line">  for each a in ACTIONS(state)do</span><br><span class="line">    v &lt;- MIN(v,MAX-VALUE(RESULT(state,a),\alpha,\beta))</span><br><span class="line">    if v &gt;= \alpha then return v else \beta &lt;- MIN(\beta,v)</span><br><span class="line">  return v</span><br></pre></td></tr></table></figure>
+<h3 id="5-4-Imperfect-Real-time-Decisions"><a href="#5-4-Imperfect-Real-time-Decisions" class="headerlink" title="5.4 Imperfect Real-time Decisions"></a>5.4 Imperfect Real-time Decisions</h3><h4 id="Overview-1"><a href="#Overview-1" class="headerlink" title="Overview"></a>Overview</h4><ul>
+<li>minimax 算法生成整个博弈搜索空间</li>
+<li>alpha-beta 剪枝算法允许我们将其剪去大部分</li>
+<li>然而，alpha-beta 仍然需要搜索抵达终端状态的所有途径，至少是搜索空间的一部分</li>
+<li>这个深度通常是不实际的，因为移动必须在合理的时间内完成</li>
+</ul>
+<h4 id="Apply-a-Heuristic-Evaluation-Function"><a href="#Apply-a-Heuristic-Evaluation-Function" class="headerlink" title="Apply a Heuristic Evaluation Function"></a>Apply a Heuristic Evaluation Function</h4><ul>
+<li>香农提出：程序应该早一些剪断搜索，并在搜索中对状态应用启发式评估函数，有效地将非终端节点转换为终端叶节点，建议使用方法：<ul>
+<li>用 EVAL 来代替 UTILITY<ul>
+<li>EVAL: 一个启发式评价函数，用于估计位置的效用</li>
+</ul>
+</li>
+<li>用 CUTOFF-TEST 来代替 TERMINAL-TEST<ul>
+<li>CUTOFF-TEST: 确定何时应用 EVAL 函数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Heuristic-H-Minimax-vs-Minimax"><a href="#Heuristic-H-Minimax-vs-Minimax" class="headerlink" title="Heuristic H-Minimax vs. Minimax"></a>Heuristic H-Minimax vs. Minimax</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function H-MINIMAX(s,d) returns an action</span><br><span class="line">  if CUTOFF-TEST(s,d) then return EVAL(s)</span><br><span class="line">  if PLAYER(s)=MAX then return max_&#123;a\in ACTION(s)&#125;H-MINIMAX(RESULT(s,a),d+1)</span><br><span class="line">  if PLAYER(s)=MIN then return min_&#123;a\in ACTION(s)&#125;H-MINIMAX(RESULT(s,a),d+1)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function MINIMAX(s) returns an action</span><br><span class="line">  if TERMINAL-TEST(s) then return UTILITY(s)</span><br><span class="line">  if PLAYER(s)=MAX then return max_&#123;a\in ACTION(s)&#125;MINIMAX(RESULT(s,a))</span><br><span class="line">  if PLAYER(s)=MIN then return min_&#123;a\in ACTION(s)&#125;MINIMAX(RESULT(s,a)</span><br></pre></td></tr></table></figure>
+<h4 id="Evaluation-Functions"><a href="#Evaluation-Functions" class="headerlink" title="Evaluation Functions"></a>Evaluation Functions</h4><ul>
+<li>一个评价函数返回从一个给定位置该博弈的期望效用估计<ul>
+<li>应与真实效用函数相同的方式对终端状态进行整理<ul>
+<li>获胜状态必须评价为优于平局</li>
+<li>平局状态必须评价为优于失败</li>
+</ul>
+</li>
+<li>计算的时间不能太长</li>
+<li>非终端状态应该与实际获胜的机会密切相关</li>
+</ul>
+</li>
+</ul>
+<h4 id="Weighted-Linear-Function"><a href="#Weighted-Linear-Function" class="headerlink" title="Weighted Linear Function"></a>Weighted Linear Function</h4><p>$$<br>\begin{align<em>}<br>EVAL(s)&amp;=w_1f_1(s)+w_2f_2(s)+…+w_nf_n(s)\<br>&amp;=\sum_{i=1}^nw_if_i(s)<br>\end{align</em>}<br>$$</p>
+<ul>
+<li>$w_i$ 为权重</li>
+<li>$f_i$ 为位置的特征</li>
+<li>对于国际象棋<ul>
+<li>$f_i$ 为棋盘上每种棋子的数量</li>
+<li>$w_i$ 为棋子的数值：1 表示兵，3 表示象…</li>
+</ul>
+</li>
+</ul>
+<h4 id="Chess"><a href="#Chess" class="headerlink" title="Chess"></a>Chess</h4><h3 id="5-5-Stochastic-Games-随机博弈"><a href="#5-5-Stochastic-Games-随机博弈" class="headerlink" title="5.5 Stochastic Games 随机博弈"></a>5.5 Stochastic Games 随机博弈</h3><ul>
+<li>随机博弈？<ul>
+<li>是一种具有概率转换的动态博弈，有一个或多个玩家</li>
+<li>许多博弈通过引入一种随机元素来仿照这种不可预测性</li>
+</ul>
+</li>
+<li>Backgammon 西洋双陆棋</li>
+</ul>
+<h3 id="5-6-Monte-Carlo-Methods"><a href="#5-6-Monte-Carlo-Methods" class="headerlink" title="5.6 Monte-Carlo Methods"></a>5.6 Monte-Carlo Methods</h3><h4 id="Go-vs-Chess"><a href="#Go-vs-Chess" class="headerlink" title="Go vs. Chess"></a>Go vs. Chess</h4><h4 id="Algorithm-of-AlphaGo"><a href="#Algorithm-of-AlphaGo" class="headerlink" title="Algorithm of AlphaGo"></a>Algorithm of AlphaGo</h4><ul>
+<li>Deep neural networks <ul>
+<li>value network: used to evaluate board positions</li>
+<li>policy network: used to select moves</li>
+</ul>
+</li>
+<li>Monte-Carlo tree search <ul>
+<li>Combines Monte-Carlo simulation with value networks</li>
+</ul>
+</li>
+<li>Reinforcement learning<ul>
+<li>used to improve its play</li>
+</ul>
+</li>
+</ul>
+<h4 id="About-Monte-Carlo-Methods"><a href="#About-Monte-Carlo-Methods" class="headerlink" title="About Monte-Carlo Methods"></a>About Monte-Carlo Methods</h4><ul>
+<li>a broad class of computational algorithms that rely on repeated random sampling to obtain numerical results</li>
+<li>tend to follow a particular pattern:<ul>
+<li>define a domain of possible inputs</li>
+<li>generate inputs randomly from a probability distribution over the domain</li>
+<li>perform a deterministic computation on the inputs</li>
+<li>aggregate the results</li>
+</ul>
+</li>
+</ul>
+<h4 id="Family-of-Monte-Carlo-Methods"><a href="#Family-of-Monte-Carlo-Methods" class="headerlink" title="Family of Monte-Carlo Methods"></a>Family of Monte-Carlo Methods</h4><ul>
+<li>Classical Monte-Carlo 经典<ul>
+<li>样本来自于概率分布，往往是经典波兹曼分布（Boltzmann distribution）</li>
+</ul>
+</li>
+<li>Quantum Monte-Carlo 量子<ul>
+<li>采用随机走查方法来计算量子力学的能量和波函数</li>
+</ul>
+</li>
+<li>Volumetric Monte-Carlo 容积式<ul>
+<li>采用随机数生成的方法产生每个原子的容量，或进行其他类型几何分析</li>
+</ul>
+</li>
+<li>Kinetic Monte-Carlo 动力学<ul>
+<li>仿真过程采用尺度分析来建立时间尺度，或者将随机效应引入分子动力学</li>
+</ul>
+</li>
+</ul>
+<h4 id="Monte-Carlo-Tree-Search"><a href="#Monte-Carlo-Tree-Search" class="headerlink" title="Monte-Carlo Tree Search"></a>Monte-Carlo Tree Search</h4><ul>
+<li>将蒙特卡洛仿真与博弈搜索树相结合</li>
+<li>和 minimax 一样，每个节点对应于一个博弈状态</li>
+<li>不同于 minimax，结点的值通过蒙特卡洛仿真来估值</li>
+<li>$W(a)/N(a)=$ the value of action a<ul>
+<li>$W(a)=$ the total reward</li>
+<li>$N(a)=$ the number of simulations</li>
+</ul>
+</li>
+</ul>
+<h4 id="Algorithm-of-AlphaGo-1"><a href="#Algorithm-of-AlphaGo-1" class="headerlink" title="Algorithm of AlphaGo"></a>Algorithm of AlphaGo</h4><ul>
+<li>采用机器学习和树搜索技术相结合的方式，并且用人类和计算机走棋的棋局进行大量的训练</li>
+<li>两个深度神经网络<ul>
+<li>价值网络来评价棋盘位置，策略网络来选择走棋</li>
+</ul>
+</li>
+<li>树搜索<ul>
+<li>蒙特卡洛树搜索</li>
+</ul>
+</li>
+<li>强化学习<ul>
+<li>用于改善其走棋</li>
+</ul>
+</li>
+</ul>
+<h4 id="Monte-Carlo-Tree-Search-in-AlphaGo"><a href="#Monte-Carlo-Tree-Search-in-AlphaGo" class="headerlink" title="Monte-Carlo Tree Search in AlphaGo"></a>Monte-Carlo Tree Search in AlphaGo</h4><ul>
+<li>(a) Selection: Each simulation traverses the tree by selecting edge with maximum action value Q + bonus u(P) that depends on a stored prior probability P for that edge.</li>
+<li>(b) Expansion: The leaf node may be expanded; the new node is processed once by the policy network $p_\sigma$ and the output probabilities are stored as prior probabilities P for each action.</li>
+<li>(c) Evaluation(Simulation): The leaf node is evaluated in two ways: 1) using the value network $v_\theta$; 2) by running a rollout to the end of the game with the fast rollout policy $p_\pi$ , then computing the winner with function r</li>
+<li>(d) Backup(Back propagation): Action values Q are updated to track the mean value of all evaluations $r(\cdot)$ and $v_\theta(\cdot)$ in the subtree below that action.</li>
+</ul>
+<h4 id="Neural-Network-Training-Pipeline-in-AlphaGo"><a href="#Neural-Network-Training-Pipeline-in-AlphaGo" class="headerlink" title="Neural Network Training Pipeline in AlphaGo"></a>Neural Network Training Pipeline in AlphaGo</h4><ul>
+<li>A fast rollout policy $p_\pi$ and supervised learning(SL) policy network $p_\sigma$ are trained to predict human expert moves in a data set of positions</li>
+<li>A reinforcement learning(RL) policy network $p_\rho$ is initialized to the SL policy network, and then improved by policy gradient learning to maximize the outcome</li>
+<li>A new data set is generated by playing games of self-play with the RL policy network</li>
+<li>A value network $v_\theta$ is trained by regression to predict the expected outcome</li>
+</ul>
+<h4 id="Neural-Network-Architecture-in-AlphaGo"><a href="#Neural-Network-Architecture-in-AlphaGo" class="headerlink" title="Neural Network Architecture in AlphaGo"></a>Neural Network Architecture in AlphaGo</h4><ul>
+<li><p>The policy network 策略网络</p>
+<ul>
+<li>input: the board position</li>
+<li>passes s through convolutional layers with parameters $\sigma$ or $\rho$</li>
+<li>outputs: a prbability distribution over legal moves a.</li>
+</ul>
+</li>
+<li><p>The value network 价值网络</p>
+<ul>
+<li>input: the board position s’</li>
+<li>similarly uses many convolutional layers with parameters $\theta$</li>
+<li>output: a scalar value $v_\theta(s’)$ that predicts the expected outcome.</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Artificial-Intelligence/" rel="tag"># Artificial Intelligence</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/02/人工智能原理-Part-II-Searching-Ch4-Local-Search-and-Swarm-Intelligence/" rel="next" title="人工智能原理 Part II. Searching Ch4.Local Search and Swarm Intelligence">
+                <i class="fa fa-chevron-left"></i> 人工智能原理 Part II. Searching Ch4.Local Search and Swarm Intelligence
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/03/人工智能原理-Part-II-Searching-Ch6-Constraint-Satisfaction-Problems/" rel="prev" title="人工智能原理 Part II. Searching Ch6.Constraint Satisfaction Problems">
+                人工智能原理 Part II. Searching Ch6.Constraint Satisfaction Problems <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/blog-logo.png"
+                alt="Wine&Chord" />
+            
+              <p class="site-author-name" itemprop="name">Wine&Chord</p>
+              <p class="site-description motion-element" itemprop="description">主要用于记录学习经历</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ch5-Adversarial-Search"><span class="nav-number">1.</span> <span class="nav-text">Ch5 Adversarial Search</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-Games"><span class="nav-number">1.1.</span> <span class="nav-text">5.1 Games</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Search-vs-Adversarial-Search-搜索与对抗搜索"><span class="nav-number">1.1.1.</span> <span class="nav-text">Search vs. Adversarial Search 搜索与对抗搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Adversarial-Search-often-Known-as-Games-对抗搜索通常称为博弈"><span class="nav-number">1.1.2.</span> <span class="nav-text">Adversarial Search often Known as Games 对抗搜索通常称为博弈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Games-are-Good-Problems-for-AI"><span class="nav-number">1.1.3.</span> <span class="nav-text">Games are Good Problems for AI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Zero-Sum-vs-Non-zero-Sum"><span class="nav-number">1.1.4.</span> <span class="nav-text">Zero Sum vs. Non-zero Sum</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Games-are-Interesting-but-Too-Hard-to-Solve"><span class="nav-number">1.1.5.</span> <span class="nav-text">Games are Interesting but Too Hard to Solve</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Types-of-Games"><span class="nav-number">1.1.6.</span> <span class="nav-text">Types of Games</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Origins-of-Game-Playing-Algorithms"><span class="nav-number">1.1.7.</span> <span class="nav-text">Origins of Game Playing Algorithms</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Two-Players-Game"><span class="nav-number">1.1.8.</span> <span class="nav-text">Two Players Game</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Formally-Defined-as-a-Search-Problem"><span class="nav-number">1.1.9.</span> <span class="nav-text">Formally Defined as a Search Problem</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-Optimal-Decisions-in-Games"><span class="nav-number">1.2.</span> <span class="nav-text">5.2 Optimal Decisions in Games</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Optimal-Solution-最优解"><span class="nav-number">1.2.1.</span> <span class="nav-text">Optimal Solution 最优解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Minimax-Theorem"><span class="nav-number">1.2.2.</span> <span class="nav-text">Minimax Theorem</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Optimal-Solution-in-Adversarial-Search"><span class="nav-number">1.2.3.</span> <span class="nav-text">Optimal Solution in Adversarial Search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Minimax-Algorithm"><span class="nav-number">1.2.4.</span> <span class="nav-text">Minimax Algorithm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Properties-of-Minimax-Decision-最小最大决策的性质"><span class="nav-number">1.2.5.</span> <span class="nav-text">Properties of Minimax Decision 最小最大决策的性质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Optimal-Decisions-in-Multi-player-Games-多玩家博弈中最优决策"><span class="nav-number">1.2.6.</span> <span class="nav-text">Optimal Decisions in Multi-player Games 多玩家博弈中最优决策</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-Alpha-Beta-Pruning"><span class="nav-number">1.3.</span> <span class="nav-text">5.3 Alpha-Beta Pruning</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Overview"><span class="nav-number">1.3.1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Why-Called-Alpha-Beta"><span class="nav-number">1.3.2.</span> <span class="nav-text">Why Called Alpha-Beta</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Alpha-Beta-Search-Algorithm"><span class="nav-number">1.3.3.</span> <span class="nav-text">Alpha-Beta Search Algorithm</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-Imperfect-Real-time-Decisions"><span class="nav-number">1.4.</span> <span class="nav-text">5.4 Imperfect Real-time Decisions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Overview-1"><span class="nav-number">1.4.1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Apply-a-Heuristic-Evaluation-Function"><span class="nav-number">1.4.2.</span> <span class="nav-text">Apply a Heuristic Evaluation Function</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Heuristic-H-Minimax-vs-Minimax"><span class="nav-number">1.4.3.</span> <span class="nav-text">Heuristic H-Minimax vs. Minimax</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Evaluation-Functions"><span class="nav-number">1.4.4.</span> <span class="nav-text">Evaluation Functions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Weighted-Linear-Function"><span class="nav-number">1.4.5.</span> <span class="nav-text">Weighted Linear Function</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Chess"><span class="nav-number">1.4.6.</span> <span class="nav-text">Chess</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-Stochastic-Games-随机博弈"><span class="nav-number">1.5.</span> <span class="nav-text">5.5 Stochastic Games 随机博弈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-6-Monte-Carlo-Methods"><span class="nav-number">1.6.</span> <span class="nav-text">5.6 Monte-Carlo Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Go-vs-Chess"><span class="nav-number">1.6.1.</span> <span class="nav-text">Go vs. Chess</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Algorithm-of-AlphaGo"><span class="nav-number">1.6.2.</span> <span class="nav-text">Algorithm of AlphaGo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#About-Monte-Carlo-Methods"><span class="nav-number">1.6.3.</span> <span class="nav-text">About Monte-Carlo Methods</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Family-of-Monte-Carlo-Methods"><span class="nav-number">1.6.4.</span> <span class="nav-text">Family of Monte-Carlo Methods</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Monte-Carlo-Tree-Search"><span class="nav-number">1.6.5.</span> <span class="nav-text">Monte-Carlo Tree Search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Algorithm-of-AlphaGo-1"><span class="nav-number">1.6.6.</span> <span class="nav-text">Algorithm of AlphaGo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Monte-Carlo-Tree-Search-in-AlphaGo"><span class="nav-number">1.6.7.</span> <span class="nav-text">Monte-Carlo Tree Search in AlphaGo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Neural-Network-Training-Pipeline-in-AlphaGo"><span class="nav-number">1.6.8.</span> <span class="nav-text">Neural Network Training Pipeline in AlphaGo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Neural-Network-Architecture-in-AlphaGo"><span class="nav-number">1.6.9.</span> <span class="nav-text">Neural Network Architecture in AlphaGo</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" >Wine&Chord</span>
+
+  
+</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://wineandchord.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/02/03/人工智能原理-Part-II-Searching-Ch5-Adversarial-Search/';
+          this.page.identifier = '2019/02/03/人工智能原理-Part-II-Searching-Ch5-Adversarial-Search/';
+          this.page.title = '人工智能原理 Part II. Searching Ch5.Adversarial Search';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://wineandchord.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- <script type="text/javascript" src="/js/src/love.js"></script>script> -->

@@ -296,7 +296,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/110-Balanced-Binary-Tree-DFS-7/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/657-Robot-Return-to-Origin-4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -315,7 +315,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/04/110-Balanced-Binary-Tree-DFS-7/" itemprop="url">110. Balanced Binary Tree-DFS-7</a></h1>
+                <a class="post-title-link" href="/2018/11/04/657-Robot-Return-to-Origin-4/" itemprop="url">657. Robot Return to Origin-4</a></h1>
         
 
         <div class="post-meta">
@@ -327,7 +327,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T14:51:31+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T19:41:40+08:00">
                 2018-11-04
               </time>
             
@@ -368,9 +368,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/04/110-Balanced-Binary-Tree-DFS-7/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/04/657-Robot-Return-to-Origin-4/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/04/110-Balanced-Binary-Tree-DFS-7/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/04/657-Robot-Return-to-Origin-4/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -400,9 +400,8 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>判断是否是平衡的。</p>
-<h3 id="top-down"><a href="#top-down" class="headerlink" title="top-down"></a>top-down</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">depth</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> max(depth(root-&gt;left), depth(root-&gt;right))+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isBlanced</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">int</span> left = depth(root-&gt;left);</span><br><span class="line">    <span class="keyword">int</span> right = depth(root-&gt;right);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">abs</span>(left-right) &lt;= <span class="number">1</span> &amp;&amp; isBalanced(root-&gt;left) &amp;&amp; isBalanced(root-&gt;right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="bottom-up"><a href="#bottom-up" class="headerlink" title="bottom-up"></a>bottom-up</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfsHeight</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> leftHeight = dfsHeight(root-&gt;left);</span><br><span class="line">    <span class="keyword">if</span>(leftHeight == <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> rightHeight = dfsHeight(root-&gt;right);</span><br><span class="line">    <span class="keyword">if</span>(rightHeight == <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">abs</span>(leftHeight - rightHeight) &gt; <span class="number">1</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">return</span> max(leftHeight, rightHeight) + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isBlanced</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> dfsHeight(root) != <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>一个机器人从原点开始，给一个移动序列，问最终是否能够回到原点。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// simulation</span></span><br><span class="line"><span class="keyword">int</span> x = <span class="number">0</span>, y = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">char</span> move: moves.toCharArray())&#123;</span><br><span class="line">    <span class="keyword">if</span>(move == <span class="string">'U'</span>) y--;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(move == <span class="string">'D'</span>) y++;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(move == <span class="string">'L'</span>) x--;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(move == <span class="string">'R'</span>) x++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> x == <span class="number">0</span> &amp;&amp; y == <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -450,7 +449,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/101-Symmetric-Tree-DFS-6/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/804-Unique-Morse-Code-Words-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -469,7 +468,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/04/101-Symmetric-Tree-DFS-6/" itemprop="url">101. Symmetric Tree-DFS-6</a></h1>
+                <a class="post-title-link" href="/2018/11/04/804-Unique-Morse-Code-Words-3/" itemprop="url">804. Unique Morse Code Words-3</a></h1>
         
 
         <div class="post-meta">
@@ -481,7 +480,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T14:36:40+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T19:34:42+08:00">
                 2018-11-04
               </time>
             
@@ -522,9 +521,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/04/101-Symmetric-Tree-DFS-6/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/04/804-Unique-Morse-Code-Words-3/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/04/101-Symmetric-Tree-DFS-6/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/04/804-Unique-Morse-Code-Words-3/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -554,19 +553,9 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>判断二叉树是否对称。</p>
-<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSymmetric</span><span class="params">(TreeNode root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> isMirror(root, root);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isMirror</span><span class="params">(TreeNode t1, TreeNode t2)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!t1 &amp;&amp; !t2) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">if</span>(!t1 || !t2) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">return</span> (t1.val==t2.val) &amp;&amp; isMirror(t1.right, t2.left) &amp;&amp; isMirror(t1.left, t2.right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isSymmetric</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> isMirror(root, root);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isMirror</span><span class="params">(TreeNode* t1, TreeNode* t2)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!t1 &amp;&amp; !t2) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span>(!t1 || !t2) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> (t1-&gt;val == t2-&gt;val) &amp;&amp; isMirror(t1-&gt;right, t2-&gt;left) &amp;&amp; isMirror(t1-&gt;left, t2-&gt;right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>time: $O(n)$</li>
-<li><p>space: $O(n)$</p>
-<h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSymmetric</span><span class="params">(TreeNode root)</span></span>&#123;</span><br><span class="line">    Queue&lt;TreeNode&gt; q = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    q.add(root);</span><br><span class="line">    q.add(root);</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())&#123;</span><br><span class="line">        TreeNode t1 = q.poll();</span><br><span class="line">        TreeNode t2 = q.poll();</span><br><span class="line">        <span class="keyword">if</span>(!t1 &amp;&amp; !t2) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span>(!t1 || !t2) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(t1.val != t2.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        q.add(t1.left);</span><br><span class="line">        q.add(t2.right);</span><br><span class="line">        q.add(t1.right);</span><br><span class="line">        q.add(t2.left);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>time: $O(n)$</p>
-</li>
-<li>space: $O(n)$</li>
-</ul>
-
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给出一个字符串的莫尔斯码变换</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line">String MORSE = <span class="keyword">new</span> String[]&#123;<span class="string">".-"</span>,<span class="string">"-..."</span>,<span class="string">"-.-."</span>,<span class="string">"-.."</span>,<span class="string">"."</span>,<span class="string">"..-."</span>,<span class="string">"--."</span>,</span><br><span class="line">                         <span class="string">"...."</span>,<span class="string">".."</span>,<span class="string">".---"</span>,<span class="string">"-.-"</span>,<span class="string">".-.."</span>,<span class="string">"--"</span>,<span class="string">"-."</span>,</span><br><span class="line">                         <span class="string">"---"</span>,<span class="string">".--."</span>,<span class="string">"--.-"</span>,<span class="string">".-."</span>,<span class="string">"..."</span>,<span class="string">"-"</span>,<span class="string">"..-"</span>,</span><br><span class="line">                         <span class="string">"...-"</span>,<span class="string">".--"</span>,<span class="string">"-..-"</span>,<span class="string">"-.--"</span>,<span class="string">"--.."</span>&#125;;</span><br><span class="line">Set&lt;String&gt; seen = <span class="keyword">new</span> HashSet();</span><br><span class="line"><span class="keyword">for</span>(String word: words)&#123;</span><br><span class="line">    StringBuilder code = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> c: word.toCharArray())</span><br><span class="line">        code.append(MORSE[c-<span class="string">'a'</span>]);</span><br><span class="line">    seen.add(code.toString());</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> seen.size();</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; d = &#123;&#125;;</span><br><span class="line"><span class="built_in">unordered_set</span>&lt;<span class="built_in">string</span>&gt; s;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> word: words)&#123;</span><br><span class="line">    <span class="built_in">string</span> code;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> c: word) code += d[c-<span class="string">'a'</span>];</span><br><span class="line">    s.insert(code);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> s.size();</span><br></pre></td></tr></table></figure>
           
         
       
@@ -614,7 +603,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/257-Binary-Tree-Paths-DFS-5/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/709-To-Lower-Case-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -633,7 +622,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/04/257-Binary-Tree-Paths-DFS-5/" itemprop="url">257. Binary Tree Paths-DFS-5</a></h1>
+                <a class="post-title-link" href="/2018/11/04/709-To-Lower-Case-2/" itemprop="url">709. To Lower Case-2</a></h1>
         
 
         <div class="post-meta">
@@ -645,7 +634,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T13:56:14+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T19:30:11+08:00">
                 2018-11-04
               </time>
             
@@ -686,9 +675,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/04/257-Binary-Tree-Paths-DFS-5/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/04/709-To-Lower-Case-2/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/04/257-Binary-Tree-Paths-DFS-5/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/04/709-To-Lower-Case-2/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -718,9 +707,8 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>找到所有从根到叶子的路径。</p>
-<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">binaryTreePaths</span><span class="params">(TreeNode root)</span></span>&#123;</span><br><span class="line">    List&lt;String&gt; answer = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">    <span class="keyword">if</span>(root != <span class="keyword">null</span>) searchBT(root, <span class="string">""</span>, answer);</span><br><span class="line">    <span class="keyword">return</span> answer;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">searchBT</span><span class="params">(TreeNode root, String path, List&lt;String&gt; answer)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root.left == <span class="keyword">null</span> &amp;&amp; root.right == <span class="keyword">null</span>) answer.add(path+root.val);</span><br><span class="line">    <span class="keyword">if</span>(root.left != <span class="keyword">null</span>) searchBT(root.left, path+root.val+<span class="string">"-&gt;"</span>, answer);</span><br><span class="line">    <span class="keyword">if</span>(root.right != <span class="keyword">null</span>) searchBT(root.right, path+root.val+<span class="string">"-&gt;"</span>, answer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">binaryTreePaths</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; result, TreeNode* root, <span class="built_in">string</span> t)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!root-&gt;left &amp;&amp; !root-&gt;right) &#123;</span><br><span class="line">        result.push_back(t);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(root-&gt;left) binaryTreePaths(result, root-&gt;left, t+<span class="string">"-&gt;"</span>+to_string(root-&gt;left-&gt;val));</span><br><span class="line">    <span class="keyword">if</span>(root-&gt;right) binaryTreePaths(result, root-&gt;right, t+<span class="string">"-&gt;"</span>+to_string(root-&gt;right-&gt;val));</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; binaryTreePaths(TreeNode* root)&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; result;</span><br><span class="line">    <span class="keyword">if</span>(!root) <span class="keyword">return</span> result;</span><br><span class="line">    binaryTreePaths(result, root, to_string(root-&gt;val));</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>实现变小写</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">char</span>&amp; c: str)&#123;</span><br><span class="line">    <span class="keyword">if</span>(c &gt;= <span class="string">'A'</span> &amp;&amp; c &lt;= <span class="string">'Z'</span>)</span><br><span class="line">        c += <span class="string">'a'</span> - <span class="string">'A'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> str;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -768,7 +756,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/108-Convert-Sorted-Array-to-Binary-Search-Tree-DFS-4/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/929-Unique-Email-Addresses-String-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -787,7 +775,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/04/108-Convert-Sorted-Array-to-Binary-Search-Tree-DFS-4/" itemprop="url">108. Convert Sorted Array to Binary Search Tree-DFS-4</a></h1>
+                <a class="post-title-link" href="/2018/11/04/929-Unique-Email-Addresses-String-1/" itemprop="url">929. Unique Email Addresses-String-1</a></h1>
         
 
         <div class="post-meta">
@@ -799,7 +787,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T13:48:48+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T19:13:11+08:00">
                 2018-11-04
               </time>
             
@@ -840,9 +828,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/04/108-Convert-Sorted-Array-to-Binary-Search-Tree-DFS-4/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/04/929-Unique-Email-Addresses-String-1/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/04/108-Convert-Sorted-Array-to-Binary-Search-Tree-DFS-4/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/04/929-Unique-Email-Addresses-String-1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -872,968 +860,951 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个升序的数组，将其转化为平衡二叉树。</p>
-<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TreeNode* <span class="title">sortedArrayToBST</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; num)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(num.size() == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">if</span>(num.size() == <span class="number">1</span>) <span class="keyword">return</span> <span class="keyword">new</span> TreeNode(num[<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">int</span> middle = num.size()/<span class="number">2</span>;</span><br><span class="line">    TreeNode* root = <span class="keyword">new</span> TreeNode(num[middle]);</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; leftInts(num.begin(), num.begin()+middle);</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; rightInts(num.begin()+middle+<span class="number">1</span>, num.end());</span><br><span class="line">    root-&gt;left = sortedArrayToBST(leftInts);</span><br><span class="line">    root-&gt;right = sortedArrayToBST(rightInts);</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/733-Flood-Fill-DFS-3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/04/733-Flood-Fill-DFS-3/" itemprop="url">733. Flood Fill-DFS-3</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T13:33:26+08:00">
-                2018-11-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/04/733-Flood-Fill-DFS-3/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/04/733-Flood-Fill-DFS-3/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>用一个像素值来填充图片中同色的区域。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">image =</span><br><span class="line">1 1 1</span><br><span class="line">1 1 0</span><br><span class="line">1 0 1</span><br><span class="line">(sr,sc)=(1,1), newColor=2 -&gt;</span><br><span class="line">2 2 2</span><br><span class="line">2 2 0</span><br><span class="line">2 0 1</span><br></pre></td></tr></table></figure></p>
-<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[][] floodFill(<span class="keyword">int</span>[][] image, <span class="keyword">int</span> sr, <span class="keyword">int</span> sc, <span class="keyword">int</span> newColor)&#123;</span><br><span class="line">    <span class="keyword">int</span> color = image[sr][sc];</span><br><span class="line">    <span class="keyword">if</span>(color != newColor) dfs(image, sr, sc, color, newColor);</span><br><span class="line">    <span class="keyword">return</span> image;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span>[][] image, <span class="keyword">int</span> r, <span class="keyword">int</span> c, <span class="keyword">int</span> color, <span class="keyword">int</span> newColor)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(image[r][c] == color)&#123;</span><br><span class="line">        image[r][c] = newColor;</span><br><span class="line">        <span class="keyword">if</span>(r &gt;= <span class="number">1</span>) dfs(image, r-<span class="number">1</span>, c, color, newColor);</span><br><span class="line">        <span class="keyword">if</span>(c &gt;= <span class="number">1</span>) dfs(image, r, c-<span class="number">1</span>, color, newColor);</span><br><span class="line">        <span class="keyword">if</span>(r+<span class="number">1</span> &lt; image.length) dfs(image, r+<span class="number">1</span>, c, color, newColor);</span><br><span class="line">        <span class="keyword">if</span>(c+<span class="number">1</span> &lt; image[<span class="number">0</span>].length) dfs(image, r, c+<span class="number">1</span>, color, newColor);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">floodFill</span><span class="params">(self, image, sr, sc, newColor)</span>:</span></span><br><span class="line">    R, C = len(image), len(image[<span class="number">0</span>])</span><br><span class="line">    color = image[sr][sc];</span><br><span class="line">    <span class="keyword">if</span> color == newColor: <span class="keyword">return</span> image</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(r, c)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> image[r][c] == color:</span><br><span class="line">            image[r][c] = newColor</span><br><span class="line">            <span class="keyword">if</span> r &gt;= <span class="number">1</span>: dfs(r<span class="number">-1</span>, c)</span><br><span class="line">            <span class="keyword">if</span> r+<span class="number">1</span> &lt; R: dfs(r+<span class="number">1</span>, c)</span><br><span class="line">            <span class="keyword">if</span> c &gt;= <span class="number">1</span>: dfs(r, c<span class="number">-1</span>)</span><br><span class="line">            <span class="keyword">if</span> c+<span class="number">1</span> &lt; C: dfs(r, c+<span class="number">1</span>)</span><br><span class="line">    dfs(sr, sc)</span><br><span class="line">    <span class="keyword">return</span> image</span><br></pre></td></tr></table></figure>
-<ul>
-<li>time: $O(N)$</li>
-<li>space: $O(N)$</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/100-Same-Tree-DFS-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/04/100-Same-Tree-DFS-2/" itemprop="url">100. Same Tree-DFS-2</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T13:28:41+08:00">
-                2018-11-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/04/100-Same-Tree-DFS-2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/04/100-Same-Tree-DFS-2/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>判断两个树是否一样</p>
-<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isSameTree</span><span class="params">(TreeNode* p, TreeNode* q)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(p == <span class="literal">NULL</span> || q == <span class="literal">NULL</span>) <span class="keyword">return</span> (p==q);</span><br><span class="line">    <span class="keyword">return</span> (p-&gt;val == q-&gt;val &amp;&amp; isSameTree(p-&gt;left, q-&gt;left) &amp;&amp; isSameTree(p-&gt;right, q-&gt;right));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/897-Increasing-Order-Search-Tree-DFS-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/04/897-Increasing-Order-Search-Tree-DFS-1/" itemprop="url">897. Increasing Order Search Tree-DFS-1</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T12:22:09+08:00">
-                2018-11-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/04/897-Increasing-Order-Search-Tree-DFS-1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/04/897-Increasing-Order-Search-Tree-DFS-1/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个树，根据它的中序遍历序列重新进行调整，使每一个结点只有有孩子没有左孩子。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode *left;</span><br><span class="line">    TreeNode *right;</span><br><span class="line">    TreeNode(<span class="keyword">int</span> x): val(x), left(<span class="literal">NULL</span>), right(<span class="literal">NULL</span>)&#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<h3 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">increasingBST</span><span class="params">(TreeNode root)</span></span>&#123;</span><br><span class="line">    List&lt;Integer&gt; vals = <span class="keyword">new</span> ArrayList();</span><br><span class="line">    inorder(root, vals);</span><br><span class="line">    TreeNode ans = <span class="keyword">new</span> TreeNode(<span class="number">0</span>), cur = ans;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> v: vals)&#123;</span><br><span class="line">        cur.right = <span class="keyword">new</span> TreeNode(v);</span><br><span class="line">        cur = cur.right;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans.right;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">inorder</span><span class="params">(TreeNode node, List&lt;Integer&gt; vals)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!node) <span class="keyword">return</span>;</span><br><span class="line">    inorder(node.left, vals);</span><br><span class="line">    vals.add(node.val);</span><br><span class="line">    inorder(node.right, vals);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">increasingBST</span><span class="params">(self, root)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inorder</span><span class="params">(node)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> node:</span><br><span class="line">            <span class="keyword">yield</span> <span class="keyword">from</span> inorder(node.left)</span><br><span class="line">            <span class="keyword">yield</span> node.val</span><br><span class="line">            <span class="keyword">yield</span> <span class="keyword">from</span> inorder(node.right)</span><br><span class="line">    ans = cur = TreeNode(<span class="keyword">None</span>)</span><br><span class="line">    <span class="keyword">for</span> v <span class="keyword">in</span> inorder(root):</span><br><span class="line">        cur.right = TreeNode(v)</span><br><span class="line">        cur = cur.right</span><br><span class="line">    <span class="keyword">return</span> ans.right</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="function">TreeNode* <span class="title">increasingBST</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> increasintBST(root, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">TreeNode* <span class="title">increasingBST</span><span class="params">(TreeNode* root, TreeNode* tail = <span class="literal">NULL</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!root) <span class="keyword">return</span> tail;</span><br><span class="line">    TreeNode* res = increasingBST(root-&gt;left, root);</span><br><span class="line">    root-&gt;left = <span class="literal">NULL</span>;</span><br><span class="line">    root-&gt;right = increasingBST(root-&gt;right, tail);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>time: $O(N)$</li>
-<li>space: $O(N)$</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/872-Leaf-Similar-Trees-Tree-10/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/04/872-Leaf-Similar-Trees-Tree-10/" itemprop="url">872. Leaf-Similar Trees-Tree-10</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T12:11:00+08:00">
-                2018-11-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/04/872-Leaf-Similar-Trees-Tree-10/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/04/872-Leaf-Similar-Trees-Tree-10/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>判断两个二叉树各自的叶节点序列是否相同<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode *left;</span><br><span class="line">    TreeNode *right;</span><br><span class="line">    TreeNode(<span class="keyword">int</span> x): val(x), left(<span class="literal">NULL</span>), right(<span class="literal">NULL</span>)&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">leafSimilar</span><span class="params">(TreeNode* root1, TreeNode* root2)</span></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; leaves1;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; leaves2;</span><br><span class="line">    dfs(root1, leaves1);</span><br><span class="line">    dfs(root2, leaves2);</span><br><span class="line">    <span class="keyword">return</span> leaves1 == leaves2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(TreeNode* node, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; leaves)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(node == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span>(node-&gt;left == <span class="literal">NULL</span> &amp;&amp; node-&gt;right == <span class="literal">NULL</span>)</span><br><span class="line">        leaves.push_back(node-&gt;val);</span><br><span class="line">    dfs(node-&gt;left, leaves);</span><br><span class="line">    dfs(node-&gt;right, leaves);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>time: $O(T_1+T_2)$</li>
-<li>space: $O(T_1+T_2)$</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/104-Maximum-Depth-of-Binary-Tree-Tree-9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/04/104-Maximum-Depth-of-Binary-Tree-Tree-9/" itemprop="url">104. Maximum Depth of Binary Tree-Tree-9</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T11:35:04+08:00">
-                2018-11-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/04/104-Maximum-Depth-of-Binary-Tree-Tree-9/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/04/104-Maximum-Depth-of-Binary-Tree-Tree-9/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>找出一个二叉树的最大深度<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode *left;</span><br><span class="line">    TreeNode *right;</span><br><span class="line">    TreeNode(<span class="keyword">int</span> x): val(x), left(<span class="literal">NULL</span>), right(<span class="literal">NULL</span>)&#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxDepth</span><span class="params">(TreeNode *root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> max(<span class="number">1</span>+maxDepth(root-&gt;left), <span class="number">1</span>+maxDepth(root-&gt;right));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>time: $O(N)$</li>
-<li><p>space: $O(N)$, best case: $O(logN)$</p>
-<h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><p>使用一个栈，通过深度优先搜索来访问每一个结点，用max来记录其最大深度</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxDepth</span><span class="params">(self, root)</span>:</span></span><br><span class="line">    stack = []</span><br><span class="line">    <span class="keyword">if</span> root <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">        stack.append((<span class="number">1</span>, root))</span><br><span class="line">    depth = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> stack:</span><br><span class="line">        current_depth, root = stack.pop()</span><br><span class="line">        <span class="keyword">if</span> root <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            depth = max(depth, current_depth)</span><br><span class="line">            stack.append((current_depth+<span class="number">1</span>, root.left))</span><br><span class="line">            stack.append((current_depth+<span class="number">1</span>, root.right))</span><br><span class="line">    <span class="keyword">return</span> depth</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>time: $O(N)$</p>
-</li>
-<li>space: $O(N)$<h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxDepth</span><span class="params">(TreeNode *root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">queue</span>&lt;TreeNode*&gt; q;</span><br><span class="line">    q.push(root);</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())&#123;</span><br><span class="line">        res++;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>, n = q.size(); i &lt; n; i++)&#123;</span><br><span class="line">            TreeNode *p = q.front();</span><br><span class="line">            q.pop();</span><br><span class="line">            <span class="keyword">if</span>(p-&gt;left != <span class="literal">NULL</span>) q.push(p-&gt;left);</span><br><span class="line">            <span class="keyword">if</span>(p-&gt;right != <span class="literal">NULL</span>) q.push(p-&gt;right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/559-Maximum-Depth-of-N-ary-Tree-Tree-8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/04/559-Maximum-Depth-of-N-ary-Tree-Tree-8/" itemprop="url">559. Maximum Depth of N-ary Tree-Tree-8</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T11:31:03+08:00">
-                2018-11-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/04/559-Maximum-Depth-of-N-ary-Tree-Tree-8/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/04/559-Maximum-Depth-of-N-ary-Tree-Tree-8/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个N叉树，找到最大深度。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    <span class="built_in">vector</span>&lt;Node*&gt; children;</span><br><span class="line">    Node() &#123;&#125;</span><br><span class="line">    Node(<span class="keyword">int</span> _val, <span class="built_in">vector</span>&lt;Node*&gt; _children)&#123;</span><br><span class="line">        val = _val;</span><br><span class="line">        children = _children;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>使用深度优先搜索<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxDepth</span><span class="params">(Node root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(root.children.isEmpty()) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        List&lt;Integer&gt; heights = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(Node item: root.children)</span><br><span class="line">            heights.add(maxDepth(item));</span><br><span class="line">        <span class="keyword">return</span> Collections.max(heights) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxDepth</span><span class="params">(self, root)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> root <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">elif</span> root.children == []:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        height = [self.maxDepth(c) <span class="keyword">for</span> c <span class="keyword">in</span> root.children]</span><br><span class="line">        <span class="keyword">return</span> max(height) + <span class="number">1</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxDepth</span><span class="params">(Node* root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(Node* child: root-&gt;children)</span><br><span class="line">        res = max(res, maxDepth(child)+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>time: $O(N)$</li>
-<li>space: worst case:$O(N)$, best case:$O(logN)$<h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3>使用一个栈来把递归变为迭代<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line"><span class="keyword">import</span> javafx.util.Pair;</span><br><span class="line"><span class="keyword">import</span> java.lang.Math;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxDepth</span><span class="params">(Node root)</span></span>&#123;</span><br><span class="line">    Queue&lt;Pair&lt;Node, Integer&gt;&gt; stack = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    <span class="keyword">if</span>(root != <span class="keyword">null</span>) stack.add(<span class="keyword">new</span> Pair(root, <span class="number">1</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> depth = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>(!stack.isEmpty())&#123;</span><br><span class="line">    Pair&lt;Node, Integer&gt; current = stack.poll();</span><br><span class="line">    root = current.getKey();</span><br><span class="line">    <span class="keyword">int</span> current_depth = current.getValue();</span><br><span class="line">    <span class="keyword">if</span>(root != <span class="keyword">null</span>)&#123;</span><br><span class="line">        depth = Math.max(depth, current_depth);</span><br><span class="line">        <span class="keyword">for</span>(Node c: root.children)&#123;</span><br><span class="line">            stack.add(<span class="keyword">new</span> Pair(c, current_depth + <span class="number">1</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> depth;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>邮件中本地名里面含有 ‘.’ 的会被忽略，含有 ‘+’ 的，其后面的所有会被忽略。这两条规则均不适用于域名。给一个发送邮件地址的 list，问实际上有哪些地址收到了邮件？</p>
+<h3 id="Canonical-Form"><a href="#Canonical-Form" class="headerlink" title="Canonical Form"></a>Canonical Form</h3><ul>
+<li>分开本地名和域名</li>
+<li>本地名中 ‘+’ 后面的完全取掉</li>
+<li>取掉本地名中的所有 ‘.’<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numUniqueEmails</span><span class="params">(String[] emails)</span></span>&#123;</span><br><span class="line">    Set&lt;String&gt; seen = <span class="keyword">new</span> HashSet();</span><br><span class="line">    <span class="keyword">for</span>(String email: emails)&#123;</span><br><span class="line">        <span class="keyword">int</span> i = email.indexOf(<span class="string">'@'</span>);</span><br><span class="line">        String local = email.substring(<span class="number">0</span>, i);</span><br><span class="line">        String rest = email.substring(i);</span><br><span class="line">        <span class="keyword">if</span>(local.contains(<span class="string">"+"</span>))&#123;</span><br><span class="line">            local = local.substring(<span class="number">0</span>, local.indexOf(<span class="string">'+'</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        local = local.replaceAll(<span class="string">"."</span>, <span class="string">""</span>);</span><br><span class="line">        seen.add(local+rest);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> seen.size();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxDepth</span><span class="params">(self, root)</span>:</span></span><br><span class="line">    stack = []</span><br><span class="line">    <span class="keyword">if</span> root <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">        stack.append((<span class="number">1</span>, root))</span><br><span class="line">    depth = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> stack != []:</span><br><span class="line">        current_depth, root = stack.pop()</span><br><span class="line">        <span class="keyword">if</span> root <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            depth = max(depth, current_depth)</span><br><span class="line">            <span class="keyword">for</span> c <span class="keyword">in</span> root.children:</span><br><span class="line">                stack.append((current_depth+<span class="number">1</span>, c))</span><br><span class="line">    <span class="keyword">return</span> depth</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">numUniqueEmails</span><span class="params">(self, emails)</span>:</span></span><br><span class="line">    seen = set()</span><br><span class="line">    <span class="keyword">for</span> email <span class="keyword">in</span> emails:</span><br><span class="line">        local, _, domain = email.partition(<span class="string">'@'</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">'+'</span> <span class="keyword">in</span> local:</span><br><span class="line">            local = local[:local.index(<span class="string">'+'</span>)]</span><br><span class="line">        seen.add(local.replace(<span class="string">'.'</span>, <span class="string">''</span>) + <span class="string">'@'</span> + domain)</span><br><span class="line">    <span class="keyword">return</span> len(seen)</span><br><span class="line">// C++</span><br><span class="line">int numUniqueEmails(vector&lt;string&gt;&amp; emails)&#123;</span><br><span class="line">    unordered_set&lt;string&gt; res;</span><br><span class="line">    vector&lt;char&gt; domain = &#123;&#125;;</span><br><span class="line">    vector&lt;char&gt; local = &#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span>(auto email: emails)&#123;</span><br><span class="line">        domain.clear();</span><br><span class="line">        local.clear();</span><br><span class="line">        <span class="keyword">for</span>(int i = email.length()<span class="number">-1</span>; i &gt; <span class="number">-1</span>; --i)&#123;</span><br><span class="line">            domain.push_back(email[i]);</span><br><span class="line">            <span class="keyword">if</span>(email[i] == <span class="string">'@'</span>) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; email.length(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(email[i] == <span class="string">'.'</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span>(email[i] == <span class="string">'@'</span> || email[i] == <span class="string">'+'</span>) <span class="keyword">break</span>;</span><br><span class="line">            local.push_back(email[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        res.insert(string(local.begin(), local.end()) + string(domain.rbegin(), domain.rend()));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res.size();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>time: $O(N)$</li>
-<li>space: $O(N)$<h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxDepth</span><span class="params">(Node* root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">queue</span>&lt;Node*&gt; q;</span><br><span class="line">    q.push(root);</span><br><span class="line">    <span class="keyword">int</span> depth = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())&#123;</span><br><span class="line">        depth += <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> breadth = q.size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> _ = <span class="number">0</span>; _ &lt; breadth; _++)&#123;</span><br><span class="line">            <span class="keyword">auto</span> node = q.front(); q.pop();</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> child: node-&gt;children)</span><br><span class="line">                <span class="keyword">if</span>(child)</span><br><span class="line">                    q.push(child);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> depth;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>time: $O(C)$</li>
+<li>space: $O(C)$</li>
 </ul>
 
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/378-Kth-Smallest-Element-in-a-Sorted-Matrix-Heap-4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/04/378-Kth-Smallest-Element-in-a-Sorted-Matrix-Heap-4/" itemprop="url">378. Kth Smallest Element in a Sorted Matrix-Heap-4</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T18:57:40+08:00">
+                2018-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/04/378-Kth-Smallest-Element-in-a-Sorted-Matrix-Heap-4/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/04/378-Kth-Smallest-Element-in-a-Sorted-Matrix-Heap-4/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个nxn矩阵，每一行每一列都是升序。找到矩阵中第k小的元素。</p>
+<h3 id="方法一：堆"><a href="#方法一：堆" class="headerlink" title="方法一：堆"></a>方法一：堆</h3><ul>
+<li>用第一行的元素建立一个最小堆。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">kthSmallest</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = matrix.length;</span><br><span class="line">    PriorityQueue&lt;Tuple&gt; pq = <span class="keyword">new</span> PriorityQueue&lt;Tuple&gt;();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= n-<span class="number">1</span>; j++)</span><br><span class="line">        pq.offer(<span class="keyword">new</span> Tuple(<span class="number">0</span>, j, matrix[<span class="number">0</span>][j]));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k-<span class="number">1</span>; i++)&#123;</span><br><span class="line">        Tuple t = pq.poll();</span><br><span class="line">        <span class="keyword">if</span>(t.x == n-<span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">        pq.offer(<span class="keyword">new</span> Tuple(t.x+<span class="number">1</span>, t.y, matrix[t.x+<span class="number">1</span>][t.y]));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> pq.poll().val;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tuple</span> <span class="keyword">implements</span> <span class="title">Comparable</span>&lt;<span class="title">Tuple</span>&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x, y, val;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Tuple</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.x = x;</span><br><span class="line">        <span class="keyword">this</span>.y = y;</span><br><span class="line">        <span class="keyword">this</span>.val = val;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Tuple that)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.val - that.val;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="方法二：二分查找"><a href="#方法二：二分查找" class="headerlink" title="方法二：二分查找"></a>方法二：二分查找</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">kthSmallest</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> lo = matrix[<span class="number">0</span>][<span class="number">0</span>], hi = matrix[matrix.length-<span class="number">1</span>][matrix[<span class="number">0</span>].length-<span class="number">1</span>] + <span class="number">1</span>;  <span class="comment">// [lo, hi)</span></span><br><span class="line">    <span class="keyword">while</span>(lo &lt; hi)&#123;</span><br><span class="line">        <span class="keyword">int</span> mid = lo + (hi-lo) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>, j = matrix[<span class="number">0</span>].length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; matrix[<span class="number">0</span>].length; i++)&#123;</span><br><span class="line">            <span class="keyword">while</span>(j &gt;= <span class="number">0</span> &amp;&amp; matrix[i][j] &gt; mid) j--;</span><br><span class="line">            count += (j+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(count &lt; k) lo = mid + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> hi = mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> lo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/347-Top-K-Frequent-Elements-Heap-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/04/347-Top-K-Frequent-Elements-Heap-3/" itemprop="url">347. Top K Frequent Elements-Heap-3</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T16:57:54+08:00">
+                2018-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/04/347-Top-K-Frequent-Elements-Heap-3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/04/347-Top-K-Frequent-Elements-Heap-3/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个非空整数数组，返回 <code>k most frequent elements</code></p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++ using hash table and bucket sort</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; topKFrequent(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)&#123;</span><br><span class="line">    <span class="comment">// nums = [1,1,1,2,2,3]</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> num: nums)</span><br><span class="line">        m[num]++; <span class="comment">// m = &#123;1:3, 2:2, 3:1&#125;</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; buckets(nums.size()+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> p:m)</span><br><span class="line">        buckets[p.second].push_back(p.first);</span><br><span class="line">    <span class="comment">// buckets = [[],[3],[2],[1]]</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = buckets.size()<span class="number">-1</span>; i &gt;= <span class="number">0</span> &amp;&amp; ans.size() &lt; k; --i)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> num: buckets[i])&#123;</span><br><span class="line">            ans.push_back(num);</span><br><span class="line">            <span class="keyword">if</span>(ans.size()==k)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/451-Sort-Characters-By-Frequency-Heap-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/04/451-Sort-Characters-By-Frequency-Heap-2/" itemprop="url">451. Sort Characters By Frequency-Heap-2</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T16:47:05+08:00">
+                2018-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/04/451-Sort-Characters-By-Frequency-Heap-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/04/451-Sort-Characters-By-Frequency-Heap-2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个字符串，按照频率下降的顺序对字符进行排序。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">frequencySort</span><span class="params">(<span class="built_in">string</span> s)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> counts[<span class="number">256</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> ch: s) counts[ch]++;</span><br><span class="line">    sort(s.begin(), s.end(), [&amp;](<span class="keyword">char</span> a, <span class="keyword">char</span> b)&#123;</span><br><span class="line">        <span class="keyword">return</span> counts[a]&gt;counts[b] || (counts[a] == counts[b] &amp;&amp; a &lt; b)</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// another</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">frequencySort</span><span class="params">(<span class="built_in">string</span> s)</span></span>&#123;</span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt; freq;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; bucket(s.size()+<span class="number">1</span>, <span class="string">""</span>);</span><br><span class="line">    <span class="built_in">string</span> res;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> c:s) freq[c]++;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span>&amp; it:freq)&#123;</span><br><span class="line">        <span class="keyword">int</span> n = it.second;</span><br><span class="line">        <span class="keyword">char</span> c = it.first;</span><br><span class="line">        bucket[n].append(n, c);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = s.size(); i &gt; <span class="number">0</span>; i--)</span><br><span class="line">        <span class="keyword">if</span>(!bucket[i].empty())</span><br><span class="line">            res.append(bucket[i]);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/703-Kth-Largest-Element-in-a-Stream-Heap-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/04/703-Kth-Largest-Element-in-a-Stream-Heap-1/" itemprop="url">703. Kth Largest Element in a Stream-Heap-1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T16:02:09+08:00">
+                2018-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/04/703-Kth-Largest-Element-in-a-Stream-Heap-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/04/703-Kth-Largest-Element-in-a-Stream-Heap-1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>设计一个类来找到一个流中第 k 大的元素。类初始的时候有 k 和一个数组 nums。之后每进行添加元素的操作时都要能够返回第 k 大的元素。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">KthLargest</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">    KthLargest(<span class="keyword">int</span> k, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums)&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> k = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">int</span>[] arr = [<span class="number">4</span>,<span class="number">5</span>,<span class="number">8</span>,<span class="number">2</span>];</span><br><span class="line">KthLargest kthLargest = <span class="keyword">new</span> KthLargest(<span class="number">3</span>, arr);</span><br><span class="line">kthLargest.add(<span class="number">3</span>); <span class="comment">// [2,3,4,5,8]: returns 4</span></span><br><span class="line">kthLargest.add(<span class="number">5</span>); <span class="comment">// [2,3,4,5,5,8]: return 5</span></span><br><span class="line">kthLargest.add(<span class="number">10</span>); <span class="comment">// [2,3,4,5,5,8,10]: return 5</span></span><br><span class="line">kthLargest.add(<span class="number">9</span>); <span class="comment">// [2,3,4,5,5,8,9,10]: return 8</span></span><br><span class="line">kthLargest.add(<span class="number">4</span>); <span class="comment">// [2,3,4,4,5,5,8,9,10]: return 8</span></span><br></pre></td></tr></table></figure>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>思路：建立一个只含有 k 的比较大元素的最小堆。<br>对于 add:</p>
+<ul>
+<li>比较新加入的元素 <code>x</code> 和堆中的最小值，决定我们是否要 <code>pop min</code> <code>insert x</code></li>
+<li>并且要考虑 <code>heap_size</code> 小于 <code>k</code> 的情况<br>对于构造，只需调用 <code>N</code> 次 <code>add</code> 即可</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;, greater&lt;<span class="keyword">int</span>&gt;&gt; pq;</span><br><span class="line"><span class="keyword">int</span> size;</span><br><span class="line">KthLargest(<span class="keyword">int</span> k, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums)&#123;</span><br><span class="line">    size = k;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); i++)&#123;</span><br><span class="line">        pq.push(nums[i]);</span><br><span class="line">        <span class="keyword">if</span>(pq.size() &gt; k) pq.pop();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">    pq.push(val);</span><br><span class="line">    <span class="keyword">if</span>(pq.size() &gt; size) pq.pop();</span><br><span class="line">    <span class="keyword">return</span> pq.top();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">KthLargest</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, k, nums)</span>:</span></span><br><span class="line">        self.pool = nums</span><br><span class="line">        self.k = k</span><br><span class="line">        heapq.heapify(self.pool)</span><br><span class="line">        <span class="keyword">while</span> len(self.pool) &gt; k:</span><br><span class="line">            heapq.heappop(self.pool)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(self, val)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> len(self.pool) &lt; self.k:</span><br><span class="line">            heapq.heappush(self.pool, val)</span><br><span class="line">        <span class="keyword">elif</span> val &gt; self.pool[<span class="number">0</span>]:</span><br><span class="line">            <span class="comment"># pop and return the smallest item from the heap</span></span><br><span class="line">            <span class="comment"># and also push the new item</span></span><br><span class="line">            heapq.heapreplace(self.pool, val) </span><br><span class="line">        <span class="keyword">return</span> self.pool[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/112-Path-Sum-DFS-9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/04/112-Path-Sum-DFS-9/" itemprop="url">112. Path Sum-DFS-9</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T15:54:27+08:00">
+                2018-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/04/112-Path-Sum-DFS-9/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/04/112-Path-Sum-DFS-9/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定一个二叉树和一个数，问是否有一条从根到叶子结点的路径使得路径上的长度和等于这个数？</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">hasPathSum</span><span class="params">(TreeNode* root, <span class="keyword">int</span> sum)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(root-&gt;val == sum &amp;&amp; root-&gt;left == <span class="literal">NULL</span> &amp;&amp; root-&gt;right == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> hasPathSum(root-&gt;left, sum-root-&gt;val) || hasPathSum(root-&gt;right, sum-root-&gt;val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/743-Network-Delay-Time-DFS-8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/04/743-Network-Delay-Time-DFS-8/" itemprop="url">743. Network Delay Time-DFS-8</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T15:03:28+08:00">
+                2018-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/04/743-Network-Delay-Time-DFS-8/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/04/743-Network-Delay-Time-DFS-8/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>一个有向图，time[i] = (u, v, w) 表示从 u 到 v 需要花费 w 的时间。问从 K 发一个信号，多长时间后所有的结点都能收到？</p>
+<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><p>用 dist[node] 来表示信号到达该结点的时间。收到信号之后从发送最快的边转发出去。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line">Map&lt;Integer, Integer&gt; dist;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">networkDelayTime</span><span class="params">(<span class="keyword">int</span>[][] times, <span class="keyword">int</span> N, <span class="keyword">int</span> K)</span></span>&#123;</span><br><span class="line">    Map&lt;Integer, List&lt;<span class="keyword">int</span>[]&gt;&gt; graph = <span class="keyword">new</span> HashMap();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span>[] edge: times)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!graph.containsKey(edge[<span class="number">0</span>]))</span><br><span class="line">            graph.put(edge[<span class="number">0</span>], <span class="keyword">new</span> ArrayList&lt;<span class="keyword">int</span>[]&gt;());</span><br><span class="line">        graph.get(edge[<span class="number">0</span>]).add(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;edge[<span class="number">2</span>], edge[<span class="number">1</span>]&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> node: graph.keySet())&#123;</span><br><span class="line">        Collections.sort(graph.get(node), (a, b)-&gt;a[<span class="number">0</span>]-b[<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    dist = <span class="keyword">new</span> HashMap();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> node = <span class="number">1</span>; node &lt;= N; node++)</span><br><span class="line">        dist.put(node, Integer.MAX_VALUE);</span><br><span class="line">    dfs(graph, K, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> cand: dist.values())&#123;</span><br><span class="line">        <span class="keyword">if</span>(cand == Integer.MAX_VALUE) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        ans = Math.max(ans, cand);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(Map&lt;Integer, List&lt;<span class="keyword">int</span>[]&gt;&gt; graph, <span class="keyword">int</span> node, <span class="keyword">int</span> elapsed)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(elapsed &gt;= dist.get(node)) <span class="keyword">return</span>;</span><br><span class="line">    dist.put(node, elapsed);</span><br><span class="line">    <span class="keyword">if</span>(graph.containsKey(node))</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span>[] info: graph.get(node))</span><br><span class="line">            dfs(graph, info[<span class="number">1</span>], elapsed+info[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">networkDelayTime</span><span class="params">(self, times, N, K)</span>:</span></span><br><span class="line">    graph = collections.defaultdict(list)</span><br><span class="line">    <span class="keyword">for</span> u, v, w <span class="keyword">in</span> times:</span><br><span class="line">        graph[u].append((w, v))</span><br><span class="line">    dist = &#123;node: float(<span class="string">'inf'</span>) <span class="keyword">for</span> node <span class="keyword">in</span> xrange(<span class="number">1</span>, N+<span class="number">1</span>)&#125;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(node, elapsed)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> elapsed &gt;= dist[node]: <span class="keyword">return</span></span><br><span class="line">        dist[node] = elapsed</span><br><span class="line">        <span class="keyword">for</span> time, nei <span class="keyword">in</span> sorted(graph[node]):</span><br><span class="line">            dfs(nei, elapsed+time)</span><br><span class="line">    dfs(K, <span class="number">0</span>)</span><br><span class="line">    ans = max(dist.values())</span><br><span class="line">    <span class="keyword">return</span> ans <span class="keyword">if</span> ans &lt; float(<span class="string">'-1'</span>) <span class="keyword">else</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<h3 id="Dijkstra’s-Algorithm"><a href="#Dijkstra’s-Algorithm" class="headerlink" title="Dijkstra’s Algorithm"></a>Dijkstra’s Algorithm</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line">Map&lt;Integer, Integer&gt; dist;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">networkDelayTime</span><span class="params">(<span class="keyword">int</span>[][] times, <span class="keyword">int</span> N, <span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">    Map&lt;Integer, List&lt;<span class="keyword">int</span>[]&gt;&gt; graph = <span class="keyword">new</span> HashMap();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span>[] edge: times)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!graph.containsKey(edge[<span class="number">0</span>]))</span><br><span class="line">            graph.put(edge[<span class="number">0</span>], <span class="keyword">new</span> ArrayList&lt;<span class="keyword">int</span>[]&gt;());</span><br><span class="line">        graph.get(edge[<span class="number">0</span>]).add(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;edge[<span class="number">1</span>], edge[<span class="number">2</span>]&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    dist = <span class="keyword">new</span> HashMap();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> node = <span class="number">1</span>; node &lt;= N; node++)</span><br><span class="line">        dist.put(node, Integer.MAX_VALUE);</span><br><span class="line">    dist.put(K, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">boolean</span>[] seen = <span class="keyword">new</span> <span class="keyword">boolean</span>[N+<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> candNode = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> candDist = Integer.MAX_VALUE;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!seen[i] &amp;&amp; dist.get(i) &lt; candDist)&#123;</span><br><span class="line">                candDist = dist.get(i);</span><br><span class="line">                candNode = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -1872,7 +1843,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1922,7 +1893,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">143</span>
+                  <span class="site-state-item-count">153</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1933,7 +1904,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1944,7 +1915,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">49</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

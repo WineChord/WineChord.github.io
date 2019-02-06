@@ -296,7 +296,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/657-Robot-Return-to-Origin-4/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/728-Self-Dividing-Numbers-Math-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -315,7 +315,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/04/657-Robot-Return-to-Origin-4/" itemprop="url">657. Robot Return to Origin-4</a></h1>
+                <a class="post-title-link" href="/2018/11/04/728-Self-Dividing-Numbers-Math-1/" itemprop="url">728. Self Dividing Numbers-Math-1</a></h1>
         
 
         <div class="post-meta">
@@ -327,7 +327,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T19:41:40+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T20:35:41+08:00">
                 2018-11-04
               </time>
             
@@ -368,9 +368,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/04/657-Robot-Return-to-Origin-4/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/04/728-Self-Dividing-Numbers-Math-1/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/04/657-Robot-Return-to-Origin-4/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/04/728-Self-Dividing-Numbers-Math-1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -400,8 +400,9 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>一个机器人从原点开始，给一个移动序列，问最终是否能够回到原点。</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// simulation</span></span><br><span class="line"><span class="keyword">int</span> x = <span class="number">0</span>, y = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">char</span> move: moves.toCharArray())&#123;</span><br><span class="line">    <span class="keyword">if</span>(move == <span class="string">'U'</span>) y--;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(move == <span class="string">'D'</span>) y++;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(move == <span class="string">'L'</span>) x--;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(move == <span class="string">'R'</span>) x++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> x == <span class="number">0</span> &amp;&amp; y == <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>问一个范围内有哪些数是可以被他们的每一位整除的？</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line">is_self_dividing = <span class="keyword">lambda</span> num: <span class="string">'0'</span> <span class="keyword">not</span> <span class="keyword">in</span> str(num) <span class="keyword">and</span> all([num%int(digit)==<span class="number">0</span> <span class="keyword">for</span> digit <span class="keyword">in</span> str(num)])</span><br><span class="line"><span class="keyword">return</span> filter(is_self_dividing, range(left, right+<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = left, n = <span class="number">0</span>; i &lt;= right; i++)&#123;</span><br><span class="line">    <span class="keyword">for</span>(n = i; n &gt; <span class="number">0</span>; n /= <span class="number">10</span>)</span><br><span class="line">        <span class="keyword">if</span>(!(n%<span class="number">10</span>) || i%(n%<span class="number">10</span>)) <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">if</span>(!n) res.push_back(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> res;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -449,7 +450,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/804-Unique-Morse-Code-Words-3/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/788-Rotated-Digits-String-12/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -468,7 +469,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/04/804-Unique-Morse-Code-Words-3/" itemprop="url">804. Unique Morse Code Words-3</a></h1>
+                <a class="post-title-link" href="/2018/11/04/788-Rotated-Digits-String-12/" itemprop="url">788. Rotated Digits-String-12</a></h1>
         
 
         <div class="post-meta">
@@ -480,7 +481,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T19:34:42+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T20:26:36+08:00">
                 2018-11-04
               </time>
             
@@ -521,9 +522,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/04/804-Unique-Morse-Code-Words-3/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/04/788-Rotated-Digits-String-12/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/04/804-Unique-Morse-Code-Words-3/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/04/788-Rotated-Digits-String-12/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -553,9 +554,8 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给出一个字符串的莫尔斯码变换</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line">String MORSE = <span class="keyword">new</span> String[]&#123;<span class="string">".-"</span>,<span class="string">"-..."</span>,<span class="string">"-.-."</span>,<span class="string">"-.."</span>,<span class="string">"."</span>,<span class="string">"..-."</span>,<span class="string">"--."</span>,</span><br><span class="line">                         <span class="string">"...."</span>,<span class="string">".."</span>,<span class="string">".---"</span>,<span class="string">"-.-"</span>,<span class="string">".-.."</span>,<span class="string">"--"</span>,<span class="string">"-."</span>,</span><br><span class="line">                         <span class="string">"---"</span>,<span class="string">".--."</span>,<span class="string">"--.-"</span>,<span class="string">".-."</span>,<span class="string">"..."</span>,<span class="string">"-"</span>,<span class="string">"..-"</span>,</span><br><span class="line">                         <span class="string">"...-"</span>,<span class="string">".--"</span>,<span class="string">"-..-"</span>,<span class="string">"-.--"</span>,<span class="string">"--.."</span>&#125;;</span><br><span class="line">Set&lt;String&gt; seen = <span class="keyword">new</span> HashSet();</span><br><span class="line"><span class="keyword">for</span>(String word: words)&#123;</span><br><span class="line">    StringBuilder code = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> c: word.toCharArray())</span><br><span class="line">        code.append(MORSE[c-<span class="string">'a'</span>]);</span><br><span class="line">    seen.add(code.toString());</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> seen.size();</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; d = &#123;&#125;;</span><br><span class="line"><span class="built_in">unordered_set</span>&lt;<span class="built_in">string</span>&gt; s;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> word: words)&#123;</span><br><span class="line">    <span class="built_in">string</span> code;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> c: word) code += d[c-<span class="string">'a'</span>];</span><br><span class="line">    s.insert(code);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> s.size();</span><br></pre></td></tr></table></figure>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>找出一个范围内有多少个好数。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rotatedDigits</span><span class="params">(self, N)</span>:</span></span><br><span class="line">    s1 = set([<span class="number">1</span>,<span class="number">8</span>,<span class="number">0</span>])</span><br><span class="line">    s2 = set([<span class="number">1</span>,<span class="number">8</span>,<span class="number">0</span>,<span class="number">6</span>,<span class="number">9</span>,<span class="number">2</span>,<span class="number">5</span>])</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isGood</span><span class="params">(x)</span>:</span></span><br><span class="line">        s = set([int(i) <span class="keyword">for</span> i <span class="keyword">in</span> str(x)])</span><br><span class="line">        <span class="keyword">return</span> s.issubset(s2) <span class="keyword">and</span> <span class="keyword">not</span> s.issubset(s1)</span><br><span class="line">    <span class="keyword">return</span> sum(isGood(i) <span class="keyword">for</span> i <span class="keyword">in</span> range(N+<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
           
         
       
@@ -603,7 +603,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/709-To-Lower-Case-2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/696-Count-Binary-Substrings-String-11/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -622,7 +622,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/04/709-To-Lower-Case-2/" itemprop="url">709. To Lower Case-2</a></h1>
+                <a class="post-title-link" href="/2018/11/04/696-Count-Binary-Substrings-String-11/" itemprop="url">696. Count Binary Substrings-String-11</a></h1>
         
 
         <div class="post-meta">
@@ -634,7 +634,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T19:30:11+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T20:20:20+08:00">
                 2018-11-04
               </time>
             
@@ -675,9 +675,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/04/709-To-Lower-Case-2/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/04/696-Count-Binary-Substrings-String-11/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/04/709-To-Lower-Case-2/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/04/696-Count-Binary-Substrings-String-11/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -707,8 +707,8 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>实现变小写</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">char</span>&amp; c: str)&#123;</span><br><span class="line">    <span class="keyword">if</span>(c &gt;= <span class="string">'A'</span> &amp;&amp; c &lt;= <span class="string">'Z'</span>)</span><br><span class="line">        c += <span class="string">'a'</span> - <span class="string">'A'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> str;</span><br></pre></td></tr></table></figure>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>一个字符串中连续且长度相等的 ‘1’ ‘0’ 子串个数。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="keyword">int</span> cur = <span class="number">1</span>, pre = <span class="number">0</span>, res = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; s.size(); i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(s[i] == s[i<span class="number">-1</span>]) cur++;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        res += min(cur, pre);</span><br><span class="line">        pre = cur;</span><br><span class="line">        cur = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> res + min(cur, pre);</span><br></pre></td></tr></table></figure>
           
         
       
@@ -756,7 +756,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/929-Unique-Email-Addresses-String-1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/520-Detect-Capital-String-10/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -775,7 +775,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/04/929-Unique-Email-Addresses-String-1/" itemprop="url">929. Unique Email Addresses-String-1</a></h1>
+                <a class="post-title-link" href="/2018/11/04/520-Detect-Capital-String-10/" itemprop="url">520. Detect Capital-String-10</a></h1>
         
 
         <div class="post-meta">
@@ -787,7 +787,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T19:13:11+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T20:15:57+08:00">
                 2018-11-04
               </time>
             
@@ -828,9 +828,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/04/929-Unique-Email-Addresses-String-1/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/04/520-Detect-Capital-String-10/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/04/929-Unique-Email-Addresses-String-1/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/04/520-Detect-Capital-String-10/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -860,18 +860,296 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>邮件中本地名里面含有 ‘.’ 的会被忽略，含有 ‘+’ 的，其后面的所有会被忽略。这两条规则均不适用于域名。给一个发送邮件地址的 list，问实际上有哪些地址收到了邮件？</p>
-<h3 id="Canonical-Form"><a href="#Canonical-Form" class="headerlink" title="Canonical Form"></a>Canonical Form</h3><ul>
-<li>分开本地名和域名</li>
-<li>本地名中 ‘+’ 后面的完全取掉</li>
-<li>取掉本地名中的所有 ‘.’<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numUniqueEmails</span><span class="params">(String[] emails)</span></span>&#123;</span><br><span class="line">    Set&lt;String&gt; seen = <span class="keyword">new</span> HashSet();</span><br><span class="line">    <span class="keyword">for</span>(String email: emails)&#123;</span><br><span class="line">        <span class="keyword">int</span> i = email.indexOf(<span class="string">'@'</span>);</span><br><span class="line">        String local = email.substring(<span class="number">0</span>, i);</span><br><span class="line">        String rest = email.substring(i);</span><br><span class="line">        <span class="keyword">if</span>(local.contains(<span class="string">"+"</span>))&#123;</span><br><span class="line">            local = local.substring(<span class="number">0</span>, local.indexOf(<span class="string">'+'</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        local = local.replaceAll(<span class="string">"."</span>, <span class="string">""</span>);</span><br><span class="line">        seen.add(local+rest);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> seen.size();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>检测大小写使用是否正确</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">char</span> c: word)</span><br><span class="line">    <span class="keyword">if</span>(<span class="string">'Z'</span> - c &gt;= <span class="number">0</span>) cnt++;</span><br><span class="line"><span class="keyword">return</span> (cnt==<span class="number">0</span> || cnt == word.size()) || (cnt==<span class="number">1</span> &amp;&amp; <span class="string">'Z'</span> - word[<span class="number">0</span>] &gt;= <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/520-String-10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/04/520-String-10/" itemprop="url">520-String-10</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T20:15:26+08:00">
+                2018-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/04/520-String-10/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/04/520-String-10/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/824-Goat-Latin-String-9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/04/824-Goat-Latin-String-9/" itemprop="url">824. Goat Latin-String-9</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T20:06:46+08:00">
+                2018-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/04/824-Goat-Latin-String-9/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/04/824-Goat-Latin-String-9/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>说羊语</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul>
+<li>建立一个元音集</li>
+<li>把字符串分割成单词</li>
+<li>检查每个单词是否以元音开头</li>
+<li>不是的话首字母后置<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">unordered_set</span>&lt;<span class="keyword">char</span>&gt; vowel(&#123;<span class="string">'a'</span>, <span class="string">'e'</span>, <span class="string">'i'</span>, <span class="string">'o'</span>, <span class="string">'u'</span>, <span class="string">'A'</span>, <span class="string">'E'</span>, <span class="string">'I'</span>, <span class="string">'O'</span>, <span class="string">'U'</span>&#125;);</span><br><span class="line"><span class="function"><span class="built_in">istringstream</span> <span class="title">iss</span><span class="params">(S)</span></span>;</span><br><span class="line"><span class="built_in">string</span> res, w;</span><br><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>, j;</span><br><span class="line"><span class="keyword">while</span>(iss &gt;&gt; w)&#123;</span><br><span class="line">    res += <span class="string">' '</span> + (vowel.count(w[<span class="number">0</span>]) == <span class="number">1</span> ? w : w.substr(<span class="number">1</span>) + w[<span class="number">0</span>] + <span class="string">"ma"</span>);</span><br><span class="line">    <span class="keyword">for</span>(j = <span class="number">0</span>, ++i; j &lt; i; j++) res += <span class="string">"a"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> res.substr(<span class="number">1</span>);</span><br></pre></td></tr></table></figure></li>
 </ul>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">numUniqueEmails</span><span class="params">(self, emails)</span>:</span></span><br><span class="line">    seen = set()</span><br><span class="line">    <span class="keyword">for</span> email <span class="keyword">in</span> emails:</span><br><span class="line">        local, _, domain = email.partition(<span class="string">'@'</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">'+'</span> <span class="keyword">in</span> local:</span><br><span class="line">            local = local[:local.index(<span class="string">'+'</span>)]</span><br><span class="line">        seen.add(local.replace(<span class="string">'.'</span>, <span class="string">''</span>) + <span class="string">'@'</span> + domain)</span><br><span class="line">    <span class="keyword">return</span> len(seen)</span><br><span class="line">// C++</span><br><span class="line">int numUniqueEmails(vector&lt;string&gt;&amp; emails)&#123;</span><br><span class="line">    unordered_set&lt;string&gt; res;</span><br><span class="line">    vector&lt;char&gt; domain = &#123;&#125;;</span><br><span class="line">    vector&lt;char&gt; local = &#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span>(auto email: emails)&#123;</span><br><span class="line">        domain.clear();</span><br><span class="line">        local.clear();</span><br><span class="line">        <span class="keyword">for</span>(int i = email.length()<span class="number">-1</span>; i &gt; <span class="number">-1</span>; --i)&#123;</span><br><span class="line">            domain.push_back(email[i]);</span><br><span class="line">            <span class="keyword">if</span>(email[i] == <span class="string">'@'</span>) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; email.length(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(email[i] == <span class="string">'.'</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span>(email[i] == <span class="string">'@'</span> || email[i] == <span class="string">'+'</span>) <span class="keyword">break</span>;</span><br><span class="line">            local.push_back(email[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        res.insert(string(local.begin(), local.end()) + string(domain.rbegin(), domain.rend()));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res.size();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>time: $O(C)$</li>
-<li>space: $O(C)$</li>
-</ul>
 
           
         
@@ -920,7 +1198,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/378-Kth-Smallest-Element-in-a-Sorted-Matrix-Heap-4/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/521-Longest-Uncommon-Subsequence-I-String-8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -939,7 +1217,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/04/378-Kth-Smallest-Element-in-a-Sorted-Matrix-Heap-4/" itemprop="url">378. Kth Smallest Element in a Sorted Matrix-Heap-4</a></h1>
+                <a class="post-title-link" href="/2018/11/04/521-Longest-Uncommon-Subsequence-I-String-8/" itemprop="url">521. Longest Uncommon Subsequence I-String-8</a></h1>
         
 
         <div class="post-meta">
@@ -951,7 +1229,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T18:57:40+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T20:01:19+08:00">
                 2018-11-04
               </time>
             
@@ -992,9 +1270,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/04/378-Kth-Smallest-Element-in-a-Sorted-Matrix-Heap-4/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/04/521-Longest-Uncommon-Subsequence-I-String-8/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/04/378-Kth-Smallest-Element-in-a-Sorted-Matrix-Heap-4/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/04/521-Longest-Uncommon-Subsequence-I-String-8/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1024,12 +1302,7 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个nxn矩阵，每一行每一列都是升序。找到矩阵中第k小的元素。</p>
-<h3 id="方法一：堆"><a href="#方法一：堆" class="headerlink" title="方法一：堆"></a>方法一：堆</h3><ul>
-<li>用第一行的元素建立一个最小堆。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">kthSmallest</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = matrix.length;</span><br><span class="line">    PriorityQueue&lt;Tuple&gt; pq = <span class="keyword">new</span> PriorityQueue&lt;Tuple&gt;();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= n-<span class="number">1</span>; j++)</span><br><span class="line">        pq.offer(<span class="keyword">new</span> Tuple(<span class="number">0</span>, j, matrix[<span class="number">0</span>][j]));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k-<span class="number">1</span>; i++)&#123;</span><br><span class="line">        Tuple t = pq.poll();</span><br><span class="line">        <span class="keyword">if</span>(t.x == n-<span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">        pq.offer(<span class="keyword">new</span> Tuple(t.x+<span class="number">1</span>, t.y, matrix[t.x+<span class="number">1</span>][t.y]));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> pq.poll().val;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tuple</span> <span class="keyword">implements</span> <span class="title">Comparable</span>&lt;<span class="title">Tuple</span>&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x, y, val;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Tuple</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.x = x;</span><br><span class="line">        <span class="keyword">this</span>.y = y;</span><br><span class="line">        <span class="keyword">this</span>.val = val;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Tuple that)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.val - that.val;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="方法二：二分查找"><a href="#方法二：二分查找" class="headerlink" title="方法二：二分查找"></a>方法二：二分查找</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">kthSmallest</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> lo = matrix[<span class="number">0</span>][<span class="number">0</span>], hi = matrix[matrix.length-<span class="number">1</span>][matrix[<span class="number">0</span>].length-<span class="number">1</span>] + <span class="number">1</span>;  <span class="comment">// [lo, hi)</span></span><br><span class="line">    <span class="keyword">while</span>(lo &lt; hi)&#123;</span><br><span class="line">        <span class="keyword">int</span> mid = lo + (hi-lo) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>, j = matrix[<span class="number">0</span>].length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; matrix[<span class="number">0</span>].length; i++)&#123;</span><br><span class="line">            <span class="keyword">while</span>(j &gt;= <span class="number">0</span> &amp;&amp; matrix[i][j] &gt; mid) j--;</span><br><span class="line">            count += (j+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(count &lt; k) lo = mid + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> hi = mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> lo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3>
           
         
       
@@ -1077,7 +1350,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/347-Top-K-Frequent-Elements-Heap-3/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/893-Groups-of-Special-Equivalent-Strings-String-7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -1096,7 +1369,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/04/347-Top-K-Frequent-Elements-Heap-3/" itemprop="url">347. Top K Frequent Elements-Heap-3</a></h1>
+                <a class="post-title-link" href="/2018/11/04/893-Groups-of-Special-Equivalent-Strings-String-7/" itemprop="url">893.Groups of Special-Equivalent Strings-String-7</a></h1>
         
 
         <div class="post-meta">
@@ -1108,7 +1381,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T16:57:54+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T19:53:30+08:00">
                 2018-11-04
               </time>
             
@@ -1149,9 +1422,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/04/347-Top-K-Frequent-Elements-Heap-3/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/04/893-Groups-of-Special-Equivalent-Strings-String-7/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/04/347-Top-K-Frequent-Elements-Heap-3/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/04/893-Groups-of-Special-Equivalent-Strings-String-7/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1181,9 +1454,9 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个非空整数数组，返回 <code>k most frequent elements</code></p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++ using hash table and bucket sort</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; topKFrequent(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)&#123;</span><br><span class="line">    <span class="comment">// nums = [1,1,1,2,2,3]</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> num: nums)</span><br><span class="line">        m[num]++; <span class="comment">// m = &#123;1:3, 2:2, 3:1&#125;</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; buckets(nums.size()+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> p:m)</span><br><span class="line">        buckets[p.second].push_back(p.first);</span><br><span class="line">    <span class="comment">// buckets = [[],[3],[2],[1]]</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = buckets.size()<span class="number">-1</span>; i &gt;= <span class="number">0</span> &amp;&amp; ans.size() &lt; k; --i)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> num: buckets[i])&#123;</span><br><span class="line">            ans.push_back(num);</span><br><span class="line">            <span class="keyword">if</span>(ans.size()==k)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>找到字符串数组中有多少组是相等价的。</p>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;String&gt; seen = <span class="keyword">new</span> HashSet();</span><br><span class="line"><span class="keyword">for</span>(String S: A)&#123;</span><br><span class="line">    <span class="keyword">int</span>[] count = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">52</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>; i &lt; S.length(); i++)</span><br><span class="line">        count[S.charAt(i) - <span class="string">'a'</span> + <span class="number">26</span>*(i%<span class="number">2</span>)]++;</span><br><span class="line">    seen.add(Arrays.toString(count));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> seen.size();</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="built_in">set</span>&lt;pair&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;&gt; s;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; w: A)&#123;</span><br><span class="line">    pair&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; p;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; w.size(); i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(i % <span class="number">2</span>) p.first += w[i];</span><br><span class="line">        <span class="keyword">else</span> p.second += w[i];</span><br><span class="line">    &#125;</span><br><span class="line">    sort(p.first.begin(), p.first.end());</span><br><span class="line">    sort(p.second.begin(), p.second.end());</span><br><span class="line">    s.insert(p);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> s.size();</span><br></pre></td></tr></table></figure>
           
         
       
@@ -1231,7 +1504,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/451-Sort-Characters-By-Frequency-Heap-2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/344-Reverse-String-String-6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -1250,7 +1523,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/04/451-Sort-Characters-By-Frequency-Heap-2/" itemprop="url">451. Sort Characters By Frequency-Heap-2</a></h1>
+                <a class="post-title-link" href="/2018/11/04/344-Reverse-String-String-6/" itemprop="url">344. Reverse String-String-6</a></h1>
         
 
         <div class="post-meta">
@@ -1262,7 +1535,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T16:47:05+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T19:50:57+08:00">
                 2018-11-04
               </time>
             
@@ -1303,9 +1576,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/04/451-Sort-Characters-By-Frequency-Heap-2/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/04/344-Reverse-String-String-6/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/04/451-Sort-Characters-By-Frequency-Heap-2/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/04/344-Reverse-String-String-6/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1335,8 +1608,8 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个字符串，按照频率下降的顺序对字符进行排序。</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">frequencySort</span><span class="params">(<span class="built_in">string</span> s)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> counts[<span class="number">256</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> ch: s) counts[ch]++;</span><br><span class="line">    sort(s.begin(), s.end(), [&amp;](<span class="keyword">char</span> a, <span class="keyword">char</span> b)&#123;</span><br><span class="line">        <span class="keyword">return</span> counts[a]&gt;counts[b] || (counts[a] == counts[b] &amp;&amp; a &lt; b)</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// another</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">frequencySort</span><span class="params">(<span class="built_in">string</span> s)</span></span>&#123;</span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt; freq;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; bucket(s.size()+<span class="number">1</span>, <span class="string">""</span>);</span><br><span class="line">    <span class="built_in">string</span> res;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> c:s) freq[c]++;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span>&amp; it:freq)&#123;</span><br><span class="line">        <span class="keyword">int</span> n = it.second;</span><br><span class="line">        <span class="keyword">char</span> c = it.first;</span><br><span class="line">        bucket[n].append(n, c);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = s.size(); i &gt; <span class="number">0</span>; i--)</span><br><span class="line">        <span class="keyword">if</span>(!bucket[i].empty())</span><br><span class="line">            res.append(bucket[i]);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>翻转字符串</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>, j = s.size() - <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>(i &lt; j)</span><br><span class="line">    swap(s[i++], s[j--]);</span><br><span class="line"><span class="keyword">return</span> s;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -1384,7 +1657,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/703-Kth-Largest-Element-in-a-Stream-Heap-1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/557-Reverse-Word-in-a-StringIII-String-5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -1403,7 +1676,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/04/703-Kth-Largest-Element-in-a-Stream-Heap-1/" itemprop="url">703. Kth Largest Element in a Stream-Heap-1</a></h1>
+                <a class="post-title-link" href="/2018/11/04/557-Reverse-Word-in-a-StringIII-String-5/" itemprop="url">557. Reverse Word in a StringIII-String-5</a></h1>
         
 
         <div class="post-meta">
@@ -1415,7 +1688,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T16:02:09+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T19:46:03+08:00">
                 2018-11-04
               </time>
             
@@ -1456,9 +1729,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/04/703-Kth-Largest-Element-in-a-Stream-Heap-1/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/04/557-Reverse-Word-in-a-StringIII-String-5/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/04/703-Kth-Largest-Element-in-a-Stream-Heap-1/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/04/557-Reverse-Word-in-a-StringIII-String-5/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1488,323 +1761,8 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>设计一个类来找到一个流中第 k 大的元素。类初始的时候有 k 和一个数组 nums。之后每进行添加元素的操作时都要能够返回第 k 大的元素。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">KthLargest</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">    KthLargest(<span class="keyword">int</span> k, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums)&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> k = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">int</span>[] arr = [<span class="number">4</span>,<span class="number">5</span>,<span class="number">8</span>,<span class="number">2</span>];</span><br><span class="line">KthLargest kthLargest = <span class="keyword">new</span> KthLargest(<span class="number">3</span>, arr);</span><br><span class="line">kthLargest.add(<span class="number">3</span>); <span class="comment">// [2,3,4,5,8]: returns 4</span></span><br><span class="line">kthLargest.add(<span class="number">5</span>); <span class="comment">// [2,3,4,5,5,8]: return 5</span></span><br><span class="line">kthLargest.add(<span class="number">10</span>); <span class="comment">// [2,3,4,5,5,8,10]: return 5</span></span><br><span class="line">kthLargest.add(<span class="number">9</span>); <span class="comment">// [2,3,4,5,5,8,9,10]: return 8</span></span><br><span class="line">kthLargest.add(<span class="number">4</span>); <span class="comment">// [2,3,4,4,5,5,8,9,10]: return 8</span></span><br></pre></td></tr></table></figure>
-<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>思路：建立一个只含有 k 的比较大元素的最小堆。<br>对于 add:</p>
-<ul>
-<li>比较新加入的元素 <code>x</code> 和堆中的最小值，决定我们是否要 <code>pop min</code> <code>insert x</code></li>
-<li>并且要考虑 <code>heap_size</code> 小于 <code>k</code> 的情况<br>对于构造，只需调用 <code>N</code> 次 <code>add</code> 即可</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;, greater&lt;<span class="keyword">int</span>&gt;&gt; pq;</span><br><span class="line"><span class="keyword">int</span> size;</span><br><span class="line">KthLargest(<span class="keyword">int</span> k, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums)&#123;</span><br><span class="line">    size = k;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); i++)&#123;</span><br><span class="line">        pq.push(nums[i]);</span><br><span class="line">        <span class="keyword">if</span>(pq.size() &gt; k) pq.pop();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">    pq.push(val);</span><br><span class="line">    <span class="keyword">if</span>(pq.size() &gt; size) pq.pop();</span><br><span class="line">    <span class="keyword">return</span> pq.top();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">KthLargest</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, k, nums)</span>:</span></span><br><span class="line">        self.pool = nums</span><br><span class="line">        self.k = k</span><br><span class="line">        heapq.heapify(self.pool)</span><br><span class="line">        <span class="keyword">while</span> len(self.pool) &gt; k:</span><br><span class="line">            heapq.heappop(self.pool)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(self, val)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> len(self.pool) &lt; self.k:</span><br><span class="line">            heapq.heappush(self.pool, val)</span><br><span class="line">        <span class="keyword">elif</span> val &gt; self.pool[<span class="number">0</span>]:</span><br><span class="line">            <span class="comment"># pop and return the smallest item from the heap</span></span><br><span class="line">            <span class="comment"># and also push the new item</span></span><br><span class="line">            heapq.heapreplace(self.pool, val) </span><br><span class="line">        <span class="keyword">return</span> self.pool[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/112-Path-Sum-DFS-9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/04/112-Path-Sum-DFS-9/" itemprop="url">112. Path Sum-DFS-9</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T15:54:27+08:00">
-                2018-11-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/04/112-Path-Sum-DFS-9/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/04/112-Path-Sum-DFS-9/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定一个二叉树和一个数，问是否有一条从根到叶子结点的路径使得路径上的长度和等于这个数？</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">hasPathSum</span><span class="params">(TreeNode* root, <span class="keyword">int</span> sum)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(root-&gt;val == sum &amp;&amp; root-&gt;left == <span class="literal">NULL</span> &amp;&amp; root-&gt;right == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> hasPathSum(root-&gt;left, sum-root-&gt;val) || hasPathSum(root-&gt;right, sum-root-&gt;val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/743-Network-Delay-Time-DFS-8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/04/743-Network-Delay-Time-DFS-8/" itemprop="url">743. Network Delay Time-DFS-8</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T15:03:28+08:00">
-                2018-11-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/04/743-Network-Delay-Time-DFS-8/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/04/743-Network-Delay-Time-DFS-8/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>一个有向图，time[i] = (u, v, w) 表示从 u 到 v 需要花费 w 的时间。问从 K 发一个信号，多长时间后所有的结点都能收到？</p>
-<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><p>用 dist[node] 来表示信号到达该结点的时间。收到信号之后从发送最快的边转发出去。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line">Map&lt;Integer, Integer&gt; dist;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">networkDelayTime</span><span class="params">(<span class="keyword">int</span>[][] times, <span class="keyword">int</span> N, <span class="keyword">int</span> K)</span></span>&#123;</span><br><span class="line">    Map&lt;Integer, List&lt;<span class="keyword">int</span>[]&gt;&gt; graph = <span class="keyword">new</span> HashMap();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span>[] edge: times)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!graph.containsKey(edge[<span class="number">0</span>]))</span><br><span class="line">            graph.put(edge[<span class="number">0</span>], <span class="keyword">new</span> ArrayList&lt;<span class="keyword">int</span>[]&gt;());</span><br><span class="line">        graph.get(edge[<span class="number">0</span>]).add(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;edge[<span class="number">2</span>], edge[<span class="number">1</span>]&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> node: graph.keySet())&#123;</span><br><span class="line">        Collections.sort(graph.get(node), (a, b)-&gt;a[<span class="number">0</span>]-b[<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    dist = <span class="keyword">new</span> HashMap();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> node = <span class="number">1</span>; node &lt;= N; node++)</span><br><span class="line">        dist.put(node, Integer.MAX_VALUE);</span><br><span class="line">    dfs(graph, K, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> cand: dist.values())&#123;</span><br><span class="line">        <span class="keyword">if</span>(cand == Integer.MAX_VALUE) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        ans = Math.max(ans, cand);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(Map&lt;Integer, List&lt;<span class="keyword">int</span>[]&gt;&gt; graph, <span class="keyword">int</span> node, <span class="keyword">int</span> elapsed)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(elapsed &gt;= dist.get(node)) <span class="keyword">return</span>;</span><br><span class="line">    dist.put(node, elapsed);</span><br><span class="line">    <span class="keyword">if</span>(graph.containsKey(node))</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span>[] info: graph.get(node))</span><br><span class="line">            dfs(graph, info[<span class="number">1</span>], elapsed+info[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">networkDelayTime</span><span class="params">(self, times, N, K)</span>:</span></span><br><span class="line">    graph = collections.defaultdict(list)</span><br><span class="line">    <span class="keyword">for</span> u, v, w <span class="keyword">in</span> times:</span><br><span class="line">        graph[u].append((w, v))</span><br><span class="line">    dist = &#123;node: float(<span class="string">'inf'</span>) <span class="keyword">for</span> node <span class="keyword">in</span> xrange(<span class="number">1</span>, N+<span class="number">1</span>)&#125;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(node, elapsed)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> elapsed &gt;= dist[node]: <span class="keyword">return</span></span><br><span class="line">        dist[node] = elapsed</span><br><span class="line">        <span class="keyword">for</span> time, nei <span class="keyword">in</span> sorted(graph[node]):</span><br><span class="line">            dfs(nei, elapsed+time)</span><br><span class="line">    dfs(K, <span class="number">0</span>)</span><br><span class="line">    ans = max(dist.values())</span><br><span class="line">    <span class="keyword">return</span> ans <span class="keyword">if</span> ans &lt; float(<span class="string">'-1'</span>) <span class="keyword">else</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
-<h3 id="Dijkstra’s-Algorithm"><a href="#Dijkstra’s-Algorithm" class="headerlink" title="Dijkstra’s Algorithm"></a>Dijkstra’s Algorithm</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line">Map&lt;Integer, Integer&gt; dist;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">networkDelayTime</span><span class="params">(<span class="keyword">int</span>[][] times, <span class="keyword">int</span> N, <span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">    Map&lt;Integer, List&lt;<span class="keyword">int</span>[]&gt;&gt; graph = <span class="keyword">new</span> HashMap();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span>[] edge: times)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!graph.containsKey(edge[<span class="number">0</span>]))</span><br><span class="line">            graph.put(edge[<span class="number">0</span>], <span class="keyword">new</span> ArrayList&lt;<span class="keyword">int</span>[]&gt;());</span><br><span class="line">        graph.get(edge[<span class="number">0</span>]).add(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;edge[<span class="number">1</span>], edge[<span class="number">2</span>]&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    dist = <span class="keyword">new</span> HashMap();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> node = <span class="number">1</span>; node &lt;= N; node++)</span><br><span class="line">        dist.put(node, Integer.MAX_VALUE);</span><br><span class="line">    dist.put(K, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">boolean</span>[] seen = <span class="keyword">new</span> <span class="keyword">boolean</span>[N+<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> candNode = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> candDist = Integer.MAX_VALUE;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!seen[i] &amp;&amp; dist.get(i) &lt; candDist)&#123;</span><br><span class="line">                candDist = dist.get(i);</span><br><span class="line">                candNode = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>对字符串中每个单词进行字母翻转</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(s[i] != <span class="string">' '</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> j = i;</span><br><span class="line">        <span class="keyword">for</span>(;j &lt; s.length() &amp;&amp; s[j] != <span class="string">' '</span>; j++);</span><br><span class="line">        reverse(s.begin()+i, s.begin()+j);</span><br><span class="line">        i = j<span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> s;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -1843,7 +1801,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1893,7 +1851,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">143</span>
+                  <span class="site-state-item-count">153</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1904,7 +1862,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1915,7 +1873,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">49</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

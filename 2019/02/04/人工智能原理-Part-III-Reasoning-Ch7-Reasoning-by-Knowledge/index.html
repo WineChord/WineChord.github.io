@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/blog-logo180.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog-logo32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog-logo16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Artificial Intelligence," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Ch7. Reasoning by Knowledge7.1 Overview7.1.1 Data, Information, Knowledge and Wisdom7.1.2 Explicit and Tacit Knowledge 显性与隐性知识 Explicit knowledge 显性知识 可表示为形式语言，包括语法陈述，数学表达式等 可以快捷地转化为其他形式 可以容易地用计算机语言，决">
+<meta name="keywords" content="Artificial Intelligence">
+<meta property="og:type" content="article">
+<meta property="og:title" content="人工智能原理 Part III. Reasoning Ch7.Reasoning by Knowledge">
+<meta property="og:url" content="http://yoursite.com/2019/02/04/人工智能原理-Part-III-Reasoning-Ch7-Reasoning-by-Knowledge/index.html">
+<meta property="og:site_name" content="Wine&amp;Chord">
+<meta property="og:description" content="Ch7. Reasoning by Knowledge7.1 Overview7.1.1 Data, Information, Knowledge and Wisdom7.1.2 Explicit and Tacit Knowledge 显性与隐性知识 Explicit knowledge 显性知识 可表示为形式语言，包括语法陈述，数学表达式等 可以快捷地转化为其他形式 可以容易地用计算机语言，决">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-06T23:15:33.633Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="人工智能原理 Part III. Reasoning Ch7.Reasoning by Knowledge">
+<meta name="twitter:description" content="Ch7. Reasoning by Knowledge7.1 Overview7.1.1 Data, Information, Knowledge and Wisdom7.1.2 Explicit and Tacit Knowledge 显性与隐性知识 Explicit knowledge 显性知识 可表示为形式语言，包括语法陈述，数学表达式等 可以快捷地转化为其他形式 可以容易地用计算机语言，决">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/04/人工智能原理-Part-III-Reasoning-Ch7-Reasoning-by-Knowledge/"/>
+
+
+
+
+
+  <title>人工智能原理 Part III. Reasoning Ch7.Reasoning by Knowledge | Wine&Chord</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <!-- <a href="https://github.com/WineChord"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a> -->
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wine&Chord</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/04/人工智能原理-Part-III-Reasoning-Ch7-Reasoning-by-Knowledge/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">人工智能原理 Part III. Reasoning Ch7.Reasoning by Knowledge</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-04T10:36:36+08:00">
+                2019-02-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/04/人工智能原理-Part-III-Reasoning-Ch7-Reasoning-by-Knowledge/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/04/人工智能原理-Part-III-Reasoning-Ch7-Reasoning-by-Knowledge/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Ch7-Reasoning-by-Knowledge"><a href="#Ch7-Reasoning-by-Knowledge" class="headerlink" title="Ch7. Reasoning by Knowledge"></a>Ch7. Reasoning by Knowledge</h2><h3 id="7-1-Overview"><a href="#7-1-Overview" class="headerlink" title="7.1 Overview"></a>7.1 Overview</h3><h4 id="7-1-1-Data-Information-Knowledge-and-Wisdom"><a href="#7-1-1-Data-Information-Knowledge-and-Wisdom" class="headerlink" title="7.1.1 Data, Information, Knowledge and Wisdom"></a>7.1.1 Data, Information, Knowledge and Wisdom</h4><h4 id="7-1-2-Explicit-and-Tacit-Knowledge-显性与隐性知识"><a href="#7-1-2-Explicit-and-Tacit-Knowledge-显性与隐性知识" class="headerlink" title="7.1.2 Explicit and Tacit Knowledge 显性与隐性知识"></a>7.1.2 Explicit and Tacit Knowledge 显性与隐性知识</h4><ul>
+<li>Explicit knowledge 显性知识<ul>
+<li>可表示为形式语言，包括语法陈述，数学表达式等</li>
+<li>可以快捷地转化为其他形式</li>
+<li>可以容易地用计算机语言，决策树和规则等表示</li>
+</ul>
+</li>
+<li>Tacit knowledge 隐性知识<ul>
+<li>个人的经验和无形的因素，如观点等</li>
+<li>难以用形式化语言来表示</li>
+<li>神经网络提供了表示隐性知识的方法</li>
+</ul>
+</li>
+</ul>
+<h4 id="7-1-3-Knowledge-Types"><a href="#7-1-3-Knowledge-Types" class="headerlink" title="7.1.3 Knowledge Types"></a>7.1.3 Knowledge Types</h4><table>
+<thead>
+<tr>
+<th style="text-align:center">Types</th>
+<th style="text-align:center">Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Static knowledge</td>
+<td style="text-align:center">Unlikely to change</td>
+</tr>
+<tr>
+<td style="text-align:center">Dynamic</td>
+<td style="text-align:center">Records in a database</td>
+</tr>
+<tr>
+<td style="text-align:center">Surface</td>
+<td style="text-align:center">Accumulated through exp</td>
+</tr>
+<tr>
+<td style="text-align:center">Deep</td>
+<td style="text-align:center">Thm/Prf/Problem Specifics</td>
+</tr>
+<tr>
+<td style="text-align:center">Procedural</td>
+<td style="text-align:center">Describes how a problem is solved</td>
+</tr>
+<tr>
+<td style="text-align:center">Declarative</td>
+<td style="text-align:center">Describes knowledge about a problem</td>
+</tr>
+<tr>
+<td style="text-align:center">Meta-knowledge</td>
+<td style="text-align:center">Describes knowledge about knowledge</td>
+</tr>
+<tr>
+<td style="text-align:center">Heuristic</td>
+<td style="text-align:center">A rule of thumb that guide the reasoning process</td>
+</tr>
+</tbody>
+</table>
+<h4 id="7-1-4-Knowledge-Base-and-Knowledge-Base-System"><a href="#7-1-4-Knowledge-Base-and-Knowledge-Base-System" class="headerlink" title="7.1.4 Knowledge Base and Knowledge Base System"></a>7.1.4 Knowledge Base and Knowledge Base System</h4><ul>
+<li>知识库–用于区分数据库</li>
+<li>知识库被用于存储复杂的结构和非结构化知识。由一套语句组成，每个语句都是由一种被称为知识表示语言来表示的，从而表示关于世界的某些断言</li>
+<li>一个知识库系统（KBS）由知识库和推理引擎组成，其中，知识库表示关于世界的事实，推理引擎则可以基于这些事实进行推理</li>
+</ul>
+<h4 id="7-1-5-Knowledge-Engineering-KE"><a href="#7-1-5-Knowledge-Engineering-KE" class="headerlink" title="7.1.5 Knowledge Engineering (KE)"></a>7.1.5 Knowledge Engineering (KE)</h4><ul>
+<li>知识工程<ul>
+<li>是构建，维护和使用知识库系统中所关联的所有技术，科学和社会的方方面面</li>
+</ul>
+</li>
+</ul>
+<h4 id="7-1-6-Knowledge-based-Engineering-KBE"><a href="#7-1-6-Knowledge-based-Engineering-KBE" class="headerlink" title="7.1.6 Knowledge-based Engineering (KBE)"></a>7.1.6 Knowledge-based Engineering (KBE)</h4><ul>
+<li>KBE是将基于知识的系统技术用于制造设计和生产领域。</li>
+</ul>
+<h3 id="7-2-Knowledge-Representation"><a href="#7-2-Knowledge-Representation" class="headerlink" title="7.2 Knowledge Representation"></a>7.2 Knowledge Representation</h3><h4 id="7-2-1-Overview-of-Knowledge-Representation"><a href="#7-2-1-Overview-of-Knowledge-Representation" class="headerlink" title="7.2.1 Overview of Knowledge Representation"></a>7.2.1 Overview of Knowledge Representation</h4><ul>
+<li>什么是知识表示？<ul>
+<li>关注于设计计算机表示来采集关于世界的知识，可用于解决复杂的问题</li>
+<li>与过程性代码相比，使复杂的软件容易定义和维护，可用于专家系统</li>
+</ul>
+</li>
+<li>为什么采用知识表示<ul>
+<li>传统的过程性代码并非是解决复杂问题的最好形式</li>
+</ul>
+</li>
+</ul>
+<h4 id="7-2-2-Core-Issues-of-Knowledge-Representation"><a href="#7-2-2-Core-Issues-of-Knowledge-Representation" class="headerlink" title="7.2.2 Core Issues of Knowledge Representation"></a>7.2.2 Core Issues of Knowledge Representation</h4><ul>
+<li>Primitive 原语<ul>
+<li>用于表示知识的基础框架，例如：语义网络，一阶逻辑等</li>
+</ul>
+</li>
+<li>Meta-representation 元表示<ul>
+<li>知识表示语言用该语言本身表示</li>
+</ul>
+</li>
+<li>Incompleteness 不完备性<ul>
+<li>将确定性因子与规则和结论相关联</li>
+</ul>
+</li>
+<li>Universals vs. Facts 共性与事实<ul>
+<li>Universals: 关于世界的一般性描述</li>
+<li>Facts: 共性中的具体事例</li>
+</ul>
+</li>
+<li>Expressive adequacy 表现的充分性<ul>
+<li>How expressive they intend their representation to be.</li>
+</ul>
+</li>
+<li>Reasoning efficiency 推理的有效性<ul>
+<li>Refer to the run time efficiency of the system</li>
+</ul>
+</li>
+</ul>
+<h4 id="7-2-3-Typical-Methods-of-Knowledge-Representation"><a href="#7-2-3-Typical-Methods-of-Knowledge-Representation" class="headerlink" title="7.2.3 Typical Methods of Knowledge Representation"></a>7.2.3 Typical Methods of Knowledge Representation</h4><ul>
+<li>Bayesian Network 贝叶斯网络</li>
+<li>First Order Logic 一阶逻辑</li>
+<li>Frame-based System 基于 Frame 的系统</li>
+<li>Ontology 本本体</li>
+<li>Production System 产生式系统</li>
+<li>Script 脚本</li>
+<li>Semantic Network 语义网络</li>
+</ul>
+<h4 id="7-2-4-What-is-Semantic-Network"><a href="#7-2-4-What-is-Semantic-Network" class="headerlink" title="7.2.4 What is Semantic Network"></a>7.2.4 What is Semantic Network</h4><ul>
+<li>是一种表示概念间语义关系的网络</li>
+<li>一种由结点和弧组成的有向或无向图，其中，结点表示概念，弧表示概念间的语义关系。</li>
+</ul>
+<h4 id="7-2-5-Basics-of-Semantic-Network"><a href="#7-2-5-Basics-of-Semantic-Network" class="headerlink" title="7.2.5 Basics of Semantic Network"></a>7.2.5 Basics of Semantic Network</h4><ul>
+<li>语义网络是基于认知的，被组织成为一个分类层次结构</li>
+<li>语义网络被采用的情形是当某种知识可以很好地化解为一组彼此相关的概念时</li>
+<li>但是难于以驾驭大型领域，并且不能很好地表现性能或元知识</li>
+<li>某些特性也不易表达：<ul>
+<li>否定，析取，或者一般的非分类知识</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-3-Representation-using-Logic"><a href="#7-3-Representation-using-Logic" class="headerlink" title="7.3 Representation using Logic"></a>7.3 Representation using Logic</h3><h4 id="7-3-1-Procedural-vs-Declarative-Approaches"><a href="#7-3-1-Procedural-vs-Declarative-Approaches" class="headerlink" title="7.3.1 Procedural vs. Declarative Approaches"></a>7.3.1 Procedural vs. Declarative Approaches</h4><ul>
+<li>Procedural approaches 过程性方法<ul>
+<li>use procedural languages, such as<ul>
+<li>C/C++/C#/Java</li>
+<li>Lisp</li>
+<li>Python</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Declarative approaches 陈述性方法<ul>
+<li>use declarative languages, such as<ul>
+<li>Propositional logic, 命题逻辑</li>
+<li>First-order logic, 一阶逻辑</li>
+<li>Temporal logic 时序逻辑</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="7-3-2-Five-Different-Logics"><a href="#7-3-2-Five-Different-Logics" class="headerlink" title="7.3.2 Five Different Logics"></a>7.3.2 Five Different Logics</h4><table>
+<thead>
+<tr>
+<th style="text-align:center">Formal Language 形式语言</th>
+<th style="text-align:center">Ontological Commitment 本体论约定</th>
+<th style="text-align:center">Epistemological Commitment 认识论约定</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Propositional logic</td>
+<td style="text-align:center">facts</td>
+<td style="text-align:center">true/false/unknown</td>
+</tr>
+<tr>
+<td style="text-align:center">First-order logic</td>
+<td style="text-align:center">facts,objects,relations</td>
+<td style="text-align:center">true/false/unknown</td>
+</tr>
+<tr>
+<td style="text-align:center">Temporal logic</td>
+<td style="text-align:center">facts,objects,relations,times</td>
+<td style="text-align:center">true/false/unknown</td>
+</tr>
+<tr>
+<td style="text-align:center">Probability theory</td>
+<td style="text-align:center">facts</td>
+<td style="text-align:center">degree of belief $\in$ [0,1]</td>
+</tr>
+<tr>
+<td style="text-align:center">Fuzzy logic</td>
+<td style="text-align:center">facts with degree of truth $\in$ [0,1]</td>
+<td style="text-align:center">known interval value</td>
+</tr>
+</tbody>
+</table>
+<h4 id="7-3-3-Logical-Symbols"><a href="#7-3-3-Logical-Symbols" class="headerlink" title="7.3.3 Logical Symbols"></a>7.3.3 Logical Symbols</h4><h4 id="7-3-4-Propositional-Logic-vs-First-order-Logic"><a href="#7-3-4-Propositional-Logic-vs-First-order-Logic" class="headerlink" title="7.3.4 Propositional Logic vs. First-order Logic"></a>7.3.4 Propositional Logic vs. First-order Logic</h4><ul>
+<li>Propositional logic 命题逻辑<ul>
+<li>also known as propositional calculus 又称命题演算</li>
+<li>use of logical connectives, deal with simple declarative propositions (if they are true or false)</li>
+</ul>
+</li>
+<li>First-order logic 一阶逻辑<ul>
+<li>also known as first-order predicate calculus 又称一阶谓词演算</li>
+<li>additionally, use quantifiers, equality, and use predicates (often associated with sets) 额外使用了限量词，等量词以及谓词</li>
+</ul>
+</li>
+</ul>
+<h4 id="7-3-5-Formation-Rules-in-First-Order-Logic"><a href="#7-3-5-Formation-Rules-in-First-Order-Logic" class="headerlink" title="7.3.5 Formation Rules in First Order Logic"></a>7.3.5 Formation Rules in First Order Logic</h4><ul>
+<li>The formation rules define<ul>
+<li>terms and formulas</li>
+</ul>
+</li>
+<li>The formation rules can be used to write a formal grammar for terms and formulas.</li>
+<li>Formation rules are generally context-free, i.e.,<ul>
+<li>each production has a single symbol on the left side.</li>
+</ul>
+</li>
+<li>Terms:<ul>
+<li>Rule1: Variables<ul>
+<li>Any variable is a term</li>
+</ul>
+</li>
+<li>Rule2: Constants<ul>
+<li>Any constant is also a term</li>
+</ul>
+</li>
+<li>Rule3: Functions<ul>
+<li>Any expression $f(t_1,…t_n)$ of $n$ arguments is a term, where each argument $t_i$ is a term, and $f$ is a function symbol of valence $n$. In particular, symbols denoting individual constants are 0-ary function symbols, and thus terms.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Formulas:<ul>
+<li>Predicate symbols: If P is an n-ary predicate symbol and $t_1,…,t_n$ are terms, then $P(t_1,…,t_n)$ is a formula.</li>
+<li>谓词符号：若 P 是一个 n 元谓词符号并且 $t_1,…,t_n$ 是项，则 $P(t_1,…,t_n)$ 是一个公式。</li>
+<li>Equality: If the equality symbol is considered part of logic, and $t_1$ and $t_2$ are terms, then $t_1=t_2$ is a formula.</li>
+<li>等量：若等量符号被认为是逻辑的一部分，并且 $t_1$ 和 $t_2$ 是项，则 $t_1=t_2$ 是一个公式</li>
+<li>Negation: if $\varphi$ is a formula, then $\neg \varphi$ is a formula.</li>
+<li>Binary connectives: If $\varphi$ and $\psi$ are formulas, then $(\varphi\implies\psi)$ is formula. Similar rules apply to other binary logical connectives.</li>
+<li>Quantifiers: If $\varphi$ is a formula and $x$ is a variable, then $\forall x\varphi$ and $\exist x\varphi$ are formulas.</li>
+</ul>
+</li>
+</ul>
+<h4 id="7-3-6-Prolog-Language"><a href="#7-3-6-Prolog-Language" class="headerlink" title="7.3.6 Prolog Language"></a>7.3.6 Prolog Language</h4><ul>
+<li>Prolog 语言起源于一阶逻辑</li>
+<li>是一种通用的逻辑编程语言，已经被用于定理证明，专家系统，自然语言处理等</li>
+<li>不同于其他的编程语言，Prolog是陈述性的：程序逻辑由关系来表达，表示为事实与规则</li>
+</ul>
+<h3 id="7-4-Ontological-Engineering"><a href="#7-4-Ontological-Engineering" class="headerlink" title="7.4 Ontological Engineering"></a>7.4 Ontological Engineering</h3><h4 id="7-4-1-What-is-Ontology"><a href="#7-4-1-What-is-Ontology" class="headerlink" title="7.4.1 What is Ontology"></a>7.4.1 What is Ontology</h4><ul>
+<li>本体论是关于生物，生成，存在或现实的本质，以及生物及其关系的基本类别的哲学研究</li>
+<li>一个本体是一种对若干实体的类型，特性和相互关系的形式化命名和定义，它真实的，或根本地存在于一个特定范围的论域</li>
+<li>一个本体提供了一个领域的公共词汇，并且用不同层次的形式定义一些术语的含义和它们之间的关系。</li>
+<li>某些领域创建本体来组织信息，然后再将这些本体用于问题求解，包括<ul>
+<li>人工智能</li>
+<li>语义Web</li>
+<li>系统工程</li>
+<li>软件工程</li>
+<li>生物医学信息学</li>
+<li>图书馆学</li>
+<li>信息架构</li>
+</ul>
+</li>
+<li>Type of Ontology</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Types</th>
+<th style="text-align:center">Concepts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Upper ontology</td>
+<td style="text-align:center">A model of the common objects that are generally applicable across a wide range of domain ontologies.</td>
+</tr>
+<tr>
+<td style="text-align:center">Domain ontology</td>
+<td style="text-align:center">Relevant to a particular topic or area of interest, e.g. information technology, or particular branches of science.</td>
+</tr>
+<tr>
+<td style="text-align:center">Hybrid ontology</td>
+<td style="text-align:center">A combination of an upper ontology and a domain ontology.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Components of Ontology 本体的成分</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Components</th>
+<th style="text-align:center">Instances</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Individuals</td>
+<td style="text-align:center">instances or objects</td>
+</tr>
+<tr>
+<td style="text-align:center">Classes</td>
+<td style="text-align:center">sets, collections, concepts, classes in programming, types of objects, or kinds of things</td>
+</tr>
+<tr>
+<td style="text-align:center">Attributes</td>
+<td style="text-align:center">aspects, properties, features, characteristics, or parameters that objects(and classes) can have</td>
+</tr>
+<tr>
+<td style="text-align:center">Relations</td>
+<td style="text-align:center">ways in which classes and individuals can be related to one another</td>
+</tr>
+<tr>
+<td style="text-align:center">Function terms</td>
+<td style="text-align:center">complex structures formed from certain relations that can be used in place of an individual term in a statement</td>
+</tr>
+<tr>
+<td style="text-align:center">Restrictions</td>
+<td style="text-align:center">formally stated descriptions of what must be true in order for some assertion to be accepted as input</td>
+</tr>
+<tr>
+<td style="text-align:center">Rules</td>
+<td style="text-align:center">statements in the form of an if-then (antecedent-consequent) sentence that describe the logical inferences that can be drawn from an assertion in a partilar form</td>
+</tr>
+<tr>
+<td style="text-align:center">Axioms</td>
+<td style="text-align:center">assertions (including rules) in a logical form that together comprise the overall theory that the ontology describes in its domain of application</td>
+</tr>
+<tr>
+<td style="text-align:center">Events</td>
+<td style="text-align:center">the changing of attributes or relations</td>
+</tr>
+</tbody>
+</table>
+<h4 id="7-4-2-What-is-Ontological-Engineering"><a href="#7-4-2-What-is-Ontological-Engineering" class="headerlink" title="7.4.2 What is Ontological Engineering"></a>7.4.2 What is Ontological Engineering</h4><ul>
+<li>一个研究构建本体的方法和方法学的领域<ul>
+<li>一组某个领域概念的形式化表示和</li>
+<li>这些概念之间的关系</li>
+</ul>
+</li>
+<li>要表示一般的概念<ul>
+<li>Event 事件</li>
+<li>Time 时间</li>
+<li>Physical objects, and 物理对象</li>
+<li>Beliefs 置信度</li>
+</ul>
+</li>
+<li>本体工程研究<ul>
+<li>本体开发过程</li>
+<li>本体生命周期</li>
+<li>构建本体的方法和方法学</li>
+<li>支持本体的工具套件和语言的新领域</li>
+</ul>
+</li>
+</ul>
+<h4 id="7-4-3-Two-Classes-of-Ontology-Languages"><a href="#7-4-3-Two-Classes-of-Ontology-Languages" class="headerlink" title="7.4.3 Two Classes of Ontology Languages"></a>7.4.3 Two Classes of Ontology Languages</h4><ul>
+<li>1) 传统语法的本体语言<ul>
+<li>Common Logic</li>
+<li>DOGMA</li>
+<li>F-Logic</li>
+<li>KIF</li>
+<li>KM programming language</li>
+<li>LOOM</li>
+<li>OCML</li>
+<li>OKBC</li>
+</ul>
+</li>
+<li>2) 标记式本体语言<ul>
+<li>使用标记方案对知识进行编码，最常用的是 XML</li>
+</ul>
+</li>
+</ul>
+<h4 id="7-4-4-Typical-Ontology-Languages"><a href="#7-4-4-Typical-Ontology-Languages" class="headerlink" title="7.4.4 Typical Ontology Languages"></a>7.4.4 Typical Ontology Languages</h4><h4 id="7-4-5-Applications-of-Ontologies"><a href="#7-4-5-Applications-of-Ontologies" class="headerlink" title="7.4.5 Applications of Ontologies"></a>7.4.5 Applications of Ontologies</h4><ul>
+<li>Knowledge management</li>
+<li>NLP</li>
+<li>E-commerce</li>
+<li>Intelligent information integration</li>
+<li>Bio-informatics</li>
+<li>Education</li>
+<li>Semantic Web</li>
+</ul>
+<h3 id="7-5-Bayesian-Networks"><a href="#7-5-Bayesian-Networks" class="headerlink" title="7.5 Bayesian Networks"></a>7.5 Bayesian Networks</h3><h4 id="7-5-1-About-Uncertain-Knowledge"><a href="#7-5-1-About-Uncertain-Knowledge" class="headerlink" title="7.5.1 About Uncertain Knowledge"></a>7.5.1 About Uncertain Knowledge</h4><ul>
+<li>智能体的进化：问题求解，推理，规划以及学习</li>
+<li>可能需要处理不确定性，由于部分可观察性和不确定性问题</li>
+<li>由此需要：<ul>
+<li>概率论</li>
+<li>效用论</li>
+<li>决策论</li>
+</ul>
+</li>
+</ul>
+<h4 id="7-5-2-Retional-Decisions"><a href="#7-5-2-Retional-Decisions" class="headerlink" title="7.5.2 Retional Decisions"></a>7.5.2 Retional Decisions</h4><ul>
+<li>概率论：用于处理置信度，degrees of belief</li>
+<li>效用论：有效性的质量，用偏好来表现和推理，每个状态都具有“有效性/效用”的度量值。</li>
+<li>决策论：理性决策的通论：<ul>
+<li>Decision theory = probability theory + utility theory</li>
+</ul>
+</li>
+</ul>
+<h4 id="7-5-3-Algorithm-of-a-Decision-theoretic-Agent"><a href="#7-5-3-Algorithm-of-a-Decision-theoretic-Agent" class="headerlink" title="7.5.3 Algorithm of a Decision-theoretic Agent"></a>7.5.3 Algorithm of a Decision-theoretic Agent</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function DECISION-THEORETIC-AGENT(percept) returns an action</span><br><span class="line">  persistent: belief_state, probabilistic beliefs about the current state of the world</span><br><span class="line">  			  action, the agent&apos;s action </span><br><span class="line">  update belief_state based on action and percept</span><br><span class="line">  calculate outcome probabilities for actions,</span><br><span class="line">      given action decriptions and current belief_state</span><br><span class="line">  select action with highest expected utility,</span><br><span class="line">      given probabilities of outcomes and utility information</span><br><span class="line">return action</span><br></pre></td></tr></table></figure>
+<h4 id="7-5-4-Bayes’-Rule"><a href="#7-5-4-Bayes’-Rule" class="headerlink" title="7.5.4 Bayes’ Rule"></a>7.5.4 Bayes’ Rule</h4><ul>
+<li>Product rule 乘积规则<ul>
+<li>$P(ab)=P(a|b)P(b)$ and $P(ab)=P(b|a)P(a)$</li>
+</ul>
+</li>
+<li>Bayes’ rule<ul>
+<li>$P(b|a)=\frac{P(a|b)P(b)}{P(a)}$</li>
+</ul>
+</li>
+<li>Why works?<ul>
+<li>我们常常需要根据三个项的概率估计值去计算第四个</li>
+</ul>
+</li>
+<li>想根据一些未知原因的证据，来查明其原因<ul>
+<li>$P(cause|effect)=\frac{P(effect|cause)P(cause)}{P(effect)}$</li>
+</ul>
+</li>
+<li>About Bayesian Networks<ul>
+<li>一种概率图模型</li>
+<li>采用一种有向无环图，表示的是一组随机变量，以及变量之间的条件相关性。</li>
+<li>规范如下：<ul>
+<li>1) 一组结点，每个节点对应于一个随机变量</li>
+<li>2) 一组这对结点的有向连接</li>
+<li>3) 每个节点在给定双亲下的条件概率分布 $P(X_i|Parents(X_i))$</li>
+</ul>
+</li>
+<li>同义词：<ul>
+<li>belief network 信念网络</li>
+<li>probabilistic network 概率网络</li>
+<li>causal network 因果网络</li>
+</ul>
+</li>
+<li>一个贝叶斯网络表示一组随机变量和他们的条件依赖关系<ul>
+<li>如：可以表示疾病与症状之间的概率关系</li>
+</ul>
+</li>
+<li>两种观点：<ul>
+<li>将该网络视为一种联合概率分布的表示</li>
+<li>将其视为一组条件独立语句的一种编码</li>
+</ul>
+</li>
+<li>第一种观点有利于理解如何构建网络</li>
+<li>第二种观点有助于设计推理过程</li>
+</ul>
+</li>
+</ul>
+<h4 id="7-5-5-Representing-Full-Joint-Distribution"><a href="#7-5-5-Representing-Full-Joint-Distribution" class="headerlink" title="7.5.5 Representing Full Joint Distribution"></a>7.5.5 Representing Full Joint Distribution</h4><ul>
+<li>采用条件分布元素的乘积：<ul>
+<li>$P(x_1,…,x_n)=\prod_{i=1}^nP(x_i|parents(X_i))$</li>
+</ul>
+</li>
+</ul>
+<h4 id="7-5-6-Constructing-Bayesian-Networks"><a href="#7-5-6-Constructing-Bayesian-Networks" class="headerlink" title="7.5.6 Constructing Bayesian Networks"></a>7.5.6 Constructing Bayesian Networks</h4><ul>
+<li><p>首先，用条件概率公式对联合概率进行改写，使用如下乘积规则</p>
+<ul>
+<li>$P(ab)=P(a|b)P(b)$</li>
+<li>$P(x1,…,x_n)=P(x_n|x_{n-1},…,x_1)P(x_{n-1},…,x_1)$</li>
+</ul>
+</li>
+<li><p>然后，重复该过程，将每个合取概率缩减为条件概率和较小的合取，最终得到一个大的乘积</p>
+<ul>
+<li><p>$$<br>\begin{align<em>}<br>P(x_1,…,x_n)&amp;=P(x_n|x_{n-1},…,x_1)P(x_{n-1}|x_{n-2},…,x_1)…P(x_2|x_1)P(x_1)\<br>&amp;=\prod_{i=1}^nP(x_i|x_{i-1},…,x_1)<br>\end{align</em>}<br>$$</p>
+</li>
+<li><p>此式为任意一组随机变量的链式法则</p>
+</li>
+</ul>
+</li>
+<li><p>联合分布的规格等同于一般性断言，即：对于网络中的每个变量 $X_i$有</p>
+<ul>
+<li>$$<br>P(X_i|X_{i-1},…,X1)=P(X_i|Parents(X_i))\<br>provided\ that\ Parents(X_i)\sube {X_{i-1},…,X_1}<br>$$</li>
+</ul>
+</li>
+<li><p>该等式说明：贝叶斯网络是域的一个正确表示，仅当给定其父节点，每个节点条件独立于结点序中其他前驱结点时。</p>
+</li>
+<li><p>可用如下方法来满足该条件</p>
+<ul>
+<li><ol>
+<li>结点：先确定要对域建模的变量集，${X_,…,X_n}$</li>
+<li>Links: For i = 1 to n do:<ul>
+<li>Choose from $X_1,…,X_{i-1}$, aminimal set of parents for $X_i$.</li>
+<li>For each parent insert a link from the parent to $X_i$</li>
+<li>Write down the conditional probability table (CPT)<ul>
+<li>$P(X_i|Parents(X_i))$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>结点 $X_i$ 的父辈应该包含直接影响 $X_i$ 的 $X_1,…,X_{i-1}$ 的所有节点。 </li>
+</ul>
+</li>
+</ul>
+<h4 id="7-5-7-Compactness"><a href="#7-5-7-Compactness" class="headerlink" title="7.5.7 Compactness"></a>7.5.7 Compactness</h4><ul>
+<li>贝叶斯网络远比全联合分布紧凑。它的紧凑性是局部结构化（也称稀疏）系统的一般特性。</li>
+<li>在局部结构化系统中，每个子成分仅直接与其他成分的有限数量打交道</li>
+<li>贝叶斯网络中，具有 $k$ 个父节点的布尔变量的 CPT (条件概率表) 有 $2^k$ 行</li>
+<li>假设有 $n$ 个布尔变量<ul>
+<li>Bayesian networks: 贝叶斯网络<ul>
+<li>如果每个变量的父节点不超过 $k$ 个，则全部网络可以用 $n2^k$ 个数指定</li>
+</ul>
+</li>
+<li>Full joint distribution: 全联合分布<ul>
+<li>包含 $2^n$ 个数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="7-5-8-Node-Ordering"><a href="#7-5-8-Node-Ordering" class="headerlink" title="7.5.8 Node Ordering"></a>7.5.8 Node Ordering</h4><ul>
+<li>只有当选择一个好的结点排序，我们才会得到一个紧凑的贝叶斯网络</li>
+</ul>
+<h4 id="7-5-9-Conditional-Independence-Relations"><a href="#7-5-9-Conditional-Independence-Relations" class="headerlink" title="7.5.9 Conditional Independence Relations"></a>7.5.9 Conditional Independence Relations</h4><ul>
+<li>Numerical semantics: 数值语义<ul>
+<li>一个结点，给定其父节点后，条件独立于其他前驱结点<ul>
+<li>$P(x_1,…,x_n)=\prod_{i=1}^nP(x_i|parents(X_i))$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Topological semantics: 拓扑语义<ul>
+<li>每个节点，给定其父节点后，条件独立于它的非后继结点</li>
+</ul>
+</li>
+<li>Nemerical semantics $\Leftrightarrow$ Topological semantics</li>
+<li>Markov blanket 马尔可夫覆盖<ul>
+<li>一个结点，给定其马尔可夫覆盖后，条件独立于网络中的所有其他结点（即：父节点，子节点，以及子节点的其他父节点）</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Artificial-Intelligence/" rel="tag"># Artificial Intelligence</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/03/人工智能原理-Part-II-Searching-Ch6-Constraint-Satisfaction-Problems/" rel="next" title="人工智能原理 Part II. Searching Ch6.Constraint Satisfaction Problems">
+                <i class="fa fa-chevron-left"></i> 人工智能原理 Part II. Searching Ch6.Constraint Satisfaction Problems
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/blog-logo.png"
+                alt="Wine&Chord" />
+            
+              <p class="site-author-name" itemprop="name">Wine&Chord</p>
+              <p class="site-description motion-element" itemprop="description">主要用于记录学习经历</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">153</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ch7-Reasoning-by-Knowledge"><span class="nav-number">1.</span> <span class="nav-text">Ch7. Reasoning by Knowledge</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-Overview"><span class="nav-number">1.1.</span> <span class="nav-text">7.1 Overview</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1-1-Data-Information-Knowledge-and-Wisdom"><span class="nav-number">1.1.1.</span> <span class="nav-text">7.1.1 Data, Information, Knowledge and Wisdom</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1-2-Explicit-and-Tacit-Knowledge-显性与隐性知识"><span class="nav-number">1.1.2.</span> <span class="nav-text">7.1.2 Explicit and Tacit Knowledge 显性与隐性知识</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1-3-Knowledge-Types"><span class="nav-number">1.1.3.</span> <span class="nav-text">7.1.3 Knowledge Types</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1-4-Knowledge-Base-and-Knowledge-Base-System"><span class="nav-number">1.1.4.</span> <span class="nav-text">7.1.4 Knowledge Base and Knowledge Base System</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1-5-Knowledge-Engineering-KE"><span class="nav-number">1.1.5.</span> <span class="nav-text">7.1.5 Knowledge Engineering (KE)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1-6-Knowledge-based-Engineering-KBE"><span class="nav-number">1.1.6.</span> <span class="nav-text">7.1.6 Knowledge-based Engineering (KBE)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-Knowledge-Representation"><span class="nav-number">1.2.</span> <span class="nav-text">7.2 Knowledge Representation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-1-Overview-of-Knowledge-Representation"><span class="nav-number">1.2.1.</span> <span class="nav-text">7.2.1 Overview of Knowledge Representation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-2-Core-Issues-of-Knowledge-Representation"><span class="nav-number">1.2.2.</span> <span class="nav-text">7.2.2 Core Issues of Knowledge Representation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-3-Typical-Methods-of-Knowledge-Representation"><span class="nav-number">1.2.3.</span> <span class="nav-text">7.2.3 Typical Methods of Knowledge Representation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-4-What-is-Semantic-Network"><span class="nav-number">1.2.4.</span> <span class="nav-text">7.2.4 What is Semantic Network</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-5-Basics-of-Semantic-Network"><span class="nav-number">1.2.5.</span> <span class="nav-text">7.2.5 Basics of Semantic Network</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-Representation-using-Logic"><span class="nav-number">1.3.</span> <span class="nav-text">7.3 Representation using Logic</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-3-1-Procedural-vs-Declarative-Approaches"><span class="nav-number">1.3.1.</span> <span class="nav-text">7.3.1 Procedural vs. Declarative Approaches</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-3-2-Five-Different-Logics"><span class="nav-number">1.3.2.</span> <span class="nav-text">7.3.2 Five Different Logics</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-3-3-Logical-Symbols"><span class="nav-number">1.3.3.</span> <span class="nav-text">7.3.3 Logical Symbols</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-3-4-Propositional-Logic-vs-First-order-Logic"><span class="nav-number">1.3.4.</span> <span class="nav-text">7.3.4 Propositional Logic vs. First-order Logic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-3-5-Formation-Rules-in-First-Order-Logic"><span class="nav-number">1.3.5.</span> <span class="nav-text">7.3.5 Formation Rules in First Order Logic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-3-6-Prolog-Language"><span class="nav-number">1.3.6.</span> <span class="nav-text">7.3.6 Prolog Language</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-Ontological-Engineering"><span class="nav-number">1.4.</span> <span class="nav-text">7.4 Ontological Engineering</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-4-1-What-is-Ontology"><span class="nav-number">1.4.1.</span> <span class="nav-text">7.4.1 What is Ontology</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-4-2-What-is-Ontological-Engineering"><span class="nav-number">1.4.2.</span> <span class="nav-text">7.4.2 What is Ontological Engineering</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-4-3-Two-Classes-of-Ontology-Languages"><span class="nav-number">1.4.3.</span> <span class="nav-text">7.4.3 Two Classes of Ontology Languages</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-4-4-Typical-Ontology-Languages"><span class="nav-number">1.4.4.</span> <span class="nav-text">7.4.4 Typical Ontology Languages</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-4-5-Applications-of-Ontologies"><span class="nav-number">1.4.5.</span> <span class="nav-text">7.4.5 Applications of Ontologies</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-5-Bayesian-Networks"><span class="nav-number">1.5.</span> <span class="nav-text">7.5 Bayesian Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-5-1-About-Uncertain-Knowledge"><span class="nav-number">1.5.1.</span> <span class="nav-text">7.5.1 About Uncertain Knowledge</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-5-2-Retional-Decisions"><span class="nav-number">1.5.2.</span> <span class="nav-text">7.5.2 Retional Decisions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-5-3-Algorithm-of-a-Decision-theoretic-Agent"><span class="nav-number">1.5.3.</span> <span class="nav-text">7.5.3 Algorithm of a Decision-theoretic Agent</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-5-4-Bayes’-Rule"><span class="nav-number">1.5.4.</span> <span class="nav-text">7.5.4 Bayes’ Rule</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-5-5-Representing-Full-Joint-Distribution"><span class="nav-number">1.5.5.</span> <span class="nav-text">7.5.5 Representing Full Joint Distribution</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-5-6-Constructing-Bayesian-Networks"><span class="nav-number">1.5.6.</span> <span class="nav-text">7.5.6 Constructing Bayesian Networks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-5-7-Compactness"><span class="nav-number">1.5.7.</span> <span class="nav-text">7.5.7 Compactness</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-5-8-Node-Ordering"><span class="nav-number">1.5.8.</span> <span class="nav-text">7.5.8 Node Ordering</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-5-9-Conditional-Independence-Relations"><span class="nav-number">1.5.9.</span> <span class="nav-text">7.5.9 Conditional Independence Relations</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" >Wine&Chord</span>
+
+  
+</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://wineandchord.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/02/04/人工智能原理-Part-III-Reasoning-Ch7-Reasoning-by-Knowledge/';
+          this.page.identifier = '2019/02/04/人工智能原理-Part-III-Reasoning-Ch7-Reasoning-by-Knowledge/';
+          this.page.title = '人工智能原理 Part III. Reasoning Ch7.Reasoning by Knowledge';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://wineandchord.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- <script type="text/javascript" src="/js/src/love.js"></script>script> -->

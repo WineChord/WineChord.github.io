@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="时间：2018年9月16日 13:30~17:30题目描述 贪吃蛇($snake$) 模拟贪吃蛇游戏，规则如下： 游戏地图为 $64\times 64$ 的网格地图，左上角格子坐标为 $(0,0)$，右下角格子坐标为 $(63,63)$，格子 $(x,y)$ 代表位于从上往下数第 $x$ 行，从左往右数第 $y$ 列的格子。 游戏可以有任意多个玩家，每个玩家有一定数量的蛇（数量在游戏开始时设定）">
+<meta name="description" content="时间：2018年9月16日 13:30~17:30题目描述 贪吃蛇($snake​$) 模拟贪吃蛇游戏，规则如下： 游戏地图为 $64\times 64$ 的网格地图，左上角格子坐标为 $(0,0)$，右下角格子坐标为 $(63,63)$，格子 $(x,y)$ 代表位于从上往下数第 $x$ 行，从左往右数第 $y$ 列的格子。 游戏可以有任意多个玩家，每个玩家有一定数量的蛇（数量在游戏开始时设定">
 <meta name="keywords" content="模拟">
 <meta property="og:type" content="article">
 <meta property="og:title" content="THU2018推研机试 贪吃蛇">
 <meta property="og:url" content="http://yoursite.com/2019/01/29/THU2018推研机试-贪吃蛇/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="时间：2018年9月16日 13:30~17:30题目描述 贪吃蛇($snake$) 模拟贪吃蛇游戏，规则如下： 游戏地图为 $64\times 64$ 的网格地图，左上角格子坐标为 $(0,0)$，右下角格子坐标为 $(63,63)$，格子 $(x,y)$ 代表位于从上往下数第 $x$ 行，从左往右数第 $y$ 列的格子。 游戏可以有任意多个玩家，每个玩家有一定数量的蛇（数量在游戏开始时设定）">
+<meta property="og:description" content="时间：2018年9月16日 13:30~17:30题目描述 贪吃蛇($snake​$) 模拟贪吃蛇游戏，规则如下： 游戏地图为 $64\times 64$ 的网格地图，左上角格子坐标为 $(0,0)$，右下角格子坐标为 $(63,63)$，格子 $(x,y)$ 代表位于从上往下数第 $x$ 行，从左往右数第 $y$ 列的格子。 游戏可以有任意多个玩家，每个玩家有一定数量的蛇（数量在游戏开始时设定">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-30T01:13:08.005Z">
+<meta property="og:updated_time" content="2019-01-31T12:36:33.132Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="THU2018推研机试 贪吃蛇">
-<meta name="twitter:description" content="时间：2018年9月16日 13:30~17:30题目描述 贪吃蛇($snake$) 模拟贪吃蛇游戏，规则如下： 游戏地图为 $64\times 64$ 的网格地图，左上角格子坐标为 $(0,0)$，右下角格子坐标为 $(63,63)$，格子 $(x,y)$ 代表位于从上往下数第 $x$ 行，从左往右数第 $y$ 列的格子。 游戏可以有任意多个玩家，每个玩家有一定数量的蛇（数量在游戏开始时设定）">
+<meta name="twitter:description" content="时间：2018年9月16日 13:30~17:30题目描述 贪吃蛇($snake​$) 模拟贪吃蛇游戏，规则如下： 游戏地图为 $64\times 64$ 的网格地图，左上角格子坐标为 $(0,0)$，右下角格子坐标为 $(63,63)$，格子 $(x,y)$ 代表位于从上往下数第 $x$ 行，从左往右数第 $y$ 列的格子。 游戏可以有任意多个玩家，每个玩家有一定数量的蛇（数量在游戏开始时设定">
 
 
 
@@ -399,11 +399,11 @@
       
         <ul>
 <li>时间：2018年9月16日 13:30~17:30<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2></li>
-<li>贪吃蛇($snake$)</li>
+<li>贪吃蛇($snake​$)</li>
 <li>模拟贪吃蛇游戏，规则如下：</li>
 <li>游戏地图为 $64\times 64$ 的网格地图，左上角格子坐标为 $(0,0)$，右下角格子坐标为 $(63,63)$，格子 $(x,y)$ 代表位于从上往下数第 $x$ 行，从左往右数第 $y$ 列的格子。</li>
 <li>游戏可以有任意多个玩家，每个玩家有一定数量的蛇（数量在游戏开始时设定）。同一时刻每个玩家只能有最多一条蛇在场上。当某个玩家的蛇死亡后，若他还有剩余的蛇，则在一段时间后重新上场，若无剩余的蛇，则他游戏失败。</li>
-<li>每条蛇出生时长度为 $2$，在系统指定位置出生，且保证出生位置一定为空，若出生指令涉及的坐标再指令执行的时刻被其他物体（蛇，墙，豆子）占据或坐标不合法，该出生指令无效，保证出生指令指定的蛇的头尾位置一定相邻。蛇出生后若无玩家操作则静止不动，直至玩家发出移动指令后才开始移动（若玩家指定的移动方向恰好从头指向尾，则视为头尾交换），并且直至死亡再也不会停止。</li>
+<li>每条蛇出生时长度为 $2$，在系统指定位置出生，且保证出生位置一定为空，若出生指令涉及的坐标在指令执行的时刻被其他物体（蛇，墙，豆子）占据或坐标不合法，该出生指令无效，保证出生指令指定的蛇的头尾位置一定相邻。蛇出生后若无玩家操作则静止不动，直至玩家发出移动指令后才开始移动（若玩家指定的移动方向恰好从头指向尾，则视为头尾交换），并且直至死亡再也不会停止。</li>
 <li>蛇每一秒移动一格，若玩家在这一秒指定了蛇头的移动方向，则蛇头按指定方向移动；若未指定，则按上一秒的方向移动；若指定的移动方向与原先移动方向正好相反，则不会生效。若在某一秒蛇头移动到了豆子的位置，则豆子被吃掉，同时蛇身长度增加。每吃掉一个豆子，身子长度加一。</li>
 <li>蛇头碰到自己的蛇身，对方的蛇身，墙或越过地图边界，即会死亡；若碰撞时刻恰好有多条蛇且长度均为最大，则发生碰撞的所有蛇均死亡。</li>
 <li>系统会不定期通过指令指示随机撒一些豆子在某些格子上，或者在一些格子上随机生成墙。若该指令涉及的某些坐标再指令执行的时刻被其他物体（蛇，墙，豆子）占据或坐标不合法，整条指令作废；若该指令中有重复的坐标，只在该坐标生成一个豆子（墙）。</li>
@@ -421,22 +421,22 @@
 <li>以下 $L$ 行：每行表示一条记录，行内的字符串或整数以一个空格分开。<ul>
 <li>每一行开头有一个非负整数 $S$，表示该操作发生在游戏开始后的第几秒。</li>
 <li>若接下来的字符串为某个玩家的 $ID$，则表示是这个玩家进行的操作。再接下来的字符串若为 <code>&quot;UP&quot;</code> <code>&quot;DOWN&quot;</code> <code>&quot;LEFT&quot;</code> <code>&quot;RIGHT&quot;</code>，则分别表示操作自己的蛇向上下左右移动。</li>
-<li>若 $S$ 后面的字符串为 <code>&quot;System&quot;</code>，表示是游戏系统进行的操作，若接下来的字符串为 <code>&quot;Wall&quot;</code>，表示生成墙，若接下来字符串为 <code>&quot;Bean&quot;</code>，表示生成豆子，接下来跟着一个正整数 $n$，后面跟着 $2n$ 个整数 $x_1,y_1,x_2,y_2,…,x_n,y_n$，代表在坐标分别为 $(x_1,y_1),(x_2,y_2),…,(x_n,y_n)$ 的格子添加墙或一个豆子。若 <code>&quot;System&quot;</code> 后面的字符串是一个玩家的 $ID$，表示该玩家的蛇出生了，后面跟着四个整数 $x_1,y_1,x_2,y_2$，表示该蛇蛇头在 $(x_1,y_1)$，蛇身在 $(x_2,y_2)$。</li>
-<li>保证 $S\le 3,000$，保证后给出的 $S$ 一定不小于先给出的 $S$。</li>
+<li>若 $S​$ 后面的字符串为 <code>&quot;System&quot;</code>，表示是游戏系统进行的操作，若接下来的字符串为 <code>&quot;Wall&quot;</code>，表示生成墙，若接下来字符串为 <code>&quot;Bean&quot;</code>，表示生成豆子，接下来跟着一个正整数 $n​$，后面跟着 $2n​$ 个整数 $x_1,y_1,x_2,y_2,…,x_n,y_n​$，代表在坐标分别为 $(x_1,y_1),(x_2,y_2),…,(x_n,y_n)​$ 的格子添加墙或一个豆子。若 <code>&quot;System&quot;</code> 后面的字符串是一个玩家的 $ID​$，表示该玩家的蛇出生了，后面跟着四个整数 $x_1,y_1,x_2,y_2​$，表示该蛇蛇头在 $(x_1,y_1)​$，蛇身在 $(x_2,y_2)​$。</li>
+<li>保证 $S\le 3,000​$，保证后给出的 $S​$ 一定不小于先给出的 $S​$。</li>
 </ul>
 </li>
-<li>保证输入数据中所有整数均在 $32$ 位带符号整型范围内。</li>
+<li>保证输入数据中所有整数均在 $32​$ 位带符号整型范围内。</li>
 </ul>
 <h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><ul>
 <li>输出到标准输出</li>
 <li>输出 $n$ 行</li>
-<li>每行开头一个字符串，为一个玩家 $ID$，若该玩家胜利，后面跟一字符串 <code>&quot;WIN&quot;</code>，若失败，后面跟一个整数，表示在第多少秒失败。</li>
+<li>每行开头一个字符串，为一个玩家 $ID​$，若该玩家胜利，后面跟一字符串 <code>&quot;WIN&quot;</code>，若失败，后面跟一个整数，表示在第多少秒失败。</li>
 <li>各玩家按游戏失败的时间顺序输出，若有多个胜者，按照输入最开始给出玩家的相对顺序输出所有胜者。</li>
 </ul>
 <h2 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">Wangxz 1</span><br><span class="line">Bakser 1</span><br><span class="line">8</span><br><span class="line">0 System Wangxz 1 0 0 0</span><br><span class="line">0 System Bakser 62 63 63 63</span><br><span class="line">1 Bakser UP</span><br><span class="line">1 Wangxz DOWN</span><br><span class="line">5 System Wall 2 20 20 26 23</span><br><span class="line">30 Wangxz RIGHT</span><br><span class="line">38 Wangxz DOWN</span><br><span class="line">65 System Wall 2 20 20 26 23</span><br></pre></td></tr></table></figure>
 <h2 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出"></a>样例输出</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Bakser 63</span><br><span class="line">Wangxz WIN</span><br></pre></td></tr></table></figure>
 <h2 id="样例解释"><a href="#样例解释" class="headerlink" title="样例解释"></a>样例解释</h2><ul>
-<li>第 $63$ 秒，$Bakser$ 的蛇越过地图上边界而死，$Wangxz$ 胜利。</li>
+<li>第 $63​$ 秒，$Bakser​$ 的蛇越过地图上边界而死，$Wangxz​$ 胜利。</li>
 </ul>
 <h2 id="子任务"><a href="#子任务" class="headerlink" title="子任务"></a>子任务</h2><table>
 <thead>
@@ -503,7 +503,11 @@
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
 <li>大模拟</li>
 </ul>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="生成随机数据"><a href="#生成随机数据" class="headerlink" title="生成随机数据"></a>生成随机数据</h2><ul>
+<li>为了生成数据的合理性以及直观性，写了一个<a href="TODO">辅助工具</a></li>
+</ul>
+<h4 id="子任务-1-n-1-L-le-10-2-每个玩家蛇的数量-le-1-没有墙和豆子。-15’"><a href="#子任务-1-n-1-L-le-10-2-每个玩家蛇的数量-le-1-没有墙和豆子。-15’" class="headerlink" title="子任务$1$, $n=1$, $L\le 10^2$ , 每个玩家蛇的数量 $\le 1$, 没有墙和豆子。(15’)"></a>子任务$1$, $n=1$, $L\le 10^2$ , 每个玩家蛇的数量 $\le 1$, 没有墙和豆子。(15’)</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random </span><br><span class="line">n = <span class="number">1</span></span><br><span class="line">Name = [<span class="string">"Wangxz"</span>] <span class="comment"># 玩家名字</span></span><br><span class="line">SnakeN = [<span class="number">1</span>] <span class="comment"># 玩家蛇的数量</span></span><br><span class="line">L = random.randrange(<span class="number">1</span>, <span class="number">101</span>) <span class="comment"># log的数量	</span></span><br><span class="line">S = []</span><br><span class="line">S.append(random.randrange(<span class="number">1</span>,<span class="number">10</span>)) <span class="comment"># 第一个操作发生在游戏开始的十秒内</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(L):</span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    S.append(random.randrange(S[i],))</span><br></pre></td></tr></table></figure>
+<h4 id="子任务-2-n-1-L-le-10-2-每个玩家蛇的数量-le-1-没有豆子。-15’"><a href="#子任务-2-n-1-L-le-10-2-每个玩家蛇的数量-le-1-没有豆子。-15’" class="headerlink" title="子任务$2$, $n=1$, $L\le 10^2$ , 每个玩家蛇的数量 $\le 1$, 没有豆子。(15’)"></a>子任务$2$, $n=1$, $L\le 10^2$ , 每个玩家蛇的数量 $\le 1$, 没有豆子。(15’)</h4><h4 id="子任务-3-n-1-L-le-10-2-每个玩家蛇的数量-le-1-。-15’"><a href="#子任务-3-n-1-L-le-10-2-每个玩家蛇的数量-le-1-。-15’" class="headerlink" title="子任务$3$, $n=1$, $L\le 10^2$ , 每个玩家蛇的数量 $\le 1$ 。(15’)"></a>子任务$3$, $n=1$, $L\le 10^2$ , 每个玩家蛇的数量 $\le 1$ 。(15’)</h4><h4 id="子任务-4-n-2-L-le-3-000​-每个玩家蛇的数量-le-1​-。-15’"><a href="#子任务-4-n-2-L-le-3-000​-每个玩家蛇的数量-le-1​-。-15’" class="headerlink" title="子任务$4$, $n=2$, $L\le 3\,000​$ , 每个玩家蛇的数量 $\le 1​$ 。(15’)"></a>子任务$4$, $n=2$, $L\le 3\,000​$ , 每个玩家蛇的数量 $\le 1​$ 。(15’)</h4><h4 id="子任务-5-n-10-L-le-3-000-每个玩家蛇的数量-le-1-。-20’"><a href="#子任务-5-n-10-L-le-3-000-每个玩家蛇的数量-le-1-。-20’" class="headerlink" title="子任务$5$, $n=10$, $L\le 3\,000$ , 每个玩家蛇的数量 $\le 1$  。(20’)"></a>子任务$5$, $n=10$, $L\le 3\,000$ , 每个玩家蛇的数量 $\le 1$  。(20’)</h4><h4 id="子任务-6-n-10-L-le-3-000-每个玩家蛇的数量-le-10-。-20’"><a href="#子任务-6-n-10-L-le-3-000-每个玩家蛇的数量-le-10-。-20’" class="headerlink" title="子任务$6$, $n=10$, $L\le 3\,000$ , 每个玩家蛇的数量 $\le 10$ 。(20’)"></a>子任务$6$, $n=10$, $L\le 3\,000$ , 每个玩家蛇的数量 $\le 10$ 。(20’)</h4><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -636,7 +640,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">143</span>
+                  <span class="site-state-item-count">153</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -647,7 +651,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -658,7 +662,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">49</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -691,7 +695,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入"><span class="nav-number">2.</span> <span class="nav-text">输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出"><span class="nav-number">3.</span> <span class="nav-text">输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#样例输入"><span class="nav-number">4.</span> <span class="nav-text">样例输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#样例输出"><span class="nav-number">5.</span> <span class="nav-text">样例输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#样例解释"><span class="nav-number">6.</span> <span class="nav-text">样例解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子任务"><span class="nav-number">7.</span> <span class="nav-text">子任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">8.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">9.</span> <span class="nav-text">实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入"><span class="nav-number">2.</span> <span class="nav-text">输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出"><span class="nav-number">3.</span> <span class="nav-text">输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#样例输入"><span class="nav-number">4.</span> <span class="nav-text">样例输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#样例输出"><span class="nav-number">5.</span> <span class="nav-text">样例输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#样例解释"><span class="nav-number">6.</span> <span class="nav-text">样例解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子任务"><span class="nav-number">7.</span> <span class="nav-text">子任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">8.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成随机数据"><span class="nav-number">9.</span> <span class="nav-text">生成随机数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#子任务-1-n-1-L-le-10-2-每个玩家蛇的数量-le-1-没有墙和豆子。-15’"><span class="nav-number">9.0.1.</span> <span class="nav-text">子任务$1$, $n=1$, $L\le 10^2$ , 每个玩家蛇的数量 $\le 1$, 没有墙和豆子。(15’)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#子任务-2-n-1-L-le-10-2-每个玩家蛇的数量-le-1-没有豆子。-15’"><span class="nav-number">9.0.2.</span> <span class="nav-text">子任务$2$, $n=1$, $L\le 10^2$ , 每个玩家蛇的数量 $\le 1$, 没有豆子。(15’)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#子任务-3-n-1-L-le-10-2-每个玩家蛇的数量-le-1-。-15’"><span class="nav-number">9.0.3.</span> <span class="nav-text">子任务$3$, $n=1$, $L\le 10^2$ , 每个玩家蛇的数量 $\le 1$ 。(15’)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#子任务-4-n-2-L-le-3-000​-每个玩家蛇的数量-le-1​-。-15’"><span class="nav-number">9.0.4.</span> <span class="nav-text">子任务$4$, $n=2$, $L\le 3\,000​$ , 每个玩家蛇的数量 $\le 1​$ 。(15’)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#子任务-5-n-10-L-le-3-000-每个玩家蛇的数量-le-1-。-20’"><span class="nav-number">9.0.5.</span> <span class="nav-text">子任务$5$, $n=10$, $L\le 3\,000$ , 每个玩家蛇的数量 $\le 1$  。(20’)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#子任务-6-n-10-L-le-3-000-每个玩家蛇的数量-le-10-。-20’"><span class="nav-number">9.0.6.</span> <span class="nav-text">子任务$6$, $n=10$, $L\le 3\,000$ , 每个玩家蛇的数量 $\le 10$ 。(20’)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">10.</span> <span class="nav-text">实现</span></a></li></ol></div>
             
 
           </div>
