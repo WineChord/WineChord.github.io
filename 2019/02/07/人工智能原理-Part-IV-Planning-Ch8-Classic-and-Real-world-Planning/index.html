@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/blog-logo180.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog-logo32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog-logo16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Artificial Intelligence," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Ch8 Classic and Real-world Planning8.1 Planning Problems8.1.1 What is Planning 动作是智能体的一个关键部分 规划意味着制定一套行动计划来达到既定的目标  8.1.2 What are Planning Problems A longer definition 给定现实世界中一个问题的描述： 初始状态，预期目标和可能的动作">
+<meta name="keywords" content="Artificial Intelligence">
+<meta property="og:type" content="article">
+<meta property="og:title" content="人工智能原理 Part IV. Planning Ch8.Classic and Real-world Planning">
+<meta property="og:url" content="http://yoursite.com/2019/02/07/人工智能原理-Part-IV-Planning-Ch8-Classic-and-Real-world-Planning/index.html">
+<meta property="og:site_name" content="Wine&amp;Chord">
+<meta property="og:description" content="Ch8 Classic and Real-world Planning8.1 Planning Problems8.1.1 What is Planning 动作是智能体的一个关键部分 规划意味着制定一套行动计划来达到既定的目标  8.1.2 What are Planning Problems A longer definition 给定现实世界中一个问题的描述： 初始状态，预期目标和可能的动作">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-07T01:20:19.337Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="人工智能原理 Part IV. Planning Ch8.Classic and Real-world Planning">
+<meta name="twitter:description" content="Ch8 Classic and Real-world Planning8.1 Planning Problems8.1.1 What is Planning 动作是智能体的一个关键部分 规划意味着制定一套行动计划来达到既定的目标  8.1.2 What are Planning Problems A longer definition 给定现实世界中一个问题的描述： 初始状态，预期目标和可能的动作">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/07/人工智能原理-Part-IV-Planning-Ch8-Classic-and-Real-world-Planning/"/>
+
+
+
+
+
+  <title>人工智能原理 Part IV. Planning Ch8.Classic and Real-world Planning | Wine&Chord</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <!-- <a href="https://github.com/WineChord"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a> -->
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wine&Chord</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/07/人工智能原理-Part-IV-Planning-Ch8-Classic-and-Real-world-Planning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">人工智能原理 Part IV. Planning Ch8.Classic and Real-world Planning</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-07T07:25:06+08:00">
+                2019-02-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/07/人工智能原理-Part-IV-Planning-Ch8-Classic-and-Real-world-Planning/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/07/人工智能原理-Part-IV-Planning-Ch8-Classic-and-Real-world-Planning/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Ch8-Classic-and-Real-world-Planning"><a href="#Ch8-Classic-and-Real-world-Planning" class="headerlink" title="Ch8 Classic and Real-world Planning"></a>Ch8 Classic and Real-world Planning</h2><h3 id="8-1-Planning-Problems"><a href="#8-1-Planning-Problems" class="headerlink" title="8.1 Planning Problems"></a>8.1 Planning Problems</h3><h4 id="8-1-1-What-is-Planning"><a href="#8-1-1-What-is-Planning" class="headerlink" title="8.1.1 What is Planning"></a>8.1.1 What is Planning</h4><ul>
+<li>动作是智能体的一个关键部分</li>
+<li>规划意味着制定一套行动计划来达到既定的目标</li>
+</ul>
+<h4 id="8-1-2-What-are-Planning-Problems"><a href="#8-1-2-What-are-Planning-Problems" class="headerlink" title="8.1.2 What are Planning Problems"></a>8.1.2 What are Planning Problems</h4><ul>
+<li>A longer definition<ul>
+<li>给定现实世界中一个问题的描述：<ul>
+<li>初始状态，预期目标和可能的动作</li>
+</ul>
+</li>
+<li>规划是找到一个计划：它产生从任何初始状态到达一个目标状态的一系列动作</li>
+</ul>
+</li>
+<li>A shorter definition <ul>
+<li>制定一个达到既定目标的行动计划</li>
+</ul>
+</li>
+</ul>
+<h4 id="8-1-3-What-is-Classical-Planning"><a href="#8-1-3-What-is-Classical-Planning" class="headerlink" title="8.1.3 What is Classical Planning"></a>8.1.3 What is Classical Planning</h4><ul>
+<li>经典规划具有特征：<ul>
+<li>fully observable 完全可观测</li>
+<li>a unique known initial state 唯一已知初始状态</li>
+<li>static environments 静态环境</li>
+<li>deterministic actions 确定性的动作</li>
+<li>can be taken only one at a time 每次仅一个动作</li>
+<li>a single agent 单一智能体</li>
+</ul>
+</li>
+</ul>
+<h4 id="8-1-4-Planning-Difficulties"><a href="#8-1-4-Planning-Difficulties" class="headerlink" title="8.1.4 Planning Difficulties"></a>8.1.4 Planning Difficulties</h4><table>
+<thead>
+<tr>
+<th style="text-align:center">Properties</th>
+<th style="text-align:center">Questions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">actions 动作</td>
+<td style="text-align:center">确定的还是不确定的？是否持续一段时间？可并发执行还是串行？</td>
+</tr>
+<tr>
+<td style="text-align:center">state varables 状态变量</td>
+<td style="text-align:center">离散的还是连续的？</td>
+</tr>
+<tr>
+<td style="text-align:center">initial states 初始状态</td>
+<td style="text-align:center">有限的还是任意多的？</td>
+</tr>
+<tr>
+<td style="text-align:center">objective 目标</td>
+<td style="text-align:center">要达到指定的目标状态？要最大化回报函数？</td>
+</tr>
+<tr>
+<td style="text-align:center">agents 智能体</td>
+<td style="text-align:center">一个还是多个？合作还是单干？</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Problem-solving Agent vs. Planning Agent 问题求解智能体与规划智能体</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">问题求解智能体</th>
+<th style="text-align:center">规划智能体</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">State(Initial/Goal) 状态（初始/目标）</td>
+<td style="text-align:center">Atomic representation 原子表示</td>
+<td style="text-align:center">Factored representation因子表示（collection of variables 变量的集合）</td>
+</tr>
+<tr>
+<td style="text-align:center">Actions 动作</td>
+<td style="text-align:center">Instantiated actions 实例化动作</td>
+<td style="text-align:center">Actions schemas 动作模式（use Planning Domain Definition Language 使用规划领域定义语言PDDL）</td>
+</tr>
+<tr>
+<td style="text-align:center">Heuristic 启发法</td>
+<td style="text-align:center">Domain-specific heuristics 领域特定启发法</td>
+<td style="text-align:center">Domain-independent heuristics 领域无关启发法</td>
+</tr>
+</tbody>
+</table>
+<h4 id="8-1-5-About-PDDL"><a href="#8-1-5-About-PDDL" class="headerlink" title="8.1.5 About PDDL"></a>8.1.5 About PDDL</h4><ul>
+<li>PDDL(Planning Domain Definition Language) 规划领域定义语言是对AI规划语言标准化的一种尝试，于1998年首次开发</li>
+</ul>
+<h4 id="8-1-6-Three-Components-to-Define-a-Planning-Task"><a href="#8-1-6-Three-Components-to-Define-a-Planning-Task" class="headerlink" title="8.1.6 Three Components to Define a Planning Task"></a>8.1.6 Three Components to Define a Planning Task</h4><ul>
+<li>State <ul>
+<li>represented as a conjunction of fluents (fluents: a relation that varies from one to next) 变数的合取</li>
+</ul>
+</li>
+<li>Actions<ul>
+<li>described by a set of action schemas, implicitly define the function 一组动作模式</li>
+</ul>
+</li>
+<li>Goal<ul>
+<li>represented as conjunction of literals(literals: an elementary proposition) 命题的合取</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-2-Classic-Planning"><a href="#8-2-Classic-Planning" class="headerlink" title="8.2 Classic Planning"></a>8.2 Classic Planning</h3><h4 id="8-2-1-Planning-as-State-Space-Search"><a href="#8-2-1-Planning-as-State-Space-Search" class="headerlink" title="8.2.1 Planning as State-Space Search"></a>8.2.1 Planning as State-Space Search</h4><h5 id="Two-approaches-to-searching-for-a-plan"><a href="#Two-approaches-to-searching-for-a-plan" class="headerlink" title="Two approaches to searching for a plan"></a>Two approaches to searching for a plan</h5><ul>
+<li>1) Forward state-space search 前向状态空间搜索<ul>
+<li>从初始状态开始</li>
+<li>运用该问题的动作</li>
+<li>朝着一个目标状态向前搜索</li>
+</ul>
+</li>
+<li>2) Backward relevant-states search 后向状态空间搜索<ul>
+<li>从表示该目标的状态集开始</li>
+<li>运用反向的动作</li>
+<li>朝着初始状态向后搜索</li>
+</ul>
+</li>
+</ul>
+<h5 id="Heuristics-for-planning"><a href="#Heuristics-for-planning" class="headerlink" title="Heuristics for planning"></a>Heuristics for planning</h5><ul>
+<li>将搜索问题视为一个图<ul>
+<li>其中结点表示状态，边为动作，寻找一条连接初始状态至某个目标状态的路径</li>
+</ul>
+</li>
+<li>简化该问题的两种方法<ul>
+<li>增加边</li>
+<li>状态抽象（state abstraction）：将多个节点组织在一起，形成具有较少状态空间抽象，从而容易搜索。</li>
+</ul>
+</li>
+</ul>
+<h5 id="Two-heuristics-by-adding-edges-to-the-graph"><a href="#Two-heuristics-by-adding-edges-to-the-graph" class="headerlink" title="Two heuristics by adding edges to the graph"></a>Two heuristics by adding edges to the graph</h5><ul>
+<li>1) Ignore-preconditions heuristic 忽略前提启发法<ul>
+<li>放弃动作中所有的前提条件</li>
+<li>每个动作变成可作用于每个状态，并且任一目标变数可以用一个步骤实现</li>
+</ul>
+</li>
+<li>2) Ignore-delete-lists heuristic 忽略删除表启发法<ul>
+<li>从所有动作中移除删除表，即，从作用中删除所有的否定文字</li>
+<li>这样便使其可以朝着目标单调进展：任何动作都不会取消另一个动作的进展</li>
+</ul>
+</li>
+</ul>
+<h4 id="8-2-2-Planning-Graphs"><a href="#8-2-2-Planning-Graphs" class="headerlink" title="8.2.2 Planning Graphs"></a>8.2.2 Planning Graphs</h4><ul>
+<li>规划图</li>
+<li>是一个组成层次的有向图<ul>
+<li>首先，初始状态的层次 $s_0$ 包含表示每个变数的结点</li>
+<li>然后，层次 $A_0$ 包含可能适用于 $S_0$ 的每个动作的结点</li>
+<li>然后，交替进入层次 $S_i$ ，接着是 $A_i$ </li>
+<li>直到到达一个结束条件</li>
+</ul>
+</li>
+<li>仅适用于命题规划问题<ul>
+<li>无变量</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function GRAPH-PLAN(ploblem) returns solution or failure</span><br><span class="line">  graph &lt;- INITIAL-PLAN-GRAPH(problem)</span><br><span class="line">  goal &lt;- CONJUNCTS(problem.GOAL)</span><br><span class="line">  nogoods &lt;- an empty hash table</span><br><span class="line">  for tl=0 to inf do</span><br><span class="line">    if goals all non-mutex in S_t of graph then</span><br><span class="line">      solution &lt;- EXTRACT-SOLUTION(graph,goals,NUMLEVELS(graph),nogoods)</span><br><span class="line">      if solution != failure then return solution</span><br><span class="line">    if graph and nogoods have both leveled off then return failure</span><br><span class="line">    graph &lt;- EXPAND-GRAPH(graph,problem)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>调用 EXPAND-GRAPH 来增加一层，直到通过调用 EXTRACT-SOLUTION 找到一个解，或者没有可能存在的解</li>
+</ul>
+<h4 id="8-2-3-Other-Classical-Planning-Approaches"><a href="#8-2-3-Other-Classical-Planning-Approaches" class="headerlink" title="8.2.3 Other Classical Planning Approaches"></a>8.2.3 Other Classical Planning Approaches</h4><ul>
+<li>planning as Boolean satisfiability 布尔可满足性<ul>
+<li>确定是否存在满足给定布尔表达式的解释的问题<ul>
+<li>可满足表达式：表达式的值可为 True</li>
+<li>不可满足表达式：表达式的值始终为 False</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>planning as first-order logical deduction 一阶逻辑推理</li>
+<li>planning as constraint satisfaction 约束满足<ul>
+<li>CSP (约束满足问题)技术对调度问题很有效</li>
+<li>可将有界规划问题进行编码为 CSP，例如找到一个长度为 $k$ 的规划的问题</li>
+<li>还可以将规划图编码为 CSP</li>
+</ul>
+</li>
+<li>planning as plan refinement 规划精进<ul>
+<li>Totally ordered plan 全序规划</li>
+<li>Partially ordered plan 偏序规划</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-3-Planning-and-Scheduling"><a href="#8-3-Planning-and-Scheduling" class="headerlink" title="8.3 Planning and Scheduling"></a>8.3 Planning and Scheduling</h3><h4 id="8-3-1-Planning-and-Scheduling"><a href="#8-3-1-Planning-and-Scheduling" class="headerlink" title="8.3.1 Planning and Scheduling"></a>8.3.1 Planning and Scheduling</h4><ul>
+<li>规划与调度</li>
+<li>经典规划可以表示做什么，按什么顺序</li>
+<li>无法表示动作持续多长时间，什么时候发生</li>
+<li>Plan First and Schedule Later<ul>
+<li>将问题分为规划阶段和调度阶段<ul>
+<li>规划阶段：<ul>
+<li>选择具有某种有序约束的动作</li>
+<li>去满足问题的目标</li>
+</ul>
+</li>
+<li>调度阶段<ul>
+<li>在规划中增加时间信息</li>
+<li>去满足资源和期限的约束</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>表征时间和资源约束<ul>
+<li>调度问题包含一系列作业，每个作业包含一组具有顺序约束的动作</li>
+<li>每个动作有一段持续时间和一组资源约束</li>
+<li>每个资源约束指定：类型，数量，可消费或可重用</li>
+<li>动作可以产生资源</li>
+<li>解决方案选哟对每个动作指定起始时间，并且要满足所有时间顺序约束和资源约束</li>
+</ul>
+</li>
+</ul>
+<h4 id="8-3-2-Solving-Scheduling-Problems"><a href="#8-3-2-Solving-Scheduling-Problems" class="headerlink" title="8.3.2 Solving Scheduling Problems"></a>8.3.2 Solving Scheduling Problems</h4><ul>
+<li>要使规划持续时间最短，必须找到与排序约束一致的所有动作的最早开始时间</li>
+<li>将排序约束视为一个有向图</li>
+<li>可以将关键路径法（CPM）用于该图，来确定每个动作可能的开始与结束时间</li>
+<li>一个表示偏序计划的图的路径是一个线性排序的动作序列</li>
+<li>如果引入资源约束，所导致的开始和结束时间的约束变得更加复杂</li>
+</ul>
+<h3 id="8-4-Real-World-Planning"><a href="#8-4-Real-World-Planning" class="headerlink" title="8.4 Real-World Planning"></a>8.4 Real-World Planning</h3><h4 id="8-4-1-Hierarchical-Planning"><a href="#8-4-1-Hierarchical-Planning" class="headerlink" title="8.4.1 Hierarchical Planning"></a>8.4.1 Hierarchical Planning</h4><ul>
+<li>经典规划<ul>
+<li>一组固定的动作</li>
+<li>问题：最新式的算法可以生成包含数千个动作的解</li>
+</ul>
+</li>
+<li>分层规划<ul>
+<li>将高层，抽象的任务分解为底层，具象的任务</li>
+<li>在层次结构的每一级，计算任务被缩减为少量活动，因此计算成本也减少</li>
+</ul>
+</li>
+<li>基本动作 Primitive action<ul>
+<li>经典规划中的动作，具有经典的前提-效用模式</li>
+<li>没有提炼过程</li>
+</ul>
+</li>
+<li>高级动作 High-level action (HLA)<ul>
+<li>层次任务网络规划中的重要概念</li>
+<li>每个 HLA 有一个或多个可能的提炼，每个动作可以是一个 HLA，或一个基本动作</li>
+</ul>
+</li>
+</ul>
+<h4 id="8-4-2-Multi-agent-Planning"><a href="#8-4-2-Multi-agent-Planning" class="headerlink" title="8.4.2 Multi-agent Planning"></a>8.4.2 Multi-agent Planning</h4><ul>
+<li>当环境中有多个智能体时，每个面临多智能体规划问题，试图通过其他智能体的帮助或阻碍达到自己的目标。</li>
+<li>这种多智能体规划涉及多个智能体之间协调资源和活动</li>
+<li>该主题也涉及到多个智能体在执行计划（分布式连续规划）时如何能够实时动作</li>
+<li>单智能体 &amp; 多智能体</li>
+<li>单智能体<ul>
+<li>多效用器<ul>
+<li>一个智能体有多个可以并发运行的效用器，如，一个人可以同时一边打字一边说话</li>
+</ul>
+</li>
+<li>多躯体<ul>
+<li>效应器物理分解为独立的单元，但是作为一个躯体动作，例如，工厂里的传送机器人机群</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>多智能体<ul>
+<li>多智能体之间协调资源与动作</li>
+</ul>
+</li>
+<li>多智能体的特性<ul>
+<li>Autonomy 自主性</li>
+<li>Local views 局部视野</li>
+<li>Decentralization 分散化</li>
+</ul>
+</li>
+<li>Issues in Multi-agent Planning <ul>
+<li>当这些智能体具有不同目标时</li>
+<li>1) 多同步动作的表示与规划所涉及的问题<ul>
+<li>Actor</li>
+<li>Multi-actor</li>
+<li>Multiple simultaneous actions</li>
+</ul>
+</li>
+<li>2) 真正的多智能体环境中所发生的合作，协调和竞争的问题<ul>
+<li>Convention 协定</li>
+<li>Communication 通信</li>
+<li>Plan recognition 规划认可</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-5-Decision-theoretic-Planning"><a href="#8-5-Decision-theoretic-Planning" class="headerlink" title="8.5 Decision-theoretic Planning"></a>8.5 Decision-theoretic Planning</h3><ul>
+<li>决策理论规划</li>
+<li>经典规划是寻找一个以最小代价到达其目标的计划</li>
+<li>决策理论规划是寻找一个以最大期望效用（MEU maximum expected utility）到达其目标的规划</li>
+<li>如何形式化以及求解<ul>
+<li>如何对决策理论规划问题进行格式化？<ul>
+<li>马尔可夫决策过程 Markov Decision Process</li>
+</ul>
+</li>
+<li>如何求解？<ul>
+<li>动态规划 Dynamic Programming</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="8-5-1-Markov-Decision-Process"><a href="#8-5-1-Markov-Decision-Process" class="headerlink" title="8.5.1 Markov Decision Process"></a>8.5.1 Markov Decision Process</h4><ul>
+<li><p>是一种离散时间随机控制过程，意味着动作结果仅仅依赖于当前状态</p>
+</li>
+<li><p>是一个五元组 $(S,A,P,R,\gamma)$ ，其中</p>
+<ul>
+<li>$S$ 为状态集</li>
+<li>$A$ 为动作集</li>
+<li>$P(s’|s,a)$ 为从 $s$ 导出 $s’$ 的概率</li>
+<li>$R(s,a,s’)$ 为一个回报函数</li>
+<li>$\gamma\in [0,1]$ 为衰减</li>
+</ul>
+</li>
+<li><p>核心问题</p>
+<ul>
+<li>经典规划的核心问题<ul>
+<li>智能体所在的环境是确定的</li>
+<li>求解该问题是找到一个达到其目标的计划</li>
+</ul>
+</li>
+<li>马尔可夫决策过程的核心问题<ul>
+<li>处于一个离散时间随机环境</li>
+<li>求解该问题是找到一个控制其过程的策略</li>
+<li>Finding policy is the core problem to solve MDPs</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>给定一个 $MDP(S,A,P,R,\gamma)$ ，一个策略是一个计算函数 $\pi$ ，它对每个状态 $s$ 生成一个动作 $a$ </p>
+<ul>
+<li><p>一个确定性策略被定义为 $\pi:S\rightarrow A$</p>
+</li>
+<li><p>一个随机策略也可以被定义为 </p>
+<ul>
+<li>$$<br>\pi:S\times A\rightarrow [0,1]\<br>where\ \pi(s,a)\ge0\ and\ \sum_a\pi(s,a)=1<br>$$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li></li>
+</ul>
+<h4 id="8-5-2-Dynamic-Programming"><a href="#8-5-2-Dynamic-Programming" class="headerlink" title="8.5.2 Dynamic Programming"></a>8.5.2 Dynamic Programming</h4><h5 id="Utilities-and-Optimal-Policies-效用和优化策略"><a href="#Utilities-and-Optimal-Policies-效用和优化策略" class="headerlink" title="Utilities and Optimal Policies 效用和优化策略"></a>Utilities and Optimal Policies 效用和优化策略</h5><ul>
+<li><p>在顺序决策问题中，偏好由状态顺序之间的顺序来表示</p>
+</li>
+<li><p>通常采用一个累加效用函数</p>
+<ul>
+<li>$$<br>U([s_0,s_1,s_2,…])=R(s_0)+R(s_1)+R(s_2)+…=\sum_iR(s_i)<br>$$</li>
+</ul>
+</li>
+<li><p>一个状态（亦称真值）的效用被定义为</p>
+<ul>
+<li>$U(s_i)$ 假设最佳动作结束之前的预期回报值的总和</li>
+</ul>
+</li>
+<li><p>两个优化策略：值迭代和策略迭代</p>
+</li>
+</ul>
+<h5 id="1-Value-Iteration-值迭代"><a href="#1-Value-Iteration-值迭代" class="headerlink" title="1) Value Iteration 值迭代"></a>1) Value Iteration 值迭代</h5><ul>
+<li>基本思想<ul>
+<li>计算每个状态的效用，然后使用该状态效用在每个状态中选择一个最佳动作</li>
+<li>不使用 $\pi$ 函数，而 $\pi$ 值在 $U(s)$ 中计算</li>
+</ul>
+</li>
+<li>贝尔曼效用等式 Bellman equation for utilities<ul>
+<li>$U(s)=R(s)+\gamma\ \max_{\alpha\in A(s)}\sum_{s’}P(s’|s,a)U(s’)$</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function VALUE-ITERATION(mdp,\ep) returns a utility function</span><br><span class="line">  inputs: mdp, an MDP with states S, actions A(s), transition model P(s&apos;|s,a), rewards R(s), discount \gamma</span><br><span class="line">  		  \ep, the maximum error allowed in the utility of any state</span><br><span class="line">  local variables: U, U&apos;, vectors of utilities for states in S, initially zero</span><br><span class="line">  				   \delta, the maximum change in the utility of any state in an iteration</span><br><span class="line">  repeat</span><br><span class="line">  	U &lt;- U&apos;; \delta &lt;- 0</span><br><span class="line">  	for each state s in S do</span><br><span class="line">  	  U&apos;[s] &lt;- R(s) + \gamma max_&#123;a\in A(s)&#125; \sum_&#123;s&apos;&#125;P(s&apos;|s,a)U[s&apos;]</span><br><span class="line">  	  if |U&apos;[s]-U[s]|&gt;\delta then \delta &lt;- |U&apos;[s]-U[s]|</span><br><span class="line">  until \delta &lt; \ep(1-\gamma)/\gamma</span><br><span class="line">  return U</span><br></pre></td></tr></table></figure>
+<h5 id="2-Policy-Iteration"><a href="#2-Policy-Iteration" class="headerlink" title="2) Policy Iteration"></a>2) Policy Iteration</h5><ul>
+<li><p>基本思想</p>
+<ul>
+<li><p>交替执行如下两个阶段</p>
+<ul>
+<li><p>Policy evaluation </p>
+<ul>
+<li><p>给定一个策略 $\pi_i$ ，如果 $\pi_i$ 被执行的话，计算每个状态的效用 $U_i$ </p>
+</li>
+<li><p>$$<br>U_i(s)=R(s)+\gamma\ \sum_{s’}P(s’|s,\pi_{i}(s))U_i(s’)<br>$$</p>
+</li>
+</ul>
+</li>
+<li><p>Policy improvement</p>
+<ul>
+<li><p>calculate a new MEU(maximum expected uility) policy $\pi_{i+1}$, using one-step look-ahead based on $U_i$.</p>
+</li>
+<li><p>$$<br>\pi^*(s)=\gamma\ argmax_{\alpha\in A(s)}\sum_{s’}P(s’|s,a)U(s’)<br>$$</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function POLICY-ITERATION(mdp) returns a policy</span><br><span class="line">  inputs: mdp, an MDP with states S, actions A(s), transition model P(s&apos;|s,a)</span><br><span class="line">  local variables: U, a vector of utilities for states in S, initially zero</span><br><span class="line">  				   \pi, a policy vector indexed by state, initially random</span><br><span class="line">  repeat</span><br><span class="line">  	U &lt;- POLICY-EVALUATION(\pi,U,mdp)</span><br><span class="line">  	unchanged? &lt;- true</span><br><span class="line">  	for each state s in S do</span><br><span class="line">  	  if max_&#123;a\inA(s)&#125;\sum_&#123;s&apos;&#125;P(s&apos;|s,a)U[s&apos;]&gt;\sumP(s&apos;|s,\pi[s])U[s&apos;]then do</span><br><span class="line">  	    \pi[s] &lt;- argmax_&#123;\alpha\in A(s)&#125;\sum_&#123;s&apos;&#125;P(s&apos;|s,a)U[s&apos;]</span><br><span class="line">  	    unchanged? &lt;- false</span><br><span class="line">  until unchanged</span><br><span class="line">  return \pi</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Artificial-Intelligence/" rel="tag"># Artificial Intelligence</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/04/人工智能原理-Part-III-Reasoning-Ch7-Reasoning-by-Knowledge/" rel="next" title="人工智能原理 Part III. Reasoning Ch7.Reasoning by Knowledge">
+                <i class="fa fa-chevron-left"></i> 人工智能原理 Part III. Reasoning Ch7.Reasoning by Knowledge
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/07/人工智能原理-Part-V-Learning-Ch9-Perspectives-about-Machine-Learning/" rel="prev" title="人工智能原理 Part V. Learning Ch9.Perspectives about Machine Learning">
+                人工智能原理 Part V. Learning Ch9.Perspectives about Machine Learning <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/blog-logo.png"
+                alt="Wine&Chord" />
+            
+              <p class="site-author-name" itemprop="name">Wine&Chord</p>
+              <p class="site-description motion-element" itemprop="description">主要用于记录学习经历</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">155</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ch8-Classic-and-Real-world-Planning"><span class="nav-number">1.</span> <span class="nav-text">Ch8 Classic and Real-world Planning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-Planning-Problems"><span class="nav-number">1.1.</span> <span class="nav-text">8.1 Planning Problems</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#8-1-1-What-is-Planning"><span class="nav-number">1.1.1.</span> <span class="nav-text">8.1.1 What is Planning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-1-2-What-are-Planning-Problems"><span class="nav-number">1.1.2.</span> <span class="nav-text">8.1.2 What are Planning Problems</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-1-3-What-is-Classical-Planning"><span class="nav-number">1.1.3.</span> <span class="nav-text">8.1.3 What is Classical Planning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-1-4-Planning-Difficulties"><span class="nav-number">1.1.4.</span> <span class="nav-text">8.1.4 Planning Difficulties</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-1-5-About-PDDL"><span class="nav-number">1.1.5.</span> <span class="nav-text">8.1.5 About PDDL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-1-6-Three-Components-to-Define-a-Planning-Task"><span class="nav-number">1.1.6.</span> <span class="nav-text">8.1.6 Three Components to Define a Planning Task</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-Classic-Planning"><span class="nav-number">1.2.</span> <span class="nav-text">8.2 Classic Planning</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#8-2-1-Planning-as-State-Space-Search"><span class="nav-number">1.2.1.</span> <span class="nav-text">8.2.1 Planning as State-Space Search</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Two-approaches-to-searching-for-a-plan"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">Two approaches to searching for a plan</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Heuristics-for-planning"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">Heuristics for planning</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Two-heuristics-by-adding-edges-to-the-graph"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">Two heuristics by adding edges to the graph</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-2-2-Planning-Graphs"><span class="nav-number">1.2.2.</span> <span class="nav-text">8.2.2 Planning Graphs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-2-3-Other-Classical-Planning-Approaches"><span class="nav-number">1.2.3.</span> <span class="nav-text">8.2.3 Other Classical Planning Approaches</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3-Planning-and-Scheduling"><span class="nav-number">1.3.</span> <span class="nav-text">8.3 Planning and Scheduling</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#8-3-1-Planning-and-Scheduling"><span class="nav-number">1.3.1.</span> <span class="nav-text">8.3.1 Planning and Scheduling</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-3-2-Solving-Scheduling-Problems"><span class="nav-number">1.3.2.</span> <span class="nav-text">8.3.2 Solving Scheduling Problems</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-4-Real-World-Planning"><span class="nav-number">1.4.</span> <span class="nav-text">8.4 Real-World Planning</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#8-4-1-Hierarchical-Planning"><span class="nav-number">1.4.1.</span> <span class="nav-text">8.4.1 Hierarchical Planning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-4-2-Multi-agent-Planning"><span class="nav-number">1.4.2.</span> <span class="nav-text">8.4.2 Multi-agent Planning</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-5-Decision-theoretic-Planning"><span class="nav-number">1.5.</span> <span class="nav-text">8.5 Decision-theoretic Planning</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#8-5-1-Markov-Decision-Process"><span class="nav-number">1.5.1.</span> <span class="nav-text">8.5.1 Markov Decision Process</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-5-2-Dynamic-Programming"><span class="nav-number">1.5.2.</span> <span class="nav-text">8.5.2 Dynamic Programming</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Utilities-and-Optimal-Policies-效用和优化策略"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">Utilities and Optimal Policies 效用和优化策略</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-Value-Iteration-值迭代"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">1) Value Iteration 值迭代</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-Policy-Iteration"><span class="nav-number">1.5.2.3.</span> <span class="nav-text">2) Policy Iteration</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" >Wine&Chord</span>
+
+  
+</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://wineandchord.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/02/07/人工智能原理-Part-IV-Planning-Ch8-Classic-and-Real-world-Planning/';
+          this.page.identifier = '2019/02/07/人工智能原理-Part-IV-Planning-Ch8-Classic-and-Real-world-Planning/';
+          this.page.title = '人工智能原理 Part IV. Planning Ch8.Classic and Real-world Planning';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://wineandchord.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- <script type="text/javascript" src="/js/src/love.js"></script>script> -->
