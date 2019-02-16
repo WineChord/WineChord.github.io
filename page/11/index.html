@@ -79,16 +79,16 @@
 
 
 
-<meta name="description" content="主要用于记录学习经历">
+<meta name="description" content="记录学习经历">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Wine&amp;Chord">
 <meta property="og:url" content="http://yoursite.com/page/11/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="主要用于记录学习经历">
+<meta property="og:description" content="记录学习经历">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Wine&amp;Chord">
-<meta name="twitter:description" content="主要用于记录学习经历">
+<meta name="twitter:description" content="记录学习经历">
 
 
 
@@ -296,7 +296,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/283-Move-Zeros-10/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/706-Design-HashMap-HT-13/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -315,7 +315,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/02/283-Move-Zeros-10/" itemprop="url">283. Move Zeros-10</a></h1>
+                <a class="post-title-link" href="/2018/11/03/706-Design-HashMap-HT-13/" itemprop="url">706. Design HashMap-HT-13</a></h1>
         
 
         <div class="post-meta">
@@ -327,8 +327,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T09:24:24+08:00">
-                2018-11-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-03T23:42:18+08:00">
+                2018-11-03
               </time>
             
 
@@ -368,9 +368,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/02/283-Move-Zeros-10/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/03/706-Design-HashMap-HT-13/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/02/283-Move-Zeros-10/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/03/706-Design-HashMap-HT-13/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -400,11 +400,10 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个数组，把里面的0移动到最后，并且不能改变其他元素的相对位置。</p>
-<h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>数出0的个数，然后把非0元素放到向量中，最后再把0放入向量中。time: O(n), space: O(n)<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">moveZers</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = nums.size();</span><br><span class="line">    <span class="keyword">int</span> numZeros = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) numZeros += (nums[i] == <span class="number">0</span>);</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        <span class="keyword">if</span>(nums[i] != <span class="number">0</span>) ans.push_back(nums[i]);</span><br><span class="line">    <span class="keyword">while</span>(numZeros--) ans.push_back(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) nums[i] = ans[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="方法二：使用两个指针"><a href="#方法二：使用两个指针" class="headerlink" title="方法二：使用两个指针"></a>方法二：使用两个指针</h3><p>一个指针用来遍历整个数组，另外一个指针将非0元素重写到数组前面。<br>time: O(n), space: O(1)<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">moveZeros</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> lastNonZeroFoundAt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num.size(); i++)</span><br><span class="line">        <span class="keyword">if</span>(nums[i] != <span class="number">0</span>)</span><br><span class="line">            nums[lastNonZeroFoundAt++] = nums[i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = lastNonZeroFoundAt; i &lt; nums.size(); i++)</span><br><span class="line">        nums[i] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="方法三：最优解，使操作同时也最少"><a href="#方法三：最优解，使操作同时也最少" class="headerlink" title="方法三：最优解，使操作同时也最少"></a>方法三：最优解，使操作同时也最少</h3><p>碰到一个非0时只需与前面的进行交换。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">moveZeros</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> lastNonZeroFoundAt = <span class="number">0</span>, cur = <span class="number">0</span>; cur &lt; nums.size(); cur++)</span><br><span class="line">        <span class="keyword">if</span>(nums[cur] != <span class="number">0</span>)</span><br><span class="line">            swap(nums[lastNonZeroFoundAt++], nums[cur]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>设计一个 Hash Map<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyHashMap</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    MyHashMap()&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">put</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span> value)</span></span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> key)</span></span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">(<span class="keyword">int</span> key)</span></span>&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* MyHashMap obj = new MyHashMap();</span></span><br><span class="line"><span class="comment">* obj.put(key, value);</span></span><br><span class="line"><span class="comment">* int param_2 = obj.get(key);</span></span><br><span class="line"><span class="comment">* obj.remove(key);</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line">classMyHashMap&#123;</span><br><span class="line">    <span class="keyword">final</span> Bucket[] buckets = <span class="keyword">new</span> Bucket[<span class="number">10000</span>];</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span> value)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = idx(key);</span><br><span class="line">        <span class="keyword">if</span>(bucket[i] == <span class="keyword">null</span>)</span><br><span class="line">            bucket[i] = <span class="keyword">new</span> Bucket();</span><br><span class="line">        ListNode prev = find(buckets[i], key);</span><br><span class="line">        <span class="keyword">if</span>(prev.next == <span class="keyword">null</span>)</span><br><span class="line">            prev.next = <span class="keyword">new</span> ListNode(key, value);</span><br><span class="line">        <span class="keyword">else</span> prev.next.val = value;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = idx(key);</span><br><span class="line">        <span class="keyword">if</span>(buckets[i] == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        ListNode node = find(buckets[i], key);</span><br><span class="line">        <span class="keyword">return</span> node.next == <span class="keyword">null</span>?-<span class="number">1</span>:node.next.val;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(<span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = idx(key);</span><br><span class="line">        <span class="keyword">if</span>(buckets[i] == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">        ListNode prev = find(buckets[i], key);</span><br><span class="line">        <span class="keyword">if</span>(prev.next == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">        prev.next = prev.next.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">idx</span><span class="params">(<span class="keyword">int</span> key)</span></span>&#123; <span class="keyword">return</span> Integer.hashCode(key) % buckets.length;&#125;</span><br><span class="line">    <span class="function">ListNode <span class="title">find</span><span class="params">(Bucket bucket, <span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">        ListNode node = bucket.head, prev = <span class="keyword">null</span>;</span><br><span class="line">        While(node != <span class="keyword">null</span> &amp;&amp; node.key != key)&#123;</span><br><span class="line">            prev = node;</span><br><span class="line">            node = node.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> prev;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bucket</span></span>&#123;</span><br><span class="line">    <span class="keyword">final</span> ListNode head = <span class="keyword">new</span> ListNode(-<span class="number">1</span>, -<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListNode</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> key, val;</span><br><span class="line">    ListNode next;</span><br><span class="line">    ListNode(<span class="keyword">int</span> key, <span class="keyword">int</span> val)&#123;</span><br><span class="line">        <span class="keyword">this</span>.key = key;</span><br><span class="line">        <span class="keyword">this</span>.val = val;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="function">class <span class="title">MyHashMap</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params"><span class="keyword">const</span> <span class="keyword">static</span> <span class="keyword">int</span> size = <span class="number">1000</span>;</span></span></span><br><span class="line"><span class="function"><span class="params"><span class="built_in">std</span>::<span class="built_in">array</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;, size&gt; vv;</span></span></span><br><span class="line"><span class="function"><span class="params"><span class="keyword">public</span>:</span></span></span><br><span class="line"><span class="function"><span class="params">    MyHashMap()</span></span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">put</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> key, <span class="keyword">const</span> <span class="keyword">int</span> value)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> x = key / size;</span><br><span class="line">        <span class="keyword">int</span> y = key % size;</span><br><span class="line">        <span class="keyword">if</span>(vv[s].empty())&#123;</span><br><span class="line">            vv[x] = <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(size+<span class="number">1</span>, <span class="number">-1</span>);</span><br><span class="line">            vv[x][size] = <span class="number">0</span>;   </span><br><span class="line">        &#125;</span><br><span class="line">        vv[x][y] = value;</span><br><span class="line">        vv[x][size]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> x = key/size;</span><br><span class="line">        <span class="keyword">int</span> y = key%size;</span><br><span class="line">        <span class="keyword">if</span>(vv[x].empty() || vv[x][y] == <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">return</span> vv[x][y];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> x = key/size;</span><br><span class="line">        <span class="keyword">int</span> y = key%size;</span><br><span class="line">        <span class="keyword">if</span>(vv[x].empty() || vv[x][y]==<span class="number">-1</span>) <span class="keyword">return</span> ;</span><br><span class="line">        vv[x][y] = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">if</span>(--vv[x][size] == <span class="number">0</span>) vv[x].clear();</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++ using vector</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyHashMap</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    MyHashMap()&#123;</span><br><span class="line">        vec = <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(<span class="number">1000001</span>, <span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">put</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span> value)</span></span>&#123;</span><br><span class="line">        vec[key] = value;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> vec[key];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">(<span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">        vec[key] = <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -452,7 +451,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/888-Fair-Candy-Swap-9/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/242-Valid-Anagram-HT-12/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -471,7 +470,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/02/888-Fair-Candy-Swap-9/" itemprop="url">888. Fair Candy Swap-9</a></h1>
+                <a class="post-title-link" href="/2018/11/03/242-Valid-Anagram-HT-12/" itemprop="url">242. Valid Anagram-HT-12</a></h1>
         
 
         <div class="post-meta">
@@ -483,8 +482,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T09:10:02+08:00">
-                2018-11-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-03T23:30:59+08:00">
+                2018-11-03
               </time>
             
 
@@ -524,9 +523,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/02/888-Fair-Candy-Swap-9/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/03/242-Valid-Anagram-HT-12/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/02/888-Fair-Candy-Swap-9/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/03/242-Valid-Anagram-HT-12/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -556,12 +555,324 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>交换两个人的糖果，使两个人的糖果总大小一样</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] fairCandySwap(<span class="keyword">int</span>[] A, <span class="keyword">int</span>[] B)&#123;</span><br><span class="line">    <span class="keyword">int</span> sa = <span class="number">0</span>, sb = <span class="number">0</span>; <span class="comment">// sum of A, B respectively</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> x: A) sa += x;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> x: B) sb += x;</span><br><span class="line">    <span class="keyword">int</span> delta = (sb-sa)/<span class="number">2</span>;</span><br><span class="line">    <span class="comment">// Alice gives x, she expects to receive x + delta</span></span><br><span class="line">    Set&lt;Integer&gt; setB = <span class="keyword">new</span> HashSet();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> x: B) setB.add(x);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> x: A)</span><br><span class="line">        <span class="keyword">if</span>(setB.contain(x+delta))</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;x, x+delta&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; fairCandySwap(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; A, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; B)&#123;</span><br><span class="line">    <span class="keyword">int</span> dif = (accumulate(A.begin(), A.end(), <span class="number">0</span>) - accumulate(B.begin(), B.end(), <span class="number">0</span>)) / <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">unordered_set</span>&lt;<span class="keyword">int</span>&gt; S(A.begin(), A.end());</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> b:B)</span><br><span class="line">        <span class="keyword">if</span>(S.count(b+dif))</span><br><span class="line">            <span class="keyword">return</span> &#123;b+dif, b&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>anagram: 字谜。确定一个字符串是不是另外一个字符串的字谜（他的排列形式）</p>
+<h3 id="方法一：排序"><a href="#方法一：排序" class="headerlink" title="方法一：排序"></a>方法一：排序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isAnagram</span><span class="params">(String s, String t)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s.length() != t.length()) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">char</span>[] str1 = s.toCharArray();</span><br><span class="line">    <span class="keyword">char</span>[] str2 = t.toCharArray();</span><br><span class="line">    Arrays.sort(str1);</span><br><span class="line">    Arrays.sort(str2);</span><br><span class="line">    <span class="keyword">return</span> Arrays.equals(str1, str2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>time: $O(A.length+B.length)$</li>
-<li>space: $O(B.length)$</li>
+<li>time: $O(nlogn)$</li>
+<li>space: $O(1)$<h3 id="方法二：Hash-Table"><a href="#方法二：Hash-Table" class="headerlink" title="方法二：Hash Table"></a>方法二：Hash Table</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isAnagram</span><span class="params">(String s, String t)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s.length() != t.length()) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">int</span>[] counter = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">26</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length; i++)&#123;</span><br><span class="line">        counter[s.charAt(i)-<span class="string">'a'</span>]++;</span><br><span class="line">        counter[t.charAt(i)-<span class="string">'a'</span>]--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> count: counter)</span><br><span class="line">        <span class="keyword">if</span>(count) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isAnagram</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">string</span> t)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s.length() != t.length()) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">int</span> n = s.length();</span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt; counts;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        counts[s[i]]++;</span><br><span class="line">        counts[t[i]]--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> count: counts)</span><br><span class="line">        <span class="keyword">if</span>(count.second) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/349-Interection-of-Two-Arrays-HT-11/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/03/349-Interection-of-Two-Arrays-HT-11/" itemprop="url">349. Interection of Two Arrays-HT-11</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-03T23:24:49+08:00">
+                2018-11-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/03/349-Interection-of-Two-Arrays-HT-11/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/03/349-Interection-of-Two-Arrays-HT-11/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给两个数组，找出他们公有的元素。</p>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; intersection(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums2)&#123;</span><br><span class="line">    <span class="built_in">unordered_set</span>&lt;<span class="keyword">int</span>&gt; m(nums1.begin(), nums1.end());</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> a: nums2)</span><br><span class="line">        <span class="keyword">if</span>(m.count(a))&#123;</span><br><span class="line">            res.push_back(a);</span><br><span class="line">            m.erase(a);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/690-Employee-Importance-HT-10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/03/690-Employee-Importance-HT-10/" itemprop="url">690. Employee Importance-HT-10</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-03T23:06:41+08:00">
+                2018-11-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/03/690-Employee-Importance-HT-10/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/03/690-Employee-Importance-HT-10/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定一个员工的数据结构，包括他特有的id和重要度和他直接下属的id。找出某一个员工及其下属的中重要度。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Employee info</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">int</span> importance;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; subordinates;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// use depth-first search</span></span><br><span class="line"><span class="comment">// Java</span></span><br><span class="line">Map&lt;Integer, Employee&gt; emap;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getImportance</span><span class="params">(List&lt;Employee&gt; employees, <span class="keyword">int</span> queryid)</span></span>&#123;</span><br><span class="line">    emap = <span class="keyword">new</span> HashMap();</span><br><span class="line">    <span class="keyword">for</span>(Employee e: employees) emap.put(e.id, e);</span><br><span class="line">    <span class="keyword">return</span> dfs(queryid);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> eid)</span></span>&#123;</span><br><span class="line">    Employee employee = emap.get(eid);</span><br><span class="line">    <span class="keyword">int</span> ans = employee.importance;</span><br><span class="line">    <span class="keyword">for</span>(Integer subid: employee.subordinates)</span><br><span class="line">        ans += dfs(subid);</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getImportance</span><span class="params">(self, employee, query_id)</span>:</span></span><br><span class="line">    emap = &#123;e.id: e <span class="keyword">for</span> e <span class="keyword">in</span> employees&#125;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(eid)</span>:</span></span><br><span class="line">        employee = emap[eid]</span><br><span class="line">        <span class="keyword">return</span> (employee.importance+sum(dfs(eid) <span class="keyword">for</span> eid <span class="keyword">in</span> employee.subordinates))</span><br><span class="line">    <span class="keyword">return</span> dfs(query_id)</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getImportance</span><span class="params">(<span class="built_in">vector</span>&lt;Employee*&gt; employees, <span class="keyword">int</span> id)</span></span>&#123;</span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, Employee*&gt; <span class="built_in">map</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> element: employees)</span><br><span class="line">        <span class="built_in">map</span>[element-&gt;id] = element;</span><br><span class="line">    <span class="keyword">return</span> help(<span class="built_in">map</span>, id);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">help</span><span class="params">(<span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, Employee*&gt;&amp; <span class="built_in">map</span>, <span class="keyword">const</span> <span class="keyword">int</span> id)</span></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> sum = <span class="built_in">map</span>[id]-&gt;importance;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> element: <span class="built_in">map</span>[id]-&gt;subordinates)</span><br><span class="line">        sum += help(<span class="built_in">map</span>, element);</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>time: $O(n)$</li>
+<li>space: $O(n)$</li>
 </ul>
 
           
@@ -611,7 +922,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/485-Max-Consecutive-Ones-8/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/389-Find-the-Difference-HT-9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -630,7 +941,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/02/485-Max-Consecutive-Ones-8/" itemprop="url">485. Max Consecutive Ones-8</a></h1>
+                <a class="post-title-link" href="/2018/11/03/389-Find-the-Difference-HT-9/" itemprop="url">389. Find the Difference-HT-9</a></h1>
         
 
         <div class="post-meta">
@@ -642,8 +953,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T09:04:38+08:00">
-                2018-11-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-03T22:55:00+08:00">
+                2018-11-03
               </time>
             
 
@@ -683,9 +994,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/02/485-Max-Consecutive-Ones-8/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/03/389-Find-the-Difference-HT-9/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/02/485-Max-Consecutive-Ones-8/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/03/389-Find-the-Difference-HT-9/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -715,472 +1026,9 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个只含有0和1的数组，问里面最多的连续1的长度</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findMaxConsecutiveOnes</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> maxHere = <span class="number">0</span>, max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> n: nums)</span><br><span class="line">        max = Maxth.max(max, maxHere = (n==<span class="number">0</span>)?<span class="number">0</span>:maxHere+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findMaxConsecutiveOnes</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> maxHere = <span class="number">0</span>, m = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp; n: nums)</span><br><span class="line">            m = max(m, maxHere=(n==<span class="number">0</span>)?<span class="number">0</span>:maxHere+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> m;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/896-Monotonic-Array-7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/02/896-Monotonic-Array-7/" itemprop="url">896. Monotonic Array-7</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T08:52:44+08:00">
-                2018-11-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/02/896-Monotonic-Array-7/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/02/896-Monotonic-Array-7/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>判断一个数组是否单调</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isMonotonic</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> size = A.size();</span><br><span class="line">    <span class="keyword">if</span>(size &lt;= <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">bool</span> incr = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">bool</span> decr = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; size; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(A[i<span class="number">-1</span>] &gt; A[i]) incr = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(A[i<span class="number">-1</span>] &lt; A[i]) decr = <span class="literal">false</span>;</span><br><span class="line">        <span class="comment">// if(!incr &amp;&amp; !decr) break;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> incr || decr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/566-Reshape-the-Matrix-6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/02/566-Reshape-the-Matrix-6/" itemprop="url">566 Reshape the Matrix-6</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T08:28:15+08:00">
-                2018-11-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/02/566-Reshape-the-Matrix-6/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/02/566-Reshape-the-Matrix-6/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>实现矩阵的 reshape 操作</p>
-<h3 id="方法一：使用队列"><a href="#方法一：使用队列" class="headerlink" title="方法一：使用队列"></a>方法一：使用队列</h3><p>$time: O(m<em>n)    space: O(m</em>n)$<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[][] matrixReshape(<span class="keyword">int</span>[][] nums, <span class="keyword">int</span> r, <span class="keyword">int</span> c)&#123;</span><br><span class="line">    <span class="keyword">int</span>[][] res = <span class="keyword">new</span> <span class="keyword">int</span>[r][c];</span><br><span class="line">    <span class="keyword">if</span>(nums.length == <span class="number">0</span> || r*c != nums.length * nums[<span class="number">0</span>].length)</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    Queue&lt;Integer&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; nums[<span class="number">0</span>].length; j++)</span><br><span class="line">            queue.add(nums[i][j]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; r; i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; c; j++)</span><br><span class="line">            res[i][j] = queue.remove();</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; matrixReshape(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; nums, <span class="keyword">int</span> r, <span class="keyword">int</span> c) &#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res(r, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(c, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">int</span> preR = nums.size(), preC = nums[<span class="number">0</span>].size();</span><br><span class="line">    <span class="keyword">if</span>(preR==<span class="number">0</span> || r*c != preR*preC) <span class="keyword">return</span> nums;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; preR; i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; preC; j++)</span><br><span class="line">            q.push(nums[i][j]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; r; i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; c; j++)&#123;</span><br><span class="line">            res[i][j] = q.front();</span><br><span class="line">            q.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="方法二：不使用队列"><a href="#方法二：不使用队列" class="headerlink" title="方法二：不使用队列"></a>方法二：不使用队列</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; nums[<span class="number">0</span>].length; j++)&#123;</span><br><span class="line">        res[rows][cols] = nums[i][j];</span><br><span class="line">        cols++;</span><br><span class="line">        <span class="keyword">if</span>(cols == c)&#123;</span><br><span class="line">            rows++;</span><br><span class="line">            cols = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="方法三：使用除法和余数"><a href="#方法三：使用除法和余数" class="headerlink" title="方法三：使用除法和余数"></a>方法三：使用除法和余数</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// inside the for loop:</span></span><br><span class="line">res[count/c][count%c] = nums[i][j];</span><br><span class="line">count++</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/766-Toeplitz-Matrix-5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/02/766-Toeplitz-Matrix-5/" itemprop="url">766. Toeplitz Matrix-5</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T08:18:07+08:00">
-                2018-11-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/02/766-Toeplitz-Matrix-5/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/02/766-Toeplitz-Matrix-5/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>判断一个矩阵是否是 Toeplitz 矩阵。<br>矩阵的特性是：每一个从左上到右下的对角线上元素相等。</p>
-<h3 id="方法一：根据对角线性质"><a href="#方法一：根据对角线性质" class="headerlink" title="方法一：根据对角线性质"></a>方法一：根据对角线性质</h3><p>time: O(M*N)  space: O(M+N)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// r1 - c1 == r2 - c2  -&gt; 这样的元素在同一组中</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isToeplitzMatrix</span><span class="params">(<span class="keyword">int</span>[][] matrix)</span></span>&#123;</span><br><span class="line">    Map&lt;Integer, Integer&gt; groups = <span class="keyword">new</span> HashMap();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> r = <span class="number">0</span>; r &lt; matrix.length; r++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> c = <span class="number">0</span>; c &lt; matrix[<span class="number">0</span>].length; c++)</span><br><span class="line">            <span class="keyword">if</span>(!groups.containsKey(r-c))</span><br><span class="line">                groups.put(r-c, matrix[r][c]);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (groups.get(r-c) != matrix[r][c])</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="方法二：每一个元素与它左上角元素作比较"><a href="#方法二：每一个元素与它左上角元素作比较" class="headerlink" title="方法二：每一个元素与它左上角元素作比较"></a>方法二：每一个元素与它左上角元素作比较</h3><p>time: O(M*N)   space: O(1)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isToeplitzMatrix</span><span class="params">(<span class="keyword">int</span>[][] matrix)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> r = <span class="number">0</span>; r &lt; matrix.length; r++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> c = <span class="number">0</span>; c &lt; matrix[<span class="number">0</span>].length; c++)</span><br><span class="line">            <span class="keyword">if</span>(r &gt; <span class="number">0</span> &amp;&amp; c &gt; <span class="number">0</span> &amp;&amp; matrix[r-<span class="number">1</span>][c-<span class="number">1</span>] != matrix[r][c]) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="function">bool <span class="title">isToeplitzMatrix</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&amp; matrix)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> R = matrix.size();  <span class="comment">// 只计算一次，相比上一个用时会更短</span></span><br><span class="line">    <span class="keyword">int</span> C = matrix[<span class="number">0</span>].size();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> r = <span class="number">0</span>; r &lt; R; r++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> c = <span class="number">0</span>; c &lt; C; c++)</span><br><span class="line">            <span class="keyword">if</span>(r &gt; <span class="number">0</span> &amp;&amp; c &gt; <span class="number">0</span> &amp;&amp; matrix[r-<span class="number">1</span>][c-<span class="number">1</span>] != matrix[r][c]) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>两个字符串只有小写字母，其中一个是有另一个随机排序并在随机位置上增加的一个字母，问新增加的字母是什么？</p>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bit manipulation</span></span><br><span class="line"><span class="function"><span class="keyword">char</span> <span class="title">findTheDifference</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">string</span> t)</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> r = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> c:s) r ^= c;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> c:t) r ^= c;</span><br><span class="line">    <span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python </span></span><br><span class="line"><span class="comment"># dict</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findTheDifference</span><span class="params">(self, s, t)</span>:</span></span><br><span class="line">    dic = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> ch <span class="keyword">in</span> s:</span><br><span class="line">        dic[ch] = dic.get(ch, <span class="number">0</span>) + <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> ch <span class="keyword">in</span> t:</span><br><span class="line">        <span class="keyword">if</span> dic.get(ch, <span class="number">0</span>) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> ch</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            dic[ch] -= <span class="number">1</span></span><br><span class="line"><span class="comment"># difference</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findTheDifference</span><span class="params">(self, s, t)</span>:</span></span><br><span class="line">    diff = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">        diff -= ord(s[i])</span><br><span class="line">        diff += ord(t[i])</span><br><span class="line">    diff += ord(t[<span class="number">-1</span>])</span><br><span class="line">    <span class="keyword">return</span> chr(diff)</span><br><span class="line"><span class="comment"># xor</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findTheDifference</span><span class="params">(self, s, t)</span>:</span></span><br><span class="line">    code = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> ch <span class="keyword">in</span> s+t:</span><br><span class="line">        code ^= ord(ch)</span><br><span class="line">    <span class="keyword">return</span> chr(code)</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1229,7 +1077,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/867-Transpose-Matrix-4/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/748-Shorest-Completing-Word-HT-8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -1248,7 +1096,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/02/867-Transpose-Matrix-4/" itemprop="url">867. Transpose Matrix-4</a></h1>
+                <a class="post-title-link" href="/2018/11/03/748-Shorest-Completing-Word-HT-8/" itemprop="url">748. Shorest Completing Word-HT-8</a></h1>
         
 
         <div class="post-meta">
@@ -1260,8 +1108,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T07:48:13+08:00">
-                2018-11-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-03T22:30:45+08:00">
+                2018-11-03
               </time>
             
 
@@ -1301,9 +1149,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/02/867-Transpose-Matrix-4/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/03/748-Shorest-Completing-Word-HT-8/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/02/867-Transpose-Matrix-4/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/03/748-Shorest-Completing-Word-HT-8/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1333,9 +1181,9 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>实现矩阵的转置</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>直接复制<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[][] transpose(<span class="keyword">int</span>[][] A)&#123;</span><br><span class="line">    <span class="keyword">int</span> R = A.length, C = A[<span class="number">0</span>].length;</span><br><span class="line">    <span class="keyword">int</span>[][] ans = <span class="keyword">new</span> <span class="keyword">int</span>[C][R];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> r = <span class="number">0</span>; r &lt; R; r++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> c = <span class="number">0</span>; c &lt; R; c++)</span><br><span class="line">            ans[c][r] = A[r][c];</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; transpose(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; A) &#123;</span><br><span class="line">    <span class="keyword">int</span> R = A.size(), C = A[<span class="number">0</span>].size();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ans(C, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(R, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> r = <span class="number">0</span>; r &lt; R; r++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> c = <span class="number">0</span>; c &lt; C; c++)</span><br><span class="line">            ans[c][r] = A[r][c];</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>找到最短的且含有模板中所有字母的单词。</p>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">shortestCompletingWord</span><span class="params">(String licensePlate, String[] words)</span></span>&#123;</span><br><span class="line">    String target = licensePlate.toLowerCase();</span><br><span class="line">    <span class="keyword">int</span>[] charMap = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">26</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; target.length(); i++)</span><br><span class="line">        <span class="keyword">if</span>(Character.isLetter(target.charAt(i)))</span><br><span class="line">            charMap[target.charAt(i)-<span class="string">'a'</span>]++;</span><br><span class="line">    <span class="keyword">int</span> minLength = Integer.MAX_VALUE;</span><br><span class="line">    String result = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; words.length; i++)&#123;</span><br><span class="line">        String word = words[i].toLowerCase();</span><br><span class="line">        <span class="keyword">if</span>(matches(word, charMap) &amp;&amp; word.length() &lt; minLength)&#123;</span><br><span class="line">            minLength = word.length();</span><br><span class="line">            result = words[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">matches</span><span class="params">(String word, <span class="keyword">int</span>[] charMap)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] targetMap = nre <span class="keyword">int</span>[<span class="number">26</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; word.length(); i++)</span><br><span class="line">        <span class="keyword">if</span>(Character.isLetter(word.charAt(i)))</span><br><span class="line">            targetMap[word.charAt(i)-<span class="string">'a'</span>]++;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++)</span><br><span class="line">        <span class="keyword">if</span>(charMap[i]!=<span class="number">0</span> &amp;&amp; target&lt;ap[i] &lt; charMap[i])</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">shortestCompletingWord</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; words)</span></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::transform(s.begin(), s.end(), s.begin(), ::<span class="built_in">tolower</span>);</span><br><span class="line">    <span class="built_in">map</span>&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt; counts;</span><br><span class="line">    <span class="keyword">int</span> total = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> c: s)</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">isalpha</span>(c))&#123;</span><br><span class="line">            counts[c]++;</span><br><span class="line">            total++;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="built_in">string</span> res;</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">string</span> w: words)&#123;</span><br><span class="line">        <span class="keyword">int</span> n = total;</span><br><span class="line">        <span class="built_in">map</span>&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt; cnts = counts;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; w.size(); i++)</span><br><span class="line">            n -= (cnts[w[i]]--) &gt; <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">0</span> &amp;&amp; (res.empty() || w.size() &lt; res.size()))</span><br><span class="line">            res = w;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -1383,7 +1231,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/561-Array-Partition-I-3/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/136-Single-Number-HT-7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -1402,7 +1250,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/02/561-Array-Partition-I-3/" itemprop="url">561. Array Partition I-3</a></h1>
+                <a class="post-title-link" href="/2018/11/03/136-Single-Number-HT-7/" itemprop="url">136. Single Number-HT-7</a></h1>
         
 
         <div class="post-meta">
@@ -1414,8 +1262,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T07:44:13+08:00">
-                2018-11-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-03T22:13:59+08:00">
+                2018-11-03
               </time>
             
 
@@ -1455,9 +1303,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/02/561-Array-Partition-I-3/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/03/136-Single-Number-HT-7/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/02/561-Array-Partition-I-3/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/03/136-Single-Number-HT-7/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1487,9 +1335,29 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个数组，使数组中的元素两两结合后取小者相加，问和最大是多少</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>对数组进行排序，然后从第0个元素开始每个2个元素取。时间复杂度取决于排序的时间复杂度<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">arrayPairSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">std</span>::sort(nums.begin(), nums.end());</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size()<span class="number">-1</span>; i+=<span class="number">2</span>)</span><br><span class="line">        sum += nums[i];</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一种类似于桶排序的思路</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">arrayPairSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> hash[<span class="number">20001</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> n: nums)</span><br><span class="line">        ++hash[n+<span class="number">10000</span>];</span><br><span class="line">    <span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20001</span>; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(hash[i] == <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span>(flag == <span class="literal">true</span>) sum+= ((hash[i] + <span class="number">1</span>)/<span class="number">2</span>) * (i<span class="number">-10000</span>);</span><br><span class="line">        <span class="keyword">else</span> sum += (hash[i]/<span class="number">2</span>) * (i<span class="number">-10000</span>);</span><br><span class="line">        <span class="keyword">if</span>(hash[i]&amp;<span class="number">0x01</span>) flag = !flag;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个非空的整数数组，除了一个元素出现了一次之外每个元素都出现了两次。找出那个只出现一次的元素。</p>
+<h3 id="方法一：List-operation"><a href="#方法一：List-operation" class="headerlink" title="方法一：List operation"></a>方法一：List operation</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">singleNumber</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">    no_duplicate_list = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> nums:</span><br><span class="line">        <span class="keyword">if</span> i <span class="keyword">not</span> <span class="keyword">in</span> no_duplicate_list:</span><br><span class="line">            no_duplicate_list.append(i)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            no_duplicate_list.remove(i)</span><br><span class="line">    <span class="keyword">return</span> no_duplicate_list.pop()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>time: $O(n^2)$</li>
+<li><p>space: $O(n)$</p>
+<h3 id="方法二：Hash-Table"><a href="#方法二：Hash-Table" class="headerlink" title="方法二：Hash Table"></a>方法二：Hash Table</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">singleNumber</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">    hash_table = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> nums:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            hash_table.pop(i)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            hash_table[i] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> hash_table.popitem()[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>time: $O(n)$</p>
+</li>
+<li><p>space: $O(n)$</p>
+<h3 id="方法三：数学"><a href="#方法三：数学" class="headerlink" title="方法三：数学"></a>方法三：数学</h3><p>$$<br>2 \times (a+b+c) - (a+a+b+b+c) = c<br>$$</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">singleNUmber</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span>*sum(set(nums)) - sum(nums)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>time: $O(n+n)=O(n)$, see it as <code>sum(list(i for i in nums)</code></p>
+</li>
+<li><p>space: $O(n+n)=O(n)$</p>
+<h3 id="方法四：位操作"><a href="#方法四：位操作" class="headerlink" title="方法四：位操作"></a>方法四：位操作</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">singleNumber</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">    a = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> nums:</span><br><span class="line">        a ^= i</span><br><span class="line">    <span class="keyword">return</span> a</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>time: $O(n)$</p>
+</li>
+<li>space: $O(1)$</li>
+</ul>
+
           
         
       
@@ -1537,7 +1405,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/832-Flipping-an-Image-2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/575-Distribute-Candies-HT-6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -1556,7 +1424,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/02/832-Flipping-an-Image-2/" itemprop="url">832. Flipping an Image-2</a></h1>
+                <a class="post-title-link" href="/2018/11/03/575-Distribute-Candies-HT-6/" itemprop="url">575. Distribute Candies-HT-6</a></h1>
         
 
         <div class="post-meta">
@@ -1568,8 +1436,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T07:25:56+08:00">
-                2018-11-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-03T21:33:13+08:00">
+                2018-11-03
               </time>
             
 
@@ -1609,9 +1477,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/02/832-Flipping-an-Image-2/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/03/575-Distribute-Candies-HT-6/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/02/832-Flipping-an-Image-2/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/03/575-Distribute-Candies-HT-6/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1641,9 +1509,30 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>翻转图片中的像素，并取反</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[][] flipAndIvertImage(<span class="keyword">int</span>[][] A)&#123;</span><br><span class="line">    <span class="keyword">int</span> C = A[<span class="number">0</span>].length;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span>[] row : A)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (C+<span class="number">1</span>)/<span class="number">2</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> tmp = row[i]^<span class="number">1</span>;</span><br><span class="line">            row[i] = row[C-<span class="number">1</span>-i]^<span class="number">1</span>;</span><br><span class="line">            row[C-<span class="number">1</span>-i] = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> A;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; flipAndInvertImage(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; A)&#123;</span><br><span class="line">    <span class="keyword">size_t</span> rows = A.size();</span><br><span class="line">    <span class="keyword">size_t</span> cols = A[<span class="number">0</span>].size();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rows; i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; cols/<span class="number">2</span>; j++)</span><br><span class="line">            swap(A[i][j], A[i][cols-j<span class="number">-1</span>]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rows; i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; cols; j++)</span><br><span class="line">            A[i][j] = !A[i][j];</span><br><span class="line">    <span class="keyword">return</span> A;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个长度为偶数的整数数组，不同的数字代表不同类型的糖果。将糖果均分给哥哥姐姐，问姐姐可以得到的糖果种类总数最大是多少？</p>
+<h3 id="方法一：暴力"><a href="#方法一：暴力" class="headerlink" title="方法一：暴力"></a>方法一：暴力</h3><p>生成糖果的所有排列，然后确定前半个数组中的种类个数。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line"><span class="keyword">int</span> max_kind = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">distributeCandies</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">    permute(nums, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> max_kind;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">permute</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> l)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l == nums.length-<span class="number">1</span>)&#123;</span><br><span class="line">        HashSet&lt;Integer&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length/<span class="number">2</span>; i++)</span><br><span class="line">            set.add(nums[i]);</span><br><span class="line">        max_kind = Math.max(max_kind, set.size());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = l; i &lt; nums.length; i++)&#123;</span><br><span class="line">        swap(nums, i, l);</span><br><span class="line">        permute(nums, l+<span class="number">1</span>);</span><br><span class="line">        swap(nums, i, l);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> temp = nums[x];</span><br><span class="line">    nums[x] = nums[y];</span><br><span class="line">    nums[y] = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>time: $O(n!)$</li>
+<li><p>space: $O(n)$</p>
+<h3 id="方法二：更好的暴力"><a href="#方法二：更好的暴力" class="headerlink" title="方法二：更好的暴力"></a>方法二：更好的暴力</h3><p>观察到姐姐最多可以拿到的种类数是 n/2，对于种类数少于 n/2 的情况，我们可以把所有种类数的糖果都给姐姐。所以我们遍历数组，找出糖果的种类总数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">distributeCandies</span><span class="params">(<span class="keyword">int</span>[] candies)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; candies.length &amp;&amp; count &lt; candies.length/<span class="number">2</span>; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(candies[i] != Integer.MIN_VALUE)&#123;</span><br><span class="line">            count++;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; candies.length; j++)</span><br><span class="line">                <span class="keyword">if</span>(candies[j] == candies[i])</span><br><span class="line">                    candies[j] == Integer.MIN_VALUE;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>time: $O(n^2)$</p>
+</li>
+<li><p>space: $O(1)$</p>
+<h3 id="方法三：使用排序"><a href="#方法三：使用排序" class="headerlink" title="方法三：使用排序"></a>方法三：使用排序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">distributeCandies</span><span class="params">(<span class="keyword">int</span>[] candies)</span></span>&#123;</span><br><span class="line">    Array.sort(candies);</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; candies.length &amp;&amp; count &lt; candies.length/<span class="number">2</span>; i++)</span><br><span class="line">        <span class="keyword">if</span>(candies[i] &gt; candies[i-<span class="number">1</span>])</span><br><span class="line">            count++;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>time: $O(nlogn)$</p>
+</li>
+<li>space: $O(1)$<h3 id="方法四：使用-set"><a href="#方法四：使用-set" class="headerlink" title="方法四：使用 set"></a>方法四：使用 set</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">distributeCandies</span><span class="params">(<span class="keyword">int</span>[] candies)</span></span>&#123;</span><br><span class="line">    HashSet&lt;Integer&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> candy: candies)&#123;</span><br><span class="line">        set.add(candy);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Math.min(set.size(), candies.length/<span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">distributeCandies</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; candies)</span></span>&#123;</span><br><span class="line">    <span class="built_in">unordered_set</span>&lt;<span class="keyword">int</span>&gt; kinds;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> kind: candies)</span><br><span class="line">        kinds.insert(kind);</span><br><span class="line">    <span class="keyword">return</span> min(kinds.size(), candies.size()/<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">distributeCandies</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; candies)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> min(<span class="built_in">unordered_set</span>&lt;<span class="keyword">int</span>&gt;(begin(c), end(c)).size(), c.size()/<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">distributeCandies</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; candies)</span></span>&#123;</span><br><span class="line">    <span class="built_in">bitset</span>&lt;200001&gt; hash;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i: candies)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!hash.test(i+<span class="number">100000</span>))&#123;</span><br><span class="line">            count++;</span><br><span class="line">            hash.<span class="built_in">set</span>(i+<span class="number">100000</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> n = candies.size();</span><br><span class="line">    <span class="keyword">return</span> min(count, n/<span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>time: $O(n)$</li>
+<li>space: $O(n)$</li>
+</ul>
+
           
         
       
@@ -1691,7 +1580,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/905-Sort-Array-By-Parity-1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/463-Island-Perimeter-HT-5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -1710,7 +1599,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/02/905-Sort-Array-By-Parity-1/" itemprop="url">905. Sort Array By Parity-1</a></h1>
+                <a class="post-title-link" href="/2018/11/03/463-Island-Perimeter-HT-5/" itemprop="url">463 Island Perimeter-HT-5</a></h1>
         
 
         <div class="post-meta">
@@ -1722,8 +1611,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T07:09:34+08:00">
-                2018-11-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-03T21:24:43+08:00">
+                2018-11-03
               </time>
             
 
@@ -1763,9 +1652,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/02/905-Sort-Array-By-Parity-1/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/03/463-Island-Perimeter-HT-5/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/02/905-Sort-Array-By-Parity-1/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/03/463-Island-Perimeter-HT-5/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1795,11 +1684,164 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个数组，把偶数放在数组前面，奇数放在数组后面</p>
-<h3 id="方法一：排序"><a href="#方法一：排序" class="headerlink" title="方法一：排序"></a>方法一：排序</h3><p>直接进行排序，time: O(NlongN),space: O(N)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def sortArrayByParity(self, A):</span><br><span class="line">    A.sort(key = lambda x: x%2)</span><br><span class="line">    return A</span><br></pre></td></tr></table></figure></p>
-<h3 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h3><p>走两轮 time O(N), space: O(N)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] sortArrayByParity(<span class="keyword">int</span>[] A)&#123;</span><br><span class="line">    <span class="keyword">int</span>[] ans = <span class="keyword">new</span> <span class="keyword">int</span>[A.length];</span><br><span class="line">    <span class="keyword">int</span> t = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; A.length; i++)</span><br><span class="line">        <span class="keyword">if</span>(A[i]%<span class="number">2</span>==<span class="number">0</span>) <span class="comment">// even</span></span><br><span class="line">            ans[t++] = A[i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; A.length; i++)</span><br><span class="line">        <span class="keyword">if</span>(A[i]%<span class="number">2</span>==<span class="number">1</span>) <span class="comment">// odd</span></span><br><span class="line">            ans[t++] = A[i];</span><br><span class="line">    <span class="keyword">return</span> ans</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sortArrayByParity</span><span class="params">(self, A)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> ([x <span class="keyword">for</span> x <span class="keyword">in</span> A <span class="keyword">if</span> x%<span class="number">2</span>==<span class="number">0</span>] + [x <span class="keyword">for</span> x <span class="keyword">in</span> A <span class="keyword">if</span> x%<span class="number">2</span>==<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
-<h3 id="方法三：就地算法"><a href="#方法三：就地算法" class="headerlink" title="方法三：就地算法"></a>方法三：就地算法</h3><p>维护两个指针i,j，循环时保证所有下标小于i的都是偶数，所有下标大于j的都是奇数。 time: O(N), space: O(1)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] sortArrayByParity(<span class="keyword">int</span>[] A)&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, j = A.length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(i &lt; j)&#123;</span><br><span class="line">        <span class="keyword">if</span>(A[i] % <span class="number">2</span> &gt; A[j] % <span class="number">2</span>)&#123;</span><br><span class="line">            <span class="keyword">int</span> tmp = A[i];</span><br><span class="line">            A[i] = A[j];</span><br><span class="line">            A[j] = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(A[i]%<span class="number">2</span>==<span class="number">0</span>) i++;</span><br><span class="line">        <span class="keyword">if</span>(A[j]%<span class="number">2</span>==<span class="number">1</span>) j--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> A;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>perimeter:周长。给一个二维数组，1代表陆地，0代表海洋。格子是水平或者垂直连接的。确定岛的周长</p>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>找到陆地总数，再找到重复边的个数。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">islandPerimeter</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; grid)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>, repeat = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; grid.size(); i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; grid[i].size(); j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(grid[i][j] == <span class="number">1</span>)&#123;</span><br><span class="line">                count++;</span><br><span class="line">                <span class="keyword">if</span>(i!=<span class="number">0</span>&amp;&amp;grid[i<span class="number">-1</span>][j]==<span class="number">1</span>) repeat++;</span><br><span class="line">                <span class="keyword">if</span>(j!=<span class="number">0</span>&amp;&amp;grid[i][j<span class="number">-1</span>]==<span class="number">1</span>) repeat++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">4</span>*count-repeat*<span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/884-Uncommon-Words-from-Two-Sentences-HT-4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/03/884-Uncommon-Words-from-Two-Sentences-HT-4/" itemprop="url">884. Uncommon Words from Two Sentences-HT-4</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-03T21:11:38+08:00">
+                2018-11-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/03/884-Uncommon-Words-from-Two-Sentences-HT-4/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/03/884-Uncommon-Words-from-Two-Sentences-HT-4/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给两个句子，句子由单词以及单词间的空格构成，每个单词只有小写形式。一个不常见的单词只出现在所有的句子中一次，找出所有的不常见单词。</p>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line"><span class="keyword">public</span> String[] uncommonFromSentences(String A, String B)&#123;</span><br><span class="line">    Map&lt;String, Integer&gt; count = <span class="keyword">new</span> HashMap();</span><br><span class="line">    <span class="keyword">for</span>(String word: A.split(<span class="string">" "</span>))</span><br><span class="line">        count.put(word, count.getOrDefault(word, <span class="number">0</span>)+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(String word: B.split(<span class="string">" "</span>))</span><br><span class="line">        count.put(word, count.getOrDefault(word, <span class="number">0</span>)+<span class="number">1</span>);</span><br><span class="line">    List&lt;String&gt; ans = <span class="keyword">new</span> LinkedList();</span><br><span class="line">    <span class="keyword">for</span>(String word: count.keySet())</span><br><span class="line">        <span class="keyword">if</span>(count.get(word) == <span class="number">1</span>)</span><br><span class="line">            ans.add(word);</span><br><span class="line">    <span class="keyword">return</span> ans.toArray(<span class="keyword">new</span> String[ans.size()]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">uncommonFromSentences</span><span class="params">(self, A, B)</span>:</span></span><br><span class="line">    count = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> A.split():</span><br><span class="line">        count[word] = count.get(word, <span class="number">0</span>) + <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> B.split():</span><br><span class="line">        count[word] = count.get(word, <span class="number">0</span>) + <span class="number">1</span></span><br><span class="line">    <span class="comment"># Alternatively:</span></span><br><span class="line">    <span class="comment"># count = collections.Counter(A.split())</span></span><br><span class="line">    <span class="comment"># count += collections.Counter(B.split())</span></span><br><span class="line">    <span class="keyword">return</span> [word <span class="keyword">for</span> word <span class="keyword">in</span> count <span class="keyword">if</span> count[word] == <span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; uncommonFromSentences(<span class="built_in">string</span> A, <span class="built_in">string</span> B)&#123;</span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; count;</span><br><span class="line">    <span class="function"><span class="built_in">istringstream</span> <span class="title">iss</span><span class="params">(A + <span class="string">" "</span> + B)</span></span>;</span><br><span class="line">    <span class="keyword">while</span>(iss &gt;&gt; A) count[A]++;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; res;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> w: count)</span><br><span class="line">        <span class="keyword">if</span>(w.second == <span class="number">1</span>)</span><br><span class="line">            res.push_back(w.first);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1839,7 +1881,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1879,7 +1921,7 @@
                 alt="Wine&Chord" />
             
               <p class="site-author-name" itemprop="name">Wine&Chord</p>
-              <p class="site-description motion-element" itemprop="description">主要用于记录学习经历</p>
+              <p class="site-description motion-element" itemprop="description">记录学习经历</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -1889,7 +1931,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">155</span>
+                  <span class="site-state-item-count">186</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1900,7 +1942,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1911,7 +1953,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">71</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

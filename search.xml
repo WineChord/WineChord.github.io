@@ -1,6 +1,338 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[谓词演算及归结树]]></title>
+    <url>%2F2019%2F02%2F16%2F%E8%B0%93%E8%AF%8D%E6%BC%94%E7%AE%97%E5%8F%8A%E5%BD%92%E7%BB%93%E6%A0%91%2F</url>
+    <content type="text"><![CDATA[Prerequisites 数理逻辑或离散数学中的一阶谓词演算 有关命题逻辑，谓词逻辑的演算方法 一阶谓词逻辑的优点：有很强的表达能力及严密的数学基础 Goals 一阶谓词演算的基本体系 命题逻辑和谓词逻辑的归结方法 基于归结的提取问题回答的方法 基于规则的正向演绎方法和逆向演绎方法 关系图（courtesy of 人工智能导论课件）： 一阶谓词演算的基本体系 谓词演算是一种形式语言，是AI中一种常用的知识表示方法，可以表示各种描述语句。如在产生式系统中，用来表达综合数据库，规则集的描述 谓词演算体系中的一些演绎推理方法，还可以用来建立自动定理证明系统，问答系统，基于规则的演绎系统等 含：标点符号，括号，逻辑联结词，常量符号集，变量符号集，$n$ 元函数符号集，$n$ 元谓词符号集，量词（全称$\forall$ 存在$\exist$） 并定义了谓词演算的合法表达式（原子公式，合式公式wff），表达式的演算化简方法，以便将一般化的表达式化成标准式（合取的前束范式或析取得前束范式） 化简结果的标准式：$F\triangleq(Q_1x_1)…(Q_nx_n)M$ 其中 $(Q_1x_1)…(Q_nx_n)$ 为前束，代表各种量词的约束关系 $M$ 称为母式，是不包含量词符号量化的合式公式范式 谓词演算中建立有很多推理规则可用来从已知的公式集推出新的公式，这些导出的公式称为定理。 给出定理的推理过程及所使用的推理规则序列就构成了该定理的一个证明 在证明定理的演绎过程中，经常要对量化的表达式进行匹配操作，因而需要对项作变量置换使表达式一致起来，该过程称作合一 前束范式：所有量词均非否定地出现在公式的前部，且所有的量词的约束范围均是整个公式 任何一个合式公式均可以转化为一个前束范式 消去前束范式中所有的存在量词后得到的合式公式称为 $S$ 范式，这一过程称为 $skolem$ 化 $S$ 范式与原式不一定等价，但在不可满足方面是等价的 利用结合律，分配律等可以将 $S$ 范式转化为一个合取范式，合取范式是前束范式的一种，其母式具有如下的形式：$A_1\and A_2\and …\and A_n$ 其中 $A_i$ 是由原子公式或原子公式的否定组成的析取项。每个析取项又称之为子句，一个合取范式可以用如下的子句的集合（子句集）表示： ${A_1,A_2,…A_n}$ 例： $(x)(y)[(P(x,y)\or \sim Q(x,y))\and (\sim P(x,y)\or U(x)\or V(y))\and(Q(x,y)\or \sim U(y))]$ 即为一个合取范式，其子句集为： ${P(x,y)\or \sim Q(x,y),\sim P(x,y)\or U(x)\or V(y), Q(x,y)\or \sim U(y)}$ 任何一个合式公式均可以通过九步来化为子句集，例： $(z)(x)(y){[(P(x)\or Q(x))\rightarrow R(y)]\or U(z)}$ 消蕴涵符 $A(x)\rightarrow B(x) \equiv \sim A(x)\or B(x)$ 有： $(P(x)\or Q(x))\rightarrow R(y)\Rightarrow \sim (P(x)\or Q(x))\or R(y)$ 代入式中有： $(\exist z)(\forall x)(\exist y){[\sim(P(x)\or Q(x))\or R(y)]\or U(z)}$ 移动否定符 应用摩根定律： $\sim(A(x)\or B(x))\equiv \sim A(x)\and \sim B(x)$ $\sim(A(x)\and B(x))\equiv \sim A(x)\or \sim B(x)$ 故而有： $\sim(P(x)\or Q(x))\Rightarrow \sim P(x)\and \sim Q(x)$ 代入： $(\exist z)(\forall x)(\exist y){[(\sim P(x)\and\sim Q(x))\or R(y)]\or U(z)}$ 若否定作用于量词，则根据量词转换率将量词提到否定的作用域外： $\sim((\forall x)A(x))\equiv (\exist x)(\sim A(x))$ $\sim ((\exist x)A(x))\equiv (\forall x)(\sim A(x))$ 本例未出现此情况。 变量换名 在不同的量词约束的变量，应使用不同的变量名 $(\forall x)A(x)\or (\exist x)B(x)$ 改为：$(\forall x)A(x)\or (\exist y)B(y)$ 量词左移 将所有量词移到最左侧，但是不改变次序，如上例可以重写为： $(\forall x)(\exist y){A(x)\or B(y)}$ 这也是要在第三步改名的原因，否则就不能移动 至此，一个合式公式便转化为了前束范式，特点为：所有量词均非否定地出现在公式的前部，并且所有量词的约束范围均是整个合式公式。 消去存在量词（skolem化） 消去存在量词的规则如下： 假设 $\Psi$ 为前束范式中的一个存在量词，若其前面没有全称量词，则将 $\Psi$ 所约束的变量 $x$ 用一个全新的常量代替 若前面有全称量词，则将 $x$ 用一个新的函数（称为 $skolem$ 函数）代替，该函数的变量是那些在 $\Psi$ 前面的全称量词所约束的变量，然后将存在量词 $\Psi$ 消去 $(\exist z)(\forall x)(\exist y){[(\sim P(x)\and \sim Q(x))\or R(y)]\or U(z)}$ $\Rightarrow (\forall x){[(\sim P(x)\and \sim Q(x))\or R(f(x))]\or U(a)}$ 化为合取范式 利用结合律，分配律等将 $S$ 范式的母式转化为合取范式 $(A(x)\and B(x))\and C(x)\equiv A(x)\and(B(x)\and C(x))$ $(A(x)\or B(x))\or C(x)\equiv A(x)\or (B(x)\or C(x))$ $A(x)\and (B(x)\or C(x))\equiv (A(x)\and B(x))\or(A(x)\and C(x))$ $A(x)\or(B(x)\and C(x))\equiv (A(x)\or B(x))\and(A(x)\or C(x))$ 对于本例： $(\forall x){[(\sim P(x)\and\sim Q(x))\or R(f(x))]\or U(a)}$ $\Rightarrow (\forall x){[\sim P(x)\and\sim Q(x)]\or R(f(x))\or U(a)}$ $\Rightarrow (\forall x){[\sim P(x)\or R(f(x))\or U(a)]\and[\sim Q(x)\or R(f(x))\or U(a)]}$ 隐去全称量词 此时所有的变量都是受全称量词约束，故而可以将全称量词隐去，默认所有的变量都是受全称量词约束的。 $[\sim P(x)\or R(f(x))\or U(a)]\and [\sim Q(x)\or R(f(x))\or U(a)]$ 表示为子句集 用 “,” 代替公式中的 “$\and$”，并用 “{}” 括起来 ${\sim P(x)\or R(f(x))\or U(a),\sim Q(x)\or R(f(x))\or U(a)}$ 变量换名 使不同子句中的变量使用不同的名字 ${\sim P(x_1)\or R(f(x_1))\or U(a),\sim Q(x_2)\or R(f(x_2))\or U(a)}$ 对任一合式公式通过以下步骤化为前束范式 消去多余的前束 消去蕴涵符 将否定词只作用于原子公式为止 变量标准化（进行必要换名） 所有量词左移，不要改次序 消去存在量词 $F=(\exist x)(\exist y)(\forall z)(\exist u)(\forall v)(\exist w)(P(x,y,z,u,v,w)$ $\and (Q(x,y,z,u,v,w)\or\sim R(x,z,w)))$ 四个存在量词替换如下： $x=a,y=b,u=f(z),w=g(z,w)$ 得： $F1=(\forall z)(\forall v)(P(a,b,z,f(z),v,g(z,v))$ $\and (Q(a,b,z,f(z),v,g(z,v))\or\sim R(a,z,g(z,v))))$ 将母式化为合取范式。反复使用结合律和分配律，将母式表达成合取范式的标准型，最后得到一个 $Skolem$ 化的前束范式 $Fs$ 省略全称量词 将母式用子句集表示 $S={P(a,b,z,f(z),v,g(z,v)),$ $Q(a,b,z,f(z),v,g(z,v))\or\sim R(a,z,g(z,v))}$ 子句变量标准化，使任意两个子句不会有相同的变量出现。 标准式应用问题 经过上述步骤化简之后得到的标准式是经过 $Skolem$ 化的前束范式，通常也称为 $S-标准形$ ，注意其不唯一，记为 $Fs$ 定理：若 $S$ 是合取公式 $F$ 的 $S-$标准形之子句集，则 $F$ 为永假的充要条件是 $S$ 为不可满足的。 子句：为标准形母式中的合取元，因而每一个子句是若干文字的析取式，不含有文字的子句称为空子句 空子句取值总为假，记为 NIL 在一个子句的文字中，用常量代替变量，得到一个文字的基例，由基文字组成的子句称为基子句 子句集中所有元素（即子句）的合取式不为真，则称该子句集为不可满足的 归结 一个重要的推理规则 1965年 Robinson 提出，使自动定理证明技术得到很大发展 先介绍归结方法的基本思想 再分别讨论命题逻辑和谓词逻辑的归结原理 归结原理 类似反证法 先对结论求反，然后将已知条件和结论的否定合在一起用子句集表达 若该子句集存在矛盾，则证明了结论的正确性 证明子句集存在矛盾的方法： 设 $S$ 是已知条件和结论的否定合并后对应的子句集 假设有一种变换方法，可以对 $S$ 实施一系列的变换，而且该变换能够保证变换前后的子句集在不可满足的意义下是等价的 如此，若最终得到的子句集是不可满足的，就证明了子句集 $S$ 是不可满足的，从而结论成立 子句集中的子句是“与”的关系，如果在子句集中出现了空子句，则该子句集不可满足。 故归结过程就是寻找空子句的过程 若看为搜索，则初始状态为已知条件和结论的否定对应的子句集，目标为空子句，规则是归结 证明 $F=F1\and F2\and…\and Fn\rightarrow W$ 为永真 等价于证明 $F=F1\and F2\and…\and Fn\and \sim W$ 为永假 等价于证明 $F$ 对应的子句集 $S=S0 \cup {\sim W}$ 为不可满足的 此时若用归结作为推理规则使用时，可以简化机器证明 思路：设法检验扩充的子句集 $Si$ 是否含有空子句，若 $S$ 集中存在空子句，则表明 $S$ 为不可满足的。若无空子句，则进一步用归结法从 $S$ 导出 $S1$ 然后再检验 $S1$ 是否有空子句，可以证明用归结法导出的扩大子句集 $S1$，其不可满足性是不变的，所以若 $S1$ 中有空子句，也就证得了 $S$ 不可满足性。 归结一直进行下去，目的是通过归结过程演绎出 $S$ 额不可满足性，从而使定理得到证明 命题逻辑的归结原理 命题逻辑：不含变量的逻辑 归结式（或预解式）的定义及性质 归结式：对于任意两个子句 $C1$ 和 $C2$ ，若 $C1$ 中有一个文字 $L1$，而 $C2$ 中有一个与 $L1$ 成互补的文字 $L2$ ，分别从 $C1,C2$ 中删除 $L1$ 和 $L2$，并将其剩余部分组成新的析取式，则称新子句为归结式或预解式 例：$C1=L\or C1’$ $C2=(\sim L)\or C2’$，则归结式 $C=C1’\or C2’$，当 $C1’=C2’=NIL$ 时，$C=NIL$ 定理：两个子句 $C1$ 和 $C2$ 的归结式 $C$ 是 $C1$ 和 $C2$ 的逻辑推论 证：略 推论：子句集 $S={C1,C2,…,Cn}$与子句集 $S1={C,C1,C2,…,Cn}$的不可满足性是等价的（$C$ 为 $C1$ 和 $C2$ 的归结式） 证： 设 $S$ 是不可满足的，则 $C1,C2,…,Cn$ 中必有一为假，因而 $S1$ 必为不可满足的 设 $S1$ 是不可满足，分两种情况： $C$ 为真：则 $C1,C2,…,Cn$ 中必有一为假，故 $S$ 不可满足 $C$ 为假： 则 $C1\or C2$ 为假，即 $C1$ 为假或 $C2$ 为假，故 $S$ 也是不可满足的 因此 $S$ 和 $S1$ 的不可满足性是等价的 同理可证 $Si$ 和 $Si+1$ 的不可满足性也是等价的（$i=1,2,…$） 归结原理即为从子句集 $S$ 出发，应用归结推理规则导出子句集 $S1$ ，再从 $S1$ 出发导出 $S2$ ，直到某一个子句集 $Sn$ 出现空子句为止。 根据不可满足性等价原理，已知若 $Sn$ 为不可满足的，则可逆向依次推得 $S$ 必为不可满足的 由此可见，用归结法证明定理，过程比较单纯，只涉及归结推理规则的应用问题，因而便于实现机器证明 命题逻辑的归结过程 给定公理集 $F$ 命题集 $P$，归结过程如下： 把 $F$ 转化为子句集表示，得子句集 $S0$ 把命题 $P$ 的否定式 $\sim P$ 也转化为子句集表示，并将其加到 $S0$ 中，得 $S=S0\cup {S\sim p}$ 对子句集 $S$ 反复应用归结推理规则，直至导出含有空子句的扩大子句集为止，即出现归结式为空子句的情况，表明已经找到了矛盾，证明过程结束 例： 已知公理集为： $P$ (1) $(P\and Q)\rightarrow R$ (2) $(S\or T)\rightarrow Q$ (3) $T$ (4) 求证 $R$ 由 (1) 有子句集 ${P}$ 由 (2) 有： $(P\and Q)\rightarrow R$ $\Rightarrow \sim(P\and Q)\or R$ $\Rightarrow (\sim P\or \sim Q\or R)$ 得子句集：${\sim P\or \sim Q\or R}$ 由 (3) $(S\or V)\rightarrow Q$ $\Rightarrow \sim (S\or T)\or Q$ $\Rightarrow (\sim S\and \sim T)\or Q$ $\Rightarrow (\sim S\or Q)\and (\sim T\or Q)$ 得子句集：${\sim S\or Q,\sim T\or Q}$ 由 (4) 有子句集${T}$ 由结论的否定得子句集：${\sim R}$ 将以上子句集并在一起有总的子句集： ${P,\sim P\or\sim Q\or R,\sim S\or Q,\sim T\or Q,T,\sim R}$ 归结结果如图所示（courtesy of 人工智能导论课件）： 由于根部出现了空子句，因此命题 $R$ 得到证明。 谓词逻辑的归结原理 命题逻辑中较容易确定用于归结的两个归结对 而对于谓词逻辑来说，由于谓词具有常量，变量和函数等变元的存在，两个子句是否可用于归结，判断起来是比较复杂的 如： $P(x)\or Q(y)$ 和 $\sim P(f(y))\or R(y)$ 是否可以归结？ $P(A)\or Q(y)$ 和 $\sim P(f(y))\or R(y)$ 是否可以归结？ 后面可看出，前者可以归结而后者不可以归结 从命题逻辑的归结过程可以看出，求归结式时比较容易确定含有互补对文字的两个子句，因而匹配过程比较简单 但是在谓词逻辑中，需要考虑变量的约束问题，所以往往要对公式作变量置换和合一等处理，才能得到互补的基本式 过程为： 若 $S$ 中两子句间有相同互补文字的谓词，但他们的项不同，则必须找出对应的不一致项 进行变量置换，使其对应项一致 求归结式看能否导出空子句 合一（Unify） 一个有序对集合 $s={ti/vi}$ $(i=1,2,…,n)$ 称为置换 其中 $vi$ $(i=1,2,…,)$ 是变量， $ti$ $(i=1,2,…,n)$ 是不同于 $vi$ 的项，可以是常量，函数或其他变量 置换 $s$ 表示将公式中所有变量 $vi$ 用 $ti$ 代替 对公式 $E$ 施以置换 $s$，记作 $Es$，$Es$ 称为公式 $E$ 的例 例：设有置换 $s={z/x,A/y}$， 则：$P[x,f(y),B]s=P(z,f(A),B)$ 设有公式的集合 ${Ei}$ $(i=1,2,…,m)$，如果存在一个置换 $s$，使得这 $m$ 个公式被施以 $s$ 以后，变得完全一样了，则称这 $m$ 个公式是可合一的，置换 $s$ 是它们的合一者 例： 设有公式集 ${P(x,f(y),B),P(z,f(B),B)}$ 和置换 $s1={A/x,B/y,A/z}$ 由于 $P(x,f(y),B)s=P(A,f(B),B)$ $P(z,f(B),B)s=P(A,f(B),B)$ 所以公式集是可合一的，置换 $s1$ 是它们的合一者 一般来说合一者不唯一 对于一个公式集来说，如果存在几个合一者，则其中置换数最少，限制最少，产生的例最具一般性的置换称为一般合一者（mgu） 一般合一者也不一定唯一 $s1=(z/x,w/y)$ $P[x,f(y),B]s1=P[z,f(w),B]$ $s4=(c/x,A/y)$ $P[x,f(y),B]s4=P[C,f(A),B]$ 第一个例为原始文字初等变式，实际上置换后只是对变量做了换名 第四个例为基例，置换后不再含有变量 通常用有序对的集合 $s={t_1/v_1,t_2,v_2,…,t_n/v_n}$来表示任一置换，用 $s$ 对表达式 $E$ 作置换后的例简记为 $Es$。 有时要进行多次替换，可以进行合成 如： $s1={g(x,y)/z}$，$s2={A/x,B/y,C/w,D/z}$ $s1s2={g(A,B)/z,A/x,B/y,C/w}$ UNIFY 算法用来判断两个公式是否可以合一，并且在可合一的情况下，给出他们的 mgu 基本思想（用递归描述）： 从左向右按位置扫描两个谓词的每一个对应部分 如果二者一致，则转向下一项 若不一致，查看是否存在一个置换 若不存在置换，则不可合一 若存在，则这些置换的合成为其合一者 若两个对应项都是变量时，置换选作用一个变量替代另一个变量，则这样得到的合一者为 mgu 注意算法中可合一的表达式要用表结构来表示，如把 $P(x,f(A,y))$ 表示为 $(P\ x\ f\ A\ y)$ 可合一时返回 mgu，否则返回 FAIL 谓词逻辑归结过程 判断是否可归结以及确定归结式： 对于子句 $C1’\or L1$ 和 $C2’\or L2$ ，若 $L1$ 与 $\sim L2$ 可合一，且 $s$ 是其合一者，则 $(C1’\or C2’)s$ 是其归结式 设 $C1$ 和 $C2$ 为两个不同的子句，子句中的变量已标准化，采用文字集的形式来表示子句（即文字之间理解为析取关系），则有：$C1={C1i}(i=1,2,…,n)$ $C2={C2j}(i=1,2,…,m)$ 再设 ${L1k}$ 和 ${L2k}$ 分别为 $C1$ 和 $C2$ 的两个子集 若 ${L1k}$ 和 ${\sim L2k}$ 的并集存在一个 mgu s，则两个子句的归结式为 $$C={ { C1i } - { L1k } } s \cup { { C2j } -{ L2k} } s$$ 也可看出归结式不唯一 例子： 已知： 会朗读的人是识字的； 海豚都不识字； 有些海豚是很机灵的。 证明：有些很机灵的东西不会朗读。 先用谓词逻辑描述如下： 已知： $(\forall x)(R(x)\rightarrow L(x))​$ $(\forall x)(D(x)\rightarrow \sim L(x))$ $(\exist x)(D(x)\and I(x))$ 求证：$(\exist x)(I(x)\and \sim R(x))$ 先将前提条件的谓词公式化简，然后将要证明的结论取反并化成子句形，求得子句集 (1) $\sim R(x)\or L(x)$ (2) $\sim D(y)\or \sim L(y)$ (3a) $D(A)$ (3b) $I(A)$ (4) $\sim I(z)\or R(z)$ 归结树如图（画线为L1,L2，旁边标的是合一者）：]]></content>
+      <tags>
+        <tag>人工智能</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[谓词归结法总结]]></title>
+    <url>%2F2019%2F02%2F15%2F%E8%B0%93%E8%AF%8D%E5%BD%92%E7%BB%93%E6%B3%95%E6%80%BB%E7%BB%93%2F</url>
+    <content type="text"><![CDATA[人工智能导论 第四章 第四节 当一个结论成立时，归结法可以证明该结论成立 而，证明 $(\exist x)W(x)$ 成立固然重要，但有时更关心使得 $W(x)$ 成立的那个 $x$ 是什么，即，希望得到问题的答案 基于归结的问答就是利用归结方法获得问题答案的方法 基本方法： 用归结法证明问题的正确性，给出归结树 根据该归结树构造一个修改证明树，构造方法： 将结论的否定对应的子句 $S1$ 再次求反得到一个新子句 $S2$ $S1$ 和 $S2$ 构造一个重言式 $S1 \or S2$ 用该重言式代替归结树中的子句 $S1$ 最后在归结树得到空子句的地方得到的子句就是问题的答案 归结反演系统主要用来解决证明问题，即给定公式集 $F0$ ，要求证明存在量词量化的目标公式 $(x)W(x)$ 对于直接回答 $x=A$ 时 $W(A)$ 是否为真这种问题，可以直接使用归结反演系统证明 而对于 $x=?$ 时 $W(x)$ 为真或填空类型的问题，则应先证明一个与回答问题语句中提问项有对应匹配关系的一般语句，然后再找某一个具体的匹配值，该值就给出问题的回答。 这种要求产生满足条件的 $x$ 的例子需要构造性的证明方法，即如果能给出对问题的构造性证明过程，则可给出具体问题的答案。 提取回答的方法 已知条件：”John 在什么地方，Fido 就在什么地方”，”John 在学校” 问：”Fido 在什么地方？” 首先用归结法证明 Fido 确实在一个地方，然后再回答出 Fido 在什么地方 “If Fido goes wherever John goes and if John is at school, where is Fido?” 分析：该问题给出两个已知事实和一个询问，该询问答案应从事实出发演绎得到 先将问题用谓词逻辑公式表示： 前提公式集：$(\forall x)(AT(John,x)\rightarrow AT(Fido,x))$ ，$AT(John,School)$ 目标公式：$(\exist x)AT(Fido,x)$ 首先证明目标公式是前提公式集的逻辑推理 然后找出一个 $x$ 的例子，如此完成回答 关键：将询问表达为一个有存在量词约束的目标公式，如此便容易用归结法给出证明，反演树如图（courtesy of 人工智能导论课件）： 用一个重言式来取代目标公式的否定式这个子句，该重言式为 $\sim AT(Fido,x)\or AT(Fido,x)$ 按反演树的构造进行归结，给出重言式替代目标否定式子句后的证明树，此时根子句不为空，称此证明树为修改证明树，修改证明树如图（courtesy of 人工智能导论课件）： 用根部子句作为回答语句 从图中可以看出根部有子句 $AT(Fido,School)$ 即为一个正确答案，该回答与目标公式形式相同，其为目标公式中约束变量 $x$ 用常量 $School$ 替代的结果，即求得目标公式中 $x$ 的一个例 可以看出，回答的提取过程是把一棵反演树转化为根部带有回答语句的一棵修改证明树的过程。 从证明树可以得出根部的语句是公理集（前提公式集）与一个重言式（由目标否定式构成）的逻辑推论，也就是扩大公理集的逻辑推论，因而修改证明树构造的本身就证明这种提取回答的办法是正确的。]]></content>
+      <tags>
+        <tag>人工智能</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Notes for CLRS Ch30 Polynomials and the FFT]]></title>
+    <url>%2F2019%2F02%2F12%2FNotes-for-CLRS-Ch30-Polynomials-and-the-FFT%2F</url>
+    <content type="text"><![CDATA[Ch30 Polynomials and the FFT FFT 可以将两个多项式的乘法实现时间缩短至 $\Theta(nlgn)$。 两个乘数分别为 $A(x)=\sum_{j=0}^{n-1}a_jx^j$ $B(x)=\sum_{j=0}^{n-1}b_jx^j$ 乘积为 $$C(x)=\sum_{j=0}^{2n-2}c_jx^j$$ $$c_j=\sum_{k=0}^ja_kb_{j-k}$$ Coefficient representation Point-value representation ${(x_0,y_0),(x_1,y_1),…,(x_{n-1},y_{n-1})}$ 其中$$y_k=A(x_k)$$Theorem 30.1(Uniqueness of an interpolating polynomial) 对于任意 $x_k$ 唯一的点值集，满足 $y_k=A(x_k)$ 的 $n$ 阶多项式 $A(x)$ 也是唯一的。 证明：$(3)$ 等价于$$\begin{bmatrix}1 &amp;x_0 &amp;x_0^2 &amp;\cdots &amp;x_0^{n-1}\1 &amp;x_1 &amp;x_1^2 &amp;\cdots &amp;x_1^{n-1}\\vdots &amp;\vdots &amp;\vdots &amp;\ddots &amp;\vdots\1 &amp;x^{n-1} &amp;x_{n-1}^2 &amp;\cdots &amp;x_{n-1}^{n-1}\end{bmatrix}$$]]></content>
+      <categories>
+        <category>CLRS</category>
+      </categories>
+      <tags>
+        <tag>FFT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CST2018 3-8 Shortest]]></title>
+    <url>%2F2019%2F02%2F09%2FCST2018-3-8-Shortest%2F</url>
+    <content type="text"><![CDATA[题目描述 给定一张 $n$ 个点 $m$ 条边的带权无向图，算出从 $1$ 到 $n$ 的最短路径 注意，请不要使用 spfa 或队列优化的 bellman-ford 算法，如果使用了该算法，有可能无法通过全部测试点。 输入输出 输入： 第 $1$ 行：$n\ m$ 以下 $m$ 行：每行三个数 $a,b,c$ ，其中 $1\le a,b\le n, 1\le c\le 1000$ ，代表有一条 $a$ 到 $b$ 的无向边，边权为 $c$ 输出： 一个整数，代表最短路径长度 1234567891011121314151617intput:6 135 1 655 1 8835 4 2206 6 6983 6 1283 2 3812 1 7311 2 722 4 6764 5 8782 4 912 3 1611 4 897output:361 数据范围及限制 $1\le n\le 100000$, $1\le m\le 300000$ 边权 $\in [1,1000]$ 1 sec 256 MB 提示 堆优化 Dijkstra 思路实现]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>Heap</tag>
+        <tag>Dijkstra</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CST2018 3-7 History]]></title>
+    <url>%2F2019%2F02%2F09%2FCST2018-3-7-History%2F</url>
+    <content type="text"><![CDATA[题目描述 查看提交记录，一个提交记录是一个整数型的学生 id，唯一代表了一个学生 每看到一个记录，询问上一次提交是什么时候，若为第一次提交，则要回答当前时刻 输入输出 输入： 第 $1$ 行：$n$ 提交记录的个数 以下 $n$ 行：每行一个非负整数，第 $i$ 个整数表示第 $i$ 次提交的学生的 id。注意要将 id 与上一次询问的答案做异或，才能得到真正的学生 id。特别地，第一次询问时的“上一次询问的答案”是0 输出： $n$ 行：每行一个正整数，第 $i$ 个整数表示第 $i$ 个提交记录的学生上次提交时间，即该学生上次提交的提交记录是第几条。若为第一次提交，输出 $i$ 即可。 12345678910111213141516171819input:81415151012121111output:11244536 数据范围及限制 $1\le n\le 1,000,000$ 所有数字 $\lt 2^{30}$ 且非负 1 sec 256 MB 提示 散列 思路实现]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>Hash</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CST2018 3-6 Match]]></title>
+    <url>%2F2019%2F02%2F09%2FCST2018-3-6-Match%2F</url>
+    <content type="text"><![CDATA[题目描述 给定一个字符串 $S[1…n]$，对于一个询问 $(p,q,len)$，欲知其两个子串 $S[p…p+len-1]$，$S[q…q+len-1]$是否相同。更多地，希望在对串 $S$ 完成一些操作之后还能高效地得到这个结果 12341 p c // 在 p 位置之后插入一个小写字母 c2 p // 删除 p 位置上的字符3 p q // 将 S[p..q] 翻转为 S[q..p]4 p q len // 查询 S[p..p+len-1],S[q..q+len-1] 是否相同 输入输出 输入： 第 $1$ 行：$n\ m$ 第 $2$ 行：长为 $n$ 的字符串 以下 $m$ 行：每行为一个操作 输出： 一个整数，表示询问相同的次数 123456789input:4 4 aacb 2 3 // aab1 2 b // aabb3 2 3 // abab4 1 3 2 // ab == aboutput:1 // 一共一个询问的答案是匹配的 限制 $0\le n,m \le 400,000$ time: 4 sec space: 256 MB 提示 平衡树，hash 思路实现]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>平衡树</tag>
+        <tag>Hash</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CST2018 3-5 Prefix]]></title>
+    <url>%2F2019%2F02%2F09%2FCST2018-3-5-Prefix%2F</url>
+    <content type="text"><![CDATA[问题描述 给定一个字符串 $S[1…n]$，定义前缀 $prefix[i]=S[1…i]$，现在想知道所有 $prefix[i]$ 在 $S$ 中出现的次数总和，一次出现定义为： $$prefix[i]==s[j…j+i-1]$$ 如：对于字符串 aabaab，a 在字符串中出现 4 次，aa 出现 2 次，aab 出现 2 次，剩余的 3 个前缀各出现 1 次，答案为 11 输入输出 输入： 共一行：$S$ 输出： 所有前缀出现的次数之和 1234input:abbaaaabbaoutput:18 限制 $1\le n\le 20,000,000$ 字符串都是小写 0.5 sec 256 MB 提示 KMP , 理解KMP中next数组的含义，利用next数组来辅助计数 思路实现]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>KMP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CST2018 3-4 kth]]></title>
+    <url>%2F2019%2F02%2F09%2FCST2018-3-4-kth%2F</url>
+    <content type="text"><![CDATA[题目描述 三个数组 a[1…n], b[1…n], c[1…n]，在所有数对$(x,y,z)$ $(1\le x,y,z\le n)$ 中，找到 $a[x]+b[y]+c[z]$ 的值第 $k$ 小的那对，若有多对，找出任何一对即可 不能直接访问三个数组中的元素，只能给出两种方案，两个数对，通过函数接口，来比较值得大小 接口说明 kth.h kth_lib.cpp 1void get_kth(int n, int k, int *x, int *y, int *z); 需要实现 get_kth，找到第 $k$ 小的数对后，需要将该数对的三个值分别存在 *x,*y,*z 中 1int compare(int x, int y, int z, int u, int v, int w); 当 $a[x]+b[y]+c[z]\lt a[u]+b[v]+c[w]$ 时，返回 $1$ ，否则返回 $0$ compare 的实现为 $O(1)$ ，可认为每秒钟至少能调用 1e7 次该函数 测试说明 首先读入 $n\ k$ 然后读入并生成 a,b,c 数组中的数 接着调用 get_kth 函数 在实现的 get_kth 函数中，可以调用 compare 函数来对两个数进行比较，若传入参数不在 $1\sim n$ 的范围内，判为 WA get_kth 返回后，输出 $a[x]+b[y]+c[z]$ 的值 本地测试：g++ kth_lib.cpp your_code.cpp -O2 -o kth.exe 样例程序：kth_sample.cpp 输入输出 输入： 第 $1$ 行：$n\ k$ $n$ 个整数，第 $i$ 个表示 $a[i]$ $n$ 个整数，第 $i$ 个表示 $b[i]$ $n$ 个整数，第 $i$ 个表示 $c[i]$ 每个整数 $\in [1,10^8]$ 输出： 正确时输出方案的值，错误时输出错误信息 1234567input:3 63 1 54 2 1200 300 100output:106 限制 4 sec 256 MB 提示 [n 特别大，枚举所有方案好像不太可能] [如果只有一个数组，要求第 k 小，可以怎么求？] [如果有两个数组，该怎么求？] [如果有三个数组呢？ ] [堆 ]]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>堆</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CST2018 3-3 Hacker]]></title>
+    <url>%2F2019%2F02%2F09%2FCST2018-3-3-Hacker%2F</url>
+    <content type="text"><![CDATA[题目描述 用户系统保存密码时不能明文保存。一种做法是加盐 hash，将 password + salt 的 CRC32 值存在数据库中。当用户登录时，重复此计算，验证 hash 的值是否相等。 盐和密码必须由 0123456789tsinghua 中的字符组成，所有的用户使用相同的 salt 窃听了一些密文，想破解对应的密码，只破解不超过5位的密码。 窃听的过程中还不断地了解到一些极有可能成为密文的弱口令 维护两个操作： 120 x // 查询 x 所对应的密码，若为5位以内或是之前发现的弱口令密码则输出该密码。找不到则输出 No，多个密码对应则输出 duplicate1 // 新探知一个可能的弱口令，不同 1 指令插入的相同的弱口令需要被认为是不同的，即如果 1 插入两次 &quot;aaaaaaa&quot;，0 操作询问之后需要输出 duplicate 输入输出 输入： 第 $1$ 行：$n$ 第 $2$ 行：salt (length$\le 4$) 以下 $n$ 行：每行为一个操作 注意：为体现操作的在线性，对于每个操作”1”，每次增加的弱口令实际为之前发现的（不计算 duplicate）7 个密文的首字母。 输出： 若干行：对于每个0操作，若询问的密文x对应5位以内或是一个之前发现的弱口令密码，则输出，找不到则输出 No，多个密码对应则输出 duplicate 123456789101112131415161718192021222324252627282930313233343536373839404142434445input:22gh050 2477200410 23386694230 14934020390 41987698230 23882800790 26634221670 965116030 412351810 179798796610 42040416760 2477200410 23386694230 14934020390 41987698230 23882800790 26634221670 965116030 4123510 1797987966output:0112223333ttttthhhhhuuuuuNo0123thu123thu00112223333ttttthhhhhuuuuuNoduplicate 限制 $1\le n\le 2,000,000$ 3 sec 256 MB 提示 散列 思路实现]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>散列</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CST2018 3-2 Not Found]]></title>
+    <url>%2F2019%2F02%2F09%2FCST2018-3-2-Not-Found%2F</url>
+    <content type="text"><![CDATA[题目描述 给 01串 A，请输出一个最短的01串 B，使得 B 在 A 中从未出现过 多解时输出字典序最小的 输入输出 输入： 共 $1$ 行：01串 A，输入文件将以换行符结尾 输出： 共 $1$ 行：01串 B，建议输出文件以换行符结尾 1234input:10100011output:110 限制 $1\le len(A) \le 16,777,216$ 1 sec 20 MB 提示 即使提交一个只包含空的 main 函数的程序，也会占用一定空间，大约为 12 MB。 这题的编译流程做了特殊设置，提交 .c 文件也会占用跟 .cpp 相同的运行空间。 [如何将输入数据存下来？] [答案的长度不会太大，可以枚举，但是之后如何判断？] [如何减少判断答案所需要的空间？]]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[CST2018 3-1-2 Max]]></title>
+    <url>%2F2019%2F02%2F09%2FCST2018-3-1-2-Max%2F</url>
+    <content type="text"><![CDATA[问题描述 ${a_i}$ ，序列区间和： $$S(l,r)=\sum_{i=l}^ra_i,\ if\ l\gt r,S(l,r)=0$$ 问对于给定的一个区间 $a[l…r]$ 的最大的子区间和 $$P(l,r)=\max_{l\le u,v\le r}S(u,v)$$ 为多少？ 输入输出 输入： 第 $1$ 行：$n\ m$ 序列长度和操作次数 第 $2$ 行：$n$ 个整数表示 $a_i$ 以下 $m$ 行：每行三个整数 120 x value # x处的数改为 value1 l r # 查询 P(l,r) 的大小 输出： 每行输出对应最大子区间和的大小 12345678910input:4 476 10 -18 -168 0 4 -1371 1 30 4 511 3 3output:860 数据规模及限制 $1\le n\le 500,000$ $1\le m\le 500,000$ $-200\le value, ai\le 200$ 2 sec 256 MB 提示 线段树, 考虑线段树中的一条线段节点r，如果目标线段a被他包含，那么目标线段a对于线段树中的r节点来讲有三种可能，在左子树(左半线段)，右子树(右半线段),或者经过线段中点(左半线段的右侧+右半线段的左侧)]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>线段树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CST2018 3-1-1 Sum]]></title>
+    <url>%2F2019%2F02%2F09%2FCST2018-3-1-1-Sum%2F</url>
+    <content type="text"><![CDATA[问题描述 对于序列 ${a_i}$，区间和为 $$S(l,r)=\sum_{i=l}^ra_i$$ 询问之前还会有插入修改操作 输入输出 输入： 第 $1$ 行：$n\ m$ 序列长度和操作次数 第 $2$ 行：$n$ 个整数，表示 $a_i$ 以下 $m$ 行：每行三个整数，可能为 120 x value # 表示将x处的数改为value1 l r # 询问区间和 S(l,r) 输出： 若干行：对于每个操作1的询问，输出对应的区间和大小 12345678910input:4 476 10 -18 -168 0 4 -1371 1 30 4 511 3 3output:68-18 数据规模及限制 $1\le n\le 500,000$ $1\le m\le 500,000$ $-200\le value, ai\le 200$ 2 sec 256 MB 提示 线段树 思路实现]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>线段树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CST2018 2-8 MST]]></title>
+    <url>%2F2019%2F02%2F09%2FCST2018-2-8-MST%2F</url>
+    <content type="text"><![CDATA[题目描述 给一张 $n$ 结点的带权完全图，计算最小生成树 输入输出 输入： 第 $1$ 行：$n$ 以下 $n$ 行：每行 $n$ 个非负整数，$(i,j)$ 表示点 $i$ 和点 $j$ 之间的边权 有：$cost(i,j)=cost(j,i)$ 且 $cost(i,i)=0$ 输出： 一个整数，表示最小生成树的各边长之和 12345678input:40 4 9 214 0 8 179 8 0 1621 17 16 0output:28 数据范围及限制 $1\le n\le 500$ 边权为整数 $\in [0,1000]$ 1 sec 256 MB 提示 最小生成树 思路实现]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>最小生成树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CST2018 2-7 Virus]]></title>
+    <url>%2F2019%2F02%2F09%2FCST2018-2-7-Virus%2F</url>
+    <content type="text"><![CDATA[题目描述 一个 $n*m$ 的01矩阵，0表示有病毒 病毒会同时向多个方向扩散，若 $(x,y)$ 处有一个病毒，则 $(i,j)$ 处的点会在 $|x-i|+|y-j|$ 秒后被感染。 $(i,j)$ 处点被病毒感染所花的时间定义为第一次被某病毒感染所花的时间 只需统计所有非病毒点被病毒感染所花的时间之和即可 输入输出 输入： 第 $1$ 行：$n\ m$ 矩阵的长和宽 以下 $n$ 行：每行一个长为 $m$ 的字符串，保证只有01 保证每个字符串中一定有0 输出： 一个整数，表示所有非病毒点被病毒感染所花的时间之和 1234567input:3 4011001000001output:4 数据范围及限制 $1\le n,m\le 1000$ 1 sec 256 MB 提示 BFS 思路实现]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>BFS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CST2018 2-6 Temperature]]></title>
+    <url>%2F2019%2F02%2F09%2FCST2018-2-6-Temperature%2F</url>
+    <content type="text"><![CDATA[题目描述 提供气温数据查询服务 根据用户指定矩形区域内所有观察站的观测值计算出平均气温 请改进数据结构和算法，提高查询效率 观察站的坐标呈矩阵排列，气象台可以随时修改任意一个观测站的气温 用户可以指定某矩形区域来获得该区域内所有观察站的平均气温 接口说明 头文件 temperature.h 库文件 temperature_lib.cpp 请实现初始化函数和查询函数： 1void init(int n, int m, int** temp); 此为初始化函数的声明，可以在此进行初始化 其中 $n,m$ 表示观察站构成矩形的行数和列数，$temp$ 为数组的数组，其中 $temp[i][j]$ 表示第 $i$ 行第 $j$ 列观察站的初始气温。 1int query(int x1, int y1, int x2, int y2); 此为查询函数的声明。初始化完成后，交互库会调用该函数多次，每一次需要进行相应查询并返回结果 查询的四边分别与 $x$ 轴或 $y$ 轴平行，其中 $(x1,y1)$ 和 $(x2,y2)$ 为一对角线，在矩形边界上的观察站也要记录。 返回平均气温的数值，进行截断取整 1void change(int x, int y, int temp); 此为修改函数的声明，在初始化完成后，交互库会调用该函数若干次，需要将坐标为 $(x,y)$ 的观察站处的温度修改为 $temp$。 测试说明 首先从标准输入中读取数据 然后调用 $init$ 函数 接着对于每个不同的操作相应地调用 $query$ 和 $change$ 函数，并将 $query$ 函数的结果写入标准输出 本地测试：g++ temperature_lib.cpp your_code.cpp -O2 -o temperature.exe 样例程序 temperature_sample.cpp 实现了“每次查询返回一个随机数”的算法 输入输出 输入： 第 $1$ 行：$n\ m\ k$ 观察站函数和列数，操作总数 以下一行为 $n*m$ 个整数，分别表示坐标为 (1,1),(1,2),…,(1,m),(2,1),(2,2),…,(n,1),(n,2),…,(n,m) 的观察站的初始温度。 以下 $k$ 行：每行若干整数，表示一个操作 120 x y temp # 将(x,y)处气温改为temp1 x1 y1 x2 y2 # 求该矩形内所有观察站的平均气温（保证x1&lt;=x2,y1&lt;=y2） 输出： 若干行：每行对应一次求平均气温的查询结果（截断取整后） 123456789101112input:4 4 53 8 10 2 4 22 8 7 63 12 87 3 19 2 46 91 2 2 3 30 3 3 11 2 3 4 40 4 4 111 1 1 4 4output:321213 数据范围及限制 气温为整数 $\in [-1000,1000)$ $1\le n\le 1200$ $1\le m\le 1200$ $1\le k\le 2,000,000$ time：3 sec space：256 MB 提示 仿照 range tree 的思路， 第二个维度的树的每个节点保存区间和，以便快速计算区间和 因为这题坐标是连续的，因此不需要使用 range tree 的树结构，只需要用数组存储线段树即可 本题只有单点修改，如果你的常数优化不够好，可以自学数组状的树（又称“树状数组”）完成优化 思路实现]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>区间树</tag>
+        <tag>树状数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CST2018 2-5 ChromPoly]]></title>
+    <url>%2F2019%2F02%2F09%2FCST2018-2-5-ChromPoly%2F</url>
+    <content type="text"><![CDATA[题目描述 考察无向图 $G=(V,E)$，$G$ 的一个 $k-$染色（coloring）是从 $V$ 到 $[1,k]$ 的一个映射： $\pi:V\rightarrow {1,2,…,k}$ 且满足 $\forall v,u\in V,\pi(v)\not= \pi(u) if (v,u)\in E$ 即：将所有顶点归入不超过 $k$ 个等价类，且保证相邻顶点不属同类 若将图 $G$ 和 $k$ 视作变量，则可用函数 $CP(G,k)$ 表示图 $G$ 的 $k-$染色方案数。而对于任一图 $G$，该函数都是 $k$ 的多项式形式，称作色多项式（chromatic polynomial） 例子： 对于包含 $n$ 个顶点，不含任何边的图 $Sn$，有 $CP(Sn,k)=k^n$ 对于完全图 $Kn$，有 $CP(Kn,k)=0,if\ k\lt n$ $CP(Kn,k)=\frac{k!}{(k-n)!},if\ k\ge n$ 对于二部图（bipartition）$B(2,3)$，有（在这个语境里其实是完全二分图） $CP(B(2,3),1)=0$ $CP(B(2,3),2)=2$ $CP(B(2,3),3)=6(2*3)+6\times 8\div 2=30$ $CP(B(2,3),k)=k^5-6k^4+15k^3-17k^2+7k$ 对于 5 阶环 $C5$，有 $CP(C5,1)=P(2,C5)=0$ $CP(C5,3)=30$ $CP(C5,k)=k^5-5k^4+10k^3+4*k$ 请编写程序，求对于给定的图 $G$，计算并输出对应的色多项式 $CP(G,k)$ 输入输出 输入： 第 $1$ 行：$n\ m$ 顶点数和边数 以下每行：$(u,v)$表示图中的一条边，且保证满足 $0\le u,v\lt n$ 输出： $n+1$ 行：每一行表示该图色多项式各项的系数（依 $k$ 的次数由低向高排列） 12345678910111213input: # 为一个十字形图5 41 01 31 21 4output: 01-46-41 数据范围 $1\le n\lt 30$ $1\le m\lt 70$ 保证图中无自环 各项系数的值保证在带符号64位整数范围内 time：7 sec space：1024 MB 说明 $CP(G,k)=CP(G\backslash {e},k)-CP(G/{e},k)$ 其中 $\backslash$ 为减除（subtraction）操作，即为从图中将某一边抹去。 $/$ 为收缩（contraction）操作，即为收缩边 $e$ ，直到其顶点 $v$ 和 $u$ 粘连为同一个顶点 $w$；而与之关联的边除 $e$ 外依然保留。 更多：https://dsa.cs.tsinghua.edu.cn/~deng/ds/00240074@2004spring/handout/assignment/chromaticpolynomial/ 思路实现]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>图</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CST2018 2-4 Sort]]></title>
+    <url>%2F2019%2F02%2F09%2FCST2018-2-4-Sort%2F</url>
+    <content type="text"><![CDATA[问题描述 每次比较三个数，返回最小数和最大数 为测试这个比较器，需要实现一个排序算法，使用该比较器，将 $n$ 互不相同的整数从小到大排序 提供了一个交互库，其中实现了一个比较器函数，需要编写一个排序函数，调用比较器函数将序列排好序 需要在比较器使用次数限制之内，将这些整数正确地排序 接口说明 提供的交互库包括头文件sort.h和库文件sort_lib.cpp，头文件包含排序函数和比较器函数的生命，库文件中包含比较器函数和主函数的实现，需在程序中包含头文件 sort.h并实现排序函数 1void sort(int n, int limit, int *a); 为排序函数的声明，需要实现。$n​$ 为待排序的个数，limit 表示比较器函数的使用次数限制，a为一个长度为n整数数组，初始值为 $0\sim n-1​$。需要将排序的结果存入 a 数组中 1void compare(int a, int b, int c, int *max, int *min); 无法得到待排序的整数的值，而只能得到每个整数的编号。因此 a 数组中的值，以及 a,b,c 都应该是 $0\sim n-1$ 之间的数，表示某个整数的编号。 测试说明 交互库具体实现如下： 首先从标准输入中读取两个整数 $n,limit$，分别表示待排序的整数个数和比较器函数的使用次数限制。 然后以某种方式读入并生成待排序的 $n$ 个整数 接着调用 sort 函数 在你实现的 sort 函数中，可以调用 compare 函数来进行比较，如果传入的 a,b,c 不在 0~n-1 之间，或者调用次数超过 limit，会 WA sort 函数返回后，会检查 a 数组的内容是否正确排序 本地测试：g++ sort_lib.cpp your_code.cpp -O2 -o sort.exe来编译，然后运行 sort.exe 来测试 还提供了一个样例程序 sort_example.cpp实现了 Bogo 排序算法 输入输出 输入： 第 $1$ 行：$n\ limit$ 第 $2$ 行：$n$ 个整数，要求是 $0\sim n-1$ 的排列，表示待排序的序列 输出： 正确时：”Accepted” 错误时：一些错误信息 123456input:5 10003 2 4 0 1output:Acceptedcmp_cnt = 135 # stderr 的输出 提示 [有哪些常用的排序算法？这些算法的期望、最好、最坏比较次数分别是多少？] [给 n 个数排序的比较次数的理论下界是多少？如果一次能比较三个数，又是多少？] [哪些排序算法可以改进成一次比较三个数的？改进效果分别如何？] [提示：对已有的排序算法作更多的改进，以进一步减少比较次数]]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>排序</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CST2018 2-3-2 Mooney]]></title>
+    <url>%2F2019%2F02%2F09%2FCST2018-2-3-2-Mooney%2F</url>
+    <content type="text"><![CDATA[题目描述 同2-3-1 直接计算各自最佳路径所能达到的数值 输入输出 输入： 同上一题 输出： 第 $1$ 行：GG最少看多少次月亮 第 $2$ 行：MM最多捡多少次钱 123456789101112131415161718192021input:12 15mMmMmMmmMmMM0 10 21 32 34 33 55 45 65 86 78 117 115 99 1010 11output:35 数据规模 $1\le n\le 500,000$ $1\le m\le 1,200,000$ 提示 BFS 强连通分量 拓扑序动态规划 思路实现]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>BFS</tag>
+        <tag>强连通分量</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CST2018 2-3-1 Mooney(basic)]]></title>
+    <url>%2F2019%2F02%2F09%2FCST2018-2-3-1-Mooney-basic%2F</url>
+    <content type="text"><![CDATA[题目描述 GG和MM在每个交叉路口时都会选择看月亮或五毛钱 月亮一直有，但是五毛钱只在某些交叉路口出没 GG在每个交叉路口借光看方向时，他倾向于少看月亮 MM则希望尽可能多地捡钱，注意钱不能重复捡起 先给出地图，他们殊途同归，问最佳途径所能达到的数值 先问强连通分量的个数 输入输出 输入： 第 $1$ 行：$n\ m$ 有向图的点数和边数 第 $2$ 行：长度为 $n$ 的字符串，依次给出各点（即编号 $[0,n)$ 的路口）的路况：’M’表示此处只有月亮，’m’表示还有五毛钱 以下 $m$ 行：分别描述各边 $a\ b$ 表示从 $a$ 到 $b$ 有边（$a,b\in [0,n)$） GG和MM的起点都是 $0$，目的地都是 $n-1$ 保证起点和终点有通路相连 输出： 输出图中强连通分量的数量 1234567891011121314151617181920input:12 15mMmMmMmmMmMM0 10 21 32 34 33 55 45 65 86 78 117 115 99 1010 11output:10 数据规模 $1\le n\le 500,000$ $1\le m\le 1,200,000$ 提示 BFS 强连通分量 思路实现]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>BFS</tag>
+        <tag>强连通分量</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CST2018 2-2 Circuit]]></title>
+    <url>%2F2019%2F02%2F09%2FCST2018-2-2-Circuit%2F</url>
+    <content type="text"><![CDATA[题目描述 电路板可以插两个元件，每个元件64个引脚，每个引脚输出0或1，64位输出会按某种固定的顺序拼成表示信号强度的数。电路板由64个异或门组成，即有64个输出引脚，每一位是两个元件对应位的异或。 现在有n个元件，想知道对于每个元件，它和其他哪个元件组合产生的信号最强。特别地，只有间隔不超过k的元件才能组合（第一个和第四个的间隔为2） 输入输出 输入： 第 $1$ 行：$n\ k$ 以下 $n$ 行：每行1个整数 输出： 共 $n$ 行：每行一个整数，表示第 $i(0\le i\lt n)$个元件与第几个元件组合产生的信号最强。若有多个，输出最靠前的 12345678910111213input:5 1 1283582188973788096292233896473114708482814932303221807207546111027206413871086852320182272output:23443 限制 $2\le n\le 500,000$ $0\le k\le 500,000$ 提示 二叉编码树、链表 思路实现]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>二叉编码树</tag>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CST2018 2-1 Meteorites]]></title>
+    <url>%2F2019%2F02%2F09%2FCST2018-2-1-Meteorites%2F</url>
+    <content type="text"><![CDATA[题目描述 最初 $N$ 个陨石碎片，每个包含能量 $ai$ 每次可以选择合成两块陨石碎片 $i,j$ ，合成一个新的碎片 $k$，新的碎片能量为 $ak=ai*aj$。 每次合成新的碎片 $k$，可以获得等同于 $ak$ 的分数，总得分是每次得分的乘积 $ak1ak2ak3*…$ 经过 $n-1$ 次合并，最终合成一块碎片，问最少的得分是多少？ 输入输出 输入： 第 $1$ 行：$n$ 碎片的个数 第 $2$ 行：$n$ 个整数 $ai$ ，表示 $n$ 个陨石碎片的能量 输出： 最少得分 12345input:42 3 4 5output:14400 // 6 * 20 * 120 = 14400 数据范围及限制 $2\le n\le 2000$ $1\le ai\le 10^9$ 提示 哈夫曼树 CST2018 1-1 A+B problem 思路实现]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>霍夫曼树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CST2018 1-8 Brackets]]></title>
+    <url>%2F2019%2F02%2F09%2FCST2018-1-8-Brackets%2F</url>
+    <content type="text"><![CDATA[题目描述 给定一个长为n的只包含括号的括号序列，判断是否合法 输入输出 输入： 第 $1$ 行：$T$ 以下 $T$ 行：每行一个字符串 $S$ ，保证只由()[]{} 六种字符构成 输出： 共 $T$ 行：每行一个 $Yes$ 或 $No$ 1234567input:2((&#123;&#125;())[])&#123;(&#125;)output:YesNo 数据范围及限制 $1\le T\le 10$ $1\le |S|\le 100,000$ 提示 栈 思路实现]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>栈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CST2018 1-7 FIFO]]></title>
+    <url>%2F2019%2F02%2F09%2FCST2018-1-7-FIFO%2F</url>
+    <content type="text"><![CDATA[题目描述 简化版的FIFO调度算法 访问某个地址的值时，先在缓冲器中寻找该地址及其对应值 若在缓冲器中找到该地址，则将其对应值返回，操作结束 若未找到，则从内存中读取该地址对应值，并试图将该地址及其对应值存到缓冲器中 若缓冲器未满，则存，操作结束 若满，删除最先进入缓冲器的元素，添加当前访问地址及其值 刚开始缓冲器为空，现有一系列访存请求，问有几次需要去内存中访存 输入输出 输入： 第 $1$ 行：$n\ m$ 缓冲器的大小和访存次数 以下一行：$m$ 个整数，表示每次访问的地址，每个地址是1-100的整数 输出： 一个整数，表示答案 12345input:3 71 2 1 5 4 4 1output:5 数据范围及限制 $1\le n\le 100$ $1\le m\le 1000$ $1\le 内存地址\le 100$ 时间：1 sec 空间：256 MB 提示 队列 思考实现]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>队列</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CST2018 1-6 9的完美文本编辑器]]></title>
+    <url>%2F2019%2F02%2F09%2FCST2018-1-6-9%E7%9A%84%E5%AE%8C%E7%BE%8E%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8%2F</url>
+    <content type="text"><![CDATA[题目描述 一个完美的文本编辑器，拥有两个光标，可以在两个地方插入和删除文本。 功能列表如下： 功能名称 命令格式 说明 &lt; (move left) &lt; w w为一个字符，不是’L’就是’R’，代表左光标还是右光标。将选定光标向左移动，如果是最左端则不移动。执行成功输出”T”，否则输出”F”（已在最左侧） > (move right) > w 类似上 I (insert) I w c c是一个可见字符（$33\le ascii码\le 126$），表示在该光标左插入该字符，该命令始终输出”F” D (delete) D w 表示删除该光标右的一个字符，成功输出”T”，否则输出”F”（光标右侧没有字符） R (reverse) R 翻转左光标和右光标之间的字符，只有左光标在右光标的左侧时才能执行（两光标重合时也不能执行）成功时输出 “T”，否则 “F” S (show) S 显示当前处理的文本，只输出文本，不输出”T”或”F” 开始时文本编辑器中有一定内容，左光标在第一个字符左，右光标在最后一个字符右。 注：插入和删除操作中，没有被操作的光标与文本的相对左右位置保持不变。特别地，若两个光标重叠，操作后也仍然重叠。 输入输出 输入： 第 $1$ 行：初始文本编辑器的内容 第 $2$ 行：$N$ 操作次数 以下 $N$ 行：每行一个命令 输出： 对于每个命令执行并输出 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788input:942&gt; LI L tI R &apos;&lt; R&lt; RI R -I L nI L sI L iI R bI L aI R -I L kI L a&gt; LR&gt; R&gt; R&gt; R&gt; R&gt; R&lt; L&lt; L&lt; LR&lt; L&lt; L&lt; L&lt; L&lt; L&lt; L&lt; LR&gt; L&gt; L&lt; R&lt; R&lt; RD LD LD LSoutput:TTTTTTTTTTTTTTFFTTTTTTTTFTTTTTTTTTTTTTTTT9-is-baka 数据范围及限制 初始字符，插入字符是可见字符（$33\le ascii 字符\le 126$） $1\le 初始文本长度\le 3,200,000$ $1\le N\le 4,000,000​$ 输出文件大小$\le 20MB$ 提示 列表。 使用数组集中存放链表节点可以提高效率。 思路实现]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>列表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CST2018 1-5 Zuma]]></title>
+    <url>%2F2019%2F02%2F09%2FCST2018-1-5-Zuma%2F</url>
+    <content type="text"><![CDATA[题目描述 一条轨道上初始有 $n$ 个彩色珠子，其中任意三个相邻的珠子不会完全同色。 可以发射珠子到轨道上，一旦有三个或更多同色的珠子相邻，就会立即消失。可发生连锁反应 请计算一系列操作之后的珠子序列 输入输出 输入： 第 $1$ 行：由 ‘A’-‘Z’ 组成的字符串，表示初始珠子序列 第 $2$ 行：$m$ 表示共有 $m$ 次操作 以下 $m$ 行：每行代表一次操作，每次操作为 $k\ \Sigma$ ，其中 $k\in[0,b]$ 表示新珠子嵌入之后在轨道上的位序，$\Sigma$ 表示新珠子的颜色 输出： 共 $1$ 行：给出所有操作之后轨道上的珠子序列 若没有珠子，则输出空行（一个换行符） 12345678910input:ACCBA51 B0 A2 B4 C0 Aoutput:A 数据范围及限制 $0\le n\le 500,000$ $0\le m\le 500,000$ 输入保证位置合法 时间：2 sec 空间：256 MB 提示 本题字母、数字混合输入，且初始序列可能为空，请使用足够鲁棒的读入方式。 [ 我们将介绍一种简单高效的数据结构，分块数组。他是一个结合了链表和列表的高效的数据结构。 ] [ 列表可以 $O(1)$ 完成寻址，但是需要 $O(N)$ 完成删除和插入，链表可以 $O(1)$ 完成删除和插入，但是需要 $O(N)$ 完成寻址。我们将他们结合起来选择 $\sqrt{n}$ 为一个中间值。 ] [ 将 $N​$ 长度的列表以 $O(\sqrt{n})​$ 长度断成 $O(\sqrt{n})​$ 块，每块用链表连起来，这样链表的长度为 $O(\sqrt{n})​$ 同时列表的长度为 $O(\sqrt{n})​$，我们可以在 $O(\sqrt{n})​$ 的时间范围内完成寻址插入和删除。 ] [ 另一个需要注意的是在移动数组元素时，使用 memove 能够大大提升程序的性能 ] 思路实现]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>分块数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CST2018 1-4 Stock]]></title>
+    <url>%2F2019%2F02%2F09%2FCST2018-1-4-Stock%2F</url>
+    <content type="text"><![CDATA[题目描述 从发行到退出之间的时段称为股票的活跃期 若某股票在第123天发行并于130天退出，则认为活跃期为123-129共7天，记作 $[123,130)$ 假定股票在活跃期内价格不变 在该王国中，禁止不同股票的活跃期相互包含，也就是说，每天发行和退市的股票累积不超过一支 M先生是公认的股神，他任何时候的投资总额都保持固定，如此可保证风险有限。每天都将所有的投资集中用于购入当日价格最低的一支股票（为此可能需要先卖出原持有股票） M先生希望知道自己一段时期内的日均持股量 输入输出 输入： 第 $1$ 行：$N$ 以下 $2N$ 行：按日期升序描述股票历史 12D X // 在上一事件之后的第D天有一支股票发行，且按M先生的投资额可购入X股D // 在上一事件之后的第D天有一支股票退市 其中，除首个事件的D值可能为0，其余D值均为正整数。X均为非负整数 输入的时间序列合法，即保证活跃股票数始终非负 输出： 输出自股市开市至最后一支股票退出期间，M先生的日均持股量乘以天数 12345678910111213141516input:62 1002 20051 15012 1002 3002 2002312output:5000 // 5000 = 200.00股 * 25天 数据范围及限制 $1\le N\le 1,000,000$ $0\le X\lt 2^{31}$ 股市的营业期不超过 $2^{31}-1$ 天 时间：1 sec 空间：256 MB 提示 在队列结构的基础上，扩充操作接口 思路实现]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>队列</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CST2018 1-3 filename]]></title>
+    <url>%2F2019%2F02%2F09%2FCST2018-1-3-filename%2F</url>
+    <content type="text"><![CDATA[问题描述 规范文件名 问最少需要修改多少次才能使字符串A变成字符串B？ 对于修改代价超过K的文件名选择放弃 定义一个修改代价 在第 $i$ 个位置插入一个字符 $K$ $…S_{i-1}S_iS_{i+1}…\Rightarrow S_{i-1}KS_iS_{i+1}…$ 删除第 $i$ 个位置的字符 $…S_{i-1}S_iS_{i+1}…\Rightarrow S_{i-1}S_{i+1}…$ 输入输出 输入： 第 $1$ 行：$N\ M\ K$ # 表示原始串A的长度，目标串B的长度和限制的最大修改次数 以下 $2$ 行：分别为原始串和目标串 输出： 如最小修改次数小于等于K，则输出最小修改次数，否则输出-1 样例： 123456intput:10 11 5987300761387300676513output:3 数据范围及限制 $n,m\le 501000$ $k\le 100$ 时间：1 sec 内存：256 MB 提示 动态规划 思路 使用动态规划 实现]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>Dynamic Programming</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CST2018 1-2 Graphics]]></title>
+    <url>%2F2019%2F02%2F09%2FCST2018-1-2-Graphics%2F</url>
+    <content type="text"><![CDATA[题目描述 在 $x$ 轴正半轴和 $y$ 轴正半轴分别挑选 $n$ 个不同点 将 $x$ 轴和 $y$ 轴的点一一连接，形成 $n$ 条线段，并保证任意两条线段都不相交。 给出 $m$ 个询问，对于每个询问将会给定一个点 $P(Px,Py)$ 请回答线段 $OP$ 与 $n$ 条线段会产生多少个交点？ 输入输出 输入： 第 $1$ 行：$n$ # 表示线段的数量 第 $2$ 行：$n$ 个正整数，表示在 $x$ 轴选取的点的横坐标 第 $3$ 行：$n$ 个正整数，表示在 $y$ 轴选取的点的纵坐标 第 $4$ 行：$m$ 表示询问数量 以后 $m$ 行：每行两个整数 $Px,Py$ ，表示询问中给定点横纵坐标 输出： 共 $m$ 行：每行一个非负整数，表示答案 输入输出样例12345678910input:34 5 33 5 421 13 3output:03 样例说明 $3$ 条线段分别为：(3,0)-(0,3),(4,0)-(0,4),(5,0)-(0,5) (0,0)-(1,1)无交点，答案为0 (0,0)-(3,3)有三个交点，答案为3 数据范围及限制 $1\le n\le 200,000$ $1\le m\le 200,000$ $1\le 横纵坐标\lt 2^{31}$ 时间限制：1 sec 内存限制：256 MB 提示 二分查找、ToLeft测试。 对于每条线段，可以用向量叉积的 ToLeft 测试来判断其在线段的左边还是右边。通过二分查找，可以高效的查找点在哪个区域内，从而确定交点的数目。 思路 按提示来 实现]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>计算几何</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CST2018 1-1 A+B problem]]></title>
+    <url>%2F2019%2F02%2F09%2FCST2018-1-1-A-B-problem%2F</url>
+    <content type="text"><![CDATA[题目描述 实际上是 $A*B$ 问题，和PA2-1有关。 问题是模拟 Python 中自带的长整型 可以计算几百位的整数乘法 输入输出 输入： 第 $1$ 行：​$n$ # 要计算 ​$n$ 组乘法 以下 $n$ 行：每行包含两个非负整数 $a$ $b$ 输出： 共 $n$ 行：每行输出乘积 输入输出样例123456789input:31 12 2123123 789789output:1497241191047 此样例是第一个测试点 数据范围及限制 $1\le n\le 500​$ $0\le a\lt 10^{5000}​$ $0\le b\lt10^{5000}​$ 时间限制：1 sec 内存限制：256 MB 提示 使用高精度算法 思路 实现一个高精度乘法即可 实现1234567891011121314151617181920212223242526272829303132333435363738#include&lt;iostream&gt;#include&lt;cstring&gt;#define MAXLEN 5000+5int a[MAXLEN], b[MAXLEN], sum[MAXLEN*2];char sa[MAXLEN], sb[MAXLEN];int hpMulti(int la, int lb)&#123; int i,j,lsum=0; memset(sum, 0, sizeof(sum)); for(i=1; i&lt;=la; i++) for(j=1, lsum=i-1; j&lt;=lb; j++) sum[++lsum] += b[j]*a[i]; for(i=1; i&lt;=lsum; i++) if(sum[i]&gt;=10)&#123; if(sum[lsum]&gt;=10) lsum++; sum[i+1] += sum[i] / 10; sum[i] %= 10; &#125; return lsum;&#125;int main()&#123; int n; scanf("%d", &amp;n); while(n--)&#123; int la=0, lb=0, lsum=0; scanf("%s %s", sa, sb); la = strlen(sa); lb = strlen(sb); for(i=1, j=la-1; i&lt;=la; i++, j--) a[i] = sa[j] - '0' for(i=1, j=lb-1; i&lt;=lb; i++, j--) b[i] = sb[j] - '0' lsum = hpMulti(la, lb); for(i=lsum; i&gt;0; i--) printf("%d", sum[i]); printf("\n"); &#125; return 0;&#125; 附录：提供的对拍工具12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849# check.py# 集合了控制脚本和数据生成器，配置完里面的参数使用 python3 check.py 运行。当出现A，B不一致的数据时，程序会自动终止import osimport randomdef checkAns(outputFile1, outputFile2): """ 该函数用于判断两个输入文件是否相同，这里采用的方式是读入两个文件的所有行，然后拼起来判断是否相同。可以根据需求修改 outputFile1,outputFile2 分别为判断的两个文件的文件名 函数返回布尔值 """ with open(outputFile1, "r") as f: output1 = f.readlines() with open(outputFile2, "r") as f: output2 = f.readlines() return "".join(output1) == "".join(output2)def dataMaker(inputFile, n, valuelength): """ 这个函数根据自己的需求一定要修改，他负责根据读入的参数来生成一个测试文件inputFile。 在A+B问题里面,n用来控制生成的数组组数，valuelength用来控制用于乘法的长度。 """ with open(inputFile, "w") as f: f.write(str(n) + "\n") for datanum in range(n): S1 = str(random.randint(1, 9)) S2 = str(random.randint(1, 9)) for itr in range(valuelength - 1): S1 += str(random.randint(0, 9)) S2 += str(random.randint(0, 9)) f.write(S1 + " " + S2 + "\n")if __name__ == '__main__': while True: # 每组数据10个，长度为10 dataMaker("input.txt", 10, 10) # 运行a读入input.txt输出到output1.txt,a.cpp是c++代码需要编译之后得到可执行程序a os.system("./a &lt; input.txt &gt;output1.txt") # 运行b读入input.txt输出到output1.txt,b.py是python代码通过python指令运行 os.system("python3 b.py &lt; input.txt &gt;output2.txt") if checkAns("output1.txt", "output2.txt") is False: print("Wrong") break print("right") 123456789101112131415// a.cpp 一个蛮力的C++代码，仅仅能够计算 long long 内的乘法，需要编译成可执行文件a之后才能够放入脚本运行#include &lt;iostream&gt;using namespace std;int main() &#123; int N; cin &gt;&gt; N; for (int i = 0; i &lt; N; i ++) &#123; long long a, b; cin &gt;&gt; a &gt;&gt; b; cout &lt;&lt; a * b &lt;&lt; endl; &#125; return 0;&#125; 1234567# b.py 一个Python代码，实现了高效的大数乘法n = int(input())for itr in range(n): a, b = input().split(" ") a = int(a) b = int(b) print(a * b)]]></content>
+      <categories>
+        <category>THUOJ</category>
+      </categories>
+      <tags>
+        <tag>高精度</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[人工智能原理 Part V. Learning Ch11/12.Paradigms/Models in Machine Learning]]></title>
+    <url>%2F2019%2F02%2F07%2F%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%8E%9F%E7%90%86-Part-V-Learning-Ch11-12-Paradigms-Models-in-Machine-Learning%2F</url>
+    <content type="text"><![CDATA[Ch11 Paradigms11.1 Supervised Learning Paradigm 接受一组标注的样本作为训练数据，然后对未知点进行推测 6个步骤： 1）确定训练类型 2）收集训练集 3）确定特征提取方法 4）设计该任务的算法 5）训练该算法 6）评估精确性 相关任务： 分类，回归，排名 11.2 Unsupervised Learning Paradigm 接受未标注数据，然后对未知点做出预测 目标是发现数据中共性的东西 相关任务： 聚类/密度估计/降维 11.3 Reinforcement Learning Paradigm 学习器是一个决策制定智能体，在环境下采取行动并获得这些动作的回报 经过一系列试错运行之后，可以学到最优策略 目标是使回报最大化 不提供输入和输出对，专注于在线的性能优化 类型 1）基于模型 首先以马尔可夫决策过程来行动，并学习 T 和 R 然后用学习的 T 和 R 进行数值迭代或策略迭代 2）无模型 学习策略没有任何模型 避开学习 T 和 R 的过程，采用直接评估策略 基于预测的时间差分（temporal difference）法 1）基于模型的强化学习 思想： 通过实践经验学习模型。若学到的模型正确，则用于数值求解 2）无模型强化学习 Actor-Critic methods 动作者·评判者方法 策略迭代（On-policy）的时间差分版 一种明确表示独立于价值函数的策略的结构 策略（动作者）用于选择动作 价值函数（评判者）用于评估动作者所完成的动作 TD error: $\delta_t=r_{t+1}+\gamma V(S_{t+1})-V(S_t)$ Preference: $p(s_t,a_t)\leftarrow p(s_t,a_t)+\beta\delta_t$ Q-learning 价值迭代（Off-policy）的时间差分版 基于回报值和 Q-value 函数，递增估计动作的 Q 值 更新规则是一种时间差分学习的变体，采用 Q 值与内置的下个状态 Q 值得最大运算符： $Q(s_t,a_t)=\sum_aT(s_t,a_t,s_{t+1})[R(s_t,a_t,s_{t+1})+\gamma\max_{a_{t+1}}Q(s_{t+1},a_{t+1})]$ 学习到基于样本的，东顾总-值函数 Q 新算法 Deep Q-Network Deterministic Policy Gradients (DPG) Asynchronous Advantage Actor-Critic (A3C) UNsupervised REinforcement and Auxiliary Learning Neural Episodic Control (NEC) 神经情景控制 应用 机器人 手臂 导航 游戏 11.4 Other Learning Paradigms Ensemble learning 集成学习 多个弱学习器组成一个强学习器 Learning to learn 学会学习 基于先前的经验学习归纳偏差 Transfer learning 迁移学习 将已有的知识用于不同但相关的问题 Adversarial learning 对抗式学习 以一种对抗性方式（即零和博弈）来生成模仿某种分布的数据 Collaborative learning 协同式学习 以某种协同式（如非零和博弈，双赢）来得到所期待的输出结果 Ch12 Models 可以处理完成一个学习任务的方法 属于算法层面而不是数据层面的模型 机器学习的效果在很大程度上取决于解决该学习任务时所选用的方法 Models Brief Statements Sub-models Typical Algorithm Probabilistic 采用概率模式来表示随机变量之间的条件相关性 贝叶斯/生成/统计 贝叶斯网络/概率规划/线性回归 Geometric 采用线，面，距离或流形等几何图形模型来构建学习算法 线/面/距离/流形 线性回归/SVM/k-NN/Isomap Logical 采用逻辑模型来构建学习算法 逻辑/规则 归纳逻辑编程/相关规则 Networked 采用网络模式来构建机器学习算法 浅层/深层 感知机/CNN 12.1 Probabilistic Models 概率论研究不确定性问题 概率模型是采用概率论来表示所有不确定的形式 贝叶斯规则允许我们推断未知量，适配我们的模型，做出预测并从数据中学习 典型方法 朴素贝叶斯和贝叶斯网络 概率规划 高斯过程 隐马尔可夫模型 Often the goal of machine learning is to determine the probability of an event, e.g. $P(a\ person\ is\ at\ risk\ for\ a\ disease)$ 两个主要学派 频率学派 贝叶斯学派 给定一组特定数据，概率对事件的不确定性进行量化，旨在最接近事实真值 Bayes Rule 告诉我们如何从数据推断假设 学习和预测可以看作是推理的形式 推断未知的量 =&gt; 适配我们的模型 =&gt; 做出预测 =&gt; 从数据中学习 $$P(hypothesis|data)=\frac{P(data|hypothesis)P(hypothesis)}{P(data)}$$ Bayesian ML 任何事物都遵循以下两规则 求和规则：$P(x)=\sum_yP(x,y)$ 乘积规则：$P(x,y)=P(x)P(y|x)$ $P(\theta|\lambda,m)$: posterior probability of given data $\lambda$ 后验概率 $P(\lambda|\theta,m)$: likelihood of parameters $\theta$ in model m $P(\theta|m)$: prior probability of $\theta$ 先验 $P(\lambda|m)$: evidence $$P(\theta|\lambda,m)=\frac{P(\lambda|\theta,m)P(\theta|m)}{P(\lambda|m)}$$ $$posterior=\frac{likelihood\times prior}{evidence}$$ 参数方法/非参数方法 参数方法 设有限参数集 $\theta$ ，给定该参数，则特征预测 $x$ 独立于观测数据 $D$，即 $P(x|\theta,\lambda)=P(x|\theta)$ 因此，捕捉任何事物在于要知晓这些数据 故即使数据量无限，模型复杂度也是有界的 故参数方法不是很灵活 非参数方法 设数据分布不能用这样一个有限参数集来定义，但通常能够由假设的无限维度 $\theta$ 来定义。通常我们把 $\theta$ 看作是一个函数 $\theta$ 可以捕捉数据 $D$ 的信息量可以随着数据量的增长而增长 故而更加灵活 Parametric Non-parametric Brief Statements 参数个数固定 参数个数随训练数据的量而增长 Typical Algorithm SVM k-NN Advantage 通常易于使用 更加灵活 Disadvantage 对数据分布的性质做出严格的假设 时常在计算上难以应付大的数据集 12.2 Geometric Models 直接在实例空间构建，空间可以被认为是几何的概念，如： 欧氏几何：线，面，欧式距离 黎曼几何：流形，黎曼距离 二维/三维的模型易于可视化 线和面 使用线或平面这样的几何模型来构建一些机器学习算法 流形 一种拓扑空间，其每个点附近存在近似的欧几里得空间 更精确地说，一个 $n$ 微流形的每个点都是一个临近点，它与维度为 $n$ 的欧几里得空间同胚。 高维输入数据中可以发现其固有的低维特性 低维流形假设 高维输入数据依附于一个低维流形 典型的流形学习算法 Isomap (Isometric mapping 等距映射) LLE (Locally Linear Embeddings 局部线性嵌入) LE (Laplacian Eigenmaps 拉普拉斯特征映射) LTSA (Local Tangent Space Alignment 局部切空间对齐) Inductive Manifold Learning 归纳流形学习 Isomap (Isometric mapping) 等距映射 保留数据之间的测地线距离而不是欧几里得距离 算法流程 确定每个点的相邻点 构建一个邻接图 计算两点之间的最短距离 计算低维嵌入，采用多元尺度分析（MDS）方法 LLE (Locally Linear Embedding) 局部线性嵌入 通过在小邻域中找到最佳线性重构，将数据点嵌入在低维空间中 计算每个点的重建权重，然后通过求解特征值问题对嵌入成本进行最小化 LE (Laplacian Eigenmaps) 拉普拉斯特征映射 Le 重申在非线性映射问题作为一种图的顶点嵌入，并且采用图拉普拉斯来生成一个平滑的映射。 典型的流形学习应用 图像处理 基因表达图谱 手写体识别 人脸识别 12.3 Logical Models 易于解释的逻辑表达式，易于转换成人类能够理解的规则 典型的逻辑模型 一阶逻辑 关联规则 决策树 关联规则 是一种用于在大型数据库中变量之间发现有趣关系的方法 采用差异趣味性度量方式，旨在识别数据库中发现的强规则 可用于发现超市产品之间的规律，称之为购物篮分析 ${onions,potatoes}\Rightarrow {burger}$ Def. $I={i_1,i_2,…,i_n}$: a set of n attributes called items $T={t_1,t_2,…,t_m}$: a set of transactions called transactions database. Each $t_i$ is a subset of the items in $I$, i.e., $t_i\sube I$ $X\Rightarrow Y$: an association rule, where $X,Y\sube I$, and $X\cap Y=\varnothing$ 决策树 使用决策树作为预测模型，将项的观察结果映射到关于项的目标值 目标变量可以取一组有限值得树模型称为分类树；其中叶节点表示类标签，分支表示通往这些类标签的特征连接。 12.4 Networked Models 人工神经网络 (ANN) 是人脑的一种人工表征，试图模拟人类的学习过程 通过互联的“神经元”构建一个系统，神经元之间相互发送消息 神经元之间的连接具有数值权重，可以通过经验调整，使 ANN 适应输入并且能够学习。 前馈神经网络 信息从输入节点仅仅以一个方向即前进方向穿过隐藏层并抵达输出结点 循环神经网络 连接形成有向循环 建立网络的内部状态，使之展现动态的时间特性 DNN 使用许多层非线性处理单元，用于特征提取和转换 能够学习数据的多层特征或表征。高层特征来自于底层特征 成为更广泛的机器学习领域的一部分：学习数据表征 学习多层级表征，对应于不同的抽象层级；这种层级形成了一种概念的层次结构 代表性的DNN Deep belief networks (DBN) 深度信念网络 Convolutional neural networks (CNN) 卷积神经网络 Deep Boltzmann machines (DBM) 深度波兹曼机 Recurrent neural networks (RNN) 循环网络 Long short-term memory (LSTM) 长短期记忆 Auto-Encoders 自动编码器 Generative Adversarial Network (GAN) 生成对抗网络 CNN 前馈式ANN，使用至少一个卷积层来代替一般的矩阵乘法 四个关键思想 local connections (convolution) 局部连接（卷积） shared weights 共享权值 pooling (sampling) 池化（采样） many layers conv layer 包含一组学习滤波器，每个滤波器对输入的宽和高进行卷积，计算滤波器和输入之间的点积，生成一个该滤波器的二维活动图 pooling layer 是一种非线性下采样，将输入图像分割成一组不重叠的矩形，对每个这样的子区域，再产出其最大值。 GAN 2014 Ian Goodfellow Adversarial Network, inspired by Adversarial game Generator maps from a latent space to a particular data distribution of interest Discriminator discriminate between real samples and samples produced by generator]]></content>
+      <tags>
+        <tag>Artificial Intelligence</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[人工智能原理 Part V. Learning Ch10.Tasks in Machine Learning]]></title>
+    <url>%2F2019%2F02%2F07%2F%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%8E%9F%E7%90%86-Part-V-Learning-Ch10-Tasks-in-Machine-Learning%2F</url>
+    <content type="text"><![CDATA[Ch10 Tasks in Machine Learning10.1 Classification 是基于包含已知类别成员观测值的训练数据集，来辨识新的观测值属于哪一组类别的任务 10.1.1 How Classification Works Classifier 一种实现分类，尤其是构成一种具体实现的算法，被称为一个分类器 有时还指的是由分类算法所实现的数学函数，它将输入数据映射为一个类别 A Formal Description of Classification Let $\mathbb{R^n}(n\ge1)$ denote a set of n-dimensional real-valued vectors, input space $\mathcal{X}$ is a subset of $\mathbb{R^n}$ , output space $\mathcal{Y}$ is a set of categories, $\mathcal{D}$ is an unknown distribution over $\mathcal{X}\times \mathcal{Y}$, then: Let target labeling function: $f:\mathcal{X}\rightarrow \mathcal{Y}$ Training set (Labeled training sample set): $$\mathcal{S}={(x^{(i)},y^{(j)})|(x,y)\in \mathcal{X}\times \mathcal{Y},i\in [1,m], j\in [1,n]}$$ Classification algorithm Let a hypothesis set $\mathcal{H}$ are the mapping $\mathcal{X}$ to $\mathcal{Y}$, to determine a hypothesis (classifier function): $h:\mathcal{X}\rightarrow\mathcal{Y}\ and\ h\in\mathcal{H}\ with\ small\ generalization\ error:\ R(h)=Pr_x[h(x)\ne f(x)]$ Classification: Given a testing dataset of unknown categories: $\mathcal{X}={x^{(i)}|x\in\mathcal{X},i\in[1,m]}$ Using the classifier function $h(\mathcal{X})=\mathcal{Y}$ determined at above to predicate classifying results: $\mathcal{y}=h(\mathcal{X})={y^{(j)}|y\in\mathcal{Y},j\in[1,n],h(x)=y}$ where $\mathcal{Y}$ is the set of known categories 10.1.2 Linear and NonlinearLinear Classification 是通过线性分类器来进行分类 是一个具有线性决策边界的线性判别函数 $H={\mathbb{x}\xrightarrow\ y(\mathbb{x})=\mathbb{w}\cdot \mathbb{x}+b|\mathbb{w}\in \mathbb{R^n},b\in \mathbb{R}}$ Non-linear Classification 是通过一个非线性分类器来进行分类 若干非线性决定边界，并且可能是非连续决定边界 如在SVM中的非线性分类器是一个非线性核函数 10.1.3 Dimensions and Classes Dimensions 维度 若问题空间的维度为 $n$，则其线性分类器的维度为 $n-1$ 的超平面 Classes 类别 Two classes: k=2 Multiple classes: k&gt;2 Case Study: Softmax Classifier It is a multiclass classifier, implemented by a softmax function Softmax function maps a K-dimensional vector $\mathbb{x}$ of arbitrary real values to a K-dimensional vector $\sigma(\mathbb{x})$ of real values (range 0 to 1, add up to 1). $\sigma(\mathbb{x})_j=\frac{e^{x_j}}{\sum_{k-1}^Ke^{x_k}}\ j=1,…,K$ In probability theory, the output of the softmax function can be represented as a categorical distribution, i.e., a probability distribution over K different outcomes. $P(y=j\ |\mathbb{x})=\frac{e^{\mathbb{x}^T\mathbb{w}j}}{\sum{k-1}^Ke^{\mathbb{x}^T\mathbb{w}_k}}$ 已用于多种多元分类方法 multinomial logistic regression 多项式逻辑回归 multiclass linear discriminant analysis 多元线性判别分析 naive Bayes classifiers 朴素贝叶斯分类器 ANN RL 10.1.4 Applications and Algorithms 分类的典型应用 CV: Face, handwriting, action reg., Medical img analysis. Video tracking. Pattern reg. Biometric ident. Statistical NLP Document classification Internet search engines Credit scoring 分类的典型算法 AdaBoost Decision tree ANN Bayesian networks Hidden Markov models K-NN Kernel method Linear discriminant analysis Naive Bayes classifier Softmax SVM 10.2 Regression 回归分析是估计变量间关系的统计过程，它包含对多变量进行建模和分析的许多技术，焦点是某个自变量与一个或多个因变量之间的关系 要解决输出是真实连续值得问题 预测每个项的真实值 回归 vs. 分类 相似点：都需要训练过程 不同点：回归连续，分类离散 10.2.1 How Regression Works Let $\mathbb{R}^n(n\ge1)$ denote a set of n-dimensional real-valued vectors, $\mathbb{R}+$ is a set of non-negative real numbers, input space $\mathcal{X}$ is a subset of $\mathbb{R}^n$, output space $\mathcal{Y}$ is a set of real numbers $\mathbb{R}+$, $D$ is an unknown distribution over $\mathcal{X}\times \mathcal{Y}$ , then Let target labeling function: $f:\mathcal{X}\rightarrow \mathcal{Y}$ Training set(Labeled training sample set): $\mathcal{S}={(x^{(i)},y^{(i)})|(x,y)\in \mathcal{X}\times\mathcal{Y},i\in[1,m]}$ Regression algorithm: Given hypothesis set $H$, to determine a hypothesis (regression function): $h:\mathcal{X}\rightarrow \mathcal{Y}\ and\ h\in H$ with small generalization error $R(h)$: $R(h)=E_x[L(h(x),f(x))]$ Regression Given a testing dataset of unknown output: $\mathcal{X}={x^{(i)}|x\in\mathcal{X},i\in[1,m]}$ Using the regressive hypothesis $h(\mathcal{X})=\mathcal{Y}$ determined at above to predicate regressive results: $\mathcal{R}=h(\mathcal{X})={y^{(i)}|y\in \mathcal{Y},i\in [1,n],h(x)=y}$ Note, in which: $\mathcal{Y}$ is a set of real continues numbers 10.2.2 Linear and Nonlinear Linear Regression linear combination of the model parameters Nonlinear Regression nonlinear combination of the parameters 10.2.3 Applications and Algorithms 典型应用 Trend esti. Epidemiology 传染病学 Fin. Econo. Env. Sci. 典型算法 Bayesian linear regression Percentage regression Kernel ridge regression Support-vector regression Quantile regression 分位数回归 Regression Trees Cascade Correlation Group Method Data Handling(GMDH) 分组方法数据处理 Multivariate Adaptive Regression Splines(MARS) 多元自适应回归样条 Multilinear Interpolation 多线性插值 10.3 Clustering10.3.1 How Clustering Works 将数据对象进行分组 聚类最大的不同点在于他是一种无监督学习，没有训练数据 基于距离，密度等发现聚类 A Formal Description of Clustering Let $\mathbb{R}^n(n\ge1)$ denote a set of n-dimensional real-valued vectors, input space $\mathcal{X}$ is a subset of $\mathbb{R}^n$, output space $\mathcal{Y}$ is a set of unknown clusters, $D$ is an unknown distribution over $\mathcal{X}\times \mathcal{Y}$, then: Let a clustering function: $h:\mathcal{X}\rightarrow\mathcal{Y}\ and\ h\in H$ Clustering: Given a testing set of unknown clusters: $\mathcal{X}={x^{(i)}|x\in \mathcal{Y},i\in [1,m]}$ Using the clustering function determined at above to analyze the clustering results: $\mathcal{Y}=h(\mathcal{X})={y\in \mathcal{Y},i\in [1,n],h(x)=y}$ 10.3.2 Major Approaches of Clustering 1) Connectivity-based clustering 连接性 2) Centroid-based clustering 中心点 3) Distribution-based clustering 分布 4) Density-based clustering 密度 10.3.3 Applications and Algorithms10.4 Ranking 依据某种准则整理数据项 10.5 Dimensionality Reduction 将输入映射到低维空间 降维的原因： 在高维空间对数据进行分析时会发生维度灾难 数据稀疏或无关 二维或三维数据更容易表示 线性降维/非线性降维 方法： Principal Component Analysis (PCA) 主成分分析 Linear Discriminate Analysis (LDA) 线性判别分析 Multilinear subspace learning 多线性子空间学习 Multilinear PCA (MPCA) 多线性主成分分析 Multilinear Linear Discriminant Analysis (MLDA) 多线性线性判别分析 PCA 举例 是一种统计过程 采用正交变换将一组可能相关变量的观测值转换成一组称为主成分的线性不相关变量 主成分的数量小于原始变量的数量 非线性降维的方法 Multi-dimensional Scaling 多元尺度分析 经典/度量/非度量/广义 Kernel approaches 核方法 核PCA Kernel Fisher Discriminant Analysis (KFD) 核费希尔判别分析 Manifold learning approaches 流形学习方法 Isometric feature mapping (Isomap) 等距特征映射 Locally-linear embedding (LLE) 局部线性嵌入 Multi-dimensional Scaling (MDS) 多元尺度分析 用于数据可视化的一些相关统计技术，用来考察数据中的相似性和非相似性 构建一个所有点之间的成对距离矩阵，然后在低维空间计算每个点的位置，便于二维或三维可视化]]></content>
+      <tags>
+        <tag>Artificial Intelligence</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[人工智能原理 Part V. Learning Ch9.Perspectives about Machine Learning]]></title>
     <url>%2F2019%2F02%2F07%2F%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%8E%9F%E7%90%86-Part-V-Learning-Ch9-Perspectives-about-Machine-Learning%2F</url>
     <content type="text"><![CDATA[Ch9 Perspectives about Machine Learning9.1 What is Machine Learning 是人工智能的一个分支，从事构建和研究可以从数据中学习的系统 Artificial Intelligence 研究感知外部环境并为某个目标采取行动的“智能体” Machine Learning 人工智能的一个分支，从事构建可以从数据中学习的系统 与其他学科的关系 统计学习 取自统计学的机器学习框架 模式识别 识别数据中的模式（$\approx$ 机器学习+数据模式） 数据挖掘 发现数据中的未知特性（$\approx$ 机器学习+数据库） 计算机视觉 从图像中提取信息（$\approx$ 机器学习+图像处理） 两种通用的学习类型 Inductive Learning 归纳学习（bottom-up logic） 从特定的训练实例中获得或发现通用的规则或事实 Deductive Learning 演绎学习（top-down logic） 使用一套已知的规则和事实去推导适合该训练数据的猜测 机器学习的形式化定义 Tom Mitchell 1997: A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E. 9.2 History of Machine Learning 三个学派 Connectionism 联结主义 Perceptron, ANN, DL Symbolicism 符号主义 Association Rules, Decision tree, Random Forests Behaviorism 行为主义 Reinforcement learning 9.3 Why Different Perspectives 难点 应该选择哪种算法 有多少种算法 难点是什么 一个视角够吗? 三个观点 做什么 $\Rightarrow$ 问题 $\Rightarrow$ 学习任务 任务：表示可以用机器学习解决的基本问题 什么形式 $\Rightarrow$ 场景 $\Rightarrow$ 学习范式 范式：表示机器学习中发生的典型场景 如何做 $\Rightarrow$ 手段 $\Rightarrow$ 学习模型 模型：表示可以处理完成一个学习任务的方法 9.4 Three Perspectives on Machine Learning9.4.1 Learning Tasks 学习任务用于表示可以用机器学习解决的基本问题 Tasks Brief Statements Typical algorithm Classification 分类 将输入分成多个类别 SVM 支持向量机 Regression 回归 输出是连续的而不是离散的 Bayesian linear regression 贝叶斯线性回归 Clustering 聚类 输入被划分为若干事先位置的组 k-means Ranking 排名 将值来换成排名 PageRank Density estimation 密度估计 寻找某个空间中输入的分布 Boosting Density Estimation 增强式密度估计 Dimensionality reduction 降维 通过将输入映射到低维空间来将其简化 Isomap 等距特征映射 Optimization 优化 从所有可能的解中寻找最优解 Q-learning 9.4.2 Learning Paradigms 用于表示机器学习中发生的典型场景 根据机器学习的典型场景或样式来区分学习范式 它怎样从数据中学习 它如何同环境互动 Paradigms Brief Statements Typical Algorithm Supervised 有监督 采用一组标注好的数据进行训练，再对未知点进行预测 SVM Unsupervised 无监督 仅接受未标注数据，再对所有的未知点做出预测 k-means Reinforcement 强化 算法与外部环境交互，每个动作得到一个回报 Q-learning 9.4.3 Learning Models 用于表示可以处理完成一个学习任务的方法 ML的效果在很大程度上取决于解决该学习任务时所选用的方法 Models Brief Statements Sub-models Typical Algorithm Geometric 几何 采用线，面，距离或流形来构建学习算法 线，面，距离，流形(Manifold) 线性回归，SVM，k-NN，Isomap等距映射 Logical 逻辑 采用逻辑模型 逻辑，规则 Inductive Logic Program 归纳逻辑编程，Association Rule 相关规则 Networked 网络 采用网络模式 浅层，深层 Perceptron 感知机，CNN 卷积神经网络 Probabilistic 概率 采用概率模式来表示随机变量之间的条件相关性 Bayes贝叶斯，Generative 生成，Statistic 统计 贝叶斯网络，概率规划，线性回归 9.5 Applications and Terminologies 应用领域 样本 特征 手工式特征：SIFT,HOG,SURF,LBP,GLOH,LESH,CENTRIST 学习式特征：CNN 特征学习也被称为表示学习 标记 训练样本 验证样本 测试样本 损失函数 假设集 抽象 泛化]]></content>

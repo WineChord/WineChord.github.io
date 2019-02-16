@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/blog-logo180.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog-logo32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog-logo16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="人工智能," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Prerequisites 数理逻辑或离散数学中的一阶谓词演算 有关命题逻辑，谓词逻辑的演算方法 一阶谓词逻辑的优点：有很强的表达能力及严密的数学基础  Goals 一阶谓词演算的基本体系 命题逻辑和谓词逻辑的归结方法 基于归结的提取问题回答的方法 基于规则的正向演绎方法和逆向演绎方法  关系图（courtesy of 人工智能导论课件）：  一阶谓词演算的基本体系 谓词演算是一种形式语言，是AI">
+<meta name="keywords" content="人工智能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="谓词演算及归结树">
+<meta property="og:url" content="http://yoursite.com/2019/02/16/谓词演算及归结树/index.html">
+<meta property="og:site_name" content="Wine&amp;Chord">
+<meta property="og:description" content="Prerequisites 数理逻辑或离散数学中的一阶谓词演算 有关命题逻辑，谓词逻辑的演算方法 一阶谓词逻辑的优点：有很强的表达能力及严密的数学基础  Goals 一阶谓词演算的基本体系 命题逻辑和谓词逻辑的归结方法 基于归结的提取问题回答的方法 基于规则的正向演绎方法和逆向演绎方法  关系图（courtesy of 人工智能导论课件）：  一阶谓词演算的基本体系 谓词演算是一种形式语言，是AI">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/t1.gif">
+<meta property="og:image" content="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/rl4.1.gif">
+<meta property="og:image" content="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/t2.gif">
+<meta property="og:updated_time" content="2019-02-16T16:31:25.919Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="谓词演算及归结树">
+<meta name="twitter:description" content="Prerequisites 数理逻辑或离散数学中的一阶谓词演算 有关命题逻辑，谓词逻辑的演算方法 一阶谓词逻辑的优点：有很强的表达能力及严密的数学基础  Goals 一阶谓词演算的基本体系 命题逻辑和谓词逻辑的归结方法 基于归结的提取问题回答的方法 基于规则的正向演绎方法和逆向演绎方法  关系图（courtesy of 人工智能导论课件）：  一阶谓词演算的基本体系 谓词演算是一种形式语言，是AI">
+<meta name="twitter:image" content="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/t1.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/16/谓词演算及归结树/"/>
+
+
+
+
+
+  <title>谓词演算及归结树 | Wine&Chord</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <!-- <a href="https://github.com/WineChord"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a> -->
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wine&Chord</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/16/谓词演算及归结树/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">谓词演算及归结树</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-16T20:17:54+08:00">
+                2019-02-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/16/谓词演算及归结树/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/16/谓词演算及归结树/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><ul>
+<li>数理逻辑或离散数学中的一阶谓词演算</li>
+<li>有关命题逻辑，谓词逻辑的演算方法</li>
+<li>一阶谓词逻辑的优点：有很强的表达能力及严密的数学基础</li>
+</ul>
+<h2 id="Goals"><a href="#Goals" class="headerlink" title="Goals"></a>Goals</h2><ul>
+<li>一阶谓词演算的基本体系</li>
+<li>命题逻辑和谓词逻辑的归结方法</li>
+<li>基于归结的提取问题回答的方法</li>
+<li>基于规则的正向演绎方法和逆向演绎方法</li>
+</ul>
+<p>关系图（courtesy of 人工智能导论课件）：</p>
+<p><img src="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/t1.gif" alt="一阶谓词逻辑知识点图"></p>
+<h2 id="一阶谓词演算的基本体系"><a href="#一阶谓词演算的基本体系" class="headerlink" title="一阶谓词演算的基本体系"></a>一阶谓词演算的基本体系</h2><ul>
+<li>谓词演算是一种形式语言，是AI中一种常用的知识表示方法，可以表示各种描述语句。如在产生式系统中，用来表达综合数据库，规则集的描述</li>
+<li>谓词演算体系中的一些演绎推理方法，还可以用来建立自动定理证明系统，问答系统，基于规则的演绎系统等</li>
+<li>含：标点符号，括号，逻辑联结词，常量符号集，变量符号集，$n$ 元函数符号集，$n$ 元谓词符号集，量词（全称$\forall$ 存在$\exist$）</li>
+<li>并定义了谓词演算的合法表达式（原子公式，合式公式wff），表达式的演算化简方法，以便将一般化的表达式化成标准式（合取的前束范式或析取得前束范式）</li>
+<li>化简结果的标准式：$F\triangleq(Q_1x_1)…(Q_nx_n)M$ <ul>
+<li>其中 $(Q_1x_1)…(Q_nx_n)$ 为前束，代表各种量词的约束关系</li>
+<li>$M$ 称为母式，是不包含量词符号量化的合式公式范式</li>
+</ul>
+</li>
+<li>谓词演算中建立有很多推理规则可用来从已知的公式集推出新的公式，这些导出的公式称为定理。</li>
+<li>给出定理的推理过程及所使用的推理规则序列就构成了该定理的一个证明</li>
+<li>在证明定理的演绎过程中，经常要对量化的表达式进行匹配操作，因而需要对项作变量置换使表达式一致起来，该过程称作合一</li>
+</ul>
+<hr>
+<ul>
+<li>前束范式：所有量词均非否定地出现在公式的前部，且所有的量词的约束范围均是整个公式</li>
+<li>任何一个合式公式均可以转化为一个前束范式</li>
+<li>消去前束范式中所有的存在量词后得到的合式公式称为 $S$ 范式，这一过程称为 $skolem$ 化</li>
+<li>$S$ 范式与原式不一定等价，但在不可满足方面是等价的</li>
+<li>利用结合律，分配律等可以将 $S$ 范式转化为一个合取范式，合取范式是前束范式的一种，其母式具有如下的形式：$A_1\and A_2\and …\and A_n$</li>
+<li>其中 $A_i$ 是由原子公式或原子公式的否定组成的析取项。每个析取项又称之为子句，一个合取范式可以用如下的子句的集合（子句集）表示：</li>
+</ul>
+<p>${A_1,A_2,…A_n}$</p>
+<ul>
+<li>例：</li>
+</ul>
+<p>$(x)(y)[(P(x,y)\or \sim Q(x,y))\and (\sim P(x,y)\or U(x)\or V(y))\and(Q(x,y)\or \sim U(y))]$</p>
+<p>即为一个合取范式，其子句集为：</p>
+<p>${P(x,y)\or \sim Q(x,y),\sim P(x,y)\or U(x)\or V(y), Q(x,y)\or \sim U(y)}$</p>
+<ul>
+<li>任何一个合式公式均可以通过九步来化为子句集，例：</li>
+</ul>
+<p>$(z)(x)(y){[(P(x)\or Q(x))\rightarrow R(y)]\or U(z)}$</p>
+<ol>
+<li>消蕴涵符</li>
+</ol>
+<p>$A(x)\rightarrow B(x) \equiv \sim A(x)\or B(x)$</p>
+<p>有：</p>
+<p>$(P(x)\or Q(x))\rightarrow R(y)\Rightarrow \sim (P(x)\or Q(x))\or R(y)$</p>
+<p>代入式中有：</p>
+<p>$(\exist z)(\forall x)(\exist y){[\sim(P(x)\or Q(x))\or R(y)]\or U(z)}$</p>
+<ol start="2">
+<li>移动否定符</li>
+</ol>
+<p>应用摩根定律：</p>
+<p>$\sim(A(x)\or B(x))\equiv \sim A(x)\and \sim B(x)$</p>
+<p>$\sim(A(x)\and B(x))\equiv \sim A(x)\or \sim B(x)$</p>
+<p>故而有：</p>
+<p>$\sim(P(x)\or Q(x))\Rightarrow \sim P(x)\and \sim Q(x)$</p>
+<p>代入：</p>
+<p>$(\exist z)(\forall x)(\exist y){[(\sim P(x)\and\sim Q(x))\or R(y)]\or U(z)}$</p>
+<p>若否定作用于量词，则根据量词转换率将量词提到否定的作用域外：</p>
+<p>$\sim((\forall x)A(x))\equiv (\exist x)(\sim A(x))$</p>
+<p>$\sim ((\exist x)A(x))\equiv (\forall x)(\sim A(x))$</p>
+<p>本例未出现此情况。</p>
+<ol start="3">
+<li>变量换名</li>
+</ol>
+<p>在不同的量词约束的变量，应使用不同的变量名</p>
+<p>$(\forall x)A(x)\or (\exist x)B(x)$</p>
+<p>改为：$(\forall x)A(x)\or (\exist y)B(y)$</p>
+<ol start="4">
+<li>量词左移</li>
+</ol>
+<p>将所有量词移到最左侧，但是不改变次序，如上例可以重写为：</p>
+<p>$(\forall x)(\exist y){A(x)\or B(y)}$</p>
+<p>这也是要在第三步改名的原因，否则就不能移动</p>
+<p>至此，一个合式公式便转化为了前束范式，特点为：所有量词均非否定地出现在公式的前部，并且所有量词的约束范围均是整个合式公式。</p>
+<ol start="5">
+<li>消去存在量词（skolem化）</li>
+</ol>
+<p>消去存在量词的规则如下：</p>
+<ul>
+<li>假设 $\Psi$ 为前束范式中的一个存在量词，若其前面没有全称量词，则将 $\Psi$ 所约束的变量 $x$ 用一个全新的常量代替</li>
+<li>若前面有全称量词，则将 $x$ 用一个新的函数（称为 $skolem$ 函数）代替，该函数的变量是那些在 $\Psi$ 前面的全称量词所约束的变量，然后将存在量词 $\Psi$ 消去</li>
+</ul>
+<p>$(\exist z)(\forall x)(\exist y){[(\sim P(x)\and \sim Q(x))\or R(y)]\or U(z)}$</p>
+<p>$\Rightarrow (\forall x){[(\sim P(x)\and \sim Q(x))\or R(f(x))]\or U(a)}$</p>
+<ol start="6">
+<li>化为合取范式</li>
+</ol>
+<p>利用结合律，分配律等将 $S$ 范式的母式转化为合取范式</p>
+<p>$(A(x)\and B(x))\and C(x)\equiv A(x)\and(B(x)\and C(x))$</p>
+<p>$(A(x)\or B(x))\or C(x)\equiv A(x)\or (B(x)\or C(x))$</p>
+<p>$A(x)\and (B(x)\or C(x))\equiv (A(x)\and B(x))\or(A(x)\and C(x))$</p>
+<p>$A(x)\or(B(x)\and C(x))\equiv (A(x)\or B(x))\and(A(x)\or C(x))$</p>
+<p>对于本例：</p>
+<p>$(\forall x){[(\sim P(x)\and\sim Q(x))\or R(f(x))]\or U(a)}$</p>
+<p>$\Rightarrow (\forall x){[\sim P(x)\and\sim Q(x)]\or R(f(x))\or U(a)}$</p>
+<p>$\Rightarrow (\forall x){[\sim P(x)\or R(f(x))\or U(a)]\and[\sim Q(x)\or R(f(x))\or U(a)]}$</p>
+<ol start="7">
+<li>隐去全称量词</li>
+</ol>
+<p>此时所有的变量都是受全称量词约束，故而可以将全称量词隐去，默认所有的变量都是受全称量词约束的。</p>
+<p>$[\sim P(x)\or R(f(x))\or U(a)]\and [\sim Q(x)\or R(f(x))\or U(a)]$</p>
+<ol start="8">
+<li>表示为子句集</li>
+</ol>
+<p>用 “,” 代替公式中的 “$\and$”，并用 “{}” 括起来</p>
+<p>${\sim P(x)\or R(f(x))\or U(a),\sim Q(x)\or R(f(x))\or U(a)}$</p>
+<ol start="9">
+<li>变量换名</li>
+</ol>
+<p>使不同子句中的变量使用不同的名字</p>
+<p>${\sim P(x_1)\or R(f(x_1))\or U(a),\sim Q(x_2)\or R(f(x_2))\or U(a)}$</p>
+<ul>
+<li>对任一合式公式通过以下步骤化为前束范式</li>
+</ul>
+<ol>
+<li>消去多余的前束</li>
+<li>消去蕴涵符</li>
+<li>将否定词只作用于原子公式为止</li>
+<li>变量标准化（进行必要换名）</li>
+<li>所有量词左移，不要改次序</li>
+<li>消去存在量词</li>
+</ol>
+<p>$F=(\exist x)(\exist y)(\forall z)(\exist u)(\forall v)(\exist w)(P(x,y,z,u,v,w)$</p>
+<p>$\and (Q(x,y,z,u,v,w)\or\sim R(x,z,w)))$</p>
+<p>四个存在量词替换如下：</p>
+<p>$x=a,y=b,u=f(z),w=g(z,w)$</p>
+<p>得：</p>
+<p>$F1=(\forall z)(\forall v)(P(a,b,z,f(z),v,g(z,v))$</p>
+<p>$\and (Q(a,b,z,f(z),v,g(z,v))\or\sim R(a,z,g(z,v))))$</p>
+<ol start="7">
+<li><p>将母式化为合取范式。反复使用结合律和分配律，将母式表达成合取范式的标准型，最后得到一个 $Skolem$ 化的前束范式 $Fs$</p>
+</li>
+<li><p>省略全称量词</p>
+</li>
+<li>将母式用子句集表示</li>
+</ol>
+<p>$S={P(a,b,z,f(z),v,g(z,v)),$</p>
+<p>$Q(a,b,z,f(z),v,g(z,v))\or\sim R(a,z,g(z,v))}$</p>
+<ol start="10">
+<li>子句变量标准化，使任意两个子句不会有相同的变量出现。</li>
+</ol>
+<hr>
+<ul>
+<li>标准式应用问题</li>
+<li>经过上述步骤化简之后得到的标准式是经过 $Skolem$ 化的前束范式，通常也称为 $S-标准形$ ，注意其不唯一，记为 $Fs$ </li>
+<li>定理：若 $S$ 是合取公式 $F$ 的 $S-$标准形之子句集，则 $F$ 为永假的充要条件是 $S$ 为不可满足的。</li>
+<li>子句：为标准形母式中的合取元，因而每一个子句是若干文字的析取式，不含有文字的子句称为空子句</li>
+<li>空子句取值总为假，记为 NIL</li>
+<li>在一个子句的文字中，用常量代替变量，得到一个文字的基例，由基文字组成的子句称为基子句</li>
+<li>子句集中所有元素（即子句）的合取式不为真，则称该子句集为不可满足的</li>
+</ul>
+<hr>
+<h3 id="归结"><a href="#归结" class="headerlink" title="归结"></a>归结</h3><ul>
+<li>一个重要的推理规则</li>
+<li>1965年 Robinson 提出，使自动定理证明技术得到很大发展</li>
+<li>先介绍归结方法的基本思想</li>
+<li>再分别讨论命题逻辑和谓词逻辑的归结原理</li>
+</ul>
+<h4 id="归结原理"><a href="#归结原理" class="headerlink" title="归结原理"></a>归结原理</h4><ul>
+<li>类似反证法</li>
+<li>先对结论求反，然后将已知条件和结论的否定合在一起用子句集表达</li>
+<li>若该子句集存在矛盾，则证明了结论的正确性</li>
+<li>证明子句集存在矛盾的方法：<ul>
+<li>设 $S$ 是已知条件和结论的否定合并后对应的子句集</li>
+<li>假设有一种变换方法，可以对 $S$ 实施一系列的变换，而且该变换能够保证变换前后的子句集在不可满足的意义下是等价的</li>
+<li>如此，若最终得到的子句集是不可满足的，就证明了子句集 $S$ 是不可满足的，从而结论成立</li>
+</ul>
+</li>
+<li>子句集中的子句是“与”的关系，如果在子句集中出现了空子句，则该子句集不可满足。</li>
+<li>故归结过程就是寻找空子句的过程</li>
+<li>若看为搜索，则初始状态为已知条件和结论的否定对应的子句集，目标为空子句，规则是归结</li>
+</ul>
+<hr>
+<ul>
+<li>证明 $F=F1\and F2\and…\and Fn\rightarrow W$ 为永真</li>
+<li>等价于证明 $F=F1\and F2\and…\and Fn\and \sim W$ 为永假</li>
+<li>等价于证明 $F$ 对应的子句集 $S=S0 \cup {\sim W}$ 为不可满足的</li>
+<li>此时若用归结作为推理规则使用时，可以简化机器证明</li>
+<li>思路：设法检验扩充的子句集 $Si$ 是否含有空子句，若 $S$ 集中存在空子句，则表明 $S$ 为不可满足的。若无空子句，则进一步用归结法从 $S$ 导出 $S1$ 然后再检验 $S1$ 是否有空子句，可以证明用归结法导出的扩大子句集 $S1$，其不可满足性是不变的，所以若 $S1$ 中有空子句，也就证得了 $S$ 不可满足性。</li>
+<li>归结一直进行下去，目的是通过归结过程演绎出 $S$ 额不可满足性，从而使定理得到证明 </li>
+</ul>
+<h4 id="命题逻辑的归结原理"><a href="#命题逻辑的归结原理" class="headerlink" title="命题逻辑的归结原理"></a>命题逻辑的归结原理</h4><ul>
+<li>命题逻辑：不含变量的逻辑</li>
+</ul>
+<h5 id="归结式（或预解式）的定义及性质"><a href="#归结式（或预解式）的定义及性质" class="headerlink" title="归结式（或预解式）的定义及性质"></a>归结式（或预解式）的定义及性质</h5><ul>
+<li>归结式：对于任意两个子句 $C1$ 和 $C2$ ，若 $C1$ 中有一个文字 $L1$，而 $C2$ 中有一个与 $L1$ 成互补的文字 $L2$ ，分别从 $C1,C2$ 中删除 $L1$ 和 $L2$，并将其剩余部分组成新的析取式，则称新子句为归结式或预解式</li>
+<li>例：$C1=L\or C1’$ $C2=(\sim L)\or C2’$，则归结式 $C=C1’\or C2’$，当 $C1’=C2’=NIL$ 时，$C=NIL$</li>
+<li>定理：两个子句 $C1$ 和 $C2$ 的归结式 $C$ 是 $C1$ 和 $C2$ 的逻辑推论</li>
+<li>证：略</li>
+<li>推论：子句集 $S={C1,C2,…,Cn}$与子句集 $S1={C,C1,C2,…,Cn}$的不可满足性是等价的（$C$ 为 $C1$ 和 $C2$ 的归结式）</li>
+<li>证：<ul>
+<li>设 $S$ 是不可满足的，则 $C1,C2,…,Cn$ 中必有一为假，因而 $S1$ 必为不可满足的</li>
+<li>设 $S1$ 是不可满足，分两种情况：<ul>
+<li>$C$ 为真：则 $C1,C2,…,Cn$ 中必有一为假，故 $S$ 不可满足</li>
+<li>$C$ 为假： 则 $C1\or C2$ 为假，即 $C1$ 为假或 $C2$ 为假，故 $S$ 也是不可满足的</li>
+</ul>
+</li>
+<li>因此 $S$ 和 $S1$ 的不可满足性是等价的</li>
+</ul>
+</li>
+<li>同理可证 $Si$ 和 $Si+1$ 的不可满足性也是等价的（$i=1,2,…$）</li>
+<li>归结原理即为从子句集 $S$ 出发，应用归结推理规则导出子句集 $S1$ ，再从 $S1$ 出发导出 $S2$ ，直到某一个子句集 $Sn$ 出现空子句为止。</li>
+<li>根据不可满足性等价原理，已知若 $Sn$ 为不可满足的，则可逆向依次推得 $S$ 必为不可满足的</li>
+<li>由此可见，用归结法证明定理，过程比较单纯，只涉及归结推理规则的应用问题，因而便于实现机器证明</li>
+</ul>
+<h5 id="命题逻辑的归结过程"><a href="#命题逻辑的归结过程" class="headerlink" title="命题逻辑的归结过程"></a>命题逻辑的归结过程</h5><ul>
+<li>给定公理集 $F$ 命题集 $P$，归结过程如下：</li>
+</ul>
+<ol>
+<li>把 $F$ 转化为子句集表示，得子句集 $S0$</li>
+<li>把命题 $P$ 的否定式 $\sim P$ 也转化为子句集表示，并将其加到 $S0$ 中，得 $S=S0\cup {S\sim p}$</li>
+<li>对子句集 $S$ 反复应用归结推理规则，直至导出含有空子句的扩大子句集为止，即出现归结式为空子句的情况，表明已经找到了矛盾，证明过程结束</li>
+</ol>
+<p>例：</p>
+<p>已知公理集为：</p>
+<p>$P$        (1)</p>
+<p>$(P\and Q)\rightarrow R$    (2)</p>
+<p>$(S\or T)\rightarrow Q$     (3)</p>
+<p>$T$         (4)</p>
+<p>求证 $R$</p>
+<ul>
+<li>由 (1) 有子句集 ${P}$</li>
+<li>由 (2) 有：<ul>
+<li>$(P\and Q)\rightarrow R$</li>
+<li>$\Rightarrow \sim(P\and Q)\or R$</li>
+<li>$\Rightarrow (\sim P\or \sim Q\or R)$</li>
+<li>得子句集：${\sim P\or \sim Q\or R}$</li>
+</ul>
+</li>
+<li>由 (3)<ul>
+<li>$(S\or V)\rightarrow Q$</li>
+<li>$\Rightarrow \sim (S\or T)\or Q$</li>
+<li>$\Rightarrow (\sim S\and \sim T)\or Q$</li>
+<li>$\Rightarrow (\sim S\or Q)\and (\sim T\or Q)$</li>
+<li>得子句集：${\sim S\or Q,\sim T\or Q}$</li>
+</ul>
+</li>
+<li>由 (4) 有子句集${T}$</li>
+<li>由结论的否定得子句集：${\sim R}$</li>
+<li>将以上子句集并在一起有总的子句集：<ul>
+<li>${P,\sim P\or\sim Q\or R,\sim S\or Q,\sim T\or Q,T,\sim R}$</li>
+</ul>
+</li>
+<li>归结结果如图所示（courtesy of 人工智能导论课件）：</li>
+</ul>
+<p><img src="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/rl4.1.gif" alt="命题逻辑的归结演绎树"></p>
+<ul>
+<li>由于根部出现了空子句，因此命题 $R$ 得到证明。</li>
+</ul>
+<h4 id="谓词逻辑的归结原理"><a href="#谓词逻辑的归结原理" class="headerlink" title="谓词逻辑的归结原理"></a>谓词逻辑的归结原理</h4><ul>
+<li>命题逻辑中较容易确定用于归结的两个归结对</li>
+<li>而对于谓词逻辑来说，由于谓词具有常量，变量和函数等变元的存在，两个子句是否可用于归结，判断起来是比较复杂的</li>
+<li>如：<ul>
+<li>$P(x)\or Q(y)$ 和 $\sim P(f(y))\or R(y)$ 是否可以归结？</li>
+<li>$P(A)\or Q(y)$ 和 $\sim P(f(y))\or R(y)$ 是否可以归结？</li>
+<li>后面可看出，前者可以归结而后者不可以归结</li>
+</ul>
+</li>
+<li>从命题逻辑的归结过程可以看出，求归结式时比较容易确定含有互补对文字的两个子句，因而匹配过程比较简单</li>
+<li>但是在谓词逻辑中，需要考虑变量的约束问题，所以往往要对公式作变量置换和合一等处理，才能得到互补的基本式</li>
+<li>过程为：<ul>
+<li>若 $S$ 中两子句间有相同互补文字的谓词，但他们的项不同，则必须找出对应的不一致项</li>
+<li>进行变量置换，使其对应项一致</li>
+<li>求归结式看能否导出空子句</li>
+</ul>
+</li>
+</ul>
+<h5 id="合一（Unify）"><a href="#合一（Unify）" class="headerlink" title="合一（Unify）"></a>合一（Unify）</h5><ul>
+<li>一个有序对集合 $s={ti/vi}$ $(i=1,2,…,n)$ 称为置换</li>
+<li>其中 $vi$ $(i=1,2,…,)$ 是变量， $ti$ $(i=1,2,…,n)$ 是不同于 $vi$ 的项，可以是常量，函数或其他变量</li>
+<li>置换 $s$ 表示将公式中所有变量 $vi$ 用 $ti$ 代替</li>
+<li>对公式 $E$ 施以置换 $s$，记作 $Es$，$Es$ 称为公式 $E$ 的例</li>
+</ul>
+<p>例：设有置换 $s={z/x,A/y}$，</p>
+<p>则：$P[x,f(y),B]s=P(z,f(A),B)$</p>
+<p>设有公式的集合 ${Ei}$ $(i=1,2,…,m)$，如果存在一个置换 $s$，使得这 $m$ 个公式被施以 $s$ 以后，变得完全一样了，则称这 $m$ 个公式是可合一的，置换 $s$ 是它们的合一者</p>
+<p>例：</p>
+<p>设有公式集 ${P(x,f(y),B),P(z,f(B),B)}$ 和置换 $s1={A/x,B/y,A/z}$</p>
+<p>由于</p>
+<p>$P(x,f(y),B)s=P(A,f(B),B)$</p>
+<p>$P(z,f(B),B)s=P(A,f(B),B)$</p>
+<p>所以公式集是可合一的，置换 $s1$ 是它们的合一者</p>
+<p>一般来说合一者不唯一</p>
+<ul>
+<li>对于一个公式集来说，如果存在几个合一者，则其中置换数最少，限制最少，产生的例最具一般性的置换称为一般合一者（mgu）</li>
+<li>一般合一者也不一定唯一</li>
+</ul>
+<p>$s1=(z/x,w/y)$  $P[x,f(y),B]s1=P[z,f(w),B]$</p>
+<p>$s4=(c/x,A/y)$  $P[x,f(y),B]s4=P[C,f(A),B]$</p>
+<ul>
+<li>第一个例为原始文字初等变式，实际上置换后只是对变量做了换名</li>
+<li>第四个例为基例，置换后不再含有变量</li>
+<li>通常用有序对的集合 $s={t_1/v_1,t_2,v_2,…,t_n/v_n}$来表示任一置换，用 $s$ 对表达式 $E$ 作置换后的例简记为 $Es$。</li>
+<li>有时要进行多次替换，可以进行合成</li>
+</ul>
+<p>如：</p>
+<p>$s1={g(x,y)/z}$，$s2={A/x,B/y,C/w,D/z}$</p>
+<p>$s1s2={g(A,B)/z,A/x,B/y,C/w}$</p>
+<ul>
+<li>UNIFY 算法用来判断两个公式是否可以合一，并且在可合一的情况下，给出他们的 mgu</li>
+<li>基本思想（用递归描述）：<ul>
+<li>从左向右按位置扫描两个谓词的每一个对应部分</li>
+<li>如果二者一致，则转向下一项</li>
+<li>若不一致，查看是否存在一个置换</li>
+<li>若不存在置换，则不可合一</li>
+<li>若存在，则这些置换的合成为其合一者</li>
+<li>若两个对应项都是变量时，置换选作用一个变量替代另一个变量，则这样得到的合一者为 mgu</li>
+</ul>
+</li>
+<li>注意算法中可合一的表达式要用表结构来表示，如把 $P(x,f(A,y))$ 表示为 $(P\ x\ f\ A\ y)$</li>
+<li>可合一时返回 mgu，否则返回 FAIL</li>
+</ul>
+<h5 id="谓词逻辑归结过程"><a href="#谓词逻辑归结过程" class="headerlink" title="谓词逻辑归结过程"></a>谓词逻辑归结过程</h5><ul>
+<li>判断是否可归结以及确定归结式：</li>
+<li>对于子句 $C1’\or L1$ 和 $C2’\or L2$ ，若 $L1$ 与 $\sim L2$ 可合一，且 $s$ 是其合一者，则 $(C1’\or C2’)s$ 是其归结式</li>
+</ul>
+<p>设 $C1$ 和 $C2$ 为两个不同的子句，子句中的变量已标准化，采用文字集的形式来表示子句（即文字之间理解为析取关系），则有：<br>$C1={C1i}(i=1,2,…,n)$</p>
+<p>$C2={C2j}(i=1,2,…,m)$</p>
+<p>再设 ${L1k}$ 和 ${L2k}$ 分别为 $C1$ 和 $C2$ 的两个子集</p>
+<p>若 ${L1k}$ 和 ${\sim L2k}$ 的并集存在一个 mgu s，则两个子句的归结式为</p>
+<p>$$<br>C={ { C1i } - { L1k } } s \cup { { C2j } -{ L2k} } s<br>$$</p>
+<p>也可看出归结式不唯一</p>
+<p>例子：</p>
+<p>已知：</p>
+<ol>
+<li>会朗读的人是识字的；</li>
+<li>海豚都不识字；</li>
+<li>有些海豚是很机灵的。</li>
+</ol>
+<p>证明：有些很机灵的东西不会朗读。</p>
+<p>先用谓词逻辑描述如下：</p>
+<p>已知：</p>
+<ol>
+<li>$(\forall x)(R(x)\rightarrow L(x))​$</li>
+<li>$(\forall x)(D(x)\rightarrow \sim L(x))$  </li>
+<li>$(\exist x)(D(x)\and I(x))$</li>
+</ol>
+<p>求证：$(\exist x)(I(x)\and \sim R(x))$</p>
+<p>先将前提条件的谓词公式化简，然后将要证明的结论取反并化成子句形，求得子句集</p>
+<p>(1) $\sim R(x)\or L(x)$</p>
+<p>(2) $\sim D(y)\or \sim L(y)$</p>
+<p>(3a) $D(A)$</p>
+<p>(3b) $I(A)$</p>
+<p>(4) $\sim I(z)\or R(z)$</p>
+<p>归结树如图（画线为L1,L2，旁边标的是合一者）：</p>
+<p><img src="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/t2.gif" alt="谓词逻辑的归结树"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/人工智能/" rel="tag"># 人工智能</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/15/谓词归结法总结/" rel="next" title="谓词归结法总结">
+                <i class="fa fa-chevron-left"></i> 谓词归结法总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/blog-logo.png"
+                alt="Wine&Chord" />
+            
+              <p class="site-author-name" itemprop="name">Wine&Chord</p>
+              <p class="site-description motion-element" itemprop="description">记录学习经历</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">186</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Goals"><span class="nav-number">2.</span> <span class="nav-text">Goals</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一阶谓词演算的基本体系"><span class="nav-number">3.</span> <span class="nav-text">一阶谓词演算的基本体系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#归结"><span class="nav-number">3.1.</span> <span class="nav-text">归结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#归结原理"><span class="nav-number">3.1.1.</span> <span class="nav-text">归结原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命题逻辑的归结原理"><span class="nav-number">3.1.2.</span> <span class="nav-text">命题逻辑的归结原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#归结式（或预解式）的定义及性质"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">归结式（或预解式）的定义及性质</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命题逻辑的归结过程"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">命题逻辑的归结过程</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#谓词逻辑的归结原理"><span class="nav-number">3.1.3.</span> <span class="nav-text">谓词逻辑的归结原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#合一（Unify）"><span class="nav-number">3.1.3.1.</span> <span class="nav-text">合一（Unify）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#谓词逻辑归结过程"><span class="nav-number">3.1.3.2.</span> <span class="nav-text">谓词逻辑归结过程</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" >Wine&Chord</span>
+
+  
+</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://wineandchord.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/02/16/谓词演算及归结树/';
+          this.page.identifier = '2019/02/16/谓词演算及归结树/';
+          this.page.title = '谓词演算及归结树';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://wineandchord.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- <script type="text/javascript" src="/js/src/love.js"></script>script> -->

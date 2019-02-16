@@ -79,16 +79,16 @@
 
 
 
-<meta name="description" content="主要用于记录学习经历">
+<meta name="description" content="记录学习经历">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Wine&amp;Chord">
 <meta property="og:url" content="http://yoursite.com/page/9/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="主要用于记录学习经历">
+<meta property="og:description" content="记录学习经历">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Wine&amp;Chord">
-<meta name="twitter:description" content="主要用于记录学习经历">
+<meta name="twitter:description" content="记录学习经历">
 
 
 
@@ -296,7 +296,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/811-Subdomain-Visit-Count-HT-2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/703-Kth-Largest-Element-in-a-Stream-Heap-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -315,7 +315,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/03/811-Subdomain-Visit-Count-HT-2/" itemprop="url">811. Subdomain Visit Count-HT-2</a></h1>
+                <a class="post-title-link" href="/2018/11/04/703-Kth-Largest-Element-in-a-Stream-Heap-1/" itemprop="url">703. Kth Largest Element in a Stream-Heap-1</a></h1>
         
 
         <div class="post-meta">
@@ -327,8 +327,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-03T20:34:32+08:00">
-                2018-11-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T16:02:09+08:00">
+                2018-11-04
               </time>
             
 
@@ -368,9 +368,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/03/811-Subdomain-Visit-Count-HT-2/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/04/703-Kth-Largest-Element-in-a-Stream-Heap-1/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/03/811-Subdomain-Visit-Count-HT-2/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/04/703-Kth-Largest-Element-in-a-Stream-Heap-1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -400,10 +400,15 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>子域名访问的次数。当访问一个域名时，他的众多子域名也会被访问。<br>问给一个有很多要访问的域名以及访问的次数，问对于各子域名都需要访问多少次？</p>
-<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>使用 Hash Map，对于 <code>a.b.c</code>，数的是 <code>a.b.c</code> <code>b.c</code> <code>c</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">subdomainVisits</span><span class="params">(String[] cpdomains)</span></span>&#123;</span><br><span class="line">	Map&lt;String, Integer&gt; counts = <span class="keyword">new</span> HashMap();</span><br><span class="line">	<span class="keyword">for</span>(String domain: cpdomains)&#123;</span><br><span class="line">		String[] cpinfo = domain.split(<span class="string">"\\s+"</span>);</span><br><span class="line">		String[] frags = cpinfo[<span class="number">1</span>].split(<span class="string">"\\."</span>);</span><br><span class="line">		<span class="keyword">int</span> count = Integer.valueOf(cpinfo[<span class="number">0</span>]);</span><br><span class="line">		String cur = <span class="string">""</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = frags.length-<span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">			cur = frags[i] + (i &lt; frags.length-<span class="number">1</span>?<span class="string">"."</span>:<span class="string">""</span>) + cur;</span><br><span class="line">			counts.put(cur, counts.getOrDefault(cur, <span class="number">0</span>)+count);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	List&lt;String&gt; ans = <span class="keyword">new</span> ArrayList();</span><br><span class="line">	<span class="keyword">for</span>(String dom: counts.keySet())</span><br><span class="line">		ans.add(<span class="string">""</span>+counts.get(dom)+<span class="string">" "</span>+dom);</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">subdomainVisits</span><span class="params">(self, cpdomains)</span>:</span></span><br><span class="line">	ans = collections.Counter()</span><br><span class="line">	<span class="keyword">for</span> domain <span class="keyword">in</span> cpdomains:</span><br><span class="line">		count, domain = domain.split()</span><br><span class="line">		count = int(count)</span><br><span class="line">		frags = domain.split(<span class="string">'.'</span>)</span><br><span class="line">		<span class="keyword">for</span> i <span class="keyword">in</span> xrange(len(frags)):</span><br><span class="line">			ans[<span class="string">"."</span>.join(frags[i:])] += count</span><br><span class="line">	<span class="keyword">return</span> [<span class="string">"&#123;&#125; &#123;&#125;"</span>.format(ct, dom) <span class="keyword">for</span> dom, ct <span class="keyword">in</span> ans.items()]</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; subdomainVisits(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; cpdomains)&#123;</span><br><span class="line">	<span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; c;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> cd: cpdomains)&#123;</span><br><span class="line">		<span class="keyword">int</span> i = cd.find(<span class="string">" "</span>);</span><br><span class="line">		<span class="keyword">int</span> n = stoi(cd.substr(<span class="number">0</span>,i));</span><br><span class="line">		<span class="built_in">string</span> s = cd.substr(i+<span class="number">1</span>, cd.size()-i<span class="number">-1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.size(); i++)</span><br><span class="line">			<span class="keyword">if</span>(s[i] == <span class="string">'.'</span>)</span><br><span class="line">				c[s.substr(i+<span class="number">1</span>, s.size()-i)] += n;</span><br><span class="line">		c[s] += n;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; res;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> k: c) res.push_back(to_string(k.second)+<span class="string">" "</span>+k.first);</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>设计一个类来找到一个流中第 k 大的元素。类初始的时候有 k 和一个数组 nums。之后每进行添加元素的操作时都要能够返回第 k 大的元素。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">KthLargest</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">    KthLargest(<span class="keyword">int</span> k, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums)&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> k = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">int</span>[] arr = [<span class="number">4</span>,<span class="number">5</span>,<span class="number">8</span>,<span class="number">2</span>];</span><br><span class="line">KthLargest kthLargest = <span class="keyword">new</span> KthLargest(<span class="number">3</span>, arr);</span><br><span class="line">kthLargest.add(<span class="number">3</span>); <span class="comment">// [2,3,4,5,8]: returns 4</span></span><br><span class="line">kthLargest.add(<span class="number">5</span>); <span class="comment">// [2,3,4,5,5,8]: return 5</span></span><br><span class="line">kthLargest.add(<span class="number">10</span>); <span class="comment">// [2,3,4,5,5,8,10]: return 5</span></span><br><span class="line">kthLargest.add(<span class="number">9</span>); <span class="comment">// [2,3,4,5,5,8,9,10]: return 8</span></span><br><span class="line">kthLargest.add(<span class="number">4</span>); <span class="comment">// [2,3,4,4,5,5,8,9,10]: return 8</span></span><br></pre></td></tr></table></figure>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>思路：建立一个只含有 k 的比较大元素的最小堆。<br>对于 add:</p>
+<ul>
+<li>比较新加入的元素 <code>x</code> 和堆中的最小值，决定我们是否要 <code>pop min</code> <code>insert x</code></li>
+<li>并且要考虑 <code>heap_size</code> 小于 <code>k</code> 的情况<br>对于构造，只需调用 <code>N</code> 次 <code>add</code> 即可</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;, greater&lt;<span class="keyword">int</span>&gt;&gt; pq;</span><br><span class="line"><span class="keyword">int</span> size;</span><br><span class="line">KthLargest(<span class="keyword">int</span> k, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums)&#123;</span><br><span class="line">    size = k;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); i++)&#123;</span><br><span class="line">        pq.push(nums[i]);</span><br><span class="line">        <span class="keyword">if</span>(pq.size() &gt; k) pq.pop();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">    pq.push(val);</span><br><span class="line">    <span class="keyword">if</span>(pq.size() &gt; size) pq.pop();</span><br><span class="line">    <span class="keyword">return</span> pq.top();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">KthLargest</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, k, nums)</span>:</span></span><br><span class="line">        self.pool = nums</span><br><span class="line">        self.k = k</span><br><span class="line">        heapq.heapify(self.pool)</span><br><span class="line">        <span class="keyword">while</span> len(self.pool) &gt; k:</span><br><span class="line">            heapq.heappop(self.pool)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(self, val)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> len(self.pool) &lt; self.k:</span><br><span class="line">            heapq.heappush(self.pool, val)</span><br><span class="line">        <span class="keyword">elif</span> val &gt; self.pool[<span class="number">0</span>]:</span><br><span class="line">            <span class="comment"># pop and return the smallest item from the heap</span></span><br><span class="line">            <span class="comment"># and also push the new item</span></span><br><span class="line">            heapq.heapreplace(self.pool, val) </span><br><span class="line">        <span class="keyword">return</span> self.pool[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
           
         
       
@@ -451,7 +456,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/771-Jewels-and-Stones-HT-1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/112-Path-Sum-DFS-9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -470,7 +475,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/03/771-Jewels-and-Stones-HT-1/" itemprop="url">771 Jewels and Stones-HT-1</a></h1>
+                <a class="post-title-link" href="/2018/11/04/112-Path-Sum-DFS-9/" itemprop="url">112. Path Sum-DFS-9</a></h1>
         
 
         <div class="post-meta">
@@ -482,8 +487,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-03T20:24:14+08:00">
-                2018-11-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T15:54:27+08:00">
+                2018-11-04
               </time>
             
 
@@ -523,9 +528,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/03/771-Jewels-and-Stones-HT-1/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/04/112-Path-Sum-DFS-9/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/03/771-Jewels-and-Stones-HT-1/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/04/112-Path-Sum-DFS-9/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -555,12 +560,479 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>有一个字符串 J 来表示珠宝，用字符串 S 来表示石头。<br>S 中的每一个字符都是你拥有的一种石头，你想知道这些石头里面有多少是珠宝。</p>
-<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>用 J 来建立一个 hash set，读 S 来数珠宝的数量。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">numJewelsInStones</span><span class="params">(<span class="built_in">string</span> J, <span class="built_in">string</span> S)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">unordered_set</span>&lt;<span class="keyword">char</span>&gt; setJ(J.begin(), J.end());</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> s: S) <span class="keyword">if</span>(setJ.count(s)) res++;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numJewelsInstones</span><span class="params">(String J, String S)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    Set setJ = <span class="keyword">new</span> HashSet();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> j: J.toCharArray()) setJ.add();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> s: S.toCharArray()) <span class="keyword">if</span>(setJ.contains(s)) res++;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"># Python</span><br><span class="line"><span class="function">def <span class="title">numJewelsInStones</span><span class="params">(self, J, S)</span>:</span></span><br><span class="line"><span class="function">    setJ </span>= set(J)</span><br><span class="line">    <span class="keyword">return</span> sum(s in setJ <span class="keyword">for</span> s in S)</span><br></pre></td></tr></table></figure>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定一个二叉树和一个数，问是否有一条从根到叶子结点的路径使得路径上的长度和等于这个数？</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">hasPathSum</span><span class="params">(TreeNode* root, <span class="keyword">int</span> sum)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(root-&gt;val == sum &amp;&amp; root-&gt;left == <span class="literal">NULL</span> &amp;&amp; root-&gt;right == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> hasPathSum(root-&gt;left, sum-root-&gt;val) || hasPathSum(root-&gt;right, sum-root-&gt;val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/743-Network-Delay-Time-DFS-8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/04/743-Network-Delay-Time-DFS-8/" itemprop="url">743. Network Delay Time-DFS-8</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T15:03:28+08:00">
+                2018-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/04/743-Network-Delay-Time-DFS-8/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/04/743-Network-Delay-Time-DFS-8/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>一个有向图，time[i] = (u, v, w) 表示从 u 到 v 需要花费 w 的时间。问从 K 发一个信号，多长时间后所有的结点都能收到？</p>
+<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><p>用 dist[node] 来表示信号到达该结点的时间。收到信号之后从发送最快的边转发出去。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line">Map&lt;Integer, Integer&gt; dist;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">networkDelayTime</span><span class="params">(<span class="keyword">int</span>[][] times, <span class="keyword">int</span> N, <span class="keyword">int</span> K)</span></span>&#123;</span><br><span class="line">    Map&lt;Integer, List&lt;<span class="keyword">int</span>[]&gt;&gt; graph = <span class="keyword">new</span> HashMap();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span>[] edge: times)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!graph.containsKey(edge[<span class="number">0</span>]))</span><br><span class="line">            graph.put(edge[<span class="number">0</span>], <span class="keyword">new</span> ArrayList&lt;<span class="keyword">int</span>[]&gt;());</span><br><span class="line">        graph.get(edge[<span class="number">0</span>]).add(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;edge[<span class="number">2</span>], edge[<span class="number">1</span>]&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> node: graph.keySet())&#123;</span><br><span class="line">        Collections.sort(graph.get(node), (a, b)-&gt;a[<span class="number">0</span>]-b[<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    dist = <span class="keyword">new</span> HashMap();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> node = <span class="number">1</span>; node &lt;= N; node++)</span><br><span class="line">        dist.put(node, Integer.MAX_VALUE);</span><br><span class="line">    dfs(graph, K, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> cand: dist.values())&#123;</span><br><span class="line">        <span class="keyword">if</span>(cand == Integer.MAX_VALUE) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        ans = Math.max(ans, cand);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(Map&lt;Integer, List&lt;<span class="keyword">int</span>[]&gt;&gt; graph, <span class="keyword">int</span> node, <span class="keyword">int</span> elapsed)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(elapsed &gt;= dist.get(node)) <span class="keyword">return</span>;</span><br><span class="line">    dist.put(node, elapsed);</span><br><span class="line">    <span class="keyword">if</span>(graph.containsKey(node))</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span>[] info: graph.get(node))</span><br><span class="line">            dfs(graph, info[<span class="number">1</span>], elapsed+info[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">networkDelayTime</span><span class="params">(self, times, N, K)</span>:</span></span><br><span class="line">    graph = collections.defaultdict(list)</span><br><span class="line">    <span class="keyword">for</span> u, v, w <span class="keyword">in</span> times:</span><br><span class="line">        graph[u].append((w, v))</span><br><span class="line">    dist = &#123;node: float(<span class="string">'inf'</span>) <span class="keyword">for</span> node <span class="keyword">in</span> xrange(<span class="number">1</span>, N+<span class="number">1</span>)&#125;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(node, elapsed)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> elapsed &gt;= dist[node]: <span class="keyword">return</span></span><br><span class="line">        dist[node] = elapsed</span><br><span class="line">        <span class="keyword">for</span> time, nei <span class="keyword">in</span> sorted(graph[node]):</span><br><span class="line">            dfs(nei, elapsed+time)</span><br><span class="line">    dfs(K, <span class="number">0</span>)</span><br><span class="line">    ans = max(dist.values())</span><br><span class="line">    <span class="keyword">return</span> ans <span class="keyword">if</span> ans &lt; float(<span class="string">'-1'</span>) <span class="keyword">else</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<h3 id="Dijkstra’s-Algorithm"><a href="#Dijkstra’s-Algorithm" class="headerlink" title="Dijkstra’s Algorithm"></a>Dijkstra’s Algorithm</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line">Map&lt;Integer, Integer&gt; dist;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">networkDelayTime</span><span class="params">(<span class="keyword">int</span>[][] times, <span class="keyword">int</span> N, <span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">    Map&lt;Integer, List&lt;<span class="keyword">int</span>[]&gt;&gt; graph = <span class="keyword">new</span> HashMap();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span>[] edge: times)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!graph.containsKey(edge[<span class="number">0</span>]))</span><br><span class="line">            graph.put(edge[<span class="number">0</span>], <span class="keyword">new</span> ArrayList&lt;<span class="keyword">int</span>[]&gt;());</span><br><span class="line">        graph.get(edge[<span class="number">0</span>]).add(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;edge[<span class="number">1</span>], edge[<span class="number">2</span>]&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    dist = <span class="keyword">new</span> HashMap();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> node = <span class="number">1</span>; node &lt;= N; node++)</span><br><span class="line">        dist.put(node, Integer.MAX_VALUE);</span><br><span class="line">    dist.put(K, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">boolean</span>[] seen = <span class="keyword">new</span> <span class="keyword">boolean</span>[N+<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> candNode = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> candDist = Integer.MAX_VALUE;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!seen[i] &amp;&amp; dist.get(i) &lt; candDist)&#123;</span><br><span class="line">                candDist = dist.get(i);</span><br><span class="line">                candNode = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/110-Balanced-Binary-Tree-DFS-7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/04/110-Balanced-Binary-Tree-DFS-7/" itemprop="url">110. Balanced Binary Tree-DFS-7</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T14:51:31+08:00">
+                2018-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/04/110-Balanced-Binary-Tree-DFS-7/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/04/110-Balanced-Binary-Tree-DFS-7/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>判断是否是平衡的。</p>
+<h3 id="top-down"><a href="#top-down" class="headerlink" title="top-down"></a>top-down</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">depth</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> max(depth(root-&gt;left), depth(root-&gt;right))+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isBlanced</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">int</span> left = depth(root-&gt;left);</span><br><span class="line">    <span class="keyword">int</span> right = depth(root-&gt;right);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">abs</span>(left-right) &lt;= <span class="number">1</span> &amp;&amp; isBalanced(root-&gt;left) &amp;&amp; isBalanced(root-&gt;right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="bottom-up"><a href="#bottom-up" class="headerlink" title="bottom-up"></a>bottom-up</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfsHeight</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> leftHeight = dfsHeight(root-&gt;left);</span><br><span class="line">    <span class="keyword">if</span>(leftHeight == <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> rightHeight = dfsHeight(root-&gt;right);</span><br><span class="line">    <span class="keyword">if</span>(rightHeight == <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">abs</span>(leftHeight - rightHeight) &gt; <span class="number">1</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">return</span> max(leftHeight, rightHeight) + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isBlanced</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> dfsHeight(root) != <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/101-Symmetric-Tree-DFS-6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/04/101-Symmetric-Tree-DFS-6/" itemprop="url">101. Symmetric Tree-DFS-6</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T14:36:40+08:00">
+                2018-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/04/101-Symmetric-Tree-DFS-6/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/04/101-Symmetric-Tree-DFS-6/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>判断二叉树是否对称。</p>
+<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSymmetric</span><span class="params">(TreeNode root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> isMirror(root, root);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isMirror</span><span class="params">(TreeNode t1, TreeNode t2)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!t1 &amp;&amp; !t2) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">if</span>(!t1 || !t2) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">return</span> (t1.val==t2.val) &amp;&amp; isMirror(t1.right, t2.left) &amp;&amp; isMirror(t1.left, t2.right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isSymmetric</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> isMirror(root, root);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isMirror</span><span class="params">(TreeNode* t1, TreeNode* t2)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!t1 &amp;&amp; !t2) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span>(!t1 || !t2) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> (t1-&gt;val == t2-&gt;val) &amp;&amp; isMirror(t1-&gt;right, t2-&gt;left) &amp;&amp; isMirror(t1-&gt;left, t2-&gt;right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>time: $O(M+N)$(use O(1) to check if it contains an element)</li>
-<li>space: $O(M)$</li>
+<li>time: $O(n)$</li>
+<li><p>space: $O(n)$</p>
+<h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSymmetric</span><span class="params">(TreeNode root)</span></span>&#123;</span><br><span class="line">    Queue&lt;TreeNode&gt; q = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    q.add(root);</span><br><span class="line">    q.add(root);</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())&#123;</span><br><span class="line">        TreeNode t1 = q.poll();</span><br><span class="line">        TreeNode t2 = q.poll();</span><br><span class="line">        <span class="keyword">if</span>(!t1 &amp;&amp; !t2) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span>(!t1 || !t2) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(t1.val != t2.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        q.add(t1.left);</span><br><span class="line">        q.add(t2.right);</span><br><span class="line">        q.add(t1.right);</span><br><span class="line">        q.add(t2.left);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>time: $O(n)$</p>
+</li>
+<li>space: $O(n)$</li>
 </ul>
 
           
@@ -610,7 +1082,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/300-Longest-Increasing-Subsequence-DP-12/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/257-Binary-Tree-Paths-DFS-5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -629,7 +1101,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/02/300-Longest-Increasing-Subsequence-DP-12/" itemprop="url">300. Longest Increasing Subsequence-DP-12</a></h1>
+                <a class="post-title-link" href="/2018/11/04/257-Binary-Tree-Paths-DFS-5/" itemprop="url">257. Binary Tree Paths-DFS-5</a></h1>
         
 
         <div class="post-meta">
@@ -641,8 +1113,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T20:25:12+08:00">
-                2018-11-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T13:56:14+08:00">
+                2018-11-04
               </time>
             
 
@@ -682,9 +1154,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/02/300-Longest-Increasing-Subsequence-DP-12/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/04/257-Binary-Tree-Paths-DFS-5/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/02/300-Longest-Increasing-Subsequence-DP-12/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/04/257-Binary-Tree-Paths-DFS-5/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -714,16 +1186,9 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>寻找一个序列中的最长上升子序列</p>
-<h3 id="方法一：暴力"><a href="#方法一：暴力" class="headerlink" title="方法一：暴力"></a>方法一：暴力</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLIS</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> lengthofLIS(nums, Integer.MIN_VALUE, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthofLIS</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> prev, <span class="keyword">int</span> curpos)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(curpos == nums.length) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> taken = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(nums[curpos] &gt; prev)&#123;</span><br><span class="line">        taken = <span class="number">1</span> + lengthofLIS(nums, nums[curpos], curpos+<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> nottaken = lengthofLIS(nums, nums[curpos], curpos+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> Math.max(taken, nottaken);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>time: $O(2^n)$,<br>space: $O(n^2)$</p>
-<h3 id="方法二：带记忆的递归"><a href="#方法二：带记忆的递归" class="headerlink" title="方法二：带记忆的递归"></a>方法二：带记忆的递归</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLIS</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> memo[][] = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length + <span class="number">1</span>][nums.length];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span>[] l: memo) Arrays.fill(l, -<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> lengthofLIS(nums, -<span class="number">1</span>, <span class="number">0</span>, memo);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthofLIS</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> precindex, <span class="keyword">int</span> curpos, <span class="keyword">int</span>[][] memo)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(curpos == nums.length) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(memo[previndex+<span class="number">1</span>][curpos] &gt;= <span class="number">0</span>) <span class="keyword">return</span> memo[previndex+<span class="number">1</span>][curpos];</span><br><span class="line">    <span class="keyword">int</span> taken = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(previndex &lt; <span class="number">0</span> || nums[curpos] &gt; nums[previndex])&#123;</span><br><span class="line">        taken = <span class="number">1</span> + lengthofLIS(nums, curpos, curpos+<span class="number">1</span>, memo);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> nottaken = lengthofLIS(nums, previndex, curpos+<span class="number">1</span>, memo);</span><br><span class="line">    memo[previndex+<span class="number">1</span>][curpos] = Math.max(taken, nottaken);</span><br><span class="line">    <span class="keyword">return</span> memo[previndex+<span class="number">1</span>][curpos];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>time: $O(n^2)$,<br>space: $O(n^2)$</p>
-<h3 id="方法三：动态规划"><a href="#方法三：动态规划" class="headerlink" title="方法三：动态规划"></a>方法三：动态规划</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLIS</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(nums.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> maxans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; dp.length; i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> maxval = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i] &gt; nums[j])</span><br><span class="line">                maxval = Math.max(maxval, dp[j]);</span><br><span class="line">        &#125;</span><br><span class="line">        dp[i] = maxval + <span class="number">1</span>;</span><br><span class="line">        maxans = Math.max(maxans, dp[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>time: $O(n^2)$,<br>space: $O(n)$</p>
-<h3 id="方法四：使用了二分搜索的动态规划"><a href="#方法四：使用了二分搜索的动态规划" class="headerlink" title="方法四：使用了二分搜索的动态规划"></a>方法四：使用了二分搜索的动态规划</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLIS</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">    <span class="keyword">int</span> len = <span class="number">0</span>; </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> num: nums)&#123;</span><br><span class="line">        <span class="keyword">int</span> i = Arrays.binarySearch(dp, <span class="number">0</span>, len, num);</span><br><span class="line">        <span class="keyword">if</span>(i &lt; <span class="number">0</span>) i = -(i+<span class="number">1</span>);</span><br><span class="line">        dp[i] = num;</span><br><span class="line">        <span class="keyword">if</span>(i == len) len++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> len;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>time: $O(nlogn)$,<br>space: $O(n)$</p>
-
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>找到所有从根到叶子的路径。</p>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">binaryTreePaths</span><span class="params">(TreeNode root)</span></span>&#123;</span><br><span class="line">    List&lt;String&gt; answer = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">    <span class="keyword">if</span>(root != <span class="keyword">null</span>) searchBT(root, <span class="string">""</span>, answer);</span><br><span class="line">    <span class="keyword">return</span> answer;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">searchBT</span><span class="params">(TreeNode root, String path, List&lt;String&gt; answer)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root.left == <span class="keyword">null</span> &amp;&amp; root.right == <span class="keyword">null</span>) answer.add(path+root.val);</span><br><span class="line">    <span class="keyword">if</span>(root.left != <span class="keyword">null</span>) searchBT(root.left, path+root.val+<span class="string">"-&gt;"</span>, answer);</span><br><span class="line">    <span class="keyword">if</span>(root.right != <span class="keyword">null</span>) searchBT(root.right, path+root.val+<span class="string">"-&gt;"</span>, answer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">binaryTreePaths</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; result, TreeNode* root, <span class="built_in">string</span> t)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!root-&gt;left &amp;&amp; !root-&gt;right) &#123;</span><br><span class="line">        result.push_back(t);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(root-&gt;left) binaryTreePaths(result, root-&gt;left, t+<span class="string">"-&gt;"</span>+to_string(root-&gt;left-&gt;val));</span><br><span class="line">    <span class="keyword">if</span>(root-&gt;right) binaryTreePaths(result, root-&gt;right, t+<span class="string">"-&gt;"</span>+to_string(root-&gt;right-&gt;val));</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; binaryTreePaths(TreeNode* root)&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; result;</span><br><span class="line">    <span class="keyword">if</span>(!root) <span class="keyword">return</span> result;</span><br><span class="line">    binaryTreePaths(result, root, to_string(root-&gt;val));</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -771,7 +1236,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/714-Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee-DP-11/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/108-Convert-Sorted-Array-to-Binary-Search-Tree-DFS-4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -790,7 +1255,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/02/714-Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee-DP-11/" itemprop="url">714. Best Time to Buy and Sell Stock with Transaction Fee-DP-11</a></h1>
+                <a class="post-title-link" href="/2018/11/04/108-Convert-Sorted-Array-to-Binary-Search-Tree-DFS-4/" itemprop="url">108. Convert Sorted Array to Binary Search Tree-DFS-4</a></h1>
         
 
         <div class="post-meta">
@@ -802,8 +1267,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T19:35:48+08:00">
-                2018-11-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T13:48:48+08:00">
+                2018-11-04
               </time>
             
 
@@ -843,9 +1308,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/02/714-Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee-DP-11/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/04/108-Convert-Sorted-Array-to-Binary-Search-Tree-DFS-4/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/02/714-Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee-DP-11/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/04/108-Convert-Sorted-Array-to-Binary-Search-Tree-DFS-4/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -875,23 +1340,8 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>带手续费的买卖股票最佳时间。可以买卖多次，但是买之前必须先卖出已经有的。手续费只在卖的时候收。<br>问最大的盈利可以是多少？</p>
-<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>在第i天结束的时候，用 cash 来表示我们手上没有股票的时候拥有的最大利润，用 hold 来表示我们手上有股票时拥有的最大利润。对于 cash 变量而言，有两种情况</p>
-<ul>
-<li>我们前一天手上就没有股票，那么我们今天也不再买，这样就保持了手上没有股票，该利润用 cash 来表示。即 <code>cash = cash</code></li>
-<li>我们前一天手上是有股票的，为了满足 cash 这个变量的要求（它只表示手上没有股票时的最大利润），我们在今天必须卖出，由于前一天手上是有股票的，所以前一天的最大利润用 hold 表示，这样 <code>cash = hold + prices[i] - fee</code></li>
-</ul>
-<p>我们的目标是利润最大化，所以：<br><code>cash = max(cash, hold + prices[i] - fee)</code>。</p>
-<p>对于 hold 变量而言，也有两种情况：</p>
-<ul>
-<li>我们前一天手上就有股票，那么今天保留股票就可以满足要求：<code>hold = hold</code></li>
-<li>我们前一天没有股票，为了手上能够有股票，我们需要在这一天买入，而因为前一天手上没有股票，所以前一天的利润用 cash 来表示。故：<code>hold = cash - prices[i]</code></li>
-</ul>
-<p>目标是利润最大化，故：<br><code>hold = max(hold, cash - prices[i])</code></p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxProfit</span><span class="params">(self, prices, fee)</span>:</span></span><br><span class="line">    cash, hold = <span class="number">0</span>, -prices[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(prices)):</span><br><span class="line">        cash = max(cash, hold + prices[i] - fee)</span><br><span class="line">        hold = max(hold, cash - prices[i])</span><br><span class="line">    <span class="keyword">return</span> cash</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices, <span class="keyword">int</span> fee)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> cash = <span class="number">0</span>, hold = -prices[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; prices.length; i++)&#123;</span><br><span class="line">        cash = Math.max(cash, hold + prices[i] - fee);</span><br><span class="line">        hold = Math.max(hold, cash - prices[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cash;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>time: $O(N)$,<br>space: $O(1)$</p>
-
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个升序的数组，将其转化为平衡二叉树。</p>
+<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TreeNode* <span class="title">sortedArrayToBST</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; num)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(num.size() == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">if</span>(num.size() == <span class="number">1</span>) <span class="keyword">return</span> <span class="keyword">new</span> TreeNode(num[<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">int</span> middle = num.size()/<span class="number">2</span>;</span><br><span class="line">    TreeNode* root = <span class="keyword">new</span> TreeNode(num[middle]);</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; leftInts(num.begin(), num.begin()+middle);</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; rightInts(num.begin()+middle+<span class="number">1</span>, num.end());</span><br><span class="line">    root-&gt;left = sortedArrayToBST(leftInts);</span><br><span class="line">    root-&gt;right = sortedArrayToBST(rightInts);</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -939,7 +1389,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/712-Minimum-ASCII-Delete-Sum-for-Two-Strings-DP-10/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/733-Flood-Fill-DFS-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -958,7 +1408,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/02/712-Minimum-ASCII-Delete-Sum-for-Two-Strings-DP-10/" itemprop="url">712. Minimum ASCII Delete Sum for Two Strings-DP-10</a></h1>
+                <a class="post-title-link" href="/2018/11/04/733-Flood-Fill-DFS-3/" itemprop="url">733. Flood Fill-DFS-3</a></h1>
         
 
         <div class="post-meta">
@@ -970,8 +1420,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T19:10:06+08:00">
-                2018-11-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T13:33:26+08:00">
+                2018-11-04
               </time>
             
 
@@ -1011,9 +1461,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/02/712-Minimum-ASCII-Delete-Sum-for-Two-Strings-DP-10/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/04/733-Flood-Fill-DFS-3/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/02/712-Minimum-ASCII-Delete-Sum-for-Two-Strings-DP-10/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/04/733-Flood-Fill-DFS-3/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1043,11 +1493,12 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给两个字符串，两边各删除一些字符使得两个字符串最终能够相等，问删除的字符ASCII之和最小是多少？</p>
-<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>用 dp[i][j] 表示对于 s1[i:] 和 s2[j:] 的解。<br>其中一个字符串为空时，答案是另一个字符串的 ASCII 总和：<br>$$<br>dp[i][s2.length()] = dp[i+1][s2.length()] + s1.codePointAt(i)<br>$$<br>如果 s1[i] == s2[j]，有 dp[i][j] = dp[i+1][j+1]。<br>如果 s1[i] != s2[j]，需要进行删除<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">def minimumDeleteSum(self, s1, s2):</span><br><span class="line">    dp = [[<span class="number">0</span>] * (len(s2)+<span class="number">1</span>) <span class="keyword">for</span> _ in xrange(len(s1)+<span class="number">1</span>)]</span><br><span class="line">    <span class="keyword">for</span> i in xrange(len(s1) - <span class="number">1</span>, <span class="number">-1</span>, <span class="number">-1</span>):</span><br><span class="line">        dp[i][len(s2)] = dp[i+<span class="number">1</span>][len(s2)] + ord(s1[i])</span><br><span class="line">    <span class="keyword">for</span> j in xrange(len(s2) - <span class="number">1</span>, <span class="number">-1</span>, <span class="number">-1</span>):</span><br><span class="line">        dp[len(s1)][j] = dp[len(s1)[j+<span class="number">1</span>]] + ord(s2[j])</span><br><span class="line">    <span class="keyword">for</span> i in xrange(len(s1) - <span class="number">1</span>, <span class="number">-1</span>, <span class="number">-1</span>):</span><br><span class="line">        <span class="keyword">for</span> j in xrange(len(s1) - <span class="number">1</span>, <span class="number">-1</span>, <span class="number">-1</span>):</span><br><span class="line">            <span class="keyword">if</span> s1[i] == s2[j]:</span><br><span class="line">                dp[i][j] = dp[i+<span class="number">1</span>][j+<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                dp[i][j] = min(dp[i+<span class="number">1</span>][j] + ord(s1[i]), dp[i][j+<span class="number">1</span>] + ord(s2[j]))</span><br><span class="line">    <span class="keyword">return</span> dp[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">    </span><br><span class="line"><span class="comment">// C++ version</span></span><br><span class="line"><span class="keyword">int</span> minimumDeleteSum(<span class="built_in">string</span> s1, <span class="built_in">string</span> s2) &#123;</span><br><span class="line">    <span class="keyword">int</span> len1 = s1.size();</span><br><span class="line">    <span class="keyword">int</span> len2 = s2.size();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dp(len1+<span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(len2+<span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = len1<span class="number">-1</span>; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">        dp[i][len2] = dp[i+<span class="number">1</span>][len2] + s1[i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = len2<span class="number">-1</span>; j &gt;= <span class="number">0</span>; j--)</span><br><span class="line">        dp[len1][j] = dp[len1][j+<span class="number">1</span>] + s2[j];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = len1<span class="number">-1</span>; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = len2<span class="number">-1</span>; j &gt;= <span class="number">0</span>; j--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s1[i] == s2[j])</span><br><span class="line">                dp[i][j] = dp[i+<span class="number">1</span>][j+<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                dp[i][j] = min(dp[i+<span class="number">1</span>][j]+s1[i], dp[i][j+<span class="number">1</span>]+s2[j]);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>用一个像素值来填充图片中同色的区域。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">image =</span><br><span class="line">1 1 1</span><br><span class="line">1 1 0</span><br><span class="line">1 0 1</span><br><span class="line">(sr,sc)=(1,1), newColor=2 -&gt;</span><br><span class="line">2 2 2</span><br><span class="line">2 2 0</span><br><span class="line">2 0 1</span><br></pre></td></tr></table></figure></p>
+<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[][] floodFill(<span class="keyword">int</span>[][] image, <span class="keyword">int</span> sr, <span class="keyword">int</span> sc, <span class="keyword">int</span> newColor)&#123;</span><br><span class="line">    <span class="keyword">int</span> color = image[sr][sc];</span><br><span class="line">    <span class="keyword">if</span>(color != newColor) dfs(image, sr, sc, color, newColor);</span><br><span class="line">    <span class="keyword">return</span> image;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span>[][] image, <span class="keyword">int</span> r, <span class="keyword">int</span> c, <span class="keyword">int</span> color, <span class="keyword">int</span> newColor)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(image[r][c] == color)&#123;</span><br><span class="line">        image[r][c] = newColor;</span><br><span class="line">        <span class="keyword">if</span>(r &gt;= <span class="number">1</span>) dfs(image, r-<span class="number">1</span>, c, color, newColor);</span><br><span class="line">        <span class="keyword">if</span>(c &gt;= <span class="number">1</span>) dfs(image, r, c-<span class="number">1</span>, color, newColor);</span><br><span class="line">        <span class="keyword">if</span>(r+<span class="number">1</span> &lt; image.length) dfs(image, r+<span class="number">1</span>, c, color, newColor);</span><br><span class="line">        <span class="keyword">if</span>(c+<span class="number">1</span> &lt; image[<span class="number">0</span>].length) dfs(image, r, c+<span class="number">1</span>, color, newColor);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">floodFill</span><span class="params">(self, image, sr, sc, newColor)</span>:</span></span><br><span class="line">    R, C = len(image), len(image[<span class="number">0</span>])</span><br><span class="line">    color = image[sr][sc];</span><br><span class="line">    <span class="keyword">if</span> color == newColor: <span class="keyword">return</span> image</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(r, c)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> image[r][c] == color:</span><br><span class="line">            image[r][c] = newColor</span><br><span class="line">            <span class="keyword">if</span> r &gt;= <span class="number">1</span>: dfs(r<span class="number">-1</span>, c)</span><br><span class="line">            <span class="keyword">if</span> r+<span class="number">1</span> &lt; R: dfs(r+<span class="number">1</span>, c)</span><br><span class="line">            <span class="keyword">if</span> c &gt;= <span class="number">1</span>: dfs(r, c<span class="number">-1</span>)</span><br><span class="line">            <span class="keyword">if</span> c+<span class="number">1</span> &lt; C: dfs(r, c+<span class="number">1</span>)</span><br><span class="line">    dfs(sr, sc)</span><br><span class="line">    <span class="keyword">return</span> image</span><br></pre></td></tr></table></figure>
 <ul>
-<li>time: $O(M*N)$, where M, N are the lengths of the given strings.</li>
-<li>space: $O(M*N)$</li>
+<li>time: $O(N)$</li>
+<li>space: $O(N)$</li>
 </ul>
 
           
@@ -1097,7 +1548,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/647-Palindromic-Substrings-DP-9/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/100-Same-Tree-DFS-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -1116,7 +1567,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/02/647-Palindromic-Substrings-DP-9/" itemprop="url">647. Palindromic Substrings-DP-9</a></h1>
+                <a class="post-title-link" href="/2018/11/04/100-Same-Tree-DFS-2/" itemprop="url">100. Same Tree-DFS-2</a></h1>
         
 
         <div class="post-meta">
@@ -1128,8 +1579,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T18:20:32+08:00">
-                2018-11-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T13:28:41+08:00">
+                2018-11-04
               </time>
             
 
@@ -1169,9 +1620,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/02/647-Palindromic-Substrings-DP-9/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/04/100-Same-Tree-DFS-2/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/02/647-Palindromic-Substrings-DP-9/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/04/100-Same-Tree-DFS-2/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1201,12 +1652,8 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>数一下一个字符串中回文子串的个数</p>
-<h3 id="方法一：在中心扩张"><a href="#方法一：在中心扩张" class="headerlink" title="方法一：在中心扩张"></a>方法一：在中心扩张</h3><p>枚举所有可能为回文子串中心的下标。注意区分奇数长度和偶数长度。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">countSubstrings</span><span class="params">(String S)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N = S.length(), ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> center = <span class="number">0</span>; center &lt;= <span class="number">2</span>*N-<span class="number">1</span>; center++)&#123;</span><br><span class="line">        <span class="keyword">int</span> left = center/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">int</span> right = left + center%<span class="number">2</span>; <span class="comment">// 用来处理奇偶</span></span><br><span class="line">        <span class="keyword">while</span>(left &gt;= <span class="number">0</span> &amp;&amp; right &lt; N &amp;&amp; S.charAt(left) == S.charAt(right))&#123;</span><br><span class="line">            ans++;</span><br><span class="line">            left--;</span><br><span class="line">            right++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 另一种写法</span></span><br><span class="line"><span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">countSubstring</span><span class="params">(String s)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s==<span class="keyword">null</span> || s.length() == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++)&#123;</span><br><span class="line">        extendPalindrome(s, i, i); <span class="comment">// odd length</span></span><br><span class="line">        extendPalindrome(s, i, i+<span class="number">1</span>); <span class="comment">// even length</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">extendPalindrome</span><span class="params">(String s, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(left &gt;= <span class="number">0</span> &amp;&amp; right &lt; s.length() &amp;&amp; s.charAt(left) == s.charAt(right))&#123;</span><br><span class="line">        count++; left--; right++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>time: $O(n^2)$,<br>space: $O(1)$</p>
-<h3 id="方法二：Manacher’s-Algorithm"><a href="#方法二：Manacher’s-Algorithm" class="headerlink" title="方法二：Manacher’s Algorithm"></a>方法二：Manacher’s Algorithm</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">countSubstrings</span><span class="params">(String S)</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>[] A = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">2</span> * S.length() + <span class="number">3</span>];</span><br><span class="line">    A[<span class="number">0</span>] = <span class="string">'@'</span>;</span><br><span class="line">    A[<span class="number">1</span>] = <span class="string">'#'</span>;</span><br><span class="line">    A[A.length-<span class="number">1</span>] = <span class="string">'$'</span>;</span><br><span class="line">    <span class="keyword">int</span> t = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> c: S.toCharArray())&#123;</span><br><span class="line">        A[t++] = c;</span><br><span class="line">        A[t++] = <span class="string">'#'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span>[] Z = <span class="keyword">new</span> <span class="keyword">int</span>[A.length];</span><br><span class="line">    <span class="keyword">int</span> center = <span class="number">0</span>, right = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; Z.length-<span class="number">1</span>; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(i &lt; right)</span><br><span class="line">            Z[i] = Math.min(right-i, Z[<span class="number">2</span>*center-i]);</span><br><span class="line">        <span class="keyword">while</span>(A[i + Z[i] + <span class="number">1</span>] == A[i - Z[i] - <span class="number">1</span>]) Z[i]++;</span><br><span class="line">        <span class="keyword">if</span>(i + Z[i] &gt; right)&#123;</span><br><span class="line">            center = i;</span><br><span class="line">            right = i + Z[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> v: Z) ans += (v+<span class="number">1</span>)/<span class="number">2</span>; <span class="comment">// for v is the longest </span></span><br><span class="line">    <span class="comment">// polindromic substring centered at C, then the substrings </span></span><br><span class="line">    <span class="comment">// with radius R-1, R-2 ... 0, also form polindrome</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>time: $O(N)$,<br>space: $O(N)$</p>
-
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>判断两个树是否一样</p>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isSameTree</span><span class="params">(TreeNode* p, TreeNode* q)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(p == <span class="literal">NULL</span> || q == <span class="literal">NULL</span>) <span class="keyword">return</span> (p==q);</span><br><span class="line">    <span class="keyword">return</span> (p-&gt;val == q-&gt;val &amp;&amp; isSameTree(p-&gt;left, q-&gt;left) &amp;&amp; isSameTree(p-&gt;right, q-&gt;right));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -1254,7 +1701,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/413-Arithmetic-Slices-DP-8/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/897-Increasing-Order-Search-Tree-DFS-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -1273,7 +1720,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/02/413-Arithmetic-Slices-DP-8/" itemprop="url">413. Arithmetic Slices-DP-8</a></h1>
+                <a class="post-title-link" href="/2018/11/04/897-Increasing-Order-Search-Tree-DFS-1/" itemprop="url">897. Increasing Order Search Tree-DFS-1</a></h1>
         
 
         <div class="post-meta">
@@ -1285,8 +1732,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T17:27:26+08:00">
-                2018-11-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T12:22:09+08:00">
+                2018-11-04
               </time>
             
 
@@ -1326,9 +1773,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/02/413-Arithmetic-Slices-DP-8/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/04/897-Increasing-Order-Search-Tree-DFS-1/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/02/413-Arithmetic-Slices-DP-8/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/04/897-Increasing-Order-Search-Tree-DFS-1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1358,486 +1805,14 @@
       
         
           
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个数组，找出其中可以切分出的算术级数序列的个数</p>
-<h3 id="方法一：暴力"><a href="#方法一：暴力" class="headerlink" title="方法一：暴力"></a>方法一：暴力</h3><p>枚举所有可能出现的情况。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numberOfArithmeticSlices</span><span class="params">(<span class="keyword">int</span>[] A)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> s = <span class="number">0</span>; s &lt; A.length-<span class="number">2</span>; s++)&#123; <span class="comment">// s denotes start</span></span><br><span class="line">        <span class="keyword">int</span> d = A[s+<span class="number">1</span>] - A[s];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> e = s+<span class="number">2</span>; e &lt; A.length; e++)&#123; <span class="comment">// e denotes end</span></span><br><span class="line">            <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(i = s+<span class="number">1</span>; i &lt;= e; i++)</span><br><span class="line">                <span class="keyword">if</span>(A[i] - A[i-<span class="number">1</span>] != d)</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">if</span>(i &gt; e) count++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>time: $O(n^3)$,<br>space: $O(1)$</p>
-<h3 id="方法二：暴力优化"><a href="#方法二：暴力优化" class="headerlink" title="方法二：暴力优化"></a>方法二：暴力优化</h3><p>之前的方法在检查[s,e+1]时还要再重复[s,e]中的部分，所以是多余的，可以进行优化：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numberOfArithmeticSlices</span><span class="params">(<span class="keyword">int</span>[] A)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> s = <span class="number">0</span>; s &lt; A.length - <span class="number">2</span>; s++)</span><br><span class="line">        <span class="keyword">int</span> d = A[s+<span class="number">1</span>] - A[s];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> e = s+<span class="number">2</span>; e &lt; A.length; e++)</span><br><span class="line">            <span class="keyword">if</span>(A[e] - A[e - <span class="number">1</span>] == d) count++;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>time: $O(n^2)$,<br>space: $O(1)$</p>
-<h3 id="方法三：使用递归"><a href="#方法三：使用递归" class="headerlink" title="方法三：使用递归"></a>方法三：使用递归</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numberOfArithmeticSlices</span><span class="params">(<span class="keyword">int</span>[] A)</span></span>&#123;</span><br><span class="line">    slices(A, A.length - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">slices</span><span class="params">(<span class="keyword">int</span>[] A, <span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(i &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> ap = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(A[i] - A[i-<span class="number">1</span>] == A[i-<span class="number">1</span>] - A[i-<span class="number">2</span>])&#123;</span><br><span class="line">        ap = <span class="number">1</span> + slices(A, i-<span class="number">1</span>);</span><br><span class="line">        sum += ap;</span><br><span class="line">    &#125; <span class="keyword">else</span></span><br><span class="line">        slices(A, i-<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> ap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>time: $O(n)$,<br>space: $O(n)$</p>
-<h3 id="方法四：动态规划"><a href="#方法四：动态规划" class="headerlink" title="方法四：动态规划"></a>方法四：动态规划</h3><p>dp[i]表示(k,j)范围内可能的切片数量。k在满足(k,j)形成算术级数时尽可能小。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numberOfArithmeticSlices</span><span class="params">(<span class="keyword">int</span>[] A)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[A.length];</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; dp.length; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(A[i] - A[i-<span class="number">1</span>] == A[i-<span class="number">1</span>] - A[i-<span class="number">2</span>])&#123;</span><br><span class="line">            dp[i] = <span class="number">1</span>+dp[i-<span class="number">1</span>];</span><br><span class="line">            sum += dp[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>time: $O(n)$,<br>space: $O(n)$<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 可改进为只用一个变量，因为每次循环只用了dp[i-1]</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numberOfArithmeticSlices</span><span class="params">(<span class="keyword">int</span>[] A)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> dp = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; A.length; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(A[i] - A[i-<span class="number">1</span>] == A[i-<span class="number">1</span>] - A[i-<span class="number">2</span>])&#123;</span><br><span class="line">            dp = <span class="number">1</span> + dp;</span><br><span class="line">            sum += dp;</span><br><span class="line">        &#125; <span class="keyword">else</span> dp = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>time: $O(n)$,<br>space: $O(1)$ </p>
-<h3 id="方法六：使用公式"><a href="#方法六：使用公式" class="headerlink" title="方法六：使用公式"></a>方法六：使用公式</h3><p>可以观察到，对于连续发现k个间距相同的元素时，我们对总和依次加上了1,2,3,…k，所以每当数到一个连续时，给count变量加上1，当发现不连续时，在总和里面直接加上 $count*(count+1)/2$<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numberOfArithmeticSlices</span><span class="params">(<span class="keyword">int</span>[] A)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; A.length; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(A[i] - A[i-<span class="number">1</span>] == A[i-<span class="number">1</span>] - A[i-<span class="number">2</span>]) count++;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            sum += (count+<span class="number">1</span>)*count/<span class="number">2</span>;</span><br><span class="line">            count = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum += (count+<span class="number">1</span>)*count/<span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/877-Stone-Game-DP-7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/02/877-Stone-Game-DP-7/" itemprop="url">877. Stone Game-DP-7</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T15:45:04+08:00">
-                2018-11-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/02/877-Stone-Game-DP-7/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/02/877-Stone-Game-DP-7/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>有偶数摞石块，第i摞用 piles[i] 来表示。石块的总数是奇数，两个人轮流取一摞石块，问到最后第一个取石块的人是否永远拥有一个可以胜出的策略？</p>
-<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>dp(i, j) 表示当剩余的石头堆为 piles[i],…piles[j] 时可以得到的最大分数（这个分数指的是A得到的分数减去B得到的分数，对于A来讲，他如果想赢的话，就要让这个分数最大，对于B来讲，他要让这个分数最小）。对于 A ，我们要让这个分数最大：<br>$$<br>dp(i, j) = max(piles[i] + dp(i+1, j), piles[j] + dp(i, j-1))<br>$$<br>对于 B，我们要让这个分数最小（B拿的石块会减小总分数）：<br>$$<br>dp(i, j) = min(-piles[i] + dp(i+1, j), -piles[j] + dp(i, j-1))<br>$$<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">stoneGame</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; piles)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N = piles.size();</span><br><span class="line">    <span class="comment">// dp[i+1][j+1] = the value of the game [piles[i]...piles[j]]</span></span><br><span class="line">    <span class="keyword">int</span> dp[N+<span class="number">2</span>][N+<span class="number">2</span>];</span><br><span class="line">    <span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> size = <span class="number">1</span>; size &lt;= N; size++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>, j = size<span class="number">-1</span>; j &lt; N; i++, j++)&#123;</span><br><span class="line">            <span class="keyword">int</span> parity = (j-i-N) % <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(parity) </span><br><span class="line">                dp[i+<span class="number">1</span>][j+<span class="number">1</span>] = max(piles[i]+dp[i+<span class="number">2</span>][j+<span class="number">1</span>], piles[j]+dp[i+<span class="number">1</span>][j]);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                dp[i+<span class="number">1</span>][j+<span class="number">1</span>] = min(-piles[i]+dp[i+<span class="number">2</span>][j+<span class="number">1</span>], -piles[j]+dp[i+<span class="number">1</span>][j]);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[<span class="number">1</span>][N] &gt; <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/338-Counting-Bits-DP-6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/02/338-Counting-Bits-DP-6/" itemprop="url">338. Counting Bits-DP-6</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T15:23:39+08:00">
-                2018-11-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/02/338-Counting-Bits-DP-6/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/02/338-Counting-Bits-DP-6/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个数字num，对于所有的在 [0, num] 范围内的数字 i，计算他们二进制形式中1的个数，返回为一个数组。<br>如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：2</span><br><span class="line">输出：[0,1,1]</span><br></pre></td></tr></table></figure></p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>递推方程为：<br>$$<br>f[i] = f[i/2] + i\%2<br>$$<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; countBits(<span class="keyword">int</span> num)&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">    ans.push_back(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= num; i++)&#123;</span><br><span class="line">        ans.push_back(ans[i/<span class="number">2</span>] + i%<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 直接判断</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; countBits(<span class="keyword">int</span> num) &#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= num; i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> c = <span class="number">0</span>, a = i;</span><br><span class="line">        <span class="keyword">while</span>(a)&#123;</span><br><span class="line">            a &amp;= a<span class="number">-1</span>;</span><br><span class="line">            c++;</span><br><span class="line">        &#125;</span><br><span class="line">        ans.push_back(c);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 另外一种解法</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; countBits(<span class="keyword">int</span> num) &#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">    ans.push_back(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= num; i++)</span><br><span class="line">        ans.push_back(ans[i&amp;(i<span class="number">-1</span>)] + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/303-Range-Sum-Query-Immutable-DP-5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/02/303-Range-Sum-Query-Immutable-DP-5/" itemprop="url">303. Range Sum Query-Immutable-DP-5</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T15:06:07+08:00">
-                2018-11-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/02/303-Range-Sum-Query-Immutable-DP-5/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/02/303-Range-Sum-Query-Immutable-DP-5/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个数组，给一个下标范围，求范围内数组的和。</p>
-<h3 id="方法一：暴力"><a href="#方法一：暴力" class="headerlink" title="方法一：暴力"></a>方法一：暴力</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">int</span>[] data;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">NumArray</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">    data = nums;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">sumRange</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k = i; k &lt;= j; k++)</span><br><span class="line">        sum += data[k];</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>time: O(n),<br>space: O(1) (data is a reference to nums and is not a copy of it)</p>
-<h3 id="方法二：Caching"><a href="#方法二：Caching" class="headerlink" title="方法二：Caching"></a>方法二：Caching</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Map&lt;Pair&lt;Integer, Integer&gt;, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">NumArray</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i; j &lt; nums.length; j++)&#123;</span><br><span class="line">            sum += nums[j];</span><br><span class="line">            map.put(Pair.create(i, j), sum);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">sumRange</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> map.get(Pair.create(i, j));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>time: $O(1)$ time per query, $O(n^2)$ time pre-computation,</p>
-<p>space: $O(n^2)$</p>
-<h3 id="方法三：Caching"><a href="#方法三：Caching" class="headerlink" title="方法三：Caching"></a>方法三：Caching</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// sum[k] 是 nums[0...k-1] 的和</span></span><br><span class="line"><span class="comment">// sumRange(i, j) = sum[j+1] - sum[i]</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span>[] sum;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">NumArray</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">    sum = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length+<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++)</span><br><span class="line">        sum[i+<span class="number">1</span>] = sum[i] + nums[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">sumRange</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> sum[j+<span class="number">1</span>] - sum[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>time: $O(1)$ time per query, $O(n)$ time pre-computation</p>
-<p>space: $O(n)$<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NumArray</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; sum;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    NumArray(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums) &#123;</span><br><span class="line">        sum.push_back(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span>&amp; num: nums)</span><br><span class="line">            sum.push_back(sum.back() + num);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">sumRange</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> sum[j+<span class="number">1</span>] - sum[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个树，根据它的中序遍历序列重新进行调整，使每一个结点只有有孩子没有左孩子。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode *left;</span><br><span class="line">    TreeNode *right;</span><br><span class="line">    TreeNode(<span class="keyword">int</span> x): val(x), left(<span class="literal">NULL</span>), right(<span class="literal">NULL</span>)&#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">increasingBST</span><span class="params">(TreeNode root)</span></span>&#123;</span><br><span class="line">    List&lt;Integer&gt; vals = <span class="keyword">new</span> ArrayList();</span><br><span class="line">    inorder(root, vals);</span><br><span class="line">    TreeNode ans = <span class="keyword">new</span> TreeNode(<span class="number">0</span>), cur = ans;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> v: vals)&#123;</span><br><span class="line">        cur.right = <span class="keyword">new</span> TreeNode(v);</span><br><span class="line">        cur = cur.right;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans.right;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">inorder</span><span class="params">(TreeNode node, List&lt;Integer&gt; vals)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!node) <span class="keyword">return</span>;</span><br><span class="line">    inorder(node.left, vals);</span><br><span class="line">    vals.add(node.val);</span><br><span class="line">    inorder(node.right, vals);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">increasingBST</span><span class="params">(self, root)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inorder</span><span class="params">(node)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> node:</span><br><span class="line">            <span class="keyword">yield</span> <span class="keyword">from</span> inorder(node.left)</span><br><span class="line">            <span class="keyword">yield</span> node.val</span><br><span class="line">            <span class="keyword">yield</span> <span class="keyword">from</span> inorder(node.right)</span><br><span class="line">    ans = cur = TreeNode(<span class="keyword">None</span>)</span><br><span class="line">    <span class="keyword">for</span> v <span class="keyword">in</span> inorder(root):</span><br><span class="line">        cur.right = TreeNode(v)</span><br><span class="line">        cur = cur.right</span><br><span class="line">    <span class="keyword">return</span> ans.right</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="function">TreeNode* <span class="title">increasingBST</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> increasintBST(root, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">TreeNode* <span class="title">increasingBST</span><span class="params">(TreeNode* root, TreeNode* tail = <span class="literal">NULL</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!root) <span class="keyword">return</span> tail;</span><br><span class="line">    TreeNode* res = increasingBST(root-&gt;left, root);</span><br><span class="line">    root-&gt;left = <span class="literal">NULL</span>;</span><br><span class="line">    root-&gt;right = increasingBST(root-&gt;right, tail);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>time: $O(N)$</li>
+<li>space: $O(N)$</li>
+</ul>
 
           
         
@@ -1877,7 +1852,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1917,7 +1892,7 @@
                 alt="Wine&Chord" />
             
               <p class="site-author-name" itemprop="name">Wine&Chord</p>
-              <p class="site-description motion-element" itemprop="description">主要用于记录学习经历</p>
+              <p class="site-description motion-element" itemprop="description">记录学习经历</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -1927,7 +1902,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">155</span>
+                  <span class="site-state-item-count">186</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1938,7 +1913,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1949,7 +1924,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">71</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

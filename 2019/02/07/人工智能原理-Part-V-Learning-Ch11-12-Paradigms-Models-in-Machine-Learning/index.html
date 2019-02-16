@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/blog-logo180.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog-logo32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog-logo16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Artificial Intelligence," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Ch11 Paradigms11.1 Supervised Learning Paradigm 接受一组标注的样本作为训练数据，然后对未知点进行推测 6个步骤： 1）确定训练类型 2）收集训练集 3）确定特征提取方法 4）设计该任务的算法 5）训练该算法 6）评估精确性   相关任务： 分类，回归，排名    11.2 Unsupervised Learning Paradigm 接受未标注数据，">
+<meta name="keywords" content="Artificial Intelligence">
+<meta property="og:type" content="article">
+<meta property="og:title" content="人工智能原理 Part V. Learning Ch11&#x2F;12.Paradigms&#x2F;Models in Machine Learning">
+<meta property="og:url" content="http://yoursite.com/2019/02/07/人工智能原理-Part-V-Learning-Ch11-12-Paradigms-Models-in-Machine-Learning/index.html">
+<meta property="og:site_name" content="Wine&amp;Chord">
+<meta property="og:description" content="Ch11 Paradigms11.1 Supervised Learning Paradigm 接受一组标注的样本作为训练数据，然后对未知点进行推测 6个步骤： 1）确定训练类型 2）收集训练集 3）确定特征提取方法 4）设计该任务的算法 5）训练该算法 6）评估精确性   相关任务： 分类，回归，排名    11.2 Unsupervised Learning Paradigm 接受未标注数据，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-09T01:40:21.611Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="人工智能原理 Part V. Learning Ch11&#x2F;12.Paradigms&#x2F;Models in Machine Learning">
+<meta name="twitter:description" content="Ch11 Paradigms11.1 Supervised Learning Paradigm 接受一组标注的样本作为训练数据，然后对未知点进行推测 6个步骤： 1）确定训练类型 2）收集训练集 3）确定特征提取方法 4）设计该任务的算法 5）训练该算法 6）评估精确性   相关任务： 分类，回归，排名    11.2 Unsupervised Learning Paradigm 接受未标注数据，">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/07/人工智能原理-Part-V-Learning-Ch11-12-Paradigms-Models-in-Machine-Learning/"/>
+
+
+
+
+
+  <title>人工智能原理 Part V. Learning Ch11/12.Paradigms/Models in Machine Learning | Wine&Chord</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <!-- <a href="https://github.com/WineChord"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a> -->
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wine&Chord</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/07/人工智能原理-Part-V-Learning-Ch11-12-Paradigms-Models-in-Machine-Learning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">人工智能原理 Part V. Learning Ch11/12.Paradigms/Models in Machine Learning</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-07T13:16:30+08:00">
+                2019-02-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/07/人工智能原理-Part-V-Learning-Ch11-12-Paradigms-Models-in-Machine-Learning/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/07/人工智能原理-Part-V-Learning-Ch11-12-Paradigms-Models-in-Machine-Learning/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Ch11-Paradigms"><a href="#Ch11-Paradigms" class="headerlink" title="Ch11 Paradigms"></a>Ch11 Paradigms</h2><h3 id="11-1-Supervised-Learning-Paradigm"><a href="#11-1-Supervised-Learning-Paradigm" class="headerlink" title="11.1 Supervised Learning Paradigm"></a>11.1 Supervised Learning Paradigm</h3><ul>
+<li>接受一组标注的样本作为训练数据，然后对未知点进行推测</li>
+<li>6个步骤：<ul>
+<li>1）确定训练类型</li>
+<li>2）收集训练集</li>
+<li>3）确定特征提取方法</li>
+<li>4）设计该任务的算法</li>
+<li>5）训练该算法</li>
+<li>6）评估精确性</li>
+</ul>
+</li>
+<li>相关任务：<ul>
+<li>分类，回归，排名</li>
+</ul>
+</li>
+</ul>
+<h3 id="11-2-Unsupervised-Learning-Paradigm"><a href="#11-2-Unsupervised-Learning-Paradigm" class="headerlink" title="11.2 Unsupervised Learning Paradigm"></a>11.2 Unsupervised Learning Paradigm</h3><ul>
+<li>接受未标注数据，然后对未知点做出预测</li>
+<li>目标是发现数据中共性的东西</li>
+<li>相关任务：<ul>
+<li>聚类/密度估计/降维</li>
+</ul>
+</li>
+</ul>
+<h3 id="11-3-Reinforcement-Learning-Paradigm"><a href="#11-3-Reinforcement-Learning-Paradigm" class="headerlink" title="11.3 Reinforcement Learning Paradigm"></a>11.3 Reinforcement Learning Paradigm</h3><ul>
+<li>学习器是一个决策制定智能体，在环境下采取行动并获得这些动作的回报</li>
+<li>经过一系列试错运行之后，可以学到最优策略</li>
+<li>目标是使回报最大化</li>
+<li>不提供输入和输出对，专注于在线的性能优化</li>
+<li>类型<ul>
+<li>1）基于模型<ul>
+<li>首先以马尔可夫决策过程来行动，并学习 T 和 R</li>
+<li>然后用学习的 T 和 R 进行数值迭代或策略迭代</li>
+</ul>
+</li>
+<li>2）无模型<ul>
+<li>学习策略没有任何模型</li>
+<li>避开学习 T 和 R 的过程，采用直接评估策略</li>
+<li>基于预测的时间差分（temporal difference）法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>1）基于模型的强化学习<ul>
+<li>思想：<ul>
+<li>通过实践经验学习模型。若学到的模型正确，则用于数值求解</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2）无模型强化学习<ul>
+<li>Actor-Critic methods 动作者·评判者方法<ul>
+<li>策略迭代（On-policy）的时间差分版</li>
+<li>一种明确表示独立于价值函数的策略的结构</li>
+<li>策略（动作者）用于选择动作</li>
+<li>价值函数（评判者）用于评估动作者所完成的动作<ul>
+<li>TD error: $\delta_t=r_{t+1}+\gamma V(S_{t+1})-V(S_t)$</li>
+<li>Preference: $p(s_t,a_t)\leftarrow p(s_t,a_t)+\beta\delta_t$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Q-learning<ul>
+<li>价值迭代（Off-policy）的时间差分版</li>
+<li>基于回报值和 Q-value 函数，递增估计动作的 Q 值</li>
+</ul>
+</li>
+<li>更新规则是一种时间差分学习的变体，采用 Q 值与内置的下个状态 Q 值得最大运算符：<ul>
+<li>$Q(s_t,a_t)=\sum_aT(s_t,a_t,s_{t+1})[R(s_t,a_t,s_{t+1})+\gamma\max_{a_{t+1}}Q(s_{t+1},a_{t+1})]$</li>
+</ul>
+</li>
+<li>学习到基于样本的，东顾总-值函数 Q</li>
+</ul>
+</li>
+<li>新算法<ul>
+<li>Deep Q-Network</li>
+<li>Deterministic Policy Gradients (DPG)</li>
+<li>Asynchronous Advantage Actor-Critic (A3C)</li>
+<li>UNsupervised REinforcement and Auxiliary Learning</li>
+<li>Neural Episodic Control (NEC) 神经情景控制</li>
+</ul>
+</li>
+<li>应用<ul>
+<li>机器人<ul>
+<li>手臂</li>
+<li>导航</li>
+</ul>
+</li>
+<li>游戏</li>
+</ul>
+</li>
+</ul>
+<h3 id="11-4-Other-Learning-Paradigms"><a href="#11-4-Other-Learning-Paradigms" class="headerlink" title="11.4 Other Learning Paradigms"></a>11.4 Other Learning Paradigms</h3><ul>
+<li>Ensemble learning 集成学习<ul>
+<li>多个弱学习器组成一个强学习器</li>
+</ul>
+</li>
+<li>Learning to learn 学会学习<ul>
+<li>基于先前的经验学习归纳偏差</li>
+</ul>
+</li>
+<li>Transfer learning 迁移学习<ul>
+<li>将已有的知识用于不同但相关的问题</li>
+</ul>
+</li>
+<li>Adversarial learning 对抗式学习<ul>
+<li>以一种对抗性方式（即零和博弈）来生成模仿某种分布的数据</li>
+</ul>
+</li>
+<li>Collaborative learning 协同式学习<ul>
+<li>以某种协同式（如非零和博弈，双赢）来得到所期待的输出结果</li>
+</ul>
+</li>
+</ul>
+<h2 id="Ch12-Models"><a href="#Ch12-Models" class="headerlink" title="Ch12 Models"></a>Ch12 Models</h2><ul>
+<li>可以处理完成一个学习任务的方法</li>
+<li>属于算法层面而不是数据层面的模型</li>
+<li>机器学习的效果在很大程度上取决于解决该学习任务时所选用的方法</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Models</th>
+<th style="text-align:center">Brief Statements</th>
+<th style="text-align:center">Sub-models</th>
+<th style="text-align:center">Typical Algorithm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Probabilistic</td>
+<td style="text-align:center">采用概率模式来表示随机变量之间的条件相关性</td>
+<td style="text-align:center">贝叶斯/生成/统计</td>
+<td style="text-align:center">贝叶斯网络/概率规划/线性回归</td>
+</tr>
+<tr>
+<td style="text-align:center">Geometric</td>
+<td style="text-align:center">采用线，面，距离或流形等几何图形模型来构建学习算法</td>
+<td style="text-align:center">线/面/距离/流形</td>
+<td style="text-align:center">线性回归/SVM/k-NN/Isomap</td>
+</tr>
+<tr>
+<td style="text-align:center">Logical</td>
+<td style="text-align:center">采用逻辑模型来构建学习算法</td>
+<td style="text-align:center">逻辑/规则</td>
+<td style="text-align:center">归纳逻辑编程/相关规则</td>
+</tr>
+<tr>
+<td style="text-align:center">Networked</td>
+<td style="text-align:center">采用网络模式来构建机器学习算法</td>
+<td style="text-align:center">浅层/深层</td>
+<td style="text-align:center">感知机/CNN</td>
+</tr>
+</tbody>
+</table>
+<h3 id="12-1-Probabilistic-Models"><a href="#12-1-Probabilistic-Models" class="headerlink" title="12.1 Probabilistic Models"></a>12.1 Probabilistic Models</h3><ul>
+<li><p>概率论研究不确定性问题</p>
+</li>
+<li><p>概率模型是采用概率论来表示所有不确定的形式</p>
+</li>
+<li><p>贝叶斯规则允许我们推断未知量，适配我们的模型，做出预测并从数据中学习</p>
+</li>
+<li><p>典型方法</p>
+<ul>
+<li>朴素贝叶斯和贝叶斯网络</li>
+<li>概率规划</li>
+<li>高斯过程</li>
+<li>隐马尔可夫模型</li>
+</ul>
+</li>
+<li><p>Often the goal of machine learning is to determine the probability of an event, e.g. $P(a\ person\ is\ at\ risk\ for\ a\ disease)$</p>
+</li>
+<li><p>两个主要学派</p>
+<ul>
+<li>频率学派</li>
+<li>贝叶斯学派<ul>
+<li>给定一组特定数据，概率对事件的不确定性进行量化，旨在最接近事实真值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Bayes Rule</p>
+<ul>
+<li><p>告诉我们如何从数据推断假设</p>
+</li>
+<li><p>学习和预测可以看作是推理的形式</p>
+</li>
+<li><p>推断未知的量 =&gt; 适配我们的模型 =&gt; 做出预测 =&gt; 从数据中学习</p>
+</li>
+<li><p>$$<br>P(hypothesis|data)=\frac{P(data|hypothesis)P(hypothesis)}{P(data)}<br>$$</p>
+</li>
+</ul>
+</li>
+<li><p>Bayesian ML</p>
+<ul>
+<li><p>任何事物都遵循以下两规则</p>
+<ul>
+<li>求和规则：$P(x)=\sum_yP(x,y)$</li>
+<li>乘积规则：$P(x,y)=P(x)P(y|x)$</li>
+</ul>
+</li>
+<li><p>$P(\theta|\lambda,m)$: posterior probability of given data $\lambda$ 后验概率</p>
+</li>
+<li><p>$P(\lambda|\theta,m)$: likelihood of parameters $\theta$ in model m</p>
+</li>
+<li><p>$P(\theta|m)$: prior probability of $\theta$ 先验</p>
+</li>
+<li><p>$P(\lambda|m)$: evidence </p>
+</li>
+<li><p>$$<br>P(\theta|\lambda,m)=\frac{P(\lambda|\theta,m)P(\theta|m)}{P(\lambda|m)}<br>$$</p>
+</li>
+<li><p>$$<br>posterior=\frac{likelihood\times prior}{evidence}<br>$$</p>
+</li>
+</ul>
+</li>
+<li><p>参数方法/非参数方法</p>
+<ul>
+<li>参数方法<ul>
+<li>设有限参数集 $\theta$ ，给定该参数，则特征预测 $x$ 独立于观测数据 $D$，即<ul>
+<li>$P(x|\theta,\lambda)=P(x|\theta)$</li>
+</ul>
+</li>
+<li>因此，捕捉任何事物在于要知晓这些数据</li>
+<li>故即使数据量无限，模型复杂度也是有界的</li>
+<li>故参数方法不是很灵活</li>
+</ul>
+</li>
+<li>非参数方法<ul>
+<li>设数据分布不能用这样一个有限参数集来定义，但通常能够由假设的无限维度 $\theta$ 来定义。通常我们把 $\theta$ 看作是一个函数</li>
+<li>$\theta$ 可以捕捉数据 $D$ 的信息量可以随着数据量的增长而增长</li>
+<li>故而更加灵活</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Parametric</th>
+<th style="text-align:center">Non-parametric</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Brief Statements</td>
+<td style="text-align:center">参数个数固定</td>
+<td style="text-align:center">参数个数随训练数据的量而增长</td>
+</tr>
+<tr>
+<td style="text-align:center">Typical Algorithm</td>
+<td style="text-align:center">SVM</td>
+<td style="text-align:center">k-NN</td>
+</tr>
+<tr>
+<td style="text-align:center">Advantage</td>
+<td style="text-align:center">通常易于使用</td>
+<td style="text-align:center">更加灵活</td>
+</tr>
+<tr>
+<td style="text-align:center">Disadvantage</td>
+<td style="text-align:center">对数据分布的性质做出严格的假设</td>
+<td style="text-align:center">时常在计算上难以应付大的数据集</td>
+</tr>
+</tbody>
+</table>
+<h3 id="12-2-Geometric-Models"><a href="#12-2-Geometric-Models" class="headerlink" title="12.2 Geometric Models"></a>12.2 Geometric Models</h3><ul>
+<li>直接在实例空间构建，空间可以被认为是几何的概念，如：<ul>
+<li>欧氏几何：线，面，欧式距离</li>
+<li>黎曼几何：流形，黎曼距离</li>
+</ul>
+</li>
+<li>二维/三维的模型易于可视化</li>
+<li>线和面<ul>
+<li>使用线或平面这样的几何模型来构建一些机器学习算法</li>
+</ul>
+</li>
+<li>流形<ul>
+<li>一种拓扑空间，其每个点附近存在近似的欧几里得空间</li>
+<li>更精确地说，一个 $n$ 微流形的每个点都是一个临近点，它与维度为 $n$ 的欧几里得空间同胚。</li>
+<li>高维输入数据中可以发现其固有的低维特性</li>
+<li>低维流形假设<ul>
+<li>高维输入数据依附于一个低维流形</li>
+</ul>
+</li>
+<li>典型的流形学习算法<ul>
+<li>Isomap (Isometric mapping 等距映射)</li>
+<li>LLE (Locally Linear Embeddings 局部线性嵌入)</li>
+<li>LE (Laplacian Eigenmaps 拉普拉斯特征映射)</li>
+<li>LTSA (Local Tangent Space Alignment 局部切空间对齐)</li>
+<li>Inductive Manifold Learning 归纳流形学习</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Isomap (Isometric mapping) 等距映射<ul>
+<li>保留数据之间的测地线距离而不是欧几里得距离</li>
+<li>算法流程<ul>
+<li>确定每个点的相邻点</li>
+<li>构建一个邻接图</li>
+<li>计算两点之间的最短距离</li>
+<li>计算低维嵌入，采用多元尺度分析（MDS）方法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>LLE (Locally Linear Embedding) 局部线性嵌入<ul>
+<li>通过在小邻域中找到最佳线性重构，将数据点嵌入在低维空间中</li>
+<li>计算每个点的重建权重，然后通过求解特征值问题对嵌入成本进行最小化</li>
+</ul>
+</li>
+<li>LE (Laplacian Eigenmaps) 拉普拉斯特征映射<ul>
+<li>Le 重申在非线性映射问题作为一种图的顶点嵌入，并且采用图拉普拉斯来生成一个平滑的映射。</li>
+</ul>
+</li>
+<li>典型的流形学习应用<ul>
+<li>图像处理</li>
+<li>基因表达图谱</li>
+<li>手写体识别</li>
+<li>人脸识别</li>
+</ul>
+</li>
+</ul>
+<h3 id="12-3-Logical-Models"><a href="#12-3-Logical-Models" class="headerlink" title="12.3 Logical Models"></a>12.3 Logical Models</h3><ul>
+<li>易于解释的逻辑表达式，易于转换成人类能够理解的规则</li>
+<li>典型的逻辑模型<ul>
+<li>一阶逻辑</li>
+<li>关联规则</li>
+<li>决策树</li>
+</ul>
+</li>
+<li>关联规则<ul>
+<li>是一种用于在大型数据库中变量之间发现有趣关系的方法</li>
+<li>采用差异趣味性度量方式，旨在识别数据库中发现的强规则</li>
+<li>可用于发现超市产品之间的规律，称之为购物篮分析<ul>
+<li>${onions,potatoes}\Rightarrow {burger}$</li>
+</ul>
+</li>
+<li>Def.<ul>
+<li>$I={i_1,i_2,…,i_n}$: a set of n attributes called items</li>
+<li>$T={t_1,t_2,…,t_m}$: a set of transactions called transactions database.</li>
+<li>Each $t_i$ is a subset of the items in $I$, i.e.,<ul>
+<li>$t_i\sube I$</li>
+</ul>
+</li>
+<li>$X\Rightarrow Y$: an association rule, where $X,Y\sube I$, and $X\cap Y=\varnothing$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>决策树<ul>
+<li>使用决策树作为预测模型，将项的观察结果映射到关于项的目标值</li>
+<li>目标变量可以取一组有限值得树模型称为分类树；其中叶节点表示类标签，分支表示通往这些类标签的特征连接。</li>
+</ul>
+</li>
+</ul>
+<h3 id="12-4-Networked-Models"><a href="#12-4-Networked-Models" class="headerlink" title="12.4 Networked Models"></a>12.4 Networked Models</h3><ul>
+<li>人工神经网络 (ANN)</li>
+<li>是人脑的一种人工表征，试图模拟人类的学习过程</li>
+<li>通过互联的“神经元”构建一个系统，神经元之间相互发送消息</li>
+<li>神经元之间的连接具有数值权重，可以通过经验调整，使 ANN 适应输入并且能够学习。</li>
+<li>前馈神经网络<ul>
+<li>信息从输入节点仅仅以一个方向即前进方向穿过隐藏层并抵达输出结点</li>
+</ul>
+</li>
+<li>循环神经网络<ul>
+<li>连接形成有向循环</li>
+<li>建立网络的内部状态，使之展现动态的时间特性</li>
+</ul>
+</li>
+<li>DNN<ul>
+<li>使用许多层非线性处理单元，用于特征提取和转换</li>
+<li>能够学习数据的多层特征或表征。高层特征来自于底层特征</li>
+<li>成为更广泛的机器学习领域的一部分：学习数据表征</li>
+<li>学习多层级表征，对应于不同的抽象层级；这种层级形成了一种概念的层次结构</li>
+<li>代表性的DNN<ul>
+<li>Deep belief networks (DBN) 深度信念网络</li>
+<li>Convolutional neural networks (CNN) 卷积神经网络</li>
+<li>Deep Boltzmann machines (DBM) 深度波兹曼机</li>
+<li>Recurrent neural networks (RNN) 循环网络 </li>
+<li>Long short-term memory (LSTM) 长短期记忆</li>
+<li>Auto-Encoders 自动编码器</li>
+<li>Generative Adversarial Network (GAN) 生成对抗网络</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>CNN<ul>
+<li>前馈式ANN，使用至少一个卷积层来代替一般的矩阵乘法</li>
+<li>四个关键思想<ul>
+<li>local connections (convolution) 局部连接（卷积）</li>
+<li>shared weights 共享权值</li>
+<li>pooling (sampling) 池化（采样）</li>
+<li>many layers</li>
+</ul>
+</li>
+<li>conv layer<ul>
+<li>包含一组学习滤波器，每个滤波器对输入的宽和高进行卷积，计算滤波器和输入之间的点积，生成一个该滤波器的二维活动图</li>
+</ul>
+</li>
+<li>pooling layer<ul>
+<li>是一种非线性下采样，将输入图像分割成一组不重叠的矩形，对每个这样的子区域，再产出其最大值。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>GAN<ul>
+<li>2014 Ian Goodfellow</li>
+<li>Adversarial Network, inspired by Adversarial game</li>
+<li>Generator maps from a latent space to a particular data distribution of interest</li>
+<li>Discriminator discriminate between real samples and samples produced by generator</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Artificial-Intelligence/" rel="tag"># Artificial Intelligence</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/07/人工智能原理-Part-V-Learning-Ch10-Tasks-in-Machine-Learning/" rel="next" title="人工智能原理 Part V. Learning Ch10.Tasks in Machine Learning">
+                <i class="fa fa-chevron-left"></i> 人工智能原理 Part V. Learning Ch10.Tasks in Machine Learning
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/09/CST2018-1-1-A-B-problem/" rel="prev" title="CST2018 1-1 A+B problem">
+                CST2018 1-1 A+B problem <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/blog-logo.png"
+                alt="Wine&Chord" />
+            
+              <p class="site-author-name" itemprop="name">Wine&Chord</p>
+              <p class="site-description motion-element" itemprop="description">记录学习经历</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">186</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ch11-Paradigms"><span class="nav-number">1.</span> <span class="nav-text">Ch11 Paradigms</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#11-1-Supervised-Learning-Paradigm"><span class="nav-number">1.1.</span> <span class="nav-text">11.1 Supervised Learning Paradigm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-2-Unsupervised-Learning-Paradigm"><span class="nav-number">1.2.</span> <span class="nav-text">11.2 Unsupervised Learning Paradigm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-3-Reinforcement-Learning-Paradigm"><span class="nav-number">1.3.</span> <span class="nav-text">11.3 Reinforcement Learning Paradigm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-4-Other-Learning-Paradigms"><span class="nav-number">1.4.</span> <span class="nav-text">11.4 Other Learning Paradigms</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ch12-Models"><span class="nav-number">2.</span> <span class="nav-text">Ch12 Models</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#12-1-Probabilistic-Models"><span class="nav-number">2.1.</span> <span class="nav-text">12.1 Probabilistic Models</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-2-Geometric-Models"><span class="nav-number">2.2.</span> <span class="nav-text">12.2 Geometric Models</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-3-Logical-Models"><span class="nav-number">2.3.</span> <span class="nav-text">12.3 Logical Models</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-4-Networked-Models"><span class="nav-number">2.4.</span> <span class="nav-text">12.4 Networked Models</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" >Wine&Chord</span>
+
+  
+</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://wineandchord.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/02/07/人工智能原理-Part-V-Learning-Ch11-12-Paradigms-Models-in-Machine-Learning/';
+          this.page.identifier = '2019/02/07/人工智能原理-Part-V-Learning-Ch11-12-Paradigms-Models-in-Machine-Learning/';
+          this.page.title = '人工智能原理 Part V. Learning Ch11/12.Paradigms/Models in Machine Learning';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://wineandchord.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- <script type="text/javascript" src="/js/src/love.js"></script>script> -->
