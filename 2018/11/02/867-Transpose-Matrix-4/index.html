@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="问题描述实现矩阵的转置 实现直接复制12345678public int[][] transpose(int[][] A)&amp;#123;    int R = A.length, C = A[0].length;    int[][] ans = new int[C][R];    for(int r = 0; r &amp;lt; R; r++)        for(int c = 0; c &amp;lt;">
+<meta name="description" content="问题描述 实现矩阵的转置 实现 直接复制 12345678public int[][] transpose(int[][] A)&amp;#123;    int R = A.length, C = A[0].length;    int[][] ans = new int[C][R];    for(int r = 0; r &amp;lt; R; r++)        for(int c = 0; c &amp;l">
 <meta name="keywords" content="LeetCode,Array">
 <meta property="og:type" content="article">
 <meta property="og:title" content="867. Transpose Matrix-4">
 <meta property="og:url" content="http://yoursite.com/2018/11/02/867-Transpose-Matrix-4/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="问题描述实现矩阵的转置 实现直接复制12345678public int[][] transpose(int[][] A)&amp;#123;    int R = A.length, C = A[0].length;    int[][] ans = new int[C][R];    for(int r = 0; r &amp;lt; R; r++)        for(int c = 0; c &amp;lt;">
+<meta property="og:description" content="问题描述 实现矩阵的转置 实现 直接复制 12345678public int[][] transpose(int[][] A)&amp;#123;    int R = A.length, C = A[0].length;    int[][] ans = new int[C][R];    for(int r = 0; r &amp;lt; R; r++)        for(int c = 0; c &amp;l">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-01-26T14:44:51.211Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="867. Transpose Matrix-4">
-<meta name="twitter:description" content="问题描述实现矩阵的转置 实现直接复制12345678public int[][] transpose(int[][] A)&amp;#123;    int R = A.length, C = A[0].length;    int[][] ans = new int[C][R];    for(int r = 0; r &amp;lt; R; r++)        for(int c = 0; c &amp;lt;">
+<meta name="twitter:description" content="问题描述 实现矩阵的转置 实现 直接复制 12345678public int[][] transpose(int[][] A)&amp;#123;    int R = A.length, C = A[0].length;    int[][] ans = new int[C][R];    for(int r = 0; r &amp;lt; R; r++)        for(int c = 0; c &amp;l">
 
 
 
@@ -397,9 +397,13 @@
       
 
       
-        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>实现矩阵的转置</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>直接复制<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[][] transpose(<span class="keyword">int</span>[][] A)&#123;</span><br><span class="line">    <span class="keyword">int</span> R = A.length, C = A[<span class="number">0</span>].length;</span><br><span class="line">    <span class="keyword">int</span>[][] ans = <span class="keyword">new</span> <span class="keyword">int</span>[C][R];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> r = <span class="number">0</span>; r &lt; R; r++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> c = <span class="number">0</span>; c &lt; R; c++)</span><br><span class="line">            ans[c][r] = A[r][c];</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; transpose(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; A) &#123;</span><br><span class="line">    <span class="keyword">int</span> R = A.size(), C = A[<span class="number">0</span>].size();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ans(C, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(R, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> r = <span class="number">0</span>; r &lt; R; r++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> c = <span class="number">0</span>; c &lt; C; c++)</span><br><span class="line">            ans[c][r] = A[r][c];</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h3>问题描述</h3>
+<p>实现矩阵的转置</p>
+<h3>实现</h3>
+<p>直接复制
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[][] transpose(<span class="keyword">int</span>[][] A)&#123;</span><br><span class="line">    <span class="keyword">int</span> R = A.length, C = A[<span class="number">0</span>].length;</span><br><span class="line">    <span class="keyword">int</span>[][] ans = <span class="keyword">new</span> <span class="keyword">int</span>[C][R];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> r = <span class="number">0</span>; r &lt; R; r++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> c = <span class="number">0</span>; c &lt; R; c++)</span><br><span class="line">            ans[c][r] = A[r][c];</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; transpose(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; A) &#123;</span><br><span class="line">    <span class="keyword">int</span> R = A.size(), C = A[<span class="number">0</span>].size();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ans(C, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(R, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> r = <span class="number">0</span>; r &lt; R; r++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> c = <span class="number">0</span>; c &lt; C; c++)</span><br><span class="line">            ans[c][r] = A[r][c];</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
     
@@ -589,7 +593,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a></li></ol></div>
             
 
           </div>

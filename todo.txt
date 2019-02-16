@@ -1,0 +1,31 @@
+string: 12  -------------------- DONE
+Math: 11
+Binary Search: 6
+Two Pointers: 5
+BFS: 5
+Stack: 5
+Backtracking: 4
+Design: 4
+Greedy: 4
+Linked List: 4
+Bit Manipulation: 4
+Sort: 2
+Graph: 2
+Divide and Conquer: 2
+Union Find: 2
+Trie: 2
+Binary Search Tree: 2
+Recursion: 2
+Segment Tree: 1
+Queue: 1
+Random: 1
+Binary Indexed Tree: 1
+Minimax: 1
+Topological Sort: 1
+Brainteaser: 1
+Geometry: 1
+Map: 1
+REjection Sampling: 1
+Reservoir Sampling: 1
+Memoization: 1
+total: 86

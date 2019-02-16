@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="题目描述 GG和MM在每个交叉路口时都会选择看月亮或五毛钱 月亮一直有，但是五毛钱只在某些交叉路口出没 GG在每个交叉路口借光看方向时，他倾向于少看月亮 MM则希望尽可能多地捡钱，注意钱不能重复捡起  先给出地图，他们殊途同归，问最佳途径所能达到的数值  先问强连通分量的个数  输入输出 输入： 第 $1$ 行：$n\ m$ 有向图的点数和边数 第 $2$ 行：长度为 $n$ 的字符串，依次给出各">
+<meta name="description" content="题目描述   GG和MM在每个交叉路口时都会选择看月亮或五毛钱   月亮一直有，但是五毛钱只在某些交叉路口出没   GG在每个交叉路口借光看方向时，他倾向于少看月亮   MM则希望尽可能多地捡钱，注意钱不能重复捡起   先给出地图，他们殊途同归，问最佳途径所能达到的数值   先问强连通分量的个数   输入输出  输入：  第 $1$ 行：$n\ m$ 有向图的点数和边数 第 $2$ 行：长度为 $">
 <meta name="keywords" content="BFS,强连通分量">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CST2018 2-3-1 Mooney(basic)">
 <meta property="og:url" content="http://yoursite.com/2019/02/09/CST2018-2-3-1-Mooney-basic/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="题目描述 GG和MM在每个交叉路口时都会选择看月亮或五毛钱 月亮一直有，但是五毛钱只在某些交叉路口出没 GG在每个交叉路口借光看方向时，他倾向于少看月亮 MM则希望尽可能多地捡钱，注意钱不能重复捡起  先给出地图，他们殊途同归，问最佳途径所能达到的数值  先问强连通分量的个数  输入输出 输入： 第 $1$ 行：$n\ m$ 有向图的点数和边数 第 $2$ 行：长度为 $n$ 的字符串，依次给出各">
+<meta property="og:description" content="题目描述   GG和MM在每个交叉路口时都会选择看月亮或五毛钱   月亮一直有，但是五毛钱只在某些交叉路口出没   GG在每个交叉路口借光看方向时，他倾向于少看月亮   MM则希望尽可能多地捡钱，注意钱不能重复捡起   先给出地图，他们殊途同归，问最佳途径所能达到的数值   先问强连通分量的个数   输入输出  输入：  第 $1$ 行：$n\ m$ 有向图的点数和边数 第 $2$ 行：长度为 $">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://dsa.cs.tsinghua.edu.cn/oj/attachment/f688/f68864fe697f50936c9f62fcde1fba468fe6dfc8.png">
 <meta property="og:updated_time" content="2019-02-10T03:05:41.802Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CST2018 2-3-1 Mooney(basic)">
-<meta name="twitter:description" content="题目描述 GG和MM在每个交叉路口时都会选择看月亮或五毛钱 月亮一直有，但是五毛钱只在某些交叉路口出没 GG在每个交叉路口借光看方向时，他倾向于少看月亮 MM则希望尽可能多地捡钱，注意钱不能重复捡起  先给出地图，他们殊途同归，问最佳途径所能达到的数值  先问强连通分量的个数  输入输出 输入： 第 $1$ 行：$n\ m$ 有向图的点数和边数 第 $2$ 行：长度为 $n$ 的字符串，依次给出各">
+<meta name="twitter:description" content="题目描述   GG和MM在每个交叉路口时都会选择看月亮或五毛钱   月亮一直有，但是五毛钱只在某些交叉路口出没   GG在每个交叉路口借光看方向时，他倾向于少看月亮   MM则希望尽可能多地捡钱，注意钱不能重复捡起   先给出地图，他们殊途同归，问最佳途径所能达到的数值   先问强连通分量的个数   输入输出  输入：  第 $1$ 行：$n\ m$ 有向图的点数和边数 第 $2$ 行：长度为 $">
 <meta name="twitter:image" content="https://dsa.cs.tsinghua.edu.cn/oj/attachment/f688/f68864fe697f50936c9f62fcde1fba468fe6dfc8.png">
 
 
@@ -399,41 +399,59 @@
       
 
       
-        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><ul>
-<li>GG和MM在每个交叉路口时都会选择看月亮或五毛钱</li>
-<li>月亮一直有，但是五毛钱只在某些交叉路口出没</li>
-<li>GG在每个交叉路口借光看方向时，他倾向于少看月亮</li>
-<li><p>MM则希望尽可能多地捡钱，注意钱不能重复捡起</p>
+        <h2>题目描述</h2>
+<ul>
+<li>
+<p>GG和MM在每个交叉路口时都会选择看月亮或五毛钱</p>
 </li>
-<li><p>先给出地图，他们殊途同归，问最佳途径所能达到的数值</p>
+<li>
+<p>月亮一直有，但是五毛钱只在某些交叉路口出没</p>
 </li>
-<li>先问强连通分量的个数</li>
+<li>
+<p>GG在每个交叉路口借光看方向时，他倾向于少看月亮</p>
+</li>
+<li>
+<p>MM则希望尽可能多地捡钱，注意钱不能重复捡起</p>
+</li>
+<li>
+<p>先给出地图，他们殊途同归，问最佳途径所能达到的数值</p>
+</li>
+<li>
+<p>先问强连通分量的个数</p>
+</li>
 </ul>
-<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ul>
-<li>输入：<ul>
+<h2>输入输出</h2>
+<ul>
+<li>输入：
+<ul>
 <li>第 $1$ 行：$n\ m$ 有向图的点数和边数</li>
-<li>第 $2$ 行：长度为 $n$ 的字符串，依次给出各点（即编号 $[0,n)$ 的路口）的路况：’M’表示此处只有月亮，’m’表示还有五毛钱</li>
+<li>第 $2$ 行：长度为 $n$ 的字符串，依次给出各点（即编号 $[0,n)$ 的路口）的路况：'M'表示此处只有月亮，'m'表示还有五毛钱</li>
 <li>以下 $m$ 行：分别描述各边 $a\ b$ 表示从 $a$ 到 $b$ 有边（$a,b\in [0,n)$）</li>
 <li>GG和MM的起点都是 $0$，目的地都是 $n-1$</li>
 <li>保证起点和终点有通路相连</li>
 </ul>
 </li>
-<li>输出：<ul>
+<li>输出：
+<ul>
 <li>输出图中强连通分量的数量</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">12 15</span><br><span class="line">mMmMmMmmMmMM</span><br><span class="line">0 1</span><br><span class="line">0 2</span><br><span class="line">1 3</span><br><span class="line">2 3</span><br><span class="line">4 3</span><br><span class="line">3 5</span><br><span class="line">5 4</span><br><span class="line">5 6</span><br><span class="line">5 8</span><br><span class="line">6 7</span><br><span class="line">8 11</span><br><span class="line">7 11</span><br><span class="line">5 9</span><br><span class="line">9 10</span><br><span class="line">10 11</span><br><span class="line">output:</span><br><span class="line">10</span><br></pre></td></tr></table></figure>
-<h2 id="数据规模"><a href="#数据规模" class="headerlink" title="数据规模"></a>数据规模</h2><ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">12 15</span><br><span class="line">mMmMmMmmMmMM</span><br><span class="line">0 1</span><br><span class="line">0 2</span><br><span class="line">1 3</span><br><span class="line">2 3</span><br><span class="line">4 3</span><br><span class="line">3 5</span><br><span class="line">5 4</span><br><span class="line">5 6</span><br><span class="line">5 8</span><br><span class="line">6 7</span><br><span class="line">8 11</span><br><span class="line">7 11</span><br><span class="line">5 9</span><br><span class="line">9 10</span><br><span class="line">10 11</span><br><span class="line">output:</span><br><span class="line">10</span><br></pre></td></tr></table></figure></p>
+<h2>数据规模</h2>
+<ul>
 <li>$1\le n\le 500,000$</li>
 <li>$1\le m\le 1,200,000$</li>
 </ul>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><ul>
+<h2>提示</h2>
+<ul>
 <li>BFS</li>
 <li>强连通分量</li>
 </ul>
 <p><img src="https://dsa.cs.tsinghua.edu.cn/oj/attachment/f688/f68864fe697f50936c9f62fcde1fba468fe6dfc8.png" alt="图片"></p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2>
+<h2>思路</h2>
+<h2>实现</h2>
+
       
     </div>
     
@@ -623,7 +641,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入输出"><span class="nav-number">2.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据规模"><span class="nav-number">3.</span> <span class="nav-text">数据规模</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提示"><span class="nav-number">4.</span> <span class="nav-text">提示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">5.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">6.</span> <span class="nav-text">实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">数据规模</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">提示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">实现</span></a></li></ol></div>
             
 
           </div>

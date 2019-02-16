@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="问题描述一个字符串中连续且长度相等的 ‘1’ ‘0’ 子串个数。 实现1234567891011// C++int cur = 1, pre = 0, res = 0;for(int i = 1; i &amp;lt; s.size(); i++)&amp;#123;    if(s[i] == s[i-1]) cur++;    else&amp;#123;        res += min(cur, pre);">
+<meta name="description" content="问题描述 一个字符串中连续且长度相等的 &apos;1&apos; &apos;0&apos; 子串个数。 实现 1234567891011// C++int cur = 1, pre = 0, res = 0;for(int i = 1; i &amp;lt; s.size(); i++)&amp;#123;    if(s[i] == s[i-1]) cur++;    else&amp;#123;        res += min(cur, pre);">
 <meta name="keywords" content="LeetCode,String">
 <meta property="og:type" content="article">
 <meta property="og:title" content="696. Count Binary Substrings-String-11">
 <meta property="og:url" content="http://yoursite.com/2018/11/04/696-Count-Binary-Substrings-String-11/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="问题描述一个字符串中连续且长度相等的 ‘1’ ‘0’ 子串个数。 实现1234567891011// C++int cur = 1, pre = 0, res = 0;for(int i = 1; i &amp;lt; s.size(); i++)&amp;#123;    if(s[i] == s[i-1]) cur++;    else&amp;#123;        res += min(cur, pre);">
+<meta property="og:description" content="问题描述 一个字符串中连续且长度相等的 &apos;1&apos; &apos;0&apos; 子串个数。 实现 1234567891011// C++int cur = 1, pre = 0, res = 0;for(int i = 1; i &amp;lt; s.size(); i++)&amp;#123;    if(s[i] == s[i-1]) cur++;    else&amp;#123;        res += min(cur, pre);">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-01-26T14:40:09.851Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="696. Count Binary Substrings-String-11">
-<meta name="twitter:description" content="问题描述一个字符串中连续且长度相等的 ‘1’ ‘0’ 子串个数。 实现1234567891011// C++int cur = 1, pre = 0, res = 0;for(int i = 1; i &amp;lt; s.size(); i++)&amp;#123;    if(s[i] == s[i-1]) cur++;    else&amp;#123;        res += min(cur, pre);">
+<meta name="twitter:description" content="问题描述 一个字符串中连续且长度相等的 &apos;1&apos; &apos;0&apos; 子串个数。 实现 1234567891011// C++int cur = 1, pre = 0, res = 0;for(int i = 1; i &amp;lt; s.size(); i++)&amp;#123;    if(s[i] == s[i-1]) cur++;    else&amp;#123;        res += min(cur, pre);">
 
 
 
@@ -397,8 +397,11 @@
       
 
       
-        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>一个字符串中连续且长度相等的 ‘1’ ‘0’ 子串个数。</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="keyword">int</span> cur = <span class="number">1</span>, pre = <span class="number">0</span>, res = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; s.size(); i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(s[i] == s[i<span class="number">-1</span>]) cur++;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        res += min(cur, pre);</span><br><span class="line">        pre = cur;</span><br><span class="line">        cur = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> res + min(cur, pre);</span><br></pre></td></tr></table></figure>
+        <h3>问题描述</h3>
+<p>一个字符串中连续且长度相等的 '1' '0' 子串个数。</p>
+<h3>实现</h3>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="keyword">int</span> cur = <span class="number">1</span>, pre = <span class="number">0</span>, res = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; s.size(); i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(s[i] == s[i<span class="number">-1</span>]) cur++;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        res += min(cur, pre);</span><br><span class="line">        pre = cur;</span><br><span class="line">        cur = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> res + min(cur, pre);</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
     
@@ -588,7 +591,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a></li></ol></div>
             
 
           </div>

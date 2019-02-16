@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="时间：2018年9月16日 13:30~17:30题目描述 过去的项链（$reverse$） 过去有一个项链。这个项链上串了 $N$ 个珠子，其中第 $i$ 个珠子上有 $a_i$ 的能量值（$a_i$ 不一定非负）。 对于一段连续的珠子，过去定义其美丽程度为它们的能量值之和。自然地，一个项链的美观值定义为它的所有连续子段的美丽程度的最大值。 过去得到了一把神奇的剪刀，他可以把这个项链的恰好一个">
+<meta name="description" content="时间：2018年9月16日 13:30~17:30  题目描述  过去的项链（$reverse$） 过去有一个项链。这个项链上串了 $N$ 个珠子，其中第 $i$ 个珠子上有 $a_i$ 的能量值（$a_i$ 不一定非负）。 对于一段连续的珠子，过去定义其美丽程度为它们的能量值之和。自然地，一个项链的美观值定义为它的所有连续子段的美丽程度的最大值。 过去得到了一把神奇的剪刀，他可以把这个项链的恰">
 <meta name="keywords" content="动态规划">
 <meta property="og:type" content="article">
 <meta property="og:title" content="THU2018推研机试 过去的项链">
 <meta property="og:url" content="http://yoursite.com/2019/01/29/THU2018推研机试-过去的项链/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="时间：2018年9月16日 13:30~17:30题目描述 过去的项链（$reverse$） 过去有一个项链。这个项链上串了 $N$ 个珠子，其中第 $i$ 个珠子上有 $a_i$ 的能量值（$a_i$ 不一定非负）。 对于一段连续的珠子，过去定义其美丽程度为它们的能量值之和。自然地，一个项链的美观值定义为它的所有连续子段的美丽程度的最大值。 过去得到了一把神奇的剪刀，他可以把这个项链的恰好一个">
+<meta property="og:description" content="时间：2018年9月16日 13:30~17:30  题目描述  过去的项链（$reverse$） 过去有一个项链。这个项链上串了 $N$ 个珠子，其中第 $i$ 个珠子上有 $a_i$ 的能量值（$a_i$ 不一定非负）。 对于一段连续的珠子，过去定义其美丽程度为它们的能量值之和。自然地，一个项链的美观值定义为它的所有连续子段的美丽程度的最大值。 过去得到了一把神奇的剪刀，他可以把这个项链的恰">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-01-29T15:58:15.324Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="THU2018推研机试 过去的项链">
-<meta name="twitter:description" content="时间：2018年9月16日 13:30~17:30题目描述 过去的项链（$reverse$） 过去有一个项链。这个项链上串了 $N$ 个珠子，其中第 $i$ 个珠子上有 $a_i$ 的能量值（$a_i$ 不一定非负）。 对于一段连续的珠子，过去定义其美丽程度为它们的能量值之和。自然地，一个项链的美观值定义为它的所有连续子段的美丽程度的最大值。 过去得到了一把神奇的剪刀，他可以把这个项链的恰好一个">
+<meta name="twitter:description" content="时间：2018年9月16日 13:30~17:30  题目描述  过去的项链（$reverse$） 过去有一个项链。这个项链上串了 $N$ 个珠子，其中第 $i$ 个珠子上有 $a_i$ 的能量值（$a_i$ 不一定非负）。 对于一段连续的珠子，过去定义其美丽程度为它们的能量值之和。自然地，一个项链的美观值定义为它的所有连续子段的美丽程度的最大值。 过去得到了一把神奇的剪刀，他可以把这个项链的恰">
 
 
 
@@ -398,7 +398,10 @@
 
       
         <ul>
-<li>时间：2018年9月16日 13:30~17:30<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2></li>
+<li>时间：2018年9月16日 13:30~17:30</li>
+</ul>
+<h2>题目描述</h2>
+<ul>
 <li>过去的项链（$reverse$）</li>
 <li>过去有一个项链。这个项链上串了 $N$ 个珠子，其中第 $i$ 个珠子上有 $a_i$ 的能量值（$a_i$ 不一定非负）。</li>
 <li>对于一段连续的珠子，过去定义其美丽程度为它们的能量值之和。自然地，一个项链的美观值定义为它的所有连续子段的美丽程度的最大值。</li>
@@ -406,32 +409,41 @@
 <li>过去想利用这把剪刀，得到一个美观值尽可能大的新项链。</li>
 <li>问新项链的美观值最大可以是多少，以及为了达到这个最大值，应该选择原项链的哪一段去切？</li>
 </ul>
-<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><ul>
+<h2>输入格式</h2>
+<ul>
 <li>第一行：正整数N   $1\le N\le 2\times 10^5$</li>
 <li>第二行： $N$ 个整数，描述序列 ${a_i}$，此处下标从 $1$ 开始，保证 $a_i$ 的绝对值不超过 $10^8$</li>
 </ul>
-<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><ul>
+<h2>输出格式</h2>
+<ul>
 <li>第一行：一个整数，表示美观值的最大值</li>
-<li>第二行：两个整数 $l,r$，表示选择把 $a_l,a_{l+1},…,a_r$ 这一段切下来，反转再拼接回去。<ul>
-<li>注意：此处是一个闭区间，特别的，当 $l\gt r$ 时，表示选择的是 $a_l,a_{l+1},…,a_N,a_1,a_2,…,a_r$ 这一段；当 $l=r$ 时，单个珠子被反转相当于什么也没有发生。</li>
+<li>第二行：两个整数 $l,r$，表示选择把 $a_l,a_{l+1},...,a_r$ 这一段切下来，反转再拼接回去。
+<ul>
+<li>注意：此处是一个闭区间，特别的，当 $l\gt r$ 时，表示选择的是 $a_l,a_{l+1},...,a_N,a_1,a_2,...,a_r$ 这一段；当 $l=r$ 时，单个珠子被反转相当于什么也没有发生。</li>
 </ul>
 </li>
 </ul>
-<h2 id="样例1-输入"><a href="#样例1-输入" class="headerlink" title="样例1 输入"></a>样例1 输入</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">6</span><br><span class="line">3 2 -1 1 -1 5</span><br></pre></td></tr></table></figure>
-<h2 id="样例1-输出"><a href="#样例1-输出" class="headerlink" title="样例1 输出"></a>样例1 输出</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">11</span><br><span class="line">3 4</span><br></pre></td></tr></table></figure>
-<h2 id="样例1-解释"><a href="#样例1-解释" class="headerlink" title="样例1 解释"></a>样例1 解释</h2><ul>
+<h2>样例1 输入</h2>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">6</span><br><span class="line">3 2 -1 1 -1 5</span><br></pre></td></tr></table></figure></p>
+<h2>样例1 输出</h2>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">11</span><br><span class="line">3 4</span><br></pre></td></tr></table></figure></p>
+<h2>样例1 解释</h2>
+<ul>
 <li>反转 $a_3,a_4$ 后，美丽程度的最大值在子段 $[5,3,2,1]$ 上取到，故答案为 $11$。</li>
 </ul>
-<h2 id="子任务"><a href="#子任务" class="headerlink" title="子任务"></a>子任务</h2><ul>
+<h2>子任务</h2>
+<ul>
 <li>1（30分）：$N\le 50$</li>
 <li>2（25分）：$N\le 400$</li>
 <li>3（25分）：$N\le 3000$</li>
 <li>4（20分）：$N\le 2\times 10^5$</li>
 </ul>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
+<h2>思路</h2>
+<ul>
 <li>动态规划，变成一个 <code>maximumSubarray</code> 问题</li>
 </ul>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2>
+<h2>实现</h2>
+
       
     </div>
     
@@ -619,7 +631,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入格式"><span class="nav-number">2.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出格式"><span class="nav-number">3.</span> <span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#样例1-输入"><span class="nav-number">4.</span> <span class="nav-text">样例1 输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#样例1-输出"><span class="nav-number">5.</span> <span class="nav-text">样例1 输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#样例1-解释"><span class="nav-number">6.</span> <span class="nav-text">样例1 解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子任务"><span class="nav-number">7.</span> <span class="nav-text">子任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">8.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">9.</span> <span class="nav-text">实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">样例1 输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">样例1 输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">样例1 解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">7.</span> <span class="nav-text">子任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">9.</span> <span class="nav-text">实现</span></a></li></ol></div>
             
 
           </div>

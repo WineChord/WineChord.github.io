@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="题目描述 给一张 $n$ 结点的带权完全图，计算最小生成树  输入输出 输入： 第 $1$ 行：$n$ 以下 $n$ 行：每行 $n$ 个非负整数，$(i,j)$ 表示点 $i$ 和点 $j$ 之间的边权 有：$cost(i,j)=cost(j,i)$ 且 $cost(i,i)=0$   输出： 一个整数，表示最小生成树的各边长之和    12345678input:40 4 9 214 0 8">
+<meta name="description" content="题目描述  给一张 $n$ 结点的带权完全图，计算最小生成树  输入输出  输入：  第 $1$ 行：$n$ 以下 $n$ 行：每行 $n$ 个非负整数，$(i,j)$ 表示点 $i$ 和点 $j$ 之间的边权 有：$cost(i,j)=cost(j,i)$ 且 $cost(i,i)=0$   输出：  一个整数，表示最小生成树的各边长之和    12345678input:40 4 9 214">
 <meta name="keywords" content="最小生成树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CST2018 2-8 MST">
 <meta property="og:url" content="http://yoursite.com/2019/02/09/CST2018-2-8-MST/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="题目描述 给一张 $n$ 结点的带权完全图，计算最小生成树  输入输出 输入： 第 $1$ 行：$n$ 以下 $n$ 行：每行 $n$ 个非负整数，$(i,j)$ 表示点 $i$ 和点 $j$ 之间的边权 有：$cost(i,j)=cost(j,i)$ 且 $cost(i,i)=0$   输出： 一个整数，表示最小生成树的各边长之和    12345678input:40 4 9 214 0 8">
+<meta property="og:description" content="题目描述  给一张 $n$ 结点的带权完全图，计算最小生成树  输入输出  输入：  第 $1$ 行：$n$ 以下 $n$ 行：每行 $n$ 个非负整数，$(i,j)$ 表示点 $i$ 和点 $j$ 之间的边权 有：$cost(i,j)=cost(j,i)$ 且 $cost(i,i)=0$   输出：  一个整数，表示最小生成树的各边长之和    12345678input:40 4 9 214">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-02-11T06:53:25.750Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CST2018 2-8 MST">
-<meta name="twitter:description" content="题目描述 给一张 $n$ 结点的带权完全图，计算最小生成树  输入输出 输入： 第 $1$ 行：$n$ 以下 $n$ 行：每行 $n$ 个非负整数，$(i,j)$ 表示点 $i$ 和点 $j$ 之间的边权 有：$cost(i,j)=cost(j,i)$ 且 $cost(i,i)=0$   输出： 一个整数，表示最小生成树的各边长之和    12345678input:40 4 9 214 0 8">
+<meta name="twitter:description" content="题目描述  给一张 $n$ 结点的带权完全图，计算最小生成树  输入输出  输入：  第 $1$ 行：$n$ 以下 $n$ 行：每行 $n$ 个非负整数，$(i,j)$ 表示点 $i$ 和点 $j$ 之间的边权 有：$cost(i,j)=cost(j,i)$ 且 $cost(i,i)=0$   输出：  一个整数，表示最小生成树的各边长之和    12345678input:40 4 9 214">
 
 
 
@@ -397,32 +397,40 @@
       
 
       
-        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><ul>
+        <h2>题目描述</h2>
+<ul>
 <li>给一张 $n$ 结点的带权完全图，计算最小生成树</li>
 </ul>
-<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ul>
-<li>输入：<ul>
+<h2>输入输出</h2>
+<ul>
+<li>输入：
+<ul>
 <li>第 $1$ 行：$n$</li>
 <li>以下 $n$ 行：每行 $n$ 个非负整数，$(i,j)$ 表示点 $i$ 和点 $j$ 之间的边权</li>
 <li>有：$cost(i,j)=cost(j,i)$ 且 $cost(i,i)=0$</li>
 </ul>
 </li>
-<li>输出：<ul>
+<li>输出：
+<ul>
 <li>一个整数，表示最小生成树的各边长之和</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">4</span><br><span class="line">0 4 9 21</span><br><span class="line">4 0 8 17</span><br><span class="line">9 8 0 16</span><br><span class="line">21 17 16 0</span><br><span class="line">output:</span><br><span class="line">28</span><br></pre></td></tr></table></figure>
-<h2 id="数据范围及限制"><a href="#数据范围及限制" class="headerlink" title="数据范围及限制"></a>数据范围及限制</h2><ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">4</span><br><span class="line">0 4 9 21</span><br><span class="line">4 0 8 17</span><br><span class="line">9 8 0 16</span><br><span class="line">21 17 16 0</span><br><span class="line">output:</span><br><span class="line">28</span><br></pre></td></tr></table></figure></p>
+<h2>数据范围及限制</h2>
+<ul>
 <li>$1\le n\le 500$</li>
 <li>边权为整数 $\in [0,1000]$</li>
 <li>1 sec</li>
 <li>256 MB</li>
 </ul>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><ul>
+<h2>提示</h2>
+<ul>
 <li>最小生成树</li>
 </ul>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2>
+<h2>思路</h2>
+<h2>实现</h2>
+
       
     </div>
     
@@ -610,7 +618,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入输出"><span class="nav-number">2.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据范围及限制"><span class="nav-number">3.</span> <span class="nav-text">数据范围及限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提示"><span class="nav-number">4.</span> <span class="nav-text">提示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">5.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">6.</span> <span class="nav-text">实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">数据范围及限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">提示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">实现</span></a></li></ol></div>
             
 
           </div>

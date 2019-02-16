@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="题目描述 给定一个长为n的只包含括号的括号序列，判断是否合法  输入输出 输入： 第 $1$ 行：$T$ 以下 $T$ 行：每行一个字符串 $S$ ，保证只由()[]{} 六种字符构成   输出： 共 $T$ 行：每行一个 $Yes$ 或 $No$    1234567input:2((&amp;#123;&amp;#125;())[])&amp;#123;(&amp;#125;)output:YesNo 数据范围及限制 $1\">
+<meta name="description" content="题目描述  给定一个长为n的只包含括号的括号序列，判断是否合法  输入输出  输入：  第 $1$ 行：$T$ 以下 $T$ 行：每行一个字符串 $S$ ，保证只由()[]{} 六种字符构成   输出：  共 $T$ 行：每行一个 $Yes$ 或 $No$    1234567input:2((&amp;#123;&amp;#125;())[])&amp;#123;(&amp;#125;)output:YesNo 数据范围及限制">
 <meta name="keywords" content="栈">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CST2018 1-8 Brackets">
 <meta property="og:url" content="http://yoursite.com/2019/02/09/CST2018-1-8-Brackets/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="题目描述 给定一个长为n的只包含括号的括号序列，判断是否合法  输入输出 输入： 第 $1$ 行：$T$ 以下 $T$ 行：每行一个字符串 $S$ ，保证只由()[]{} 六种字符构成   输出： 共 $T$ 行：每行一个 $Yes$ 或 $No$    1234567input:2((&amp;#123;&amp;#125;())[])&amp;#123;(&amp;#125;)output:YesNo 数据范围及限制 $1\">
+<meta property="og:description" content="题目描述  给定一个长为n的只包含括号的括号序列，判断是否合法  输入输出  输入：  第 $1$ 行：$T$ 以下 $T$ 行：每行一个字符串 $S$ ，保证只由()[]{} 六种字符构成   输出：  共 $T$ 行：每行一个 $Yes$ 或 $No$    1234567input:2((&amp;#123;&amp;#125;())[])&amp;#123;(&amp;#125;)output:YesNo 数据范围及限制">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-02-10T02:04:56.415Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CST2018 1-8 Brackets">
-<meta name="twitter:description" content="题目描述 给定一个长为n的只包含括号的括号序列，判断是否合法  输入输出 输入： 第 $1$ 行：$T$ 以下 $T$ 行：每行一个字符串 $S$ ，保证只由()[]{} 六种字符构成   输出： 共 $T$ 行：每行一个 $Yes$ 或 $No$    1234567input:2((&amp;#123;&amp;#125;())[])&amp;#123;(&amp;#125;)output:YesNo 数据范围及限制 $1\">
+<meta name="twitter:description" content="题目描述  给定一个长为n的只包含括号的括号序列，判断是否合法  输入输出  输入：  第 $1$ 行：$T$ 以下 $T$ 行：每行一个字符串 $S$ ，保证只由()[]{} 六种字符构成   输出：  共 $T$ 行：每行一个 $Yes$ 或 $No$    1234567input:2((&amp;#123;&amp;#125;())[])&amp;#123;(&amp;#125;)output:YesNo 数据范围及限制">
 
 
 
@@ -397,29 +397,37 @@
       
 
       
-        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><ul>
+        <h2>题目描述</h2>
+<ul>
 <li>给定一个长为n的只包含括号的括号序列，判断是否合法</li>
 </ul>
-<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ul>
-<li>输入：<ul>
+<h2>输入输出</h2>
+<ul>
+<li>输入：
+<ul>
 <li>第 $1$ 行：$T$</li>
 <li>以下 $T$ 行：每行一个字符串 $S$ ，保证只由<code>()[]{}</code> 六种字符构成</li>
 </ul>
 </li>
-<li>输出：<ul>
+<li>输出：
+<ul>
 <li>共 $T$ 行：每行一个 $Yes$ 或 $No$</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">2</span><br><span class="line">((&#123;&#125;())[])</span><br><span class="line">&#123;(&#125;)</span><br><span class="line">output:</span><br><span class="line">Yes</span><br><span class="line">No</span><br></pre></td></tr></table></figure>
-<h2 id="数据范围及限制"><a href="#数据范围及限制" class="headerlink" title="数据范围及限制"></a>数据范围及限制</h2><ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">2</span><br><span class="line">((&#123;&#125;())[])</span><br><span class="line">&#123;(&#125;)</span><br><span class="line">output:</span><br><span class="line">Yes</span><br><span class="line">No</span><br></pre></td></tr></table></figure></p>
+<h2>数据范围及限制</h2>
+<ul>
 <li>$1\le T\le 10$</li>
 <li>$1\le |S|\le 100,000$</li>
 </ul>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><ul>
+<h2>提示</h2>
+<ul>
 <li>栈</li>
 </ul>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2>
+<h2>思路</h2>
+<h2>实现</h2>
+
       
     </div>
     
@@ -607,7 +615,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入输出"><span class="nav-number">2.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据范围及限制"><span class="nav-number">3.</span> <span class="nav-text">数据范围及限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提示"><span class="nav-number">4.</span> <span class="nav-text">提示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">5.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">6.</span> <span class="nav-text">实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">数据范围及限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">提示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">实现</span></a></li></ol></div>
             
 
           </div>

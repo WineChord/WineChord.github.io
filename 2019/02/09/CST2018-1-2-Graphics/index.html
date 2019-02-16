@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="题目描述 在 $x$ 轴正半轴和 $y$ 轴正半轴分别挑选 $n$ 个不同点 将 $x$ 轴和 $y$ 轴的点一一连接，形成 $n$ 条线段，并保证任意两条线段都不相交。 给出 $m$ 个询问，对于每个询问将会给定一个点 $P(Px,Py)$ 请回答线段 $OP$ 与 $n$ 条线段会产生多少个交点？  输入输出 输入： 第 $1$ 行：$n$  # 表示线段的数量 第 $2$ 行：$n$ 个正整">
+<meta name="description" content="题目描述  在 $x$ 轴正半轴和 $y$ 轴正半轴分别挑选 $n$ 个不同点 将 $x$ 轴和 $y$ 轴的点一一连接，形成 $n$ 条线段，并保证任意两条线段都不相交。 给出 $m$ 个询问，对于每个询问将会给定一个点 $P(Px,Py)$ 请回答线段 $OP$ 与 $n$ 条线段会产生多少个交点？  输入输出  输入：  第 $1$ 行：$n$  # 表示线段的数量 第 $2$ 行：$n$">
 <meta name="keywords" content="计算几何">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CST2018 1-2 Graphics">
 <meta property="og:url" content="http://yoursite.com/2019/02/09/CST2018-1-2-Graphics/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="题目描述 在 $x$ 轴正半轴和 $y$ 轴正半轴分别挑选 $n$ 个不同点 将 $x$ 轴和 $y$ 轴的点一一连接，形成 $n$ 条线段，并保证任意两条线段都不相交。 给出 $m$ 个询问，对于每个询问将会给定一个点 $P(Px,Py)$ 请回答线段 $OP$ 与 $n$ 条线段会产生多少个交点？  输入输出 输入： 第 $1$ 行：$n$  # 表示线段的数量 第 $2$ 行：$n$ 个正整">
+<meta property="og:description" content="题目描述  在 $x$ 轴正半轴和 $y$ 轴正半轴分别挑选 $n$ 个不同点 将 $x$ 轴和 $y$ 轴的点一一连接，形成 $n$ 条线段，并保证任意两条线段都不相交。 给出 $m$ 个询问，对于每个询问将会给定一个点 $P(Px,Py)$ 请回答线段 $OP$ 与 $n$ 条线段会产生多少个交点？  输入输出  输入：  第 $1$ 行：$n$  # 表示线段的数量 第 $2$ 行：$n$">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-02-09T02:13:25.620Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CST2018 1-2 Graphics">
-<meta name="twitter:description" content="题目描述 在 $x$ 轴正半轴和 $y$ 轴正半轴分别挑选 $n$ 个不同点 将 $x$ 轴和 $y$ 轴的点一一连接，形成 $n$ 条线段，并保证任意两条线段都不相交。 给出 $m$ 个询问，对于每个询问将会给定一个点 $P(Px,Py)$ 请回答线段 $OP$ 与 $n$ 条线段会产生多少个交点？  输入输出 输入： 第 $1$ 行：$n$  # 表示线段的数量 第 $2$ 行：$n$ 个正整">
+<meta name="twitter:description" content="题目描述  在 $x$ 轴正半轴和 $y$ 轴正半轴分别挑选 $n$ 个不同点 将 $x$ 轴和 $y$ 轴的点一一连接，形成 $n$ 条线段，并保证任意两条线段都不相交。 给出 $m$ 个询问，对于每个询问将会给定一个点 $P(Px,Py)$ 请回答线段 $OP$ 与 $n$ 条线段会产生多少个交点？  输入输出  输入：  第 $1$ 行：$n$  # 表示线段的数量 第 $2$ 行：$n$">
 
 
 
@@ -397,14 +397,17 @@
       
 
       
-        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><ul>
+        <h2>题目描述</h2>
+<ul>
 <li>在 $x$ 轴正半轴和 $y$ 轴正半轴分别挑选 $n$ 个不同点</li>
 <li>将 $x$ 轴和 $y$ 轴的点一一连接，形成 $n$ 条线段，并保证任意两条线段都不相交。</li>
 <li>给出 $m$ 个询问，对于每个询问将会给定一个点 $P(Px,Py)$</li>
 <li>请回答线段 $OP$ 与 $n$ 条线段会产生多少个交点？</li>
 </ul>
-<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ul>
-<li>输入：<ul>
+<h2>输入输出</h2>
+<ul>
+<li>输入：
+<ul>
 <li>第 $1$ 行：$n$  # 表示线段的数量</li>
 <li>第 $2$ 行：$n$ 个正整数，表示在 $x$ 轴选取的点的横坐标</li>
 <li>第 $3$ 行：$n$ 个正整数，表示在 $y$ 轴选取的点的纵坐标</li>
@@ -412,35 +415,42 @@
 <li>以后 $m$ 行：每行两个整数 $Px,Py$ ，表示询问中给定点横纵坐标</li>
 </ul>
 </li>
-<li>输出：<ul>
+<li>输出：
+<ul>
 <li>共 $m$ 行：每行一个非负整数，表示答案</li>
 </ul>
 </li>
 </ul>
-<h2 id="输入输出样例"><a href="#输入输出样例" class="headerlink" title="输入输出样例"></a>输入输出样例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">3</span><br><span class="line">4 5 3</span><br><span class="line">3 5 4</span><br><span class="line">2</span><br><span class="line">1 1</span><br><span class="line">3 3</span><br><span class="line">output:</span><br><span class="line">0</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+<h2>输入输出样例</h2>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">3</span><br><span class="line">4 5 3</span><br><span class="line">3 5 4</span><br><span class="line">2</span><br><span class="line">1 1</span><br><span class="line">3 3</span><br><span class="line">output:</span><br><span class="line">0</span><br><span class="line">3</span><br></pre></td></tr></table></figure></p>
 <ul>
-<li>样例说明<ul>
+<li>样例说明
+<ul>
 <li>$3$ 条线段分别为：(3,0)-(0,3),(4,0)-(0,4),(5,0)-(0,5)</li>
 <li>(0,0)-(1,1)无交点，答案为0</li>
 <li>(0,0)-(3,3)有三个交点，答案为3</li>
 </ul>
 </li>
 </ul>
-<h2 id="数据范围及限制"><a href="#数据范围及限制" class="headerlink" title="数据范围及限制"></a>数据范围及限制</h2><ul>
+<h2>数据范围及限制</h2>
+<ul>
 <li>$1\le n\le 200,000$</li>
 <li>$1\le m\le 200,000$</li>
 <li>$1\le 横纵坐标\lt 2^{31}$</li>
 <li>时间限制：1 sec</li>
 <li>内存限制：256 MB</li>
 </ul>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><ul>
+<h2>提示</h2>
+<ul>
 <li>二分查找、ToLeft测试。</li>
 <li>对于每条线段，可以用向量叉积的 ToLeft 测试来判断其在线段的左边还是右边。通过二分查找，可以高效的查找点在哪个区域内，从而确定交点的数目。</li>
 </ul>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
+<h2>思路</h2>
+<ul>
 <li>按提示来</li>
 </ul>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2>
+<h2>实现</h2>
+
       
     </div>
     
@@ -628,7 +638,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入输出"><span class="nav-number">2.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入输出样例"><span class="nav-number">3.</span> <span class="nav-text">输入输出样例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据范围及限制"><span class="nav-number">4.</span> <span class="nav-text">数据范围及限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提示"><span class="nav-number">5.</span> <span class="nav-text">提示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">6.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">7.</span> <span class="nav-text">实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">输入输出样例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">数据范围及限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">提示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">7.</span> <span class="nav-text">实现</span></a></li></ol></div>
             
 
           </div>

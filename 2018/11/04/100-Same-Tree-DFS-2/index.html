@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="问题描述判断两个树是否一样 解法1234bool isSameTree(TreeNode* p, TreeNode* q)&amp;#123;    if(p == NULL || q == NULL) return (p==q);    return (p-&amp;gt;val == q-&amp;gt;val &amp;amp;&amp;amp; isSameTree(p-&amp;gt;left, q-&amp;gt;left) &amp;amp;&amp;a">
+<meta name="description" content="问题描述 判断两个树是否一样 解法 1234bool isSameTree(TreeNode* p, TreeNode* q)&amp;#123;    if(p == NULL || q == NULL) return (p==q);    return (p-&amp;gt;val == q-&amp;gt;val &amp;amp;&amp;amp; isSameTree(p-&amp;gt;left, q-&amp;gt;left) &amp;amp;">
 <meta name="keywords" content="LeetCode,Tree,DFS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="100. Same Tree-DFS-2">
 <meta property="og:url" content="http://yoursite.com/2018/11/04/100-Same-Tree-DFS-2/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="问题描述判断两个树是否一样 解法1234bool isSameTree(TreeNode* p, TreeNode* q)&amp;#123;    if(p == NULL || q == NULL) return (p==q);    return (p-&amp;gt;val == q-&amp;gt;val &amp;amp;&amp;amp; isSameTree(p-&amp;gt;left, q-&amp;gt;left) &amp;amp;&amp;a">
+<meta property="og:description" content="问题描述 判断两个树是否一样 解法 1234bool isSameTree(TreeNode* p, TreeNode* q)&amp;#123;    if(p == NULL || q == NULL) return (p==q);    return (p-&amp;gt;val == q-&amp;gt;val &amp;amp;&amp;amp; isSameTree(p-&amp;gt;left, q-&amp;gt;left) &amp;amp;">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-01-26T14:27:08.982Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="100. Same Tree-DFS-2">
-<meta name="twitter:description" content="问题描述判断两个树是否一样 解法1234bool isSameTree(TreeNode* p, TreeNode* q)&amp;#123;    if(p == NULL || q == NULL) return (p==q);    return (p-&amp;gt;val == q-&amp;gt;val &amp;amp;&amp;amp; isSameTree(p-&amp;gt;left, q-&amp;gt;left) &amp;amp;&amp;a">
+<meta name="twitter:description" content="问题描述 判断两个树是否一样 解法 1234bool isSameTree(TreeNode* p, TreeNode* q)&amp;#123;    if(p == NULL || q == NULL) return (p==q);    return (p-&amp;gt;val == q-&amp;gt;val &amp;amp;&amp;amp; isSameTree(p-&amp;gt;left, q-&amp;gt;left) &amp;amp;">
 
 
 
@@ -397,8 +397,11 @@
       
 
       
-        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>判断两个树是否一样</p>
-<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isSameTree</span><span class="params">(TreeNode* p, TreeNode* q)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(p == <span class="literal">NULL</span> || q == <span class="literal">NULL</span>) <span class="keyword">return</span> (p==q);</span><br><span class="line">    <span class="keyword">return</span> (p-&gt;val == q-&gt;val &amp;&amp; isSameTree(p-&gt;left, q-&gt;left) &amp;&amp; isSameTree(p-&gt;right, q-&gt;right));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h3>问题描述</h3>
+<p>判断两个树是否一样</p>
+<h3>解法</h3>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isSameTree</span><span class="params">(TreeNode* p, TreeNode* q)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(p == <span class="literal">NULL</span> || q == <span class="literal">NULL</span>) <span class="keyword">return</span> (p==q);</span><br><span class="line">    <span class="keyword">return</span> (p-&gt;val == q-&gt;val &amp;&amp; isSameTree(p-&gt;left, q-&gt;left) &amp;&amp; isSameTree(p-&gt;right, q-&gt;right));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
     
@@ -590,7 +593,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解法"><span class="nav-number">2.</span> <span class="nav-text">解法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">解法</span></a></li></ol></div>
             
 
           </div>

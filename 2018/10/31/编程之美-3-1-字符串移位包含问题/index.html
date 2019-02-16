@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="问题描述判断一个字符串是否能被另一个字符串进行循环移位后包含。 解法一：暴力1234567891011char src = &quot;AABBCD&quot;;char des = &quot;CDAA&quot;;int len = strlen(src);for(int i = 0; i &amp;lt; len; i++)&amp;#123;    char tempchar = src[0];    for(int j = 0; j &amp;lt;">
+<meta name="description" content="问题描述 判断一个字符串是否能被另一个字符串进行循环移位后包含。 解法一：暴力 1234567891011char src = &quot;AABBCD&quot;;char des = &quot;CDAA&quot;;int len = strlen(src);for(int i = 0; i &amp;lt; len; i++)&amp;#123;    char tempchar = src[0];    for(int j = 0; j &amp;l">
 <meta name="keywords" content="String">
 <meta property="og:type" content="article">
 <meta property="og:title" content="编程之美 3.1 字符串移位包含问题">
 <meta property="og:url" content="http://yoursite.com/2018/10/31/编程之美-3-1-字符串移位包含问题/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="问题描述判断一个字符串是否能被另一个字符串进行循环移位后包含。 解法一：暴力1234567891011char src = &quot;AABBCD&quot;;char des = &quot;CDAA&quot;;int len = strlen(src);for(int i = 0; i &amp;lt; len; i++)&amp;#123;    char tempchar = src[0];    for(int j = 0; j &amp;lt;">
+<meta property="og:description" content="问题描述 判断一个字符串是否能被另一个字符串进行循环移位后包含。 解法一：暴力 1234567891011char src = &quot;AABBCD&quot;;char des = &quot;CDAA&quot;;int len = strlen(src);for(int i = 0; i &amp;lt; len; i++)&amp;#123;    char tempchar = src[0];    for(int j = 0; j &amp;l">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-01-26T14:20:30.443Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="编程之美 3.1 字符串移位包含问题">
-<meta name="twitter:description" content="问题描述判断一个字符串是否能被另一个字符串进行循环移位后包含。 解法一：暴力1234567891011char src = &quot;AABBCD&quot;;char des = &quot;CDAA&quot;;int len = strlen(src);for(int i = 0; i &amp;lt; len; i++)&amp;#123;    char tempchar = src[0];    for(int j = 0; j &amp;lt;">
+<meta name="twitter:description" content="问题描述 判断一个字符串是否能被另一个字符串进行循环移位后包含。 解法一：暴力 1234567891011char src = &quot;AABBCD&quot;;char des = &quot;CDAA&quot;;int len = strlen(src);for(int i = 0; i &amp;lt; len; i++)&amp;#123;    char tempchar = src[0];    for(int j = 0; j &amp;l">
 
 
 
@@ -397,9 +397,12 @@
       
 
       
-        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>判断一个字符串是否能被另一个字符串进行循环移位后包含。</p>
-<h3 id="解法一：暴力"><a href="#解法一：暴力" class="headerlink" title="解法一：暴力"></a>解法一：暴力</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> src = <span class="string">"AABBCD"</span>;</span><br><span class="line"><span class="keyword">char</span> des = <span class="string">"CDAA"</span>;</span><br><span class="line"><span class="keyword">int</span> len = <span class="built_in">strlen</span>(src);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">    <span class="keyword">char</span> tempchar = src[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; len - <span class="number">1</span>; j++)</span><br><span class="line">        src[j] = src[j+<span class="number">1</span>];</span><br><span class="line">    src[len - <span class="number">1</span>] = tempchar;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strstr</span>(src, des)) <span class="keyword">return</span> <span class="literal">true</span>; </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
-<h3 id="解法二：观察"><a href="#解法二：观察" class="headerlink" title="解法二：观察"></a>解法二：观察</h3><p>可以看到 $s_1$ 做循环移位之后得到的字符串都是 $s_1s_1$ 的子串。则问题转化为判断 $s_2$ 是否在 $s_1s_1$ 子串上。</p>
+        <h3>问题描述</h3>
+<p>判断一个字符串是否能被另一个字符串进行循环移位后包含。</p>
+<h3>解法一：暴力</h3>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> src = <span class="string">"AABBCD"</span>;</span><br><span class="line"><span class="keyword">char</span> des = <span class="string">"CDAA"</span>;</span><br><span class="line"><span class="keyword">int</span> len = <span class="built_in">strlen</span>(src);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">    <span class="keyword">char</span> tempchar = src[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; len - <span class="number">1</span>; j++)</span><br><span class="line">        src[j] = src[j+<span class="number">1</span>];</span><br><span class="line">    src[len - <span class="number">1</span>] = tempchar;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strstr</span>(src, des)) <span class="keyword">return</span> <span class="literal">true</span>; </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">false</span>;</span><br></pre></td></tr></table></figure></p>
+<h3>解法二：观察</h3>
+<p>可以看到 $s_1$ 做循环移位之后得到的字符串都是 $s_1s_1$ 的子串。则问题转化为判断 $s_2$ 是否在 $s_1s_1$ 子串上。</p>
 
       
     </div>
@@ -588,7 +591,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解法一：暴力"><span class="nav-number">2.</span> <span class="nav-text">解法一：暴力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解法二：观察"><span class="nav-number">3.</span> <span class="nav-text">解法二：观察</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">解法一：暴力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">解法二：观察</span></a></li></ol></div>
             
 
           </div>

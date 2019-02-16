@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="问题描述给定一个数组和一个目标值，问数组中的哪两个元素相加可以得到这个值，返回这两个元素的下标 思路使用散列表，对于每一个元素 $num[i]$，另一半的值应为 $numToFind=target-num[i]$，直接在散列表中查找该关键码是否存在，若存在，该关键码对应的值即为其下标 $j$，有因为当前元素的下标为 $i$，故应返回 $[i,j]$；若不存在，则将 ${num[i],i}$ 这一">
+<meta name="description" content="问题描述 给定一个数组和一个目标值，问数组中的哪两个元素相加可以得到这个值，返回这两个元素的下标 思路 使用散列表，对于每一个元素 $num[i]$，另一半的值应为 $numToFind=target-num[i]$，直接在散列表中查找该关键码是否存在，若存在，该关键码对应的值即为其下标 $j$，有因为当前元素的下标为 $i$，故应返回 $[i,j]$；若不存在，则将 ${num[i],i}$ 这">
 <meta name="keywords" content="LeetCode,Array,Hash">
 <meta property="og:type" content="article">
 <meta property="og:title" content="1.TwoSum">
 <meta property="og:url" content="http://yoursite.com/2018/08/08/TwoSum/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="问题描述给定一个数组和一个目标值，问数组中的哪两个元素相加可以得到这个值，返回这两个元素的下标 思路使用散列表，对于每一个元素 $num[i]$，另一半的值应为 $numToFind=target-num[i]$，直接在散列表中查找该关键码是否存在，若存在，该关键码对应的值即为其下标 $j$，有因为当前元素的下标为 $i$，故应返回 $[i,j]$；若不存在，则将 ${num[i],i}$ 这一">
+<meta property="og:description" content="问题描述 给定一个数组和一个目标值，问数组中的哪两个元素相加可以得到这个值，返回这两个元素的下标 思路 使用散列表，对于每一个元素 $num[i]$，另一半的值应为 $numToFind=target-num[i]$，直接在散列表中查找该关键码是否存在，若存在，该关键码对应的值即为其下标 $j$，有因为当前元素的下标为 $i$，故应返回 $[i,j]$；若不存在，则将 ${num[i],i}$ 这">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-01-26T14:14:23.664Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="1.TwoSum">
-<meta name="twitter:description" content="问题描述给定一个数组和一个目标值，问数组中的哪两个元素相加可以得到这个值，返回这两个元素的下标 思路使用散列表，对于每一个元素 $num[i]$，另一半的值应为 $numToFind=target-num[i]$，直接在散列表中查找该关键码是否存在，若存在，该关键码对应的值即为其下标 $j$，有因为当前元素的下标为 $i$，故应返回 $[i,j]$；若不存在，则将 ${num[i],i}$ 这一">
+<meta name="twitter:description" content="问题描述 给定一个数组和一个目标值，问数组中的哪两个元素相加可以得到这个值，返回这两个元素的下标 思路 使用散列表，对于每一个元素 $num[i]$，另一半的值应为 $numToFind=target-num[i]$，直接在散列表中查找该关键码是否存在，若存在，该关键码对应的值即为其下标 $j$，有因为当前元素的下标为 $i$，故应返回 $[i,j]$；若不存在，则将 ${num[i],i}$ 这">
 
 
 
@@ -397,10 +397,14 @@
       
 
       
-        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定一个数组和一个目标值，问数组中的哪两个元素相加可以得到这个值，返回这两个元素的下标</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>使用散列表，对于每一个元素 $num[i]$，另一半的值应为 $numToFind=target-num[i]$，直接在散列表中查找该关键码是否存在，若存在，该关键码对应的值即为其下标 $j$，有因为当前元素的下标为 $i$，故应返回 $[i,j]$；若不存在，则将 ${num[i],i}$ 这一 $key-value \ pair$ 存入散列表中。</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; twoSum(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target)&#123;</span><br><span class="line">	<span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; hash;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> numberToFind = target - nums[i]; <span class="comment">// 找到要查找的值</span></span><br><span class="line">		<span class="keyword">if</span>(hash.find(numberToFind) != hash.end())&#123;</span><br><span class="line">			result.push_back(hash[numberToFind]); <span class="comment">// 找到了</span></span><br><span class="line">			result.push_back(i);</span><br><span class="line">			<span class="keyword">return</span> result;</span><br><span class="line">		&#125;</span><br><span class="line">		hash[nums[i]] = i;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>对每个元素只需操作一次，故时间复杂度为 $O(n)$，需要维护一个 $O(n)$ 的散列表，故空间复杂度为 $O(n)$</p>
+        <h3>问题描述</h3>
+<p>给定一个数组和一个目标值，问数组中的哪两个元素相加可以得到这个值，返回这两个元素的下标</p>
+<h3>思路</h3>
+<p>使用散列表，对于每一个元素 $num[i]$，另一半的值应为 $numToFind=target-num[i]$，直接在散列表中查找该关键码是否存在，若存在，该关键码对应的值即为其下标 $j$，有因为当前元素的下标为 $i$，故应返回 $[i,j]$；若不存在，则将 ${num[i],i}$ 这一 $key-value \ pair$ 存入散列表中。</p>
+<h3>实现</h3>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; twoSum(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target)&#123;</span><br><span class="line">	<span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; hash;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> numberToFind = target - nums[i]; <span class="comment">// 找到要查找的值</span></span><br><span class="line">		<span class="keyword">if</span>(hash.find(numberToFind) != hash.end())&#123;</span><br><span class="line">			result.push_back(hash[numberToFind]); <span class="comment">// 找到了</span></span><br><span class="line">			result.push_back(i);</span><br><span class="line">			<span class="keyword">return</span> result;</span><br><span class="line">		&#125;</span><br><span class="line">		hash[nums[i]] = i;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>复杂度分析</h3>
+<p>对每个元素只需操作一次，故时间复杂度为 $O(n)$，需要维护一个 $O(n)$ 的散列表，故空间复杂度为 $O(n)$</p>
 
       
     </div>
@@ -593,7 +597,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">3.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂度分析"><span class="nav-number">4.</span> <span class="nav-text">复杂度分析</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">复杂度分析</span></a></li></ol></div>
             
 
           </div>

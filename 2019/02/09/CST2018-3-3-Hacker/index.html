@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="题目描述 用户系统保存密码时不能明文保存。一种做法是加盐 hash，将 password + salt 的 CRC32 值存在数据库中。当用户登录时，重复此计算，验证 hash 的值是否相等。 盐和密码必须由 0123456789tsinghua 中的字符组成，所有的用户使用相同的 salt 窃听了一些密文，想破解对应的密码，只破解不超过5位的密码。 窃听的过程中还不断地了解到一些极有可能成为密文">
+<meta name="description" content="题目描述  用户系统保存密码时不能明文保存。一种做法是加盐 hash，将 password + salt 的 CRC32 值存在数据库中。当用户登录时，重复此计算，验证 hash 的值是否相等。 盐和密码必须由 0123456789tsinghua 中的字符组成，所有的用户使用相同的 salt 窃听了一些密文，想破解对应的密码，只破解不超过5位的密码。 窃听的过程中还不断地了解到一些极有可能成为密">
 <meta name="keywords" content="散列">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CST2018 3-3 Hacker">
 <meta property="og:url" content="http://yoursite.com/2019/02/09/CST2018-3-3-Hacker/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="题目描述 用户系统保存密码时不能明文保存。一种做法是加盐 hash，将 password + salt 的 CRC32 值存在数据库中。当用户登录时，重复此计算，验证 hash 的值是否相等。 盐和密码必须由 0123456789tsinghua 中的字符组成，所有的用户使用相同的 salt 窃听了一些密文，想破解对应的密码，只破解不超过5位的密码。 窃听的过程中还不断地了解到一些极有可能成为密文">
+<meta property="og:description" content="题目描述  用户系统保存密码时不能明文保存。一种做法是加盐 hash，将 password + salt 的 CRC32 值存在数据库中。当用户登录时，重复此计算，验证 hash 的值是否相等。 盐和密码必须由 0123456789tsinghua 中的字符组成，所有的用户使用相同的 salt 窃听了一些密文，想破解对应的密码，只破解不超过5位的密码。 窃听的过程中还不断地了解到一些极有可能成为密">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-02-11T07:43:14.157Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CST2018 3-3 Hacker">
-<meta name="twitter:description" content="题目描述 用户系统保存密码时不能明文保存。一种做法是加盐 hash，将 password + salt 的 CRC32 值存在数据库中。当用户登录时，重复此计算，验证 hash 的值是否相等。 盐和密码必须由 0123456789tsinghua 中的字符组成，所有的用户使用相同的 salt 窃听了一些密文，想破解对应的密码，只破解不超过5位的密码。 窃听的过程中还不断地了解到一些极有可能成为密文">
+<meta name="twitter:description" content="题目描述  用户系统保存密码时不能明文保存。一种做法是加盐 hash，将 password + salt 的 CRC32 值存在数据库中。当用户登录时，重复此计算，验证 hash 的值是否相等。 盐和密码必须由 0123456789tsinghua 中的字符组成，所有的用户使用相同的 salt 窃听了一些密文，想破解对应的密码，只破解不超过5位的密码。 窃听的过程中还不断地了解到一些极有可能成为密">
 
 
 
@@ -397,37 +397,45 @@
       
 
       
-        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><ul>
+        <h2>题目描述</h2>
+<ul>
 <li>用户系统保存密码时不能明文保存。一种做法是加盐 hash，将 password + salt 的 CRC32 值存在数据库中。当用户登录时，重复此计算，验证 hash 的值是否相等。</li>
 <li>盐和密码必须由 <code>0123456789tsinghua</code> 中的字符组成，所有的用户使用相同的 salt</li>
 <li>窃听了一些密文，想破解对应的密码，只破解不超过5位的密码。</li>
 <li>窃听的过程中还不断地了解到一些极有可能成为密文的弱口令</li>
 <li>维护两个操作：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0 x // 查询 x 所对应的密码，若为5位以内或是之前发现的弱口令密码则输出该密码。找不到则输出 No，多个密码对应则输出 duplicate</span><br><span class="line">1   // 新探知一个可能的弱口令，不同 1 指令插入的相同的弱口令需要被认为是不同的，即如果 1 插入两次 &quot;aaaaaaa&quot;，0 操作询问之后需要输出 duplicate</span><br></pre></td></tr></table></figure>
-<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ul>
-<li>输入：<ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0 x // 查询 x 所对应的密码，若为5位以内或是之前发现的弱口令密码则输出该密码。找不到则输出 No，多个密码对应则输出 duplicate</span><br><span class="line">1   // 新探知一个可能的弱口令，不同 1 指令插入的相同的弱口令需要被认为是不同的，即如果 1 插入两次 &quot;aaaaaaa&quot;，0 操作询问之后需要输出 duplicate</span><br></pre></td></tr></table></figure></p>
+<h2>输入输出</h2>
+<ul>
+<li>输入：
+<ul>
 <li>第 $1$ 行：$n$</li>
 <li>第 $2$ 行：salt (length$\le 4$)</li>
 <li>以下 $n$ 行：每行为一个操作</li>
-<li>注意：为体现操作的在线性，对于每个操作”1”，每次增加的弱口令实际为之前发现的（不计算 duplicate）7 个密文的首字母。</li>
+<li>注意：为体现操作的在线性，对于每个操作&quot;1&quot;，每次增加的弱口令实际为之前发现的（不计算 duplicate）7 个密文的首字母。</li>
 </ul>
 </li>
-<li>输出：<ul>
+<li>输出：
+<ul>
 <li>若干行：对于每个0操作，若询问的密文x对应5位以内或是一个之前发现的弱口令密码，则输出，找不到则输出 No，多个密码对应则输出 duplicate</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">22</span><br><span class="line">gh05</span><br><span class="line">0 247720041</span><br><span class="line">0 2338669423</span><br><span class="line">0 1493402039</span><br><span class="line">0 4198769823</span><br><span class="line">0 2388280079</span><br><span class="line">0 2663422167</span><br><span class="line">0 96511603</span><br><span class="line">0 4123518</span><br><span class="line">1</span><br><span class="line">0 1797987966</span><br><span class="line">1</span><br><span class="line">0 4204041676</span><br><span class="line">0 247720041</span><br><span class="line">0 2338669423</span><br><span class="line">0 1493402039</span><br><span class="line">0 4198769823</span><br><span class="line">0 2388280079</span><br><span class="line">0 2663422167</span><br><span class="line">0 96511603</span><br><span class="line">0 41235</span><br><span class="line">1</span><br><span class="line">0 1797987966</span><br><span class="line">output:</span><br><span class="line">0</span><br><span class="line">11</span><br><span class="line">222</span><br><span class="line">3333</span><br><span class="line">ttttt</span><br><span class="line">hhhhh</span><br><span class="line">uuuuu</span><br><span class="line">No</span><br><span class="line">0123thu</span><br><span class="line">123thu0</span><br><span class="line">0</span><br><span class="line">11</span><br><span class="line">222</span><br><span class="line">3333</span><br><span class="line">ttttt</span><br><span class="line">hhhhh</span><br><span class="line">uuuuu</span><br><span class="line">No</span><br><span class="line">duplicate</span><br></pre></td></tr></table></figure>
-<h2 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h2><ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">22</span><br><span class="line">gh05</span><br><span class="line">0 247720041</span><br><span class="line">0 2338669423</span><br><span class="line">0 1493402039</span><br><span class="line">0 4198769823</span><br><span class="line">0 2388280079</span><br><span class="line">0 2663422167</span><br><span class="line">0 96511603</span><br><span class="line">0 4123518</span><br><span class="line">1</span><br><span class="line">0 1797987966</span><br><span class="line">1</span><br><span class="line">0 4204041676</span><br><span class="line">0 247720041</span><br><span class="line">0 2338669423</span><br><span class="line">0 1493402039</span><br><span class="line">0 4198769823</span><br><span class="line">0 2388280079</span><br><span class="line">0 2663422167</span><br><span class="line">0 96511603</span><br><span class="line">0 41235</span><br><span class="line">1</span><br><span class="line">0 1797987966</span><br><span class="line">output:</span><br><span class="line">0</span><br><span class="line">11</span><br><span class="line">222</span><br><span class="line">3333</span><br><span class="line">ttttt</span><br><span class="line">hhhhh</span><br><span class="line">uuuuu</span><br><span class="line">No</span><br><span class="line">0123thu</span><br><span class="line">123thu0</span><br><span class="line">0</span><br><span class="line">11</span><br><span class="line">222</span><br><span class="line">3333</span><br><span class="line">ttttt</span><br><span class="line">hhhhh</span><br><span class="line">uuuuu</span><br><span class="line">No</span><br><span class="line">duplicate</span><br></pre></td></tr></table></figure></p>
+<h2>限制</h2>
+<ul>
 <li>$1\le n\le 2,000,000$</li>
 <li>3 sec</li>
 <li>256 MB</li>
 </ul>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><ul>
+<h2>提示</h2>
+<ul>
 <li>散列</li>
 </ul>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2>
+<h2>思路</h2>
+<h2>实现</h2>
+
       
     </div>
     
@@ -615,7 +623,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入输出"><span class="nav-number">2.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#限制"><span class="nav-number">3.</span> <span class="nav-text">限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提示"><span class="nav-number">4.</span> <span class="nav-text">提示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">5.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">6.</span> <span class="nav-text">实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">提示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">实现</span></a></li></ol></div>
             
 
           </div>

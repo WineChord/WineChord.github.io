@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="题目描述 最初 $N$ 个陨石碎片，每个包含能量 $ai$ 每次可以选择合成两块陨石碎片 $i,j$ ，合成一个新的碎片 $k$，新的碎片能量为 $ak=ai*aj$。 每次合成新的碎片 $k$，可以获得等同于 $ak$ 的分数，总得分是每次得分的乘积 $ak1ak2ak3*…$  经过 $n-1$ 次合并，最终合成一块碎片，问最少的得分是多少？  输入输出 输入： 第 $1$ 行：$n$ 碎片的">
+<meta name="description" content="题目描述  最初 $N$ 个陨石碎片，每个包含能量 $ai$ 每次可以选择合成两块陨石碎片 $i,j$ ，合成一个新的碎片 $k$，新的碎片能量为 $ak=ai*aj$。 每次合成新的碎片 $k$，可以获得等同于 $ak$ 的分数，总得分是每次得分的乘积 $ak1ak2ak3*...$ 经过 $n-1$ 次合并，最终合成一块碎片，问最少的得分是多少？  输入输出  输入：  第 $1$ 行：$n$">
 <meta name="keywords" content="霍夫曼树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CST2018 2-1 Meteorites">
 <meta property="og:url" content="http://yoursite.com/2019/02/09/CST2018-2-1-Meteorites/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="题目描述 最初 $N$ 个陨石碎片，每个包含能量 $ai$ 每次可以选择合成两块陨石碎片 $i,j$ ，合成一个新的碎片 $k$，新的碎片能量为 $ak=ai*aj$。 每次合成新的碎片 $k$，可以获得等同于 $ak$ 的分数，总得分是每次得分的乘积 $ak1ak2ak3*…$  经过 $n-1$ 次合并，最终合成一块碎片，问最少的得分是多少？  输入输出 输入： 第 $1$ 行：$n$ 碎片的">
+<meta property="og:description" content="题目描述  最初 $N$ 个陨石碎片，每个包含能量 $ai$ 每次可以选择合成两块陨石碎片 $i,j$ ，合成一个新的碎片 $k$，新的碎片能量为 $ak=ai*aj$。 每次合成新的碎片 $k$，可以获得等同于 $ak$ 的分数，总得分是每次得分的乘积 $ak1ak2ak3*...$ 经过 $n-1$ 次合并，最终合成一块碎片，问最少的得分是多少？  输入输出  输入：  第 $1$ 行：$n$">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-02-10T02:13:51.383Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CST2018 2-1 Meteorites">
-<meta name="twitter:description" content="题目描述 最初 $N$ 个陨石碎片，每个包含能量 $ai$ 每次可以选择合成两块陨石碎片 $i,j$ ，合成一个新的碎片 $k$，新的碎片能量为 $ak=ai*aj$。 每次合成新的碎片 $k$，可以获得等同于 $ak$ 的分数，总得分是每次得分的乘积 $ak1ak2ak3*…$  经过 $n-1$ 次合并，最终合成一块碎片，问最少的得分是多少？  输入输出 输入： 第 $1$ 行：$n$ 碎片的">
+<meta name="twitter:description" content="题目描述  最初 $N$ 个陨石碎片，每个包含能量 $ai$ 每次可以选择合成两块陨石碎片 $i,j$ ，合成一个新的碎片 $k$，新的碎片能量为 $ak=ai*aj$。 每次合成新的碎片 $k$，可以获得等同于 $ak$ 的分数，总得分是每次得分的乘积 $ak1ak2ak3*...$ 经过 $n-1$ 次合并，最终合成一块碎片，问最少的得分是多少？  输入输出  输入：  第 $1$ 行：$n$">
 
 
 
@@ -397,35 +397,45 @@
       
 
       
-        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><ul>
+        <h2>题目描述</h2>
+<ul>
 <li>最初 $N$ 个陨石碎片，每个包含能量 $ai$</li>
 <li>每次可以选择合成两块陨石碎片 $i,j$ ，合成一个新的碎片 $k$，新的碎片能量为 $ak=ai*aj$。</li>
-<li>每次合成新的碎片 $k$，可以获得等同于 $ak$ 的分数，总得分是每次得分的乘积 $ak1<em>ak2</em>ak3*…$ </li>
+<li>每次合成新的碎片 $k$，可以获得等同于 $ak$ 的分数，总得分是每次得分的乘积 $ak1<em>ak2</em>ak3*...$</li>
 <li>经过 $n-1$ 次合并，最终合成一块碎片，问最少的得分是多少？</li>
 </ul>
-<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ul>
-<li>输入：<ul>
+<h2>输入输出</h2>
+<ul>
+<li>输入：
+<ul>
 <li>第 $1$ 行：$n$ 碎片的个数</li>
 <li>第 $2$ 行：$n$ 个整数 $ai$ ，表示 $n$ 个陨石碎片的能量</li>
 </ul>
 </li>
-<li>输出：<ul>
+<li>输出：
+<ul>
 <li>最少得分</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">4</span><br><span class="line">2 3 4 5</span><br><span class="line">output:</span><br><span class="line">14400        // 6 * 20 * 120 = 14400</span><br></pre></td></tr></table></figure>
-<h2 id="数据范围及限制"><a href="#数据范围及限制" class="headerlink" title="数据范围及限制"></a>数据范围及限制</h2><ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">4</span><br><span class="line">2 3 4 5</span><br><span class="line">output:</span><br><span class="line">14400        // 6 * 20 * 120 = 14400</span><br></pre></td></tr></table></figure></p>
+<h2>数据范围及限制</h2>
+<ul>
 <li>$2\le n\le 2000$</li>
 <li>$1\le ai\le 10^9$</li>
 </ul>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><ul>
-<li><p>哈夫曼树</p>
+<h2>提示</h2>
+<ul>
+<li>
+<p>哈夫曼树</p>
 </li>
-<li><p>CST2018 1-1 A+B problem</p>
+<li>
+<p>CST2018 1-1 A+B problem</p>
 </li>
 </ul>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2>
+<h2>思路</h2>
+<h2>实现</h2>
+
       
     </div>
     
@@ -613,7 +623,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入输出"><span class="nav-number">2.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据范围及限制"><span class="nav-number">3.</span> <span class="nav-text">数据范围及限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提示"><span class="nav-number">4.</span> <span class="nav-text">提示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">5.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">6.</span> <span class="nav-text">实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">数据范围及限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">提示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">实现</span></a></li></ol></div>
             
 
           </div>

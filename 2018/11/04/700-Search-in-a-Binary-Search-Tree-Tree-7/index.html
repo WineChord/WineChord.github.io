@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="问题描述实现二叉搜索树的查找功能123456struct TreeNode&amp;#123;    int val;    TreeNode *left;    TreeNode *right;    TreeNode(int x): val(x), left(NULL), right(NULL)&amp;#123;&amp;#125;&amp;#125;; 解法12345678910111213// iterativeTre">
+<meta name="description" content="问题描述 实现二叉搜索树的查找功能 123456struct TreeNode&amp;#123;    int val;    TreeNode *left;    TreeNode *right;    TreeNode(int x): val(x), left(NULL), right(NULL)&amp;#123;&amp;#125;&amp;#125;; 解法 12345678910111213// iterative">
 <meta name="keywords" content="LeetCode,Tree">
 <meta property="og:type" content="article">
 <meta property="og:title" content="700. Search in a Binary Search Tree-Tree-7">
 <meta property="og:url" content="http://yoursite.com/2018/11/04/700-Search-in-a-Binary-Search-Tree-Tree-7/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="问题描述实现二叉搜索树的查找功能123456struct TreeNode&amp;#123;    int val;    TreeNode *left;    TreeNode *right;    TreeNode(int x): val(x), left(NULL), right(NULL)&amp;#123;&amp;#125;&amp;#125;; 解法12345678910111213// iterativeTre">
+<meta property="og:description" content="问题描述 实现二叉搜索树的查找功能 123456struct TreeNode&amp;#123;    int val;    TreeNode *left;    TreeNode *right;    TreeNode(int x): val(x), left(NULL), right(NULL)&amp;#123;&amp;#125;&amp;#125;; 解法 12345678910111213// iterative">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-01-26T14:40:19.877Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="700. Search in a Binary Search Tree-Tree-7">
-<meta name="twitter:description" content="问题描述实现二叉搜索树的查找功能123456struct TreeNode&amp;#123;    int val;    TreeNode *left;    TreeNode *right;    TreeNode(int x): val(x), left(NULL), right(NULL)&amp;#123;&amp;#125;&amp;#125;; 解法12345678910111213// iterativeTre">
+<meta name="twitter:description" content="问题描述 实现二叉搜索树的查找功能 123456struct TreeNode&amp;#123;    int val;    TreeNode *left;    TreeNode *right;    TreeNode(int x): val(x), left(NULL), right(NULL)&amp;#123;&amp;#125;&amp;#125;; 解法 12345678910111213// iterative">
 
 
 
@@ -397,8 +397,12 @@
       
 
       
-        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>实现二叉搜索树的查找功能<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode *left;</span><br><span class="line">    TreeNode *right;</span><br><span class="line">    TreeNode(<span class="keyword">int</span> x): val(x), left(<span class="literal">NULL</span>), right(<span class="literal">NULL</span>)&#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// iterative</span></span><br><span class="line"><span class="function">TreeNode* <span class="title">searchBST</span><span class="params">(TreeNode* root, <span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(root != <span class="literal">nullptr</span> &amp;&amp; root-&gt;val != val)&#123;</span><br><span class="line">        root = (root-&gt;val &gt; val) ? root-&gt;left : root-&gt;right;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// recursive</span></span><br><span class="line"><span class="function">TreeNode* <span class="title">searchBST</span><span class="params">(TreeNode* root, <span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root == null) <span class="keyword">return</span> root;</span><br><span class="line">    <span class="keyword">if</span>(root-&gt;val == val) <span class="keyword">return</span> root;</span><br><span class="line">    <span class="keyword">return</span> root-&gt;val &gt; val ? searchBST(root-&gt;left, val) : searchBST(root-&gt;right, val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h3>问题描述</h3>
+<p>实现二叉搜索树的查找功能
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode *left;</span><br><span class="line">    TreeNode *right;</span><br><span class="line">    TreeNode(<span class="keyword">int</span> x): val(x), left(<span class="literal">NULL</span>), right(<span class="literal">NULL</span>)&#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3>解法</h3>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// iterative</span></span><br><span class="line"><span class="function">TreeNode* <span class="title">searchBST</span><span class="params">(TreeNode* root, <span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(root != <span class="literal">nullptr</span> &amp;&amp; root-&gt;val != val)&#123;</span><br><span class="line">        root = (root-&gt;val &gt; val) ? root-&gt;left : root-&gt;right;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// recursive</span></span><br><span class="line"><span class="function">TreeNode* <span class="title">searchBST</span><span class="params">(TreeNode* root, <span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root == null) <span class="keyword">return</span> root;</span><br><span class="line">    <span class="keyword">if</span>(root-&gt;val == val) <span class="keyword">return</span> root;</span><br><span class="line">    <span class="keyword">return</span> root-&gt;val &gt; val ? searchBST(root-&gt;left, val) : searchBST(root-&gt;right, val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
     
@@ -588,7 +592,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解法"><span class="nav-number">2.</span> <span class="nav-text">解法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">解法</span></a></li></ol></div>
             
 
           </div>

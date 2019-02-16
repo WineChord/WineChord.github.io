@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="大概2019.1.10左右的时候在电脑的SSD上装了一个Win10（顿时觉得这孩子寿命又长了两年）。需要重新配置一下本地运行blog的环境，故记录之。 安装Node.jsNode.js 安装githttp://git-scm.com/download/ 安装Hexo在blog目录下右键：’Git Bash here’1$ npm install -g hexo-cli PS:执行上一步时出现了一个">
+<meta name="description" content="大概2019.1.10左右的时候在电脑的SSD上装了一个Win10（顿时觉得这孩子寿命又长了两年）。需要重新配置一下本地运行blog的环境，故记录之。 安装Node.js Node.js 安装git http://git-scm.com/download/ 安装Hexo 在blog目录下右键：&apos;Git Bash here&apos; 1$ npm install -g hexo-cli PS:执行上一步时出">
 <meta name="keywords" content="hexo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="博客Win10本地配置+添加搜索和Disqus">
 <meta property="og:url" content="http://yoursite.com/2019/01/15/博客Win10本地配置/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="大概2019.1.10左右的时候在电脑的SSD上装了一个Win10（顿时觉得这孩子寿命又长了两年）。需要重新配置一下本地运行blog的环境，故记录之。 安装Node.jsNode.js 安装githttp://git-scm.com/download/ 安装Hexo在blog目录下右键：’Git Bash here’1$ npm install -g hexo-cli PS:执行上一步时出现了一个">
+<meta property="og:description" content="大概2019.1.10左右的时候在电脑的SSD上装了一个Win10（顿时觉得这孩子寿命又长了两年）。需要重新配置一下本地运行blog的环境，故记录之。 安装Node.js Node.js 安装git http://git-scm.com/download/ 安装Hexo 在blog目录下右键：&apos;Git Bash here&apos; 1$ npm install -g hexo-cli PS:执行上一步时出">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-01-26T14:19:06.550Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="博客Win10本地配置+添加搜索和Disqus">
-<meta name="twitter:description" content="大概2019.1.10左右的时候在电脑的SSD上装了一个Win10（顿时觉得这孩子寿命又长了两年）。需要重新配置一下本地运行blog的环境，故记录之。 安装Node.jsNode.js 安装githttp://git-scm.com/download/ 安装Hexo在blog目录下右键：’Git Bash here’1$ npm install -g hexo-cli PS:执行上一步时出现了一个">
+<meta name="twitter:description" content="大概2019.1.10左右的时候在电脑的SSD上装了一个Win10（顿时觉得这孩子寿命又长了两年）。需要重新配置一下本地运行blog的环境，故记录之。 安装Node.js Node.js 安装git http://git-scm.com/download/ 安装Hexo 在blog目录下右键：&apos;Git Bash here&apos; 1$ npm install -g hexo-cli PS:执行上一步时出">
 
 
 
@@ -376,28 +376,41 @@
 
       
         <p>大概2019.1.10左右的时候在电脑的SSD上装了一个Win10（顿时觉得这孩子寿命又长了两年）。需要重新配置一下本地运行blog的环境，故记录之。</p>
-<h2 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h2><p><a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js</a></p>
-<h2 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h2><p><a href="http://git-scm.com/download/" target="_blank" rel="noopener">http://git-scm.com/download/</a></p>
-<h2 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h2><p>在blog目录下右键：’Git Bash here’<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install -g hexo-cli</span></span><br></pre></td></tr></table></figure></p>
-<p>PS:执行上一步时出现了一个小插曲，显示了如下错误：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">npm ERR! code ECONNRESET</span><br><span class="line">npm ERR! errno ECONNRESET</span><br><span class="line">npm ERR! network request to https://registry.npmjs.org/escape-string-regexp failed, reason: Client network socket disconnected before secure TLS connection was established</span><br><span class="line">npm ERR! network This is a problem related to network connectivity.</span><br><span class="line">npm ERR! network In most cases you are behind a proxy or have bad network settings.</span><br><span class="line">npm ERR! network</span><br><span class="line">npm ERR! network If you are behind a proxy, please make sure that the</span><br><span class="line">npm ERR! network 'proxy' config is set properly.  See: 'npm help config'</span><br><span class="line"></span><br><span class="line">npm ERR! A complete log of this run can be found in:</span><br><span class="line">npm ERR!     C:\Users\wine&amp;chord\AppData\Roaming\npm-cache\_logs\2019-01-15T13_08_57_636Z-debug.log</span><br></pre></td></tr></table></figure></p>
-<p>解决方法：换成淘宝的npm源。<a href="https://www.oschina.net/question/2443995_2155065" target="_blank" rel="noopener">参考资料</a><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm config <span class="built_in">set</span> registry <span class="string">"https://registry.npm.taobao.org"</span></span></span><br></pre></td></tr></table></figure></p>
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo g <span class="comment"># 生成静态文件</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo s <span class="comment"># 启动本地服务器</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo d <span class="comment"># 部署远端服务器</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo d -g <span class="comment"># 生成部署</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo s -g <span class="comment"># 生成预览</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo new <span class="string">"Post Name"</span> <span class="comment"># 新建一篇文章</span></span></span><br></pre></td></tr></table></figure>
+<h2>安装Node.js</h2>
+<p><a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js</a></p>
+<h2>安装git</h2>
+<p><a href="http://git-scm.com/download/" target="_blank" rel="noopener">http://git-scm.com/download/</a></p>
+<h2>安装Hexo</h2>
+<p>在blog目录下右键：'Git Bash here'
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install -g hexo-cli</span></span><br></pre></td></tr></table></figure></p>
+<p>PS:执行上一步时出现了一个小插曲，显示了如下错误：
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">npm ERR! code ECONNRESET</span><br><span class="line">npm ERR! errno ECONNRESET</span><br><span class="line">npm ERR! network request to https://registry.npmjs.org/escape-string-regexp failed, reason: Client network socket disconnected before secure TLS connection was established</span><br><span class="line">npm ERR! network This is a problem related to network connectivity.</span><br><span class="line">npm ERR! network In most cases you are behind a proxy or have bad network settings.</span><br><span class="line">npm ERR! network</span><br><span class="line">npm ERR! network If you are behind a proxy, please make sure that the</span><br><span class="line">npm ERR! network 'proxy' config is set properly.  See: 'npm help config'</span><br><span class="line"></span><br><span class="line">npm ERR! A complete log of this run can be found in:</span><br><span class="line">npm ERR!     C:\Users\wine&amp;chord\AppData\Roaming\npm-cache\_logs\2019-01-15T13_08_57_636Z-debug.log</span><br></pre></td></tr></table></figure></p>
+<p>解决方法：换成淘宝的npm源。<a href="https://www.oschina.net/question/2443995_2155065" target="_blank" rel="noopener">参考资料</a>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm config <span class="built_in">set</span> registry <span class="string">"https://registry.npm.taobao.org"</span></span></span><br></pre></td></tr></table></figure></p>
+<h2>常用命令</h2>
+<p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo g <span class="comment"># 生成静态文件</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo s <span class="comment"># 启动本地服务器</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo d <span class="comment"># 部署远端服务器</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo d -g <span class="comment"># 生成部署</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo s -g <span class="comment"># 生成预览</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo new <span class="string">"Post Name"</span> <span class="comment"># 新建一篇文章</span></span></span><br></pre></td></tr></table></figure></p>
 <p>2019.1.20 Update:</p>
-<h2 id="添加搜索功能"><a href="#添加搜索功能" class="headerlink" title="添加搜索功能"></a>添加搜索功能</h2><p><a href="https://juejin.im/post/5ad8b40c6fb9a07abd0d314c" target="_blank" rel="noopener">参考资料</a></p>
+<h2>添加搜索功能</h2>
+<p><a href="https://juejin.im/post/5ad8b40c6fb9a07abd0d314c" target="_blank" rel="noopener">参考资料</a></p>
 <ul>
-<li><p>Git Bash Here</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+<li>
+<p>Git Bash Here
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure></p>
 </li>
-<li><p>blog/_config.yml中添加：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">search：</span></span><br><span class="line">	<span class="attr">path:</span> <span class="string">search.xml</span></span><br><span class="line">	<span class="attr">field:</span> <span class="string">post</span></span><br><span class="line">	<span class="attr">format:</span> <span class="string">html</span></span><br><span class="line">	<span class="attr">limit:</span> <span class="number">10000</span></span><br></pre></td></tr></table></figure>
+<li>
+<p>blog/_config.yml中添加：
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">search：</span></span><br><span class="line">	<span class="attr">path:</span> <span class="string">search.xml</span></span><br><span class="line">	<span class="attr">field:</span> <span class="string">post</span></span><br><span class="line">	<span class="attr">format:</span> <span class="string">html</span></span><br><span class="line">	<span class="attr">limit:</span> <span class="number">10000</span></span><br></pre></td></tr></table></figure></p>
 </li>
 </ul>
 <p>以上每一个冒号后都有空格。</p>
 <ul>
-<li>blog/themes/next/_config.yml中修改<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">local_search:</span></span><br><span class="line"><span class="attr">    enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-</li>
+<li>blog/themes/next/_config.yml中修改
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">local_search:</span></span><br><span class="line"><span class="attr">    enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></li>
 </ul>
-<h2 id="添加-DISQUS"><a href="#添加-DISQUS" class="headerlink" title="添加 DISQUS"></a>添加 DISQUS</h2><p><a href="https://www.jianshu.com/p/d68de067ea74" target="_blank" rel="noopener">参考资料</a><br>先按Disqus网站步骤来，然后在<code>blog/themes/next/_config.yml</code>中进行修改：<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">disqus:</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  shortname:</span> <span class="string">wineandchord</span>    <span class="comment">#your name</span></span><br><span class="line"><span class="attr">  count:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<h2>添加 DISQUS</h2>
+<p><a href="https://www.jianshu.com/p/d68de067ea74" target="_blank" rel="noopener">参考资料</a>
+先按Disqus网站步骤来，然后在<code>blog/themes/next/_config.yml</code>中进行修改：
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">disqus:</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  shortname:</span> <span class="string">wineandchord</span>    <span class="comment">#your name</span></span><br><span class="line"><span class="attr">  count:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -586,7 +599,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Node-js"><span class="nav-number">1.</span> <span class="nav-text">安装Node.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装git"><span class="nav-number">2.</span> <span class="nav-text">安装git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Hexo"><span class="nav-number">3.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用命令"><span class="nav-number">4.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加搜索功能"><span class="nav-number">5.</span> <span class="nav-text">添加搜索功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加-DISQUS"><span class="nav-number">6.</span> <span class="nav-text">添加 DISQUS</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">安装Node.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">安装git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">添加搜索功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">添加 DISQUS</span></a></li></ol></div>
             
 
           </div>

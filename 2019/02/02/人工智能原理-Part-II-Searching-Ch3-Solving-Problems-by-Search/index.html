@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Ch3. Solving Problems by Search3.1 Problem Solving Agents3.1.1 Problem Solving in AI The solution The process Problem formulation Why search? 对于一些NP完或NP难问题，只能通过搜索来解决   Problem-solving agent 是一种基于目标的智能">
+<meta name="description" content="Ch3. Solving Problems by Search 3.1 Problem Solving Agents 3.1.1 Problem Solving in AI  The solution The process Problem formulation Why search?  对于一些NP完或NP难问题，只能通过搜索来解决   Problem-solving agent  是一种基于">
 <meta name="keywords" content="Artificial Intelligence">
 <meta property="og:type" content="article">
 <meta property="og:title" content="人工智能原理 Part II. Searching Ch3.Solving Problems by Search">
 <meta property="og:url" content="http://yoursite.com/2019/02/02/人工智能原理-Part-II-Searching-Ch3-Solving-Problems-by-Search/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="Ch3. Solving Problems by Search3.1 Problem Solving Agents3.1.1 Problem Solving in AI The solution The process Problem formulation Why search? 对于一些NP完或NP难问题，只能通过搜索来解决   Problem-solving agent 是一种基于目标的智能">
+<meta property="og:description" content="Ch3. Solving Problems by Search 3.1 Problem Solving Agents 3.1.1 Problem Solving in AI  The solution The process Problem formulation Why search?  对于一些NP完或NP难问题，只能通过搜索来解决   Problem-solving agent  是一种基于">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-02-02T14:41:50.565Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="人工智能原理 Part II. Searching Ch3.Solving Problems by Search">
-<meta name="twitter:description" content="Ch3. Solving Problems by Search3.1 Problem Solving Agents3.1.1 Problem Solving in AI The solution The process Problem formulation Why search? 对于一些NP完或NP难问题，只能通过搜索来解决   Problem-solving agent 是一种基于目标的智能">
+<meta name="twitter:description" content="Ch3. Solving Problems by Search 3.1 Problem Solving Agents 3.1.1 Problem Solving in AI  The solution The process Problem formulation Why search?  对于一些NP完或NP难问题，只能通过搜索来解决   Problem-solving agent  是一种基于">
 
 
 
@@ -375,38 +375,50 @@
       
 
       
-        <h2 id="Ch3-Solving-Problems-by-Search"><a href="#Ch3-Solving-Problems-by-Search" class="headerlink" title="Ch3. Solving Problems by Search"></a>Ch3. Solving Problems by Search</h2><h3 id="3-1-Problem-Solving-Agents"><a href="#3-1-Problem-Solving-Agents" class="headerlink" title="3.1 Problem Solving Agents"></a>3.1 Problem Solving Agents</h3><h4 id="3-1-1-Problem-Solving-in-AI"><a href="#3-1-1-Problem-Solving-in-AI" class="headerlink" title="3.1.1 Problem Solving in AI"></a>3.1.1 Problem Solving in AI</h4><ul>
+        <h2>Ch3. Solving Problems by Search</h2>
+<h3>3.1 Problem Solving Agents</h3>
+<h4>3.1.1 Problem Solving in AI</h4>
+<ul>
 <li>The solution</li>
 <li>The process</li>
 <li>Problem formulation</li>
-<li>Why search?<ul>
+<li>Why search?
+<ul>
 <li>对于一些NP完或NP难问题，只能通过搜索来解决</li>
 </ul>
 </li>
-<li>Problem-solving agent<ul>
+<li>Problem-solving agent
+<ul>
 <li>是一种基于目标的智能体，通过搜索来解决问题</li>
 </ul>
 </li>
 </ul>
-<h4 id="3-1-2-Algorithm-of-Simple-Problem-Solving-Agents"><a href="#3-1-2-Algorithm-of-Simple-Problem-Solving-Agents" class="headerlink" title="3.1.2 Algorithm of Simple Problem Solving Agents"></a>3.1.2 Algorithm of Simple Problem Solving Agents</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function SIMPLE-PROBLEM-SOLVING-AGENT(percept) returns an action</span><br><span class="line">  persistent: seq, an action sequence, initially empty</span><br><span class="line">  			  state, some description of the current world state</span><br><span class="line">  			  goal, a goal, initially null</span><br><span class="line">  			  problem, a problem formulation</span><br><span class="line">  			  action, the most recent action, initially none</span><br><span class="line">  state &lt;- UPDATE-STATE(state, percept)</span><br><span class="line">  if seq is empty then</span><br><span class="line">    goal &lt;- FORMULATE-GOAL(state)</span><br><span class="line">    problem &lt;- FORMULATE-PROBLEM(state, goal)</span><br><span class="line">    seq &lt;- SEARCH(problem)</span><br><span class="line">    if seq = failure then return a null action</span><br><span class="line">  action &lt;- FIRST(seq)</span><br><span class="line">  seq &lt;- REST(seq)</span><br><span class="line">  return action</span><br></pre></td></tr></table></figure>
-<h4 id="3-1-3-Related-Terms"><a href="#3-1-3-Related-Terms" class="headerlink" title="3.1.3 Related Terms"></a>3.1.3 Related Terms</h4><ul>
-<li>State space 状态空间，可形式化地定义：<ul>
+<h4>3.1.2 Algorithm of Simple Problem Solving Agents</h4>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function SIMPLE-PROBLEM-SOLVING-AGENT(percept) returns an action</span><br><span class="line">  persistent: seq, an action sequence, initially empty</span><br><span class="line">  			  state, some description of the current world state</span><br><span class="line">  			  goal, a goal, initially null</span><br><span class="line">  			  problem, a problem formulation</span><br><span class="line">  			  action, the most recent action, initially none</span><br><span class="line">  state &lt;- UPDATE-STATE(state, percept)</span><br><span class="line">  if seq is empty then</span><br><span class="line">    goal &lt;- FORMULATE-GOAL(state)</span><br><span class="line">    problem &lt;- FORMULATE-PROBLEM(state, goal)</span><br><span class="line">    seq &lt;- SEARCH(problem)</span><br><span class="line">    if seq = failure then return a null action</span><br><span class="line">  action &lt;- FIRST(seq)</span><br><span class="line">  seq &lt;- REST(seq)</span><br><span class="line">  return action</span><br></pre></td></tr></table></figure></p>
+<h4>3.1.3 Related Terms</h4>
+<ul>
+<li>State space 状态空间，可形式化地定义：
+<ul>
 <li>初始状态</li>
 <li>动作</li>
 <li>转换模型</li>
 </ul>
 </li>
-<li>Graph<ul>
+<li>Graph
+<ul>
 <li>状态空间形成一个图，其中结点表示状态，链接表示动作</li>
 </ul>
 </li>
-<li>Path<ul>
+<li>Path
+<ul>
 <li>状态空间的一条路径是由一系列动作连接的一个状态序列</li>
 </ul>
 </li>
 </ul>
-<h4 id="3-1-4-Five-Items-to-Formulate-a-Problem"><a href="#3-1-4-Five-Items-to-Formulate-a-Problem" class="headerlink" title="3.1.4 Five Items to Formulate a Problem"></a>3.1.4 Five Items to Formulate a Problem</h4><ul>
-<li>Initial state 初始状态<ul>
+<h4>3.1.4 Five Items to Formulate a Problem</h4>
+<ul>
+<li>Initial state 初始状态
+<ul>
 <li>In(Arad)</li>
 </ul>
 </li>
@@ -415,44 +427,59 @@
 <li>Goal test 目标测试</li>
 <li>Path cos 路径代价</li>
 </ul>
-<h3 id="3-2-Example-Problems"><a href="#3-2-Example-Problems" class="headerlink" title="3.2 Example Problems"></a>3.2 Example Problems</h3><h4 id="3-2-1-Example1-Vacuum-cleaner-world"><a href="#3-2-1-Example1-Vacuum-cleaner-world" class="headerlink" title="3.2.1 Example1: Vacuum-cleaner world"></a>3.2.1 Example1: Vacuum-cleaner world</h4><ul>
-<li><p>真空吸尘器的世界</p>
+<h3>3.2 Example Problems</h3>
+<h4>3.2.1 Example1: Vacuum-cleaner world</h4>
 <ul>
-<li><p>一个仅仅有两个地点的真空吸尘器世界：方形区域A和B</p>
+<li>
+<p>真空吸尘器的世界</p>
+<ul>
+<li>
+<p>一个仅仅有两个地点的真空吸尘器世界：方形区域A和B</p>
 </li>
-<li><p>该吸尘器智能体感知它在哪个方形区域，以及该方形区域是否有灰尘。它可以选择左行，右行，吸尘，或者空操作，即：</p>
+<li>
+<p>该吸尘器智能体感知它在哪个方形区域，以及该方形区域是否有灰尘。它可以选择左行，右行，吸尘，或者空操作，即：</p>
 <ul>
-<li>Percepts: 感知：位置和内容<ul>
-<li>location and contents, e.g. [A, Dirty] </li>
+<li>Percepts: 感知：位置和内容
+<ul>
+<li>location and contents, e.g. [A, Dirty]</li>
 </ul>
 </li>
-<li>Actions: 动作：左/右行，吸尘，空操作<ul>
+<li>Actions: 动作：左/右行，吸尘，空操作
+<ul>
 <li>Left, Right, Suck, NoOp</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>正确的功能是什么？</p>
+<li>
+<p>正确的功能是什么？</p>
 </li>
-<li><p>是否可用一个小智能体程序实现？</p>
+<li>
+<p>是否可用一个小智能体程序实现？</p>
 </li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function REFLEX-VACUUM-AGENT(location, status) returns an action</span><br><span class="line">  if status = Dirty then return Suck</span><br><span class="line">  else if location = A then return Right</span><br><span class="line">  else if location = B thne return Left</span><br></pre></td></tr></table></figure>
+<li>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function REFLEX-VACUUM-AGENT(location, status) returns an action</span><br><span class="line">  if status = Dirty then return Suck</span><br><span class="line">  else if location = A then return Right</span><br><span class="line">  else if location = B thne return Left</span><br></pre></td></tr></table></figure></p>
 </li>
 </ul>
 </li>
-<li><p>States 状态</p>
+<li>
+<p>States 状态</p>
 <ul>
 <li>智能体在两个地点中的一个，每个也许有灰尘或者没有</li>
 <li>可能的状态，两个地点：$2\times 2^2=8(n\times 2^n)$</li>
 </ul>
 </li>
-<li><p>1）Initial state 初始状态：可为任何状态</p>
+<li>
+<p>1）Initial state 初始状态：可为任何状态</p>
 </li>
-<li><p>2）Actions 动作：每个状态仅有三个动作：左/右移，吸尘</p>
+<li>
+<p>2）Actions 动作：每个状态仅有三个动作：左/右移，吸尘</p>
 </li>
-<li><p>3）Transition model 转换模型：</p>
+<li>
+<p>3）Transition model 转换模型：</p>
 <ul>
-<li>除了以下动作，其余都有<ul>
+<li>除了以下动作，其余都有
+<ul>
 <li>在最左边左移</li>
 <li>在最右边右移</li>
 <li>在情节区域进行吸尘</li>
@@ -460,59 +487,73 @@
 </li>
 </ul>
 </li>
-<li><p>4）Goal test 目标测试</p>
+<li>
+<p>4）Goal test 目标测试</p>
 <ul>
 <li>是否所有的区域内都干净</li>
 </ul>
 </li>
-<li><p>5）Path cost 路径代价</p>
+<li>
+<p>5）Path cost 路径代价</p>
 <ul>
 <li>等于路径的步数</li>
 </ul>
 </li>
 </ul>
-<h4 id="3-2-2-Example2-8-puzzle"><a href="#3-2-2-Example2-8-puzzle" class="headerlink" title="3.2.2 Example2: 8-puzzle"></a>3.2.2 Example2: 8-puzzle</h4><ul>
+<h4>3.2.2 Example2: 8-puzzle</h4>
+<ul>
 <li>$3\times 3$ 棋盘上有 $8$ 个数字棋子和一个空格</li>
 <li>与空格相邻的滑块可以移向该空格，目的是达到一个指定的目标状态</li>
-<li>States 状态<ul>
+<li>States 状态
+<ul>
 <li>$8$ 个数字滑块每个占据一个方格，而空格则位于最后一个方格</li>
 </ul>
 </li>
 <li>1）Initial state 初始状态：可为任意状态</li>
-<li>2）Actions 动作<ul>
+<li>2）Actions 动作
+<ul>
 <li>上下左右</li>
 <li>不同的子集依赖于空格的位置</li>
 </ul>
 </li>
-<li>3）Transition model 转换模型<ul>
-<li>给定状态和动作，其返回结果状态。如：<ul>
+<li>3）Transition model 转换模型
+<ul>
+<li>给定状态和动作，其返回结果状态。如：
+<ul>
 <li>若对初始状态施加左移操作，由此产生的状态则使 $5$ 与空格互换</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>4）Goal test 目标测试<ul>
+<li>4）Goal test 目标测试
+<ul>
 <li>即检查状态是否与目标状态相符</li>
 </ul>
 </li>
 <li>5）Path cost 路径代价：等于路径的步数</li>
 <li>该问题属于滑块难题（Sliding block puzzles），被认为是NP完全的。</li>
 </ul>
-<h4 id="3-2-3-Example3-8-queens-problem"><a href="#3-2-3-Example3-8-queens-problem" class="headerlink" title="3.2.3 Example3: 8-queens problem"></a>3.2.3 Example3: 8-queens problem</h4><ul>
+<h4>3.2.3 Example3: 8-queens problem</h4>
+<ul>
 <li>目标是将 $8$ 个皇后摆放在国际象棋的棋盘上，使得皇后之间不发生攻击（即每两个皇后不在同一行或同一列或同一对角线）</li>
-<li>两种主要的形式化方法<ul>
-<li>Incremental formulation 增量形式化<ul>
+<li>两种主要的形式化方法
+<ul>
+<li>Incremental formulation 增量形式化
+<ul>
 <li>从空状态开始，然后每次添加一个皇后改变其状态</li>
 </ul>
 </li>
-<li>Complete-state formulation 全态形式化<ul>
+<li>Complete-state formulation 全态形式化
+<ul>
 <li>初始时 $8$ 个皇后都放在棋盘上，然后再将她们移开</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>The incremental formulation 增量式形式化<ul>
-<li>State 状态<ul>
+<li>The incremental formulation 增量式形式化
+<ul>
+<li>State 状态
+<ul>
 <li>第一个至第八个皇后在棋盘上任意摆放，为一个状态</li>
 </ul>
 </li>
@@ -524,24 +565,30 @@
 </ul>
 </li>
 </ul>
-<h3 id="3-3-Searching-for-Solutions"><a href="#3-3-Searching-for-Solutions" class="headerlink" title="3.3 Searching for Solutions"></a>3.3 Searching for Solutions</h3><h4 id="3-3-1-Shortest-Path-Problem-by-Graph-Search"><a href="#3-3-1-Shortest-Path-Problem-by-Graph-Search" class="headerlink" title="3.3.1 Shortest Path Problem by Graph Search"></a>3.3.1 Shortest Path Problem by Graph Search</h4><p>A General Graph-search Algorithm 一种通用的图搜索算法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function GRAPH-SEARCH(problem) returns a solution, or failure</span><br><span class="line">  initialize the frontier using the initial state of problem</span><br><span class="line">  initialize the explored to be empty</span><br><span class="line">  loop do</span><br><span class="line">    if the frontier is empty then return failure</span><br><span class="line">    choose a leaf node and remove it from the frontier</span><br><span class="line">    if the node contains a goal state then return the corresponding solution</span><br><span class="line">    add the node to the explored</span><br><span class="line">    expand the chosen node, adding the resulting nodes to the frontier</span><br><span class="line">      only if not in the frontier or explored</span><br></pre></td></tr></table></figure>
+<h3>3.3 Searching for Solutions</h3>
+<h4>3.3.1 Shortest Path Problem by Graph Search</h4>
+<p>A General Graph-search Algorithm 一种通用的图搜索算法</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function GRAPH-SEARCH(problem) returns a solution, or failure</span><br><span class="line">  initialize the frontier using the initial state of problem</span><br><span class="line">  initialize the explored to be empty</span><br><span class="line">  loop do</span><br><span class="line">    if the frontier is empty then return failure</span><br><span class="line">    choose a leaf node and remove it from the frontier</span><br><span class="line">    if the node contains a goal state then return the corresponding solution</span><br><span class="line">    add the node to the explored</span><br><span class="line">    expand the chosen node, adding the resulting nodes to the frontier</span><br><span class="line">      only if not in the frontier or explored</span><br></pre></td></tr></table></figure></p>
 <ul>
-<li>The explored(aka closed list) is an data structure to remember every expanded node. </li>
+<li>The explored(aka closed list) is an data structure to remember every expanded node.</li>
 <li>The nodes in the explored or the frontier can be discarded.</li>
 </ul>
-<h4 id="3-3-2-Shortest-Path-Problem-by-Tree-Search"><a href="#3-3-2-Shortest-Path-Problem-by-Tree-Search" class="headerlink" title="3.3.2 Shortest Path Problem by Tree Search"></a>3.3.2 Shortest Path Problem by Tree Search</h4><p>A General Tree-search Algorithm 一种通用的树搜索算法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function TREE-SEARCH(problem) returns a soluion, or failure</span><br><span class="line">  initialize the frontier using the initial state of problem</span><br><span class="line">  loop do</span><br><span class="line">    if the frontier is empty then return failure</span><br><span class="line">    choose a leaf node and remove it from the frontier</span><br><span class="line">    if the node contains a goal state then return the corresponding solution</span><br><span class="line">    expand the chosen node, adding the resulting nodes to the frontier</span><br></pre></td></tr></table></figure>
+<h4>3.3.2 Shortest Path Problem by Tree Search</h4>
+<p>A General Tree-search Algorithm 一种通用的树搜索算法</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function TREE-SEARCH(problem) returns a soluion, or failure</span><br><span class="line">  initialize the frontier using the initial state of problem</span><br><span class="line">  loop do</span><br><span class="line">    if the frontier is empty then return failure</span><br><span class="line">    choose a leaf node and remove it from the frontier</span><br><span class="line">    if the node contains a goal state then return the corresponding solution</span><br><span class="line">    expand the chosen node, adding the resulting nodes to the frontier</span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>The process of expanding nodes on the frontier continues until either a solution is found or there are no more states to expand.</li>
 </ul>
-<h3 id="3-4-Uniformed-Search-Strategies"><a href="#3-4-Uniformed-Search-Strategies" class="headerlink" title="3.4 Uniformed Search Strategies"></a>3.4 Uniformed Search Strategies</h3><ul>
-<li>无信息搜索<ul>
+<h3>3.4 Uniformed Search Strategies</h3>
+<ul>
+<li>无信息搜索
+<ul>
 <li>又称盲目搜索</li>
 <li>意味着该搜索策略没有超出问题定义提供的状态之外的附加信息</li>
 <li>所有能做的就是生成后继节点，并且区分出一个目标状态或一个非目标状态</li>
 <li>所有的搜索策略是由结点扩展的顺序加以区分的</li>
-<li>分类：<ul>
+<li>分类：
+<ul>
 <li>宽度优先</li>
 <li>广度优先</li>
 <li>一致代价搜索</li>
@@ -549,12 +596,14 @@
 </li>
 </ul>
 </li>
-<li>评价<ul>
+<li>评价
+<ul>
 <li>Completeness 完备性：是否总能找到一个存在的解？</li>
 <li>Time complexity 时间复杂度：花费多少时间？</li>
 <li>Space complexity 空间复杂度：需要多少内存？</li>
 <li>Optimal 最优性</li>
-<li>衡量时空复杂度：<ul>
+<li>衡量时空复杂度：
+<ul>
 <li>b: 搜索树的最大分支因子</li>
 <li>d: 最浅解的深度</li>
 <li>m: 搜索树的最大深度</li>
@@ -563,58 +612,74 @@
 </ul>
 </li>
 </ul>
-<h4 id="3-4-1-Breadth-first-Search"><a href="#3-4-1-Breadth-first-Search" class="headerlink" title="3.4.1 Breadth-first Search"></a>3.4.1 Breadth-first Search</h4><ul>
-<li><p>搜索策略：扩展最浅的未扩展结点</p>
+<h4>3.4.1 Breadth-first Search</h4>
+<ul>
+<li>
+<p>搜索策略：扩展最浅的未扩展结点</p>
 </li>
-<li><p>实现：使用FIFO队列，即新的后继结点放在后面</p>
+<li>
+<p>实现：使用FIFO队列，即新的后继结点放在后面</p>
 </li>
-<li><p>图的宽度优先搜索算法</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function BREADTH-FIRST-SEARCH(problem)returns a solution, <span class="keyword">or</span> failure</span><br><span class="line">  node &lt;- a node with STATE = problem.INITIAL-STATE</span><br><span class="line">  PATH-TEST = <span class="number">0</span></span><br><span class="line">  explored &lt;- an empty <span class="built_in">set</span></span><br><span class="line">  loop <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">if</span> EMPTY?(frontier) then <span class="keyword">return</span> failure</span><br><span class="line">    node &lt;- POP(frontier) <span class="comment">/* choose the shallowest node in frontier */</span></span><br><span class="line">    add node.STATE to explored</span><br><span class="line">    <span class="keyword">for</span> each action in problem.ACTIONS(node.STATE)<span class="keyword">do</span></span><br><span class="line">      child &lt;- CHILD-NODE(problem, node, action)</span><br><span class="line">      <span class="keyword">if</span> child.STATE is <span class="keyword">not</span> in explored <span class="keyword">or</span> frontier then</span><br><span class="line">        <span class="keyword">if</span> problem.GOAL-TEST(child.STATE)then <span class="keyword">return</span> SOLUTION(child)</span><br><span class="line">        frontier &lt;- INSERT(child, frontier)</span><br></pre></td></tr></table></figure>
+<li>
+<p>图的宽度优先搜索算法</p>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function BREADTH-FIRST-SEARCH(problem)returns a solution, <span class="keyword">or</span> failure</span><br><span class="line">  node &lt;- a node with STATE = problem.INITIAL-STATE</span><br><span class="line">  PATH-TEST = <span class="number">0</span></span><br><span class="line">  explored &lt;- an empty <span class="built_in">set</span></span><br><span class="line">  loop <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">if</span> EMPTY?(frontier) then <span class="keyword">return</span> failure</span><br><span class="line">    node &lt;- POP(frontier) <span class="comment">/* choose the shallowest node in frontier */</span></span><br><span class="line">    add node.STATE to explored</span><br><span class="line">    <span class="keyword">for</span> each action in problem.ACTIONS(node.STATE)<span class="keyword">do</span></span><br><span class="line">      child &lt;- CHILD-NODE(problem, node, action)</span><br><span class="line">      <span class="keyword">if</span> child.STATE is <span class="keyword">not</span> in explored <span class="keyword">or</span> frontier then</span><br><span class="line">        <span class="keyword">if</span> problem.GOAL-TEST(child.STATE)then <span class="keyword">return</span> SOLUTION(child)</span><br><span class="line">        frontier &lt;- INSERT(child, frontier)</span><br></pre></td></tr></table></figure></p>
 </li>
-<li><p>Time complexity: $b+b^2+b^3+…+b^d=O(b^d)$</p>
+<li>
+<p>Time complexity: $b+b^2+b^3+...+b^d=O(b^d)$</p>
 </li>
-<li><p>Space complexity: $O(b^d)$</p>
+<li>
+<p>Space complexity: $O(b^d)$</p>
 </li>
-<li><p>其中 $b$ 为分支因子，$d$ 为最浅解的深度</p>
+<li>
+<p>其中 $b$ 为分支因子，$d$ 为最浅解的深度</p>
 </li>
-<li><p>$BFS$ 不能解决指数复杂性的问题，小的分支因子除外。</p>
+<li>
+<p>$BFS$ 不能解决指数复杂性的问题，小的分支因子除外。</p>
 </li>
 </ul>
-<h4 id="3-4-2-Uniform-cost-Search"><a href="#3-4-2-Uniform-cost-Search" class="headerlink" title="3.4.2 Uniform-cost Search"></a>3.4.2 Uniform-cost Search</h4><ul>
+<h4>3.4.2 Uniform-cost Search</h4>
+<ul>
 <li>一致代价搜索</li>
 <li>搜索策略：扩展最低代价的未扩展结点</li>
 <li>实现：队列，按路径代价排序，最低优先</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function UNIFORM-FIRST-SEARCH(problem) returns a solution, or failure</span><br><span class="line">  node &lt;- a node with STATE = problem.INITIAL-STATE, PATH-TEST=0</span><br><span class="line">  frontier &lt;- a priority queue ordered by PATH-COST, with node as the only element </span><br><span class="line">  explored &lt;- an empty set</span><br><span class="line">  loop do</span><br><span class="line">    if EMPTY?(frontier) then return failure</span><br><span class="line">    node &lt;- POP(frontier)  /* chooses the lowest-cost node in frontier */</span><br><span class="line">    if problem.GOAL-TEST(node.STATE) then return SOLUTION(node)</span><br><span class="line">    add node.STATE to explored</span><br><span class="line">    for each action in problem.ACTIONS(node.STATE) do</span><br><span class="line">      child &lt;- CHILD-NODE(problem, node, action)</span><br><span class="line">      if child.STATE is not in explored or frontier then</span><br><span class="line">        frontier &lt;- INSERT(child, frontier)</span><br><span class="line">      else if child.STATE is in frontier with higher PATH-COST then</span><br><span class="line">        replace that frontier node with child</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function UNIFORM-FIRST-SEARCH(problem) returns a solution, or failure</span><br><span class="line">  node &lt;- a node with STATE = problem.INITIAL-STATE, PATH-TEST=0</span><br><span class="line">  frontier &lt;- a priority queue ordered by PATH-COST, with node as the only element </span><br><span class="line">  explored &lt;- an empty set</span><br><span class="line">  loop do</span><br><span class="line">    if EMPTY?(frontier) then return failure</span><br><span class="line">    node &lt;- POP(frontier)  /* chooses the lowest-cost node in frontier */</span><br><span class="line">    if problem.GOAL-TEST(node.STATE) then return SOLUTION(node)</span><br><span class="line">    add node.STATE to explored</span><br><span class="line">    for each action in problem.ACTIONS(node.STATE) do</span><br><span class="line">      child &lt;- CHILD-NODE(problem, node, action)</span><br><span class="line">      if child.STATE is not in explored or frontier then</span><br><span class="line">        frontier &lt;- INSERT(child, frontier)</span><br><span class="line">      else if child.STATE is in frontier with higher PATH-COST then</span><br><span class="line">        replace that frontier node with child</span><br></pre></td></tr></table></figure></p>
 <ul>
-<li>Time: $O(b^{1+\lfloor C^*/\epsilon\rfloor})$ </li>
-<li>Space: $O(b^{1+\lfloor C^*/\epsilon\rfloor})$ </li>
+<li>Time: $O(b^{1+\lfloor C^*/\epsilon\rfloor})$</li>
+<li>Space: $O(b^{1+\lfloor C^*/\epsilon\rfloor})$</li>
 <li>$b$ 为分支因子，$C^*$ 为最优解的代价，$\epsilon$ 为每个动作的最小代价</li>
 </ul>
-<h4 id="3-4-3-Depth-first-Search"><a href="#3-4-3-Depth-first-Search" class="headerlink" title="3.4.3 Depth-first Search"></a>3.4.3 Depth-first Search</h4><ul>
+<h4>3.4.3 Depth-first Search</h4>
+<ul>
 <li>搜索策略：扩展最深的未扩展结点。</li>
 <li>实现：使用LIFO队列，把后继结点放在队列的前端。</li>
-<li>Time: $O(b^m)$ </li>
-<li>Space: $O(bm)$ </li>
+<li>Time: $O(b^m)$</li>
+<li>Space: $O(bm)$</li>
 <li>$b$ : 分支因子，$m$ 为任一结点的最大深度</li>
 </ul>
-<h4 id="3-4-4-Variants-of-Depth-first-Search"><a href="#3-4-4-Variants-of-Depth-first-Search" class="headerlink" title="3.4.4 Variants of Depth-first Search"></a>3.4.4 Variants of Depth-first Search</h4><h5 id="1）Depth-limited-Search-深度受限搜索"><a href="#1）Depth-limited-Search-深度受限搜索" class="headerlink" title="1）Depth-limited Search 深度受限搜索"></a>1）Depth-limited Search 深度受限搜索</h5><ul>
+<h4>3.4.4 Variants of Depth-first Search</h4>
+<h5>1）Depth-limited Search 深度受限搜索</h5>
+<ul>
 <li>若状态状态空间无限，深度优先搜索就会发生失败</li>
 <li>可以用一个预定的深度限制 $l$ 得到解决，即：深度 $l$ 以外的结点被视为没有后继结点</li>
-<li>缺点：<ul>
+<li>缺点：
+<ul>
 <li>如果选择 $l\lt d$ ，即最浅的目标在深度限制之外，这种方法就会出现额外的不完备性</li>
 <li>如果选择 $l\gt d$，深度受限搜索也将是非最优的。</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function DEPTH-LIMITED-SEARCH(problem, limit) returns a solution, or failure/curoff</span><br><span class="line">  return RECURSIVE-DLS(MAKE-NODE(problem.INITIAL-STATE), problem, limit)</span><br><span class="line">function RECURSIVE-DLS(node, problem, limit) returns a solution, or failure/cutoff</span><br><span class="line">  if problem.GOAL-TEST(node.STATE) then return SOLUTION(node)</span><br><span class="line">  if limit=0 then return cutoff  /* no solution */</span><br><span class="line">  cutoff_occurred? &lt;- false</span><br><span class="line">  for each action in problem.ACTIONS(node.STATE) do</span><br><span class="line">    child &lt;- CHILD-NODE(problem, node, action)</span><br><span class="line">    result &lt;- RECURSIVE-DLS(child, problem, limit-1)</span><br><span class="line">    if result=cutoff then cutoff_occurred?&lt;-true</span><br><span class="line">    else if result != failure then return result</span><br><span class="line">  if cutoff_occurred? then return cutoff /* no solution */</span><br><span class="line">  else return failure</span><br></pre></td></tr></table></figure>
-<h5 id="2）Iterative-Deepening-Search-迭代加深搜索"><a href="#2）Iterative-Deepening-Search-迭代加深搜索" class="headerlink" title="2）Iterative Deepening Search 迭代加深搜索"></a>2）Iterative Deepening Search 迭代加深搜索</h5><ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function DEPTH-LIMITED-SEARCH(problem, limit) returns a solution, or failure/curoff</span><br><span class="line">  return RECURSIVE-DLS(MAKE-NODE(problem.INITIAL-STATE), problem, limit)</span><br><span class="line">function RECURSIVE-DLS(node, problem, limit) returns a solution, or failure/cutoff</span><br><span class="line">  if problem.GOAL-TEST(node.STATE) then return SOLUTION(node)</span><br><span class="line">  if limit=0 then return cutoff  /* no solution */</span><br><span class="line">  cutoff_occurred? &lt;- false</span><br><span class="line">  for each action in problem.ACTIONS(node.STATE) do</span><br><span class="line">    child &lt;- CHILD-NODE(problem, node, action)</span><br><span class="line">    result &lt;- RECURSIVE-DLS(child, problem, limit-1)</span><br><span class="line">    if result=cutoff then cutoff_occurred?&lt;-true</span><br><span class="line">    else if result != failure then return result</span><br><span class="line">  if cutoff_occurred? then return cutoff /* no solution */</span><br><span class="line">  else return failure</span><br></pre></td></tr></table></figure></p>
+<h5>2）Iterative Deepening Search 迭代加深搜索</h5>
+<ul>
 <li>将深度优先和宽度优先的优势相结合，逐步增加深度限制反复运行直到找到目标。</li>
 <li>以深度优先搜索相同的顺序访问搜索树的节点，但先访问的结点的累积顺序实际是宽度优先。</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function ITERATIVE-DEEPENING-SEARCH(problem) returns a solution, or failure</span><br><span class="line">  for depth=0 to infinite do</span><br><span class="line">    result &lt;- DEPTH-LIMITED-SEARCH(problem, depth)</span><br><span class="line">    if result!=cutoff then return result</span><br></pre></td></tr></table></figure>
-<h4 id="3-4-5-Bidirectional-Search"><a href="#3-4-5-Bidirectional-Search" class="headerlink" title="3.4.5 Bidirectional Search"></a>3.4.5 Bidirectional Search</h4><ul>
-<li>同时进行两个搜索：<ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function ITERATIVE-DEEPENING-SEARCH(problem) returns a solution, or failure</span><br><span class="line">  for depth=0 to infinite do</span><br><span class="line">    result &lt;- DEPTH-LIMITED-SEARCH(problem, depth)</span><br><span class="line">    if result!=cutoff then return result</span><br></pre></td></tr></table></figure></p>
+<h4>3.4.5 Bidirectional Search</h4>
+<ul>
+<li>同时进行两个搜索：
+<ul>
 <li>一个从初始状态向前搜索</li>
 <li>一个从目标向后搜索</li>
 <li>当两者相遇时停止</li>
@@ -622,7 +687,8 @@
 </li>
 <li>可以通过一种剩余距离的启发式估计来导向</li>
 </ul>
-<h4 id="3-4-6-Comparing-Uninformed-Search-Strategies"><a href="#3-4-6-Comparing-Uninformed-Search-Strategies" class="headerlink" title="3.4.6 Comparing Uninformed Search Strategies"></a>3.4.6 Comparing Uninformed Search Strategies</h4><ul>
+<h4>3.4.6 Comparing Uninformed Search Strategies</h4>
+<ul>
 <li>无信息树搜索策略评价</li>
 </ul>
 <table>
@@ -677,72 +743,87 @@
 </tbody>
 </table>
 <ul>
-<li>b – maximum branching factor of the tree</li>
-<li>d – depth of the shallowest solution</li>
-<li>m – maximum depth of the tree</li>
-<li>l – the depth limit</li>
-<li>a – complete if b is finite</li>
-<li>b – complete if step costs $\epsilon$ for positive</li>
-<li>c – optimal if step costs are all identical</li>
-<li>d – if both directions use breadth-first search</li>
+<li>b -- maximum branching factor of the tree</li>
+<li>d -- depth of the shallowest solution</li>
+<li>m -- maximum depth of the tree</li>
+<li>l -- the depth limit</li>
+<li>a -- complete if b is finite</li>
+<li>b -- complete if step costs $\epsilon$ for positive</li>
+<li>c -- optimal if step costs are all identical</li>
+<li>d -- if both directions use breadth-first search</li>
 </ul>
-<h3 id="3-5-Informed-Search-Strategies"><a href="#3-5-Informed-Search-Strategies" class="headerlink" title="3.5 Informed Search Strategies"></a>3.5 Informed Search Strategies</h3><ul>
+<h3>3.5 Informed Search Strategies</h3>
+<ul>
 <li>有信息搜索，又称启发式搜索</li>
 <li>采用超出问题本身定义的，问题特有的知识，因此能够找到比无信息搜索更有效的解。</li>
-<li>一般使用如下函数的一个或两者<ul>
+<li>一般使用如下函数的一个或两者
+<ul>
 <li>评价函数（evaluation function）：$f(n)$ ，用于选择一个结点进行扩展</li>
 <li>启发式函数（heuristic function）：$h(n)$，作为 $f$ 的一个组成部分</li>
 </ul>
 </li>
 </ul>
-<h4 id="3-5-1-Best-first-Search"><a href="#3-5-1-Best-first-Search" class="headerlink" title="3.5.1 Best-first Search"></a>3.5.1 Best-first Search</h4><ul>
-<li>搜索策略<ul>
-<li>一个结点被选择进行扩展是基于一个评价函数，$f(n)$ </li>
-<li>大多数的最佳优先算法还包含一个启发式函数，$h(n)$ </li>
+<h4>3.5.1 Best-first Search</h4>
+<ul>
+<li>搜索策略
+<ul>
+<li>一个结点被选择进行扩展是基于一个评价函数，$f(n)$</li>
+<li>大多数的最佳优先算法还包含一个启发式函数，$h(n)$</li>
 </ul>
 </li>
-<li>实现<ul>
+<li>实现
+<ul>
 <li>与一致代价搜索相同</li>
 <li>然而，最佳优先搜索使用 $f(n)$ 代替 $g(n)$ 来整理优先队列</li>
 </ul>
 </li>
-<li>启发式函数（Heuristic function）<ul>
+<li>启发式函数（Heuristic function）
+<ul>
 <li>$h(n)=$ 从结点 $n$ 到目标状态的最低路径估计代价</li>
 </ul>
 </li>
-<li>特例<ul>
+<li>特例
+<ul>
 <li>Greedy Search</li>
 <li>$A^*$ Search</li>
 </ul>
 </li>
 </ul>
-<h4 id="3-5-2-Greedy-Search"><a href="#3-5-2-Greedy-Search" class="headerlink" title="3.5.2 Greedy Search"></a>3.5.2 Greedy Search</h4><ul>
-<li>搜索策略<ul>
+<h4>3.5.2 Greedy Search</h4>
+<ul>
+<li>搜索策略
+<ul>
 <li>试图扩展最接近目标的结点</li>
 </ul>
 </li>
-<li>评价函数：$f(n)=h(n)$<ul>
+<li>评价函数：$f(n)=h(n)$
+<ul>
 <li>仅使用启发式函数对结点进行评价</li>
-<li>$h(n)$ – 从 $n$ 到最接近目标的估计代价</li>
+<li>$h(n)$ -- 从 $n$ 到最接近目标的估计代价</li>
 </ul>
 </li>
-<li>Why call “greedy”?<ul>
+<li>Why call &quot;greedy&quot;?
+<ul>
 <li>每一步它都试图得到能够最接近目标的结点</li>
 </ul>
 </li>
-<li>特性：<ul>
+<li>特性：
+<ul>
 <li>Worst-case time: $O(b^m)$</li>
-<li>Space complexity: $O(b^m)$ </li>
+<li>Space complexity: $O(b^m)$</li>
 <li>b: 分支因子，m: 搜索空间的最大深度</li>
 </ul>
 </li>
 </ul>
-<h4 id="3-5-3-A-Search"><a href="#3-5-3-A-Search" class="headerlink" title="3.5.3 $A^*$ Search"></a>3.5.3 $A^*$ Search</h4><ul>
-<li>搜索策略<ul>
+<h4>3.5.3 $A^*$ Search</h4>
+<ul>
+<li>搜索策略
+<ul>
 <li>避免扩展代价高的路径，使总的估计求解代价最小化</li>
 </ul>
 </li>
-<li>评价函数<ul>
+<li>评价函数
+<ul>
 <li>$g(n)$ 到达该结点的代价</li>
 <li>$h(n)$ 从该节点到目标的估计代价</li>
 <li>$f(n)=g(n)+h(n)$</li>
@@ -750,23 +831,29 @@
 </li>
 <li>Theorem: $A^*$ search is optimal</li>
 </ul>
-<h4 id="3-5-4-Iterative-Deepening-A-Search"><a href="#3-5-4-Iterative-Deepening-A-Search" class="headerlink" title="3.5.4 Iterative Deepening $A^*$ Search"></a>3.5.4 Iterative Deepening $A^*$ Search</h4><ul>
+<h4>3.5.4 Iterative Deepening $A^*$ Search</h4>
+<ul>
 <li>迭代加深 $A^*$ 搜索</li>
-<li>是迭代加深深度优先搜索的变种<ul>
+<li>是迭代加深深度优先搜索的变种
+<ul>
 <li>从 $A^*$ 搜索算法中借鉴了这一思想，即使用启发式函数来评价到达目标的剩余代价</li>
 </ul>
 </li>
-<li>因为是一种深度优先搜索算法，内存使用率低于 $A^*$ 算法<ul>
+<li>因为是一种深度优先搜索算法，内存使用率低于 $A^*$ 算法
+<ul>
 <li>但是，不同于标准的迭代加深搜索，它集中于探索最有希望的结点，因此不会去搜索树任何同样深度的地方。</li>
 </ul>
 </li>
-<li>Comparing Iterative Deepening Search 迭代加深搜索之比较<ul>
-<li>Iterative deepening depth-first search<ul>
+<li>Comparing Iterative Deepening Search 迭代加深搜索之比较
+<ul>
+<li>Iterative deepening depth-first search
+<ul>
 <li>使用搜索深度作为每次迭代的截止值</li>
 </ul>
 </li>
-<li>Iterative Deepening $A^*$ Search<ul>
-<li>使用信息更丰富的评价函数，即 $f(n)=g(n)+h(n)$ </li>
+<li>Iterative Deepening $A^*$ Search
+<ul>
+<li>使用信息更丰富的评价函数，即 $f(n)=g(n)+h(n)$</li>
 <li>$g(n)$ 为到达该节点的代价</li>
 <li>$h(n)$ 为该节点到目标的估计代价</li>
 </ul>
@@ -774,17 +861,22 @@
 </ul>
 </li>
 </ul>
-<h3 id="3-6-Heuristic-Functions"><a href="#3-6-Heuristic-Functions" class="headerlink" title="3.6 Heuristic Functions"></a>3.6 Heuristic Functions</h3><h4 id="3-6-1-Heuristics-for-8-puzzle"><a href="#3-6-1-Heuristics-for-8-puzzle" class="headerlink" title="3.6.1 Heuristics for 8-puzzle"></a>3.6.1 Heuristics for 8-puzzle</h4><ul>
-<li>要用 $A^*$ 算法找到最短距离的解，需要一个启发式函数，通常有两个候选<ul>
+<h3>3.6 Heuristic Functions</h3>
+<h4>3.6.1 Heuristics for 8-puzzle</h4>
+<ul>
+<li>要用 $A^*$ 算法找到最短距离的解，需要一个启发式函数，通常有两个候选
+<ul>
 <li>$h_1=number\ of\ misplaced\ tiles =8$</li>
-<li>$h_2 = total\ Manhattan\ distance(tiles\ from\ desired\ locations)=18$ </li>
+<li>$h_2 = total\ Manhattan\ distance(tiles\ from\ desired\ locations)=18$</li>
 </ul>
 </li>
 </ul>
-<h4 id="3-6-2-Search-Cost"><a href="#3-6-2-Search-Cost" class="headerlink" title="3.6.2 Search Cost"></a>3.6.2 Search Cost</h4><ul>
+<h4>3.6.2 Search Cost</h4>
+<ul>
 <li>若对于所有的 $n$，$h_2(n)\ge h_1(n)$ ，则 $h_2$ 优于 $h_1$ ，因而 $h_2$ 更适合搜索。</li>
 </ul>
-<h3 id="​"><a href="#​" class="headerlink" title="​"></a>​</h3>
+<h3>​</h3>
+
       
     </div>
     
@@ -972,7 +1064,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ch3-Solving-Problems-by-Search"><span class="nav-number">1.</span> <span class="nav-text">Ch3. Solving Problems by Search</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Problem-Solving-Agents"><span class="nav-number">1.1.</span> <span class="nav-text">3.1 Problem Solving Agents</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-1-Problem-Solving-in-AI"><span class="nav-number">1.1.1.</span> <span class="nav-text">3.1.1 Problem Solving in AI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-2-Algorithm-of-Simple-Problem-Solving-Agents"><span class="nav-number">1.1.2.</span> <span class="nav-text">3.1.2 Algorithm of Simple Problem Solving Agents</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-3-Related-Terms"><span class="nav-number">1.1.3.</span> <span class="nav-text">3.1.3 Related Terms</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-4-Five-Items-to-Formulate-a-Problem"><span class="nav-number">1.1.4.</span> <span class="nav-text">3.1.4 Five Items to Formulate a Problem</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Example-Problems"><span class="nav-number">1.2.</span> <span class="nav-text">3.2 Example Problems</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-Example1-Vacuum-cleaner-world"><span class="nav-number">1.2.1.</span> <span class="nav-text">3.2.1 Example1: Vacuum-cleaner world</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-2-Example2-8-puzzle"><span class="nav-number">1.2.2.</span> <span class="nav-text">3.2.2 Example2: 8-puzzle</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-3-Example3-8-queens-problem"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.2.3 Example3: 8-queens problem</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-Searching-for-Solutions"><span class="nav-number">1.3.</span> <span class="nav-text">3.3 Searching for Solutions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-1-Shortest-Path-Problem-by-Graph-Search"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.3.1 Shortest Path Problem by Graph Search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-2-Shortest-Path-Problem-by-Tree-Search"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.3.2 Shortest Path Problem by Tree Search</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-Uniformed-Search-Strategies"><span class="nav-number">1.4.</span> <span class="nav-text">3.4 Uniformed Search Strategies</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-1-Breadth-first-Search"><span class="nav-number">1.4.1.</span> <span class="nav-text">3.4.1 Breadth-first Search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-2-Uniform-cost-Search"><span class="nav-number">1.4.2.</span> <span class="nav-text">3.4.2 Uniform-cost Search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-3-Depth-first-Search"><span class="nav-number">1.4.3.</span> <span class="nav-text">3.4.3 Depth-first Search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-4-Variants-of-Depth-first-Search"><span class="nav-number">1.4.4.</span> <span class="nav-text">3.4.4 Variants of Depth-first Search</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1）Depth-limited-Search-深度受限搜索"><span class="nav-number">1.4.4.1.</span> <span class="nav-text">1）Depth-limited Search 深度受限搜索</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2）Iterative-Deepening-Search-迭代加深搜索"><span class="nav-number">1.4.4.2.</span> <span class="nav-text">2）Iterative Deepening Search 迭代加深搜索</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-5-Bidirectional-Search"><span class="nav-number">1.4.5.</span> <span class="nav-text">3.4.5 Bidirectional Search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-6-Comparing-Uninformed-Search-Strategies"><span class="nav-number">1.4.6.</span> <span class="nav-text">3.4.6 Comparing Uninformed Search Strategies</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-Informed-Search-Strategies"><span class="nav-number">1.5.</span> <span class="nav-text">3.5 Informed Search Strategies</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-1-Best-first-Search"><span class="nav-number">1.5.1.</span> <span class="nav-text">3.5.1 Best-first Search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-2-Greedy-Search"><span class="nav-number">1.5.2.</span> <span class="nav-text">3.5.2 Greedy Search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-3-A-Search"><span class="nav-number">1.5.3.</span> <span class="nav-text">3.5.3 $A^*$ Search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-4-Iterative-Deepening-A-Search"><span class="nav-number">1.5.4.</span> <span class="nav-text">3.5.4 Iterative Deepening $A^*$ Search</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-Heuristic-Functions"><span class="nav-number">1.6.</span> <span class="nav-text">3.6 Heuristic Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-6-1-Heuristics-for-8-puzzle"><span class="nav-number">1.6.1.</span> <span class="nav-text">3.6.1 Heuristics for 8-puzzle</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-6-2-Search-Cost"><span class="nav-number">1.6.2.</span> <span class="nav-text">3.6.2 Search Cost</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#​"><span class="nav-number">1.7.</span> <span class="nav-text">​</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Ch3. Solving Problems by Search</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">3.1 Problem Solving Agents</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.1.</span> <span class="nav-text">3.1.1 Problem Solving in AI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.2.</span> <span class="nav-text">3.1.2 Algorithm of Simple Problem Solving Agents</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.3.</span> <span class="nav-text">3.1.3 Related Terms</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.4.</span> <span class="nav-text">3.1.4 Five Items to Formulate a Problem</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">3.2 Example Problems</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.1.</span> <span class="nav-text">3.2.1 Example1: Vacuum-cleaner world</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.2.</span> <span class="nav-text">3.2.2 Example2: 8-puzzle</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.2.3 Example3: 8-queens problem</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.</span> <span class="nav-text">3.3 Searching for Solutions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.3.1 Shortest Path Problem by Graph Search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.3.2 Shortest Path Problem by Tree Search</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.</span> <span class="nav-text">3.4 Uniformed Search Strategies</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.1.</span> <span class="nav-text">3.4.1 Breadth-first Search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.2.</span> <span class="nav-text">3.4.2 Uniform-cost Search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.3.</span> <span class="nav-text">3.4.3 Depth-first Search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.4.</span> <span class="nav-text">3.4.4 Variants of Depth-first Search</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.4.1.</span> <span class="nav-text">1）Depth-limited Search 深度受限搜索</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.4.2.</span> <span class="nav-text">2）Iterative Deepening Search 迭代加深搜索</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.5.</span> <span class="nav-text">3.4.5 Bidirectional Search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.6.</span> <span class="nav-text">3.4.6 Comparing Uninformed Search Strategies</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.</span> <span class="nav-text">3.5 Informed Search Strategies</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.1.</span> <span class="nav-text">3.5.1 Best-first Search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.2.</span> <span class="nav-text">3.5.2 Greedy Search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.3.</span> <span class="nav-text">3.5.3 $A^*$ Search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.4.</span> <span class="nav-text">3.5.4 Iterative Deepening $A^*$ Search</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.6.</span> <span class="nav-text">3.6 Heuristic Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.6.1.</span> <span class="nav-text">3.6.1 Heuristics for 8-puzzle</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.6.2.</span> <span class="nav-text">3.6.2 Search Cost</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.7.</span> <span class="nav-text">​</span></a></li></ol></li></ol></div>
             
 
           </div>

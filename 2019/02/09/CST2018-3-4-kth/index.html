@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="题目描述 三个数组 a[1…n], b[1…n], c[1…n]，在所有数对$(x,y,z)$ $(1\le x,y,z\le n)$ 中，找到 $a[x]+b[y]+c[z]$ 的值第 $k$ 小的那对，若有多对，找出任何一对即可 不能直接访问三个数组中的元素，只能给出两种方案，两个数对，通过函数接口，来比较值得大小  接口说明 kth.h kth_lib.cpp  1void get_kth(">
+<meta name="description" content="题目描述  三个数组 a[1...n], b[1...n], c[1...n]，在所有数对$(x,y,z)$ $(1\le x,y,z\le n)$ 中，找到 $a[x]+b[y]+c[z]$ 的值第 $k$ 小的那对，若有多对，找出任何一对即可 不能直接访问三个数组中的元素，只能给出两种方案，两个数对，通过函数接口，来比较值得大小  接口说明  kth.h kth_lib.cpp  1void">
 <meta name="keywords" content="堆">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CST2018 3-4 kth">
 <meta property="og:url" content="http://yoursite.com/2019/02/09/CST2018-3-4-kth/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="题目描述 三个数组 a[1…n], b[1…n], c[1…n]，在所有数对$(x,y,z)$ $(1\le x,y,z\le n)$ 中，找到 $a[x]+b[y]+c[z]$ 的值第 $k$ 小的那对，若有多对，找出任何一对即可 不能直接访问三个数组中的元素，只能给出两种方案，两个数对，通过函数接口，来比较值得大小  接口说明 kth.h kth_lib.cpp  1void get_kth(">
+<meta property="og:description" content="题目描述  三个数组 a[1...n], b[1...n], c[1...n]，在所有数对$(x,y,z)$ $(1\le x,y,z\le n)$ 中，找到 $a[x]+b[y]+c[z]$ 的值第 $k$ 小的那对，若有多对，找出任何一对即可 不能直接访问三个数组中的元素，只能给出两种方案，两个数对，通过函数接口，来比较值得大小  接口说明  kth.h kth_lib.cpp  1void">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-02-11T08:01:28.526Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CST2018 3-4 kth">
-<meta name="twitter:description" content="题目描述 三个数组 a[1…n], b[1…n], c[1…n]，在所有数对$(x,y,z)$ $(1\le x,y,z\le n)$ 中，找到 $a[x]+b[y]+c[z]$ 的值第 $k$ 小的那对，若有多对，找出任何一对即可 不能直接访问三个数组中的元素，只能给出两种方案，两个数对，通过函数接口，来比较值得大小  接口说明 kth.h kth_lib.cpp  1void get_kth(">
+<meta name="twitter:description" content="题目描述  三个数组 a[1...n], b[1...n], c[1...n]，在所有数对$(x,y,z)$ $(1\le x,y,z\le n)$ 中，找到 $a[x]+b[y]+c[z]$ 的值第 $k$ 小的那对，若有多对，找出任何一对即可 不能直接访问三个数组中的元素，只能给出两种方案，两个数对，通过函数接口，来比较值得大小  接口说明  kth.h kth_lib.cpp  1void">
 
 
 
@@ -397,34 +397,39 @@
       
 
       
-        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><ul>
-<li>三个数组 a[1…n], b[1…n], c[1…n]，在所有数对$(x,y,z)$ $(1\le x,y,z\le n)$ 中，找到 $a[x]+b[y]+c[z]$ 的值第 $k$ 小的那对，若有多对，找出任何一对即可</li>
+        <h2>题目描述</h2>
+<ul>
+<li>三个数组 a[1...n], b[1...n], c[1...n]，在所有数对$(x,y,z)$ $(1\le x,y,z\le n)$ 中，找到 $a[x]+b[y]+c[z]$ 的值第 $k$ 小的那对，若有多对，找出任何一对即可</li>
 <li>不能直接访问三个数组中的元素，只能给出两种方案，两个数对，通过函数接口，来比较值得大小</li>
 </ul>
-<h2 id="接口说明"><a href="#接口说明" class="headerlink" title="接口说明"></a>接口说明</h2><ul>
+<h2>接口说明</h2>
+<ul>
 <li>kth.h</li>
 <li>kth_lib.cpp</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void get_kth(int n, int k, int *x, int *y, int *z);</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void get_kth(int n, int k, int *x, int *y, int *z);</span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>需要实现 <code>get_kth</code>，找到第 $k$ 小的数对后，需要将该数对的三个值分别存在 <code>*x</code>,<code>*y</code>,<code>*z</code>  中</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int compare(int x, int y, int z, int u, int v, int w);</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int compare(int x, int y, int z, int u, int v, int w);</span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>当 $a[x]+b[y]+c[z]\lt a[u]+b[v]+c[w]$ 时，返回 $1$ ，否则返回 $0$</li>
 <li><code>compare</code> 的实现为 $O(1)$ ，可认为每秒钟至少能调用 1e7 次该函数</li>
 </ul>
-<h2 id="测试说明"><a href="#测试说明" class="headerlink" title="测试说明"></a>测试说明</h2><ul>
+<h2>测试说明</h2>
+<ul>
 <li>首先读入 $n\ k$</li>
 <li>然后读入并生成 a,b,c 数组中的数</li>
 <li>接着调用 <code>get_kth</code> 函数</li>
 <li>在实现的 <code>get_kth</code> 函数中，可以调用 <code>compare</code> 函数来对两个数进行比较，若传入参数不在 $1\sim n$ 的范围内，判为 WA</li>
 <li><code>get_kth</code> 返回后，输出 $a[x]+b[y]+c[z]$ 的值</li>
 <li>本地测试：<code>g++ kth_lib.cpp your_code.cpp -O2 -o kth.exe</code></li>
-<li>样例程序：<code>kth_sample.cpp</code> </li>
+<li>样例程序：<code>kth_sample.cpp</code></li>
 </ul>
-<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ul>
-<li>输入：<ul>
+<h2>输入输出</h2>
+<ul>
+<li>输入：
+<ul>
 <li>第 $1$ 行：$n\ k$</li>
 <li>$n$ 个整数，第 $i$ 个表示 $a[i]$</li>
 <li>$n$ 个整数，第 $i$ 个表示 $b[i]$</li>
@@ -432,26 +437,34 @@
 <li>每个整数 $\in [1,10^8]$</li>
 </ul>
 </li>
-<li>输出：<ul>
+<li>输出：
+<ul>
 <li>正确时输出方案的值，错误时输出错误信息</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">3 6</span><br><span class="line">3 1 5</span><br><span class="line">4 2 1</span><br><span class="line">200 300 100</span><br><span class="line">output:</span><br><span class="line">106</span><br></pre></td></tr></table></figure>
-<h2 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h2><ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">3 6</span><br><span class="line">3 1 5</span><br><span class="line">4 2 1</span><br><span class="line">200 300 100</span><br><span class="line">output:</span><br><span class="line">106</span><br></pre></td></tr></table></figure></p>
+<h2>限制</h2>
+<ul>
 <li>4 sec</li>
 <li>256 MB</li>
 </ul>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><ul>
-<li><p>[n 特别大，枚举所有方案好像不太可能]</p>
+<h2>提示</h2>
+<ul>
+<li>
+<p>[n 特别大，枚举所有方案好像不太可能]</p>
 </li>
-<li><p>[如果只有一个数组，要求第 k 小，可以怎么求？]</p>
+<li>
+<p>[如果只有一个数组，要求第 k 小，可以怎么求？]</p>
 </li>
-<li><p>[如果有两个数组，该怎么求？]</p>
+<li>
+<p>[如果有两个数组，该怎么求？]</p>
 </li>
-<li><p>[如果有三个数组呢？　　　　]</p>
+<li>
+<p>[如果有三个数组呢？　　　　]</p>
 </li>
-<li><p>[堆　　　　　　　　　　　　]</p>
+<li>
+<p>[堆　　　　　　　　　　　　]</p>
 </li>
 </ul>
 
@@ -642,7 +655,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口说明"><span class="nav-number">2.</span> <span class="nav-text">接口说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试说明"><span class="nav-number">3.</span> <span class="nav-text">测试说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入输出"><span class="nav-number">4.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#限制"><span class="nav-number">5.</span> <span class="nav-text">限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提示"><span class="nav-number">6.</span> <span class="nav-text">提示</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">接口说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">测试说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">提示</span></a></li></ol></div>
             
 
           </div>

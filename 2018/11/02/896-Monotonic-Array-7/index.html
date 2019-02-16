@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="问题描述判断一个数组是否单调 实现123456789101112bool isMonotonic(vector&amp;lt;int&amp;gt;&amp;amp; A) &amp;#123;    int size = A.size();    if(size &amp;lt;= 1) return true;    bool incr = true;    bool decr = true;    for(int i = 1; i">
+<meta name="description" content="问题描述 判断一个数组是否单调 实现 123456789101112bool isMonotonic(vector&amp;lt;int&amp;gt;&amp;amp; A) &amp;#123;    int size = A.size();    if(size &amp;lt;= 1) return true;    bool incr = true;    bool decr = true;    for(int i = 1;">
 <meta name="keywords" content="LeetCode,Array">
 <meta property="og:type" content="article">
 <meta property="og:title" content="896. Monotonic Array-7">
 <meta property="og:url" content="http://yoursite.com/2018/11/02/896-Monotonic-Array-7/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="问题描述判断一个数组是否单调 实现123456789101112bool isMonotonic(vector&amp;lt;int&amp;gt;&amp;amp; A) &amp;#123;    int size = A.size();    if(size &amp;lt;= 1) return true;    bool incr = true;    bool decr = true;    for(int i = 1; i">
+<meta property="og:description" content="问题描述 判断一个数组是否单调 实现 123456789101112bool isMonotonic(vector&amp;lt;int&amp;gt;&amp;amp; A) &amp;#123;    int size = A.size();    if(size &amp;lt;= 1) return true;    bool incr = true;    bool decr = true;    for(int i = 1;">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-01-26T14:47:13.040Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="896. Monotonic Array-7">
-<meta name="twitter:description" content="问题描述判断一个数组是否单调 实现123456789101112bool isMonotonic(vector&amp;lt;int&amp;gt;&amp;amp; A) &amp;#123;    int size = A.size();    if(size &amp;lt;= 1) return true;    bool incr = true;    bool decr = true;    for(int i = 1; i">
+<meta name="twitter:description" content="问题描述 判断一个数组是否单调 实现 123456789101112bool isMonotonic(vector&amp;lt;int&amp;gt;&amp;amp; A) &amp;#123;    int size = A.size();    if(size &amp;lt;= 1) return true;    bool incr = true;    bool decr = true;    for(int i = 1;">
 
 
 
@@ -397,8 +397,11 @@
       
 
       
-        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>判断一个数组是否单调</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isMonotonic</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> size = A.size();</span><br><span class="line">    <span class="keyword">if</span>(size &lt;= <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">bool</span> incr = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">bool</span> decr = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; size; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(A[i<span class="number">-1</span>] &gt; A[i]) incr = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(A[i<span class="number">-1</span>] &lt; A[i]) decr = <span class="literal">false</span>;</span><br><span class="line">        <span class="comment">// if(!incr &amp;&amp; !decr) break;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> incr || decr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h3>问题描述</h3>
+<p>判断一个数组是否单调</p>
+<h3>实现</h3>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isMonotonic</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> size = A.size();</span><br><span class="line">    <span class="keyword">if</span>(size &lt;= <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">bool</span> incr = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">bool</span> decr = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; size; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(A[i<span class="number">-1</span>] &gt; A[i]) incr = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(A[i<span class="number">-1</span>] &lt; A[i]) decr = <span class="literal">false</span>;</span><br><span class="line">        <span class="comment">// if(!incr &amp;&amp; !decr) break;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> incr || decr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
     
@@ -588,7 +591,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a></li></ol></div>
             
 
           </div>

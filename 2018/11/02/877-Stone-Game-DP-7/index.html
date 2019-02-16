@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="问题描述有偶数摞石块，第i摞用 piles[i] 来表示。石块的总数是奇数，两个人轮流取一摞石块，问到最后第一个取石块的人是否永远拥有一个可以胜出的策略？ 动态规划dp(i, j) 表示当剩余的石头堆为 piles[i],…piles[j] 时可以得到的最大分数（这个分数指的是A得到的分数减去B得到的分数，对于A来讲，他如果想赢的话，就要让这个分数最大，对于B来讲，他要让这个分数最小）。对于 A">
+<meta name="description" content="问题描述 有偶数摞石块，第i摞用 piles[i] 来表示。石块的总数是奇数，两个人轮流取一摞石块，问到最后第一个取石块的人是否永远拥有一个可以胜出的策略？ 动态规划 dp(i, j) 表示当剩余的石头堆为 piles[i],...piles[j] 时可以得到的最大分数（这个分数指的是A得到的分数减去B得到的分数，对于A来讲，他如果想赢的话，就要让这个分数最大，对于B来讲，他要让这个分数最小）。对">
 <meta name="keywords" content="LeetCode,Math,Dynamic Programming">
 <meta property="og:type" content="article">
 <meta property="og:title" content="877. Stone Game-DP-7">
 <meta property="og:url" content="http://yoursite.com/2018/11/02/877-Stone-Game-DP-7/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="问题描述有偶数摞石块，第i摞用 piles[i] 来表示。石块的总数是奇数，两个人轮流取一摞石块，问到最后第一个取石块的人是否永远拥有一个可以胜出的策略？ 动态规划dp(i, j) 表示当剩余的石头堆为 piles[i],…piles[j] 时可以得到的最大分数（这个分数指的是A得到的分数减去B得到的分数，对于A来讲，他如果想赢的话，就要让这个分数最大，对于B来讲，他要让这个分数最小）。对于 A">
+<meta property="og:description" content="问题描述 有偶数摞石块，第i摞用 piles[i] 来表示。石块的总数是奇数，两个人轮流取一摞石块，问到最后第一个取石块的人是否永远拥有一个可以胜出的策略？ 动态规划 dp(i, j) 表示当剩余的石头堆为 piles[i],...piles[j] 时可以得到的最大分数（这个分数指的是A得到的分数减去B得到的分数，对于A来讲，他如果想赢的话，就要让这个分数最大，对于B来讲，他要让这个分数最小）。对">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-01-26T14:45:03.477Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="877. Stone Game-DP-7">
-<meta name="twitter:description" content="问题描述有偶数摞石块，第i摞用 piles[i] 来表示。石块的总数是奇数，两个人轮流取一摞石块，问到最后第一个取石块的人是否永远拥有一个可以胜出的策略？ 动态规划dp(i, j) 表示当剩余的石头堆为 piles[i],…piles[j] 时可以得到的最大分数（这个分数指的是A得到的分数减去B得到的分数，对于A来讲，他如果想赢的话，就要让这个分数最大，对于B来讲，他要让这个分数最小）。对于 A">
+<meta name="twitter:description" content="问题描述 有偶数摞石块，第i摞用 piles[i] 来表示。石块的总数是奇数，两个人轮流取一摞石块，问到最后第一个取石块的人是否永远拥有一个可以胜出的策略？ 动态规划 dp(i, j) 表示当剩余的石头堆为 piles[i],...piles[j] 时可以得到的最大分数（这个分数指的是A得到的分数减去B得到的分数，对于A来讲，他如果想赢的话，就要让这个分数最大，对于B来讲，他要让这个分数最小）。对">
 
 
 
@@ -397,8 +397,18 @@
       
 
       
-        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>有偶数摞石块，第i摞用 piles[i] 来表示。石块的总数是奇数，两个人轮流取一摞石块，问到最后第一个取石块的人是否永远拥有一个可以胜出的策略？</p>
-<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>dp(i, j) 表示当剩余的石头堆为 piles[i],…piles[j] 时可以得到的最大分数（这个分数指的是A得到的分数减去B得到的分数，对于A来讲，他如果想赢的话，就要让这个分数最大，对于B来讲，他要让这个分数最小）。对于 A ，我们要让这个分数最大：<br>$$<br>dp(i, j) = max(piles[i] + dp(i+1, j), piles[j] + dp(i, j-1))<br>$$<br>对于 B，我们要让这个分数最小（B拿的石块会减小总分数）：<br>$$<br>dp(i, j) = min(-piles[i] + dp(i+1, j), -piles[j] + dp(i, j-1))<br>$$<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">stoneGame</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; piles)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N = piles.size();</span><br><span class="line">    <span class="comment">// dp[i+1][j+1] = the value of the game [piles[i]...piles[j]]</span></span><br><span class="line">    <span class="keyword">int</span> dp[N+<span class="number">2</span>][N+<span class="number">2</span>];</span><br><span class="line">    <span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> size = <span class="number">1</span>; size &lt;= N; size++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>, j = size<span class="number">-1</span>; j &lt; N; i++, j++)&#123;</span><br><span class="line">            <span class="keyword">int</span> parity = (j-i-N) % <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(parity) </span><br><span class="line">                dp[i+<span class="number">1</span>][j+<span class="number">1</span>] = max(piles[i]+dp[i+<span class="number">2</span>][j+<span class="number">1</span>], piles[j]+dp[i+<span class="number">1</span>][j]);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                dp[i+<span class="number">1</span>][j+<span class="number">1</span>] = min(-piles[i]+dp[i+<span class="number">2</span>][j+<span class="number">1</span>], -piles[j]+dp[i+<span class="number">1</span>][j]);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[<span class="number">1</span>][N] &gt; <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <h3>问题描述</h3>
+<p>有偶数摞石块，第i摞用 piles[i] 来表示。石块的总数是奇数，两个人轮流取一摞石块，问到最后第一个取石块的人是否永远拥有一个可以胜出的策略？</p>
+<h3>动态规划</h3>
+<p>dp(i, j) 表示当剩余的石头堆为 piles[i],...piles[j] 时可以得到的最大分数（这个分数指的是A得到的分数减去B得到的分数，对于A来讲，他如果想赢的话，就要让这个分数最大，对于B来讲，他要让这个分数最小）。对于 A ，我们要让这个分数最大：
+$$
+dp(i, j) = max(piles[i] + dp(i+1, j), piles[j] + dp(i, j-1))
+$$
+对于 B，我们要让这个分数最小（B拿的石块会减小总分数）：
+$$
+dp(i, j) = min(-piles[i] + dp(i+1, j), -piles[j] + dp(i, j-1))
+$$
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">stoneGame</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; piles)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N = piles.size();</span><br><span class="line">    <span class="comment">// dp[i+1][j+1] = the value of the game [piles[i]...piles[j]]</span></span><br><span class="line">    <span class="keyword">int</span> dp[N+<span class="number">2</span>][N+<span class="number">2</span>];</span><br><span class="line">    <span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> size = <span class="number">1</span>; size &lt;= N; size++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>, j = size<span class="number">-1</span>; j &lt; N; i++, j++)&#123;</span><br><span class="line">            <span class="keyword">int</span> parity = (j-i-N) % <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(parity) </span><br><span class="line">                dp[i+<span class="number">1</span>][j+<span class="number">1</span>] = max(piles[i]+dp[i+<span class="number">2</span>][j+<span class="number">1</span>], piles[j]+dp[i+<span class="number">1</span>][j]);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                dp[i+<span class="number">1</span>][j+<span class="number">1</span>] = min(-piles[i]+dp[i+<span class="number">2</span>][j+<span class="number">1</span>], -piles[j]+dp[i+<span class="number">1</span>][j]);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[<span class="number">1</span>][N] &gt; <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -591,7 +601,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态规划"><span class="nav-number">2.</span> <span class="nav-text">动态规划</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">动态规划</span></a></li></ol></div>
             
 
           </div>

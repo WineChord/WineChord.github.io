@@ -400,35 +400,45 @@
       
         
           
-            <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><ul>
+            <h2>题目描述</h2>
+<ul>
 <li>最初 $N$ 个陨石碎片，每个包含能量 $ai$</li>
 <li>每次可以选择合成两块陨石碎片 $i,j$ ，合成一个新的碎片 $k$，新的碎片能量为 $ak=ai*aj$。</li>
-<li>每次合成新的碎片 $k$，可以获得等同于 $ak$ 的分数，总得分是每次得分的乘积 $ak1<em>ak2</em>ak3*…$ </li>
+<li>每次合成新的碎片 $k$，可以获得等同于 $ak$ 的分数，总得分是每次得分的乘积 $ak1<em>ak2</em>ak3*...$</li>
 <li>经过 $n-1$ 次合并，最终合成一块碎片，问最少的得分是多少？</li>
 </ul>
-<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ul>
-<li>输入：<ul>
+<h2>输入输出</h2>
+<ul>
+<li>输入：
+<ul>
 <li>第 $1$ 行：$n$ 碎片的个数</li>
 <li>第 $2$ 行：$n$ 个整数 $ai$ ，表示 $n$ 个陨石碎片的能量</li>
 </ul>
 </li>
-<li>输出：<ul>
+<li>输出：
+<ul>
 <li>最少得分</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">4</span><br><span class="line">2 3 4 5</span><br><span class="line">output:</span><br><span class="line">14400        // 6 * 20 * 120 = 14400</span><br></pre></td></tr></table></figure>
-<h2 id="数据范围及限制"><a href="#数据范围及限制" class="headerlink" title="数据范围及限制"></a>数据范围及限制</h2><ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">4</span><br><span class="line">2 3 4 5</span><br><span class="line">output:</span><br><span class="line">14400        // 6 * 20 * 120 = 14400</span><br></pre></td></tr></table></figure></p>
+<h2>数据范围及限制</h2>
+<ul>
 <li>$2\le n\le 2000$</li>
 <li>$1\le ai\le 10^9$</li>
 </ul>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><ul>
-<li><p>哈夫曼树</p>
+<h2>提示</h2>
+<ul>
+<li>
+<p>哈夫曼树</p>
 </li>
-<li><p>CST2018 1-1 A+B problem</p>
+<li>
+<p>CST2018 1-1 A+B problem</p>
 </li>
 </ul>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2>
+<h2>思路</h2>
+<h2>实现</h2>
+
           
         
       
@@ -580,29 +590,37 @@
       
         
           
-            <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><ul>
+            <h2>题目描述</h2>
+<ul>
 <li>给定一个长为n的只包含括号的括号序列，判断是否合法</li>
 </ul>
-<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ul>
-<li>输入：<ul>
+<h2>输入输出</h2>
+<ul>
+<li>输入：
+<ul>
 <li>第 $1$ 行：$T$</li>
 <li>以下 $T$ 行：每行一个字符串 $S$ ，保证只由<code>()[]{}</code> 六种字符构成</li>
 </ul>
 </li>
-<li>输出：<ul>
+<li>输出：
+<ul>
 <li>共 $T$ 行：每行一个 $Yes$ 或 $No$</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">2</span><br><span class="line">((&#123;&#125;())[])</span><br><span class="line">&#123;(&#125;)</span><br><span class="line">output:</span><br><span class="line">Yes</span><br><span class="line">No</span><br></pre></td></tr></table></figure>
-<h2 id="数据范围及限制"><a href="#数据范围及限制" class="headerlink" title="数据范围及限制"></a>数据范围及限制</h2><ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">2</span><br><span class="line">((&#123;&#125;())[])</span><br><span class="line">&#123;(&#125;)</span><br><span class="line">output:</span><br><span class="line">Yes</span><br><span class="line">No</span><br></pre></td></tr></table></figure></p>
+<h2>数据范围及限制</h2>
+<ul>
 <li>$1\le T\le 10$</li>
 <li>$1\le |S|\le 100,000$</li>
 </ul>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><ul>
+<h2>提示</h2>
+<ul>
 <li>栈</li>
 </ul>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2>
+<h2>思路</h2>
+<h2>实现</h2>
+
           
         
       
@@ -754,8 +772,10 @@
       
         
           
-            <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><ul>
-<li>简化版的FIFO调度算法<ol>
+            <h2>题目描述</h2>
+<ul>
+<li>简化版的FIFO调度算法
+<ol>
 <li>访问某个地址的值时，先在缓冲器中寻找该地址及其对应值</li>
 <li>若在缓冲器中找到该地址，则将其对应值返回，操作结束</li>
 <li>若未找到，则从内存中读取该地址对应值，并试图将该地址及其对应值存到缓冲器中</li>
@@ -765,31 +785,46 @@
 </li>
 <li>刚开始缓冲器为空，现有一系列访存请求，问有几次需要去内存中访存</li>
 </ul>
-<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ul>
-<li>输入：<ul>
+<h2>输入输出</h2>
+<ul>
+<li>输入：
+<ul>
 <li>第 $1$ 行：$n\ m$ 缓冲器的大小和访存次数</li>
 <li>以下一行：$m$ 个整数，表示每次访问的地址，每个地址是1-100的整数</li>
 </ul>
 </li>
-<li>输出：<ul>
+<li>输出：
+<ul>
 <li>一个整数，表示答案</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">3 7</span><br><span class="line">1 2 1 5 4 4 1</span><br><span class="line">output:</span><br><span class="line">5</span><br></pre></td></tr></table></figure>
-<h2 id="数据范围及限制"><a href="#数据范围及限制" class="headerlink" title="数据范围及限制"></a>数据范围及限制</h2><ul>
-<li>$1\le n\le 100$</li>
-<li>$1\le m\le 1000$</li>
-<li><p>$1\le 内存地址\le 100$</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">3 7</span><br><span class="line">1 2 1 5 4 4 1</span><br><span class="line">output:</span><br><span class="line">5</span><br></pre></td></tr></table></figure></p>
+<h2>数据范围及限制</h2>
+<ul>
+<li>
+<p>$1\le n\le 100$</p>
 </li>
-<li><p>时间：1 sec</p>
+<li>
+<p>$1\le m\le 1000$</p>
 </li>
-<li>空间：256 MB</li>
+<li>
+<p>$1\le 内存地址\le 100$</p>
+</li>
+<li>
+<p>时间：1 sec</p>
+</li>
+<li>
+<p>空间：256 MB</p>
+</li>
 </ul>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><ul>
+<h2>提示</h2>
+<ul>
 <li>队列</li>
 </ul>
-<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2>
+<h2>思考</h2>
+<h2>实现</h2>
+
           
         
       
@@ -941,7 +976,8 @@
       
         
           
-            <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><ul>
+            <h2>题目描述</h2>
+<ul>
 <li>一个完美的文本编辑器，拥有两个光标，可以在两个地方插入和删除文本。</li>
 <li>功能列表如下：</li>
 </ul>
@@ -957,32 +993,32 @@
 <tr>
 <td style="text-align:center">&lt; (move left)</td>
 <td style="text-align:center">&lt; w</td>
-<td style="text-align:center">w为一个字符，不是’L’就是’R’，代表左光标还是右光标。将选定光标向左移动，如果是最左端则不移动。执行成功输出”T”，否则输出”F”（已在最左侧）</td>
+<td style="text-align:center">w为一个字符，不是'L'就是'R'，代表左光标还是右光标。将选定光标向左移动，如果是最左端则不移动。执行成功输出&quot;T&quot;，否则输出&quot;F&quot;（已在最左侧）</td>
 </tr>
 <tr>
-<td style="text-align:center">> (move right)</td>
-<td style="text-align:center">> w</td>
+<td style="text-align:center">&gt; (move right)</td>
+<td style="text-align:center">&gt; w</td>
 <td style="text-align:center">类似上</td>
 </tr>
 <tr>
 <td style="text-align:center">I (insert)</td>
 <td style="text-align:center">I w c</td>
-<td style="text-align:center">c是一个可见字符（$33\le ascii码\le 126$），表示在该光标左插入该字符，该命令始终输出”F”</td>
+<td style="text-align:center">c是一个可见字符（$33\le ascii码\le 126$），表示在该光标左插入该字符，该命令始终输出&quot;F&quot;</td>
 </tr>
 <tr>
 <td style="text-align:center">D (delete)</td>
 <td style="text-align:center">D w</td>
-<td style="text-align:center">表示删除该光标右的一个字符，成功输出”T”，否则输出”F”（光标右侧没有字符）</td>
+<td style="text-align:center">表示删除该光标右的一个字符，成功输出&quot;T&quot;，否则输出&quot;F&quot;（光标右侧没有字符）</td>
 </tr>
 <tr>
 <td style="text-align:center">R (reverse)</td>
 <td style="text-align:center">R</td>
-<td style="text-align:center">翻转左光标和右光标之间的字符，只有左光标在右光标的左侧时才能执行（两光标重合时也不能执行）成功时输出 “T”，否则 “F”</td>
+<td style="text-align:center">翻转左光标和右光标之间的字符，只有左光标在右光标的左侧时才能执行（两光标重合时也不能执行）成功时输出 &quot;T&quot;，否则 &quot;F&quot;</td>
 </tr>
 <tr>
 <td style="text-align:center">S (show)</td>
 <td style="text-align:center">S</td>
-<td style="text-align:center">显示当前处理的文本，只输出文本，不输出”T”或”F”</td>
+<td style="text-align:center">显示当前处理的文本，只输出文本，不输出&quot;T&quot;或&quot;F&quot;</td>
 </tr>
 </tbody>
 </table>
@@ -990,32 +1026,41 @@
 <li>开始时文本编辑器中有一定内容，左光标在第一个字符左，右光标在最后一个字符右。</li>
 <li>注：插入和删除操作中，没有被操作的光标与文本的相对左右位置保持不变。特别地，若两个光标重叠，操作后也仍然重叠。</li>
 </ul>
-<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ul>
-<li>输入：<ul>
+<h2>输入输出</h2>
+<ul>
+<li>输入：
+<ul>
 <li>第 $1$ 行：初始文本编辑器的内容</li>
 <li>第 $2$ 行：$N$ 操作次数</li>
 <li>以下 $N$ 行：每行一个命令</li>
 </ul>
 </li>
-<li>输出：<ul>
+<li>输出：
+<ul>
 <li>对于每个命令执行并输出</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">9</span><br><span class="line">42</span><br><span class="line">&gt; L</span><br><span class="line">I L t</span><br><span class="line">I R &apos;</span><br><span class="line">&lt; R</span><br><span class="line">&lt; R</span><br><span class="line">I R -</span><br><span class="line">I L n</span><br><span class="line">I L s</span><br><span class="line">I L i</span><br><span class="line">I R b</span><br><span class="line">I L a</span><br><span class="line">I R -</span><br><span class="line">I L k</span><br><span class="line">I L a</span><br><span class="line">&gt; L</span><br><span class="line">R</span><br><span class="line">&gt; R</span><br><span class="line">&gt; R</span><br><span class="line">&gt; R</span><br><span class="line">&gt; R</span><br><span class="line">&gt; R</span><br><span class="line">&lt; L</span><br><span class="line">&lt; L</span><br><span class="line">&lt; L</span><br><span class="line">R</span><br><span class="line">&lt; L</span><br><span class="line">&lt; L</span><br><span class="line">&lt; L</span><br><span class="line">&lt; L</span><br><span class="line">&lt; L</span><br><span class="line">&lt; L</span><br><span class="line">&lt; L</span><br><span class="line">R</span><br><span class="line">&gt; L</span><br><span class="line">&gt; L</span><br><span class="line">&lt; R</span><br><span class="line">&lt; R</span><br><span class="line">&lt; R</span><br><span class="line">D L</span><br><span class="line">D L</span><br><span class="line">D L</span><br><span class="line">S</span><br><span class="line">output:</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">F</span><br><span class="line">F</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">F</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">9-is-baka</span><br></pre></td></tr></table></figure>
-<h2 id="数据范围及限制"><a href="#数据范围及限制" class="headerlink" title="数据范围及限制"></a>数据范围及限制</h2><ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">9</span><br><span class="line">42</span><br><span class="line">&gt; L</span><br><span class="line">I L t</span><br><span class="line">I R &apos;</span><br><span class="line">&lt; R</span><br><span class="line">&lt; R</span><br><span class="line">I R -</span><br><span class="line">I L n</span><br><span class="line">I L s</span><br><span class="line">I L i</span><br><span class="line">I R b</span><br><span class="line">I L a</span><br><span class="line">I R -</span><br><span class="line">I L k</span><br><span class="line">I L a</span><br><span class="line">&gt; L</span><br><span class="line">R</span><br><span class="line">&gt; R</span><br><span class="line">&gt; R</span><br><span class="line">&gt; R</span><br><span class="line">&gt; R</span><br><span class="line">&gt; R</span><br><span class="line">&lt; L</span><br><span class="line">&lt; L</span><br><span class="line">&lt; L</span><br><span class="line">R</span><br><span class="line">&lt; L</span><br><span class="line">&lt; L</span><br><span class="line">&lt; L</span><br><span class="line">&lt; L</span><br><span class="line">&lt; L</span><br><span class="line">&lt; L</span><br><span class="line">&lt; L</span><br><span class="line">R</span><br><span class="line">&gt; L</span><br><span class="line">&gt; L</span><br><span class="line">&lt; R</span><br><span class="line">&lt; R</span><br><span class="line">&lt; R</span><br><span class="line">D L</span><br><span class="line">D L</span><br><span class="line">D L</span><br><span class="line">S</span><br><span class="line">output:</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">F</span><br><span class="line">F</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">F</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">T</span><br><span class="line">9-is-baka</span><br></pre></td></tr></table></figure></p>
+<h2>数据范围及限制</h2>
+<ul>
 <li>初始字符，插入字符是可见字符（$33\le ascii 字符\le 126$）</li>
 <li>$1\le 初始文本长度\le 3,200,000$</li>
 <li>$1\le N\le 4,000,000​$</li>
 <li>输出文件大小$\le 20MB$</li>
 </ul>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><ul>
-<li><p>列表。</p>
+<h2>提示</h2>
+<ul>
+<li>
+<p>列表。</p>
 </li>
-<li><p>使用数组集中存放链表节点可以提高效率。</p>
+<li>
+<p>使用数组集中存放链表节点可以提高效率。</p>
 </li>
 </ul>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2>
+<h2>思路</h2>
+<h2>实现</h2>
+
           
         
       
@@ -1167,47 +1212,68 @@
       
         
           
-            <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><ul>
+            <h2>题目描述</h2>
+<ul>
 <li>一条轨道上初始有 $n$ 个彩色珠子，其中任意三个相邻的珠子不会完全同色。</li>
 <li>可以发射珠子到轨道上，一旦有三个或更多同色的珠子相邻，就会立即消失。可发生连锁反应</li>
 <li>请计算一系列操作之后的珠子序列</li>
 </ul>
-<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ul>
-<li>输入：<ul>
-<li>第 $1$ 行：由 ‘A’-‘Z’ 组成的字符串，表示初始珠子序列</li>
+<h2>输入输出</h2>
+<ul>
+<li>输入：
+<ul>
+<li>第 $1$ 行：由 'A'-'Z' 组成的字符串，表示初始珠子序列</li>
 <li>第 $2$ 行：$m$ 表示共有 $m$ 次操作</li>
 <li>以下 $m$ 行：每行代表一次操作，每次操作为 $k\ \Sigma$ ，其中 $k\in[0,b]$ 表示新珠子嵌入之后在轨道上的位序，$\Sigma$ 表示新珠子的颜色</li>
 </ul>
 </li>
-<li>输出：<ul>
+<li>输出：
+<ul>
 <li>共 $1$ 行：给出所有操作之后轨道上的珠子序列</li>
 <li>若没有珠子，则输出空行（一个换行符）</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">ACCBA</span><br><span class="line">5</span><br><span class="line">1 B</span><br><span class="line">0 A</span><br><span class="line">2 B</span><br><span class="line">4 C</span><br><span class="line">0 A</span><br><span class="line">output:</span><br><span class="line">A</span><br></pre></td></tr></table></figure>
-<h2 id="数据范围及限制"><a href="#数据范围及限制" class="headerlink" title="数据范围及限制"></a>数据范围及限制</h2><ul>
-<li>$0\le n\le 500,000$</li>
-<li>$0\le m\le 500,000$</li>
-<li><p>输入保证位置合法</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">ACCBA</span><br><span class="line">5</span><br><span class="line">1 B</span><br><span class="line">0 A</span><br><span class="line">2 B</span><br><span class="line">4 C</span><br><span class="line">0 A</span><br><span class="line">output:</span><br><span class="line">A</span><br></pre></td></tr></table></figure></p>
+<h2>数据范围及限制</h2>
+<ul>
+<li>
+<p>$0\le n\le 500,000$</p>
 </li>
-<li><p>时间：2 sec</p>
+<li>
+<p>$0\le m\le 500,000$</p>
 </li>
-<li>空间：256 MB</li>
-</ul>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><ul>
-<li><p>本题字母、数字混合输入，且初始序列可能为空，请使用足够鲁棒的读入方式。</p>
+<li>
+<p>输入保证位置合法</p>
 </li>
-<li><p>[ 我们将介绍一种简单高效的数据结构，分块数组。他是一个结合了链表和列表的高效的数据结构。 ]</p>
+<li>
+<p>时间：2 sec</p>
 </li>
-<li><p>[ 列表可以 $O(1)$ 完成寻址，但是需要 $O(N)$ 完成删除和插入，链表可以 $O(1)$ 完成删除和插入，但是需要 $O(N)$ 完成寻址。我们将他们结合起来选择 $\sqrt{n}$ 为一个中间值。 ]</p>
-</li>
-<li><p>[ 将 $N​$ 长度的列表以 $O(\sqrt{n})​$ 长度断成 $O(\sqrt{n})​$ 块，每块用链表连起来，这样链表的长度为 $O(\sqrt{n})​$ 同时列表的长度为 $O(\sqrt{n})​$，我们可以在 $O(\sqrt{n})​$ 的时间范围内完成寻址插入和删除。 ]</p>
-</li>
-<li><p>[ 另一个需要注意的是在移动数组元素时，使用 memove 能够大大提升程序的性能 ]</p>
+<li>
+<p>空间：256 MB</p>
 </li>
 </ul>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2>
+<h2>提示</h2>
+<ul>
+<li>
+<p>本题字母、数字混合输入，且初始序列可能为空，请使用足够鲁棒的读入方式。</p>
+</li>
+<li>
+<p>[ 我们将介绍一种简单高效的数据结构，分块数组。他是一个结合了链表和列表的高效的数据结构。 ]</p>
+</li>
+<li>
+<p>[ 列表可以 $O(1)$ 完成寻址，但是需要 $O(N)$ 完成删除和插入，链表可以 $O(1)$ 完成删除和插入，但是需要 $O(N)$ 完成寻址。我们将他们结合起来选择 $\sqrt{n}$ 为一个中间值。 ]</p>
+</li>
+<li>
+<p>[ 将 $N​$ 长度的列表以 $O(\sqrt{n})​$ 长度断成 $O(\sqrt{n})​$ 块，每块用链表连起来，这样链表的长度为 $O(\sqrt{n})​$ 同时列表的长度为 $O(\sqrt{n})​$，我们可以在 $O(\sqrt{n})​$ 的时间范围内完成寻址插入和删除。 ]</p>
+</li>
+<li>
+<p>[ 另一个需要注意的是在移动数组元素时，使用 memove 能够大大提升程序的性能 ]</p>
+</li>
+</ul>
+<h2>思路</h2>
+<h2>实现</h2>
+
           
         
       
@@ -1359,7 +1425,8 @@
       
         
           
-            <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><ul>
+            <h2>题目描述</h2>
+<ul>
 <li>从发行到退出之间的时段称为股票的活跃期</li>
 <li>若某股票在第123天发行并于130天退出，则认为活跃期为123-129共7天，记作 $[123,130)$</li>
 <li>假定股票在活跃期内价格不变</li>
@@ -1367,34 +1434,41 @@
 <li>M先生是公认的股神，他任何时候的投资总额都保持固定，如此可保证风险有限。每天都将所有的投资集中用于购入当日价格最低的一支股票（为此可能需要先卖出原持有股票）</li>
 <li>M先生希望知道自己一段时期内的日均持股量</li>
 </ul>
-<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ul>
-<li>输入：<ul>
+<h2>输入输出</h2>
+<ul>
+<li>输入：
+<ul>
 <li>第 $1$ 行：$N$</li>
 <li>以下 $2N$ 行：按日期升序描述股票历史</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D X // 在上一事件之后的第D天有一支股票发行，且按M先生的投资额可购入X股</span><br><span class="line">D // 在上一事件之后的第D天有一支股票退市</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D X // 在上一事件之后的第D天有一支股票发行，且按M先生的投资额可购入X股</span><br><span class="line">D // 在上一事件之后的第D天有一支股票退市</span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>其中，除首个事件的D值可能为0，其余D值均为正整数。X均为非负整数</li>
 <li>输入的时间序列合法，即保证活跃股票数始终非负</li>
-<li>输出：<ul>
+<li>输出：
+<ul>
 <li>输出自股市开市至最后一支股票退出期间，M先生的日均持股量乘以天数</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">6</span><br><span class="line">2 100</span><br><span class="line">2 200</span><br><span class="line">5</span><br><span class="line">1 150</span><br><span class="line">1</span><br><span class="line">2 100</span><br><span class="line">2 300</span><br><span class="line">2 200</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">output:</span><br><span class="line">5000    // 5000 = 200.00股 * 25天</span><br></pre></td></tr></table></figure>
-<h2 id="数据范围及限制"><a href="#数据范围及限制" class="headerlink" title="数据范围及限制"></a>数据范围及限制</h2><ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">6</span><br><span class="line">2 100</span><br><span class="line">2 200</span><br><span class="line">5</span><br><span class="line">1 150</span><br><span class="line">1</span><br><span class="line">2 100</span><br><span class="line">2 300</span><br><span class="line">2 200</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">output:</span><br><span class="line">5000    // 5000 = 200.00股 * 25天</span><br></pre></td></tr></table></figure></p>
+<h2>数据范围及限制</h2>
+<ul>
 <li>$1\le N\le 1,000,000$</li>
 <li>$0\le X\lt 2^{31}$</li>
 <li>股市的营业期不超过 $2^{31}-1$ 天</li>
 <li>时间：1 sec</li>
 <li>空间：256 MB</li>
 </ul>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><ul>
-<li>在队列结构的基础上，扩充操作接口 </li>
+<h2>提示</h2>
+<ul>
+<li>在队列结构的基础上，扩充操作接口</li>
 </ul>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2>
+<h2>思路</h2>
+<h2>实现</h2>
+
           
         
       
@@ -1546,52 +1620,72 @@
       
         
           
-            <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><ul>
-<li><p>规范文件名</p>
+            <h2>问题描述</h2>
+<ul>
+<li>
+<p>规范文件名</p>
 </li>
-<li><p>问最少需要修改多少次才能使字符串A变成字符串B？</p>
+<li>
+<p>问最少需要修改多少次才能使字符串A变成字符串B？</p>
 </li>
-<li><p>对于修改代价超过K的文件名选择放弃</p>
+<li>
+<p>对于修改代价超过K的文件名选择放弃</p>
 </li>
-<li><p>定义一个修改代价</p>
+<li>
+<p>定义一个修改代价</p>
 <ol>
-<li><p>在第 $i$ 个位置插入一个字符 $K$</p>
-<p>$…S_{i-1}S_iS_{i+1}…\Rightarrow S_{i-1}KS_iS_{i+1}…$</p>
+<li>
+<p>在第 $i$ 个位置插入一个字符 $K$</p>
+<p>$...S_{i-1}S_iS_{i+1}...\Rightarrow S_{i-1}KS_iS_{i+1}...$</p>
 </li>
-<li><p>删除第 $i$ 个位置的字符</p>
-<p>$…S_{i-1}S_iS_{i+1}…\Rightarrow S_{i-1}S_{i+1}…$</p>
+<li>
+<p>删除第 $i$ 个位置的字符</p>
+<p>$...S_{i-1}S_iS_{i+1}...\Rightarrow S_{i-1}S_{i+1}...$</p>
 </li>
 </ol>
 </li>
 </ul>
-<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ul>
-<li>输入：<ul>
+<h2>输入输出</h2>
+<ul>
+<li>输入：
+<ul>
 <li>第 $1$ 行：$N\ M\ K$ # 表示原始串A的长度，目标串B的长度和限制的最大修改次数</li>
 <li>以下 $2$ 行：分别为原始串和目标串</li>
 </ul>
 </li>
-<li>输出：<ul>
+<li>输出：
+<ul>
 <li>如最小修改次数小于等于K，则输出最小修改次数，否则输出-1</li>
 </ul>
 </li>
 <li>样例：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">intput:</span><br><span class="line">10 11 5</span><br><span class="line">9873007613</span><br><span class="line">87300676513</span><br><span class="line">output:</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
-<h2 id="数据范围及限制"><a href="#数据范围及限制" class="headerlink" title="数据范围及限制"></a>数据范围及限制</h2><ul>
-<li>$n,m\le 501000$</li>
-<li><p>$k\le 100$</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">intput:</span><br><span class="line">10 11 5</span><br><span class="line">9873007613</span><br><span class="line">87300676513</span><br><span class="line">output:</span><br><span class="line">3</span><br></pre></td></tr></table></figure></p>
+<h2>数据范围及限制</h2>
+<ul>
+<li>
+<p>$n,m\le 501000$</p>
 </li>
-<li><p>时间：1 sec</p>
+<li>
+<p>$k\le 100$</p>
 </li>
-<li>内存：256 MB</li>
+<li>
+<p>时间：1 sec</p>
+</li>
+<li>
+<p>内存：256 MB</p>
+</li>
 </ul>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><ul>
+<h2>提示</h2>
+<ul>
 <li>动态规划</li>
 </ul>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
+<h2>思路</h2>
+<ul>
 <li>使用动态规划</li>
 </ul>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2>
+<h2>实现</h2>
+
           
         
       
@@ -1743,14 +1837,17 @@
       
         
           
-            <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><ul>
+            <h2>题目描述</h2>
+<ul>
 <li>在 $x$ 轴正半轴和 $y$ 轴正半轴分别挑选 $n$ 个不同点</li>
 <li>将 $x$ 轴和 $y$ 轴的点一一连接，形成 $n$ 条线段，并保证任意两条线段都不相交。</li>
 <li>给出 $m$ 个询问，对于每个询问将会给定一个点 $P(Px,Py)$</li>
 <li>请回答线段 $OP$ 与 $n$ 条线段会产生多少个交点？</li>
 </ul>
-<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ul>
-<li>输入：<ul>
+<h2>输入输出</h2>
+<ul>
+<li>输入：
+<ul>
 <li>第 $1$ 行：$n$  # 表示线段的数量</li>
 <li>第 $2$ 行：$n$ 个正整数，表示在 $x$ 轴选取的点的横坐标</li>
 <li>第 $3$ 行：$n$ 个正整数，表示在 $y$ 轴选取的点的纵坐标</li>
@@ -1758,35 +1855,42 @@
 <li>以后 $m$ 行：每行两个整数 $Px,Py$ ，表示询问中给定点横纵坐标</li>
 </ul>
 </li>
-<li>输出：<ul>
+<li>输出：
+<ul>
 <li>共 $m$ 行：每行一个非负整数，表示答案</li>
 </ul>
 </li>
 </ul>
-<h2 id="输入输出样例"><a href="#输入输出样例" class="headerlink" title="输入输出样例"></a>输入输出样例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">3</span><br><span class="line">4 5 3</span><br><span class="line">3 5 4</span><br><span class="line">2</span><br><span class="line">1 1</span><br><span class="line">3 3</span><br><span class="line">output:</span><br><span class="line">0</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+<h2>输入输出样例</h2>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">3</span><br><span class="line">4 5 3</span><br><span class="line">3 5 4</span><br><span class="line">2</span><br><span class="line">1 1</span><br><span class="line">3 3</span><br><span class="line">output:</span><br><span class="line">0</span><br><span class="line">3</span><br></pre></td></tr></table></figure></p>
 <ul>
-<li>样例说明<ul>
+<li>样例说明
+<ul>
 <li>$3$ 条线段分别为：(3,0)-(0,3),(4,0)-(0,4),(5,0)-(0,5)</li>
 <li>(0,0)-(1,1)无交点，答案为0</li>
 <li>(0,0)-(3,3)有三个交点，答案为3</li>
 </ul>
 </li>
 </ul>
-<h2 id="数据范围及限制"><a href="#数据范围及限制" class="headerlink" title="数据范围及限制"></a>数据范围及限制</h2><ul>
+<h2>数据范围及限制</h2>
+<ul>
 <li>$1\le n\le 200,000$</li>
 <li>$1\le m\le 200,000$</li>
 <li>$1\le 横纵坐标\lt 2^{31}$</li>
 <li>时间限制：1 sec</li>
 <li>内存限制：256 MB</li>
 </ul>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><ul>
+<h2>提示</h2>
+<ul>
 <li>二分查找、ToLeft测试。</li>
 <li>对于每条线段，可以用向量叉积的 ToLeft 测试来判断其在线段的左边还是右边。通过二分查找，可以高效的查找点在哪个区域内，从而确定交点的数目。</li>
 </ul>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
+<h2>思路</h2>
+<ul>
 <li>按提示来</li>
 </ul>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2>
+<h2>实现</h2>
+
           
         
       
@@ -1938,45 +2042,63 @@
       
         
           
-            <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><ul>
+            <h2>题目描述</h2>
+<ul>
 <li>实际上是 $A*B$ 问题，和PA2-1有关。</li>
 <li>问题是模拟 Python 中自带的长整型</li>
 <li>可以计算几百位的整数乘法</li>
 </ul>
-<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ul>
-<li>输入：<ul>
+<h2>输入输出</h2>
+<ul>
+<li>输入：
+<ul>
 <li>第 $1$ 行：​$n$  # 要计算 ​$n$ 组乘法</li>
 <li>以下 $n$ 行：每行包含两个非负整数 $a$ $b$</li>
 </ul>
 </li>
-<li>输出：<ul>
+<li>输出：
+<ul>
 <li>共 $n$ 行：每行输出乘积</li>
 </ul>
 </li>
 </ul>
-<h2 id="输入输出样例"><a href="#输入输出样例" class="headerlink" title="输入输出样例"></a>输入输出样例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">3</span><br><span class="line">1 1</span><br><span class="line">2 2</span><br><span class="line">123123 789789</span><br><span class="line">output:</span><br><span class="line">1</span><br><span class="line">4</span><br><span class="line">97241191047</span><br></pre></td></tr></table></figure>
+<h2>输入输出样例</h2>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">3</span><br><span class="line">1 1</span><br><span class="line">2 2</span><br><span class="line">123123 789789</span><br><span class="line">output:</span><br><span class="line">1</span><br><span class="line">4</span><br><span class="line">97241191047</span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>此样例是第一个测试点</li>
 </ul>
-<h2 id="数据范围及限制"><a href="#数据范围及限制" class="headerlink" title="数据范围及限制"></a>数据范围及限制</h2><ul>
-<li>$1\le n\le 500​$</li>
-<li>$0\le a\lt 10^{5000}​$</li>
-<li><p>$0\le b\lt10^{5000}​$</p>
+<h2>数据范围及限制</h2>
+<ul>
+<li>
+<p>$1\le n\le 500​$</p>
 </li>
-<li><p>时间限制：1 sec</p>
+<li>
+<p>$0\le a\lt 10^{5000}​$</p>
 </li>
-<li>内存限制：256 MB</li>
+<li>
+<p>$0\le b\lt10^{5000}​$</p>
+</li>
+<li>
+<p>时间限制：1 sec</p>
+</li>
+<li>
+<p>内存限制：256 MB</p>
+</li>
 </ul>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><ul>
+<h2>提示</h2>
+<ul>
 <li>使用高精度算法</li>
 </ul>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
+<h2>思路</h2>
+<ul>
 <li>实现一个高精度乘法即可</li>
 </ul>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXLEN 5000+5</span></span><br><span class="line"><span class="keyword">int</span> a[MAXLEN], b[MAXLEN], sum[MAXLEN*<span class="number">2</span>];</span><br><span class="line"><span class="keyword">char</span> sa[MAXLEN], sb[MAXLEN];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">hpMulti</span><span class="params">(<span class="keyword">int</span> la, <span class="keyword">int</span> lb)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j,lsum=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">memset</span>(sum, <span class="number">0</span>, <span class="keyword">sizeof</span>(sum));</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=la; i++)</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">1</span>, lsum=i<span class="number">-1</span>; j&lt;=lb; j++)</span><br><span class="line">            sum[++lsum] += b[j]*a[i];</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=lsum; i++)</span><br><span class="line">        <span class="keyword">if</span>(sum[i]&gt;=<span class="number">10</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(sum[lsum]&gt;=<span class="number">10</span>) lsum++;</span><br><span class="line">            sum[i+<span class="number">1</span>] += sum[i] / <span class="number">10</span>;</span><br><span class="line">            sum[i] %= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> lsum;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">while</span>(n--)&#123;</span><br><span class="line">        <span class="keyword">int</span> la=<span class="number">0</span>, lb=<span class="number">0</span>, lsum=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%s %s"</span>, sa, sb);</span><br><span class="line">        la = <span class="built_in">strlen</span>(sa);</span><br><span class="line">        lb = <span class="built_in">strlen</span>(sb);</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">1</span>, j=la<span class="number">-1</span>; i&lt;=la; i++, j--)</span><br><span class="line">            a[i] = sa[j] - <span class="string">'0'</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">1</span>, j=lb<span class="number">-1</span>; i&lt;=lb; i++, j--)</span><br><span class="line">            b[i] = sb[j] - <span class="string">'0'</span></span><br><span class="line">        lsum = hpMulti(la, lb);</span><br><span class="line">        <span class="keyword">for</span>(i=lsum; i&gt;<span class="number">0</span>; i--)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d"</span>, sum[i]);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="附录：提供的对拍工具"><a href="#附录：提供的对拍工具" class="headerlink" title="附录：提供的对拍工具"></a>附录：提供的对拍工具</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># check.py</span></span><br><span class="line"><span class="comment"># 集合了控制脚本和数据生成器，配置完里面的参数使用 python3 check.py 运行。当出现A，B不一致的数据时，程序会自动终止</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">checkAns</span><span class="params">(outputFile1, outputFile2)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">        该函数用于判断两个输入文件是否相同，这里采用的方式是读入两个文件的所有行，然后拼起来判断是否相同。可以根据需求修改</span></span><br><span class="line"><span class="string">        outputFile1,outputFile2 分别为判断的两个文件的文件名</span></span><br><span class="line"><span class="string">        函数返回布尔值</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">with</span> open(outputFile1, <span class="string">"r"</span>) <span class="keyword">as</span> f:</span><br><span class="line">        output1 = f.readlines()</span><br><span class="line">    <span class="keyword">with</span> open(outputFile2, <span class="string">"r"</span>) <span class="keyword">as</span> f:</span><br><span class="line">        output2 = f.readlines()</span><br><span class="line">    <span class="keyword">return</span> <span class="string">""</span>.join(output1) == <span class="string">""</span>.join(output2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dataMaker</span><span class="params">(inputFile, n, valuelength)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">        这个函数根据自己的需求一定要修改，他负责根据读入的参数来生成一个测试文件inputFile。</span></span><br><span class="line"><span class="string">        在A+B问题里面,n用来控制生成的数组组数，valuelength用来控制用于乘法的长度。</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">with</span> open(inputFile, <span class="string">"w"</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(str(n) + <span class="string">"\n"</span>)</span><br><span class="line">        <span class="keyword">for</span> datanum <span class="keyword">in</span> range(n):</span><br><span class="line">            S1 = str(random.randint(<span class="number">1</span>, <span class="number">9</span>))</span><br><span class="line">            S2 = str(random.randint(<span class="number">1</span>, <span class="number">9</span>))</span><br><span class="line">            <span class="keyword">for</span> itr <span class="keyword">in</span> range(valuelength - <span class="number">1</span>):</span><br><span class="line">                S1 += str(random.randint(<span class="number">0</span>, <span class="number">9</span>))</span><br><span class="line">                S2 += str(random.randint(<span class="number">0</span>, <span class="number">9</span>))</span><br><span class="line">            f.write(S1 + <span class="string">" "</span> + S2 + <span class="string">"\n"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        <span class="comment"># 每组数据10个，长度为10</span></span><br><span class="line">        dataMaker(<span class="string">"input.txt"</span>, <span class="number">10</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 运行a读入input.txt输出到output1.txt,a.cpp是c++代码需要编译之后得到可执行程序a</span></span><br><span class="line">        os.system(<span class="string">"./a &lt; input.txt &gt;output1.txt"</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 运行b读入input.txt输出到output1.txt,b.py是python代码通过python指令运行</span></span><br><span class="line">        os.system(<span class="string">"python3 b.py &lt; input.txt &gt;output2.txt"</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> checkAns(<span class="string">"output1.txt"</span>, <span class="string">"output2.txt"</span>) <span class="keyword">is</span> <span class="keyword">False</span>:</span><br><span class="line">            print(<span class="string">"Wrong"</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        print(<span class="string">"right"</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.cpp 一个蛮力的C++代码，仅仅能够计算 long long 内的乘法，需要编译成可执行文件a之后才能够放入脚本运行</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> N;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; N;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i ++) &#123;</span><br><span class="line">		<span class="keyword">long</span> <span class="keyword">long</span> a, b;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; a * b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># b.py 一个Python代码，实现了高效的大数乘法</span></span><br><span class="line">n = int(input())</span><br><span class="line"><span class="keyword">for</span> itr <span class="keyword">in</span> range(n):</span><br><span class="line">    a, b = input().split(<span class="string">" "</span>)</span><br><span class="line">    a = int(a)</span><br><span class="line">    b = int(b)</span><br><span class="line">    print(a * b)</span><br></pre></td></tr></table></figure>
+<h2>实现</h2>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXLEN 5000+5</span></span><br><span class="line"><span class="keyword">int</span> a[MAXLEN], b[MAXLEN], sum[MAXLEN*<span class="number">2</span>];</span><br><span class="line"><span class="keyword">char</span> sa[MAXLEN], sb[MAXLEN];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">hpMulti</span><span class="params">(<span class="keyword">int</span> la, <span class="keyword">int</span> lb)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j,lsum=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">memset</span>(sum, <span class="number">0</span>, <span class="keyword">sizeof</span>(sum));</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=la; i++)</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">1</span>, lsum=i<span class="number">-1</span>; j&lt;=lb; j++)</span><br><span class="line">            sum[++lsum] += b[j]*a[i];</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=lsum; i++)</span><br><span class="line">        <span class="keyword">if</span>(sum[i]&gt;=<span class="number">10</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(sum[lsum]&gt;=<span class="number">10</span>) lsum++;</span><br><span class="line">            sum[i+<span class="number">1</span>] += sum[i] / <span class="number">10</span>;</span><br><span class="line">            sum[i] %= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> lsum;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">while</span>(n--)&#123;</span><br><span class="line">        <span class="keyword">int</span> la=<span class="number">0</span>, lb=<span class="number">0</span>, lsum=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%s %s"</span>, sa, sb);</span><br><span class="line">        la = <span class="built_in">strlen</span>(sa);</span><br><span class="line">        lb = <span class="built_in">strlen</span>(sb);</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">1</span>, j=la<span class="number">-1</span>; i&lt;=la; i++, j--)</span><br><span class="line">            a[i] = sa[j] - <span class="string">'0'</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">1</span>, j=lb<span class="number">-1</span>; i&lt;=lb; i++, j--)</span><br><span class="line">            b[i] = sb[j] - <span class="string">'0'</span></span><br><span class="line">        lsum = hpMulti(la, lb);</span><br><span class="line">        <span class="keyword">for</span>(i=lsum; i&gt;<span class="number">0</span>; i--)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d"</span>, sum[i]);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2>附录：提供的对拍工具</h2>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># check.py</span></span><br><span class="line"><span class="comment"># 集合了控制脚本和数据生成器，配置完里面的参数使用 python3 check.py 运行。当出现A，B不一致的数据时，程序会自动终止</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">checkAns</span><span class="params">(outputFile1, outputFile2)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">        该函数用于判断两个输入文件是否相同，这里采用的方式是读入两个文件的所有行，然后拼起来判断是否相同。可以根据需求修改</span></span><br><span class="line"><span class="string">        outputFile1,outputFile2 分别为判断的两个文件的文件名</span></span><br><span class="line"><span class="string">        函数返回布尔值</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">with</span> open(outputFile1, <span class="string">"r"</span>) <span class="keyword">as</span> f:</span><br><span class="line">        output1 = f.readlines()</span><br><span class="line">    <span class="keyword">with</span> open(outputFile2, <span class="string">"r"</span>) <span class="keyword">as</span> f:</span><br><span class="line">        output2 = f.readlines()</span><br><span class="line">    <span class="keyword">return</span> <span class="string">""</span>.join(output1) == <span class="string">""</span>.join(output2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dataMaker</span><span class="params">(inputFile, n, valuelength)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">        这个函数根据自己的需求一定要修改，他负责根据读入的参数来生成一个测试文件inputFile。</span></span><br><span class="line"><span class="string">        在A+B问题里面,n用来控制生成的数组组数，valuelength用来控制用于乘法的长度。</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">with</span> open(inputFile, <span class="string">"w"</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(str(n) + <span class="string">"\n"</span>)</span><br><span class="line">        <span class="keyword">for</span> datanum <span class="keyword">in</span> range(n):</span><br><span class="line">            S1 = str(random.randint(<span class="number">1</span>, <span class="number">9</span>))</span><br><span class="line">            S2 = str(random.randint(<span class="number">1</span>, <span class="number">9</span>))</span><br><span class="line">            <span class="keyword">for</span> itr <span class="keyword">in</span> range(valuelength - <span class="number">1</span>):</span><br><span class="line">                S1 += str(random.randint(<span class="number">0</span>, <span class="number">9</span>))</span><br><span class="line">                S2 += str(random.randint(<span class="number">0</span>, <span class="number">9</span>))</span><br><span class="line">            f.write(S1 + <span class="string">" "</span> + S2 + <span class="string">"\n"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        <span class="comment"># 每组数据10个，长度为10</span></span><br><span class="line">        dataMaker(<span class="string">"input.txt"</span>, <span class="number">10</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 运行a读入input.txt输出到output1.txt,a.cpp是c++代码需要编译之后得到可执行程序a</span></span><br><span class="line">        os.system(<span class="string">"./a &lt; input.txt &gt;output1.txt"</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 运行b读入input.txt输出到output1.txt,b.py是python代码通过python指令运行</span></span><br><span class="line">        os.system(<span class="string">"python3 b.py &lt; input.txt &gt;output2.txt"</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> checkAns(<span class="string">"output1.txt"</span>, <span class="string">"output2.txt"</span>) <span class="keyword">is</span> <span class="keyword">False</span>:</span><br><span class="line">            print(<span class="string">"Wrong"</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        print(<span class="string">"right"</span>)</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.cpp 一个蛮力的C++代码，仅仅能够计算 long long 内的乘法，需要编译成可执行文件a之后才能够放入脚本运行</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> N;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; N;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i ++) &#123;</span><br><span class="line">		<span class="keyword">long</span> <span class="keyword">long</span> a, b;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; a * b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># b.py 一个Python代码，实现了高效的大数乘法</span></span><br><span class="line">n = int(input())</span><br><span class="line"><span class="keyword">for</span> itr <span class="keyword">in</span> range(n):</span><br><span class="line">    a, b = input().split(<span class="string">" "</span>)</span><br><span class="line">    a = int(a)</span><br><span class="line">    b = int(b)</span><br><span class="line">    print(a * b)</span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -2107,9 +2229,12 @@
       
         
           
-            <h2 id="Ch11-Paradigms"><a href="#Ch11-Paradigms" class="headerlink" title="Ch11 Paradigms"></a>Ch11 Paradigms</h2><h3 id="11-1-Supervised-Learning-Paradigm"><a href="#11-1-Supervised-Learning-Paradigm" class="headerlink" title="11.1 Supervised Learning Paradigm"></a>11.1 Supervised Learning Paradigm</h3><ul>
+            <h2>Ch11 Paradigms</h2>
+<h3>11.1 Supervised Learning Paradigm</h3>
+<ul>
 <li>接受一组标注的样本作为训练数据，然后对未知点进行推测</li>
-<li>6个步骤：<ul>
+<li>6个步骤：
+<ul>
 <li>1）确定训练类型</li>
 <li>2）收集训练集</li>
 <li>3）确定特征提取方法</li>
@@ -2118,31 +2243,38 @@
 <li>6）评估精确性</li>
 </ul>
 </li>
-<li>相关任务：<ul>
+<li>相关任务：
+<ul>
 <li>分类，回归，排名</li>
 </ul>
 </li>
 </ul>
-<h3 id="11-2-Unsupervised-Learning-Paradigm"><a href="#11-2-Unsupervised-Learning-Paradigm" class="headerlink" title="11.2 Unsupervised Learning Paradigm"></a>11.2 Unsupervised Learning Paradigm</h3><ul>
+<h3>11.2 Unsupervised Learning Paradigm</h3>
+<ul>
 <li>接受未标注数据，然后对未知点做出预测</li>
 <li>目标是发现数据中共性的东西</li>
-<li>相关任务：<ul>
+<li>相关任务：
+<ul>
 <li>聚类/密度估计/降维</li>
 </ul>
 </li>
 </ul>
-<h3 id="11-3-Reinforcement-Learning-Paradigm"><a href="#11-3-Reinforcement-Learning-Paradigm" class="headerlink" title="11.3 Reinforcement Learning Paradigm"></a>11.3 Reinforcement Learning Paradigm</h3><ul>
+<h3>11.3 Reinforcement Learning Paradigm</h3>
+<ul>
 <li>学习器是一个决策制定智能体，在环境下采取行动并获得这些动作的回报</li>
 <li>经过一系列试错运行之后，可以学到最优策略</li>
 <li>目标是使回报最大化</li>
 <li>不提供输入和输出对，专注于在线的性能优化</li>
-<li>类型<ul>
-<li>1）基于模型<ul>
+<li>类型
+<ul>
+<li>1）基于模型
+<ul>
 <li>首先以马尔可夫决策过程来行动，并学习 T 和 R</li>
 <li>然后用学习的 T 和 R 进行数值迭代或策略迭代</li>
 </ul>
 </li>
-<li>2）无模型<ul>
+<li>2）无模型
+<ul>
 <li>学习策略没有任何模型</li>
 <li>避开学习 T 和 R 的过程，采用直接评估策略</li>
 <li>基于预测的时间差分（temporal difference）法</li>
@@ -2150,38 +2282,46 @@
 </li>
 </ul>
 </li>
-<li>1）基于模型的强化学习<ul>
-<li>思想：<ul>
+<li>1）基于模型的强化学习
+<ul>
+<li>思想：
+<ul>
 <li>通过实践经验学习模型。若学到的模型正确，则用于数值求解</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>2）无模型强化学习<ul>
-<li>Actor-Critic methods 动作者·评判者方法<ul>
+<li>2）无模型强化学习
+<ul>
+<li>Actor-Critic methods 动作者·评判者方法
+<ul>
 <li>策略迭代（On-policy）的时间差分版</li>
 <li>一种明确表示独立于价值函数的策略的结构</li>
 <li>策略（动作者）用于选择动作</li>
-<li>价值函数（评判者）用于评估动作者所完成的动作<ul>
+<li>价值函数（评判者）用于评估动作者所完成的动作
+<ul>
 <li>TD error: $\delta_t=r_{t+1}+\gamma V(S_{t+1})-V(S_t)$</li>
 <li>Preference: $p(s_t,a_t)\leftarrow p(s_t,a_t)+\beta\delta_t$</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>Q-learning<ul>
+<li>Q-learning
+<ul>
 <li>价值迭代（Off-policy）的时间差分版</li>
 <li>基于回报值和 Q-value 函数，递增估计动作的 Q 值</li>
 </ul>
 </li>
-<li>更新规则是一种时间差分学习的变体，采用 Q 值与内置的下个状态 Q 值得最大运算符：<ul>
+<li>更新规则是一种时间差分学习的变体，采用 Q 值与内置的下个状态 Q 值得最大运算符：
+<ul>
 <li>$Q(s_t,a_t)=\sum_aT(s_t,a_t,s_{t+1})[R(s_t,a_t,s_{t+1})+\gamma\max_{a_{t+1}}Q(s_{t+1},a_{t+1})]$</li>
 </ul>
 </li>
 <li>学习到基于样本的，东顾总-值函数 Q</li>
 </ul>
 </li>
-<li>新算法<ul>
+<li>新算法
+<ul>
 <li>Deep Q-Network</li>
 <li>Deterministic Policy Gradients (DPG)</li>
 <li>Asynchronous Advantage Actor-Critic (A3C)</li>
@@ -2189,8 +2329,10 @@
 <li>Neural Episodic Control (NEC) 神经情景控制</li>
 </ul>
 </li>
-<li>应用<ul>
-<li>机器人<ul>
+<li>应用
+<ul>
+<li>机器人
+<ul>
 <li>手臂</li>
 <li>导航</li>
 </ul>
@@ -2199,29 +2341,36 @@
 </ul>
 </li>
 </ul>
-<h3 id="11-4-Other-Learning-Paradigms"><a href="#11-4-Other-Learning-Paradigms" class="headerlink" title="11.4 Other Learning Paradigms"></a>11.4 Other Learning Paradigms</h3><ul>
-<li>Ensemble learning 集成学习<ul>
+<h3>11.4 Other Learning Paradigms</h3>
+<ul>
+<li>Ensemble learning 集成学习
+<ul>
 <li>多个弱学习器组成一个强学习器</li>
 </ul>
 </li>
-<li>Learning to learn 学会学习<ul>
+<li>Learning to learn 学会学习
+<ul>
 <li>基于先前的经验学习归纳偏差</li>
 </ul>
 </li>
-<li>Transfer learning 迁移学习<ul>
+<li>Transfer learning 迁移学习
+<ul>
 <li>将已有的知识用于不同但相关的问题</li>
 </ul>
 </li>
-<li>Adversarial learning 对抗式学习<ul>
+<li>Adversarial learning 对抗式学习
+<ul>
 <li>以一种对抗性方式（即零和博弈）来生成模仿某种分布的数据</li>
 </ul>
 </li>
-<li>Collaborative learning 协同式学习<ul>
+<li>Collaborative learning 协同式学习
+<ul>
 <li>以某种协同式（如非零和博弈，双赢）来得到所期待的输出结果</li>
 </ul>
 </li>
 </ul>
-<h2 id="Ch12-Models"><a href="#Ch12-Models" class="headerlink" title="Ch12 Models"></a>Ch12 Models</h2><ul>
+<h2>Ch12 Models</h2>
+<ul>
 <li>可以处理完成一个学习任务的方法</li>
 <li>属于算法层面而不是数据层面的模型</li>
 <li>机器学习的效果在很大程度上取决于解决该学习任务时所选用的方法</li>
@@ -2262,14 +2411,19 @@
 </tr>
 </tbody>
 </table>
-<h3 id="12-1-Probabilistic-Models"><a href="#12-1-Probabilistic-Models" class="headerlink" title="12.1 Probabilistic Models"></a>12.1 Probabilistic Models</h3><ul>
-<li><p>概率论研究不确定性问题</p>
+<h3>12.1 Probabilistic Models</h3>
+<ul>
+<li>
+<p>概率论研究不确定性问题</p>
 </li>
-<li><p>概率模型是采用概率论来表示所有不确定的形式</p>
+<li>
+<p>概率模型是采用概率论来表示所有不确定的形式</p>
 </li>
-<li><p>贝叶斯规则允许我们推断未知量，适配我们的模型，做出预测并从数据中学习</p>
+<li>
+<p>贝叶斯规则允许我们推断未知量，适配我们的模型，做出预测并从数据中学习</p>
 </li>
-<li><p>典型方法</p>
+<li>
+<p>典型方法</p>
 <ul>
 <li>朴素贝叶斯和贝叶斯网络</li>
 <li>概率规划</li>
@@ -2277,55 +2431,80 @@
 <li>隐马尔可夫模型</li>
 </ul>
 </li>
-<li><p>Often the goal of machine learning is to determine the probability of an event, e.g. $P(a\ person\ is\ at\ risk\ for\ a\ disease)$</p>
+<li>
+<p>Often the goal of machine learning is to determine the probability of an event, e.g. $P(a\ person\ is\ at\ risk\ for\ a\ disease)$</p>
 </li>
-<li><p>两个主要学派</p>
+<li>
+<p>两个主要学派</p>
 <ul>
 <li>频率学派</li>
-<li>贝叶斯学派<ul>
+<li>贝叶斯学派
+<ul>
 <li>给定一组特定数据，概率对事件的不确定性进行量化，旨在最接近事实真值</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>Bayes Rule</p>
+<li>
+<p>Bayes Rule</p>
 <ul>
-<li><p>告诉我们如何从数据推断假设</p>
+<li>
+<p>告诉我们如何从数据推断假设</p>
 </li>
-<li><p>学习和预测可以看作是推理的形式</p>
+<li>
+<p>学习和预测可以看作是推理的形式</p>
 </li>
-<li><p>推断未知的量 =&gt; 适配我们的模型 =&gt; 做出预测 =&gt; 从数据中学习</p>
+<li>
+<p>推断未知的量 =&gt; 适配我们的模型 =&gt; 做出预测 =&gt; 从数据中学习</p>
 </li>
-<li><p>$$<br>P(hypothesis|data)=\frac{P(data|hypothesis)P(hypothesis)}{P(data)}<br>$$</p>
+<li>
+<p>$$
+P(hypothesis|data)=\frac{P(data|hypothesis)P(hypothesis)}{P(data)}
+$$</p>
 </li>
 </ul>
 </li>
-<li><p>Bayesian ML</p>
+<li>
+<p>Bayesian ML</p>
 <ul>
-<li><p>任何事物都遵循以下两规则</p>
+<li>
+<p>任何事物都遵循以下两规则</p>
 <ul>
 <li>求和规则：$P(x)=\sum_yP(x,y)$</li>
 <li>乘积规则：$P(x,y)=P(x)P(y|x)$</li>
 </ul>
 </li>
-<li><p>$P(\theta|\lambda,m)$: posterior probability of given data $\lambda$ 后验概率</p>
+<li>
+<p>$P(\theta|\lambda,m)$: posterior probability of given data $\lambda$ 后验概率</p>
 </li>
-<li><p>$P(\lambda|\theta,m)$: likelihood of parameters $\theta$ in model m</p>
+<li>
+<p>$P(\lambda|\theta,m)$: likelihood of parameters $\theta$ in model m</p>
 </li>
-<li><p>$P(\theta|m)$: prior probability of $\theta$ 先验</p>
+<li>
+<p>$P(\theta|m)$: prior probability of $\theta$ 先验</p>
 </li>
-<li><p>$P(\lambda|m)$: evidence </p>
+<li>
+<p>$P(\lambda|m)$: evidence</p>
 </li>
-<li><p>$$<br>P(\theta|\lambda,m)=\frac{P(\lambda|\theta,m)P(\theta|m)}{P(\lambda|m)}<br>$$</p>
+<li>
+<p>$$
+P(\theta|\lambda,m)=\frac{P(\lambda|\theta,m)P(\theta|m)}{P(\lambda|m)}
+$$</p>
 </li>
-<li><p>$$<br>posterior=\frac{likelihood\times prior}{evidence}<br>$$</p>
+<li>
+<p>$$
+posterior=\frac{likelihood\times prior}{evidence}
+$$</p>
 </li>
 </ul>
 </li>
-<li><p>参数方法/非参数方法</p>
+<li>
+<p>参数方法/非参数方法</p>
 <ul>
-<li>参数方法<ul>
-<li>设有限参数集 $\theta$ ，给定该参数，则特征预测 $x$ 独立于观测数据 $D$，即<ul>
+<li>参数方法
+<ul>
+<li>设有限参数集 $\theta$ ，给定该参数，则特征预测 $x$ 独立于观测数据 $D$，即
+<ul>
 <li>$P(x|\theta,\lambda)=P(x|\theta)$</li>
 </ul>
 </li>
@@ -2334,7 +2513,8 @@
 <li>故参数方法不是很灵活</li>
 </ul>
 </li>
-<li>非参数方法<ul>
+<li>非参数方法
+<ul>
 <li>设数据分布不能用这样一个有限参数集来定义，但通常能够由假设的无限维度 $\theta$ 来定义。通常我们把 $\theta$ 看作是一个函数</li>
 <li>$\theta$ 可以捕捉数据 $D$ 的信息量可以随着数据量的增长而增长</li>
 <li>故而更加灵活</li>
@@ -2374,26 +2554,32 @@
 </tr>
 </tbody>
 </table>
-<h3 id="12-2-Geometric-Models"><a href="#12-2-Geometric-Models" class="headerlink" title="12.2 Geometric Models"></a>12.2 Geometric Models</h3><ul>
-<li>直接在实例空间构建，空间可以被认为是几何的概念，如：<ul>
+<h3>12.2 Geometric Models</h3>
+<ul>
+<li>直接在实例空间构建，空间可以被认为是几何的概念，如：
+<ul>
 <li>欧氏几何：线，面，欧式距离</li>
 <li>黎曼几何：流形，黎曼距离</li>
 </ul>
 </li>
 <li>二维/三维的模型易于可视化</li>
-<li>线和面<ul>
+<li>线和面
+<ul>
 <li>使用线或平面这样的几何模型来构建一些机器学习算法</li>
 </ul>
 </li>
-<li>流形<ul>
+<li>流形
+<ul>
 <li>一种拓扑空间，其每个点附近存在近似的欧几里得空间</li>
 <li>更精确地说，一个 $n$ 微流形的每个点都是一个临近点，它与维度为 $n$ 的欧几里得空间同胚。</li>
 <li>高维输入数据中可以发现其固有的低维特性</li>
-<li>低维流形假设<ul>
+<li>低维流形假设
+<ul>
 <li>高维输入数据依附于一个低维流形</li>
 </ul>
 </li>
-<li>典型的流形学习算法<ul>
+<li>典型的流形学习算法
+<ul>
 <li>Isomap (Isometric mapping 等距映射)</li>
 <li>LLE (Locally Linear Embeddings 局部线性嵌入)</li>
 <li>LE (Laplacian Eigenmaps 拉普拉斯特征映射)</li>
@@ -2403,9 +2589,11 @@
 </li>
 </ul>
 </li>
-<li>Isomap (Isometric mapping) 等距映射<ul>
+<li>Isomap (Isometric mapping) 等距映射
+<ul>
 <li>保留数据之间的测地线距离而不是欧几里得距离</li>
-<li>算法流程<ul>
+<li>算法流程
+<ul>
 <li>确定每个点的相邻点</li>
 <li>构建一个邻接图</li>
 <li>计算两点之间的最短距离</li>
@@ -2414,16 +2602,19 @@
 </li>
 </ul>
 </li>
-<li>LLE (Locally Linear Embedding) 局部线性嵌入<ul>
+<li>LLE (Locally Linear Embedding) 局部线性嵌入
+<ul>
 <li>通过在小邻域中找到最佳线性重构，将数据点嵌入在低维空间中</li>
 <li>计算每个点的重建权重，然后通过求解特征值问题对嵌入成本进行最小化</li>
 </ul>
 </li>
-<li>LE (Laplacian Eigenmaps) 拉普拉斯特征映射<ul>
+<li>LE (Laplacian Eigenmaps) 拉普拉斯特征映射
+<ul>
 <li>Le 重申在非线性映射问题作为一种图的顶点嵌入，并且采用图拉普拉斯来生成一个平滑的映射。</li>
 </ul>
 </li>
-<li>典型的流形学习应用<ul>
+<li>典型的流形学习应用
+<ul>
 <li>图像处理</li>
 <li>基因表达图谱</li>
 <li>手写体识别</li>
@@ -2431,25 +2622,31 @@
 </ul>
 </li>
 </ul>
-<h3 id="12-3-Logical-Models"><a href="#12-3-Logical-Models" class="headerlink" title="12.3 Logical Models"></a>12.3 Logical Models</h3><ul>
+<h3>12.3 Logical Models</h3>
+<ul>
 <li>易于解释的逻辑表达式，易于转换成人类能够理解的规则</li>
-<li>典型的逻辑模型<ul>
+<li>典型的逻辑模型
+<ul>
 <li>一阶逻辑</li>
 <li>关联规则</li>
 <li>决策树</li>
 </ul>
 </li>
-<li>关联规则<ul>
+<li>关联规则
+<ul>
 <li>是一种用于在大型数据库中变量之间发现有趣关系的方法</li>
 <li>采用差异趣味性度量方式，旨在识别数据库中发现的强规则</li>
-<li>可用于发现超市产品之间的规律，称之为购物篮分析<ul>
+<li>可用于发现超市产品之间的规律，称之为购物篮分析
+<ul>
 <li>${onions,potatoes}\Rightarrow {burger}$</li>
 </ul>
 </li>
-<li>Def.<ul>
-<li>$I={i_1,i_2,…,i_n}$: a set of n attributes called items</li>
-<li>$T={t_1,t_2,…,t_m}$: a set of transactions called transactions database.</li>
-<li>Each $t_i$ is a subset of the items in $I$, i.e.,<ul>
+<li>Def.
+<ul>
+<li>$I={i_1,i_2,...,i_n}$: a set of n attributes called items</li>
+<li>$T={t_1,t_2,...,t_m}$: a set of transactions called transactions database.</li>
+<li>Each $t_i$ is a subset of the items in $I$, i.e.,
+<ul>
 <li>$t_i\sube I$</li>
 </ul>
 </li>
@@ -2458,36 +2655,42 @@
 </li>
 </ul>
 </li>
-<li>决策树<ul>
+<li>决策树
+<ul>
 <li>使用决策树作为预测模型，将项的观察结果映射到关于项的目标值</li>
 <li>目标变量可以取一组有限值得树模型称为分类树；其中叶节点表示类标签，分支表示通往这些类标签的特征连接。</li>
 </ul>
 </li>
 </ul>
-<h3 id="12-4-Networked-Models"><a href="#12-4-Networked-Models" class="headerlink" title="12.4 Networked Models"></a>12.4 Networked Models</h3><ul>
+<h3>12.4 Networked Models</h3>
+<ul>
 <li>人工神经网络 (ANN)</li>
 <li>是人脑的一种人工表征，试图模拟人类的学习过程</li>
 <li>通过互联的“神经元”构建一个系统，神经元之间相互发送消息</li>
 <li>神经元之间的连接具有数值权重，可以通过经验调整，使 ANN 适应输入并且能够学习。</li>
-<li>前馈神经网络<ul>
+<li>前馈神经网络
+<ul>
 <li>信息从输入节点仅仅以一个方向即前进方向穿过隐藏层并抵达输出结点</li>
 </ul>
 </li>
-<li>循环神经网络<ul>
+<li>循环神经网络
+<ul>
 <li>连接形成有向循环</li>
 <li>建立网络的内部状态，使之展现动态的时间特性</li>
 </ul>
 </li>
-<li>DNN<ul>
+<li>DNN
+<ul>
 <li>使用许多层非线性处理单元，用于特征提取和转换</li>
 <li>能够学习数据的多层特征或表征。高层特征来自于底层特征</li>
 <li>成为更广泛的机器学习领域的一部分：学习数据表征</li>
 <li>学习多层级表征，对应于不同的抽象层级；这种层级形成了一种概念的层次结构</li>
-<li>代表性的DNN<ul>
+<li>代表性的DNN
+<ul>
 <li>Deep belief networks (DBN) 深度信念网络</li>
 <li>Convolutional neural networks (CNN) 卷积神经网络</li>
 <li>Deep Boltzmann machines (DBM) 深度波兹曼机</li>
-<li>Recurrent neural networks (RNN) 循环网络 </li>
+<li>Recurrent neural networks (RNN) 循环网络</li>
 <li>Long short-term memory (LSTM) 长短期记忆</li>
 <li>Auto-Encoders 自动编码器</li>
 <li>Generative Adversarial Network (GAN) 生成对抗网络</li>
@@ -2495,26 +2698,31 @@
 </li>
 </ul>
 </li>
-<li>CNN<ul>
+<li>CNN
+<ul>
 <li>前馈式ANN，使用至少一个卷积层来代替一般的矩阵乘法</li>
-<li>四个关键思想<ul>
+<li>四个关键思想
+<ul>
 <li>local connections (convolution) 局部连接（卷积）</li>
 <li>shared weights 共享权值</li>
 <li>pooling (sampling) 池化（采样）</li>
 <li>many layers</li>
 </ul>
 </li>
-<li>conv layer<ul>
+<li>conv layer
+<ul>
 <li>包含一组学习滤波器，每个滤波器对输入的宽和高进行卷积，计算滤波器和输入之间的点积，生成一个该滤波器的二维活动图</li>
 </ul>
 </li>
-<li>pooling layer<ul>
+<li>pooling layer
+<ul>
 <li>是一种非线性下采样，将输入图像分割成一组不重叠的矩形，对每个这样的子区域，再产出其最大值。</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>GAN<ul>
+<li>GAN
+<ul>
 <li>2014 Ian Goodfellow</li>
 <li>Adversarial Network, inspired by Adversarial game</li>
 <li>Generator maps from a latent space to a particular data distribution of interest</li>

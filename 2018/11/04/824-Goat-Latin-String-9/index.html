@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="问题描述说羊语 实现 建立一个元音集 把字符串分割成单词 检查每个单词是否以元音开头 不是的话首字母后置123456789unordered_set&amp;lt;char&amp;gt; vowel(&amp;#123;&apos;a&apos;, &apos;e&apos;, &apos;i&apos;, &apos;o&apos;, &apos;u&apos;, &apos;A&apos;, &apos;E&apos;, &apos;I&apos;, &apos;O&apos;, &apos;U&apos;&amp;#125;);istringstream iss(S);string res, w;int i = 0,">
+<meta name="description" content="问题描述 说羊语 实现  建立一个元音集 把字符串分割成单词 检查每个单词是否以元音开头 不是的话首字母后置 123456789unordered_set&amp;lt;char&amp;gt; vowel(&amp;#123;&apos;a&apos;, &apos;e&apos;, &apos;i&apos;, &apos;o&apos;, &apos;u&apos;, &apos;A&apos;, &apos;E&apos;, &apos;I&apos;, &apos;O&apos;, &apos;U&apos;&amp;#125;);istringstream iss(S);string res, w;int i =">
 <meta name="keywords" content="LeetCode,String">
 <meta property="og:type" content="article">
 <meta property="og:title" content="824. Goat Latin-String-9">
 <meta property="og:url" content="http://yoursite.com/2018/11/04/824-Goat-Latin-String-9/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="问题描述说羊语 实现 建立一个元音集 把字符串分割成单词 检查每个单词是否以元音开头 不是的话首字母后置123456789unordered_set&amp;lt;char&amp;gt; vowel(&amp;#123;&apos;a&apos;, &apos;e&apos;, &apos;i&apos;, &apos;o&apos;, &apos;u&apos;, &apos;A&apos;, &apos;E&apos;, &apos;I&apos;, &apos;O&apos;, &apos;U&apos;&amp;#125;);istringstream iss(S);string res, w;int i = 0,">
+<meta property="og:description" content="问题描述 说羊语 实现  建立一个元音集 把字符串分割成单词 检查每个单词是否以元音开头 不是的话首字母后置 123456789unordered_set&amp;lt;char&amp;gt; vowel(&amp;#123;&apos;a&apos;, &apos;e&apos;, &apos;i&apos;, &apos;o&apos;, &apos;u&apos;, &apos;A&apos;, &apos;E&apos;, &apos;I&apos;, &apos;O&apos;, &apos;U&apos;&amp;#125;);istringstream iss(S);string res, w;int i =">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-01-26T14:44:30.107Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="824. Goat Latin-String-9">
-<meta name="twitter:description" content="问题描述说羊语 实现 建立一个元音集 把字符串分割成单词 检查每个单词是否以元音开头 不是的话首字母后置123456789unordered_set&amp;lt;char&amp;gt; vowel(&amp;#123;&apos;a&apos;, &apos;e&apos;, &apos;i&apos;, &apos;o&apos;, &apos;u&apos;, &apos;A&apos;, &apos;E&apos;, &apos;I&apos;, &apos;O&apos;, &apos;U&apos;&amp;#125;);istringstream iss(S);string res, w;int i = 0,">
+<meta name="twitter:description" content="问题描述 说羊语 实现  建立一个元音集 把字符串分割成单词 检查每个单词是否以元音开头 不是的话首字母后置 123456789unordered_set&amp;lt;char&amp;gt; vowel(&amp;#123;&apos;a&apos;, &apos;e&apos;, &apos;i&apos;, &apos;o&apos;, &apos;u&apos;, &apos;A&apos;, &apos;E&apos;, &apos;I&apos;, &apos;O&apos;, &apos;U&apos;&amp;#125;);istringstream iss(S);string res, w;int i =">
 
 
 
@@ -397,12 +397,15 @@
       
 
       
-        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>说羊语</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul>
+        <h3>问题描述</h3>
+<p>说羊语</p>
+<h3>实现</h3>
+<ul>
 <li>建立一个元音集</li>
 <li>把字符串分割成单词</li>
 <li>检查每个单词是否以元音开头</li>
-<li>不是的话首字母后置<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">unordered_set</span>&lt;<span class="keyword">char</span>&gt; vowel(&#123;<span class="string">'a'</span>, <span class="string">'e'</span>, <span class="string">'i'</span>, <span class="string">'o'</span>, <span class="string">'u'</span>, <span class="string">'A'</span>, <span class="string">'E'</span>, <span class="string">'I'</span>, <span class="string">'O'</span>, <span class="string">'U'</span>&#125;);</span><br><span class="line"><span class="function"><span class="built_in">istringstream</span> <span class="title">iss</span><span class="params">(S)</span></span>;</span><br><span class="line"><span class="built_in">string</span> res, w;</span><br><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>, j;</span><br><span class="line"><span class="keyword">while</span>(iss &gt;&gt; w)&#123;</span><br><span class="line">    res += <span class="string">' '</span> + (vowel.count(w[<span class="number">0</span>]) == <span class="number">1</span> ? w : w.substr(<span class="number">1</span>) + w[<span class="number">0</span>] + <span class="string">"ma"</span>);</span><br><span class="line">    <span class="keyword">for</span>(j = <span class="number">0</span>, ++i; j &lt; i; j++) res += <span class="string">"a"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> res.substr(<span class="number">1</span>);</span><br></pre></td></tr></table></figure></li>
+<li>不是的话首字母后置
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">unordered_set</span>&lt;<span class="keyword">char</span>&gt; vowel(&#123;<span class="string">'a'</span>, <span class="string">'e'</span>, <span class="string">'i'</span>, <span class="string">'o'</span>, <span class="string">'u'</span>, <span class="string">'A'</span>, <span class="string">'E'</span>, <span class="string">'I'</span>, <span class="string">'O'</span>, <span class="string">'U'</span>&#125;);</span><br><span class="line"><span class="function"><span class="built_in">istringstream</span> <span class="title">iss</span><span class="params">(S)</span></span>;</span><br><span class="line"><span class="built_in">string</span> res, w;</span><br><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>, j;</span><br><span class="line"><span class="keyword">while</span>(iss &gt;&gt; w)&#123;</span><br><span class="line">    res += <span class="string">' '</span> + (vowel.count(w[<span class="number">0</span>]) == <span class="number">1</span> ? w : w.substr(<span class="number">1</span>) + w[<span class="number">0</span>] + <span class="string">"ma"</span>);</span><br><span class="line">    <span class="keyword">for</span>(j = <span class="number">0</span>, ++i; j &lt; i; j++) res += <span class="string">"a"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> res.substr(<span class="number">1</span>);</span><br></pre></td></tr></table></figure></li>
 </ul>
 
       
@@ -594,7 +597,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a></li></ol></div>
             
 
           </div>

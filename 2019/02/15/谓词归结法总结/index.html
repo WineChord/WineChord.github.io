@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="人工智能导论 第四章 第四节 当一个结论成立时，归结法可以证明该结论成立 而，证明 $(\exist x)W(x)$ 成立固然重要，但有时更关心使得 $W(x)$ 成立的那个 $x$ 是什么，即，希望得到问题的答案 基于归结的问答就是利用归结方法获得问题答案的方法 基本方法： 用归结法证明问题的正确性，给出归结树 根据该归结树构造一个修改证明树，构造方法： 将结论的否定对应的子句 $S1$ 再次求">
+<meta name="description" content="人工智能导论 第四章 第四节  当一个结论成立时，归结法可以证明该结论成立 而，证明 $(\exist x)W(x)$ 成立固然重要，但有时更关心使得 $W(x)$ 成立的那个 $x$ 是什么，即，希望得到问题的答案 基于归结的问答就是利用归结方法获得问题答案的方法 基本方法：  用归结法证明问题的正确性，给出归结树 根据该归结树构造一个修改证明树，构造方法：  将结论的否定对应的子句 $S1$">
 <meta name="keywords" content="人工智能">
 <meta property="og:type" content="article">
 <meta property="og:title" content="谓词归结法总结">
 <meta property="og:url" content="http://yoursite.com/2019/02/15/谓词归结法总结/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="人工智能导论 第四章 第四节 当一个结论成立时，归结法可以证明该结论成立 而，证明 $(\exist x)W(x)$ 成立固然重要，但有时更关心使得 $W(x)$ 成立的那个 $x$ 是什么，即，希望得到问题的答案 基于归结的问答就是利用归结方法获得问题答案的方法 基本方法： 用归结法证明问题的正确性，给出归结树 根据该归结树构造一个修改证明树，构造方法： 将结论的否定对应的子句 $S1$ 再次求">
+<meta property="og:description" content="人工智能导论 第四章 第四节  当一个结论成立时，归结法可以证明该结论成立 而，证明 $(\exist x)W(x)$ 成立固然重要，但有时更关心使得 $W(x)$ 成立的那个 $x$ 是什么，即，希望得到问题的答案 基于归结的问答就是利用归结方法获得问题答案的方法 基本方法：  用归结法证明问题的正确性，给出归结树 根据该归结树构造一个修改证明树，构造方法：  将结论的否定对应的子句 $S1$">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/rl4.8.gif">
 <meta property="og:image" content="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/rl4.9.gif">
 <meta property="og:updated_time" content="2019-02-16T12:13:28.555Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="谓词归结法总结">
-<meta name="twitter:description" content="人工智能导论 第四章 第四节 当一个结论成立时，归结法可以证明该结论成立 而，证明 $(\exist x)W(x)$ 成立固然重要，但有时更关心使得 $W(x)$ 成立的那个 $x$ 是什么，即，希望得到问题的答案 基于归结的问答就是利用归结方法获得问题答案的方法 基本方法： 用归结法证明问题的正确性，给出归结树 根据该归结树构造一个修改证明树，构造方法： 将结论的否定对应的子句 $S1$ 再次求">
+<meta name="twitter:description" content="人工智能导论 第四章 第四节  当一个结论成立时，归结法可以证明该结论成立 而，证明 $(\exist x)W(x)$ 成立固然重要，但有时更关心使得 $W(x)$ 成立的那个 $x$ 是什么，即，希望得到问题的答案 基于归结的问答就是利用归结方法获得问题答案的方法 基本方法：  用归结法证明问题的正确性，给出归结树 根据该归结树构造一个修改证明树，构造方法：  将结论的否定对应的子句 $S1$">
 <meta name="twitter:image" content="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/rl4.8.gif">
 
 
@@ -378,16 +378,19 @@
       
 
       
-        <h2 id="人工智能导论-第四章-第四节"><a href="#人工智能导论-第四章-第四节" class="headerlink" title="人工智能导论 第四章 第四节"></a>人工智能导论 第四章 第四节</h2><ul>
+        <h2>人工智能导论 第四章 第四节</h2>
+<ul>
 <li>当一个结论成立时，归结法可以证明该结论成立</li>
 <li>而，证明 $(\exist x)W(x)$ 成立固然重要，但有时更关心使得 $W(x)$ 成立的那个 $x$ 是什么，即，希望得到问题的答案</li>
 <li>基于归结的问答就是利用归结方法获得问题答案的方法</li>
-<li>基本方法：<ul>
+<li>基本方法：
+<ul>
 <li>用归结法证明问题的正确性，给出归结树</li>
-<li>根据该归结树构造一个修改证明树，构造方法：<ul>
-<li>将结论的否定对应的子句 $S1$ 再次求反得到一个新子句 $S2$ </li>
-<li>$S1$ 和 $S2$ 构造一个重言式 $S1 \or S2$ </li>
-<li>用该重言式代替归结树中的子句 $S1$ </li>
+<li>根据该归结树构造一个修改证明树，构造方法：
+<ul>
+<li>将结论的否定对应的子句 $S1$ 再次求反得到一个新子句 $S2$</li>
+<li>$S1$ 和 $S2$ 构造一个重言式 $S1 \or S2$</li>
+<li>用该重言式代替归结树中的子句 $S1$</li>
 <li>最后在归结树得到空子句的地方得到的子句就是问题的答案</li>
 </ul>
 </li>
@@ -396,18 +399,20 @@
 </ul>
 <hr>
 <ul>
-<li>归结反演系统主要用来解决证明问题，即给定公式集 $F0$ ，要求证明存在量词量化的目标公式 $(x)W(x)$ </li>
+<li>归结反演系统主要用来解决证明问题，即给定公式集 $F0$ ，要求证明存在量词量化的目标公式 $(x)W(x)$</li>
 <li>对于直接回答 $x=A$ 时 $W(A)$ 是否为真这种问题，可以直接使用归结反演系统证明</li>
 <li>而对于 $x=?$ 时 $W(x)$ 为真或填空类型的问题，则应先证明一个与回答问题语句中提问项有对应匹配关系的一般语句，然后再找某一个具体的匹配值，该值就给出问题的回答。</li>
 <li>这种要求产生满足条件的 $x$ 的例子需要构造性的证明方法，即如果能给出对问题的构造性证明过程，则可给出具体问题的答案。</li>
 </ul>
-<h3 id="提取回答的方法"><a href="#提取回答的方法" class="headerlink" title="提取回答的方法"></a>提取回答的方法</h3><ul>
-<li>已知条件：”John 在什么地方，Fido 就在什么地方”，”John 在学校”</li>
-<li>问：”Fido 在什么地方？”</li>
+<h3>提取回答的方法</h3>
+<ul>
+<li>已知条件：&quot;John 在什么地方，Fido 就在什么地方&quot;，&quot;John 在学校&quot;</li>
+<li>问：&quot;Fido 在什么地方？&quot;</li>
 <li>首先用归结法证明 Fido 确实在一个地方，然后再回答出 Fido 在什么地方</li>
-<li>“If Fido goes wherever John goes and if John is at school, where is Fido?”</li>
+<li>&quot;If Fido goes wherever John goes and if John is at school, where is Fido?&quot;</li>
 <li>分析：该问题给出两个已知事实和一个询问，该询问答案应从事实出发演绎得到</li>
-<li>先将问题用谓词逻辑公式表示：<ul>
+<li>先将问题用谓词逻辑公式表示：
+<ul>
 <li>前提公式集：$(\forall x)(AT(John,x)\rightarrow AT(Fido,x))$ ，$AT(John,School)$</li>
 <li>目标公式：$(\exist x)AT(Fido,x)$</li>
 </ul>
@@ -416,7 +421,7 @@
 <li>然后找出一个 $x$ 的例子，如此完成回答</li>
 <li>关键：将询问表达为一个有存在量词约束的目标公式，如此便容易用归结法给出证明，反演树如图（courtesy of 人工智能导论课件）：</li>
 </ul>
-<p><img src="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/rl4.8.gif" alt="反演树"> </p>
+<p><img src="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/rl4.8.gif" alt="反演树"></p>
 <ol>
 <li>用一个重言式来取代目标公式的否定式这个子句，该重言式为 $\sim AT(Fido,x)\or AT(Fido,x)$</li>
 <li>按反演树的构造进行归结，给出重言式替代目标否定式子句后的证明树，此时根子句不为空，称此证明树为修改证明树，修改证明树如图（courtesy of 人工智能导论课件）：</li>
@@ -618,7 +623,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#人工智能导论-第四章-第四节"><span class="nav-number">1.</span> <span class="nav-text">人工智能导论 第四章 第四节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#提取回答的方法"><span class="nav-number">1.1.</span> <span class="nav-text">提取回答的方法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">人工智能导论 第四章 第四节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">提取回答的方法</span></a></li></ol></li></ol></div>
             
 
           </div>

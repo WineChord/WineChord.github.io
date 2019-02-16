@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="题目描述 一条轨道上初始有 $n$ 个彩色珠子，其中任意三个相邻的珠子不会完全同色。 可以发射珠子到轨道上，一旦有三个或更多同色的珠子相邻，就会立即消失。可发生连锁反应 请计算一系列操作之后的珠子序列  输入输出 输入： 第 $1$ 行：由 ‘A’-‘Z’ 组成的字符串，表示初始珠子序列 第 $2$ 行：$m$ 表示共有 $m$ 次操作 以下 $m$ 行：每行代表一次操作，每次操作为 $k\ \S">
+<meta name="description" content="题目描述  一条轨道上初始有 $n$ 个彩色珠子，其中任意三个相邻的珠子不会完全同色。 可以发射珠子到轨道上，一旦有三个或更多同色的珠子相邻，就会立即消失。可发生连锁反应 请计算一系列操作之后的珠子序列  输入输出  输入：  第 $1$ 行：由 &apos;A&apos;-&apos;Z&apos; 组成的字符串，表示初始珠子序列 第 $2$ 行：$m$ 表示共有 $m$ 次操作 以下 $m$ 行：每行代表一次操作，每次操作为 $k\">
 <meta name="keywords" content="分块数组">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CST2018 1-5 Zuma">
 <meta property="og:url" content="http://yoursite.com/2019/02/09/CST2018-1-5-Zuma/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="题目描述 一条轨道上初始有 $n$ 个彩色珠子，其中任意三个相邻的珠子不会完全同色。 可以发射珠子到轨道上，一旦有三个或更多同色的珠子相邻，就会立即消失。可发生连锁反应 请计算一系列操作之后的珠子序列  输入输出 输入： 第 $1$ 行：由 ‘A’-‘Z’ 组成的字符串，表示初始珠子序列 第 $2$ 行：$m$ 表示共有 $m$ 次操作 以下 $m$ 行：每行代表一次操作，每次操作为 $k\ \S">
+<meta property="og:description" content="题目描述  一条轨道上初始有 $n$ 个彩色珠子，其中任意三个相邻的珠子不会完全同色。 可以发射珠子到轨道上，一旦有三个或更多同色的珠子相邻，就会立即消失。可发生连锁反应 请计算一系列操作之后的珠子序列  输入输出  输入：  第 $1$ 行：由 &apos;A&apos;-&apos;Z&apos; 组成的字符串，表示初始珠子序列 第 $2$ 行：$m$ 表示共有 $m$ 次操作 以下 $m$ 行：每行代表一次操作，每次操作为 $k\">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-02-10T01:22:13.011Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CST2018 1-5 Zuma">
-<meta name="twitter:description" content="题目描述 一条轨道上初始有 $n$ 个彩色珠子，其中任意三个相邻的珠子不会完全同色。 可以发射珠子到轨道上，一旦有三个或更多同色的珠子相邻，就会立即消失。可发生连锁反应 请计算一系列操作之后的珠子序列  输入输出 输入： 第 $1$ 行：由 ‘A’-‘Z’ 组成的字符串，表示初始珠子序列 第 $2$ 行：$m$ 表示共有 $m$ 次操作 以下 $m$ 行：每行代表一次操作，每次操作为 $k\ \S">
+<meta name="twitter:description" content="题目描述  一条轨道上初始有 $n$ 个彩色珠子，其中任意三个相邻的珠子不会完全同色。 可以发射珠子到轨道上，一旦有三个或更多同色的珠子相邻，就会立即消失。可发生连锁反应 请计算一系列操作之后的珠子序列  输入输出  输入：  第 $1$ 行：由 &apos;A&apos;-&apos;Z&apos; 组成的字符串，表示初始珠子序列 第 $2$ 行：$m$ 表示共有 $m$ 次操作 以下 $m$ 行：每行代表一次操作，每次操作为 $k\">
 
 
 
@@ -397,47 +397,68 @@
       
 
       
-        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><ul>
+        <h2>题目描述</h2>
+<ul>
 <li>一条轨道上初始有 $n$ 个彩色珠子，其中任意三个相邻的珠子不会完全同色。</li>
 <li>可以发射珠子到轨道上，一旦有三个或更多同色的珠子相邻，就会立即消失。可发生连锁反应</li>
 <li>请计算一系列操作之后的珠子序列</li>
 </ul>
-<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ul>
-<li>输入：<ul>
-<li>第 $1$ 行：由 ‘A’-‘Z’ 组成的字符串，表示初始珠子序列</li>
+<h2>输入输出</h2>
+<ul>
+<li>输入：
+<ul>
+<li>第 $1$ 行：由 'A'-'Z' 组成的字符串，表示初始珠子序列</li>
 <li>第 $2$ 行：$m$ 表示共有 $m$ 次操作</li>
 <li>以下 $m$ 行：每行代表一次操作，每次操作为 $k\ \Sigma$ ，其中 $k\in[0,b]$ 表示新珠子嵌入之后在轨道上的位序，$\Sigma$ 表示新珠子的颜色</li>
 </ul>
 </li>
-<li>输出：<ul>
+<li>输出：
+<ul>
 <li>共 $1$ 行：给出所有操作之后轨道上的珠子序列</li>
 <li>若没有珠子，则输出空行（一个换行符）</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">ACCBA</span><br><span class="line">5</span><br><span class="line">1 B</span><br><span class="line">0 A</span><br><span class="line">2 B</span><br><span class="line">4 C</span><br><span class="line">0 A</span><br><span class="line">output:</span><br><span class="line">A</span><br></pre></td></tr></table></figure>
-<h2 id="数据范围及限制"><a href="#数据范围及限制" class="headerlink" title="数据范围及限制"></a>数据范围及限制</h2><ul>
-<li>$0\le n\le 500,000$</li>
-<li>$0\le m\le 500,000$</li>
-<li><p>输入保证位置合法</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">ACCBA</span><br><span class="line">5</span><br><span class="line">1 B</span><br><span class="line">0 A</span><br><span class="line">2 B</span><br><span class="line">4 C</span><br><span class="line">0 A</span><br><span class="line">output:</span><br><span class="line">A</span><br></pre></td></tr></table></figure></p>
+<h2>数据范围及限制</h2>
+<ul>
+<li>
+<p>$0\le n\le 500,000$</p>
 </li>
-<li><p>时间：2 sec</p>
+<li>
+<p>$0\le m\le 500,000$</p>
 </li>
-<li>空间：256 MB</li>
-</ul>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><ul>
-<li><p>本题字母、数字混合输入，且初始序列可能为空，请使用足够鲁棒的读入方式。</p>
+<li>
+<p>输入保证位置合法</p>
 </li>
-<li><p>[ 我们将介绍一种简单高效的数据结构，分块数组。他是一个结合了链表和列表的高效的数据结构。 ]</p>
+<li>
+<p>时间：2 sec</p>
 </li>
-<li><p>[ 列表可以 $O(1)$ 完成寻址，但是需要 $O(N)$ 完成删除和插入，链表可以 $O(1)$ 完成删除和插入，但是需要 $O(N)$ 完成寻址。我们将他们结合起来选择 $\sqrt{n}$ 为一个中间值。 ]</p>
-</li>
-<li><p>[ 将 $N​$ 长度的列表以 $O(\sqrt{n})​$ 长度断成 $O(\sqrt{n})​$ 块，每块用链表连起来，这样链表的长度为 $O(\sqrt{n})​$ 同时列表的长度为 $O(\sqrt{n})​$，我们可以在 $O(\sqrt{n})​$ 的时间范围内完成寻址插入和删除。 ]</p>
-</li>
-<li><p>[ 另一个需要注意的是在移动数组元素时，使用 memove 能够大大提升程序的性能 ]</p>
+<li>
+<p>空间：256 MB</p>
 </li>
 </ul>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2>
+<h2>提示</h2>
+<ul>
+<li>
+<p>本题字母、数字混合输入，且初始序列可能为空，请使用足够鲁棒的读入方式。</p>
+</li>
+<li>
+<p>[ 我们将介绍一种简单高效的数据结构，分块数组。他是一个结合了链表和列表的高效的数据结构。 ]</p>
+</li>
+<li>
+<p>[ 列表可以 $O(1)$ 完成寻址，但是需要 $O(N)$ 完成删除和插入，链表可以 $O(1)$ 完成删除和插入，但是需要 $O(N)$ 完成寻址。我们将他们结合起来选择 $\sqrt{n}$ 为一个中间值。 ]</p>
+</li>
+<li>
+<p>[ 将 $N​$ 长度的列表以 $O(\sqrt{n})​$ 长度断成 $O(\sqrt{n})​$ 块，每块用链表连起来，这样链表的长度为 $O(\sqrt{n})​$ 同时列表的长度为 $O(\sqrt{n})​$，我们可以在 $O(\sqrt{n})​$ 的时间范围内完成寻址插入和删除。 ]</p>
+</li>
+<li>
+<p>[ 另一个需要注意的是在移动数组元素时，使用 memove 能够大大提升程序的性能 ]</p>
+</li>
+</ul>
+<h2>思路</h2>
+<h2>实现</h2>
+
       
     </div>
     
@@ -625,7 +646,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入输出"><span class="nav-number">2.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据范围及限制"><span class="nav-number">3.</span> <span class="nav-text">数据范围及限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提示"><span class="nav-number">4.</span> <span class="nav-text">提示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">5.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">6.</span> <span class="nav-text">实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">数据范围及限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">提示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">实现</span></a></li></ol></div>
             
 
           </div>

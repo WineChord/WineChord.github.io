@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="二维数组中的查找问题描述给一个二维数组，每一行从左到右递增，每一列从上到下递增，给一个整数，判断该整数是否在数组中。 思路选取数组的右上角元素进行比较，如果该数字等于要查找的数字，则结束。如果大于，说明要查找元素只可能出现在该列的左侧，故剔除该列后再对剩下数组的右上角元素进行比较。如果小于，说明要查找元素只可能出现在该行的下侧，剔除该行后再对剩余数组的右上角元素进行查找。 实现1234567891">
+<meta name="description" content="二维数组中的查找 问题描述 给一个二维数组，每一行从左到右递增，每一列从上到下递增，给一个整数，判断该整数是否在数组中。 思路 选取数组的右上角元素进行比较，如果该数字等于要查找的数字，则结束。如果大于，说明要查找元素只可能出现在该列的左侧，故剔除该列后再对剩下数组的右上角元素进行比较。如果小于，说明要查找元素只可能出现在该行的下侧，剔除该行后再对剩余数组的右上角元素进行查找。 实现 123456">
 <meta name="keywords" content="Array">
 <meta property="og:type" content="article">
 <meta property="og:title" content="剑指Offer 面试题4 二维数组中的查找">
 <meta property="og:url" content="http://yoursite.com/2018/10/31/剑指Offer-面试题4-二维数组中的查找/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="二维数组中的查找问题描述给一个二维数组，每一行从左到右递增，每一列从上到下递增，给一个整数，判断该整数是否在数组中。 思路选取数组的右上角元素进行比较，如果该数字等于要查找的数字，则结束。如果大于，说明要查找元素只可能出现在该列的左侧，故剔除该列后再对剩下数组的右上角元素进行比较。如果小于，说明要查找元素只可能出现在该行的下侧，剔除该行后再对剩余数组的右上角元素进行查找。 实现1234567891">
+<meta property="og:description" content="二维数组中的查找 问题描述 给一个二维数组，每一行从左到右递增，每一列从上到下递增，给一个整数，判断该整数是否在数组中。 思路 选取数组的右上角元素进行比较，如果该数字等于要查找的数字，则结束。如果大于，说明要查找元素只可能出现在该列的左侧，故剔除该列后再对剩下数组的右上角元素进行比较。如果小于，说明要查找元素只可能出现在该行的下侧，剔除该行后再对剩余数组的右上角元素进行查找。 实现 123456">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-01-26T14:14:50.955Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指Offer 面试题4 二维数组中的查找">
-<meta name="twitter:description" content="二维数组中的查找问题描述给一个二维数组，每一行从左到右递增，每一列从上到下递增，给一个整数，判断该整数是否在数组中。 思路选取数组的右上角元素进行比较，如果该数字等于要查找的数字，则结束。如果大于，说明要查找元素只可能出现在该列的左侧，故剔除该列后再对剩下数组的右上角元素进行比较。如果小于，说明要查找元素只可能出现在该行的下侧，剔除该行后再对剩余数组的右上角元素进行查找。 实现1234567891">
+<meta name="twitter:description" content="二维数组中的查找 问题描述 给一个二维数组，每一行从左到右递增，每一列从上到下递增，给一个整数，判断该整数是否在数组中。 思路 选取数组的右上角元素进行比较，如果该数字等于要查找的数字，则结束。如果大于，说明要查找元素只可能出现在该列的左侧，故剔除该列后再对剩下数组的右上角元素进行比较。如果小于，说明要查找元素只可能出现在该行的下侧，剔除该行后再对剩余数组的右上角元素进行查找。 实现 123456">
 
 
 
@@ -397,10 +397,15 @@
       
 
       
-        <h1 id="二维数组中的查找"><a href="#二维数组中的查找" class="headerlink" title="二维数组中的查找"></a>二维数组中的查找</h1><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个二维数组，每一行从左到右递增，每一列从上到下递增，给一个整数，判断该整数是否在数组中。</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>选取数组的右上角元素进行比较，如果该数字等于要查找的数字，则结束。如果大于，说明要查找元素只可能出现在该列的左侧，故剔除该列后再对剩下数组的右上角元素进行比较。如果小于，说明要查找元素只可能出现在该行的下侧，剔除该行后再对剩余数组的右上角元素进行查找。</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span>* matrix, <span class="keyword">int</span> rows, <span class="keyword">int</span> columns, <span class="keyword">int</span> number)</span></span>&#123;</span><br><span class="line">    <span class="keyword">bool</span> found = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(matrix != <span class="literal">nullptr</span> &amp;&amp; rows &gt; <span class="number">0</span> &amp;&amp; columns &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> row = <span class="number">0</span>;  <span class="comment">// 表示右上角坐标</span></span><br><span class="line">        <span class="keyword">int</span> column = columns - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(row &lt; rows &amp;&amp; column &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(matrix[row * columns + column] == number)&#123;</span><br><span class="line">                found = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(matrix[row * columns + column] &gt; number) column--; <span class="comment">// 大于则剔除列</span></span><br><span class="line">            <span class="keyword">else</span> row++; <span class="comment">// 小于则剔除行</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> found;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>每次如果没有找到，要么列减少，要么行减少，所以总的时间复杂度为 $O(m+n)$。（$m$ $n$ 为矩阵的行和列）</p>
+        <h1>二维数组中的查找</h1>
+<h3>问题描述</h3>
+<p>给一个二维数组，每一行从左到右递增，每一列从上到下递增，给一个整数，判断该整数是否在数组中。</p>
+<h3>思路</h3>
+<p>选取数组的右上角元素进行比较，如果该数字等于要查找的数字，则结束。如果大于，说明要查找元素只可能出现在该列的左侧，故剔除该列后再对剩下数组的右上角元素进行比较。如果小于，说明要查找元素只可能出现在该行的下侧，剔除该行后再对剩余数组的右上角元素进行查找。</p>
+<h3>实现</h3>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span>* matrix, <span class="keyword">int</span> rows, <span class="keyword">int</span> columns, <span class="keyword">int</span> number)</span></span>&#123;</span><br><span class="line">    <span class="keyword">bool</span> found = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(matrix != <span class="literal">nullptr</span> &amp;&amp; rows &gt; <span class="number">0</span> &amp;&amp; columns &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> row = <span class="number">0</span>;  <span class="comment">// 表示右上角坐标</span></span><br><span class="line">        <span class="keyword">int</span> column = columns - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(row &lt; rows &amp;&amp; column &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(matrix[row * columns + column] == number)&#123;</span><br><span class="line">                found = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(matrix[row * columns + column] &gt; number) column--; <span class="comment">// 大于则剔除列</span></span><br><span class="line">            <span class="keyword">else</span> row++; <span class="comment">// 小于则剔除行</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> found;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>复杂度分析</h3>
+<p>每次如果没有找到，要么列减少，要么行减少，所以总的时间复杂度为 $O(m+n)$。（$m$ $n$ 为矩阵的行和列）</p>
 
       
     </div>
@@ -589,7 +594,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#二维数组中的查找"><span class="nav-number">1.</span> <span class="nav-text">二维数组中的查找</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.0.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">1.0.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">1.0.3.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂度分析"><span class="nav-number">1.0.4.</span> <span class="nav-text">复杂度分析</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">二维数组中的查找</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.3.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.4.</span> <span class="nav-text">复杂度分析</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

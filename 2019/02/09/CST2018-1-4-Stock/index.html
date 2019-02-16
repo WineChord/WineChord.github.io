@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="题目描述 从发行到退出之间的时段称为股票的活跃期 若某股票在第123天发行并于130天退出，则认为活跃期为123-129共7天，记作 $[123,130)$ 假定股票在活跃期内价格不变 在该王国中，禁止不同股票的活跃期相互包含，也就是说，每天发行和退市的股票累积不超过一支 M先生是公认的股神，他任何时候的投资总额都保持固定，如此可保证风险有限。每天都将所有的投资集中用于购入当日价格最低的一支股票（">
+<meta name="description" content="题目描述  从发行到退出之间的时段称为股票的活跃期 若某股票在第123天发行并于130天退出，则认为活跃期为123-129共7天，记作 $[123,130)$ 假定股票在活跃期内价格不变 在该王国中，禁止不同股票的活跃期相互包含，也就是说，每天发行和退市的股票累积不超过一支 M先生是公认的股神，他任何时候的投资总额都保持固定，如此可保证风险有限。每天都将所有的投资集中用于购入当日价格最低的一支股票">
 <meta name="keywords" content="队列">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CST2018 1-4 Stock">
 <meta property="og:url" content="http://yoursite.com/2019/02/09/CST2018-1-4-Stock/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="题目描述 从发行到退出之间的时段称为股票的活跃期 若某股票在第123天发行并于130天退出，则认为活跃期为123-129共7天，记作 $[123,130)$ 假定股票在活跃期内价格不变 在该王国中，禁止不同股票的活跃期相互包含，也就是说，每天发行和退市的股票累积不超过一支 M先生是公认的股神，他任何时候的投资总额都保持固定，如此可保证风险有限。每天都将所有的投资集中用于购入当日价格最低的一支股票（">
+<meta property="og:description" content="题目描述  从发行到退出之间的时段称为股票的活跃期 若某股票在第123天发行并于130天退出，则认为活跃期为123-129共7天，记作 $[123,130)$ 假定股票在活跃期内价格不变 在该王国中，禁止不同股票的活跃期相互包含，也就是说，每天发行和退市的股票累积不超过一支 M先生是公认的股神，他任何时候的投资总额都保持固定，如此可保证风险有限。每天都将所有的投资集中用于购入当日价格最低的一支股票">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-02-10T01:06:32.426Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CST2018 1-4 Stock">
-<meta name="twitter:description" content="题目描述 从发行到退出之间的时段称为股票的活跃期 若某股票在第123天发行并于130天退出，则认为活跃期为123-129共7天，记作 $[123,130)$ 假定股票在活跃期内价格不变 在该王国中，禁止不同股票的活跃期相互包含，也就是说，每天发行和退市的股票累积不超过一支 M先生是公认的股神，他任何时候的投资总额都保持固定，如此可保证风险有限。每天都将所有的投资集中用于购入当日价格最低的一支股票（">
+<meta name="twitter:description" content="题目描述  从发行到退出之间的时段称为股票的活跃期 若某股票在第123天发行并于130天退出，则认为活跃期为123-129共7天，记作 $[123,130)$ 假定股票在活跃期内价格不变 在该王国中，禁止不同股票的活跃期相互包含，也就是说，每天发行和退市的股票累积不超过一支 M先生是公认的股神，他任何时候的投资总额都保持固定，如此可保证风险有限。每天都将所有的投资集中用于购入当日价格最低的一支股票">
 
 
 
@@ -397,7 +397,8 @@
       
 
       
-        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><ul>
+        <h2>题目描述</h2>
+<ul>
 <li>从发行到退出之间的时段称为股票的活跃期</li>
 <li>若某股票在第123天发行并于130天退出，则认为活跃期为123-129共7天，记作 $[123,130)$</li>
 <li>假定股票在活跃期内价格不变</li>
@@ -405,34 +406,41 @@
 <li>M先生是公认的股神，他任何时候的投资总额都保持固定，如此可保证风险有限。每天都将所有的投资集中用于购入当日价格最低的一支股票（为此可能需要先卖出原持有股票）</li>
 <li>M先生希望知道自己一段时期内的日均持股量</li>
 </ul>
-<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ul>
-<li>输入：<ul>
+<h2>输入输出</h2>
+<ul>
+<li>输入：
+<ul>
 <li>第 $1$ 行：$N$</li>
 <li>以下 $2N$ 行：按日期升序描述股票历史</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D X // 在上一事件之后的第D天有一支股票发行，且按M先生的投资额可购入X股</span><br><span class="line">D // 在上一事件之后的第D天有一支股票退市</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D X // 在上一事件之后的第D天有一支股票发行，且按M先生的投资额可购入X股</span><br><span class="line">D // 在上一事件之后的第D天有一支股票退市</span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>其中，除首个事件的D值可能为0，其余D值均为正整数。X均为非负整数</li>
 <li>输入的时间序列合法，即保证活跃股票数始终非负</li>
-<li>输出：<ul>
+<li>输出：
+<ul>
 <li>输出自股市开市至最后一支股票退出期间，M先生的日均持股量乘以天数</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">6</span><br><span class="line">2 100</span><br><span class="line">2 200</span><br><span class="line">5</span><br><span class="line">1 150</span><br><span class="line">1</span><br><span class="line">2 100</span><br><span class="line">2 300</span><br><span class="line">2 200</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">output:</span><br><span class="line">5000    // 5000 = 200.00股 * 25天</span><br></pre></td></tr></table></figure>
-<h2 id="数据范围及限制"><a href="#数据范围及限制" class="headerlink" title="数据范围及限制"></a>数据范围及限制</h2><ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">6</span><br><span class="line">2 100</span><br><span class="line">2 200</span><br><span class="line">5</span><br><span class="line">1 150</span><br><span class="line">1</span><br><span class="line">2 100</span><br><span class="line">2 300</span><br><span class="line">2 200</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">output:</span><br><span class="line">5000    // 5000 = 200.00股 * 25天</span><br></pre></td></tr></table></figure></p>
+<h2>数据范围及限制</h2>
+<ul>
 <li>$1\le N\le 1,000,000$</li>
 <li>$0\le X\lt 2^{31}$</li>
 <li>股市的营业期不超过 $2^{31}-1$ 天</li>
 <li>时间：1 sec</li>
 <li>空间：256 MB</li>
 </ul>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><ul>
-<li>在队列结构的基础上，扩充操作接口 </li>
+<h2>提示</h2>
+<ul>
+<li>在队列结构的基础上，扩充操作接口</li>
 </ul>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2>
+<h2>思路</h2>
+<h2>实现</h2>
+
       
     </div>
     
@@ -620,7 +628,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入输出"><span class="nav-number">2.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据范围及限制"><span class="nav-number">3.</span> <span class="nav-text">数据范围及限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提示"><span class="nav-number">4.</span> <span class="nav-text">提示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">5.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">6.</span> <span class="nav-text">实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">数据范围及限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">提示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">实现</span></a></li></ol></div>
             
 
           </div>

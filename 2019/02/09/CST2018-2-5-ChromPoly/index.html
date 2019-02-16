@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="题目描述 考察无向图 $G=(V,E)$，$G$ 的一个 $k-$染色（coloring）是从 $V$ 到 $[1,k]$ 的一个映射： $\pi:V\rightarrow {1,2,…,k}$ 且满足 $\forall v,u\in V,\pi(v)\not= \pi(u) if (v,u)\in E$  即：将所有顶点归入不超过 $k$ 个等价类，且保证相邻顶点不属同类  若将图 $G$ 和">
+<meta name="description" content="题目描述   考察无向图 $G=(V,E)$，$G$ 的一个 $k-$染色（coloring）是从 $V$ 到 $[1,k]$ 的一个映射： $\pi:V\rightarrow {1,2,...,k}$ 且满足 $\forall v,u\in V,\pi(v)\not= \pi(u) if (v,u)\in E$   即：将所有顶点归入不超过 $k$ 个等价类，且保证相邻顶点不属同类   若将图">
 <meta name="keywords" content="图">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CST2018 2-5 ChromPoly">
 <meta property="og:url" content="http://yoursite.com/2019/02/09/CST2018-2-5-ChromPoly/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="题目描述 考察无向图 $G=(V,E)$，$G$ 的一个 $k-$染色（coloring）是从 $V$ 到 $[1,k]$ 的一个映射： $\pi:V\rightarrow {1,2,…,k}$ 且满足 $\forall v,u\in V,\pi(v)\not= \pi(u) if (v,u)\in E$  即：将所有顶点归入不超过 $k$ 个等价类，且保证相邻顶点不属同类  若将图 $G$ 和">
+<meta property="og:description" content="题目描述   考察无向图 $G=(V,E)$，$G$ 的一个 $k-$染色（coloring）是从 $V$ 到 $[1,k]$ 的一个映射： $\pi:V\rightarrow {1,2,...,k}$ 且满足 $\forall v,u\in V,\pi(v)\not= \pi(u) if (v,u)\in E$   即：将所有顶点归入不超过 $k$ 个等价类，且保证相邻顶点不属同类   若将图">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-02-11T06:15:09.893Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CST2018 2-5 ChromPoly">
-<meta name="twitter:description" content="题目描述 考察无向图 $G=(V,E)$，$G$ 的一个 $k-$染色（coloring）是从 $V$ 到 $[1,k]$ 的一个映射： $\pi:V\rightarrow {1,2,…,k}$ 且满足 $\forall v,u\in V,\pi(v)\not= \pi(u) if (v,u)\in E$  即：将所有顶点归入不超过 $k$ 个等价类，且保证相邻顶点不属同类  若将图 $G$ 和">
+<meta name="twitter:description" content="题目描述   考察无向图 $G=(V,E)$，$G$ 的一个 $k-$染色（coloring）是从 $V$ 到 $[1,k]$ 的一个映射： $\pi:V\rightarrow {1,2,...,k}$ 且满足 $\forall v,u\in V,\pi(v)\not= \pi(u) if (v,u)\in E$   即：将所有顶点归入不超过 $k$ 个等价类，且保证相邻顶点不属同类   若将图">
 
 
 
@@ -397,30 +397,38 @@
       
 
       
-        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><ul>
-<li><p>考察无向图 $G=(V,E)$，$G$ 的一个 $k-$染色（coloring）是从 $V$ 到 $[1,k]$ 的一个映射：</p>
-<p>$\pi:V\rightarrow {1,2,…,k}$</p>
+        <h2>题目描述</h2>
+<ul>
+<li>
+<p>考察无向图 $G=(V,E)$，$G$ 的一个 $k-$染色（coloring）是从 $V$ 到 $[1,k]$ 的一个映射：</p>
+<p>$\pi:V\rightarrow {1,2,...,k}$</p>
 <p>且满足</p>
 <p>$\forall v,u\in V,\pi(v)\not= \pi(u) if (v,u)\in E$</p>
 </li>
-<li><p>即：将所有顶点归入不超过 $k$ 个等价类，且保证相邻顶点不属同类</p>
+<li>
+<p>即：将所有顶点归入不超过 $k$ 个等价类，且保证相邻顶点不属同类</p>
 </li>
-<li><p>若将图 $G$ 和 $k$ 视作变量，则可用函数 $CP(G,k)$ 表示图 $G$ 的 $k-$染色方案数。而对于任一图 $G$，该函数都是 $k$ 的多项式形式，称作色多项式（chromatic polynomial）</p>
+<li>
+<p>若将图 $G$ 和 $k$ 视作变量，则可用函数 $CP(G,k)$ 表示图 $G$ 的 $k-$染色方案数。而对于任一图 $G$，该函数都是 $k$ 的多项式形式，称作色多项式（chromatic polynomial）</p>
 </li>
-<li><p>例子：</p>
+<li>
+<p>例子：</p>
 </li>
-<li><p>对于包含 $n$ 个顶点，不含任何边的图 $Sn$，有</p>
+<li>
+<p>对于包含 $n$ 个顶点，不含任何边的图 $Sn$，有</p>
 <ul>
 <li>$CP(Sn,k)=k^n$</li>
 </ul>
 </li>
-<li><p>对于完全图 $Kn$，有</p>
+<li>
+<p>对于完全图 $Kn$，有</p>
 <ul>
 <li>$CP(Kn,k)=0,if\ k\lt n$</li>
 <li>$CP(Kn,k)=\frac{k!}{(k-n)!},if\ k\ge n$</li>
 </ul>
 </li>
-<li><p>对于二部图（bipartition）$B(2,3)$，有（在这个语境里其实是完全二分图）</p>
+<li>
+<p>对于二部图（bipartition）$B(2,3)$，有（在这个语境里其实是完全二分图）</p>
 <ul>
 <li>$CP(B(2,3),1)=0$</li>
 <li>$CP(B(2,3),2)=2$</li>
@@ -428,27 +436,35 @@
 <li>$CP(B(2,3),k)=k^5-6<em>k^4+15</em>k^3-17<em>k^2+7</em>k$</li>
 </ul>
 </li>
-<li>对于 5 阶环 $C5$，有<ul>
+<li>
+<p>对于 5 阶环 $C5$，有</p>
+<ul>
 <li>$CP(C5,1)=P(2,C5)=0$</li>
 <li>$CP(C5,3)=30$</li>
 <li>$CP(C5,k)=k^5-5<em>k^4+10</em>k^3+4*k$</li>
 </ul>
 </li>
-<li>请编写程序，求对于给定的图 $G$，计算并输出对应的色多项式 $CP(G,k)$</li>
+<li>
+<p>请编写程序，求对于给定的图 $G$，计算并输出对应的色多项式 $CP(G,k)$</p>
+</li>
 </ul>
-<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><ul>
-<li>输入：<ul>
+<h2>输入输出</h2>
+<ul>
+<li>输入：
+<ul>
 <li>第 $1$ 行：$n\ m$ 顶点数和边数</li>
 <li>以下每行：$(u,v)$表示图中的一条边，且保证满足 $0\le u,v\lt n$</li>
 </ul>
 </li>
-<li>输出：<ul>
+<li>输出：
+<ul>
 <li>$n+1$ 行：每一行表示该图色多项式各项的系数（依 $k$ 的次数由低向高排列）</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">input: # 为一个十字形图</span><br><span class="line">5 4</span><br><span class="line">1 0</span><br><span class="line">1 3</span><br><span class="line">1 2</span><br><span class="line">1 4</span><br><span class="line">output: </span><br><span class="line">0</span><br><span class="line">1</span><br><span class="line">-4</span><br><span class="line">6</span><br><span class="line">-4</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
-<h2 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h2><ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">input: # 为一个十字形图</span><br><span class="line">5 4</span><br><span class="line">1 0</span><br><span class="line">1 3</span><br><span class="line">1 2</span><br><span class="line">1 4</span><br><span class="line">output: </span><br><span class="line">0</span><br><span class="line">1</span><br><span class="line">-4</span><br><span class="line">6</span><br><span class="line">-4</span><br><span class="line">1</span><br></pre></td></tr></table></figure></p>
+<h2>数据范围</h2>
+<ul>
 <li>$1\le n\lt 30$</li>
 <li>$1\le m\lt 70$</li>
 <li>保证图中无自环</li>
@@ -456,13 +472,16 @@
 <li>time：7 sec</li>
 <li>space：1024 MB</li>
 </ul>
-<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><ul>
+<h2>说明</h2>
+<ul>
 <li>$CP(G,k)=CP(G\backslash {e},k)-CP(G/{e},k)$</li>
 <li>其中 $\backslash$ 为减除（subtraction）操作，即为从图中将某一边抹去。</li>
 <li>$/$ 为收缩（contraction）操作，即为收缩边 $e$ ，直到其顶点 $v$ 和 $u$ 粘连为同一个顶点 $w$；而与之关联的边除 $e$ 外依然保留。</li>
 <li>更多：<a href="https://dsa.cs.tsinghua.edu.cn/~deng/ds/00240074@2004spring/handout/assignment/chromaticpolynomial/" target="_blank" rel="noopener">https://dsa.cs.tsinghua.edu.cn/~deng/ds/00240074@2004spring/handout/assignment/chromaticpolynomial/</a></li>
 </ul>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2>
+<h2>思路</h2>
+<h2>实现</h2>
+
       
     </div>
     
@@ -650,7 +669,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入输出"><span class="nav-number">2.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据范围"><span class="nav-number">3.</span> <span class="nav-text">数据范围</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-number">4.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">5.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">6.</span> <span class="nav-text">实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">数据范围</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">实现</span></a></li></ol></div>
             
 
           </div>

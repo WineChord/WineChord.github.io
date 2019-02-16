@@ -400,15 +400,21 @@
       
         
           
-            <h1 id="二叉树的下一个结点"><a href="#二叉树的下一个结点" class="headerlink" title="二叉树的下一个结点"></a>二叉树的下一个结点</h1><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定一个二叉树，找出中序遍历序列的下一个结点</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
+            <h1>二叉树的下一个结点</h1>
+<h3>问题描述</h3>
+<p>给定一个二叉树，找出中序遍历序列的下一个结点</p>
+<h3>思路</h3>
+<ul>
 <li>右子树存在时：下一结点为右子树的最左结点</li>
-<li>右子树不存在时：<ul>
+<li>右子树不存在时：
+<ul>
 <li>若其为父左子：下一结点为其父</li>
-<li>若其为父右子：向上遍历父结点直到找到一个结点为其父的左子，该结点的父节点即为下一结点<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BinaryTreeNode* <span class="title">GetNext</span><span class="params">(BinaryTreeNode* pNode)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(pNode == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">    BinaryTreeNode* pNext = <span class="literal">nullptr</span>;</span><br><span class="line">    <span class="keyword">if</span>(pNode-&gt;m_pRight != <span class="literal">nullptr</span>)&#123; <span class="comment">// 右子树存在</span></span><br><span class="line">        BinaryTreeNode* pRight = pNode-&gt;m_pRight; <span class="comment">// 指向右子树</span></span><br><span class="line">        <span class="keyword">while</span>(pRight-&gt;m_pLeft != <span class="literal">nullptr</span>)  <span class="comment">// 一直找到最左结点</span></span><br><span class="line">            pRight = pRight-&gt;m_pLeft;</span><br><span class="line">        pNext = pRight;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (pNode-&gt;m_pParent != <span class="literal">nullptr</span>)&#123; <span class="comment">// 父亲存在</span></span><br><span class="line">        BinaryTreeNode* pCurrent = pNode;</span><br><span class="line">        BinaryTreeNode* pParent = pNode-&gt;m_pParent;</span><br><span class="line">        <span class="keyword">while</span>(pParent != <span class="literal">nullptr</span> &amp;&amp; pCurrent == pParent-&gt;m_pRight)&#123; <span class="comment">// 直到当前结点不为其父节点的右孩子</span></span><br><span class="line">            pCurrent = pParent;</span><br><span class="line">            pParent = pParent-&gt;m_pParent;</span><br><span class="line">        &#125;</span><br><span class="line">        pNext = pParent;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> pNext;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>若其为父右子：向上遍历父结点直到找到一个结点为其父的左子，该结点的父节点即为下一结点</li>
 </ul>
 </li>
 </ul>
+<h3>实现</h3>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BinaryTreeNode* <span class="title">GetNext</span><span class="params">(BinaryTreeNode* pNode)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(pNode == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">    BinaryTreeNode* pNext = <span class="literal">nullptr</span>;</span><br><span class="line">    <span class="keyword">if</span>(pNode-&gt;m_pRight != <span class="literal">nullptr</span>)&#123; <span class="comment">// 右子树存在</span></span><br><span class="line">        BinaryTreeNode* pRight = pNode-&gt;m_pRight; <span class="comment">// 指向右子树</span></span><br><span class="line">        <span class="keyword">while</span>(pRight-&gt;m_pLeft != <span class="literal">nullptr</span>)  <span class="comment">// 一直找到最左结点</span></span><br><span class="line">            pRight = pRight-&gt;m_pLeft;</span><br><span class="line">        pNext = pRight;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (pNode-&gt;m_pParent != <span class="literal">nullptr</span>)&#123; <span class="comment">// 父亲存在</span></span><br><span class="line">        BinaryTreeNode* pCurrent = pNode;</span><br><span class="line">        BinaryTreeNode* pParent = pNode-&gt;m_pParent;</span><br><span class="line">        <span class="keyword">while</span>(pParent != <span class="literal">nullptr</span> &amp;&amp; pCurrent == pParent-&gt;m_pRight)&#123; <span class="comment">// 直到当前结点不为其父节点的右孩子</span></span><br><span class="line">            pCurrent = pParent;</span><br><span class="line">            pParent = pParent-&gt;m_pParent;</span><br><span class="line">        &#125;</span><br><span class="line">        pNext = pParent;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> pNext;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -561,10 +567,16 @@
       
         
           
-            <h1 id="重建二叉树"><a href="#重建二叉树" class="headerlink" title="重建二叉树"></a>重建二叉树</h1><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给出前序遍历和中序遍历，重建二叉树并输出头结点。二叉树结点定义为：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">BinaryTreeNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> m_nValue;</span><br><span class="line">    BinaryTreeNode* m_pLeft;</span><br><span class="line">    BinaryTreeNode* m_pRight;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>使用递归完成</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BinaryTreeNode* <span class="title">Construct</span><span class="params">(<span class="keyword">int</span>* preorder, <span class="keyword">int</span>* inorder, <span class="keyword">int</span> length)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(preorder == <span class="literal">nullptr</span> || inorder == <span class="literal">nullptr</span> || length &lt;= <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">    <span class="keyword">return</span> ConstructCore(preorder, preorder + length - <span class="number">1</span>, inorder, inorder + length - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">BinaryTreeNode* <span class="title">ConstructCore</span><span class="params">(<span class="keyword">int</span>* startPreorder, <span class="keyword">int</span>* endPreorder, <span class="keyword">int</span>* startInorder, <span class="keyword">int</span>* endInorder)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> rootValue = startPreorder[<span class="number">0</span>]; <span class="comment">// 前序序列的第一个值是根节点的值</span></span><br><span class="line">    BinaryTreeNode* root = <span class="keyword">new</span> BinaryTreeNode();</span><br><span class="line">    root-&gt;m_nValue = rootValue;</span><br><span class="line">    root-&gt;m_pLeft = root-&gt;m_pRight = <span class="literal">nullptr</span>;</span><br><span class="line">    <span class="keyword">if</span>(startPreorder == endPreorder)&#123;</span><br><span class="line">        <span class="keyword">if</span>(startInorder == endInorder &amp;&amp; *startPreorder == *startInorder) <span class="keyword">return</span> root;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">throw</span> <span class="built_in">std</span>::exception(<span class="string">"Invalid input."</span>);</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="comment">// 在中序遍历序列中找到根节点的值</span></span><br><span class="line">    <span class="keyword">int</span>* rootInorder = startInorder;</span><br><span class="line">    <span class="keyword">while</span>(rootInorder &lt;= endInorder &amp;&amp; *rootInorder != rootValue)</span><br><span class="line">        rootInorder++;</span><br><span class="line">    <span class="keyword">if</span>(rootInorder == endInorder &amp;&amp; *rootInorder != rootValue)</span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">std</span>::exception(<span class="string">"Invalid input."</span>);</span><br><span class="line">    <span class="keyword">int</span> leftLength = rootInorder - startInorder;</span><br><span class="line">    <span class="keyword">int</span>* leftPreorderEnd = startPreorder + leftLength;</span><br><span class="line">    <span class="keyword">if</span>(leftLength &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">// 构建左子树</span></span><br><span class="line">        root-&gt;m_pLeft = ConstructCore(startPreorder + <span class="number">1</span>, leftPreorderEnd, startInorder, rootInorder - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(leftLength &lt; endPreorder - startPreorder)&#123;</span><br><span class="line">        <span class="comment">// 构建右子树</span></span><br><span class="line">        root-&gt;m_pRight = ConstructCore(leftPreorderEnd + <span class="number">1</span>, endPreorder, rootInorder + <span class="number">1</span>, endInorder);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>时间复杂度为 $O(nlogn)$</p>
+            <h1>重建二叉树</h1>
+<h3>问题描述</h3>
+<p>给出前序遍历和中序遍历，重建二叉树并输出头结点。二叉树结点定义为：
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">BinaryTreeNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> m_nValue;</span><br><span class="line">    BinaryTreeNode* m_pLeft;</span><br><span class="line">    BinaryTreeNode* m_pRight;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>思路</h3>
+<p>使用递归完成</p>
+<h3>实现</h3>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BinaryTreeNode* <span class="title">Construct</span><span class="params">(<span class="keyword">int</span>* preorder, <span class="keyword">int</span>* inorder, <span class="keyword">int</span> length)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(preorder == <span class="literal">nullptr</span> || inorder == <span class="literal">nullptr</span> || length &lt;= <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">    <span class="keyword">return</span> ConstructCore(preorder, preorder + length - <span class="number">1</span>, inorder, inorder + length - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">BinaryTreeNode* <span class="title">ConstructCore</span><span class="params">(<span class="keyword">int</span>* startPreorder, <span class="keyword">int</span>* endPreorder, <span class="keyword">int</span>* startInorder, <span class="keyword">int</span>* endInorder)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> rootValue = startPreorder[<span class="number">0</span>]; <span class="comment">// 前序序列的第一个值是根节点的值</span></span><br><span class="line">    BinaryTreeNode* root = <span class="keyword">new</span> BinaryTreeNode();</span><br><span class="line">    root-&gt;m_nValue = rootValue;</span><br><span class="line">    root-&gt;m_pLeft = root-&gt;m_pRight = <span class="literal">nullptr</span>;</span><br><span class="line">    <span class="keyword">if</span>(startPreorder == endPreorder)&#123;</span><br><span class="line">        <span class="keyword">if</span>(startInorder == endInorder &amp;&amp; *startPreorder == *startInorder) <span class="keyword">return</span> root;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">throw</span> <span class="built_in">std</span>::exception(<span class="string">"Invalid input."</span>);</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="comment">// 在中序遍历序列中找到根节点的值</span></span><br><span class="line">    <span class="keyword">int</span>* rootInorder = startInorder;</span><br><span class="line">    <span class="keyword">while</span>(rootInorder &lt;= endInorder &amp;&amp; *rootInorder != rootValue)</span><br><span class="line">        rootInorder++;</span><br><span class="line">    <span class="keyword">if</span>(rootInorder == endInorder &amp;&amp; *rootInorder != rootValue)</span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">std</span>::exception(<span class="string">"Invalid input."</span>);</span><br><span class="line">    <span class="keyword">int</span> leftLength = rootInorder - startInorder;</span><br><span class="line">    <span class="keyword">int</span>* leftPreorderEnd = startPreorder + leftLength;</span><br><span class="line">    <span class="keyword">if</span>(leftLength &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">// 构建左子树</span></span><br><span class="line">        root-&gt;m_pLeft = ConstructCore(startPreorder + <span class="number">1</span>, leftPreorderEnd, startInorder, rootInorder - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(leftLength &lt; endPreorder - startPreorder)&#123;</span><br><span class="line">        <span class="comment">// 构建右子树</span></span><br><span class="line">        root-&gt;m_pRight = ConstructCore(leftPreorderEnd + <span class="number">1</span>, endPreorder, rootInorder + <span class="number">1</span>, endInorder);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>复杂度分析</h3>
+<p>时间复杂度为 $O(nlogn)$</p>
 
           
         
@@ -717,11 +729,19 @@
       
         
           
-            <h1 id="从尾到头打印链表"><a href="#从尾到头打印链表" class="headerlink" title="从尾到头打印链表"></a>从尾到头打印链表</h1><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>从尾到头输出链表中每个结点的值。<br>链表结点定义如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> m_nKey;</span><br><span class="line">    ListNode* m_pNext;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>使用栈来实现</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PrintListReversingly_Iteratively</span><span class="params">(ListNode* pHead)</span></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">stack</span>&lt;ListNode*&gt; nodes;</span><br><span class="line">    ListNode* pNode = pHead;</span><br><span class="line">    <span class="keyword">while</span>(pNode != <span class="literal">nullptr</span>)&#123;</span><br><span class="line">        nodes.push(pNode);</span><br><span class="line">        pNode = pNode-&gt;m_pNext;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(!nodes.empty())&#123;</span><br><span class="line">        pNode = nodes.top();</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\t"</span>, pNode-&gt;m_nValue);</span><br><span class="line">        nodes.pop();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>也可用相应递归<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PrintListReversingly_Recursively</span><span class="params">(ListNode* pHead)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(pHead != <span class="literal">nullptr</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(pHead-&gt;m_pNext != <span class="literal">nullptr</span>)</span><br><span class="line">            PrintListReversingly_Recursively(pHead-&gt;m_pNext);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d\t"</span>, pHead-&gt;m_nValue);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>对于迭代版本而言，时间复杂度为 $O(n)$，空间复杂度为 $O(n)$</p>
+            <h1>从尾到头打印链表</h1>
+<h3>问题描述</h3>
+<p>从尾到头输出链表中每个结点的值。
+链表结点定义如下：
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> m_nKey;</span><br><span class="line">    ListNode* m_pNext;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>思路</h3>
+<p>使用栈来实现</p>
+<h3>实现</h3>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PrintListReversingly_Iteratively</span><span class="params">(ListNode* pHead)</span></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">stack</span>&lt;ListNode*&gt; nodes;</span><br><span class="line">    ListNode* pNode = pHead;</span><br><span class="line">    <span class="keyword">while</span>(pNode != <span class="literal">nullptr</span>)&#123;</span><br><span class="line">        nodes.push(pNode);</span><br><span class="line">        pNode = pNode-&gt;m_pNext;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(!nodes.empty())&#123;</span><br><span class="line">        pNode = nodes.top();</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\t"</span>, pNode-&gt;m_nValue);</span><br><span class="line">        nodes.pop();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>也可用相应递归
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PrintListReversingly_Recursively</span><span class="params">(ListNode* pHead)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(pHead != <span class="literal">nullptr</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(pHead-&gt;m_pNext != <span class="literal">nullptr</span>)</span><br><span class="line">            PrintListReversingly_Recursively(pHead-&gt;m_pNext);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d\t"</span>, pHead-&gt;m_nValue);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>复杂度分析</h3>
+<p>对于迭代版本而言，时间复杂度为 $O(n)$，空间复杂度为 $O(n)$</p>
 
           
         
@@ -874,13 +894,18 @@
       
         
           
-            <h1 id="替换空格"><a href="#替换空格" class="headerlink" title="替换空格"></a>替换空格</h1><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>将字符串中的每一个空格替换为 “%20”</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
+            <h1>替换空格</h1>
+<h3>问题描述</h3>
+<p>将字符串中的每一个空格替换为 &quot;%20&quot;</p>
+<h3>思路</h3>
+<ul>
 <li>如果从前往后替换，边替换边移动的话需要的时间复杂度是 $O(n^2)$。</li>
-<li>考虑首先遍历字符串，得到空格个数，然后计算出替换之后的字符串长度，替换时从后往前进行替换。<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ReplaceBlank</span><span class="params">(<span class="keyword">char</span> <span class="built_in">string</span>[], <span class="keyword">int</span> length)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">string</span> == <span class="literal">nullptr</span> || length &lt;= <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> len0 = <span class="number">0</span>; <span class="comment">// 原始长度</span></span><br><span class="line">    <span class="keyword">int</span> len1 = <span class="number">0</span>; <span class="comment">// 替换后长度</span></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">string</span>[i] != <span class="string">'\0'</span>)&#123;</span><br><span class="line">        len0++;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">string</span>[i] == <span class="string">' '</span>) len1 += <span class="number">3</span>;</span><br><span class="line">        i++; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(len1 &gt; length) <span class="keyword">return</span>; <span class="comment">// 字符串的空间不够</span></span><br><span class="line">    <span class="keyword">int</span> p2 = len1;  <span class="comment">// p2 指向新长度尾</span></span><br><span class="line">    <span class="keyword">int</span> p1 = len0;  <span class="comment">// p1 指向旧长度尾</span></span><br><span class="line">    <span class="keyword">while</span>(p1 &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">string</span>[p1] == <span class="string">' '</span>)&#123;  <span class="comment">// 遇到空格则替换</span></span><br><span class="line">            <span class="built_in">string</span>[p2--] = <span class="string">'0'</span>;</span><br><span class="line">            <span class="built_in">string</span>[p2--] = <span class="string">'2'</span>;</span><br><span class="line">            <span class="built_in">string</span>[p2--] = <span class="string">'%'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;  <span class="comment">// 未遇到空格则直接复制</span></span><br><span class="line">            <span class="built_in">string</span>[p2--] = <span class="built_in">string</span>[p1];</span><br><span class="line">        &#125;</span><br><span class="line">        p1--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li>考虑首先遍历字符串，得到空格个数，然后计算出替换之后的字符串长度，替换时从后往前进行替换。</li>
 </ul>
-<h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>从后往前，每个元素只复制或者移动了一次，所以时间复杂度是 $O(n)$</p>
+<h3>实现</h3>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ReplaceBlank</span><span class="params">(<span class="keyword">char</span> <span class="built_in">string</span>[], <span class="keyword">int</span> length)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">string</span> == <span class="literal">nullptr</span> || length &lt;= <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> len0 = <span class="number">0</span>; <span class="comment">// 原始长度</span></span><br><span class="line">    <span class="keyword">int</span> len1 = <span class="number">0</span>; <span class="comment">// 替换后长度</span></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">string</span>[i] != <span class="string">'\0'</span>)&#123;</span><br><span class="line">        len0++;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">string</span>[i] == <span class="string">' '</span>) len1 += <span class="number">3</span>;</span><br><span class="line">        i++; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(len1 &gt; length) <span class="keyword">return</span>; <span class="comment">// 字符串的空间不够</span></span><br><span class="line">    <span class="keyword">int</span> p2 = len1;  <span class="comment">// p2 指向新长度尾</span></span><br><span class="line">    <span class="keyword">int</span> p1 = len0;  <span class="comment">// p1 指向旧长度尾</span></span><br><span class="line">    <span class="keyword">while</span>(p1 &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">string</span>[p1] == <span class="string">' '</span>)&#123;  <span class="comment">// 遇到空格则替换</span></span><br><span class="line">            <span class="built_in">string</span>[p2--] = <span class="string">'0'</span>;</span><br><span class="line">            <span class="built_in">string</span>[p2--] = <span class="string">'2'</span>;</span><br><span class="line">            <span class="built_in">string</span>[p2--] = <span class="string">'%'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;  <span class="comment">// 未遇到空格则直接复制</span></span><br><span class="line">            <span class="built_in">string</span>[p2--] = <span class="built_in">string</span>[p1];</span><br><span class="line">        &#125;</span><br><span class="line">        p1--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>复杂度分析</h3>
+<p>从后往前，每个元素只复制或者移动了一次，所以时间复杂度是 $O(n)$</p>
 
           
         
@@ -1033,10 +1058,15 @@
       
         
           
-            <h1 id="二维数组中的查找"><a href="#二维数组中的查找" class="headerlink" title="二维数组中的查找"></a>二维数组中的查找</h1><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给一个二维数组，每一行从左到右递增，每一列从上到下递增，给一个整数，判断该整数是否在数组中。</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>选取数组的右上角元素进行比较，如果该数字等于要查找的数字，则结束。如果大于，说明要查找元素只可能出现在该列的左侧，故剔除该列后再对剩下数组的右上角元素进行比较。如果小于，说明要查找元素只可能出现在该行的下侧，剔除该行后再对剩余数组的右上角元素进行查找。</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span>* matrix, <span class="keyword">int</span> rows, <span class="keyword">int</span> columns, <span class="keyword">int</span> number)</span></span>&#123;</span><br><span class="line">    <span class="keyword">bool</span> found = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(matrix != <span class="literal">nullptr</span> &amp;&amp; rows &gt; <span class="number">0</span> &amp;&amp; columns &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> row = <span class="number">0</span>;  <span class="comment">// 表示右上角坐标</span></span><br><span class="line">        <span class="keyword">int</span> column = columns - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(row &lt; rows &amp;&amp; column &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(matrix[row * columns + column] == number)&#123;</span><br><span class="line">                found = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(matrix[row * columns + column] &gt; number) column--; <span class="comment">// 大于则剔除列</span></span><br><span class="line">            <span class="keyword">else</span> row++; <span class="comment">// 小于则剔除行</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> found;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>每次如果没有找到，要么列减少，要么行减少，所以总的时间复杂度为 $O(m+n)$。（$m$ $n$ 为矩阵的行和列）</p>
+            <h1>二维数组中的查找</h1>
+<h3>问题描述</h3>
+<p>给一个二维数组，每一行从左到右递增，每一列从上到下递增，给一个整数，判断该整数是否在数组中。</p>
+<h3>思路</h3>
+<p>选取数组的右上角元素进行比较，如果该数字等于要查找的数字，则结束。如果大于，说明要查找元素只可能出现在该列的左侧，故剔除该列后再对剩下数组的右上角元素进行比较。如果小于，说明要查找元素只可能出现在该行的下侧，剔除该行后再对剩余数组的右上角元素进行查找。</p>
+<h3>实现</h3>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span>* matrix, <span class="keyword">int</span> rows, <span class="keyword">int</span> columns, <span class="keyword">int</span> number)</span></span>&#123;</span><br><span class="line">    <span class="keyword">bool</span> found = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(matrix != <span class="literal">nullptr</span> &amp;&amp; rows &gt; <span class="number">0</span> &amp;&amp; columns &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> row = <span class="number">0</span>;  <span class="comment">// 表示右上角坐标</span></span><br><span class="line">        <span class="keyword">int</span> column = columns - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(row &lt; rows &amp;&amp; column &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(matrix[row * columns + column] == number)&#123;</span><br><span class="line">                found = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(matrix[row * columns + column] &gt; number) column--; <span class="comment">// 大于则剔除列</span></span><br><span class="line">            <span class="keyword">else</span> row++; <span class="comment">// 小于则剔除行</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> found;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>复杂度分析</h3>
+<p>每次如果没有找到，要么列减少，要么行减少，所以总的时间复杂度为 $O(m+n)$。（$m$ $n$ 为矩阵的行和列）</p>
 
           
         
@@ -1189,21 +1219,32 @@
       
         
           
-            <h1 id="数组中的重复数字"><a href="#数组中的重复数字" class="headerlink" title="数组中的重复数字"></a>数组中的重复数字</h1><h2 id="题目一：找出数组中的重复数字"><a href="#题目一：找出数组中的重复数字" class="headerlink" title="题目一：找出数组中的重复数字"></a>题目一：找出数组中的重复数字</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>长度为 $n$ 的数组中所有数字都在 $0$ ~ $n-1$ 范围内，找出任意重复数字。</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
+            <h1>数组中的重复数字</h1>
+<h2>题目一：找出数组中的重复数字</h2>
+<h3>问题描述</h3>
+<p>长度为 $n$ 的数组中所有数字都在 $0$ ~ $n-1$ 范围内，找出任意重复数字。</p>
+<h3>思路</h3>
+<ul>
 <li>可以先排序，后遍历数组，找出重复元素。时间复杂度 $O(nlogn)$</li>
 <li>还可以使用哈希表，从头到尾扫描数组，对每一个元素都可以用 $O(1)$ 时间判断哈希表中是否含有该元素。如果没有，就加入该元素，如果有，就说明找到了重复数字。其时间复杂度为 $O(n)$，需要一个 $O(n)$ 的哈希表，空间复杂度也是 $O(n)$。</li>
-<li>从头到尾扫描数组，扫描下标为 $i$ ，首先判断 $i$ 是否等于扫描的数字（记为$m$），如果相等则继续，否则判断 $m$ 和处于第 $m$ 位的数字是否相等，如果相等则表明出现了重复数字，不相等则交换 $m$ 和 $i$ ，重复对当前数的判断。<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">duplicate</span><span class="params">(<span class="keyword">int</span> numbers[], <span class="keyword">int</span> length, <span class="keyword">int</span>* duplication)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(numbers == <span class="literal">nullptr</span> || length &lt;= <span class="number">0</span>) <span class="comment">// 无效输入测试用例：输入空指针</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) <span class="comment">// 无效输入测试用例：数组包含 0~n-1 以外的数字</span></span><br><span class="line">        <span class="keyword">if</span>(numbers[i] &lt; <span class="number">0</span> || numbers[i] &gt;= length - <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++)&#123; <span class="comment">// 从头到尾扫描数组</span></span><br><span class="line">        <span class="keyword">while</span>(numbers[i] != i)&#123;  <span class="comment">// 判断扫描的数字numbers[i]与下标i是否相等，相等时重复for循环，不相等时执行以下语句</span></span><br><span class="line">            <span class="keyword">if</span>(numbers[i] == numbers[numbers[i]])&#123; <span class="comment">// 表明m与第m位数字相等，此时发现重复数字</span></span><br><span class="line">                *duplication = numbers[i];</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 到此时说明m与第m位数字不相等，则两者交换</span></span><br><span class="line">            <span class="keyword">int</span> temp = numbers[i];</span><br><span class="line">            numbers[i] = numbers[temp];</span><br><span class="line">            numbers[temp] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;  <span class="comment">// 循环结束，说明没有重复元素</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li>从头到尾扫描数组，扫描下标为 $i$ ，首先判断 $i$ 是否等于扫描的数字（记为$m$），如果相等则继续，否则判断 $m$ 和处于第 $m$ 位的数字是否相等，如果相等则表明出现了重复数字，不相等则交换 $m$ 和 $i$ ，重复对当前数的判断。</li>
 </ul>
-<h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>尽管有两重循环，但是每个数字最多只要进行两次交换即可到位，因此总的时间复杂度为 $O(n)$。操作未用额外的空间，故空间复杂度为 $O(1)$。</p>
-<h2 id="题目二：不修改数组找出重复的数字"><a href="#题目二：不修改数组找出重复的数字" class="headerlink" title="题目二：不修改数组找出重复的数字"></a>题目二：不修改数组找出重复的数字</h2><h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><p>数组长度为 $n+1$，所有数字都在 $1$ ~ $n$ 范围内，要求不能修改原数组找出重复元素。</p>
-<h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><ul>
+<h3>实现</h3>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">duplicate</span><span class="params">(<span class="keyword">int</span> numbers[], <span class="keyword">int</span> length, <span class="keyword">int</span>* duplication)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(numbers == <span class="literal">nullptr</span> || length &lt;= <span class="number">0</span>) <span class="comment">// 无效输入测试用例：输入空指针</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) <span class="comment">// 无效输入测试用例：数组包含 0~n-1 以外的数字</span></span><br><span class="line">        <span class="keyword">if</span>(numbers[i] &lt; <span class="number">0</span> || numbers[i] &gt;= length - <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++)&#123; <span class="comment">// 从头到尾扫描数组</span></span><br><span class="line">        <span class="keyword">while</span>(numbers[i] != i)&#123;  <span class="comment">// 判断扫描的数字numbers[i]与下标i是否相等，相等时重复for循环，不相等时执行以下语句</span></span><br><span class="line">            <span class="keyword">if</span>(numbers[i] == numbers[numbers[i]])&#123; <span class="comment">// 表明m与第m位数字相等，此时发现重复数字</span></span><br><span class="line">                *duplication = numbers[i];</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 到此时说明m与第m位数字不相等，则两者交换</span></span><br><span class="line">            <span class="keyword">int</span> temp = numbers[i];</span><br><span class="line">            numbers[i] = numbers[temp];</span><br><span class="line">            numbers[temp] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;  <span class="comment">// 循环结束，说明没有重复元素</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>复杂度分析</h3>
+<p>尽管有两重循环，但是每个数字最多只要进行两次交换即可到位，因此总的时间复杂度为 $O(n)$。操作未用额外的空间，故空间复杂度为 $O(1)$。</p>
+<h2>题目二：不修改数组找出重复的数字</h2>
+<h3>问题描述</h3>
+<p>数组长度为 $n+1$，所有数字都在 $1$ ~ $n$ 范围内，要求不能修改原数组找出重复元素。</p>
+<h3>思路</h3>
+<ul>
 <li>可以开辟一个辅助数组，将原数组的元素 $m$ 复制到新数组第 $m$ 位处。空间复杂度为 $O(n)$。</li>
-<li>为了降低空间复杂度，考虑使用二分法，$1$ ~ $n$ 分为 $1$ ~ $m$ 和 $m+1$ ~ $n$ 两部分，如果整个数组元素在 $1$ ~ $m$ 范围中的计数大于 $m$，说明该范围内含有重复数字，对于后半部分同理。然后再对前半部分或后半部分进行二分处理。<h3 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getDuplication</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>* numbers, <span class="keyword">int</span> length)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(numbers == <span class="literal">nullptr</span> || length &lt;= <span class="number">0</span>) <span class="comment">// 输入不能为空指针</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> start = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> end = length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(end &gt;= start)&#123;</span><br><span class="line">        <span class="keyword">int</span> middle = ((end - start) &gt;&gt; <span class="number">1</span>) + start;</span><br><span class="line">        <span class="comment">// 查找在范围内的数字个数</span></span><br><span class="line">        <span class="keyword">int</span> count = countRange(numbers, length, start, middle);</span><br><span class="line">        <span class="keyword">if</span>(end == start)&#123;  <span class="comment">// 范围中只有一个数</span></span><br><span class="line">            <span class="keyword">if</span>(count &gt; <span class="number">1</span>) <span class="keyword">return</span> start; <span class="comment">// 该数出现的次数大于1，说明重复</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(count &gt; (mi - start + <span class="number">1</span>)) <span class="comment">// 在前半部分出现的元素次数大于前半部分范围数</span></span><br><span class="line">            end = middle;</span><br><span class="line">        <span class="keyword">else</span> start = middle + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">countRange</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>* numbers, <span class="keyword">int</span> length, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(numbers == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++)</span><br><span class="line">        <span class="keyword">if</span>(numbers[i] &gt;= start &amp;&amp; numbers[i] &lt;= end)</span><br><span class="line">            count++;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li>为了降低空间复杂度，考虑使用二分法，$1$ ~ $n$ 分为 $1$ ~ $m$ 和 $m+1$ ~ $n$ 两部分，如果整个数组元素在 $1$ ~ $m$ 范围中的计数大于 $m$，说明该范围内含有重复数字，对于后半部分同理。然后再对前半部分或后半部分进行二分处理。</li>
 </ul>
-<h3 id="复杂度分析-1"><a href="#复杂度分析-1" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>$countRange$ 函数要调用 $O(logn)$ 次，每次需要 $O(n)$ 时间，总的时间复杂度是 $O(nlong(n))$，空间复杂度为 $O(1)$。与之前的方法相比属于用时间换空间。</p>
+<h3>实现</h3>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getDuplication</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>* numbers, <span class="keyword">int</span> length)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(numbers == <span class="literal">nullptr</span> || length &lt;= <span class="number">0</span>) <span class="comment">// 输入不能为空指针</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> start = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> end = length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(end &gt;= start)&#123;</span><br><span class="line">        <span class="keyword">int</span> middle = ((end - start) &gt;&gt; <span class="number">1</span>) + start;</span><br><span class="line">        <span class="comment">// 查找在范围内的数字个数</span></span><br><span class="line">        <span class="keyword">int</span> count = countRange(numbers, length, start, middle);</span><br><span class="line">        <span class="keyword">if</span>(end == start)&#123;  <span class="comment">// 范围中只有一个数</span></span><br><span class="line">            <span class="keyword">if</span>(count &gt; <span class="number">1</span>) <span class="keyword">return</span> start; <span class="comment">// 该数出现的次数大于1，说明重复</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(count &gt; (mi - start + <span class="number">1</span>)) <span class="comment">// 在前半部分出现的元素次数大于前半部分范围数</span></span><br><span class="line">            end = middle;</span><br><span class="line">        <span class="keyword">else</span> start = middle + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">countRange</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>* numbers, <span class="keyword">int</span> length, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(numbers == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++)</span><br><span class="line">        <span class="keyword">if</span>(numbers[i] &gt;= start &amp;&amp; numbers[i] &lt;= end)</span><br><span class="line">            count++;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>复杂度分析</h3>
+<p>$countRange$ 函数要调用 $O(logn)$ 次，每次需要 $O(n)$ 时间，总的时间复杂度是 $O(nlong(n))$，空间复杂度为 $O(1)$。与之前的方法相比属于用时间换空间。</p>
 <p>但是注意这个算法不能保证找到所有重复数字。比如他不能找出 { $2,3,5,4,3,2,6,7$ }中的重复数字 $2$（$3$ 是可以找到的）。这是因为在 $1$ ~ $2$ 中刚好有两个数字，所以无法确定是每个数字出现了一次还是其中的一个数字出现了两次。</p>
 
           
@@ -1357,18 +1398,26 @@
       
         
           
-            <h1 id="6-004-Fall-2015-L11-Compilers"><a href="#6-004-Fall-2015-L11-Compilers" class="headerlink" title="6.004 Fall 2015 L11: Compilers"></a>6.004 Fall 2015 L11: Compilers</h1><h2 id="Implementations-Interpretation-vs-compilation"><a href="#Implementations-Interpretation-vs-compilation" class="headerlink" title="Implementations: Interpretation vs compilation"></a>Implementations: Interpretation vs compilation</h2><h3 id="Interpretation"><a href="#Interpretation" class="headerlink" title="Interpretation"></a>Interpretation</h3><h4 id="Model-of-Interpretation"><a href="#Model-of-Interpretation" class="headerlink" title="Model of Interpretation:"></a>Model of Interpretation:</h4><p><img src="/images/Model_of_Interpretation.png" alt=""></p>
+            <h1>6.004 Fall 2015 L11: Compilers</h1>
+<h2>Implementations: Interpretation vs compilation</h2>
+<h3>Interpretation</h3>
+<h4>Model of Interpretation:</h4>
+<p><img src="/images/Model_of_Interpretation.png" alt=""></p>
 <ul>
 <li>Start with some hard-to-program machine, say $M_1$</li>
 <li>Write a single program for $M_1$ that mimics the behavior of some easier machine, $M_2$</li>
-<li>Result: a “virtual” $M_2$ </li>
+<li>Result: a &quot;virtual&quot; $M_2$</li>
 </ul>
-<h4 id="Layers-of-interpretation"><a href="#Layers-of-interpretation" class="headerlink" title="Layers of interpretation:"></a>Layers of interpretation:</h4><p><img src="/images/Layers_of_interpretation.png" alt=""></p>
+<h4>Layers of interpretation:</h4>
+<p><img src="/images/Layers_of_interpretation.png" alt=""></p>
 <ul>
 <li>Often we use several layers of interpretation to achieve desired behavior.</li>
-<li>x86 CPU, running <ul>
-<li>Python, running<ul>
-<li>Application, interpreting<ul>
+<li>x86 CPU, running
+<ul>
+<li>Python, running
+<ul>
+<li>Application, interpreting
+<ul>
 <li>Data.</li>
 </ul>
 </li>
@@ -1377,11 +1426,13 @@
 </ul>
 </li>
 </ul>
-<h3 id="Compilation"><a href="#Compilation" class="headerlink" title="Compilation"></a>Compilation</h3><h4 id="Model-of-Compilation"><a href="#Model-of-Compilation" class="headerlink" title="Model of Compilation"></a>Model of Compilation</h4><p><img src="/images/Model_of_Compilation.png" alt=""></p>
+<h3>Compilation</h3>
+<h4>Model of Compilation</h4>
+<p><img src="/images/Model_of_Compilation.png" alt=""></p>
 <ul>
-<li>Given some hard-to-program machine, say $M_1$…</li>
+<li>Given some hard-to-program machine, say $M_1$...</li>
 <li>Find some easier-to-program language $L_2$ (perhaps for a more complicated machine, $M_2$); write programs in that language</li>
-<li>Build a translator (compiler) that translates programs from $M_2$$’s$ language to $M_1$$’s$ language. May run on $M_1$, $M_2$, or some other machine. </li>
+<li>Build a translator (compiler) that translates programs from $M_2$$'s$ language to $M_1$$'s$ language. May run on $M_1$, $M_2$, or some other machine.</li>
 </ul>
 <p>Interpretation and compilation: two ways to execute high-level languages</p>
 <ul>
@@ -1389,7 +1440,8 @@
 <li><code>Both</code> afford programming applications in platform (e.g., processor) independent languages</li>
 <li><code>Both</code> are widely used in modern computer systems!</li>
 </ul>
-<h2 id="Interpretation-vs-Compilation"><a href="#Interpretation-vs-Compilation" class="headerlink" title="Interpretation vs Compilation"></a>Interpretation vs Compilation</h2><ul>
+<h2>Interpretation vs Compilation</h2>
+<ul>
 <li>Characteristic differences:</li>
 </ul>
 <table>
@@ -1402,7 +1454,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">How it treats input “x+2”</td>
+<td style="text-align:center">How it treats input &quot;x+2&quot;</td>
 <td style="text-align:center">Computes x+2</td>
 <td style="text-align:center">Generates a program that computes x+2</td>
 </tr>
@@ -1424,29 +1476,36 @@
 </tbody>
 </table>
 <ul>
-<li>Major choice we’ll see repeatedly: do it at compile time or at un time?<ul>
+<li>Major choice we'll see repeatedly: do it at compile time or at un time?
+<ul>
 <li>Which is faster?</li>
 <li>Which is more general?</li>
 </ul>
 </li>
 </ul>
-<h2 id="Compilers"><a href="#Compilers" class="headerlink" title="Compilers"></a>Compilers</h2><ul>
-<li>Bare minimum for a functional compiler:<br><img src="/images/Compilers.png" alt=""></li>
-<li>Good compilers:<ul>
-<li>Produce meaningful errors on incorrect programs<ul>
+<h2>Compilers</h2>
+<ul>
+<li>Bare minimum for a functional compiler:
+<img src="/images/Compilers.png" alt=""></li>
+<li>Good compilers:
+<ul>
+<li>Produce meaningful errors on incorrect programs
+<ul>
 <li>Even better: meaningful warnings</li>
 </ul>
 </li>
 <li>Produce fast, optimized code</li>
 </ul>
 </li>
-<li>This lecture:<ul>
+<li>This lecture:
+<ul>
 <li>Simple techniques to compile a C procedure into assembly</li>
 <li>Overview of how modern compilers work</li>
 </ul>
 </li>
 </ul>
-<h2 id="Anatomy-of-a-Modern-Compiler"><a href="#Anatomy-of-a-Modern-Compiler" class="headerlink" title="Anatomy of a Modern Compiler"></a>Anatomy of a Modern Compiler</h2><p><img src="/images/anatomy.png" alt=""></p>
+<h2>Anatomy of a Modern Compiler</h2>
+<p><img src="/images/anatomy.png" alt=""></p>
 <table>
 <thead>
 <tr>
@@ -1469,75 +1528,104 @@
 </tr>
 <tr>
 <td style="text-align:left">Translate to generic <code>intermediate representation(IR)</code></td>
+<td style="text-align:left"></td>
 </tr>
 </tbody>
 </table>
-<h2 id="Frontend-Stages"><a href="#Frontend-Stages" class="headerlink" title="Frontend Stages"></a>Frontend Stages</h2><ul>
-<li>Lexical analysis (scanning): Source -&gt; List of tokens<br><img src="/images/lexical.png" alt=""></li>
-<li>Syntactic analysis (parsing): Tokens -&gt; Syntax tree<br><img src="/images/syntactic.png" alt=""></li>
-<li>Semantic analysis (mainly, type checking)<br><img src="/images/semantic.png" alt=""></li>
+<h2>Frontend Stages</h2>
+<ul>
+<li>Lexical analysis (scanning): Source -&gt; List of tokens
+<img src="/images/lexical.png" alt=""></li>
+<li>Syntactic analysis (parsing): Tokens -&gt; Syntax tree
+<img src="/images/syntactic.png" alt=""></li>
+<li>Semantic analysis (mainly, type checking)
+<img src="/images/semantic.png" alt=""></li>
 </ul>
-<h2 id="Intermediate-Representation-IR"><a href="#Intermediate-Representation-IR" class="headerlink" title="Intermediate Representation (IR)"></a>Intermediate Representation (IR)</h2><ul>
-<li>Internal compiler language that is:<ul>
+<h2>Intermediate Representation (IR)</h2>
+<ul>
+<li>Internal compiler language that is:
+<ul>
 <li>Language-independent</li>
 <li>Machine-independent</li>
-<li>Easy to optimize<br><img src="/images/IR.png" alt=""></li>
+<li>Easy to optimize
+<img src="/images/IR.png" alt=""></li>
 </ul>
 </li>
-<li>Why yet another language?<ul>
+<li>Why yet another language?
+<ul>
 <li>Assembly does not have enough info to optimize it well</li>
-<li>Enables modularity and reuse<br><img src="/images/reuse.png" alt=""></li>
+<li>Enables modularity and reuse
+<img src="/images/reuse.png" alt=""></li>
 </ul>
 </li>
 </ul>
-<h2 id="Common-IR-Control-Flow-Graph"><a href="#Common-IR-Control-Flow-Graph" class="headerlink" title="Common IR: Control Flow Graph"></a>Common IR: Control Flow Graph</h2><ul>
-<li>Assignments:<br><img src="/images/assignment.png" alt=""></li>
-<li><p>Basic block: Sequence of assignments with an optional branch at the end\<br><img src="/images/block.png" alt=""></p>
+<h2>Common IR: Control Flow Graph</h2>
+<ul>
+<li>
+<p>Assignments:
+<img src="/images/assignment.png" alt=""></p>
 </li>
-<li><p>Control flow graph:</p>
+<li>
+<p>Basic block: Sequence of assignments with an optional branch at the end<br>
+<img src="/images/block.png" alt=""></p>
+</li>
+<li>
+<p>Control flow graph:</p>
 <ul>
 <li>Nodes: Basic blocks</li>
-<li>Edges: Jumps or branches between basic blocks </li>
+<li>Edges: Jumps or branches between basic blocks</li>
 </ul>
 </li>
 </ul>
-<h2 id="Control-Flow-Graph-for-GCD"><a href="#Control-Flow-Graph-for-GCD" class="headerlink" title="Control Flow Graph for GCD"></a>Control Flow Graph for GCD</h2><p><img src="/images\graph_GCD.png" alt=""></p>
-<h2 id="IR-Optimization"><a href="#IR-Optimization" class="headerlink" title="IR Optimization"></a>IR Optimization</h2><ul>
-<li>Perform a set of passes over the CFG<ul>
+<h2>Control Flow Graph for GCD</h2>
+<p><img src="/images%5Cgraph_GCD.png" alt=""></p>
+<h2>IR Optimization</h2>
+<ul>
+<li>Perform a set of passes over the CFG
+<ul>
 <li>Each pass does a specific, simple task over the CFG</li>
 <li>By repeating multiple simple passes on the CFG over and over, compilers achieve very complex optimizations</li>
 </ul>
 </li>
-<li>Example optimizations:<ul>
+<li>Example optimizations:
+<ul>
 <li>Dead code elimination: Eliminate assignments to variables that are never used, or basic blocks that are never reached</li>
 <li>Constant propagation: Identify variables that are constant, substitute the constant elsewhere</li>
 <li>Constant folding: Compute and substitute constant expressions</li>
 </ul>
 </li>
 </ul>
-<h2 id="Example-IR-Optimizations"><a href="#Example-IR-Optimizations" class="headerlink" title="Example IR Optimizations"></a>Example IR Optimizations</h2><p><img src="/images/IR_opt.png" alt=""><br><img src="/images/IR_done.png" alt=""></p>
+<h2>Example IR Optimizations</h2>
+<p><img src="/images/IR_opt.png" alt="">
+<img src="/images/IR_done.png" alt=""></p>
 <ul>
-<li>More optimizations by adding passes: Common subexpression elimination, loop-invariant code motion, loop unrolling…</li>
+<li>More optimizations by adding passes: Common subexpression elimination, loop-invariant code motion, loop unrolling...</li>
 </ul>
-<h2 id="Code-Generation"><a href="#Code-Generation" class="headerlink" title="Code Generation"></a>Code Generation</h2><ul>
+<h2>Code Generation</h2>
+<ul>
 <li>Translate generated IR to assembly</li>
-<li>Register allocation: Map variables to registers<ul>
+<li>Register allocation: Map variables to registers
+<ul>
 <li>If variables &gt; registers, map some to memory, and load/store them when needed</li>
 </ul>
 </li>
-<li>Translate each assignment to instructions<ul>
-<li>Some assignments may require &gt; 1 instr if our ISA doesn’t have op</li>
+<li>Translate each assignment to instructions
+<ul>
+<li>Some assignments may require &gt; 1 instr if our ISA doesn't have op</li>
 </ul>
 </li>
 <li>Emit each basic block: label, assignments, and branch or jump</li>
 <li>Lay out basic blocks, removing superfluous jumps</li>
-<li>ISA and CPU-specific optimizations<ul>
+<li>ISA and CPU-specific optimizations
+<ul>
 <li>e.g., I possible, reorder instructions to improve performance</li>
 </ul>
 </li>
 </ul>
-<h2 id="Putting-it-All-Together-GCD"><a href="#Putting-it-All-Together-GCD" class="headerlink" title="Putting it All Together: GCD"></a>Putting it All Together: GCD</h2><p><img src="/images/all_together.png" alt=""></p>
-<h2 id="Summary-Modern-Compilers"><a href="#Summary-Modern-Compilers" class="headerlink" title="Summary: Modern Compilers"></a>Summary: Modern Compilers</h2><p><img src="/images/summary.png" alt=""></p>
+<h2>Putting it All Together: GCD</h2>
+<p><img src="/images/all_together.png" alt=""></p>
+<h2>Summary: Modern Compilers</h2>
+<p><img src="/images/summary.png" alt=""></p>
 
           
         
@@ -1690,30 +1778,44 @@
       
         
           
-            <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>Given the preorder traversal sequence and postorder traversal sequence of a binary tree, we cannot determine the binary tree.<br><img src="https://dsa.cs.tsinghua.edu.cn/oj/attachment/7c7a/7c7a319cffe20865fa728afcdfccbccac25eeb46.png" alt="Figure1"><br>But for one proper binary tree, in which each internal node has two sons, we can uniquely determine it through its given preorder traversal sequence and postorder traversal sequence.</p>
+            <h1>Description</h1>
+<p>Given the preorder traversal sequence and postorder traversal sequence of a binary tree, we cannot determine the binary tree.
+<img src="https://dsa.cs.tsinghua.edu.cn/oj/attachment/7c7a/7c7a319cffe20865fa728afcdfccbccac25eeb46.png" alt="Figure1">
+But for one proper binary tree, in which each internal node has two sons, we can uniquely determine it through its given preorder traversal sequence and postorder traversal sequence.</p>
 <p>Label n nodes in one binary tree using the integers in [1, n], we would like to output the inorder traversal sequence of a binary tree through its preorder and postorder traversal sequence.</p>
-<h1 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h1><ul>
+<h1>Input</h1>
+<ul>
 <li>1st line: integer n, the number of nodes in one given binary tree.</li>
-<li>2nd and 3rd: preorder and postorder traversal sequence </li>
+<li>2nd and 3rd: preorder and postorder traversal sequence</li>
 </ul>
-<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><ul>
-<li><p>Input</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">1 2 4 5 3</span><br><span class="line">4 5 2 3 1</span><br></pre></td></tr></table></figure>
+<h1>Example</h1>
+<ul>
+<li>
+<p>Input
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">1 2 4 5 3</span><br><span class="line">4 5 2 3 1</span><br></pre></td></tr></table></figure></p>
 </li>
-<li><p>Output</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4 2 5 1 3</span><br></pre></td></tr></table></figure>
+<li>
+<p>Output
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4 2 5 1 3</span><br></pre></td></tr></table></figure></p>
 </li>
 </ul>
-<h1 id="Restrictions"><a href="#Restrictions" class="headerlink" title="Restrictions"></a>Restrictions</h1><ul>
+<h1>Restrictions</h1>
+<ul>
 <li>95% 1 &lt;= n &lt;= 1,000,000</li>
 <li>100% 1 &lt;= n &lt;= 4,000,000</li>
-<li>input sequence is a permutation of {1,2,…,n}, corresponding to a legal binary tree.</li>
+<li>input sequence is a permutation of {1,2,...,n}, corresponding to a legal binary tree.</li>
 <li>Time: 2s</li>
 <li>Memory: 256 MB</li>
 </ul>
-<h1 id="Hints"><a href="#Hints" class="headerlink" title="Hints"></a>Hints</h1><p><img src="https://dsa.cs.tsinghua.edu.cn/oj/attachment/047a/047a8ca961ff072a77e1429242c82031dc92851f.png" alt="Hints"><br>observe the positions of the left and right children in preorder and postorder traversal sequence.</p>
-<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>Note that the preordr is [PL…R…], whereas postorder is […L…RP].<br>So that we can determine the left child and right child for root P. Use recursion to build a tree. These inorder traverse the tree.</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Tree</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> data = <span class="number">0</span>;</span><br><span class="line">	Tree* lchild = <span class="literal">NULL</span>;</span><br><span class="line">	Tree* rchild = <span class="literal">NULL</span>;</span><br><span class="line">	Tree() &#123;&#125;</span><br><span class="line">	Tree(<span class="keyword">int</span> d) : data(d) &#123; lchild = <span class="literal">NULL</span>; rchild = <span class="literal">NULL</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">buildtree</span><span class="params">(Tree* root, <span class="keyword">int</span> preorder[], <span class="keyword">int</span> postorder[], <span class="keyword">int</span> size)</span> </span>&#123; <span class="comment">// initial size is 5</span></span><br><span class="line">	<span class="keyword">if</span> (size == <span class="number">1</span>) &#123;</span><br><span class="line">		root-&gt;lchild = <span class="literal">NULL</span>;</span><br><span class="line">		root-&gt;rchild = <span class="literal">NULL</span>;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> left = preorder[<span class="number">1</span>];    <span class="comment">// left is 2</span></span><br><span class="line">	<span class="keyword">int</span> right = postorder[size - <span class="number">2</span>];  <span class="comment">// right is 3</span></span><br><span class="line">	<span class="keyword">int</span> preright = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (preorder[preright++] != right);  <span class="comment">// preright is 5</span></span><br><span class="line">	<span class="keyword">int</span> leftsize = preright - <span class="number">2</span>;   <span class="comment">// leftsize is 3</span></span><br><span class="line">	<span class="keyword">int</span> rightsize = size - <span class="number">1</span> - leftsize;  <span class="comment">// rightsize is 1 </span></span><br><span class="line">	<span class="keyword">int</span> *preLeft = <span class="keyword">new</span> <span class="keyword">int</span>[leftsize];    </span><br><span class="line">	<span class="keyword">int</span> *preRight = <span class="keyword">new</span> <span class="keyword">int</span>[rightsize];</span><br><span class="line">	<span class="keyword">int</span> *postLeft = <span class="keyword">new</span> <span class="keyword">int</span>[leftsize];</span><br><span class="line">	<span class="keyword">int</span> *postRight = <span class="keyword">new</span> <span class="keyword">int</span>[rightsize];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>, j = <span class="number">0</span>; i &lt; preright - <span class="number">1</span>; i++) preLeft[j++] = preorder[i];       <span class="comment">// i = [1, 3]  [2,4,5]</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = preright - <span class="number">1</span>, j = <span class="number">0</span>; i &lt; size; i++) preRight[j++] = preorder[i];   <span class="comment">// i = [4, 4]  [3]</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>; i &lt; leftsize; i++) postLeft[j++] = postorder[i];         <span class="comment">// i = [0, 2]  [4,5,2]</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = leftsize, j = <span class="number">0</span>; i &lt; size - <span class="number">1</span>; i++) postRight[j++] = postorder[i]; <span class="comment">// i = [3, 3]  [3]</span></span><br><span class="line">	root-&gt;lchild = <span class="keyword">new</span> Tree(preLeft[<span class="number">0</span>]);</span><br><span class="line">	root-&gt;rchild = <span class="keyword">new</span> Tree(preRight[<span class="number">0</span>]);</span><br><span class="line">	buildtree(root-&gt;lchild, preLeft, postLeft, leftsize);     <span class="comment">// leftsize is 3</span></span><br><span class="line">	<span class="keyword">delete</span>[] preLeft;</span><br><span class="line">	<span class="keyword">delete</span>[] postLeft;</span><br><span class="line">	buildtree(root-&gt;rchild, preRight, postRight, rightsize);  <span class="comment">// rightsize is 1</span></span><br><span class="line">	<span class="keyword">delete</span>[] preRight;</span><br><span class="line">	<span class="keyword">delete</span>[] postRight;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">inorder</span><span class="params">(Tree* root)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (root == <span class="literal">NULL</span>)<span class="keyword">return</span>;</span><br><span class="line">	inorder(root-&gt;lchild);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d "</span>, root-&gt;data);</span><br><span class="line">	inorder(root-&gt;rchild);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);  <span class="comment">// n is the number of nodes in the tree</span></span><br><span class="line">	<span class="keyword">int</span> *preorder = <span class="keyword">new</span> <span class="keyword">int</span>[n];   <span class="comment">// preorder sequence</span></span><br><span class="line">	<span class="keyword">int</span> *postorder = <span class="keyword">new</span> <span class="keyword">int</span>[n];  <span class="comment">// postorder sequence</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;preorder[i]);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;postorder[i]);</span><br><span class="line">	<span class="comment">//  preorder: [PL...R...]</span></span><br><span class="line">	<span class="comment">//  postorder:[...L...RP]</span></span><br><span class="line">	Tree* root = <span class="keyword">new</span> Tree(preorder[<span class="number">0</span>]);</span><br><span class="line">	buildtree(root, preorder, postorder, n);</span><br><span class="line">	inorder(root);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1>Hints</h1>
+<p><img src="https://dsa.cs.tsinghua.edu.cn/oj/attachment/047a/047a8ca961ff072a77e1429242c82031dc92851f.png" alt="Hints">
+observe the positions of the left and right children in preorder and postorder traversal sequence.</p>
+<h1>Idea</h1>
+<p>Note that the preordr is [PL...R...], whereas postorder is [...L...RP].
+So that we can determine the left child and right child for root P. Use recursion to build a tree. These inorder traverse the tree.</p>
+<h1>Code</h1>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Tree</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> data = <span class="number">0</span>;</span><br><span class="line">	Tree* lchild = <span class="literal">NULL</span>;</span><br><span class="line">	Tree* rchild = <span class="literal">NULL</span>;</span><br><span class="line">	Tree() &#123;&#125;</span><br><span class="line">	Tree(<span class="keyword">int</span> d) : data(d) &#123; lchild = <span class="literal">NULL</span>; rchild = <span class="literal">NULL</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">buildtree</span><span class="params">(Tree* root, <span class="keyword">int</span> preorder[], <span class="keyword">int</span> postorder[], <span class="keyword">int</span> size)</span> </span>&#123; <span class="comment">// initial size is 5</span></span><br><span class="line">	<span class="keyword">if</span> (size == <span class="number">1</span>) &#123;</span><br><span class="line">		root-&gt;lchild = <span class="literal">NULL</span>;</span><br><span class="line">		root-&gt;rchild = <span class="literal">NULL</span>;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> left = preorder[<span class="number">1</span>];    <span class="comment">// left is 2</span></span><br><span class="line">	<span class="keyword">int</span> right = postorder[size - <span class="number">2</span>];  <span class="comment">// right is 3</span></span><br><span class="line">	<span class="keyword">int</span> preright = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (preorder[preright++] != right);  <span class="comment">// preright is 5</span></span><br><span class="line">	<span class="keyword">int</span> leftsize = preright - <span class="number">2</span>;   <span class="comment">// leftsize is 3</span></span><br><span class="line">	<span class="keyword">int</span> rightsize = size - <span class="number">1</span> - leftsize;  <span class="comment">// rightsize is 1 </span></span><br><span class="line">	<span class="keyword">int</span> *preLeft = <span class="keyword">new</span> <span class="keyword">int</span>[leftsize];    </span><br><span class="line">	<span class="keyword">int</span> *preRight = <span class="keyword">new</span> <span class="keyword">int</span>[rightsize];</span><br><span class="line">	<span class="keyword">int</span> *postLeft = <span class="keyword">new</span> <span class="keyword">int</span>[leftsize];</span><br><span class="line">	<span class="keyword">int</span> *postRight = <span class="keyword">new</span> <span class="keyword">int</span>[rightsize];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>, j = <span class="number">0</span>; i &lt; preright - <span class="number">1</span>; i++) preLeft[j++] = preorder[i];       <span class="comment">// i = [1, 3]  [2,4,5]</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = preright - <span class="number">1</span>, j = <span class="number">0</span>; i &lt; size; i++) preRight[j++] = preorder[i];   <span class="comment">// i = [4, 4]  [3]</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>; i &lt; leftsize; i++) postLeft[j++] = postorder[i];         <span class="comment">// i = [0, 2]  [4,5,2]</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = leftsize, j = <span class="number">0</span>; i &lt; size - <span class="number">1</span>; i++) postRight[j++] = postorder[i]; <span class="comment">// i = [3, 3]  [3]</span></span><br><span class="line">	root-&gt;lchild = <span class="keyword">new</span> Tree(preLeft[<span class="number">0</span>]);</span><br><span class="line">	root-&gt;rchild = <span class="keyword">new</span> Tree(preRight[<span class="number">0</span>]);</span><br><span class="line">	buildtree(root-&gt;lchild, preLeft, postLeft, leftsize);     <span class="comment">// leftsize is 3</span></span><br><span class="line">	<span class="keyword">delete</span>[] preLeft;</span><br><span class="line">	<span class="keyword">delete</span>[] postLeft;</span><br><span class="line">	buildtree(root-&gt;rchild, preRight, postRight, rightsize);  <span class="comment">// rightsize is 1</span></span><br><span class="line">	<span class="keyword">delete</span>[] preRight;</span><br><span class="line">	<span class="keyword">delete</span>[] postRight;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">inorder</span><span class="params">(Tree* root)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (root == <span class="literal">NULL</span>)<span class="keyword">return</span>;</span><br><span class="line">	inorder(root-&gt;lchild);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d "</span>, root-&gt;data);</span><br><span class="line">	inorder(root-&gt;rchild);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);  <span class="comment">// n is the number of nodes in the tree</span></span><br><span class="line">	<span class="keyword">int</span> *preorder = <span class="keyword">new</span> <span class="keyword">int</span>[n];   <span class="comment">// preorder sequence</span></span><br><span class="line">	<span class="keyword">int</span> *postorder = <span class="keyword">new</span> <span class="keyword">int</span>[n];  <span class="comment">// postorder sequence</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;preorder[i]);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;postorder[i]);</span><br><span class="line">	<span class="comment">//  preorder: [PL...R...]</span></span><br><span class="line">	<span class="comment">//  postorder:[...L...RP]</span></span><br><span class="line">	Tree* root = <span class="keyword">new</span> Tree(preorder[<span class="number">0</span>]);</span><br><span class="line">	buildtree(root, preorder, postorder, n);</span><br><span class="line">	inorder(root);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
           
         
       
@@ -1865,44 +1967,61 @@
       
         
           
-            <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>Figure below shows the structure of a station for train dispatching<br><img src="https://dsa.cs.tsinghua.edu.cn/oj/attachment/03bc/03bc70595803464554b5f6b69a21962beb038264.png" alt="Train"><br>A is the entrance and B is the exit. S is the transfer end. All single tracks are one-way, which means that the train can enter the station from A to S, and pull out from S to B. Note that the overtaking is not allowed. Because of the limited capacity of S, no more than m compartments can reside at S simultaneously.<br>Assume that a train consist of n compartments labeled {1,2,…,n}. A dispatcher wants to know whether these compartments can pull out at B in the order of {a1, a2, … an}(a sequence). If can, in what order he should operate it?</p>
-<h1 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h1><ul>
+            <h1>Description</h1>
+<p>Figure below shows the structure of a station for train dispatching
+<img src="https://dsa.cs.tsinghua.edu.cn/oj/attachment/03bc/03bc70595803464554b5f6b69a21962beb038264.png" alt="Train">
+A is the entrance and B is the exit. S is the transfer end. All single tracks are one-way, which means that the train can enter the station from A to S, and pull out from S to B. Note that the overtaking is not allowed. Because of the limited capacity of S, no more than m compartments can reside at S simultaneously.
+Assume that a train consist of n compartments labeled {1,2,...,n}. A dispatcher wants to know whether these compartments can pull out at B in the order of {a1, a2, ... an}(a sequence). If can, in what order he should operate it?</p>
+<h1>Input</h1>
+<ul>
 <li>1st line: two integers n and m.</li>
-<li>2nd line: n integers separated by spaces, which is a permutation of {1,2,…,n}. This is a compartment sequence that is to be judged regarding the feasibility.</li>
+<li>2nd line: n integers separated by spaces, which is a permutation of {1,2,...,n}. This is a compartment sequence that is to be judged regarding the feasibility.</li>
 </ul>
-<h1 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h1><ul>
-<li>If feasible, output the sequence of operations using “push” and “pop”</li>
-<li>If infeasible, output a “No”</li>
+<h1>Output</h1>
+<ul>
+<li>If feasible, output the sequence of operations using &quot;push&quot; and &quot;pop&quot;</li>
+<li>If infeasible, output a &quot;No&quot;</li>
 </ul>
-<h1 id="Example-1"><a href="#Example-1" class="headerlink" title="Example 1"></a>Example 1</h1><ul>
-<li><p>Input</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5 2</span><br><span class="line">1 2 3 5 4</span><br></pre></td></tr></table></figure>
+<h1>Example 1</h1>
+<ul>
+<li>
+<p>Input
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5 2</span><br><span class="line">1 2 3 5 4</span><br></pre></td></tr></table></figure></p>
 </li>
-<li><p>Output</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">push</span><br><span class="line">pop</span><br><span class="line">push</span><br><span class="line">pop</span><br><span class="line">push</span><br><span class="line">pop</span><br><span class="line">push</span><br><span class="line">push</span><br><span class="line">pop</span><br><span class="line">pop</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="Example-2"><a href="#Example-2" class="headerlink" title="Example 2"></a>Example 2</h1><ul>
-<li><p>Input</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5 5</span><br><span class="line">3 1 2 4 5</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Output</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">No</span><br></pre></td></tr></table></figure>
+<li>
+<p>Output
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">push</span><br><span class="line">pop</span><br><span class="line">push</span><br><span class="line">pop</span><br><span class="line">push</span><br><span class="line">pop</span><br><span class="line">push</span><br><span class="line">push</span><br><span class="line">pop</span><br><span class="line">pop</span><br></pre></td></tr></table></figure></p>
 </li>
 </ul>
-<h1 id="Restrictions"><a href="#Restrictions" class="headerlink" title="Restrictions"></a>Restrictions</h1><ul>
+<h1>Example 2</h1>
+<ul>
+<li>
+<p>Input
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5 5</span><br><span class="line">3 1 2 4 5</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Output
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">No</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<h1>Restrictions</h1>
+<ul>
 <li>1 &lt;= n &lt;= 1,600,000</li>
 <li>0 &lt;= m &lt;= 1,600,000</li>
 <li>Time: 2 s</li>
 <li>Memory: 256MB</li>
 </ul>
-<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>Trivial thought is that enumerate all the possibilities and see whether the output sequence is possible. However time consumption will be unbearable.<br>In my code I use one stack to simulate the stack permutation.</p>
+<h1>Idea</h1>
+<p>Trivial thought is that enumerate all the possibilities and see whether the output sequence is possible. However time consumption will be unbearable.
+In my code I use one stack to simulate the stack permutation.</p>
 <ul>
 <li>given one number in the left list, check whether the top of the Stack equals it.</li>
 <li>If not, push another number into the stack until check succeed or stack is full or numbers are exhausted.</li>
 </ul>
 <p>Note that we only need to check whether the top of the stack equals to current number instead of check the whole stack.</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Stack</span> &#123;</span>            <span class="comment">// form a stack</span></span><br><span class="line">	<span class="keyword">int</span>* nums;<span class="comment">// stack that implemented using array</span></span><br><span class="line">	<span class="keyword">int</span> size = <span class="number">-1</span>;      <span class="comment">// current size, also used to denote the top of the stack</span></span><br><span class="line">	<span class="keyword">int</span> maxSize = <span class="number">0</span>;    <span class="comment">// max size, defined by the input</span></span><br><span class="line">	Stack() &#123;&#125;   <span class="comment">// constructor</span></span><br><span class="line">	Stack(<span class="keyword">int</span> m) :maxSize(m) &#123;</span><br><span class="line">		nums = <span class="keyword">new</span> <span class="keyword">int</span>[m];</span><br><span class="line">	&#125;  <span class="comment">// initialized using the max size m.</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> </span>&#123; size = <span class="number">-1</span>; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> ((size + <span class="number">1</span>) &gt;= maxSize)</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			nums[++size] = num;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;  <span class="comment">// push operation</span></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span> </span>&#123; </span><br><span class="line">		<span class="keyword">if</span> (size &gt;= <span class="number">0</span>)</span><br><span class="line">			<span class="keyword">return</span> nums[size--];</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;  <span class="comment">// pop operation</span></span><br><span class="line">	<span class="keyword">int</span>&amp; <span class="keyword">operator</span>[](<span class="keyword">int</span> n) &#123; <span class="keyword">return</span> nums[n]; &#125; <span class="comment">// subscript operator overload</span></span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> e)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">bool</span> flag = <span class="literal">false</span>;</span><br><span class="line">		<span class="keyword">if</span> (e == nums[size])   <span class="comment">// only need to check the top</span></span><br><span class="line">			flag = <span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">return</span> flag;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">simulate the operation of stack permutation.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n, m;   <span class="comment">// m is the size of the stack</span></span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;m);</span><br><span class="line">	<span class="function">Stack <span class="title">S</span><span class="params">(m)</span></span>;  <span class="comment">// now S have the size m</span></span><br><span class="line">	<span class="keyword">int</span> opnum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">char</span> (*op)[<span class="number">6</span>] = <span class="keyword">new</span> <span class="keyword">char</span>[n * <span class="number">2</span>][<span class="number">6</span>];</span><br><span class="line">	<span class="keyword">bool</span> flag = <span class="literal">true</span>;  <span class="comment">// meas that the sequence is true</span></span><br><span class="line">	<span class="keyword">int</span> A = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;  <span class="comment">// for all elements in B</span></span><br><span class="line">		<span class="keyword">int</span> num;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;num);</span><br><span class="line">		<span class="keyword">while</span> (!S.find(num)) &#123; <span class="comment">// if S don't find B[i]</span></span><br><span class="line">			<span class="keyword">if</span> (A &lt;= n) &#123;   <span class="comment">// make sure A don't exceed n</span></span><br><span class="line">				<span class="keyword">if</span> (!S.push(++A)) &#123;<span class="comment">// A pops one element and S pushes one element, if stack full, push fails</span></span><br><span class="line">					flag = <span class="literal">false</span>;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span> <span class="built_in">sprintf</span>(*(op + (opnum++)), <span class="string">"push\0"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				flag = <span class="literal">false</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (!flag) <span class="keyword">break</span>;</span><br><span class="line">		<span class="comment">// now that S has the element that B needs</span></span><br><span class="line">		<span class="keyword">if</span> (S.pop() != num) &#123;</span><br><span class="line">			flag = <span class="literal">false</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="built_in">sprintf</span>(*(op + (opnum++)), <span class="string">"pop\0"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (flag) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; opnum; i++)&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%s"</span>, *(op + i));</span><br><span class="line">			<span class="keyword">if</span> (opnum - <span class="number">1</span> - i) <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"No"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1>Code</h1>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Stack</span> &#123;</span>            <span class="comment">// form a stack</span></span><br><span class="line">	<span class="keyword">int</span>* nums;<span class="comment">// stack that implemented using array</span></span><br><span class="line">	<span class="keyword">int</span> size = <span class="number">-1</span>;      <span class="comment">// current size, also used to denote the top of the stack</span></span><br><span class="line">	<span class="keyword">int</span> maxSize = <span class="number">0</span>;    <span class="comment">// max size, defined by the input</span></span><br><span class="line">	Stack() &#123;&#125;   <span class="comment">// constructor</span></span><br><span class="line">	Stack(<span class="keyword">int</span> m) :maxSize(m) &#123;</span><br><span class="line">		nums = <span class="keyword">new</span> <span class="keyword">int</span>[m];</span><br><span class="line">	&#125;  <span class="comment">// initialized using the max size m.</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> </span>&#123; size = <span class="number">-1</span>; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> ((size + <span class="number">1</span>) &gt;= maxSize)</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			nums[++size] = num;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;  <span class="comment">// push operation</span></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span> </span>&#123; </span><br><span class="line">		<span class="keyword">if</span> (size &gt;= <span class="number">0</span>)</span><br><span class="line">			<span class="keyword">return</span> nums[size--];</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;  <span class="comment">// pop operation</span></span><br><span class="line">	<span class="keyword">int</span>&amp; <span class="keyword">operator</span>[](<span class="keyword">int</span> n) &#123; <span class="keyword">return</span> nums[n]; &#125; <span class="comment">// subscript operator overload</span></span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> e)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">bool</span> flag = <span class="literal">false</span>;</span><br><span class="line">		<span class="keyword">if</span> (e == nums[size])   <span class="comment">// only need to check the top</span></span><br><span class="line">			flag = <span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">return</span> flag;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">simulate the operation of stack permutation.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n, m;   <span class="comment">// m is the size of the stack</span></span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;m);</span><br><span class="line">	<span class="function">Stack <span class="title">S</span><span class="params">(m)</span></span>;  <span class="comment">// now S have the size m</span></span><br><span class="line">	<span class="keyword">int</span> opnum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">char</span> (*op)[<span class="number">6</span>] = <span class="keyword">new</span> <span class="keyword">char</span>[n * <span class="number">2</span>][<span class="number">6</span>];</span><br><span class="line">	<span class="keyword">bool</span> flag = <span class="literal">true</span>;  <span class="comment">// meas that the sequence is true</span></span><br><span class="line">	<span class="keyword">int</span> A = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;  <span class="comment">// for all elements in B</span></span><br><span class="line">		<span class="keyword">int</span> num;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;num);</span><br><span class="line">		<span class="keyword">while</span> (!S.find(num)) &#123; <span class="comment">// if S don't find B[i]</span></span><br><span class="line">			<span class="keyword">if</span> (A &lt;= n) &#123;   <span class="comment">// make sure A don't exceed n</span></span><br><span class="line">				<span class="keyword">if</span> (!S.push(++A)) &#123;<span class="comment">// A pops one element and S pushes one element, if stack full, push fails</span></span><br><span class="line">					flag = <span class="literal">false</span>;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span> <span class="built_in">sprintf</span>(*(op + (opnum++)), <span class="string">"push\0"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				flag = <span class="literal">false</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (!flag) <span class="keyword">break</span>;</span><br><span class="line">		<span class="comment">// now that S has the element that B needs</span></span><br><span class="line">		<span class="keyword">if</span> (S.pop() != num) &#123;</span><br><span class="line">			flag = <span class="literal">false</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="built_in">sprintf</span>(*(op + (opnum++)), <span class="string">"pop\0"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (flag) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; opnum; i++)&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%s"</span>, *(op + i));</span><br><span class="line">			<span class="keyword">if</span> (opnum - <span class="number">1</span> - i) <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"No"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
           
         
       
@@ -2054,7 +2173,8 @@
       
         
           
-            <h1 id="Words"><a href="#Words" class="headerlink" title="Words"></a>Words</h1><table>
+            <h1>Words</h1>
+<table>
 <thead>
 <tr>
 <th style="text-align:center">Words</th>
@@ -2076,7 +2196,8 @@
 </tr>
 </tbody>
 </table>
-<h1 id="Phrases"><a href="#Phrases" class="headerlink" title="Phrases"></a>Phrases</h1><table>
+<h1>Phrases</h1>
+<table>
 <thead>
 <tr>
 <th style="text-align:center">Phrase</th>
@@ -2094,48 +2215,59 @@
 </tr>
 </tbody>
 </table>
-<h1 id="Comprehension"><a href="#Comprehension" class="headerlink" title="Comprehension"></a>Comprehension</h1><ul>
-<li>How can anthropologists learn about the history of ancient peoples who have not left written records?<ul>
+<h1>Comprehension</h1>
+<ul>
+<li>How can anthropologists learn about the history of ancient peoples who have not left written records?
+<ul>
 <li>Anthropologists can use sagas that left by storytellers to learn about the history of ancient people.</li>
 </ul>
 </li>
-<li>Why did ancient men prefer to use flint for making tools?<ul>
+<li>Why did ancient men prefer to use flint for making tools?
+<ul>
 <li>Because flint is easier to shape than other kinds.</li>
 </ul>
 </li>
 </ul>
-<h1 id="Vocabulary"><a href="#Vocabulary" class="headerlink" title="Vocabulary"></a>Vocabulary</h1><ul>
-<li>preserve<ul>
-<li>The only way that they can preserve their history is to recount it as sagas–legands handed down from one generation of storytellers to another.</li>
+<h1>Vocabulary</h1>
+<ul>
+<li>preserve
+<ul>
+<li>The only way that they can preserve their history is to recount it as sagas--legands handed down from one generation of storytellers to another.</li>
 <li>Only when the rare china is broken have we realized the emergency to preserve such valuable cultural relics.</li>
 </ul>
 </li>
-<li>recount<ul>
+<li>recount
+<ul>
 <li>He recounted the concept of entropy as something that is the measure of uncertainty.</li>
 </ul>
 </li>
-<li>migrations<ul>
+<li>migrations
+<ul>
 <li>These legends are useful because they can tell us something about migrations of people who lived long ago, but none could write down what they did.</li>
 <li>Repid migrations to these ancient continent lead to the irreversible climat change and environmental damage.</li>
 </ul>
 </li>
-<li>anthropologists<ul>
+<li>anthropologists
+<ul>
 <li>Anthropologists wondered where the remote ancestors of the Polynesian peoples now living in the Pacific Islands came from.</li>
 <li>Some anthropologists firmly hold the belief that sagas can perfectly explain the history of the Polynesian peoples.</li>
 </ul>
 </li>
-<li>remote<ul>
-<li>Knowing that Qichao Liang is one of his remote ancestor who still have great influence on today’s world, he uplifted his spirit and carried on writing his first monography.</li>
+<li>remote
+<ul>
+<li>Knowing that Qichao Liang is one of his remote ancestor who still have great influence on today's world, he uplifted his spirit and carried on writing his first monography.</li>
 </ul>
 </li>
-<li>decay<ul>
+<li>decay
+<ul>
 <li>Stone does not decay, and so the tools of long ago have remained when even the bones of the men who made them have disappeared without trace.</li>
 <li>The role of the extended family has been decaying for some time.</li>
 <li>Pollution has decayed the surface of the stonework on the front of the cathedral.</li>
 <li>the smell of decaying meat.</li>
 </ul>
 </li>
-<li>without trace<ul>
+<li>without trace
+<ul>
 <li>My notebook is haunted, every time I put it in my desk, the next morning it will disappear without trace.</li>
 </ul>
 </li>
