@@ -360,6 +360,37 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
 
           
 
@@ -397,7 +428,7 @@
 <ul>
 <li>谓词演算是一种形式语言，是AI中一种常用的知识表示方法，可以表示各种描述语句。如在产生式系统中，用来表达综合数据库，规则集的描述</li>
 <li>谓词演算体系中的一些演绎推理方法，还可以用来建立自动定理证明系统，问答系统，基于规则的演绎系统等</li>
-<li>含：标点符号，括号，逻辑联结词，常量符号集，变量符号集，$n$ 元函数符号集，$n$ 元谓词符号集，量词（全称$\forall$ 存在$\exist$）</li>
+<li>含：标点符号，括号，逻辑联结词，常量符号集，变量符号集，$n​$ 元函数符号集，$n​$ 元谓词符号集，量词（全称$\forall​$ 存在$\existss ​$）</li>
 <li>并定义了谓词演算的合法表达式（原子公式，合式公式wff），表达式的演算化简方法，以便将一般化的表达式化成标准式（合取的前束范式或析取得前束范式）</li>
 <li>化简结果的标准式：$F\triangleq(Q_1x_1)...(Q_nx_n)M$
 <ul>
@@ -415,28 +446,28 @@
 <li>任何一个合式公式均可以转化为一个前束范式</li>
 <li>消去前束范式中所有的存在量词后得到的合式公式称为 $S$ 范式，这一过程称为 $skolem$ 化</li>
 <li>$S$ 范式与原式不一定等价，但在不可满足方面是等价的</li>
-<li>利用结合律，分配律等可以将 $S$ 范式转化为一个合取范式，合取范式是前束范式的一种，其母式具有如下的形式：$A_1\and A_2\and ...\and A_n$</li>
-<li>其中 $A_i$ 是由原子公式或原子公式的否定组成的析取项。每个析取项又称之为子句，一个合取范式可以用如下的子句的集合（子句集）表示：</li>
+<li>利用结合律，分配律等可以将 $S​$ 范式转化为一个合取范式，合取范式是前束范式的一种，其母式具有如下的形式：$A_1\and A_2\and ...\and A_n​$</li>
+<li>其中 $A_i​$ 是由原子公式或原子公式的否定组成的析取项。每个析取项又称之为子句，一个合取范式可以用如下的子句的集合（子句集）表示：</li>
 </ul>
-<p>${A_1,A_2,...A_n}$</p>
+<p>${A_1,A_2,...A_n}​$</p>
 <ul>
 <li>例：</li>
 </ul>
-<p>$(x)(y)[(P(x,y)\or \sim Q(x,y))\and (\sim P(x,y)\or U(x)\or V(y))\and(Q(x,y)\or \sim U(y))]$</p>
+<p>$(x)(y)[(P(x,y)\or \sim Q(x,y))\and (\sim P(x,y)\or U(x)\or V(y))\and(Q(x,y)\or \sim U(y))]​$</p>
 <p>即为一个合取范式，其子句集为：</p>
 <p>${P(x,y)\or \sim Q(x,y),\sim P(x,y)\or U(x)\or V(y), Q(x,y)\or \sim U(y)}$</p>
 <ul>
 <li>任何一个合式公式均可以通过九步来化为子句集，例：</li>
 </ul>
-<p>$(z)(x)(y){[(P(x)\or Q(x))\rightarrow R(y)]\or U(z)}$</p>
+<p>$(z)(x)(y){[(P(x)\or Q(x))\rightarrow R(y)]\or U(z)}​$</p>
 <ol>
 <li>消蕴涵符</li>
 </ol>
-<p>$A(x)\rightarrow B(x) \equiv \sim A(x)\or B(x)$</p>
+<p>$A(x)\rightarrow B(x) \equiv \sim A(x)\or B(x)​$</p>
 <p>有：</p>
 <p>$(P(x)\or Q(x))\rightarrow R(y)\Rightarrow \sim (P(x)\or Q(x))\or R(y)$</p>
 <p>代入式中有：</p>
-<p>$(\exist z)(\forall x)(\exist y){[\sim(P(x)\or Q(x))\or R(y)]\or U(z)}$</p>
+<p>$(\exists z)(\forall x)(\exists y){[\sim(P(x)\or Q(x))\or R(y)]\or U(z)}$</p>
 <ol start="2">
 <li>移动否定符</li>
 </ol>
@@ -446,22 +477,22 @@
 <p>故而有：</p>
 <p>$\sim(P(x)\or Q(x))\Rightarrow \sim P(x)\and \sim Q(x)$</p>
 <p>代入：</p>
-<p>$(\exist z)(\forall x)(\exist y){[(\sim P(x)\and\sim Q(x))\or R(y)]\or U(z)}$</p>
+<p>$(\exists z)(\forall x)(\exists y){[(\sim P(x)\and\sim Q(x))\or R(y)]\or U(z)}$</p>
 <p>若否定作用于量词，则根据量词转换率将量词提到否定的作用域外：</p>
-<p>$\sim((\forall x)A(x))\equiv (\exist x)(\sim A(x))$</p>
-<p>$\sim ((\exist x)A(x))\equiv (\forall x)(\sim A(x))$</p>
+<p>$\sim((\forall x)A(x))\equiv (\exists x)(\sim A(x))$</p>
+<p>$\sim ((\exists x)A(x))\equiv (\forall x)(\sim A(x))$</p>
 <p>本例未出现此情况。</p>
 <ol start="3">
 <li>变量换名</li>
 </ol>
 <p>在不同的量词约束的变量，应使用不同的变量名</p>
-<p>$(\forall x)A(x)\or (\exist x)B(x)$</p>
-<p>改为：$(\forall x)A(x)\or (\exist y)B(y)$</p>
+<p>$(\forall x)A(x)\or (\exists x)B(x)$</p>
+<p>改为：$(\forall x)A(x)\or (\exists y)B(y)$</p>
 <ol start="4">
 <li>量词左移</li>
 </ol>
 <p>将所有量词移到最左侧，但是不改变次序，如上例可以重写为：</p>
-<p>$(\forall x)(\exist y){A(x)\or B(y)}$</p>
+<p>$(\forall x)(\exists y){A(x)\or B(y)}$</p>
 <p>这也是要在第三步改名的原因，否则就不能移动</p>
 <p>至此，一个合式公式便转化为了前束范式，特点为：所有量词均非否定地出现在公式的前部，并且所有量词的约束范围均是整个合式公式。</p>
 <ol start="5">
@@ -472,7 +503,7 @@
 <li>假设 $\Psi$ 为前束范式中的一个存在量词，若其前面没有全称量词，则将 $\Psi$ 所约束的变量 $x$ 用一个全新的常量代替</li>
 <li>若前面有全称量词，则将 $x$ 用一个新的函数（称为 $skolem$ 函数）代替，该函数的变量是那些在 $\Psi$ 前面的全称量词所约束的变量，然后将存在量词 $\Psi$ 消去</li>
 </ul>
-<p>$(\exist z)(\forall x)(\exist y){[(\sim P(x)\and \sim Q(x))\or R(y)]\or U(z)}$</p>
+<p>$(\exists z)(\forall x)(\exists y){[(\sim P(x)\and \sim Q(x))\or R(y)]\or U(z)}$</p>
 <p>$\Rightarrow (\forall x){[(\sim P(x)\and \sim Q(x))\or R(f(x))]\or U(a)}$</p>
 <ol start="6">
 <li>化为合取范式</li>
@@ -512,7 +543,7 @@
 <li>所有量词左移，不要改次序</li>
 <li>消去存在量词</li>
 </ol>
-<p>$F=(\exist x)(\exist y)(\forall z)(\exist u)(\forall v)(\exist w)(P(x,y,z,u,v,w)$</p>
+<p>$F=(\exists x)(\exists y)(\forall z)(\exists u)(\forall v)(\exists w)(P(x,y,z,u,v,w)$</p>
 <p>$\and (Q(x,y,z,u,v,w)\or\sim R(x,z,w)))$</p>
 <p>四个存在量词替换如下：</p>
 <p>$x=a,y=b,u=f(z),w=g(z,w)$</p>
@@ -749,9 +780,9 @@ $$</p>
 <ol>
 <li>$(\forall x)(R(x)\rightarrow L(x))​$</li>
 <li>$(\forall x)(D(x)\rightarrow \sim L(x))$</li>
-<li>$(\exist x)(D(x)\and I(x))$</li>
+<li>$(\exists x)(D(x)\and I(x))$</li>
 </ol>
-<p>求证：$(\exist x)(I(x)\and \sim R(x))$</p>
+<p>求证：$(\exists x)(I(x)\and \sim R(x))$</p>
 <p>先将前提条件的谓词公式化简，然后将要证明的结论取反并化成子句形，求得子句集</p>
 <p>(1) $\sim R(x)\or L(x)$</p>
 <p>(2) $\sim D(y)\or \sim L(y)$</p>
@@ -871,6 +902,37 @@ $$</p>
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
           
 
           
@@ -1081,6 +1143,37 @@ $$</p>
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
 
           
 
@@ -1271,6 +1364,37 @@ $$</p>
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
 
           
 
@@ -1455,6 +1579,37 @@ $$</p>
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
           
 
           
@@ -1641,6 +1796,37 @@ $$</p>
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
 
           
 
@@ -1825,6 +2011,37 @@ $$</p>
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
           
 
           
@@ -2014,6 +2231,37 @@ $$</p>
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
           
 
           
@@ -2237,6 +2485,37 @@ $$</p>
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
 
           
 
@@ -2426,6 +2705,37 @@ $$</p>
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
           
 
           
@@ -2642,6 +2952,15 @@ $$</p>
   </span>
   <span class="author" >Wine&Chord</span>
 
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count"></span>
   
 </div>
 
