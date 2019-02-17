@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Wine&amp;Chord">
 <meta property="og:description" content="Ch30 Polynomials and the FFT   FFT 可以将两个多项式的乘法实现时间缩短至 $\Theta(nlgn)$。   两个乘数分别为 $A(x)=\sum_{j=0}^{n-1}a_jx^j$  $B(x)=\sum_{j=0}^{n-1}b_jx^j$   乘积为   $$ C(x)=\sum_{j=0}^{2n-2}c_jx^j $$ $$ c_j=\sum_{k=0">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-15T11:44:37.506Z">
+<meta property="og:updated_time" content="2019-02-17T01:28:42.398Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Notes for CLRS Ch30 Polynomials and the FFT">
 <meta name="twitter:description" content="Ch30 Polynomials and the FFT   FFT 可以将两个多项式的乘法实现时间缩短至 $\Theta(nlgn)$。   两个乘数分别为 $A(x)=\sum_{j=0}^{n-1}a_jx^j$  $B(x)=\sum_{j=0}^{n-1}b_jx^j$   乘积为   $$ C(x)=\sum_{j=0}^{2n-2}c_jx^j $$ $$ c_j=\sum_{k=0">
@@ -381,37 +381,6 @@
           
 
           
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  
-                </span>
-              
-            </div>
-          
 
           
 
@@ -460,9 +429,9 @@ Theorem 30.1(Uniqueness of an interpolating polynomial)</p>
 <p>证明：$(3)$ 等价于
 $$
 \begin{bmatrix}
-1 &amp;x_0 &amp;x_0^2 &amp;\cdots &amp;x_0^{n-1}\
-1 &amp;x_1 &amp;x_1^2 &amp;\cdots &amp;x_1^{n-1}\
-\vdots &amp;\vdots &amp;\vdots &amp;\ddots &amp;\vdots\
+1 &amp;x_0 &amp;x_0^2 &amp;\cdots &amp;x_0^{n-1}\\
+1 &amp;x_1 &amp;x_1^2 &amp;\cdots &amp;x_1^{n-1}\\
+\vdots &amp;\vdots &amp;\vdots &amp;\ddots &amp;\vdots\\
 1 &amp;x^{n-1} &amp;x_{n-1}^2 &amp;\cdots &amp;x_{n-1}^{n-1}
 \end{bmatrix}
 $$</p>
@@ -680,15 +649,6 @@ $$</p>
   </span>
   <span class="author" >Wine&Chord</span>
 
-  
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-area-chart"></i>
-    </span>
-    
-      <span class="post-meta-item-text">Site words total count&#58;</span>
-    
-    <span title="Site words total count"></span>
   
 </div>
 
@@ -1178,7 +1138,7 @@ $$</p>
     });
   </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"},"extensions":["mediawiki-texvc.js"]}});
 </script>
 
 <script type="text/x-mathjax-config">
@@ -1190,7 +1150,7 @@ $$</p>
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

@@ -90,7 +90,7 @@
 <meta property="og:image" content="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/t1.gif">
 <meta property="og:image" content="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/rl4.1.gif">
 <meta property="og:image" content="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/t2.gif">
-<meta property="og:updated_time" content="2019-02-16T16:52:01.525Z">
+<meta property="og:updated_time" content="2019-02-17T01:18:24.173Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="谓词演算及归结树">
 <meta name="twitter:description" content="Prerequisites  数理逻辑或离散数学中的一阶谓词演算 有关命题逻辑，谓词逻辑的演算方法 一阶谓词逻辑的优点：有很强的表达能力及严密的数学基础  Goals  一阶谓词演算的基本体系 命题逻辑和谓词逻辑的归结方法 基于归结的提取问题回答的方法 基于规则的正向演绎方法和逆向演绎方法  关系图（courtesy of 人工智能导论课件）：  一阶谓词演算的基本体系  谓词演算是一种形式语言，">
@@ -363,37 +363,6 @@
           
 
           
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  
-                </span>
-              
-            </div>
-          
 
           
 
@@ -429,7 +398,7 @@
 <ul>
 <li>谓词演算是一种形式语言，是AI中一种常用的知识表示方法，可以表示各种描述语句。如在产生式系统中，用来表达综合数据库，规则集的描述</li>
 <li>谓词演算体系中的一些演绎推理方法，还可以用来建立自动定理证明系统，问答系统，基于规则的演绎系统等</li>
-<li>含：标点符号，括号，逻辑联结词，常量符号集，变量符号集，$n​$ 元函数符号集，$n​$ 元谓词符号集，量词（全称$\forall​$ 存在$\existss ​$）</li>
+<li>含：标点符号，括号，逻辑联结词，常量符号集，变量符号集，$n$ 元函数符号集，$n$ 元谓词符号集，量词（全称$\forall$ 存在$\exists $）</li>
 <li>并定义了谓词演算的合法表达式（原子公式，合式公式wff），表达式的演算化简方法，以便将一般化的表达式化成标准式（合取的前束范式或析取得前束范式）</li>
 <li>化简结果的标准式：$F\triangleq(Q_1x_1)...(Q_nx_n)M$
 <ul>
@@ -552,18 +521,13 @@
 <p>$F1=(\forall z)(\forall v)(P(a,b,z,f(z),v,g(z,v))$</p>
 <p>$\and (Q(a,b,z,f(z),v,g(z,v))\or\sim R(a,z,g(z,v))))$</p>
 <ol start="7">
-<li>
-<p>将母式化为合取范式。反复使用结合律和分配律，将母式表达成合取范式的标准型，最后得到一个 $Skolem$ 化的前束范式 $Fs$</p>
-</li>
-<li>
-<p>省略全称量词</p>
-</li>
-<li>
-<p>将母式用子句集表示</p>
-</li>
+<li>将母式化为合取范式。反复使用结合律和分配律，将母式表达成合取范式的标准型，最后得到一个 $Skolem$ 化的前束范式 $Fs$</li>
+<li>省略全称量词</li>
+<li>将母式用子句集表示</li>
 </ol>
-<p>$S={P(a,b,z,f(z),v,g(z,v)),$</p>
-<p>$Q(a,b,z,f(z),v,g(z,v))\or\sim R(a,z,g(z,v))}$</p>
+<p>$$
+S={ P(a,b,z,f(z),v,g(z,v)),Q(a,b,z,f(z),v,g(z,v))\or\sim R(a,z,g(z,v))}
+$$</p>
 <ol start="10">
 <li>子句变量标准化，使任意两个子句不会有相同的变量出现。</li>
 </ol>
@@ -1002,15 +966,6 @@ $$</p>
   </span>
   <span class="author" >Wine&Chord</span>
 
-  
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-area-chart"></i>
-    </span>
-    
-      <span class="post-meta-item-text">Site words total count&#58;</span>
-    
-    <span title="Site words total count"></span>
   
 </div>
 
@@ -1500,7 +1455,7 @@ $$</p>
     });
   </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"},"extensions":["mediawiki-texvc.js"]}});
 </script>
 
 <script type="text/x-mathjax-config">
@@ -1512,7 +1467,7 @@ $$</p>
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
