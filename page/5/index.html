@@ -296,6 +296,810 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/02/人工智能原理-Part-I-Basics/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/02/人工智能原理-Part-I-Basics/" itemprop="url">人工智能原理 Part I. Basics</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-02T09:41:11+08:00">
+                2019-02-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/02/人工智能原理-Part-I-Basics/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/02/人工智能原理-Part-I-Basics/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2>Ch1. Introduction</h2>
+<h3>1.1 Overview of Artificial Intelligence</h3>
+<h4>1.1.1 What is Artificial Intelligence(AI)</h4>
+<ul>
+<li>机器或软件所展现的智能</li>
+<li>学术研究领域的名称</li>
+<li>如何创建计算机和计算机软件使之具有智能行为</li>
+<li>诞生：1956年的“达特茅斯夏季人工智能研究计划”会议</li>
+</ul>
+<h4>1.1.2 Turing Test</h4>
+<ul>
+<li>图灵测试由艾伦图灵在1950年发表的“计算机器与智能”论文中提出的。</li>
+<li>旨在提供一种令人满意的关于智能的可操作定义。</li>
+<li>若一个人类提问官，在提出一些书面问题之后，无法分辨这些书面回答究竟是来自于人还是一台计算机，则认为计算机通过了该测试。</li>
+</ul>
+<h4>1.1.3 Visual Turing Test</h4>
+<ul>
+<li>视觉图灵测试：2014年由 Donald Geman 提出</li>
+<li>是采用一个操作员辅助设备，根据给定的图像产生随机的二元问题序列</li>
+<li>目前的计算机视觉系统是测试任务的精度。这些任务包括对象检测，图像分割和定位。</li>
+<li>受人类理解图像能力的启发而提出的。</li>
+</ul>
+<h4>1.1.4 Chinese Room</h4>
+<ul>
+<li>思想实验：中文屋，又称 &quot;Sherle's Chinese Room Argument&quot;</li>
+<li>最早由美国哲学家 John Searle 1980 年在《行为与大脑科学》上发表的论文《智力，头脑与规划》提出的。</li>
+<li>试图揭示计算机绝不能描述为有“智力”(mind)或“知性”(understanding)，不管它多么智能。</li>
+<li>设想在一个房间内操作一套计算机程序来应付从门缝中塞进来的中文字符，操作人对中文一窍不通，但是他可以通过处理符号和数字生成了合适的中文字符串，从而让屋外的人认为屋内有一个精通中文的人。</li>
+<li>结论是：按程序运行的计算机可以使它看起来理解了语言，但并没有产生真正的理解。</li>
+<li>由此他断定，图灵测试的结论是不充分的。</li>
+</ul>
+<h3>1.2 Foundations of Artificial Intelligence</h3>
+<h4>1.2.1 Mathematics</h4>
+<h5>1) Logic 逻辑学 -- 得出正确结论的形式规则是什么？</h5>
+<ul>
+<li>1847 乔治布尔(George Boole)：命题逻辑(propositional logic)，又称布尔逻辑(Boolean logic)</li>
+<li>1879 戈特洛布·弗雷格(Gottlob Frege)：一阶逻辑(first order logic)，是布尔逻辑的扩展，增加了对象和关系(objects and relations)。</li>
+<li>阿尔弗雷德·塔斯基(Alfred Tarski 1902-1983)：指称理论(theory of reference)，揭示如何将逻辑中的对象与对象相关联。</li>
+</ul>
+<h5>2） Computation 计算 -- 什么是可计算的？</h5>
+<ul>
+<li>
+<p>艾伦·图灵(Alan Turing 1912-1954)：试图精确地描述哪些函数是可计算的。</p>
+</li>
+<li>
+<p>科伯姆与埃德蒙兹(mid-1960s)：提出计算的易处理的概念。</p>
+</li>
+<li>
+<p>1972 斯蒂文·库克与理查·德卡普：提出NP完全性的理论。</p>
+<blockquote>
+<ul>
+<li>NP-completeness:
+<ul>
+<li>P: Polynomial time 多项式时间</li>
+<li>NP: Non-deterministic Polynomial time 不确定性多项式时间</li>
+<li>NP-complete: both in NP and NP-hard NP和NP难的交集</li>
+</ul>
+</li>
+<li>NP 是否等于 P 还是一个悬而未解的问题。</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h5>3） Probability 概率 -- 如何根据不确定信息进行推理？</h5>
+<ul>
+<li>卡尔达诺(Cardano 1501-1576)：构建了概率的概念，将其描述为博弈事件中可能的结果。</li>
+<li>伯努利，拉普拉斯推进该理论，并引入了新的统计学方法。</li>
+<li>贝叶斯：提出了贝叶斯规则，使之成为不确定性推理的最现代方法。</li>
+</ul>
+<h4>1.2.2 Neuroscience</h4>
+<ul>
+<li>神经科学：大脑如何处理信息？
+<ul>
+<li>神经科学研究神经系统，尤其是大脑</li>
+<li>大脑在理性决策方面非常优越（但并非完美无缺）</li>
+<li>大脑不像软件那样模块化</li>
+<li>预测和仿真时决策的关键</li>
+<li>计算机与大脑的对比：
+<ul>
+<li>大脑中神经元的数量基本是固定的，</li>
+<li>计算机中处理单元的数量，每五年增加十倍。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4>1.2.3 Cognitive Psychology</h4>
+<ul>
+<li>认知心理学：人类如何思考和行动
+<ul>
+<li>把大脑看作是信息处理设备，是研究心智过程的学科</li>
+<li>包含：
+<ul>
+<li>attention 注意机制：意识集中在某个有用感知信息子集的状态。</li>
+<li>language use 语言运用：研究语言习得，语言形成的组件，语言使用时用的预期，或者许多其他相关领域。</li>
+<li>memory 记忆：过程记忆，语义记忆，情景记忆。</li>
+<li>perception 感知：物理感知（视觉，嗅觉，味觉，知觉）及其认知过程。</li>
+<li>metacognition 元认知：是“关于认知的认知”。包裹关于认知的知识以及认知的调节。</li>
+<li>problem solving 问题求解</li>
+<li>creativity 创造力</li>
+<li>thinking 思考</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>认知心理学与认知科学的对比
+<ul>
+<li>认知心理学
+<ul>
+<li>通常通过人类参与者的心理实验来收集信息</li>
+<li>目的是研究人脑如何接受外部世界的输入，如何处理以及作用等</li>
+</ul>
+</li>
+<li>认知科学
+<ul>
+<li>关注于通过研究收集数据</li>
+<li>涉猎心理学，语言学，人类学，神经科学，社会学和教育学，尤其是人工智能</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4>1.2.4 Control Theory and Cybernetics</h4>
+<p>控制理论与控制论：机器如何能在其自身的控制下运行？</p>
+<ul>
+<li>Control theory 控制理论
+<ul>
+<li>工程与数学的交叉学科分支</li>
+<li>处理动态系统对输入的行为，以及该行为如何通过反馈进行调整</li>
+</ul>
+</li>
+<li>Cybernetics 控制论
+<ul>
+<li>跨学科的研究途径，探索调控系统，它们的结构，约束和可能性</li>
+<li>1948年被定义为“研究动物与机器的控制与通信的科学”</li>
+<li>21世纪，简单将其解释为“用技术控制任何系统”</li>
+</ul>
+</li>
+</ul>
+<h3>1.3 History of Artificial Intelligence</h3>
+<h4>1950-1956 诞生</h4>
+<ul>
+<li>1950，艾伦图灵提出图灵测试，将其作为机器智能的度量</li>
+<li>1956，在达特茅斯学院的会议上，人工智能正式诞生</li>
+</ul>
+<h4>1956-1974 黄金之年</h4>
+<ul>
+<li>1958，赫伯特·西蒙(Herbert Simon)和艾伦·纽厄尔(Allen Newell)演示了第一个AI程序，名称为逻辑理论家(Logic Theorist)</li>
+<li>1958，约翰·麦卡锡(John McCarthy)发明了著名的Lisp编程语言</li>
+<li>1960s，马斯特曼(M.Masterman)和他的剑桥大学同事设计了语义网络，用于机器翻译</li>
+<li>1963，伦纳德·武赫(Leonard Uhr)和查尔斯·瓦斯勒(Charles Vossler)发表了关于模式识别的论文，描述了第一个机器学习程序。</li>
+<li>1965，费根鲍姆(E.Feigenbaum)开创了Dendral，一个推断有机化合物分子结构的软件。这是首套专家系统。</li>
+<li>1974，肖特列夫(T.Shortliffe)演示了MYCIN程序，一个非常实用的基于规则的医学诊断方法。</li>
+</ul>
+<h4>1974-1980 第一个寒冬</h4>
+<ul>
+<li>1966，机器翻译失败了</li>
+<li>1970，连接主义(connectionism)遭到遗弃</li>
+<li>1971-1975，美国DARPA对卡内基梅隆大学的语音理解研究项目感到沮丧</li>
+<li>1973，受莱特希尔的“人工智能：综合调查”报告的影响，英国大幅度缩减AI的研究</li>
+<li>1973-1974，美国DARPA削减了一般性AI学术研究经费</li>
+</ul>
+<h4>1980-1987 繁荣期</h4>
+<ul>
+<li>1980，AAAI在斯坦福大学召开了第一届全国大会</li>
+<li>1982，日本启动了第五代计算机系统(FGCS)项目，用于知识处理。</li>
+<li>mid-1980s，机器学习出现，发明了决策树模型并且以软件形式推出。该模型具有可视化，易说明的特点。</li>
+<li>also mid-1980s，发明了多层人工神经元网络(ANN)。具有足够多的隐藏层，一个 ANN可以表达任意的功能，因此突破了感知的局限性。</li>
+</ul>
+<h4>1987-1993 第二个寒冬</h4>
+<ul>
+<li>1987，Lisp机的市场崩溃</li>
+<li>1988，美国政府的战略计划促进会取消了新的AI经费</li>
+<li>1993，专家系统缓慢滑向低谷</li>
+<li>1990s，日本第五代计算机项目未能达到初始目标，悄然退场</li>
+</ul>
+<h4>1993-Present 突破</h4>
+<ul>
+<li>1997，深蓝战胜了卫冕国际象棋冠军加里·卡斯帕罗夫，成为第一台计算机国际象棋系统。</li>
+<li>2005，斯坦福的自主机器人车辆Stanley，赢得了DARPA无人驾驶汽车挑战赛。</li>
+<li>2006，Geoffrey Hinton 和 Ruslan Salakhutdinov 在论文中提出 &quot;Deep Learning&quot;，随后该术语成了热门。</li>
+<li>Waston是IBM专门开发的智力竞赛问答计算机
+<ul>
+<li>2011，在Jeopardy!上战胜了上届冠军</li>
+</ul>
+</li>
+<li>2011，Google Brain 成立
+<ul>
+<li>Google Brain 是由1万6千台计算机连成的一个集群，致力于模仿人类大脑活动的某些方面。</li>
+<li>通过对1千万张数字图片的学习，已成功地学会识别一只猫。</li>
+</ul>
+</li>
+<li>2012，Apple 引入 Siri
+<ul>
+<li>Siri 是一种智能个人助理和知识导航软件。</li>
+<li>使用自然语言用户接口来回答问题，做出建议和执行动作。</li>
+<li>支持多种语言</li>
+</ul>
+</li>
+<li>2012，微软展示一款实时的英语-中文通用翻译系统，可以保持声音和口音。</li>
+<li>2014，微软展示 Cortana，一个运行在 Windows Phone 上的智能个人助理。</li>
+<li>2014.6，微软中国推出机器人小冰</li>
+<li>2015.9.8，百度在2015百度世界大会上推出了一款机器人助理——度秘，可以为用户提供秘书化搜索服务。</li>
+<li>2014.6，聊天机器人 Eugene Goostman被认为通过了图灵测试。</li>
+<li>2014.8，IBM发表了类人脑工作的 TrueNorth 芯片</li>
+<li>2015.2，Google DeepMind 在 Nature 上发表 Deep Q-Network，通过深度强化学习达到人类水平的操控。</li>
+<li>2015.12，Google DeepMind 的 AlphaGo 打败了欧洲围棋冠军</li>
+<li>2016.3.8-15，AlphaGo打败李世石</li>
+</ul>
+<h3>1.4 The State of The Art</h3>
+<h4>1.4.1 Categories of Artificial Intelligence</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">\</th>
+<th style="text-align:center">Humanly</th>
+<th style="text-align:center">Rationally</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Acting</td>
+<td style="text-align:center">Acting humanly</td>
+<td style="text-align:center">Acting rationally</td>
+</tr>
+<tr>
+<td style="text-align:center">Thinking</td>
+<td style="text-align:center">Thinking humanly</td>
+<td style="text-align:center">Thinking rationally</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Humanly
+<ul>
+<li>以对人类表现的逼真度来衡量</li>
+</ul>
+</li>
+<li>Rationally
+<ul>
+<li>用理想的性能表现来衡量
+<ul>
+<li>一个系统如果对已知的知识做出正确的动作，则被称为理性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5>Eight Definitions for four Categories of AI</h5>
+<ul>
+<li>Acting humanly
+<ul>
+<li>Kurzweil, 1990：完成需要人类智能所能完成的功能</li>
+<li>Rich and Knight, 1991：使计算机去做此时此地人类才能做好的事情</li>
+</ul>
+</li>
+<li>Acting rationally
+<ul>
+<li>Poole et al., 1998：计算智能是研究如何设计智能体</li>
+<li>Nilsson, 1998：AI是关注于用人工手段去实现智能行为。</li>
+</ul>
+</li>
+<li>Thinking humanly
+<ul>
+<li>Bellman, 1978：人类思维相关活动的自动化</li>
+<li>Haugeland, 1985：使计算机思考</li>
+</ul>
+</li>
+<li>Thinking rationally
+<ul>
+<li>Charniak and McDermott, 1985：通过使用计算模型进行心智能力的研究</li>
+<li>Winston, 1992：使计算机能够感知，推理，以及动作。</li>
+</ul>
+</li>
+</ul>
+<h5>Weak/Strong/Super AI</h5>
+<ul>
+<li>Weak
+<ul>
+<li>弱人工智能：人工狭义智能（ANI）</li>
+<li>无意识的AI，专注于一个具体的任务</li>
+</ul>
+</li>
+<li>Strong
+<ul>
+<li>强人工智能：人工广义智能（AGI）</li>
+<li>意味着机器具有将智能用于处理任何问题的能力。它是人工智能研究的主要目标。</li>
+</ul>
+</li>
+<li>Super
+<ul>
+<li>超人工智能：人工超级智能（ASI）</li>
+<li>是一个假定的智能体，拥有远远超过聪明的和最有天赋的人类大脑的智能</li>
+<li>也值得是问题求解系统的特性，如，超级智能语言翻译器或工程助理</li>
+</ul>
+</li>
+</ul>
+<h4>1.4.2 Applications of Artificial Intelligence</h4>
+<ul>
+<li>Computer vision</li>
+<li>Image processing</li>
+<li>VR, AR, MR</li>
+<li>Pattern recognition</li>
+<li>Intelligent Diagnosis</li>
+<li>Game theory and Strategic planning</li>
+<li>Game AI and Gamebot</li>
+<li>Machine Translation</li>
+<li>Natural language processing, Chatbot</li>
+<li>Nonlinear control, Robotics</li>
+<li>Artificial life</li>
+<li>Automated reasoning</li>
+<li>Automation</li>
+<li>Biological computing</li>
+<li>Concept mining</li>
+<li>Data mining</li>
+<li>Knowledge representation</li>
+<li>Semantic Web</li>
+<li>E-mail spam filtering</li>
+<li>Litigation 诉讼</li>
+<li>Robotics</li>
+<li>Behavior-based robotics</li>
+<li>Cognitive</li>
+<li>Cybernetics</li>
+<li>Development robotics</li>
+<li>Evolutionary robotics</li>
+<li>Hybrid intelligent system</li>
+<li>Intelligent agent</li>
+<li>Intelligent Control</li>
+</ul>
+<h4>1.4.3 Typical Papers on Artificial Intelligence</h4>
+<ul>
+<li>A Global Geometric Framework for Nonlinear Dimensionality Reduction
+<ul>
+<li>提出 Isomap(Isometric Feature Mapping 等距特征映射)，使用易测的局部度量信息来学习数据集潜在的全局几何特征。</li>
+</ul>
+</li>
+<li>Nonlinear Dimensionality Reduction by Locally Linear Embedding
+<ul>
+<li>提出局部线性嵌入(LLE)，用于计算高维输入数据中低维，邻域保护嵌入的非监督学习算法。</li>
+</ul>
+</li>
+<li>Reducing the Dimensionality of Data with Neural Networks
+<ul>
+<li>提出深度学习，可以让深度自编码网络学习低维代码，作为一种降低数据维度的工具，远远好于主成分分析方法。</li>
+</ul>
+</li>
+<li>Clustering by fast search and find of density peaks
+<ul>
+<li>提出的方法基于思想：聚类中心点具有密度高于相邻点，距离相对大于次高密度点的特性。</li>
+</ul>
+</li>
+<li>Human-level concept learning through probabilistic program induction
+<ul>
+<li>概率规划归纳法？？？</li>
+</ul>
+</li>
+<li>Human-level control through deep reinforcement learning
+<ul>
+<li>提出深度强化学习</li>
+</ul>
+</li>
+<li>Deep learning -- Y.LeCun, Y. Bengio, G. Hinton</li>
+<li>Mastering the game of Go with deep neural networks and tree search
+<ul>
+<li>深度神经网络和树搜索来下围棋。使用了蒙特卡洛搜索树</li>
+</ul>
+</li>
+</ul>
+<h4>Research Area of AI</h4>
+<ul>
+<li>AI
+<ul>
+<li>Searching: Problems space</li>
+<li>Reasoning: Knowledge</li>
+<li>Planning: Rules</li>
+<li>Learning: Data</li>
+<li>Applying
+<ul>
+<li>Communicating
+<ul>
+<li>NLP &amp; Machine Trans.</li>
+</ul>
+</li>
+<li>Perceiving
+<ul>
+<li>Vision &amp; Speech &amp; Sensing</li>
+</ul>
+</li>
+<li>Acting
+<ul>
+<li>Robot</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>This course mainly focuses on &quot;Searching, Reasoning, Planning and Learning&quot;</li>
+</ul>
+<h2>Ch2. Intelligent Agent</h2>
+<h3>2.1 Approaches for Artificial Intelligence</h3>
+<h4>2.1.1 Cybernetics and Brain Simulation</h4>
+<ul>
+<li>神经学，信息论，控制论之间的关系</li>
+</ul>
+<h4>2.1.2 Symbolic vs. Sub-symbolic</h4>
+<ul>
+<li>符号AI，最成功的形式是专家系统</li>
+<li>亚符号AI，以神经网络，统计学，数值优化等为基础</li>
+</ul>
+<h4>2.1.3 Logic-based vs. Anti-logic</h4>
+<ul>
+<li>基于逻辑</li>
+<li>反逻辑：用于解决视觉和自然语言处理，如常识知识库
+<ul>
+<li>Knowledge-based 基于知识</li>
+</ul>
+</li>
+</ul>
+<h4>2.1.4 Symbolism vs. Connectionism</h4>
+<ul>
+<li>符号主义
+<ul>
+<li>凭借符号及他们之间的关系来表征信息</li>
+<li>特定算法用于处理这些符号来解决问题和推导新的知识</li>
+</ul>
+</li>
+<li>联结主义
+<ul>
+<li>用网络内部的一种分布式形式来表征信息</li>
+<li>模仿生物学过程</li>
+</ul>
+</li>
+</ul>
+<h4>2.1.5 Statistical Approach</h4>
+<h4>2.1.6 Intelligent Agent Paradigm</h4>
+<ul>
+<li>什么是智能体
+<ul>
+<li>Operate autonomously</li>
+<li>Perceive their environment</li>
+<li>Persist over a prolonged time period</li>
+<li>Adapt to change</li>
+<li>Create and pursue goals</li>
+<li>The best outcome, or the best expected outcome(when there is uncertainty).</li>
+<li>Broadly, an agent is anything that can be viewed as
+<ul>
+<li>Perceving its environment through sensors, and acting upon that environment through actuators.</li>
+<li>May also learn or use knowledge to achieve their goals.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>2.2 Rational Agents</h3>
+<ul>
+<li>Rational Agent Approach
+<ul>
+<li>A human agent
+<ul>
+<li>sensors: eyes, ears, and other organs.</li>
+<li>actuators: hands, legs, vocal tract, ...</li>
+</ul>
+</li>
+<li>A robotic agent(robot)
+<ul>
+<li>sensors: cameras, infrared range finders.</li>
+<li>actuators: various motors.</li>
+</ul>
+</li>
+<li>A software agent(softbot)
+<ul>
+<li>sensors: keystrokes, file contents, and network packets.</li>
+<li>actuators: display on screen, write files, and send network packets.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Abstract Intelligent Agents</li>
+<li>What is Rational Agent
+<ul>
+<li>It is one that does the right thing</li>
+</ul>
+</li>
+<li>Concept of Rationality
+<ul>
+<li>Rationality depends on four things:
+<ul>
+<li>The performance measure that defines the criterion of success</li>
+<li>The agent's prior knowledge of the environment</li>
+<li>The actions that the agent can perform</li>
+<li>The agent's percept sequence to date</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>2.3 Task Environments</h3>
+<h4>2.3.1 PEAS Description</h4>
+<ul>
+<li>PEAS 是一种任务环境的规范，代表
+<ul>
+<li>Performance</li>
+<li>Environment</li>
+<li>Actuators</li>
+<li>Sensors</li>
+</ul>
+</li>
+<li>为了构建理性只能提，需要思考任务环境。</li>
+<li>任务环境是“问题”，智能体是“解决方式”</li>
+</ul>
+<h4>2.3.2 Environment Types</h4>
+<ul>
+<li>Fully observable vs. partially observable</li>
+<li>Single agent vs. multi-agent</li>
+<li>Deterministic vs. stochastic</li>
+<li>Episodic vs. sequential 阵发性与连续性</li>
+<li>Dynamic vs. static
+<ul>
+<li>Semi-dynamic: 环境本身不随时间而变，但智能体的性能发生改变</li>
+</ul>
+</li>
+<li>Discrete vs. continuous</li>
+<li>Known vs. unknown</li>
+</ul>
+<h3>2.4 Intelligent Agent Structure</h3>
+<h4>The Structure of Agents</h4>
+<ul>
+<li>
+<p>一个智能体的行为可以在数学上被描述为一个智能体函数，将每个感知映射为动作
+$$
+f:\mathcal{P}^{\star}\rightarrow \mathcal{A}\ \ \ \ where\ \mathcal{P}^{\star}=\sum^T_{t=1}|\mathcal{P}|^t
+$$</p>
+</li>
+<li>
+<p>$$
+\begin{align*}
+Agent&amp;=platform+agent\ program\
+platform&amp;=computing\ device+sensors+actuators\
+agent\ program &amp;\supset agent\ function
+\end{align*}
+$$</p>
+</li>
+<li>
+<p>智能体层次</p>
+<ul>
+<li>通常包含多个子智能体</li>
+<li>子智能体处理和执行较低级的功能</li>
+<li>智能体和子智能体构建一个完整的系统</li>
+</ul>
+</li>
+</ul>
+<h4>Agent Function</h4>
+<ul>
+<li>智能体函数是一个抽象的概念，可包括各种决策制定的原则
+<ul>
+<li>单个选项的效用计算</li>
+<li>贯穿逻辑规则的推论</li>
+<li>模糊逻辑</li>
+<li>查找表</li>
+</ul>
+</li>
+</ul>
+<h4>Agent Programs</h4>
+<ul>
+<li>
+<p>实现一个智能体功能，将感受器的输入作为当前的感知，然后返回一个动作给执行器。</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function TABLE-DRIVEN-AGENT(percept) returns an action</span><br><span class="line">  persistent: percepts, a sequence, initially empty </span><br><span class="line">  			table, a table of actions, initially fully </span><br><span class="line">  			specifiedaction, the most recent action, </span><br><span class="line">  			initially none.</span><br><span class="line">  append percept to the end of percepts</span><br><span class="line">  action &lt;- LOOKUP(percepts, table)</span><br><span class="line">  return action</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<h4>Three ways to represent states for an agent</h4>
+<ul>
+<li>Atomic 原子式：每个状态是黑盒，无内部结构</li>
+<li>Factored 因子式：每个状态由一组固定的属性和值组成</li>
+<li>Structured 结构式：每个状态包含对象，每个具有属性以及与其他对象的关系</li>
+</ul>
+<h3>2.5 Category of Intelligent Agents</h3>
+<ul>
+<li>基于感知的智力和能力的程度进行分类</li>
+</ul>
+<h4>2.5.1 Simple Reflex Agents</h4>
+<ul>
+<li>
+<p>仅在当前感知的基础上动作，忽略其余的感知历史</p>
+</li>
+<li>
+<p>基于条件动作规则：if 条件 then 动作</p>
+</li>
+<li>
+<p>About Simple Reflex Agents</p>
+<ul>
+<li>仅当外部环境为完全可观测时，该智能体的功能才能发挥</li>
+<li>某些反射智能体也可以包含关于当前状态的信息，允许它们忽视执行器已被触发的条件</li>
+<li>智能体在部分可观测环境下运行时，无限循环往往是无法避免的</li>
+<li>注意：如果智能体可以随机产生其动作，有可能从无限循环中摆脱出来</li>
+</ul>
+</li>
+<li>
+<p>Algorithm of Simple Reflex Agents</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function SIMPLE-REFLEX-AGENT(percept) returns an action</span><br><span class="line">  persistent: state, the agent&apos;s current conception of the </span><br><span class="line">  			world state rules, a set of condition-action rules</span><br><span class="line">  			action, the most recent action, initially none</span><br><span class="line">  state &lt;- INTERPRET-INPUT(percept)</span><br><span class="line">  rule &lt;- RULE-MATCH(state, rules)</span><br><span class="line">  action &lt;- rule.ACTION</span><br><span class="line">  return action</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<h4>2.5.2 Model-based Reflex Agents</h4>
+<ul>
+<li>
+<p>一个基于模型的反射智能体可以处理部分可观测环境</p>
+</li>
+<li>
+<p>其当前状态存储在智能体中，维护某种结构，它描述不可见外部环境的一部分</p>
+</li>
+<li>
+<p>About Model-based Reflex Agents</p>
+<ul>
+<li>关于“外部环境如何运作”的知识被称为一个外部环境模型</li>
+<li>基于模型的反射智能体将保持某种内部模型</li>
+<li>内部模型依赖于感知的历史，因此至少反射某些当前状态无法观测的方面</li>
+<li>然后它作为反射智能体以某种方式选择动作</li>
+</ul>
+</li>
+<li>
+<p>Algorithm of Model-based Reflex Agents
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function MODEL-BASED-REFLEX-AGENT(percept) returns an action</span><br><span class="line">  persistent: state, the agent&apos;s current conception of the </span><br><span class="line">  			world state model, a description of how the next </span><br><span class="line">  			state depends on current state and action rules, </span><br><span class="line">  			a set of condition-action rules action, the most</span><br><span class="line">  			recent action, initially none</span><br><span class="line">  state &lt;- UPDATE-STATE(state, action, percept, model)</span><br><span class="line">  rule &lt;- RULE-MATCH(state, rules)</span><br><span class="line">  action &lt;- rule.ACTION</span><br><span class="line">  return action</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<h4>2.5.3 Goal-based Agents</h4>
+<ul>
+<li>通过利用“目标信息”，基于目标的智能体进一步扩展了基于模型的智能体的功能</li>
+<li>About Goal-based Agents
+<ul>
+<li>目标信息描述所希望的情形</li>
+<li>它允许智能体在多个可能性之间选择一种方式，挑选出达到目标状态的那一个</li>
+<li>搜索和规划是人工智能的子领域，致力于发现达到智能体目标的动作序列</li>
+<li>在某些情况下，基于目标的智能体似乎不太有效</li>
+<li>但它更灵活，因为这种支持其决策的知识明显地展示出来，并且可以被修改</li>
+</ul>
+</li>
+</ul>
+<h4>2.5.4 Utility-based Agents</h4>
+<ul>
+<li>一个特殊的状态可通过一个效用函数得到，该函数将一个状态映射到一个该状态效用的度量。</li>
+<li>About Utility-based Agents
+<ul>
+<li>一种更通用的性能度量，应该根据他们使得智能体多么“高兴”的程度，允许对不同的外部环境状态进行比较</li>
+<li>效用用于描述智能体的快乐程度</li>
+<li>一个理性的基于效用的智能体选择动作，将动作结果的期待效用最大化</li>
+<li>一个基于效用的智能体需要建模并记录环境，任务的轨迹，这涉及大量的感知，表征，推理，和学习的研究</li>
+</ul>
+</li>
+</ul>
+<h4>2.5.5 Learning Agents</h4>
+<ul>
+<li>学习允许智能体最初在未知的环境中运行，并且与其最初的知识相比，会变得越来越胜任。</li>
+<li>About Learning Agents
+<ul>
+<li>Learning element</li>
+<li>Performance element</li>
+<li>Problem generator</li>
+</ul>
+</li>
+</ul>
+<h4>2.5.6 Other Agents</h4>
+<ul>
+<li>Decision Agents</li>
+<li>Input Agents</li>
+<li>Processing Agents</li>
+<li>Spatial Agents</li>
+<li>Temporal Agents 时间智能体</li>
+<li>World Agents</li>
+<li>Believable agents</li>
+<li>Shopping Agent</li>
+<li>Customer Help Desk</li>
+<li>Personal Agent</li>
+<li>Data-mining Agent</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/02/人工智能原理-索引贴/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2541,212 +3345,6 @@ $$</p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/28/THUOJ-PA2-2-2-3-凸包3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/28/THUOJ-PA2-2-2-3-凸包3/" itemprop="url">THUOJ PA2 2-2-3 凸包3</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-28T12:48:38+08:00">
-                2019-01-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/THUOJ/" itemprop="url" rel="index">
-                    <span itemprop="name">THUOJ</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/01/28/THUOJ-PA2-2-2-3-凸包3/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/01/28/THUOJ-PA2-2-2-3-凸包3/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2>问题描述</h2>
-<ul>
-<li>平面上给 $n$ 个点，求凸包</li>
-<li>$n$ 可能很大</li>
-<li>输入数据已经按照点的横坐标大小进行了排序</li>
-</ul>
-<h2>输入输出</h2>
-<ul>
-<li>和凸包2一样，输入文件仍采用二进制格式存储</li>
-<li>输出时选择凸包上纵坐标最小（纵坐标相等则选横坐标最小的）的点作为第一个输出的点，按逆时针顺序依次输出凸包上的所有点。</li>
-<li>若有重合的点，只需输出一次，不需输出凸包上非顶点的点。</li>
-</ul>
-<h2>输入输出</h2>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">11</span><br><span class="line">1 6</span><br><span class="line">1 0</span><br><span class="line">4 11</span><br><span class="line">5 5</span><br><span class="line">7 11</span><br><span class="line">7 0</span><br><span class="line">7 7</span><br><span class="line">8 1</span><br><span class="line">8 12</span><br><span class="line">9 3</span><br><span class="line">10 6</span><br><span class="line">output:</span><br><span class="line">1 0</span><br><span class="line">7 0</span><br><span class="line">8 1</span><br><span class="line">9 3</span><br><span class="line">10 6</span><br><span class="line">8 12</span><br><span class="line">4 11</span><br><span class="line">1 6</span><br></pre></td></tr></table></figure></p>
-<h2>限制</h2>
-<ul>
-<li>$5\le n \le 10,000,000$</li>
-<li>$-2^{25} \le x,y \le 2^{25}$</li>
-</ul>
-<h2>提示</h2>
-<ul>
-<li>数据特点：点的数量可能很大，输入数据已按点的横坐标从小到大排序</li>
-<li>适用算法：由于点的数量很大，使用复杂度为VH的JarvisMarch算法和复杂度为VlogV的快速凸包算法均会超时。可以使用GrahamScan算法，该算法在数据有序的情况下复杂度为V，其中V为点的总数。</li>
-</ul>
-<h2>思路</h2>
-<ul>
-<li>使用 $GrahamScan$ 算法。</li>
-</ul>
-<h3>GrahamScan 算法</h3>
-<ul>
-<li>参考<a href="https://en.wikipedia.org/wiki/Graham_scan" target="_blank" rel="noopener">wiki</a></li>
-<li>首先找到有最小 $y$ 坐标的点 $P$（$y$ 坐标相同则找具有最小 $x$ 坐标的点）$O(n)$</li>
-<li>然后将所有的点按照与 $P$ 点形成的极角大小进行排序 $O(nlogn)$
-<ul>
-<li>算极角时不一定非要算出来角度，只要能比较出大小即可。可以使用任何在 $[0,\pi]$ 之间单调的函数来进行衡量，比如可以用 $cos(x)$ 函数</li>
-</ul>
-</li>
-<li>当三个点形成“右转”关系时，说明中间那个点不是凸包点，舍弃该点，再取下一个点进行判断。</li>
-<li>三点共线时，根据需要进行取舍。</li>
-<li>判断三点关系，实际上就是判断两个向量的顺逆时针关系，举例如下：
-<ul>
-<li>考虑三个点 $P_1=(x_1,y_1)$ $P_2=(x_2,y_2)$ $P_3=(x_3,y_3)$</li>
-<li>考虑两个向量 $\overrightarrow{P_1P_2}$ $\overrightarrow{P_1P_3}$</li>
-<li>两个向量的叉积为 $(x_2-x_1)(y_3-y_1)-(y_2-y_1)(x_3-x_1)$</li>
-<li>如叉积等于0，则三点共线</li>
-<li>若叉积大于0，则向量形成逆时针关系，为“左转”</li>
-<li>若叉积小于0，则向量形成顺时针关系，为“右转”</li>
-</ul>
-</li>
-</ul>
-<h3>伪代码</h3>
-<p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ccw</span><span class="params">(p1, p2, p3)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> (p2.x-p1.x)*(p3.y-p1.y)-(p2.y-p1.y)*(p3.x-p1.x)</span><br><span class="line">N = len(points)</span><br><span class="line">swap(points[<span class="number">0</span>], points[indexOfLowestY])</span><br><span class="line">sort(points) <span class="comment"># sort it by polar angle with points[0]</span></span><br><span class="line">stack = []</span><br><span class="line">stack.push(points[<span class="number">0</span>])</span><br><span class="line">stack.push(points[<span class="number">1</span>])</span><br><span class="line"><span class="keyword">for</span> i=<span class="number">2</span> to N<span class="number">-1</span>:</span><br><span class="line">    <span class="keyword">while</span> len(stack) &gt;= <span class="number">2</span> <span class="keyword">and</span> ccw(stack.next_to_top(), stack.top(), points[i]) &lt;= <span class="number">0</span></span><br><span class="line">        stack.pop()</span><br><span class="line">    stack.push(points[i])</span><br></pre></td></tr></table></figure></p>
-<h2>实现</h2>
-<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Point</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> x, y;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">vector</span>&#123;</span></span><br><span class="line">    T* _a; <span class="keyword">int</span> _size; <span class="keyword">int</span> _maxsize;</span><br><span class="line">    <span class="built_in">vector</span>(<span class="keyword">int</span> n=<span class="number">4</span>)&#123;</span><br><span class="line">        _a = <span class="keyword">new</span> T[n];</span><br><span class="line">        _size = <span class="number">0</span>; _maxsize = n;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">resize</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">        T* b = _a;</span><br><span class="line">        _a = <span class="keyword">new</span> T[n];</span><br><span class="line">        _size = _maxsize = n;</span><br><span class="line">        <span class="keyword">delete</span>[] b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">vector</span>&lt;Point&gt; p;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    p.resize(n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;p[i].x, &amp;p[i].y);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2801,7 +3399,7 @@ $$</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">186</span>
+                  <span class="site-state-item-count">187</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -3339,7 +3937,7 @@ $$</p>
     });
   </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"},"extensions":["mediawiki-texvc.js"]}});
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"all"},"extensions":["mediawiki-texvc.js"]}});
 </script>
 
 <script type="text/x-mathjax-config">

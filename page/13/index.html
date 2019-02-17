@@ -296,6 +296,169 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/338-Counting-Bits-DP-6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/02/338-Counting-Bits-DP-6/" itemprop="url">338. Counting Bits-DP-6</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T15:23:39+08:00">
+                2018-11-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/02/338-Counting-Bits-DP-6/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/02/338-Counting-Bits-DP-6/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3>问题描述</h3>
+<p>给一个数字num，对于所有的在 [0, num] 范围内的数字 i，计算他们二进制形式中1的个数，返回为一个数组。
+如：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：2</span><br><span class="line">输出：[0,1,1]</span><br></pre></td></tr></table></figure></p>
+<h3>思路</h3>
+<p>递推方程为：
+$$
+f[i] = f[i/2] + i%2
+$$
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; countBits(<span class="keyword">int</span> num)&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">    ans.push_back(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= num; i++)&#123;</span><br><span class="line">        ans.push_back(ans[i/<span class="number">2</span>] + i%<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 直接判断</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; countBits(<span class="keyword">int</span> num) &#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= num; i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> c = <span class="number">0</span>, a = i;</span><br><span class="line">        <span class="keyword">while</span>(a)&#123;</span><br><span class="line">            a &amp;= a<span class="number">-1</span>;</span><br><span class="line">            c++;</span><br><span class="line">        &#125;</span><br><span class="line">        ans.push_back(c);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 另外一种解法</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; countBits(<span class="keyword">int</span> num) &#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">    ans.push_back(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= num; i++)</span><br><span class="line">        ans.push_back(ans[i&amp;(i<span class="number">-1</span>)] + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/303-Range-Sum-Query-Immutable-DP-5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1761,191 +1924,6 @@ f[i]为从第i级台阶往后走的最大花费。
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/169-Majority-Element-12/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/02/169-Majority-Element-12/" itemprop="url">169. Majority Element-12</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T10:07:43+08:00">
-                2018-11-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/02/169-Majority-Element-12/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/02/169-Majority-Element-12/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3>问题描述</h3>
-<p>寻找众数（出现次数大于$\lfloor n/2 \rfloor$ ）</p>
-<h3>方法一：暴力</h3>
-<p>对每一个元素都数一下它自己出现的次数
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// java</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> majorityCount = nums.length / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> num: nums)&#123;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> elem: nums)</span><br><span class="line">            <span class="keyword">if</span>(elem == num) count++;</span><br><span class="line">        <span class="keyword">if</span>(count &gt; majorityCount) <span class="keyword">return</span> num;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">majorityElement</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">    majority_count = len(nums)/<span class="number">2</span></span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">        count = sum(<span class="number">1</span> <span class="keyword">for</span> elem <span class="keyword">in</span> nums <span class="keyword">if</span> elem == num)</span><br><span class="line">        <span class="keyword">if</span> count &gt; majority_count:</span><br><span class="line">            <span class="keyword">return</span> num</span><br></pre></td></tr></table></figure></p>
-<p>time: $O(n^2)$,  space: $O(1)$</p>
-<h3>方法二：HashMap</h3>
-<p>使用 HashMap 来数每个元素出现的个数
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// java</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> Map&lt;Integer, Integer&gt; <span class="title">countNums</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">    Map&lt;Integer, Integer&gt; counts = <span class="keyword">new</span> HashMap&lt;Integer, Integer&gt;();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> num: nums)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!counts.containsKey(num)) counts.put(num, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">else</span> counts.put(num, counts.get(num)+<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> counts;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">    Map&lt;Integer, Integer&gt; counts = countNums(nums);</span><br><span class="line">    Map.Entry&lt;Integer, Integer&gt; majorityEntry = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">for</span>(Map.Entry&lt;Integer, Integer&gt; entry: counts.entrySet())</span><br><span class="line">        <span class="keyword">if</span>(majorityEntry == <span class="keyword">null</span> || entry.getValue() &gt; majorityEntry.getValue())</span><br><span class="line">            majorityEntry = entry;</span><br><span class="line">    <span class="keyword">return</span> majorityEntry.getKey();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python3</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">majorityElement</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">    counts = collections.Counter(nums)</span><br><span class="line">    <span class="keyword">return</span> max(counts.keys(), key=counts.get)</span><br><span class="line">// C++</span><br><span class="line">int majorityElement(vector&lt;int&gt;&amp; nums)&#123;</span><br><span class="line">    unordered_map&lt;int, int&gt; counts;</span><br><span class="line">    int n = nums.size();</span><br><span class="line">    <span class="keyword">for</span>(int i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        <span class="keyword">if</span>(++counts[nums[i]] &gt; n/<span class="number">2</span>)</span><br><span class="line">            <span class="keyword">return</span> nums[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>time: $O(n)$</p>
-<p>space: $O(n)$</p>
-<h3>方法三：排序</h3>
-<p>将数组进行排序，那么众数应该出现在 $\lfloor n/2 \rfloor$（n是奇数），或者 $\lfloor n/2 \rfloor+1$ （n为偶数）
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// java</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">    Arrays.sort(nums);</span><br><span class="line">    <span class="keyword">return</span> nums[nums.length/<span class="number">2</span>];</span><br><span class="line">&#125;</span><br><span class="line"># Python3</span><br><span class="line"><span class="function">def <span class="title">majorityElement</span><span class="params">(self, nums)</span>:</span></span><br><span class="line"><span class="function">    nums.<span class="title">sort</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    return nums[<span class="title">len</span><span class="params">(nums)</span><span class="comment">//2]</span></span></span><br></pre></td></tr></table></figure></p>
-<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">    nth_element(nums.begin(), nums.begin()+nums.size()/<span class="number">2</span>, nums.end());</span><br><span class="line">    <span class="keyword">return</span> nums[nums.size()/<span class="number">2</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// C++ sort</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">    sort(nums);</span><br><span class="line">    <span class="keyword">return</span> nums[nums.size()/<span class="number">2</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3>方法四：随机</h3>
-<p>随机选取一个数，判断它是不是众数
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">randRange</span><span class="params">(Random rand, <span class="keyword">int</span> min, <span class="keyword">int</span> max)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> rand.naxInt(max-min) + min;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">countOccurences</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> num)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++)</span><br><span class="line">        <span class="keyword">if</span>(nums[i] == num) count++;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">    Random rand = <span class="keyword">new</span> Random();</span><br><span class="line">    <span class="keyword">int</span> majorityCount = nums.length/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> candidate = nums[randRange(rand, <span class="number">0</span>, nums.length)];</span><br><span class="line">        <span class="keyword">if</span>(countOccurences(nums, candidate) &gt; majorityCount)</span><br><span class="line">            <span class="keyword">return</span> candidate;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">majorityElement</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">    majority_count = len(nums) // <span class="number">2</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        candidate = random.choice(nums)</span><br><span class="line">        <span class="keyword">if</span> sum(<span class="number">1</span> <span class="keyword">for</span> elem <span class="keyword">in</span> nums <span class="keyword">if</span> elem == candidate) &gt; majority_count:</span><br><span class="line">            <span class="keyword">return</span> candidate</span><br></pre></td></tr></table></figure></p>
-<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = nums.size();</span><br><span class="line">    srand(<span class="keyword">unsigned</span>(time(<span class="literal">NULL</span>)));</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> idx = rand() % n;</span><br><span class="line">        <span class="keyword">int</span> candidate = nums[idx];</span><br><span class="line">        <span class="keyword">int</span> counts = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">            <span class="keyword">if</span>(nums[i] == candidate) counts++;</span><br><span class="line">        <span class="keyword">if</span>(counts &gt; n/<span class="number">2</span>) <span class="keyword">return</span> candidate;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3>方法五：分治法</h3>
-<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">countInRange</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> num, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = lo; i &lt;= hi; i++) <span class="comment">// [lo, hi] all inclusive</span></span><br><span class="line">        <span class="keyword">if</span>(nums[i] == num) count++;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">majorityElementRec</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(lo == hi) <span class="keyword">return</span> nums[lo];</span><br><span class="line">    <span class="keyword">int</span> mid = (hi-lo)/<span class="number">2</span> + lo;</span><br><span class="line">    <span class="keyword">int</span> left = majorityElementRec(nums, lo, mid);</span><br><span class="line">    <span class="keyword">int</span> right = majorityElementRec(nums, mid+<span class="number">1</span>, hi);</span><br><span class="line">    <span class="keyword">if</span>(left == right) <span class="keyword">return</span> left;</span><br><span class="line">    <span class="keyword">int</span> leftCount = countInRange(nums, left, lo, hi);</span><br><span class="line">    <span class="keyword">int</span> rightCount = countInRange(nums, right, lo, hi);</span><br><span class="line">    <span class="keyword">return</span> leftCount &gt; rightCount ? left : right;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> majorityElementRec(nums, <span class="number">0</span>, nums.length-<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python3</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">majorityElement</span><span class="params">(self, nums, lo=<span class="number">0</span>, hi=None)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">majority_element_rec</span><span class="params">(lo, hi)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> lo == hi:</span><br><span class="line">            <span class="keyword">return</span> nums[lo]</span><br><span class="line">        mid = (hi-lo)//<span class="number">2</span> + lo</span><br><span class="line">        left = majority_element_rec(lo, mid)</span><br><span class="line">        right = majority_element_rec(mid+<span class="number">1</span>, hi)</span><br><span class="line">        <span class="keyword">if</span> left == right:</span><br><span class="line">            <span class="keyword">return</span> left</span><br><span class="line">        left_count = sum(<span class="number">1</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(lo, hi+<span class="number">1</span>) <span class="keyword">if</span> nums[i] == left)</span><br><span class="line">        right_count = sum(<span class="number">1</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(lo, hi+<span class="number">1</span>) <span class="keyword">if</span> nums[i] == right)</span><br><span class="line">        <span class="keyword">return</span> left <span class="keyword">if</span> left_count &gt; right_count <span class="keyword">else</span> right</span><br><span class="line">    <span class="keyword">return</span> majority_element_rec(<span class="number">0</span>, len(nums<span class="number">-1</span>))</span><br><span class="line">// C++</span><br><span class="line">int majorityElement(vector&lt;int&gt;&amp; nums)&#123;</span><br><span class="line">    <span class="keyword">return</span> majority(nums, <span class="number">0</span>, nums.size()<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line">int majority(vector&lt;int&gt;&amp; nums, int left, int right)&#123;</span><br><span class="line">    <span class="keyword">if</span>(left == right) <span class="keyword">return</span> nums[left];</span><br><span class="line">    int mid = left + ((right-left)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">    int lm = majority(nums, left, mid);</span><br><span class="line">    int rm = majority(nums, mid+<span class="number">1</span>, right);</span><br><span class="line">    <span class="keyword">if</span>(lm == rm) <span class="keyword">return</span> lm;</span><br><span class="line">    int lcount = count(nums.begin()+left, nums.begin()+right+<span class="number">1</span>, lm);</span><br><span class="line">    int rcount = count(nums.begin()+left, nums.begin()+right+<span class="number">1</span>, rm);</span><br><span class="line">    return lcount &gt; rcount ? lm : rm;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3>方法六：Boyer-Moore Voting</h3>
-<p>从前向后遍历数组，首先把当前的元素认为是众数，用一个变量 count 来表示这个认为是众数的数出现的次数。往后依次处理元素，假如碰到了这个数，count加一，假如碰到的不是这个数，count减一，当 count 减为 0 时，重新选取下一个元素作为众数。相当于不断舍弃一个前缀，这个前缀中可能的众数和非众数的数量是相同的，所以可以保证的是即使舍弃的前缀中包含众数，这个众数在后缀中仍为众数。
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// java</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    Integer candidate = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> num: nums)&#123;</span><br><span class="line">        <span class="keyword">if</span>(count == <span class="number">0</span>) candidate = num;</span><br><span class="line">        count += (num == candidate)?<span class="number">1</span>:-<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> candidate;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">majorityElement</span><span class="params">(self, nums)</span></span></span><br><span class="line">    count = 0</span><br><span class="line">    candidate = <span class="keyword">None</span></span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">        <span class="keyword">if</span> count == <span class="number">0</span>:</span><br><span class="line">            candidate = num</span><br><span class="line">        count + (<span class="number">1</span> <span class="keyword">if</span> num == candidate <span class="keyword">else</span> <span class="number">-1</span>)</span><br><span class="line">    <span class="keyword">return</span> candidate</span><br></pre></td></tr></table></figure></p>
-<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> major, counts = <span class="number">0</span>, n = nums.size();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!counts)&#123;</span><br><span class="line">            major = nums[i];</span><br><span class="line">            counts = <span class="number">1</span>;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">else</span> counts += (nums[i] == major) ? <span class="number">1</span> : <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> major;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3>方法七：Bit manipulation</h3>
-<p>找出这n个数，32bit中每个bit最多的的那一种情况
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> major = <span class="number">0</span>, n = nums.size();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>, mask = <span class="number">1</span>; i &lt; <span class="number">32</span>; i++, mask &lt;&lt;= <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> bitCounts = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[j] &amp; mask) bitCounts++;</span><br><span class="line">            <span class="keyword">if</span>(bitCounts &gt; n/<span class="number">2</span>)&#123;</span><br><span class="line">                major |= mask;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> major;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2000,7 +1978,7 @@ f[i]为从第i级台阶往后走的最大花费。
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">186</span>
+                  <span class="site-state-item-count">187</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2538,7 +2516,7 @@ f[i]为从第i级台阶往后走的最大花费。
     });
   </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"},"extensions":["mediawiki-texvc.js"]}});
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"all"},"extensions":["mediawiki-texvc.js"]}});
 </script>
 
 <script type="text/x-mathjax-config">
