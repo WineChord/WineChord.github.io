@@ -296,6 +296,196 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/09/CST2018-3-3-Hacker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/09/CST2018-3-3-Hacker/" itemprop="url">CST2018 3-3 Hacker</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-09T09:35:47+08:00">
+                2019-02-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/THUOJ/" itemprop="url" rel="index">
+                    <span itemprop="name">THUOJ</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/09/CST2018-3-3-Hacker/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/09/CST2018-3-3-Hacker/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2>题目描述</h2>
+<ul>
+<li>用户系统保存密码时不能明文保存。一种做法是加盐 hash，将 password + salt 的 CRC32 值存在数据库中。当用户登录时，重复此计算，验证 hash 的值是否相等。</li>
+<li>盐和密码必须由 <code>0123456789tsinghua</code> 中的字符组成，所有的用户使用相同的 salt</li>
+<li>窃听了一些密文，想破解对应的密码，只破解不超过5位的密码。</li>
+<li>窃听的过程中还不断地了解到一些极有可能成为密文的弱口令</li>
+<li>维护两个操作：</li>
+</ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0 x // 查询 x 所对应的密码，若为5位以内或是之前发现的弱口令密码则输出该密码。找不到则输出 No，多个密码对应则输出 duplicate</span><br><span class="line">1   // 新探知一个可能的弱口令，不同 1 指令插入的相同的弱口令需要被认为是不同的，即如果 1 插入两次 &quot;aaaaaaa&quot;，0 操作询问之后需要输出 duplicate</span><br></pre></td></tr></table></figure></p>
+<h2>输入输出</h2>
+<ul>
+<li>输入：
+<ul>
+<li>第 $1$ 行：$n$</li>
+<li>第 $2$ 行：salt (length$\le 4$)</li>
+<li>以下 $n$ 行：每行为一个操作</li>
+<li>注意：为体现操作的在线性，对于每个操作&quot;1&quot;，每次增加的弱口令实际为之前发现的（不计算 duplicate）7 个密文的首字母。</li>
+</ul>
+</li>
+<li>输出：
+<ul>
+<li>若干行：对于每个0操作，若询问的密文x对应5位以内或是一个之前发现的弱口令密码，则输出，找不到则输出 No，多个密码对应则输出 duplicate</li>
+</ul>
+</li>
+</ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">22</span><br><span class="line">gh05</span><br><span class="line">0 247720041</span><br><span class="line">0 2338669423</span><br><span class="line">0 1493402039</span><br><span class="line">0 4198769823</span><br><span class="line">0 2388280079</span><br><span class="line">0 2663422167</span><br><span class="line">0 96511603</span><br><span class="line">0 4123518</span><br><span class="line">1</span><br><span class="line">0 1797987966</span><br><span class="line">1</span><br><span class="line">0 4204041676</span><br><span class="line">0 247720041</span><br><span class="line">0 2338669423</span><br><span class="line">0 1493402039</span><br><span class="line">0 4198769823</span><br><span class="line">0 2388280079</span><br><span class="line">0 2663422167</span><br><span class="line">0 96511603</span><br><span class="line">0 41235</span><br><span class="line">1</span><br><span class="line">0 1797987966</span><br><span class="line">output:</span><br><span class="line">0</span><br><span class="line">11</span><br><span class="line">222</span><br><span class="line">3333</span><br><span class="line">ttttt</span><br><span class="line">hhhhh</span><br><span class="line">uuuuu</span><br><span class="line">No</span><br><span class="line">0123thu</span><br><span class="line">123thu0</span><br><span class="line">0</span><br><span class="line">11</span><br><span class="line">222</span><br><span class="line">3333</span><br><span class="line">ttttt</span><br><span class="line">hhhhh</span><br><span class="line">uuuuu</span><br><span class="line">No</span><br><span class="line">duplicate</span><br></pre></td></tr></table></figure></p>
+<h2>限制</h2>
+<ul>
+<li>$1\le n\le 2,000,000$</li>
+<li>3 sec</li>
+<li>256 MB</li>
+</ul>
+<h2>提示</h2>
+<ul>
+<li>散列</li>
+</ul>
+<h2>思路</h2>
+<h2>实现</h2>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/09/CST2018-3-2-Not-Found/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2135,210 +2325,6 @@ $$</p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/09/CST2018-2-3-1-Mooney-basic/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/09/CST2018-2-3-1-Mooney-basic/" itemprop="url">CST2018 2-3-1 Mooney(basic)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-09T09:34:12+08:00">
-                2019-02-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/THUOJ/" itemprop="url" rel="index">
-                    <span itemprop="name">THUOJ</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/02/09/CST2018-2-3-1-Mooney-basic/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/02/09/CST2018-2-3-1-Mooney-basic/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2>题目描述</h2>
-<ul>
-<li>
-<p>GG和MM在每个交叉路口时都会选择看月亮或五毛钱</p>
-</li>
-<li>
-<p>月亮一直有，但是五毛钱只在某些交叉路口出没</p>
-</li>
-<li>
-<p>GG在每个交叉路口借光看方向时，他倾向于少看月亮</p>
-</li>
-<li>
-<p>MM则希望尽可能多地捡钱，注意钱不能重复捡起</p>
-</li>
-<li>
-<p>先给出地图，他们殊途同归，问最佳途径所能达到的数值</p>
-</li>
-<li>
-<p>先问强连通分量的个数</p>
-</li>
-</ul>
-<h2>输入输出</h2>
-<ul>
-<li>输入：
-<ul>
-<li>第 $1$ 行：$n\ m$ 有向图的点数和边数</li>
-<li>第 $2$ 行：长度为 $n$ 的字符串，依次给出各点（即编号 $[0,n)$ 的路口）的路况：'M'表示此处只有月亮，'m'表示还有五毛钱</li>
-<li>以下 $m$ 行：分别描述各边 $a\ b$ 表示从 $a$ 到 $b$ 有边（$a,b\in [0,n)$）</li>
-<li>GG和MM的起点都是 $0$，目的地都是 $n-1$</li>
-<li>保证起点和终点有通路相连</li>
-</ul>
-</li>
-<li>输出：
-<ul>
-<li>输出图中强连通分量的数量</li>
-</ul>
-</li>
-</ul>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">12 15</span><br><span class="line">mMmMmMmmMmMM</span><br><span class="line">0 1</span><br><span class="line">0 2</span><br><span class="line">1 3</span><br><span class="line">2 3</span><br><span class="line">4 3</span><br><span class="line">3 5</span><br><span class="line">5 4</span><br><span class="line">5 6</span><br><span class="line">5 8</span><br><span class="line">6 7</span><br><span class="line">8 11</span><br><span class="line">7 11</span><br><span class="line">5 9</span><br><span class="line">9 10</span><br><span class="line">10 11</span><br><span class="line">output:</span><br><span class="line">10</span><br></pre></td></tr></table></figure></p>
-<h2>数据规模</h2>
-<ul>
-<li>$1\le n\le 500,000$</li>
-<li>$1\le m\le 1,200,000$</li>
-</ul>
-<h2>提示</h2>
-<ul>
-<li>BFS</li>
-<li>强连通分量</li>
-</ul>
-<p><img src="https://dsa.cs.tsinghua.edu.cn/oj/attachment/f688/f68864fe697f50936c9f62fcde1fba468fe6dfc8.png" alt="图片"></p>
-<h2>思路</h2>
-<h2>实现</h2>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2393,7 +2379,7 @@ $$</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">187</span>
+                  <span class="site-state-item-count">188</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

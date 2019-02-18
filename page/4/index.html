@@ -296,6 +296,215 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/09/CST2018-1-1-A-B-problem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/09/CST2018-1-1-A-B-problem/" itemprop="url">CST2018 1-1 A+B problem</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-09T09:31:54+08:00">
+                2019-02-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/THUOJ/" itemprop="url" rel="index">
+                    <span itemprop="name">THUOJ</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/09/CST2018-1-1-A-B-problem/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/09/CST2018-1-1-A-B-problem/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2>题目描述</h2>
+<ul>
+<li>实际上是 $A*B$ 问题，和PA2-1有关。</li>
+<li>问题是模拟 Python 中自带的长整型</li>
+<li>可以计算几百位的整数乘法</li>
+</ul>
+<h2>输入输出</h2>
+<ul>
+<li>输入：
+<ul>
+<li>第 $1$ 行：​$n$  # 要计算 ​$n$ 组乘法</li>
+<li>以下 $n$ 行：每行包含两个非负整数 $a$ $b$</li>
+</ul>
+</li>
+<li>输出：
+<ul>
+<li>共 $n$ 行：每行输出乘积</li>
+</ul>
+</li>
+</ul>
+<h2>输入输出样例</h2>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">3</span><br><span class="line">1 1</span><br><span class="line">2 2</span><br><span class="line">123123 789789</span><br><span class="line">output:</span><br><span class="line">1</span><br><span class="line">4</span><br><span class="line">97241191047</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>此样例是第一个测试点</li>
+</ul>
+<h2>数据范围及限制</h2>
+<ul>
+<li>
+<p>$1\le n\le 500​$</p>
+</li>
+<li>
+<p>$0\le a\lt 10^{5000}​$</p>
+</li>
+<li>
+<p>$0\le b\lt10^{5000}​$</p>
+</li>
+<li>
+<p>时间限制：1 sec</p>
+</li>
+<li>
+<p>内存限制：256 MB</p>
+</li>
+</ul>
+<h2>提示</h2>
+<ul>
+<li>使用高精度算法</li>
+</ul>
+<h2>思路</h2>
+<ul>
+<li>实现一个高精度乘法即可</li>
+</ul>
+<h2>实现</h2>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXLEN 5000+5</span></span><br><span class="line"><span class="keyword">int</span> a[MAXLEN], b[MAXLEN], sum[MAXLEN*<span class="number">2</span>];</span><br><span class="line"><span class="keyword">char</span> sa[MAXLEN], sb[MAXLEN];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">hpMulti</span><span class="params">(<span class="keyword">int</span> la, <span class="keyword">int</span> lb)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j,lsum=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">memset</span>(sum, <span class="number">0</span>, <span class="keyword">sizeof</span>(sum));</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=la; i++)</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">1</span>, lsum=i<span class="number">-1</span>; j&lt;=lb; j++)</span><br><span class="line">            sum[++lsum] += b[j]*a[i];</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=lsum; i++)</span><br><span class="line">        <span class="keyword">if</span>(sum[i]&gt;=<span class="number">10</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(sum[lsum]&gt;=<span class="number">10</span>) lsum++;</span><br><span class="line">            sum[i+<span class="number">1</span>] += sum[i] / <span class="number">10</span>;</span><br><span class="line">            sum[i] %= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> lsum;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">while</span>(n--)&#123;</span><br><span class="line">        <span class="keyword">int</span> la=<span class="number">0</span>, lb=<span class="number">0</span>, lsum=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%s %s"</span>, sa, sb);</span><br><span class="line">        la = <span class="built_in">strlen</span>(sa);</span><br><span class="line">        lb = <span class="built_in">strlen</span>(sb);</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">1</span>, j=la<span class="number">-1</span>; i&lt;=la; i++, j--)</span><br><span class="line">            a[i] = sa[j] - <span class="string">'0'</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">1</span>, j=lb<span class="number">-1</span>; i&lt;=lb; i++, j--)</span><br><span class="line">            b[i] = sb[j] - <span class="string">'0'</span></span><br><span class="line">        lsum = hpMulti(la, lb);</span><br><span class="line">        <span class="keyword">for</span>(i=lsum; i&gt;<span class="number">0</span>; i--)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d"</span>, sum[i]);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2>附录：提供的对拍工具</h2>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># check.py</span></span><br><span class="line"><span class="comment"># 集合了控制脚本和数据生成器，配置完里面的参数使用 python3 check.py 运行。当出现A，B不一致的数据时，程序会自动终止</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">checkAns</span><span class="params">(outputFile1, outputFile2)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">        该函数用于判断两个输入文件是否相同，这里采用的方式是读入两个文件的所有行，然后拼起来判断是否相同。可以根据需求修改</span></span><br><span class="line"><span class="string">        outputFile1,outputFile2 分别为判断的两个文件的文件名</span></span><br><span class="line"><span class="string">        函数返回布尔值</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">with</span> open(outputFile1, <span class="string">"r"</span>) <span class="keyword">as</span> f:</span><br><span class="line">        output1 = f.readlines()</span><br><span class="line">    <span class="keyword">with</span> open(outputFile2, <span class="string">"r"</span>) <span class="keyword">as</span> f:</span><br><span class="line">        output2 = f.readlines()</span><br><span class="line">    <span class="keyword">return</span> <span class="string">""</span>.join(output1) == <span class="string">""</span>.join(output2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dataMaker</span><span class="params">(inputFile, n, valuelength)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">        这个函数根据自己的需求一定要修改，他负责根据读入的参数来生成一个测试文件inputFile。</span></span><br><span class="line"><span class="string">        在A+B问题里面,n用来控制生成的数组组数，valuelength用来控制用于乘法的长度。</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">with</span> open(inputFile, <span class="string">"w"</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(str(n) + <span class="string">"\n"</span>)</span><br><span class="line">        <span class="keyword">for</span> datanum <span class="keyword">in</span> range(n):</span><br><span class="line">            S1 = str(random.randint(<span class="number">1</span>, <span class="number">9</span>))</span><br><span class="line">            S2 = str(random.randint(<span class="number">1</span>, <span class="number">9</span>))</span><br><span class="line">            <span class="keyword">for</span> itr <span class="keyword">in</span> range(valuelength - <span class="number">1</span>):</span><br><span class="line">                S1 += str(random.randint(<span class="number">0</span>, <span class="number">9</span>))</span><br><span class="line">                S2 += str(random.randint(<span class="number">0</span>, <span class="number">9</span>))</span><br><span class="line">            f.write(S1 + <span class="string">" "</span> + S2 + <span class="string">"\n"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        <span class="comment"># 每组数据10个，长度为10</span></span><br><span class="line">        dataMaker(<span class="string">"input.txt"</span>, <span class="number">10</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 运行a读入input.txt输出到output1.txt,a.cpp是c++代码需要编译之后得到可执行程序a</span></span><br><span class="line">        os.system(<span class="string">"./a &lt; input.txt &gt;output1.txt"</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 运行b读入input.txt输出到output1.txt,b.py是python代码通过python指令运行</span></span><br><span class="line">        os.system(<span class="string">"python3 b.py &lt; input.txt &gt;output2.txt"</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> checkAns(<span class="string">"output1.txt"</span>, <span class="string">"output2.txt"</span>) <span class="keyword">is</span> <span class="keyword">False</span>:</span><br><span class="line">            print(<span class="string">"Wrong"</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        print(<span class="string">"right"</span>)</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.cpp 一个蛮力的C++代码，仅仅能够计算 long long 内的乘法，需要编译成可执行文件a之后才能够放入脚本运行</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> N;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; N;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i ++) &#123;</span><br><span class="line">		<span class="keyword">long</span> <span class="keyword">long</span> a, b;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; a * b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># b.py 一个Python代码，实现了高效的大数乘法</span></span><br><span class="line">n = int(input())</span><br><span class="line"><span class="keyword">for</span> itr <span class="keyword">in</span> range(n):</span><br><span class="line">    a, b = input().split(<span class="string">" "</span>)</span><br><span class="line">    a = int(a)</span><br><span class="line">    b = int(b)</span><br><span class="line">    print(a * b)</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/07/人工智能原理-Part-V-Learning-Ch11-12-Paradigms-Models-in-Machine-Learning/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -5269,199 +5478,6 @@ $$</p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/02/Leetcode-DP-索引贴/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/02/Leetcode-DP-索引贴/" itemprop="url">Leetcode DP 索引贴</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-02T14:38:18+08:00">
-                2019-02-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/索引贴/" itemprop="url" rel="index">
-                    <span itemprop="name">索引贴</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/02/02/Leetcode-DP-索引贴/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/02/02/Leetcode-DP-索引贴/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2>1~100</h2>
-<ul>
-<li>5.Longest Palindromic Substring</li>
-<li>10.Regular Expressiong Matching</li>
-<li>32.Longest Valid Parentheses</li>
-<li>44.Wildcard Matching</li>
-<li>53.Maximum Subarray</li>
-<li>62.Unique Paths</li>
-<li>63.Unique Paths II</li>
-<li>64.Minimum Path Sum</li>
-<li>70.Climbing Stairs</li>
-<li>72.Edit Distance</li>
-<li>85.Maximal Rectangle</li>
-<li>87.Scramble String</li>
-<li>91.Decode Ways</li>
-<li>95.Unique Binary Search Trees II</li>
-<li>96.Unique Binary Search Trees</li>
-<li>97.Interleaving String</li>
-</ul>
-<h2>101~200</h2>
-<ul>
-<li>115.Distinct Subsequences</li>
-<li>120.Triangle</li>
-<li>121.Best Time to Buy and Sell Stock</li>
-<li>123.Best Time to Buy and Sell Stock III</li>
-<li>132.Palindrome Partitioning II</li>
-<li>139.Word Break</li>
-<li>140.Word Break II</li>
-<li>152.Maximum Product Subarray</li>
-<li>174.Dungeon Game</li>
-<li>188.Best Time to Buy and Sell Stock IV</li>
-<li>198.House Robber</li>
-</ul>
-<h2>201~300</h2>
-<h2>301~400</h2>
-<h2>401~500</h2>
-<h2>501~600</h2>
-<h2>601~700</h2>
-<h2>701~800</h2>
-<h2>801~900</h2>
-<h2>901~1000</h2>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -5516,7 +5532,7 @@ $$</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">187</span>
+                  <span class="site-state-item-count">188</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
