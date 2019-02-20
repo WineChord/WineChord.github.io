@@ -296,6 +296,189 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/14-Longest-Common-Prefix/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/01/14-Longest-Common-Prefix/" itemprop="url">14. Longest Common Prefix</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-01T23:04:23+08:00">
+                2018-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/01/14-Longest-Common-Prefix/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/01/14-Longest-Common-Prefix/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3>问题描述</h3>
+<p>寻找多个字符串中最长的公共前缀。若无则返回空串。</p>
+<h3>解法一：水平扫描</h3>
+<p>根据观察有：
+$$
+LCP(S_1...S_n) = LCP(...LCP(LCP(S_1,S_2),S_3)...S_N)
+$$
+时间复杂度为 $O(S)$，其中 S 为所有字符串中所有字符的总数。空间复杂度为 $O(1)$
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">longestCommonPrefix</span><span class="params">(String[] strs)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(strs.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    String prefix = strs[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; strs.length; i++)</span><br><span class="line">        <span class="keyword">while</span>(strs[i].indexOf(prefix) != <span class="number">0</span>)&#123;</span><br><span class="line">            prefix = prefix.substring(<span class="number">0</span>, prefix.length()-<span class="number">1</span>); <span class="comment">// end index is exclusive while start index is inclusive</span></span><br><span class="line">            <span class="keyword">if</span>(prefix.isEmpty()) <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> prefix;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>解法二：垂直扫描</h3>
+<p>在水平扫描中加入最后一个字符串非常短，那么这样的话会造成不必要的比较，所以考虑一行一行地进行扫描。
+时间复杂度为 $O(S)$，空间复杂度为 $O(1)$。
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">longestCommonPreFix</span><span class="params">(String[] strs)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(strs == <span class="keyword">null</span> || strs.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; strs[<span class="number">0</span>].length(); i++)&#123;</span><br><span class="line">        <span class="keyword">char</span> c = strs[<span class="number">0</span>].charAt(i);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; strs.length; j++)</span><br><span class="line">            <span class="keyword">if</span>(i == strs[j].length() || strs[j].charAt(i) != c)</span><br><span class="line">                <span class="keyword">return</span> strs[<span class="number">0</span>].substring(<span class="number">0</span>, i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> strs[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// C++ version</span></span><br><span class="line"><span class="keyword">if</span>(strs.size() == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; strs[<span class="number">0</span>].length(); i++)&#123;</span><br><span class="line">    <span class="keyword">char</span> c = strs[<span class="number">0</span>][i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; strs.size(); j++)</span><br><span class="line">        <span class="keyword">if</span>(i == strs[j].length() || strs[j][i] != c)</span><br><span class="line">            <span class="keyword">return</span> strs[<span class="number">0</span>].substr(<span class="number">0</span>, i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> strs[<span class="number">0</span>];</span><br></pre></td></tr></table></figure></p>
+<h3>解法三：分而治之</h3>
+<p>注意到
+$$
+LCP(S_1...S_n) = LCP(LCP(S_1...S_k), LCP(S_{k+1}...S_{n}))
+$$
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">longestCommonPrefix</span><span class="params">(String[] strs)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(strs == <span class="keyword">null</span> || strs.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">return</span> longestCommonPrefix(strs, <span class="number">0</span>, strs.length-<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> String <span class="title">longestCommonPrefix</span><span class="params">(String[] strs, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l == r) <span class="keyword">return</span> strs[l];</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (l+r) / <span class="number">2</span>;</span><br><span class="line">        String lcpLeft = longestCommonPrefix(strs, l, mid);</span><br><span class="line">        String lcpRight = longestCommonPrefix(strs, mid+<span class="number">1</span>, r);</span><br><span class="line">        <span class="keyword">return</span> commonPrefix(lcpLeft, lcpRight);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">String <span class="title">commonPrefix</span><span class="params">(String left, String right)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> min = Math.min(left.length(), right.length());</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; min; i++)</span><br><span class="line">        <span class="keyword">if</span>(left.charAt(i) != right.charAt(i))</span><br><span class="line">            <span class="keyword">return</span> left.substring(<span class="number">0</span>, i);</span><br><span class="line">    <span class="keyword">return</span> left.substring(<span class="number">0</span>, min);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>时间复杂度为 $O(S)$，S = m*n，在最坏情况下有n个相同的长度为m的字符串。
+$$
+T(n) = 2 \cdot T(\frac{n}{2}) + O(m)
+$$
+最好情况下需要 $O(minLen\cdot n)$次比较，其中 $minLne$ 为最短的字符串的长度。
+空间复杂度：$O(m\cdot log(n))$，因为总共有 $log(n)$ 次递归调用，每次需要 $m$ 的空间用来进行存储。</p>
+<h3>解法四：二分查找</h3>
+<p>在 $(0, minLen)$ 区间内进行最长公共前缀的查找，其中 $minLen$ 是所有字符串中最短的长度。使用二分查找，当前半部分不是公共前缀时，再在前半部分继续查找，舍弃后半部分，当前半部分是公共前缀时，舍弃前半部分，在后半部分继续进行查找。
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">longestCommonPrefix</span><span class="params">(String[] strs)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(strs == <span class="keyword">null</span> || strs.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">int</span> minLen = Integer.MAX_VALUE;</span><br><span class="line">    <span class="keyword">for</span>(String str : strs) minLen = Math.min(minLen, str.length());</span><br><span class="line">    <span class="keyword">int</span> low = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> high = minLen;</span><br><span class="line">    <span class="keyword">while</span>(low &lt;= high)&#123;</span><br><span class="line">        <span class="keyword">int</span> middle = (low + high) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(isCommonPrefix(strs, middle))</span><br><span class="line">            low = middle + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            high = middle - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> strs[<span class="number">0</span>].substring(<span class="number">0</span>, (low+high)/<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isCommonPrefix</span><span class="params">(String[] strs, <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    String str1 = str[<span class="number">0</span>].substring(<span class="number">0</span>, len);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; strs.length; i++)</span><br><span class="line">        <span class="keyword">if</span>(!strs[i].startsWith(str1))</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>时间复杂度：$O(S\cdot log(n))$，因为有 $log(n)$ 次迭代。
+空间复杂度：$O(1)$</p>
+<h3>拓展：Trie</h3>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/13-Roman-to-Integer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1768,185 +1951,6 @@ $$
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/4-Median-of-Two-Sorted-Arrays/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/01/4-Median-of-Two-Sorted-Arrays/" itemprop="url">4. Median of Two Sorted Arrays</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-01T16:08:10+08:00">
-                2018-11-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/01/4-Median-of-Two-Sorted-Arrays/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/01/4-Median-of-Two-Sorted-Arrays/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3>问题描述</h3>
-<p>找到两个有序数组的中位数。
-要求时间复杂度为 $O(log(m+n))$</p>
-<h3>思路</h3>
-<p>将两个数组各自分成两部分，假设其为 $aLeft$，$aRight$，$bLeft$，$bRight$，只要保证两个数组左半部分的长度之和等于右半部分的长度之和并且，左半部分中的任何一个元素都不大于右半部分，那么左半部分的最大值加上右半部分的最小值再除以二就是中位数。</p>
-<ul>
-<li>假设 $a$ 被分为 $a[0\sim i-1]\ \ \ a[i\sim m-1]$</li>
-<li>假设 $b$ 被分为 $b[0\sim j-1]\ \ \ b[j\sim n-1]$</li>
-</ul>
-<p>$则\ i,j\ 满足关系$
-$$
-i+j=m-i+n-j \tag{1}
-$$
-$$
-a[i-1] \le b[j] \tag{2}
-$$
-$$
-b[j-1] \le a[i] \tag{3}
-$$
-其中根据 $(1)$ 可得：
-$$
-j = \frac{m+n-2i}{2} \tag{4}
-$$
-故为使 $j$ 保持为正数，在开头确保 $m\le n$。
-则现在问题归结为在 $[0,m-1]中找一数\ i$，使得 $(2)(3)$ 成立。可以考虑使用二分法，最后达到的时间复杂度为 $O(log(m+n))$</p>
-<h3>实现</h3>
-<p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">findMedianSortedArrays</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m = nums1.size();</span><br><span class="line">    <span class="keyword">int</span> n = nums2.size();</span><br><span class="line">    <span class="keyword">if</span>(m &gt; n)&#123; <span class="comment">// 通过交换保证 nums1 的大小小于 nums2</span></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; temp(nums1); nums1 = nums2; nums2 = temp;</span><br><span class="line">        <span class="keyword">int</span> tmp = m; m = n; n = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> iMin = <span class="number">0</span>, iMax = m, halfLen = (m + n + <span class="number">1</span>)/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">while</span>(iMin &lt;= iMax)&#123;</span><br><span class="line">        <span class="keyword">int</span> i = (iMin + iMax) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">int</span> j = halfLen - i;</span><br><span class="line">        <span class="keyword">if</span>(i &lt; iMax &amp;&amp; nums2[j<span class="number">-1</span>] &gt; nums1[i])&#123;</span><br><span class="line">            iMin = i + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(i &gt; iMin &amp;&amp; nums1[i<span class="number">-1</span>] &gt; nums2[j])&#123;</span><br><span class="line">            iMax = iMax - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">int</span> maxLeft = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(i == <span class="number">0</span>) maxLeft = nums2[j<span class="number">-1</span>];</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(j == <span class="number">0</span>) maxLeft = nums1[i<span class="number">-1</span>];</span><br><span class="line">            <span class="keyword">else</span> &#123;maxLeft = <span class="built_in">std</span>::max(nums1[i<span class="number">-1</span>], nums2[j<span class="number">-1</span>]);&#125;</span><br><span class="line">            <span class="keyword">if</span>((m+n) % <span class="number">2</span> == <span class="number">1</span>) <span class="keyword">return</span> maxLeft;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">int</span> minRight = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(i == m) minRight = nums2[j];</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(j == n) minRight = nums1[i];</span><br><span class="line">            <span class="keyword">else</span> &#123;minRight = <span class="built_in">std</span>::min(nums2[j], nums1[i]);&#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">return</span> (maxLeft + minRight) / <span class="number">2.0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0.0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2001,7 +2005,7 @@ $$
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">193</span>
+                  <span class="site-state-item-count">194</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2012,7 +2016,7 @@ $$
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

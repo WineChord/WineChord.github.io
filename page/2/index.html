@@ -296,6 +296,196 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/12/Notes-for-CLRS-Ch30-Polynomials-and-the-FFT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/12/Notes-for-CLRS-Ch30-Polynomials-and-the-FFT/" itemprop="url">Notes for CLRS Ch30 Polynomials and the FFT</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-12T11:30:35+08:00">
+                2019-02-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CLRS/" itemprop="url" rel="index">
+                    <span itemprop="name">CLRS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/12/Notes-for-CLRS-Ch30-Polynomials-and-the-FFT/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/12/Notes-for-CLRS-Ch30-Polynomials-and-the-FFT/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2>Ch30 Polynomials and the FFT</h2>
+<ul>
+<li>
+<p>FFT 可以将两个多项式的乘法实现时间缩短至 $\Theta(nlgn)$。</p>
+</li>
+<li>
+<p>两个乘数分别为 $A(x)=\sum_{j=0}^{n-1}a_jx^j$  $B(x)=\sum_{j=0}^{n-1}b_jx^j$</p>
+</li>
+<li>
+<p>乘积为</p>
+</li>
+</ul>
+<p>$$
+C(x)=\sum_{j=0}^{2n-2}c_jx^j
+$$</p>
+<p>$$
+c_j=\sum_{k=0}^ja_kb_{j-k}
+$$</p>
+<ul>
+<li>Coefficient representation</li>
+<li>Point-value representation</li>
+</ul>
+<p>${(x_0,y_0),(x_1,y_1),...,(x_{n-1},y_{n-1})}$</p>
+<p>其中
+$$
+y_k=A(x_k)
+$$
+Theorem 30.1(Uniqueness of an interpolating polynomial)</p>
+<p>对于任意 $x_k$ 唯一的点值集，满足 $y_k=A(x_k)$ 的 $n$ 阶多项式 $A(x)$ 也是唯一的。</p>
+<p>证明：$(3)$ 等价于
+$$
+\begin{bmatrix}
+1 &amp;x_0 &amp;x_0^2 &amp;\cdots &amp;x_0^{n-1}\\
+1 &amp;x_1 &amp;x_1^2 &amp;\cdots &amp;x_1^{n-1}\\
+\vdots &amp;\vdots &amp;\vdots &amp;\ddots &amp;\vdots\\
+1 &amp;x^{n-1} &amp;x_{n-1}^2 &amp;\cdots &amp;x_{n-1}^{n-1}
+\end{bmatrix}
+$$</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/09/CST2018-3-8-Shortest/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2032,191 +2222,6 @@ $$</p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/09/CST2018-2-8-MST/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/09/CST2018-2-8-MST/" itemprop="url">CST2018 2-8 MST</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-09T09:35:12+08:00">
-                2019-02-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/THUOJ/" itemprop="url" rel="index">
-                    <span itemprop="name">THUOJ</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/02/09/CST2018-2-8-MST/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/02/09/CST2018-2-8-MST/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2>题目描述</h2>
-<ul>
-<li>给一张 $n$ 结点的带权完全图，计算最小生成树</li>
-</ul>
-<h2>输入输出</h2>
-<ul>
-<li>输入：
-<ul>
-<li>第 $1$ 行：$n$</li>
-<li>以下 $n$ 行：每行 $n$ 个非负整数，$(i,j)$ 表示点 $i$ 和点 $j$ 之间的边权</li>
-<li>有：$cost(i,j)=cost(j,i)$ 且 $cost(i,i)=0$</li>
-</ul>
-</li>
-<li>输出：
-<ul>
-<li>一个整数，表示最小生成树的各边长之和</li>
-</ul>
-</li>
-</ul>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">4</span><br><span class="line">0 4 9 21</span><br><span class="line">4 0 8 17</span><br><span class="line">9 8 0 16</span><br><span class="line">21 17 16 0</span><br><span class="line">output:</span><br><span class="line">28</span><br></pre></td></tr></table></figure></p>
-<h2>数据范围及限制</h2>
-<ul>
-<li>$1\le n\le 500$</li>
-<li>边权为整数 $\in [0,1000]$</li>
-<li>1 sec</li>
-<li>256 MB</li>
-</ul>
-<h2>提示</h2>
-<ul>
-<li>最小生成树</li>
-</ul>
-<h2>思路</h2>
-<h2>实现</h2>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2271,7 +2276,7 @@ $$</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">193</span>
+                  <span class="site-state-item-count">194</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2282,7 +2287,7 @@ $$</p>
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

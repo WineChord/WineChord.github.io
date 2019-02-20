@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Notes for CS 276 2 Term Vocabulary and Postings Lists]]></title>
+    <url>%2F2019%2F02%2F20%2FNotes-for-CS-276-2-Term-Vocabulary-and-Postings-Lists%2F</url>
+    <content type="text"><![CDATA[对应 IIR 的第二章，主要讲 &quot;Term Vocabulary&quot; 这个东西，也就是怎么把一个文档撕成碎片来进行表示。 重点有：Tokens, Stop words, Normalization, Stemming, Lemmatization, 还对上一章的 Merge 进行了算法优化：用 Skip Pointers Document ingestion parsing a document: format, language, character set Tokens Tokenization A token is an instance of a sequence of characters Issues: Finland's ? Hewlett-Packard ? San Francisco Numbers: have embedded spaces/ old sys may not index num/ index &quot;meta-data&quot; separately Language issues: French/German/Chinese... Terms: The things indexed in an IR sys Stop words: little semantic content(the, a, and, to, be) But the trend is away from doing this compression makes the space for including stop words is small query optimization makes query time paid for including stop words needed for: Phrase queries: &quot;King of Denmark&quot; song titles: &quot;Let it be&quot; &quot;Relational&quot; queries: &quot;flights to London&quot; Normalization to terms &quot;U.S.A&quot; $\rightarrow$ &quot;USA&quot; (delete periods and hyphens) Accents/Umlauts(元音变音) Most important criterion: How are your users like to write their queries for these words? Crucial: Need to &quot;normaliza&quot; indexed text as well as query terms identically Case folding upper $\rightarrow$ lower Thesauri(同义反义词) and Soundex(探测法，解决误拼) Stemming and Lemmatization Lemmatization(词性还原) am/is/are $\rightarrow$ be car/cars/car's/cars' $\rightarrow$ car Stemming(词干提取) crude affix chopping Porter's algorithm Commonest algorithm for stemming English Typical rules: sses $\rightarrow$ ss ies $\rightarrow$ i ational $\rightarrow$ ate tional $\rightarrow$ tion Faster postings merges: Skip pointers/Skip listd Recall: previously $O(m+n)$ Where to place skips? Tradeoff: More skips/Fewer skips Simple heuristic: postings of length $L$, use $\sqrt{L}$ evenly-spaced skip pointers ref: Term Vocabulary and Postings Lists]]></content>
+      <categories>
+        <category>CS 276 IR</category>
+      </categories>
+      <tags>
+        <tag>IR</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Merge algorithm总结]]></title>
     <url>%2F2019%2F02%2F20%2FMerge-algorithm%E6%80%BB%E7%BB%93%2F</url>
     <content type="text"><![CDATA[这是一个 In-class lab，主要解决多个关键词的查询问题，实现了基于位置索引的合并算法（Merge algorithm for proximity queries using a positional index） starter code some answers 前置知识：Boolean Retrieval 问题引出 为了实现多关键词索引，先看一个在 Linux 下的例子： 1comm -12 &lt;(grep -Riwl &quot;apple&quot; /) &lt;(grep -Riwl &quot;computer&quot; /) 该命令实现了找到同时含有 &quot;apple&quot; 和 &quot;computer&quot; 的文件。 comm: compare two sorted files line by line comm -12 file1 file2 : Print only lines present in both file1 and file2 grep: -R: 递归读取每个目录下的所有文件 -i: 不区分大小写 -w: 准确匹配这个单词（前后都得有空格或是开头结尾） -l: 输出匹配到的文件 好，那么如何在一个小机器上实现一个文本查找系统？ 故而有以下要求： 为了速度，需要索引（index） 时空进行权衡：字典（dictionary）在内存中，列表信息（postings lists）在磁盘上。 实现 &quot;merge algorithms&quot;，即找到列表中的交集，&quot;intersect&quot; 更准确些 算法高效的关键在于保持 &quot;postings lists&quot; 是有序的。本实验中列表都在内存中，但在实际中需要写出算法来支持列表在磁盘中 文档级别的索引 实现&quot;AND&quot;: intersect two postings lists 一种可能的实现： 12345678910111213141516static List&lt;Posting&gt; listFromIterator(Iterator&lt;Posting&gt; iter)&#123; List&lt;Posting&gt; list = new ArrayList&lt;Posting&gt;(); Posting p; while((p=popNextOrNull(iter)) != null) list.add(p); return list;&#125;static List&lt;Integer&gt; intersect(Iterator&lt;Posting&gt; p1, Iterator&lt;Posting&gt; p2)&#123; List&lt;Integer&gt; answer = new ArrayList&lt;Integer&gt;(); List&lt;Posting&gt; lp1 = listFromIterator(p1); List&lt;Posting&gt; lp2 = listFromIterator(p2); for(Posting posting1: lp1) for(Posting posting2: lp2) if(posting1.docID==posting2.docID) answer.add(posting1.docID); return answer;&#125; 该算法先通过迭代器得到了两个完整的列表，然后又用了双重循环来比较出两个列表相同的文档ID，从而实现取交集的操作。显然效率非常低，假设两个列表的长度分别是 $x$ 和 $y$，则易得总的时间复杂度为 $O(x+y+xy)$ 好，现在我们来改进这个算法，参考 Introduction to Information retrieval 中的 Figure 1.6，伪代码如下： 123456789101112INTERSECT(p1,p2)answer &lt;- []while p1!=NIL and p2!= NIL if docID(p1)==docID(p2) ADD(answer,docID(p1)) p1&lt;-next(p1) p2&lt;-next(p2) else if docID(p1)&lt;docID(p2) p1&lt;-next(p1) else p2&lt;-next(p2) 实现如下： 12345678910111213while(pp1 != null &amp;&amp; pp2 != null)&#123; if(pp1.docID == pp2.docID)&#123; answer.add(pp1.docID); pp1 = popNextOrNull(p1); pp2 = popNextOrNull(p2); &#125; else&#123; if(pp1.docID &lt; pp2.docID) pp1 = popNextOrNull(p1); else pp2 = popNextOrNull(p2); &#125;&#125; 改进的算法时间复杂度为 $O(x+y)$ 再尝试实现 &quot;OR&quot; 的算法：这就很简单了。。只需要修改一下下面的 else 语句，相等时只添加一个，不相等时分别添加就好（另外需要注意每个列表的元素要遍历完）： 12345678910111213141516171819202122232425while(pp1 != null &amp;&amp; pp2 != null)&#123; if(pp1.docID == pp2.docID)&#123; answer.add(pp1.docID); pp1 = popNextOrNull(p1); pp2 = popNextOrNull(p2); &#125; else&#123; if(pp1.docID &lt; pp2.docID)&#123; answer.add(pp1.docID); pp1 = popNextOrNull(p1); &#125; else&#123; answer.add(pp2.docID); pp2 = popNextOrNull(p2); &#125; &#125;&#125;while(pp1 != null)&#123; answer.add(pp1.docID); pp1 = popNextOrNull(p1);&#125;while(pp2 != null)&#123; answer.add(pp2.docID); pp2 = popNextOrNull(p2);&#125; 位置索引（Positional indices） 这里解决的问题是找到多个相邻的关键字，比如 [student /3 drunk] 意思是同时查找 student 和 drunk 这两个关键字，并且要求这两个关键字相邻的距离不超过 $3$ 为了实现这个目的，对 &quot;postings lists&quot; 的数据结构实现进行了加强，添加了关键字在每个文档中出现的位置，如： 11:7,18,33; 2:1,17; ... 意思是这个关键字在文档1中第 7,18,33 位出现，在文档2 中第 1,17 位出现。 好，现在问题变成了：同时索引两个关键字，这两个关键字之间相距小于 $k$ 实现思路：在上一步的基础上，先找到共同的文档，然后在文档中找复合条件的距离。 实现的关键是怎么在文档中找符合条件的距离？ 问题定义：给定两个序列 $L1,L2$，每个序列依次代表这两个关键词（$t1,t2$）在同一篇文档中的位置，给定 $k$ ，表示这两个关键词的距离 $d\le k$ ，求出所有符合条件的 (p1pos,p2pos) 思路（错误的）：双指针法，定义序列下标 $i,j$，，初始化均为 $0$，若 $|L1[i]-L1[j]|\le k$，则将这两个位置添加到结果中，否则若 $L1[i]\lt L2[j]$，则 $i++$，否则 $j++$ 1234567891011121314static void posWithinK(List&lt;AnswerElement&gt; answer, Iterator&lt;Integer&gt; pos1, Iterator&lt;Integer&gt; pos2, Integer dID, int k)&#123; Integer pp1 = popNextOrNull(pos1); Integer pp2 = popNextOrNull(pos2); while(pp1 != null &amp;&amp; pp2 != null)&#123; if(Math.abs(pp1-pp2) &lt;= k)&#123; AnswerElement ans = new AnswerElement(dID, pp1, pp2); answer.add(ans); if(pp1 &lt; pp2) pp2 = popNextOrNull(pos2); else pp1 = popNextOrNull(pos1); &#125; else if(pp1 &lt; pp2) pp1 = popNextOrNull(pos1); else pp2 = popNextOrNull(pos2); &#125;&#125; 整体实现： 12345678910111213while(p1posting != null &amp;&amp; p2posting != null)&#123; if(p1posting.docID == p2posting.docID)&#123; posWithinK(answer, p1posting.positions(), p2posting.positions(), p1posting.docID, k); p1posting = popNextOrNull(p1); p2posting = popNextOrNull(p2); &#125; else&#123; if(p1posting.docID &lt; p2posting.docID) p1posting = popNextOrNull(p1); else p2posting = popNextOrNull(p2); &#125;&#125; 然而这种思路是错误的，会漏掉一些 pp2 在 pp1 前的情况，参考 IIR Figure 2.12 后，提取其算法思路如下： 首先固定 pp1，将所有距离小于 $k$ 的 pp2 储存在一个列表 $l$ 中，直到 pp2 与 pp1 的距离超过了 $k$。 此时剔除 $l$ 前面与 pp1 不符合距离小于等于 $k$ 的元素，然后将剩下的添加到答案中。 更新 pp1 为下一个元素 此算法的关键在于保留了一个 $l$，使得上一次 pp1 使用过的 pp2 不会丢失，这样即使当 pp1 向后移动较大时仍然能够保证所有 pp2 在前 pp1 在后的解不会遗漏。 实现更新如下： 12345678910111213141516171819202122232425262728293031while(p1posting != null &amp;&amp; p2posting != null)&#123; if(p1posting.docID == p2posting.docID)&#123; List&lt;Integer&gt; l = new ArrayList&lt;&gt;(); Iterator&lt;Integer&gt; pos1 = p1posting.positions(); Iterator&lt;Integer&gt; pos2 = p2posting.positions(); Integer pp1 = popNextOrNull(pos1); Integer pp2 = popNextOrNull(pos2); while(pp1 != null) &#123; while(pp2 != null) &#123; if(Math.abs(pp1-pp2) &lt;= k) l.add(pp2); else if(pp2 &gt; pp1) break; pp2 = popNextOrNull(pos2); &#125; while(l.size() != 0 &amp;&amp; Math.abs(l.get(0) - pp1) &gt; k) l.remove(0); for(Integer ps: l) answer.add(new AnswerElement(p1posting.docID, pp1, ps)); pp1 = popNextOrNull(pos1); &#125; p1posting = popNextOrNull(p1); p2posting = popNextOrNull(p2); &#125; else&#123; if(p1posting.docID &lt; p2posting.docID) p1posting = popNextOrNull(p1); else p2posting = popNextOrNull(p2); &#125;&#125; 最后一个是实现 &quot;AND NOT&quot;，即包含第一个关键字但是不包含第二个关键字。 实现起来也很简单，如下： 1234567891011121314151617181920answer.add(pp1.docID);while(pp1 != null &amp;&amp; pp2 != null) &#123; if(pp1.docID == pp2.docID) &#123; answer.remove(answer.size()-1); pp1 = popNextOrNull(p1); pp2 = popNextOrNull(p2); if(pp1 != null) answer.add(pp1.docID); &#125; else &#123; if(pp1.docID &lt; pp2.docID) &#123; pp1 = popNextOrNull(p1); if(pp1 != null) answer.add(pp1.docID); &#125; else pp2 = popNextOrNull(p2); &#125;&#125;pp1 = popNextOrNull(p1);while(pp1 != null) answer.add(pp1.docID);]]></content>
@@ -12,6 +23,9 @@
     <title><![CDATA[Notes for CS 276 Intro to IR]]></title>
     <url>%2F2019%2F02%2F20%2FNotes-for-CS-276-Intro-to-IR%2F</url>
     <content type="text"><![CDATA[Introducing Information Retrieval and Web Search Def. IR is finding material(usually documents) of an unstructured nature(usually text) that satisfies an information need from within large collections(usually stored on computers). Collection: A set of documents Goal: Retrieve documents with info. that is relevant to the user's info. need and helps the user complete a task. Eval: How good are the retrieved docs? Precision: Fraction of retrieved docs that are relevant to the user's info. need Recall: Fraction of relevant docs in collection that are retrieved. Term-document incidence matrices using the number of appearances in each document to represent a term. The Inverted Index For each term t, store a list of all documents that contains t. Identify each doc by a docID Need variable-size postings lists (inside it is sorted by docID) On disk: a continuous run of postings. In memory: linked lists or variable length arrays Inverted index construction Documents to be indexed $\underrightarrow{Tokenizer}$ Token stream $\underrightarrow{Linguistic modules}$ Modified tokens $\underrightarrow{Indexer}$ Inverted index Initial stages of text processing Tokenization Normalization Stemming Stop words Indexer steps Token sequence Sort (by terms and then docID) Dictionary &amp; Postings (Doc. frequency info is added) Problems taken into consideration efficient index storage Query processing with an inverted index Query processing: AND &quot;Merge&quot; the two postings: O(x+y) Crucial: postings sorted by docID The Boolean Retrieval Model &amp; Extended Boolean Models Boolean queries: Exact match queries using AND, OR and NOT to join query terms View each doc as a set of words Is precise Query optimization Process in order of increasing freq start with smallest set, then keep cutting further Phrase queries and positional indexes to answer queries such as &quot;Stanford university&quot; It is no longer suffices to store only &lt;term: docs&gt; entries A first attempt: Biword indexes Index every consecutive pair of terms in the text as a phrase Problems: False positives Index blowup due to bigger dictionary Solution 2: Positional indexes &lt;term, number of docs containing term; doc1: position1, position2...; doc2: position1, position2...; etc.&gt; Processing a phrase query Extract inverted index entries for each distinct term Merge their doc Proximity queries Positional index size Although expands postings storage substantially, it is now standardly used because of the power and usefulness of phrase and proximity queries. Rules of thumb 2-4 as large as a non-positional index size 35-50% of volume of original text Combination schemes can be profitably combined Structured vs. Unstructured Data Structured: info. in tables Unstructured: free text Semi-structured: has distinctly identified zones ref: CS 276 Boolean Retrieval]]></content>
+      <categories>
+        <category>CS 276 IR</category>
+      </categories>
       <tags>
         <tag>IR</tag>
       </tags>
@@ -114,8 +128,8 @@
         <category>THUOJ</category>
       </categories>
       <tags>
-        <tag>Hash</tag>
         <tag>平衡树</tag>
+        <tag>Hash</tag>
       </tags>
   </entry>
   <entry>
@@ -1333,8 +1347,8 @@
       </categories>
       <tags>
         <tag>LeetCode</tag>
-        <tag>Dynamic Programming</tag>
         <tag>String</tag>
+        <tag>Dynamic Programming</tag>
       </tags>
   </entry>
   <entry>
@@ -1346,8 +1360,8 @@
       </categories>
       <tags>
         <tag>LeetCode</tag>
-        <tag>Dynamic Programming</tag>
         <tag>String</tag>
+        <tag>Dynamic Programming</tag>
       </tags>
   </entry>
   <entry>
@@ -1359,8 +1373,8 @@
       </categories>
       <tags>
         <tag>LeetCode</tag>
-        <tag>Dynamic Programming</tag>
         <tag>Math</tag>
+        <tag>Dynamic Programming</tag>
       </tags>
   </entry>
   <entry>
@@ -1372,8 +1386,8 @@
       </categories>
       <tags>
         <tag>LeetCode</tag>
-        <tag>Dynamic Programming</tag>
         <tag>Math</tag>
+        <tag>Dynamic Programming</tag>
       </tags>
   </entry>
   <entry>

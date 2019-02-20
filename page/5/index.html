@@ -296,6 +296,645 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/07/人工智能原理-Part-IV-Planning-Ch8-Classic-and-Real-world-Planning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/07/人工智能原理-Part-IV-Planning-Ch8-Classic-and-Real-world-Planning/" itemprop="url">人工智能原理 Part IV. Planning Ch8.Classic and Real-world Planning</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-07T07:25:06+08:00">
+                2019-02-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/07/人工智能原理-Part-IV-Planning-Ch8-Classic-and-Real-world-Planning/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/07/人工智能原理-Part-IV-Planning-Ch8-Classic-and-Real-world-Planning/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2>Ch8 Classic and Real-world Planning</h2>
+<h3>8.1 Planning Problems</h3>
+<h4>8.1.1 What is Planning</h4>
+<ul>
+<li>动作是智能体的一个关键部分</li>
+<li>规划意味着制定一套行动计划来达到既定的目标</li>
+</ul>
+<h4>8.1.2 What are Planning Problems</h4>
+<ul>
+<li>A longer definition
+<ul>
+<li>给定现实世界中一个问题的描述：
+<ul>
+<li>初始状态，预期目标和可能的动作</li>
+</ul>
+</li>
+<li>规划是找到一个计划：它产生从任何初始状态到达一个目标状态的一系列动作</li>
+</ul>
+</li>
+<li>A shorter definition
+<ul>
+<li>制定一个达到既定目标的行动计划</li>
+</ul>
+</li>
+</ul>
+<h4>8.1.3 What is Classical Planning</h4>
+<ul>
+<li>经典规划具有特征：
+<ul>
+<li>fully observable 完全可观测</li>
+<li>a unique known initial state 唯一已知初始状态</li>
+<li>static environments 静态环境</li>
+<li>deterministic actions 确定性的动作</li>
+<li>can be taken only one at a time 每次仅一个动作</li>
+<li>a single agent 单一智能体</li>
+</ul>
+</li>
+</ul>
+<h4>8.1.4 Planning Difficulties</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Properties</th>
+<th style="text-align:center">Questions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">actions 动作</td>
+<td style="text-align:center">确定的还是不确定的？是否持续一段时间？可并发执行还是串行？</td>
+</tr>
+<tr>
+<td style="text-align:center">state varables 状态变量</td>
+<td style="text-align:center">离散的还是连续的？</td>
+</tr>
+<tr>
+<td style="text-align:center">initial states 初始状态</td>
+<td style="text-align:center">有限的还是任意多的？</td>
+</tr>
+<tr>
+<td style="text-align:center">objective 目标</td>
+<td style="text-align:center">要达到指定的目标状态？要最大化回报函数？</td>
+</tr>
+<tr>
+<td style="text-align:center">agents 智能体</td>
+<td style="text-align:center">一个还是多个？合作还是单干？</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Problem-solving Agent vs. Planning Agent 问题求解智能体与规划智能体</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">问题求解智能体</th>
+<th style="text-align:center">规划智能体</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">State(Initial/Goal) 状态（初始/目标）</td>
+<td style="text-align:center">Atomic representation 原子表示</td>
+<td style="text-align:center">Factored representation因子表示（collection of variables 变量的集合）</td>
+</tr>
+<tr>
+<td style="text-align:center">Actions 动作</td>
+<td style="text-align:center">Instantiated actions 实例化动作</td>
+<td style="text-align:center">Actions schemas 动作模式（use Planning Domain Definition Language 使用规划领域定义语言PDDL）</td>
+</tr>
+<tr>
+<td style="text-align:center">Heuristic 启发法</td>
+<td style="text-align:center">Domain-specific heuristics 领域特定启发法</td>
+<td style="text-align:center">Domain-independent heuristics 领域无关启发法</td>
+</tr>
+</tbody>
+</table>
+<h4>8.1.5 About PDDL</h4>
+<ul>
+<li>PDDL(Planning Domain Definition Language) 规划领域定义语言是对AI规划语言标准化的一种尝试，于1998年首次开发</li>
+</ul>
+<h4>8.1.6 Three Components to Define a Planning Task</h4>
+<ul>
+<li>State
+<ul>
+<li>represented as a conjunction of fluents (fluents: a relation that varies from one to next) 变数的合取</li>
+</ul>
+</li>
+<li>Actions
+<ul>
+<li>described by a set of action schemas, implicitly define the function 一组动作模式</li>
+</ul>
+</li>
+<li>Goal
+<ul>
+<li>represented as conjunction of literals(literals: an elementary proposition) 命题的合取</li>
+</ul>
+</li>
+</ul>
+<h3>8.2 Classic Planning</h3>
+<h4>8.2.1 Planning as State-Space Search</h4>
+<h5>Two approaches to searching for a plan</h5>
+<ul>
+<li>
+<ol>
+<li>Forward state-space search 前向状态空间搜索</li>
+</ol>
+<ul>
+<li>从初始状态开始</li>
+<li>运用该问题的动作</li>
+<li>朝着一个目标状态向前搜索</li>
+</ul>
+</li>
+<li>
+<ol start="2">
+<li>Backward relevant-states search 后向状态空间搜索</li>
+</ol>
+<ul>
+<li>从表示该目标的状态集开始</li>
+<li>运用反向的动作</li>
+<li>朝着初始状态向后搜索</li>
+</ul>
+</li>
+</ul>
+<h5>Heuristics for planning</h5>
+<ul>
+<li>将搜索问题视为一个图
+<ul>
+<li>其中结点表示状态，边为动作，寻找一条连接初始状态至某个目标状态的路径</li>
+</ul>
+</li>
+<li>简化该问题的两种方法
+<ul>
+<li>增加边</li>
+<li>状态抽象（state abstraction）：将多个节点组织在一起，形成具有较少状态空间抽象，从而容易搜索。</li>
+</ul>
+</li>
+</ul>
+<h5>Two heuristics by adding edges to the graph</h5>
+<ul>
+<li>
+<ol>
+<li>Ignore-preconditions heuristic 忽略前提启发法</li>
+</ol>
+<ul>
+<li>放弃动作中所有的前提条件</li>
+<li>每个动作变成可作用于每个状态，并且任一目标变数可以用一个步骤实现</li>
+</ul>
+</li>
+<li>
+<ol start="2">
+<li>Ignore-delete-lists heuristic 忽略删除表启发法</li>
+</ol>
+<ul>
+<li>从所有动作中移除删除表，即，从作用中删除所有的否定文字</li>
+<li>这样便使其可以朝着目标单调进展：任何动作都不会取消另一个动作的进展</li>
+</ul>
+</li>
+</ul>
+<h4>8.2.2 Planning Graphs</h4>
+<ul>
+<li>规划图</li>
+<li>是一个组成层次的有向图
+<ul>
+<li>首先，初始状态的层次 $s_0$ 包含表示每个变数的结点</li>
+<li>然后，层次 $A_0$ 包含可能适用于 $S_0$ 的每个动作的结点</li>
+<li>然后，交替进入层次 $S_i$ ，接着是 $A_i$</li>
+<li>直到到达一个结束条件</li>
+</ul>
+</li>
+<li>仅适用于命题规划问题
+<ul>
+<li>无变量</li>
+</ul>
+</li>
+</ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function GRAPH-PLAN(ploblem) returns solution or failure</span><br><span class="line">  graph &lt;- INITIAL-PLAN-GRAPH(problem)</span><br><span class="line">  goal &lt;- CONJUNCTS(problem.GOAL)</span><br><span class="line">  nogoods &lt;- an empty hash table</span><br><span class="line">  for tl=0 to inf do</span><br><span class="line">    if goals all non-mutex in S_t of graph then</span><br><span class="line">      solution &lt;- EXTRACT-SOLUTION(graph,goals,NUMLEVELS(graph),nogoods)</span><br><span class="line">      if solution != failure then return solution</span><br><span class="line">    if graph and nogoods have both leveled off then return failure</span><br><span class="line">    graph &lt;- EXPAND-GRAPH(graph,problem)</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>调用 EXPAND-GRAPH 来增加一层，直到通过调用 EXTRACT-SOLUTION 找到一个解，或者没有可能存在的解</li>
+</ul>
+<h4>8.2.3 Other Classical Planning Approaches</h4>
+<ul>
+<li>planning as Boolean satisfiability 布尔可满足性
+<ul>
+<li>确定是否存在满足给定布尔表达式的解释的问题
+<ul>
+<li>可满足表达式：表达式的值可为 True</li>
+<li>不可满足表达式：表达式的值始终为 False</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>planning as first-order logical deduction 一阶逻辑推理</li>
+<li>planning as constraint satisfaction 约束满足
+<ul>
+<li>CSP (约束满足问题)技术对调度问题很有效</li>
+<li>可将有界规划问题进行编码为 CSP，例如找到一个长度为 $k$ 的规划的问题</li>
+<li>还可以将规划图编码为 CSP</li>
+</ul>
+</li>
+<li>planning as plan refinement 规划精进
+<ul>
+<li>Totally ordered plan 全序规划</li>
+<li>Partially ordered plan 偏序规划</li>
+</ul>
+</li>
+</ul>
+<h3>8.3 Planning and Scheduling</h3>
+<h4>8.3.1 Planning and Scheduling</h4>
+<ul>
+<li>规划与调度</li>
+<li>经典规划可以表示做什么，按什么顺序</li>
+<li>无法表示动作持续多长时间，什么时候发生</li>
+<li>Plan First and Schedule Later
+<ul>
+<li>将问题分为规划阶段和调度阶段
+<ul>
+<li>规划阶段：
+<ul>
+<li>选择具有某种有序约束的动作</li>
+<li>去满足问题的目标</li>
+</ul>
+</li>
+<li>调度阶段
+<ul>
+<li>在规划中增加时间信息</li>
+<li>去满足资源和期限的约束</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>表征时间和资源约束
+<ul>
+<li>调度问题包含一系列作业，每个作业包含一组具有顺序约束的动作</li>
+<li>每个动作有一段持续时间和一组资源约束</li>
+<li>每个资源约束指定：类型，数量，可消费或可重用</li>
+<li>动作可以产生资源</li>
+<li>解决方案选哟对每个动作指定起始时间，并且要满足所有时间顺序约束和资源约束</li>
+</ul>
+</li>
+</ul>
+<h4>8.3.2 Solving Scheduling Problems</h4>
+<ul>
+<li>要使规划持续时间最短，必须找到与排序约束一致的所有动作的最早开始时间</li>
+<li>将排序约束视为一个有向图</li>
+<li>可以将关键路径法（CPM）用于该图，来确定每个动作可能的开始与结束时间</li>
+<li>一个表示偏序计划的图的路径是一个线性排序的动作序列</li>
+<li>如果引入资源约束，所导致的开始和结束时间的约束变得更加复杂</li>
+</ul>
+<h3>8.4 Real-World Planning</h3>
+<h4>8.4.1 Hierarchical Planning</h4>
+<ul>
+<li>经典规划
+<ul>
+<li>一组固定的动作</li>
+<li>问题：最新式的算法可以生成包含数千个动作的解</li>
+</ul>
+</li>
+<li>分层规划
+<ul>
+<li>将高层，抽象的任务分解为底层，具象的任务</li>
+<li>在层次结构的每一级，计算任务被缩减为少量活动，因此计算成本也减少</li>
+</ul>
+</li>
+<li>基本动作 Primitive action
+<ul>
+<li>经典规划中的动作，具有经典的前提-效用模式</li>
+<li>没有提炼过程</li>
+</ul>
+</li>
+<li>高级动作 High-level action (HLA)
+<ul>
+<li>层次任务网络规划中的重要概念</li>
+<li>每个 HLA 有一个或多个可能的提炼，每个动作可以是一个 HLA，或一个基本动作</li>
+</ul>
+</li>
+</ul>
+<h4>8.4.2 Multi-agent Planning</h4>
+<ul>
+<li>当环境中有多个智能体时，每个面临多智能体规划问题，试图通过其他智能体的帮助或阻碍达到自己的目标。</li>
+<li>这种多智能体规划涉及多个智能体之间协调资源和活动</li>
+<li>该主题也涉及到多个智能体在执行计划（分布式连续规划）时如何能够实时动作</li>
+<li>单智能体 &amp; 多智能体</li>
+<li>单智能体
+<ul>
+<li>多效用器
+<ul>
+<li>一个智能体有多个可以并发运行的效用器，如，一个人可以同时一边打字一边说话</li>
+</ul>
+</li>
+<li>多躯体
+<ul>
+<li>效应器物理分解为独立的单元，但是作为一个躯体动作，例如，工厂里的传送机器人机群</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>多智能体
+<ul>
+<li>多智能体之间协调资源与动作</li>
+</ul>
+</li>
+<li>多智能体的特性
+<ul>
+<li>Autonomy 自主性</li>
+<li>Local views 局部视野</li>
+<li>Decentralization 分散化</li>
+</ul>
+</li>
+<li>Issues in Multi-agent Planning
+<ul>
+<li>当这些智能体具有不同目标时</li>
+<li>
+<ol>
+<li>多同步动作的表示与规划所涉及的问题</li>
+</ol>
+<ul>
+<li>Actor</li>
+<li>Multi-actor</li>
+<li>Multiple simultaneous actions</li>
+</ul>
+</li>
+<li>
+<ol start="2">
+<li>真正的多智能体环境中所发生的合作，协调和竞争的问题</li>
+</ol>
+<ul>
+<li>Convention 协定</li>
+<li>Communication 通信</li>
+<li>Plan recognition 规划认可</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>8.5 Decision-theoretic Planning</h3>
+<ul>
+<li>决策理论规划</li>
+<li>经典规划是寻找一个以最小代价到达其目标的计划</li>
+<li>决策理论规划是寻找一个以最大期望效用（MEU maximum expected utility）到达其目标的规划</li>
+<li>如何形式化以及求解
+<ul>
+<li>如何对决策理论规划问题进行格式化？
+<ul>
+<li>马尔可夫决策过程 Markov Decision Process</li>
+</ul>
+</li>
+<li>如何求解？
+<ul>
+<li>动态规划 Dynamic Programming</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4>8.5.1 Markov Decision Process</h4>
+<ul>
+<li>
+<p>是一种离散时间随机控制过程，意味着动作结果仅仅依赖于当前状态</p>
+</li>
+<li>
+<p>是一个五元组 $(S,A,P,R,\gamma)$ ，其中</p>
+<ul>
+<li>$S$ 为状态集</li>
+<li>$A$ 为动作集</li>
+<li>$P(s'|s,a)$ 为从 $s$ 导出 $s'$ 的概率</li>
+<li>$R(s,a,s')$ 为一个回报函数</li>
+<li>$\gamma\in [0,1]$ 为衰减</li>
+</ul>
+</li>
+<li>
+<p>核心问题</p>
+<ul>
+<li>经典规划的核心问题
+<ul>
+<li>智能体所在的环境是确定的</li>
+<li>求解该问题是找到一个达到其目标的计划</li>
+</ul>
+</li>
+<li>马尔可夫决策过程的核心问题
+<ul>
+<li>处于一个离散时间随机环境</li>
+<li>求解该问题是找到一个控制其过程的策略</li>
+<li>Finding policy is the core problem to solve MDPs</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>给定一个 $MDP(S,A,P,R,\gamma)$ ，一个策略是一个计算函数 $\pi$ ，它对每个状态 $s$ 生成一个动作 $a$</p>
+<ul>
+<li>
+<p>一个确定性策略被定义为 $\pi:S\rightarrow A$</p>
+</li>
+<li>
+<p>一个随机策略也可以被定义为</p>
+<ul>
+<li>$$
+\pi:S\times A\rightarrow [0,1]\
+where\ \pi(s,a)\ge0\ and\ \sum_a\pi(s,a)=1
+$$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li></li>
+</ul>
+<h4>8.5.2 Dynamic Programming</h4>
+<h5>Utilities and Optimal Policies 效用和优化策略</h5>
+<ul>
+<li>
+<p>在顺序决策问题中，偏好由状态顺序之间的顺序来表示</p>
+</li>
+<li>
+<p>通常采用一个累加效用函数</p>
+<ul>
+<li>$$
+U([s_0,s_1,s_2,...])=R(s_0)+R(s_1)+R(s_2)+...=\sum_iR(s_i)
+$$</li>
+</ul>
+</li>
+<li>
+<p>一个状态（亦称真值）的效用被定义为</p>
+<ul>
+<li>$U(s_i)$ 假设最佳动作结束之前的预期回报值的总和</li>
+</ul>
+</li>
+<li>
+<p>两个优化策略：值迭代和策略迭代</p>
+</li>
+</ul>
+<h5>1) Value Iteration 值迭代</h5>
+<ul>
+<li>基本思想
+<ul>
+<li>计算每个状态的效用，然后使用该状态效用在每个状态中选择一个最佳动作</li>
+<li>不使用 $\pi$ 函数，而 $\pi$ 值在 $U(s)$ 中计算</li>
+</ul>
+</li>
+<li>贝尔曼效用等式 Bellman equation for utilities
+<ul>
+<li>$U(s)=R(s)+\gamma\ \max_{\alpha\in A(s)}\sum_{s'}P(s'|s,a)U(s')$</li>
+</ul>
+</li>
+</ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function VALUE-ITERATION(mdp,\ep) returns a utility function</span><br><span class="line">  inputs: mdp, an MDP with states S, actions A(s), transition model P(s&apos;|s,a), rewards R(s), discount \gamma</span><br><span class="line">  		  \ep, the maximum error allowed in the utility of any state</span><br><span class="line">  local variables: U, U&apos;, vectors of utilities for states in S, initially zero</span><br><span class="line">  				   \delta, the maximum change in the utility of any state in an iteration</span><br><span class="line">  repeat</span><br><span class="line">  	U &lt;- U&apos;; \delta &lt;- 0</span><br><span class="line">  	for each state s in S do</span><br><span class="line">  	  U&apos;[s] &lt;- R(s) + \gamma max_&#123;a\in A(s)&#125; \sum_&#123;s&apos;&#125;P(s&apos;|s,a)U[s&apos;]</span><br><span class="line">  	  if |U&apos;[s]-U[s]|&gt;\delta then \delta &lt;- |U&apos;[s]-U[s]|</span><br><span class="line">  until \delta &lt; \ep(1-\gamma)/\gamma</span><br><span class="line">  return U</span><br></pre></td></tr></table></figure></p>
+<h5>2) Policy Iteration</h5>
+<ul>
+<li>
+<p>基本思想</p>
+<ul>
+<li>
+<p>交替执行如下两个阶段</p>
+<ul>
+<li>
+<p>Policy evaluation</p>
+<ul>
+<li>
+<p>给定一个策略 $\pi_i$ ，如果 $\pi_i$ 被执行的话，计算每个状态的效用 $U_i$</p>
+</li>
+<li>
+<p>$$
+U_i(s)=R(s)+\gamma\ \sum_{s'}P(s'|s,\pi_{i}(s))U_i(s')
+$$</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Policy improvement</p>
+<ul>
+<li>
+<p>calculate a new MEU(maximum expected uility) policy $\pi_{i+1}$, using one-step look-ahead based on $U_i$.</p>
+</li>
+<li>
+<p>$$
+\pi^*(s)=\gamma\ argmax_{\alpha\in A(s)}\sum_{s'}P(s'|s,a)U(s')
+$$</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function POLICY-ITERATION(mdp) returns a policy</span><br><span class="line">  inputs: mdp, an MDP with states S, actions A(s), transition model P(s&apos;|s,a)</span><br><span class="line">  local variables: U, a vector of utilities for states in S, initially zero</span><br><span class="line">  				   \pi, a policy vector indexed by state, initially random</span><br><span class="line">  repeat</span><br><span class="line">  	U &lt;- POLICY-EVALUATION(\pi,U,mdp)</span><br><span class="line">  	unchanged? &lt;- true</span><br><span class="line">  	for each state s in S do</span><br><span class="line">  	  if max_&#123;a\inA(s)&#125;\sum_&#123;s&apos;&#125;P(s&apos;|s,a)U[s&apos;]&gt;\sumP(s&apos;|s,\pi[s])U[s&apos;]then do</span><br><span class="line">  	    \pi[s] &lt;- argmax_&#123;\alpha\in A(s)&#125;\sum_&#123;s&apos;&#125;P(s&apos;|s,a)U[s&apos;]</span><br><span class="line">  	    unchanged? &lt;- false</span><br><span class="line">  until unchanged</span><br><span class="line">  return \pi</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/04/人工智能原理-Part-III-Reasoning-Ch7-Reasoning-by-Knowledge/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -4720,345 +5359,6 @@ $$</p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/01/近世代数-索引贴/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/01/近世代数-索引贴/" itemprop="url">近世代数 索引贴</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-01T22:14:08+08:00">
-                2019-02-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/索引贴/" itemprop="url" rel="index">
-                    <span itemprop="name">索引贴</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/02/01/近世代数-索引贴/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/02/01/近世代数-索引贴/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2>近世代数</h2>
-<ul>
-<li><a href="https://mooc.study.163.com/course/1000003009?_trace_c_p_k2_=ab9df4513bd84c15b6aba9ef78fb3145#/info" target="_blank" rel="noopener">参考资料</a></li>
-</ul>
-<h3>1. 半群和幺半群</h3>
-<ul>
-<li>1.1 若干基本概念
-<ul>
-<li>良序定理</li>
-<li>数学归纳法</li>
-<li>$Cayley$ 乘法表</li>
-<li>一元和多元代数运算</li>
-<li>代数运算的结合律和交换律</li>
-<li>代数系</li>
-<li>两个代数运算间的分配律</li>
-<li>幺元（单位元）</li>
-<li>零元</li>
-</ul>
-</li>
-<li>1.2 半群和幺半群的概念
-<ul>
-<li>半群</li>
-<li>模 $n$ 剩余类半群</li>
-<li>集合上的二元关系半群</li>
-<li>更多的例子</li>
-<li>半群中的幺元</li>
-<li>幺半群</li>
-<li>幺半群的例子</li>
-<li>有限半群成为幺半群的条件</li>
-<li>元素的幂</li>
-<li>逆元素</li>
-<li>群的概念</li>
-</ul>
-</li>
-<li>1.3 子半群，子幺半群和理想
-<ul>
-<li>子半群及实例</li>
-<li>子幺半群及实例</li>
-<li>子半群及子幺半群的交</li>
-<li>由非空集合生成的子半群和子幺半群</li>
-<li>循环半群和幺半群的结构</li>
-<li>理想</li>
-</ul>
-</li>
-<li>1.4 同态和同构
-<ul>
-<li>半群同构</li>
-<li>幺半群的同构</li>
-<li>幺半群的 $cayley$ 定理</li>
-<li>有关同态的若干性质</li>
-<li>由映射诱导出的等价关系</li>
-<li>同余关系</li>
-<li>自然同态</li>
-<li>幺半群的同态基本定理</li>
-</ul>
-</li>
-</ul>
-<h3>2. 群</h3>
-<ul>
-<li>2.1 群的定义和例子
-<ul>
-<li>群的定义</li>
-<li>群的例子</li>
-<li>$n$ 次对称群</li>
-<li>阿贝尔群</li>
-<li>群的阶</li>
-<li>模 $n$ 剩余类加群</li>
-</ul>
-</li>
-<li>2.2 群的简单性质
-<ul>
-<li>群中逆元的存在性</li>
-<li>群中幺元的存在性</li>
-<li>穿脱原则</li>
-<li>群的两个定义等价</li>
-<li>元素的阶</li>
-<li>群的若干性质定理</li>
-</ul>
-</li>
-<li>2.3 子群，生成子群
-<ul>
-<li>子群的定义和实例</li>
-<li>子群的判定定理</li>
-<li>子群的交和并</li>
-<li>群的有限非空子集成为子群的条件</li>
-<li>群的中心</li>
-<li>换位子</li>
-</ul>
-</li>
-<li>2.4 变换群和同构
-<ul>
-<li>群的同构</li>
-<li>变换群和置换群</li>
-<li>群的 $cayley$ 同构定理</li>
-<li>自同构</li>
-<li>内自同构</li>
-<li>共轭关系</li>
-<li>类方程</li>
-</ul>
-</li>
-<li>2.5 循环群
-<ul>
-<li>循环群的定义</li>
-<li>循环群的例子</li>
-<li>循环群的结构</li>
-<li>同构意义下的循环群</li>
-<li>循环群的子群</li>
-</ul>
-</li>
-<li>2.6 子群的陪集与拉格朗日定理
-<ul>
-<li>左陪集和右陪集</li>
-<li>左陪集间关系的性质定理</li>
-<li>左陪集集簇对群的划分</li>
-<li>群对子群的指数</li>
-<li>拉格朗日定理及应用</li>
-</ul>
-</li>
-<li>2.7 正规子群，商群和同态基本定理
-<ul>
-<li>两个子群的乘积为子群的判定条件</li>
-<li>正规子群及判定定理</li>
-<li>商群</li>
-<li>换位子群</li>
-<li>同态基本定理</li>
-</ul>
-</li>
-</ul>
-<h3>3.环和域</h3>
-<ul>
-<li>3.1 环和域的定义与简单性质
-<ul>
-<li>环</li>
-<li>交换环，有限环，多项式环</li>
-<li>零环，模 $n$ 剩余类环</li>
-<li>环的若干性质</li>
-<li>零因子</li>
-<li>体和域</li>
-<li>有限域</li>
-<li>子体和子域</li>
-</ul>
-</li>
-<li>3.2 无零因子环的特征数
-<ul>
-<li>环中元素对加法的阶</li>
-<li>无零因子环中元素对加法阶的唯一性</li>
-<li>特征数</li>
-<li>体和域的特征</li>
-</ul>
-</li>
-<li>3.3 同态基本定理，极大理想与费尔马定理
-<ul>
-<li>同态与同构</li>
-<li>性质定理</li>
-<li>理想子环及判定条件</li>
-<li>由非空集合生成的理想</li>
-<li>主理想</li>
-<li>极大理想</li>
-<li>费尔马定理</li>
-</ul>
-</li>
-</ul>
-<h3>4. 格</h3>
-<ul>
-<li>4.1 格的定义及简单性质</li>
-<li>4.2 对偶原理，作为代数系的格
-<ul>
-<li>偏序，上界，上确界，下界，下确界</li>
-<li>极大元，极小元</li>
-<li>偏序格</li>
-<li>偏序格的性质</li>
-<li>偏序与上下确界的关系</li>
-<li>对偶原理</li>
-<li>代数格</li>
-</ul>
-</li>
-<li>4.3 某些特殊的格
-<ul>
-<li>子格</li>
-<li>格的同态与同构</li>
-<li>格同构的保序性</li>
-<li>完备格，有界格，补元素</li>
-<li>分配格</li>
-<li>布尔代数</li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -5113,7 +5413,7 @@ $$</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">193</span>
+                  <span class="site-state-item-count">194</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -5124,7 +5424,7 @@ $$</p>
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

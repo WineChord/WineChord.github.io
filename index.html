@@ -296,6 +296,256 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/Notes-for-CS-276-2-Term-Vocabulary-and-Postings-Lists/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/20/Notes-for-CS-276-2-Term-Vocabulary-and-Postings-Lists/" itemprop="url">Notes for CS 276 2 Term Vocabulary and Postings Lists</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-20T19:28:59+08:00">
+                2019-02-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS-276-IR/" itemprop="url" rel="index">
+                    <span itemprop="name">CS 276 IR</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/20/Notes-for-CS-276-2-Term-Vocabulary-and-Postings-Lists/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/20/Notes-for-CS-276-2-Term-Vocabulary-and-Postings-Lists/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>对应 <em>IIR</em> 的第二章，主要讲 &quot;Term Vocabulary&quot; 这个东西，也就是怎么把一个文档撕成碎片来进行表示。</p>
+<p>重点有：Tokens, Stop words, Normalization, Stemming, Lemmatization,</p>
+<p>还对上一章的 Merge 进行了算法优化：用 Skip Pointers</p>
+<h2>Document ingestion</h2>
+<ul>
+<li>parsing a document: format, language, character set</li>
+</ul>
+<h2>Tokens</h2>
+<ul>
+<li>Tokenization
+<ul>
+<li>A <strong>token</strong> is an instance of a sequence of characters</li>
+<li>Issues:
+<ul>
+<li>Finland's ?</li>
+<li>Hewlett-Packard ?</li>
+<li>San Francisco</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Numbers: have embedded spaces/ old sys may not index num/ index &quot;meta-data&quot; separately</li>
+<li>Language issues: French/German/Chinese...</li>
+</ul>
+<h2>Terms: The things indexed in an IR sys</h2>
+<ul>
+<li>Stop words: little semantic content(the, a, and, to, be)</li>
+<li><strong>But the trend is away from doing this</strong>
+<ul>
+<li>compression makes the space for including stop words is small</li>
+<li>query optimization makes query time paid for including stop words</li>
+<li>needed for:
+<ul>
+<li>Phrase queries: &quot;King of Denmark&quot;</li>
+<li>song titles: &quot;Let it be&quot;</li>
+<li>&quot;Relational&quot; queries: &quot;flights to London&quot;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Normalization to terms
+<ul>
+<li>&quot;U.S.A&quot; $\rightarrow$ &quot;USA&quot;</li>
+<li>(delete periods and hyphens)</li>
+<li>Accents/Umlauts(元音变音)</li>
+<li>Most important criterion:
+<ul>
+<li>How are your users like to write their queries for these words?</li>
+</ul>
+</li>
+<li>Crucial: Need to &quot;normaliza&quot; indexed text as well as query terms identically</li>
+</ul>
+</li>
+<li>Case folding
+<ul>
+<li>upper $\rightarrow$ lower</li>
+</ul>
+</li>
+<li>Thesauri(同义反义词) and Soundex(探测法，解决误拼)</li>
+</ul>
+<h2>Stemming and Lemmatization</h2>
+<ul>
+<li>Lemmatization(词性还原)
+<ul>
+<li>am/is/are $\rightarrow$ be</li>
+<li>car/cars/car's/cars' $\rightarrow$ car</li>
+</ul>
+</li>
+<li>Stemming(词干提取)
+<ul>
+<li>crude affix chopping</li>
+</ul>
+</li>
+<li>Porter's algorithm
+<ul>
+<li>Commonest algorithm for stemming English</li>
+<li>Typical rules:
+<ul>
+<li>sses $\rightarrow$ ss</li>
+<li>ies $\rightarrow$ i</li>
+<li>ational $\rightarrow$ ate</li>
+<li>tional $\rightarrow$ tion</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2>Faster postings merges: Skip pointers/Skip listd</h2>
+<ul>
+<li>Recall: previously $O(m+n)$</li>
+<li>Where to place skips?
+<ul>
+<li>Tradeoff: More skips/Fewer skips</li>
+</ul>
+</li>
+<li>Simple heuristic: postings of length $L$, use $\sqrt{L}$ evenly-spaced skip pointers</li>
+</ul>
+<p>ref: <a href="http://web.stanford.edu/class/cs276/handouts/lecture2-dictionary.ppt" target="_blank" rel="noopener">Term Vocabulary and Postings Lists</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/Merge-algorithm总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -379,7 +629,7 @@
         
           
             <p>这是一个 In-class lab，主要解决多个关键词的查询问题，实现了基于位置索引的合并算法（Merge algorithm for proximity queries using a positional index）</p>
-<p><a href="https://github.com/manning/MergeAlgorithms" target="_blank" rel="noopener">starter code</a>  <a href="https://github.com/manning/MergeAlgorithms" target="_blank" rel="noopener">some answers</a></p>
+<p><a href="https://github.com/manning/MergeAlgorithms" target="_blank" rel="noopener">starter code</a>  <a href="https://docs.google.com/document/d/15xnoTUm3kyelIDqPTs4H2w_CYf4uaua5MeukFWx1rW8/edit" target="_blank" rel="noopener">some answers</a></p>
 <p>前置知识：Boolean Retrieval</p>
 <hr>
 <h4>问题引出</h4>
@@ -539,6 +789,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS-276-IR/" itemprop="url" rel="index">
+                    <span itemprop="name">CS 276 IR</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -2702,196 +2974,6 @@ $$</p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/12/Notes-for-CLRS-Ch30-Polynomials-and-the-FFT/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/12/Notes-for-CLRS-Ch30-Polynomials-and-the-FFT/" itemprop="url">Notes for CLRS Ch30 Polynomials and the FFT</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-12T11:30:35+08:00">
-                2019-02-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CLRS/" itemprop="url" rel="index">
-                    <span itemprop="name">CLRS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/02/12/Notes-for-CLRS-Ch30-Polynomials-and-the-FFT/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/02/12/Notes-for-CLRS-Ch30-Polynomials-and-the-FFT/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2>Ch30 Polynomials and the FFT</h2>
-<ul>
-<li>
-<p>FFT 可以将两个多项式的乘法实现时间缩短至 $\Theta(nlgn)$。</p>
-</li>
-<li>
-<p>两个乘数分别为 $A(x)=\sum_{j=0}^{n-1}a_jx^j$  $B(x)=\sum_{j=0}^{n-1}b_jx^j$</p>
-</li>
-<li>
-<p>乘积为</p>
-</li>
-</ul>
-<p>$$
-C(x)=\sum_{j=0}^{2n-2}c_jx^j
-$$</p>
-<p>$$
-c_j=\sum_{k=0}^ja_kb_{j-k}
-$$</p>
-<ul>
-<li>Coefficient representation</li>
-<li>Point-value representation</li>
-</ul>
-<p>${(x_0,y_0),(x_1,y_1),...,(x_{n-1},y_{n-1})}$</p>
-<p>其中
-$$
-y_k=A(x_k)
-$$
-Theorem 30.1(Uniqueness of an interpolating polynomial)</p>
-<p>对于任意 $x_k$ 唯一的点值集，满足 $y_k=A(x_k)$ 的 $n$ 阶多项式 $A(x)$ 也是唯一的。</p>
-<p>证明：$(3)$ 等价于
-$$
-\begin{bmatrix}
-1 &amp;x_0 &amp;x_0^2 &amp;\cdots &amp;x_0^{n-1}\\
-1 &amp;x_1 &amp;x_1^2 &amp;\cdots &amp;x_1^{n-1}\\
-\vdots &amp;\vdots &amp;\vdots &amp;\ddots &amp;\vdots\\
-1 &amp;x^{n-1} &amp;x_{n-1}^2 &amp;\cdots &amp;x_{n-1}^{n-1}
-\end{bmatrix}
-$$</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2946,7 +3028,7 @@ $$</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">193</span>
+                  <span class="site-state-item-count">194</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2957,7 +3039,7 @@ $$</p>
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
