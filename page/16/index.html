@@ -296,6 +296,327 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/12-Integer-to-Roman/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/01/12-Integer-to-Roman/" itemprop="url">12. Integer to Roman</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-01T22:34:49+08:00">
+                2018-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/01/12-Integer-to-Roman/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/01/12-Integer-to-Roman/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3>问题描述</h3>
+<p>将整数转换成罗马数字，对应关系如下：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Symbol   Value</span><br><span class="line">I        1</span><br><span class="line">V        5</span><br><span class="line">X        10</span><br><span class="line">L        50</span><br><span class="line">C        100</span><br><span class="line">D        500</span><br><span class="line">M        1000</span><br></pre></td></tr></table></figure></p>
+<p>正常情况表示加法，如 &quot;XI&quot; &quot;CIII&quot;
+有六种特殊情况表示减法：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">IX =&gt; 4     IX =&gt; 9</span><br><span class="line">XL =&gt; 40    XC =&gt; 90</span><br><span class="line">CD =&gt; 400   CM =&gt; 900</span><br></pre></td></tr></table></figure></p>
+<p>输入范围为 1~3999</p>
+<h3>实现</h3>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">intToRoman</span><span class="params">(<span class="keyword">int</span> num)</span></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> romanPieces[]=&#123;<span class="string">""</span>,<span class="string">"I"</span>,<span class="string">"II"</span>,<span class="string">"III"</span>,<span class="string">"IV"</span>,<span class="string">"V"</span>,<span class="string">"VI"</span>,<span class="string">"VII"</span>,<span class="string">"VIII"</span>,<span class="string">"IX"</span>,</span><br><span class="line">                              <span class="string">""</span>,<span class="string">"X"</span>,<span class="string">"XX"</span>,<span class="string">"XXX"</span>,<span class="string">"XL"</span>,<span class="string">"L"</span>,<span class="string">"LX"</span>,<span class="string">"LXX"</span>,<span class="string">"LXXX"</span>,<span class="string">"XC"</span>,</span><br><span class="line">                              <span class="string">""</span>,<span class="string">"C"</span>,<span class="string">"CC"</span>,<span class="string">"CCC"</span>,<span class="string">"CD"</span>,<span class="string">"D"</span>,<span class="string">"DC"</span>,<span class="string">"DCC"</span>,<span class="string">"DCCC"</span>,<span class="string">"CM"</span>,</span><br><span class="line">                              <span class="string">""</span>,<span class="string">"M"</span>,<span class="string">"MM"</span>,<span class="string">"MMM"</span>,<span class="string">"MMMM"</span>&#125;;</span><br><span class="line">    <span class="keyword">return</span> romanPieces[num/<span class="number">1000</span>+<span class="number">30</span>]+romanPieces[(num/<span class="number">100</span>)%<span class="number">10</span>+<span class="number">20</span>]</span><br><span class="line">            +romanPieces[(num/<span class="number">10</span>)%<span class="number">10</span>+<span class="number">10</span>]+romanPieces[num%<span class="number">10</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/11-Container-With-Most-Water/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/01/11-Container-With-Most-Water/" itemprop="url">11. Container With Most Water</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-01T22:17:20+08:00">
+                2018-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/01/11-Container-With-Most-Water/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/01/11-Container-With-Most-Water/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3>问题描述</h3>
+<p>给一组数字，每一个数字对应着一个坐标(i, a[i])，将这些坐标画成柱状统计图，问哪两个柱子之间可以存放最多的水</p>
+<h3>解法一：暴力</h3>
+<p>枚举所有的可能，找到最大值。时间复杂度 $O(n^2)$，空间复杂度 $O(1)$
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(<span class="keyword">int</span>[] height)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> maxarea = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; height.length; i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i = <span class="number">1</span>; j &lt; height.length; j++)</span><br><span class="line">            maxarea = Math.max(maxarea, Math.min(height[i], height[j]) * (j-i));</span><br><span class="line">    <span class="keyword">return</span> maxarea;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>解法二：两个指针法（two pointers）</h3>
+<p>两个指针分别指向最左和最右，由于整个面积是由较低的那一边决定的，所以考虑每次两个指针向内移动时的顺序：如果将现在指向的较高边的那个指针内移，则总面积是一定减小的，因为现在面积是由较低的那一边决定的，向内移又导致了宽度的减小，故如果移动较高一侧的指针的话，总面积一定减小。故每次向内移动较低一侧的指针。时间复杂度：$O(n)$，空间复杂度：$O(1)$
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(<span class="keyword">int</span>[] height)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> maxarea = <span class="number">0</span>, l = <span class="number">0</span>, r = height.length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(l &lt; r)&#123;</span><br><span class="line">        maxarea = Math.max(maxarea, Math.min(height[l], height[r]) * (r-l));</span><br><span class="line">        <span class="keyword">if</span>(height[l] &lt; height[r]) l++;</span><br><span class="line">        <span class="keyword">else</span> r--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxarea;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/10-Regular-Expression-Matching/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1652,299 +1973,11 @@ $$
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/2-Add-Two-Numbers/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/01/2-Add-Two-Numbers/" itemprop="url">2. Add Two Numbers</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-01T14:47:21+08:00">
-                2018-11-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/01/2-Add-Two-Numbers/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/01/2-Add-Two-Numbers/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3>问题描述</h3>
-<p>给两个链表，每个链表逆序存放了两个正整数，每个节点是一个数字。将这两个正整数相加，仍以链表的形式返回和。</p>
-<h3>思路</h3>
-<p>对链表进行操作，一位一位加，注意进位以及两个整数长度不同时的处理。</p>
-<h3>实现</h3>
-<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode* <span class="title">addTwoNumbers</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> carry = <span class="number">0</span>;  <span class="comment">// carry value</span></span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;  <span class="comment">// current sum</span></span><br><span class="line">    <span class="keyword">int</span> remainder = <span class="number">0</span>; <span class="comment">// current remainder</span></span><br><span class="line">    ListNode *result = <span class="literal">NULL</span>;  <span class="comment">// result</span></span><br><span class="line">    ListNode *p = result;</span><br><span class="line">    ListNode *p1 = l1;</span><br><span class="line">    ListNode *p2 = l2;</span><br><span class="line">    <span class="keyword">while</span>(p1 != <span class="literal">NULL</span> || p2 != <span class="literal">NULL</span> || carry)&#123;</span><br><span class="line">        sum = (p1?p1-&gt;val:<span class="number">0</span>) + (p2?p2-&gt;val:<span class="number">0</span>) + carry;</span><br><span class="line">        carry = sum / <span class="number">10</span>;</span><br><span class="line">        remainder = sum % <span class="number">10</span>;</span><br><span class="line">        ListNode *newNode = <span class="keyword">new</span> ListNode(remainder); <span class="comment">// store the value</span></span><br><span class="line">        <span class="keyword">if</span>(result == <span class="literal">NULL</span>)&#123; <span class="comment">// the first position</span></span><br><span class="line">            result = newNode;</span><br><span class="line">            p = result;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123; <span class="comment">// other positions</span></span><br><span class="line">            p-&gt;next = newNode;</span><br><span class="line">            p = newNode;</span><br><span class="line">        &#125;</span><br><span class="line">        p1 = p1?p1-&gt;next:p1;</span><br><span class="line">        p2 = p2?p2-&gt;next:p2;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/编程之美-4-1-金刚坐飞机问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/01/编程之美-4-1-金刚坐飞机问题/" itemprop="url">编程之美 4.1 金刚坐飞机问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-01T14:12:47+08:00">
-                2018-11-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/01/编程之美-4-1-金刚坐飞机问题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/01/编程之美-4-1-金刚坐飞机问题/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/17/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/17/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1994,7 +2027,7 @@ $$
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">190</span>
+                  <span class="site-state-item-count">192</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2016,7 +2049,7 @@ $$
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-count">74</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

@@ -296,6 +296,327 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题14-剪绳子/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/31/剑指Offer-面试题14-剪绳子/" itemprop="url">剑指Offer 面试题14 剪绳子</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T19:59:33+08:00">
+                2018-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/剑指Offer/" itemprop="url" rel="index">
+                    <span itemprop="name">剑指Offer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/31/剑指Offer-面试题14-剪绳子/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/31/剑指Offer-面试题14-剪绳子/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2>剪绳子</h2>
+<h3>问题描述</h3>
+<p>绳子长度为 $n$，剪成 $m$ 段，要求 $n,m&gt;1$，问剪下来的绳子长度的乘积最大是多少？</p>
+<h3>思路</h3>
+<ul>
+<li>使用动态规划，自底向上依次计算</li>
+<li>使用贪婪算法，尽可能多的切长度为 $3$ 的段，最后长度为 $4$ 不需要切出 $3$ 来。需要数学证明。</li>
+</ul>
+<h3>实现</h3>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Dynamic Programming</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxProductAfterCutting_solution1</span><span class="params">(<span class="keyword">int</span> length)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(length &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;  <span class="comment">// 因为必须切一刀</span></span><br><span class="line">    <span class="keyword">if</span>(length == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(length == <span class="number">3</span>) <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">int</span>* products = <span class="keyword">new</span> <span class="keyword">int</span>[length + <span class="number">1</span>];</span><br><span class="line">    products[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    products[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    products[<span class="number">2</span>] = <span class="number">2</span>;</span><br><span class="line">    products[<span class="number">3</span>] = <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">4</span>; i &lt;= length; i++)&#123;</span><br><span class="line">        max = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i/<span class="number">2</span>; j++)&#123;</span><br><span class="line">            <span class="keyword">int</span> product = products[j]*products[i-j];</span><br><span class="line">            <span class="keyword">if</span>(max &lt; product) max = product;</span><br><span class="line">            products[i] = max;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    max = products[length];</span><br><span class="line">    <span class="keyword">delete</span>[] products;</span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Greedy Algorithm</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxProductAfterCutting_solution2</span><span class="params">(<span class="keyword">int</span> length)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(length &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(length == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(length == <span class="number">3</span>) <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">    <span class="comment">// 多切3</span></span><br><span class="line">    <span class="keyword">int</span> timesOf3 = length / <span class="number">3</span>;</span><br><span class="line">    <span class="comment">// 最后剩下4时，不能切3</span></span><br><span class="line">    <span class="keyword">if</span>(length - timesOf3*<span class="number">3</span> == <span class="number">1</span>) timesOf3 -= <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> timesOf2 = (length - timesOf3*<span class="number">3</span>) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">int</span>)(<span class="built_in">pow</span>(<span class="number">3</span>, timesOf3)) * (<span class="keyword">int</span>)(<span class="built_in">pow</span>(<span class="number">2</span>, timesOf2));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题13-机器人的运动范围/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/31/剑指Offer-面试题13-机器人的运动范围/" itemprop="url">剑指Offer 面试题13 机器人的运动范围</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T19:44:08+08:00">
+                2018-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/剑指Offer/" itemprop="url" rel="index">
+                    <span itemprop="name">剑指Offer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/31/剑指Offer-面试题13-机器人的运动范围/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/31/剑指Offer-面试题13-机器人的运动范围/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2>机器人的运动范围</h2>
+<h3>问题描述</h3>
+<p>一个机器人从 $(0,0)$ 开始移动，每次可以移动上下左右，但是不能移动到坐标数字之和大于 $k$ 的格子中，比如对于格子 $(35, 23)$，假设 $k=12$，$3+5+2+3=13&gt;k$ ，所以该格子无法进入。</p>
+<h3>思路</h3>
+<p>使用回溯法。在上下左右进行相应的判断。</p>
+<h3>实现</h3>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">movingCount</span><span class="params">(<span class="keyword">int</span> threshold, <span class="keyword">int</span> rows, <span class="keyword">int</span> cols)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(threshold &lt; <span class="number">0</span> || rows &lt;= <span class="number">0</span> || cols &lt;= <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">bool</span> *visited = <span class="keyword">new</span> <span class="keyword">bool</span>[rows*cols];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rows*cols; i++) visited = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">int</span> count = movingCountCore(threshold, rows, cols, <span class="number">0</span>, <span class="number">0</span>, visited);</span><br><span class="line">    <span class="keyword">delete</span>[] visited;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">movingCountCore</span><span class="params">(<span class="keyword">int</span> threshold, <span class="keyword">int</span> rows, <span class="keyword">int</span> cols, <span class="keyword">int</span> row, <span class="keyword">int</span> col, <span class="keyword">bool</span>* visited)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>; </span><br><span class="line">    <span class="keyword">if</span>(check(threshold, rows, cols, row, col, visited))&#123;</span><br><span class="line">        <span class="comment">// 该格子满足条件</span></span><br><span class="line">        visited[row*cols + col] = <span class="literal">true</span>;</span><br><span class="line">        count = <span class="number">1</span> + movingCountCore(threshold, rows, cols, row<span class="number">-1</span>, col, visited) + movingCountCore(threshold, rows, cols, row, col<span class="number">-1</span>, visited) + movingCountCore(threshold, rows, cols, row+<span class="number">1</span>, col, visited) + movingCountCore(threshold, rows, cols, row, col+<span class="number">1</span>, visited);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> threshold, <span class="keyword">int</span> rows, <span class="keyword">int</span> cols, <span class="keyword">int</span> row, <span class="keyword">int</span> col, <span class="keyword">bool</span>* visited)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(row &gt;= <span class="number">0</span> &amp;&amp; row &lt; rows &amp;&amp; col &gt;=<span class="number">0</span> &amp;&amp; col &lt; cols &amp;&amp; getDIgitSum(row) + getDigitSum(col) &lt;= threshold &amp;&amp; !visited[row*cols+col]) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getDigitSum</span><span class="params">(<span class="keyword">int</span> number)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(number &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        sum += number % <span class="number">10</span>;</span><br><span class="line">        number /= <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题12-矩阵中的路径/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1636,351 +1957,11 @@ $$</p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题4-二维数组中的查找/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/31/剑指Offer-面试题4-二维数组中的查找/" itemprop="url">剑指Offer 面试题4 二维数组中的查找</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T09:50:09+08:00">
-                2018-10-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/剑指Offer/" itemprop="url" rel="index">
-                    <span itemprop="name">剑指Offer</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/31/剑指Offer-面试题4-二维数组中的查找/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/10/31/剑指Offer-面试题4-二维数组中的查找/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1>二维数组中的查找</h1>
-<h3>问题描述</h3>
-<p>给一个二维数组，每一行从左到右递增，每一列从上到下递增，给一个整数，判断该整数是否在数组中。</p>
-<h3>思路</h3>
-<p>选取数组的右上角元素进行比较，如果该数字等于要查找的数字，则结束。如果大于，说明要查找元素只可能出现在该列的左侧，故剔除该列后再对剩下数组的右上角元素进行比较。如果小于，说明要查找元素只可能出现在该行的下侧，剔除该行后再对剩余数组的右上角元素进行查找。</p>
-<h3>实现</h3>
-<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span>* matrix, <span class="keyword">int</span> rows, <span class="keyword">int</span> columns, <span class="keyword">int</span> number)</span></span>&#123;</span><br><span class="line">    <span class="keyword">bool</span> found = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(matrix != <span class="literal">nullptr</span> &amp;&amp; rows &gt; <span class="number">0</span> &amp;&amp; columns &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> row = <span class="number">0</span>;  <span class="comment">// 表示右上角坐标</span></span><br><span class="line">        <span class="keyword">int</span> column = columns - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(row &lt; rows &amp;&amp; column &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(matrix[row * columns + column] == number)&#123;</span><br><span class="line">                found = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(matrix[row * columns + column] &gt; number) column--; <span class="comment">// 大于则剔除列</span></span><br><span class="line">            <span class="keyword">else</span> row++; <span class="comment">// 小于则剔除行</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> found;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3>复杂度分析</h3>
-<p>每次如果没有找到，要么列减少，要么行减少，所以总的时间复杂度为 $O(m+n)$。（$m$ $n$ 为矩阵的行和列）</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题3-数组中的重复数字/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/31/剑指Offer-面试题3-数组中的重复数字/" itemprop="url">剑指Offer 面试题3 数组中的重复数字</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T08:36:25+08:00">
-                2018-10-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/剑指Offer/" itemprop="url" rel="index">
-                    <span itemprop="name">剑指Offer</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/31/剑指Offer-面试题3-数组中的重复数字/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/10/31/剑指Offer-面试题3-数组中的重复数字/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1>数组中的重复数字</h1>
-<h2>题目一：找出数组中的重复数字</h2>
-<h3>问题描述</h3>
-<p>长度为 $n$ 的数组中所有数字都在 $0$ ~ $n-1$ 范围内，找出任意重复数字。</p>
-<h3>思路</h3>
-<ul>
-<li>可以先排序，后遍历数组，找出重复元素。时间复杂度 $O(nlogn)$</li>
-<li>还可以使用哈希表，从头到尾扫描数组，对每一个元素都可以用 $O(1)$ 时间判断哈希表中是否含有该元素。如果没有，就加入该元素，如果有，就说明找到了重复数字。其时间复杂度为 $O(n)$，需要一个 $O(n)$ 的哈希表，空间复杂度也是 $O(n)$。</li>
-<li>从头到尾扫描数组，扫描下标为 $i$ ，首先判断 $i$ 是否等于扫描的数字（记为$m$），如果相等则继续，否则判断 $m$ 和处于第 $m$ 位的数字是否相等，如果相等则表明出现了重复数字，不相等则交换 $m$ 和 $i$ ，重复对当前数的判断。</li>
-</ul>
-<h3>实现</h3>
-<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">duplicate</span><span class="params">(<span class="keyword">int</span> numbers[], <span class="keyword">int</span> length, <span class="keyword">int</span>* duplication)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(numbers == <span class="literal">nullptr</span> || length &lt;= <span class="number">0</span>) <span class="comment">// 无效输入测试用例：输入空指针</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) <span class="comment">// 无效输入测试用例：数组包含 0~n-1 以外的数字</span></span><br><span class="line">        <span class="keyword">if</span>(numbers[i] &lt; <span class="number">0</span> || numbers[i] &gt;= length - <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++)&#123; <span class="comment">// 从头到尾扫描数组</span></span><br><span class="line">        <span class="keyword">while</span>(numbers[i] != i)&#123;  <span class="comment">// 判断扫描的数字numbers[i]与下标i是否相等，相等时重复for循环，不相等时执行以下语句</span></span><br><span class="line">            <span class="keyword">if</span>(numbers[i] == numbers[numbers[i]])&#123; <span class="comment">// 表明m与第m位数字相等，此时发现重复数字</span></span><br><span class="line">                *duplication = numbers[i];</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 到此时说明m与第m位数字不相等，则两者交换</span></span><br><span class="line">            <span class="keyword">int</span> temp = numbers[i];</span><br><span class="line">            numbers[i] = numbers[temp];</span><br><span class="line">            numbers[temp] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;  <span class="comment">// 循环结束，说明没有重复元素</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3>复杂度分析</h3>
-<p>尽管有两重循环，但是每个数字最多只要进行两次交换即可到位，因此总的时间复杂度为 $O(n)$。操作未用额外的空间，故空间复杂度为 $O(1)$。</p>
-<h2>题目二：不修改数组找出重复的数字</h2>
-<h3>问题描述</h3>
-<p>数组长度为 $n+1$，所有数字都在 $1$ ~ $n$ 范围内，要求不能修改原数组找出重复元素。</p>
-<h3>思路</h3>
-<ul>
-<li>可以开辟一个辅助数组，将原数组的元素 $m$ 复制到新数组第 $m$ 位处。空间复杂度为 $O(n)$。</li>
-<li>为了降低空间复杂度，考虑使用二分法，$1$ ~ $n$ 分为 $1$ ~ $m$ 和 $m+1$ ~ $n$ 两部分，如果整个数组元素在 $1$ ~ $m$ 范围中的计数大于 $m$，说明该范围内含有重复数字，对于后半部分同理。然后再对前半部分或后半部分进行二分处理。</li>
-</ul>
-<h3>实现</h3>
-<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getDuplication</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>* numbers, <span class="keyword">int</span> length)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(numbers == <span class="literal">nullptr</span> || length &lt;= <span class="number">0</span>) <span class="comment">// 输入不能为空指针</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> start = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> end = length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(end &gt;= start)&#123;</span><br><span class="line">        <span class="keyword">int</span> middle = ((end - start) &gt;&gt; <span class="number">1</span>) + start;</span><br><span class="line">        <span class="comment">// 查找在范围内的数字个数</span></span><br><span class="line">        <span class="keyword">int</span> count = countRange(numbers, length, start, middle);</span><br><span class="line">        <span class="keyword">if</span>(end == start)&#123;  <span class="comment">// 范围中只有一个数</span></span><br><span class="line">            <span class="keyword">if</span>(count &gt; <span class="number">1</span>) <span class="keyword">return</span> start; <span class="comment">// 该数出现的次数大于1，说明重复</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(count &gt; (mi - start + <span class="number">1</span>)) <span class="comment">// 在前半部分出现的元素次数大于前半部分范围数</span></span><br><span class="line">            end = middle;</span><br><span class="line">        <span class="keyword">else</span> start = middle + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">countRange</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>* numbers, <span class="keyword">int</span> length, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(numbers == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++)</span><br><span class="line">        <span class="keyword">if</span>(numbers[i] &gt;= start &amp;&amp; numbers[i] &lt;= end)</span><br><span class="line">            count++;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3>复杂度分析</h3>
-<p>$countRange$ 函数要调用 $O(logn)$ 次，每次需要 $O(n)$ 时间，总的时间复杂度是 $O(nlong(n))$，空间复杂度为 $O(1)$。与之前的方法相比属于用时间换空间。</p>
-<p>但是注意这个算法不能保证找到所有重复数字。比如他不能找出 { $2,3,5,4,3,2,6,7$ }中的重复数字 $2$（$3$ 是可以找到的）。这是因为在 $1$ ~ $2$ 中刚好有两个数字，所以无法确定是每个数字出现了一次还是其中的一个数字出现了两次。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2030,7 +2011,7 @@ $$</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">190</span>
+                  <span class="site-state-item-count">192</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2052,7 +2033,7 @@ $$</p>
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-count">74</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

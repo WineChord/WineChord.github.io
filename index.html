@@ -296,6 +296,492 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/Notes-for-CS-276-Intro-to-IR/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/20/Notes-for-CS-276-Intro-to-IR/" itemprop="url">Notes for CS 276 Intro to IR</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-20T09:33:04+08:00">
+                2019-02-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/20/Notes-for-CS-276-Intro-to-IR/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/20/Notes-for-CS-276-Intro-to-IR/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2>Introducing Information Retrieval and Web Search</h2>
+<ul>
+<li>Def.
+<ul>
+<li>IR is <strong>finding material</strong>(usually documents) of an <strong>unstructured</strong> nature(usually text) that satisfies an <strong>information need</strong> from within <strong>large collections</strong>(usually stored on computers).</li>
+<li><strong>Collection</strong>: A set of documents</li>
+<li><strong>Goal</strong>: Retrieve documents with info. that is relevant to the user's info. need and helps the user complete a task.</li>
+</ul>
+</li>
+<li>Eval: How good are the retrieved docs?
+<ul>
+<li>Precision: Fraction of retrieved docs that are relevant to the user's info. need</li>
+<li>Recall: Fraction of relevant docs in collection that are retrieved.</li>
+</ul>
+</li>
+</ul>
+<h2>Term-document incidence matrices</h2>
+<ul>
+<li>using the number of appearances in each document to represent a term.</li>
+</ul>
+<h2>The Inverted Index</h2>
+<ul>
+<li>
+<p>For each term t, store a list of all documents that contains t.</p>
+<ul>
+<li>Identify each doc by a <strong>docID</strong></li>
+</ul>
+</li>
+<li>
+<p>Need variable-size <strong>postings lists</strong> (inside it is sorted by docID)</p>
+<ul>
+<li>On disk: a continuous run of postings.</li>
+<li>In memory: linked lists or variable length arrays</li>
+</ul>
+</li>
+<li>
+<p>Inverted index construction</p>
+<ul>
+<li>Documents to be indexed</li>
+<li>$\underrightarrow{Tokenizer}$</li>
+<li>Token stream</li>
+<li>$\underrightarrow{Linguistic modules}$</li>
+<li>Modified tokens</li>
+<li>$\underrightarrow{Indexer}$</li>
+<li>Inverted index</li>
+</ul>
+</li>
+<li>
+<p>Initial stages of text processing</p>
+<ul>
+<li>Tokenization</li>
+<li>Normalization</li>
+<li>Stemming</li>
+<li>Stop words</li>
+</ul>
+</li>
+<li>
+<p>Indexer steps</p>
+<ul>
+<li>Token sequence</li>
+<li>Sort (by terms and then docID)</li>
+<li>Dictionary &amp; Postings (Doc. frequency info is added)</li>
+</ul>
+</li>
+<li>
+<p>Problems taken into consideration</p>
+<ul>
+<li>efficient index</li>
+<li>storage</li>
+</ul>
+</li>
+</ul>
+<h2>Query processing with an inverted index</h2>
+<ul>
+<li>Query processing: AND
+<ul>
+<li>&quot;Merge&quot; the two postings: O(x+y)</li>
+<li><strong>Crucial</strong>: postings sorted by docID</li>
+</ul>
+</li>
+</ul>
+<h2>The Boolean Retrieval Model &amp; Extended Boolean Models</h2>
+<ul>
+<li>Boolean queries: Exact match
+<ul>
+<li>queries using AND, OR and NOT to join query terms
+<ul>
+<li>View each doc as a set of words</li>
+<li>Is precise</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Query optimization
+<ul>
+<li>Process in order of increasing freq
+<ul>
+<li>start with smallest set, then keep cutting further</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2>Phrase queries and positional indexes</h2>
+<ul>
+<li>to answer queries such as &quot;Stanford university&quot;</li>
+<li>It is no longer suffices to store only &lt;term: docs&gt; entries</li>
+<li>A first attempt: Biword indexes
+<ul>
+<li>Index every consecutive pair of terms in the text as a phrase</li>
+<li>Problems:
+<ul>
+<li>False positives</li>
+<li>Index blowup due to bigger dictionary</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Solution 2: Positional indexes</li>
+</ul>
+<p>&lt;<strong>term</strong>, number of docs containing <strong>term</strong>;</p>
+<p>doc1: position1, position2...;</p>
+<p>doc2: position1, position2...;</p>
+<p>etc.&gt;</p>
+<ul>
+<li>Processing a phrase query
+<ul>
+<li>Extract inverted index entries for each distinct term</li>
+<li>Merge their doc</li>
+</ul>
+</li>
+<li>Proximity queries</li>
+<li>Positional index size
+<ul>
+<li>Although expands postings storage substantially, it is now standardly used because of the power and usefulness of phrase and proximity queries.</li>
+</ul>
+</li>
+<li>Rules of thumb
+<ul>
+<li>2-4 as large as a non-positional index</li>
+<li>size 35-50% of volume of original text</li>
+</ul>
+</li>
+<li>Combination schemes
+<ul>
+<li>can be profitably combined</li>
+</ul>
+</li>
+</ul>
+<h2>Structured vs. Unstructured Data</h2>
+<ul>
+<li>Structured: info. in tables</li>
+<li>Unstructured: free text</li>
+<li>Semi-structured: has distinctly identified zones</li>
+</ul>
+<p>ref: <a href="http://web.stanford.edu/class/cs276/handouts/lecture1-intro.ppt" target="_blank" rel="noopener">CS 276 Boolean Retrieval</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/19/多媒体技术概论/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/19/多媒体技术概论/" itemprop="url">多媒体技术概论</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-19T09:16:24+08:00">
+                2019-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/19/多媒体技术概论/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/19/多媒体技术概论/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2><strong>多媒体技术的定义，特征，关键技术</strong></h2>
+<p>定义：</p>
+<ul>
+<li>计算机综合处理多种媒体信息：文本，图形，图像，音频和视频，使多种信息建立逻辑连接，集成为一个系统并具有交互性。
+<ul>
+<li>综合处理声，文，图信息</li>
+<li>集成性，交互性</li>
+<li>总之：信息载体多样性，集成性，交互性</li>
+</ul>
+</li>
+</ul>
+<p>关键技术：</p>
+<ul>
+<li>视频音频信号获取技术
+<ul>
+<li>多媒体计算机和传统计算机相比就是能处理声文图，所以首先要解决视音频信号获取技术</li>
+</ul>
+</li>
+<li>多媒体数据压缩编码和解码技术
+<ul>
+<li>压缩编解码解决的是文件量过大的问题</li>
+</ul>
+</li>
+<li>视频音频数据的实时处理和特技</li>
+<li>视频音频数据的输出技术
+<ul>
+<li>视频输出：多个视频窗口，画中画电视</li>
+<li>音频输出：单声道$\rightarrow$ 环绕立体声</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>即：视音频的信号获取/实时处理和特技/输出/压缩编解码</p>
+</blockquote>
+<h2>DPCM编码原理</h2>
+<ul>
+<li>差分量化编码是利用样本与样本之间存在的信息冗余度来进行编码的一种数据压缩技术。其根据过去的样本来估计下一个样本信号的幅度大小，此估计值为预测值，然后对实际信号值与预测值之间的差进行量化编码，从而减少了表示每个样本信号的位数</li>
+<li>即存储或传送的是差值</li>
+</ul>
+<h2>参数编码的国际标准</h2>
+<p>音频编码的分类：</p>
+<ul>
+<li>基于音频数据的统计特性进行编码：波形编码</li>
+<li>基于音频的声学参数：参数编码</li>
+<li>基于人的听觉特性进行编码</li>
+</ul>
+<p>音频编码标准：</p>
+<ul>
+<li>G.711 64Kbps A律 PCM 编码标准</li>
+<li>G.721 32Kbps ADPCM</li>
+<li>G.722 64Kbps</li>
+<li>G.723 40Kbps &amp; 24Kbps</li>
+<li>G.726 16Kbps</li>
+<li>G.727 16-40Kbps ADPCM</li>
+<li>G.728</li>
+<li>RPE-LTP 长时预测规则码激励</li>
+<li>VSELP 矢量和激励线性预测 6.7Kbps</li>
+</ul>
+<p>参数编码：</p>
+<ul>
+<li>LPC 线性预测编码 2.4kb/s</li>
+<li>预测方式：前向/后向，短时/长时</li>
+</ul>
+<h2>JPEG 压缩的基本原理</h2>
+<p>两种基本压缩算法：</p>
+<ul>
+<li>基于 DCT 变换有失真的压缩算法</li>
+<li>基于空间预测编码 DPCM 的无失真压缩算法</li>
+<li></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/18/产生式系统的搜索策略/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2389,381 +2875,11 @@ $$</p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/09/CST2018-3-7-History/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/09/CST2018-3-7-History/" itemprop="url">CST2018 3-7 History</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-09T09:36:19+08:00">
-                2019-02-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/THUOJ/" itemprop="url" rel="index">
-                    <span itemprop="name">THUOJ</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/02/09/CST2018-3-7-History/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/02/09/CST2018-3-7-History/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2>题目描述</h2>
-<ul>
-<li>查看提交记录，一个提交记录是一个整数型的学生 id，唯一代表了一个学生</li>
-<li>每看到一个记录，询问上一次提交是什么时候，若为第一次提交，则要回答当前时刻</li>
-</ul>
-<h2>输入输出</h2>
-<ul>
-<li>输入：
-<ul>
-<li>第 $1$ 行：$n$  提交记录的个数</li>
-<li>以下 $n$ 行：每行一个非负整数，第 $i$ 个整数表示第 $i$ 次提交的学生的 id。注意要将 id 与上一次询问的答案做异或，才能得到真正的学生 id。特别地，第一次询问时的“上一次询问的答案”是0</li>
-</ul>
-</li>
-<li>输出：
-<ul>
-<li>$n$ 行：每行一个正整数，第 $i$ 个整数表示第 $i$ 个提交记录的学生上次提交时间，即该学生上次提交的提交记录是第几条。若为第一次提交，输出 $i$ 即可。</li>
-</ul>
-</li>
-</ul>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">8</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">15</span><br><span class="line">10</span><br><span class="line">12</span><br><span class="line">12</span><br><span class="line">11</span><br><span class="line">11</span><br><span class="line">output:</span><br><span class="line">1</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">4</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">3</span><br><span class="line">6</span><br></pre></td></tr></table></figure></p>
-<h2>数据范围及限制</h2>
-<ul>
-<li>$1\le n\le 1,000,000$</li>
-<li>所有数字 $\lt 2^{30}$ 且非负</li>
-<li>1 sec</li>
-<li>256 MB</li>
-</ul>
-<h2>提示</h2>
-<ul>
-<li>散列</li>
-</ul>
-<h2>思路</h2>
-<h2>实现</h2>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/09/CST2018-3-6-Match/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/09/CST2018-3-6-Match/" itemprop="url">CST2018 3-6 Match</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-09T09:36:10+08:00">
-                2019-02-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/THUOJ/" itemprop="url" rel="index">
-                    <span itemprop="name">THUOJ</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/02/09/CST2018-3-6-Match/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/02/09/CST2018-3-6-Match/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2>题目描述</h2>
-<ul>
-<li>给定一个字符串 $S[1...n]$，对于一个询问 $(p,q,len)$，欲知其两个子串 $S[p...p+len-1]$，$S[q...q+len-1]$是否相同。更多地，希望在对串 $S$ 完成一些操作之后还能高效地得到这个结果</li>
-</ul>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1 p c  // 在 p 位置之后插入一个小写字母 c</span><br><span class="line">2 p    // 删除 p 位置上的字符</span><br><span class="line">3 p q  // 将 S[p..q] 翻转为 S[q..p]</span><br><span class="line">4 p q len // 查询 S[p..p+len-1],S[q..q+len-1] 是否相同</span><br></pre></td></tr></table></figure></p>
-<h2>输入输出</h2>
-<ul>
-<li>输入：
-<ul>
-<li>第 $1$ 行：$n\ m$</li>
-<li>第 $2$ 行：长为 $n$ 的字符串</li>
-<li>以下 $m$ 行：每行为一个操作</li>
-</ul>
-</li>
-<li>输出：
-<ul>
-<li>一个整数，表示询问相同的次数</li>
-</ul>
-</li>
-</ul>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">4 4         </span><br><span class="line">aacb        </span><br><span class="line">2 3          // aab</span><br><span class="line">1 2 b        // aabb</span><br><span class="line">3 2 3        // abab</span><br><span class="line">4 1 3 2      // ab == ab</span><br><span class="line">output:</span><br><span class="line">1            // 一共一个询问的答案是匹配的</span><br></pre></td></tr></table></figure></p>
-<h2>限制</h2>
-<ul>
-<li>$0\le n,m \le 400,000$</li>
-<li>time: 4 sec</li>
-<li>space: 256 MB</li>
-</ul>
-<h2>提示</h2>
-<ul>
-<li>平衡树，hash</li>
-</ul>
-<h2>思路</h2>
-<h2>实现</h2>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2813,7 +2929,7 @@ $$</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">190</span>
+                  <span class="site-state-item-count">192</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2835,7 +2951,7 @@ $$</p>
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-count">74</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

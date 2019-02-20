@@ -296,6 +296,485 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/09/CST2018-2-6-Temperature/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/09/CST2018-2-6-Temperature/" itemprop="url">CST2018 2-6 Temperature</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-09T09:34:54+08:00">
+                2019-02-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/THUOJ/" itemprop="url" rel="index">
+                    <span itemprop="name">THUOJ</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/09/CST2018-2-6-Temperature/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/09/CST2018-2-6-Temperature/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2>题目描述</h2>
+<ul>
+<li>提供气温数据查询服务</li>
+<li>根据用户指定矩形区域内所有观察站的观测值计算出平均气温</li>
+<li>请改进数据结构和算法，提高查询效率</li>
+<li>观察站的坐标呈矩阵排列，气象台可以随时修改任意一个观测站的气温</li>
+<li>用户可以指定某矩形区域来获得该区域内所有观察站的平均气温</li>
+</ul>
+<h2>接口说明</h2>
+<ul>
+<li>头文件 <code>temperature.h</code></li>
+<li>库文件 <code>temperature_lib.cpp</code></li>
+<li>请实现初始化函数和查询函数：</li>
+</ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void init(int n, int m, int** temp);</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>此为初始化函数的声明，可以在此进行初始化</li>
+<li>其中 $n,m$ 表示观察站构成矩形的行数和列数，$temp$ 为数组的数组，其中 $temp[i][j]$ 表示第 $i$ 行第 $j$ 列观察站的初始气温。</li>
+</ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int query(int x1, int y1, int x2, int y2);</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>此为查询函数的声明。初始化完成后，交互库会调用该函数多次，每一次需要进行相应查询并返回结果</li>
+<li>查询的四边分别与 $x$ 轴或 $y$ 轴平行，其中 $(x1,y1)$ 和 $(x2,y2)$ 为一对角线，在矩形边界上的观察站也要记录。</li>
+<li>返回平均气温的数值，进行截断取整</li>
+</ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void change(int x, int y, int temp);</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>此为修改函数的声明，在初始化完成后，交互库会调用该函数若干次，需要将坐标为 $(x,y)$ 的观察站处的温度修改为 $temp$。</li>
+</ul>
+<h2>测试说明</h2>
+<ul>
+<li>首先从标准输入中读取数据</li>
+<li>然后调用 $init$ 函数</li>
+<li>接着对于每个不同的操作相应地调用 $query$ 和 $change$ 函数，并将 $query$ 函数的结果写入标准输出</li>
+<li>本地测试：<code>g++ temperature_lib.cpp your_code.cpp -O2 -o temperature.exe</code></li>
+<li>样例程序 <code>temperature_sample.cpp</code> 实现了“每次查询返回一个随机数”的算法</li>
+</ul>
+<h2>输入输出</h2>
+<ul>
+<li>
+<p>输入：</p>
+<ul>
+<li>第 $1$ 行：$n\ m\ k$ 观察站函数和列数，操作总数</li>
+<li>以下一行为 $n*m$ 个整数，分别表示坐标为 (1,1),(1,2),...,(1,m),(2,1),(2,2),...,(n,1),(n,2),...,(n,m) 的观察站的初始温度。</li>
+<li>以下 $k$ 行：每行若干整数，表示一个操作</li>
+</ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0 x y temp  # 将(x,y)处气温改为temp</span><br><span class="line">1 x1 y1 x2 y2  # 求该矩形内所有观察站的平均气温（保证x1&lt;=x2,y1&lt;=y2）</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>输出：</p>
+<ul>
+<li>若干行：每行对应一次求平均气温的查询结果（截断取整后）</li>
+</ul>
+</li>
+</ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">4 4 5</span><br><span class="line">3 8 10 2 4 22 8 7 63 12 87 3 19 2 46 9</span><br><span class="line">1 2 2 3 3</span><br><span class="line">0 3 3 1</span><br><span class="line">1 2 3 4 4</span><br><span class="line">0 4 4 11</span><br><span class="line">1 1 1 4 4</span><br><span class="line">output:</span><br><span class="line">32</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td></tr></table></figure></p>
+<h2>数据范围及限制</h2>
+<ul>
+<li>
+<p>气温为整数 $\in [-1000,1000)$</p>
+</li>
+<li>
+<p>$1\le n\le 1200$</p>
+</li>
+<li>
+<p>$1\le m\le 1200$</p>
+</li>
+<li>
+<p>$1\le k\le 2,000,000$</p>
+</li>
+<li>
+<p>time：3 sec</p>
+</li>
+<li>
+<p>space：256 MB</p>
+</li>
+</ul>
+<h2>提示</h2>
+<ul>
+<li>
+<p>仿照 range tree 的思路， 第二个维度的树的每个节点保存区间和，以便快速计算区间和</p>
+</li>
+<li>
+<p>因为这题坐标是连续的，因此不需要使用 range tree 的树结构，只需要用数组存储线段树即可</p>
+</li>
+<li>
+<p>本题只有单点修改，如果你的常数优化不够好，可以自学数组状的树（又称“树状数组”）完成优化</p>
+</li>
+</ul>
+<h2>思路</h2>
+<h2>实现</h2>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/09/CST2018-2-5-ChromPoly/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/09/CST2018-2-5-ChromPoly/" itemprop="url">CST2018 2-5 ChromPoly</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-09T09:34:41+08:00">
+                2019-02-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/THUOJ/" itemprop="url" rel="index">
+                    <span itemprop="name">THUOJ</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/09/CST2018-2-5-ChromPoly/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/09/CST2018-2-5-ChromPoly/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2>题目描述</h2>
+<ul>
+<li>
+<p>考察无向图 $G=(V,E)$，$G$ 的一个 $k-$染色（coloring）是从 $V$ 到 $[1,k]$ 的一个映射：</p>
+<p>$\pi:V\rightarrow {1,2,...,k}$</p>
+<p>且满足</p>
+<p>$\forall v,u\in V,\pi(v)\not= \pi(u) if (v,u)\in E$</p>
+</li>
+<li>
+<p>即：将所有顶点归入不超过 $k$ 个等价类，且保证相邻顶点不属同类</p>
+</li>
+<li>
+<p>若将图 $G$ 和 $k$ 视作变量，则可用函数 $CP(G,k)$ 表示图 $G$ 的 $k-$染色方案数。而对于任一图 $G$，该函数都是 $k$ 的多项式形式，称作色多项式（chromatic polynomial）</p>
+</li>
+<li>
+<p>例子：</p>
+</li>
+<li>
+<p>对于包含 $n$ 个顶点，不含任何边的图 $Sn$，有</p>
+<ul>
+<li>$CP(Sn,k)=k^n$</li>
+</ul>
+</li>
+<li>
+<p>对于完全图 $Kn$，有</p>
+<ul>
+<li>$CP(Kn,k)=0,if\ k\lt n$</li>
+<li>$CP(Kn,k)=\frac{k!}{(k-n)!},if\ k\ge n$</li>
+</ul>
+</li>
+<li>
+<p>对于二部图（bipartition）$B(2,3)$，有（在这个语境里其实是完全二分图）</p>
+<ul>
+<li>$CP(B(2,3),1)=0$</li>
+<li>$CP(B(2,3),2)=2$</li>
+<li>$CP(B(2,3),3)=6(2*3)+6\times 8\div 2=30$</li>
+<li>$CP(B(2,3),k)=k^5-6<em>k^4+15</em>k^3-17<em>k^2+7</em>k$</li>
+</ul>
+</li>
+<li>
+<p>对于 5 阶环 $C5$，有</p>
+<ul>
+<li>$CP(C5,1)=P(2,C5)=0$</li>
+<li>$CP(C5,3)=30$</li>
+<li>$CP(C5,k)=k^5-5<em>k^4+10</em>k^3+4*k$</li>
+</ul>
+</li>
+<li>
+<p>请编写程序，求对于给定的图 $G$，计算并输出对应的色多项式 $CP(G,k)$</p>
+</li>
+</ul>
+<h2>输入输出</h2>
+<ul>
+<li>输入：
+<ul>
+<li>第 $1$ 行：$n\ m$ 顶点数和边数</li>
+<li>以下每行：$(u,v)$表示图中的一条边，且保证满足 $0\le u,v\lt n$</li>
+</ul>
+</li>
+<li>输出：
+<ul>
+<li>$n+1$ 行：每一行表示该图色多项式各项的系数（依 $k$ 的次数由低向高排列）</li>
+</ul>
+</li>
+</ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">input: # 为一个十字形图</span><br><span class="line">5 4</span><br><span class="line">1 0</span><br><span class="line">1 3</span><br><span class="line">1 2</span><br><span class="line">1 4</span><br><span class="line">output: </span><br><span class="line">0</span><br><span class="line">1</span><br><span class="line">-4</span><br><span class="line">6</span><br><span class="line">-4</span><br><span class="line">1</span><br></pre></td></tr></table></figure></p>
+<h2>数据范围</h2>
+<ul>
+<li>$1\le n\lt 30$</li>
+<li>$1\le m\lt 70$</li>
+<li>保证图中无自环</li>
+<li>各项系数的值保证在带符号64位整数范围内</li>
+<li>time：7 sec</li>
+<li>space：1024 MB</li>
+</ul>
+<h2>说明</h2>
+<ul>
+<li>$CP(G,k)=CP(G\backslash {e},k)-CP(G/{e},k)$</li>
+<li>其中 $\backslash$ 为减除（subtraction）操作，即为从图中将某一边抹去。</li>
+<li>$/$ 为收缩（contraction）操作，即为收缩边 $e$ ，直到其顶点 $v$ 和 $u$ 粘连为同一个顶点 $w$；而与之关联的边除 $e$ 外依然保留。</li>
+<li>更多：<a href="https://dsa.cs.tsinghua.edu.cn/~deng/ds/00240074@2004spring/handout/assignment/chromaticpolynomial/" target="_blank" rel="noopener">https://dsa.cs.tsinghua.edu.cn/~deng/ds/00240074@2004spring/handout/assignment/chromaticpolynomial/</a></li>
+</ul>
+<h2>思路</h2>
+<h2>实现</h2>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/09/CST2018-2-4-Sort/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1890,419 +2369,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/09/CST2018-1-5-Zuma/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/09/CST2018-1-5-Zuma/" itemprop="url">CST2018 1-5 Zuma</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-09T09:32:37+08:00">
-                2019-02-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/THUOJ/" itemprop="url" rel="index">
-                    <span itemprop="name">THUOJ</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/02/09/CST2018-1-5-Zuma/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/02/09/CST2018-1-5-Zuma/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2>题目描述</h2>
-<ul>
-<li>一条轨道上初始有 $n$ 个彩色珠子，其中任意三个相邻的珠子不会完全同色。</li>
-<li>可以发射珠子到轨道上，一旦有三个或更多同色的珠子相邻，就会立即消失。可发生连锁反应</li>
-<li>请计算一系列操作之后的珠子序列</li>
-</ul>
-<h2>输入输出</h2>
-<ul>
-<li>输入：
-<ul>
-<li>第 $1$ 行：由 'A'-'Z' 组成的字符串，表示初始珠子序列</li>
-<li>第 $2$ 行：$m$ 表示共有 $m$ 次操作</li>
-<li>以下 $m$ 行：每行代表一次操作，每次操作为 $k\ \Sigma$ ，其中 $k\in[0,b]$ 表示新珠子嵌入之后在轨道上的位序，$\Sigma$ 表示新珠子的颜色</li>
-</ul>
-</li>
-<li>输出：
-<ul>
-<li>共 $1$ 行：给出所有操作之后轨道上的珠子序列</li>
-<li>若没有珠子，则输出空行（一个换行符）</li>
-</ul>
-</li>
-</ul>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">ACCBA</span><br><span class="line">5</span><br><span class="line">1 B</span><br><span class="line">0 A</span><br><span class="line">2 B</span><br><span class="line">4 C</span><br><span class="line">0 A</span><br><span class="line">output:</span><br><span class="line">A</span><br></pre></td></tr></table></figure></p>
-<h2>数据范围及限制</h2>
-<ul>
-<li>
-<p>$0\le n\le 500,000$</p>
-</li>
-<li>
-<p>$0\le m\le 500,000$</p>
-</li>
-<li>
-<p>输入保证位置合法</p>
-</li>
-<li>
-<p>时间：2 sec</p>
-</li>
-<li>
-<p>空间：256 MB</p>
-</li>
-</ul>
-<h2>提示</h2>
-<ul>
-<li>
-<p>本题字母、数字混合输入，且初始序列可能为空，请使用足够鲁棒的读入方式。</p>
-</li>
-<li>
-<p>[ 我们将介绍一种简单高效的数据结构，分块数组。他是一个结合了链表和列表的高效的数据结构。 ]</p>
-</li>
-<li>
-<p>[ 列表可以 $O(1)$ 完成寻址，但是需要 $O(N)$ 完成删除和插入，链表可以 $O(1)$ 完成删除和插入，但是需要 $O(N)$ 完成寻址。我们将他们结合起来选择 $\sqrt{n}$ 为一个中间值。 ]</p>
-</li>
-<li>
-<p>[ 将 $N​$ 长度的列表以 $O(\sqrt{n})​$ 长度断成 $O(\sqrt{n})​$ 块，每块用链表连起来，这样链表的长度为 $O(\sqrt{n})​$ 同时列表的长度为 $O(\sqrt{n})​$，我们可以在 $O(\sqrt{n})​$ 的时间范围内完成寻址插入和删除。 ]</p>
-</li>
-<li>
-<p>[ 另一个需要注意的是在移动数组元素时，使用 memove 能够大大提升程序的性能 ]</p>
-</li>
-</ul>
-<h2>思路</h2>
-<h2>实现</h2>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/09/CST2018-1-4-Stock/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/09/CST2018-1-4-Stock/" itemprop="url">CST2018 1-4 Stock</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-09T09:32:29+08:00">
-                2019-02-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/THUOJ/" itemprop="url" rel="index">
-                    <span itemprop="name">THUOJ</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/02/09/CST2018-1-4-Stock/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/02/09/CST2018-1-4-Stock/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2>题目描述</h2>
-<ul>
-<li>从发行到退出之间的时段称为股票的活跃期</li>
-<li>若某股票在第123天发行并于130天退出，则认为活跃期为123-129共7天，记作 $[123,130)$</li>
-<li>假定股票在活跃期内价格不变</li>
-<li>在该王国中，禁止不同股票的活跃期相互包含，也就是说，每天发行和退市的股票累积不超过一支</li>
-<li>M先生是公认的股神，他任何时候的投资总额都保持固定，如此可保证风险有限。每天都将所有的投资集中用于购入当日价格最低的一支股票（为此可能需要先卖出原持有股票）</li>
-<li>M先生希望知道自己一段时期内的日均持股量</li>
-</ul>
-<h2>输入输出</h2>
-<ul>
-<li>输入：
-<ul>
-<li>第 $1$ 行：$N$</li>
-<li>以下 $2N$ 行：按日期升序描述股票历史</li>
-</ul>
-</li>
-</ul>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D X // 在上一事件之后的第D天有一支股票发行，且按M先生的投资额可购入X股</span><br><span class="line">D // 在上一事件之后的第D天有一支股票退市</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>其中，除首个事件的D值可能为0，其余D值均为正整数。X均为非负整数</li>
-<li>输入的时间序列合法，即保证活跃股票数始终非负</li>
-<li>输出：
-<ul>
-<li>输出自股市开市至最后一支股票退出期间，M先生的日均持股量乘以天数</li>
-</ul>
-</li>
-</ul>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">6</span><br><span class="line">2 100</span><br><span class="line">2 200</span><br><span class="line">5</span><br><span class="line">1 150</span><br><span class="line">1</span><br><span class="line">2 100</span><br><span class="line">2 300</span><br><span class="line">2 200</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">output:</span><br><span class="line">5000    // 5000 = 200.00股 * 25天</span><br></pre></td></tr></table></figure></p>
-<h2>数据范围及限制</h2>
-<ul>
-<li>$1\le N\le 1,000,000$</li>
-<li>$0\le X\lt 2^{31}$</li>
-<li>股市的营业期不超过 $2^{31}-1$ 天</li>
-<li>时间：1 sec</li>
-<li>空间：256 MB</li>
-</ul>
-<h2>提示</h2>
-<ul>
-<li>在队列结构的基础上，扩充操作接口</li>
-</ul>
-<h2>思路</h2>
-<h2>实现</h2>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2352,7 +2423,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">190</span>
+                  <span class="site-state-item-count">192</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2374,7 +2445,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-count">74</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

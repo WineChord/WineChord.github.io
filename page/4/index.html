@@ -296,6 +296,414 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/09/CST2018-1-5-Zuma/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/09/CST2018-1-5-Zuma/" itemprop="url">CST2018 1-5 Zuma</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-09T09:32:37+08:00">
+                2019-02-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/THUOJ/" itemprop="url" rel="index">
+                    <span itemprop="name">THUOJ</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/09/CST2018-1-5-Zuma/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/09/CST2018-1-5-Zuma/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2>题目描述</h2>
+<ul>
+<li>一条轨道上初始有 $n$ 个彩色珠子，其中任意三个相邻的珠子不会完全同色。</li>
+<li>可以发射珠子到轨道上，一旦有三个或更多同色的珠子相邻，就会立即消失。可发生连锁反应</li>
+<li>请计算一系列操作之后的珠子序列</li>
+</ul>
+<h2>输入输出</h2>
+<ul>
+<li>输入：
+<ul>
+<li>第 $1$ 行：由 'A'-'Z' 组成的字符串，表示初始珠子序列</li>
+<li>第 $2$ 行：$m$ 表示共有 $m$ 次操作</li>
+<li>以下 $m$ 行：每行代表一次操作，每次操作为 $k\ \Sigma$ ，其中 $k\in[0,b]$ 表示新珠子嵌入之后在轨道上的位序，$\Sigma$ 表示新珠子的颜色</li>
+</ul>
+</li>
+<li>输出：
+<ul>
+<li>共 $1$ 行：给出所有操作之后轨道上的珠子序列</li>
+<li>若没有珠子，则输出空行（一个换行符）</li>
+</ul>
+</li>
+</ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">ACCBA</span><br><span class="line">5</span><br><span class="line">1 B</span><br><span class="line">0 A</span><br><span class="line">2 B</span><br><span class="line">4 C</span><br><span class="line">0 A</span><br><span class="line">output:</span><br><span class="line">A</span><br></pre></td></tr></table></figure></p>
+<h2>数据范围及限制</h2>
+<ul>
+<li>
+<p>$0\le n\le 500,000$</p>
+</li>
+<li>
+<p>$0\le m\le 500,000$</p>
+</li>
+<li>
+<p>输入保证位置合法</p>
+</li>
+<li>
+<p>时间：2 sec</p>
+</li>
+<li>
+<p>空间：256 MB</p>
+</li>
+</ul>
+<h2>提示</h2>
+<ul>
+<li>
+<p>本题字母、数字混合输入，且初始序列可能为空，请使用足够鲁棒的读入方式。</p>
+</li>
+<li>
+<p>[ 我们将介绍一种简单高效的数据结构，分块数组。他是一个结合了链表和列表的高效的数据结构。 ]</p>
+</li>
+<li>
+<p>[ 列表可以 $O(1)$ 完成寻址，但是需要 $O(N)$ 完成删除和插入，链表可以 $O(1)$ 完成删除和插入，但是需要 $O(N)$ 完成寻址。我们将他们结合起来选择 $\sqrt{n}$ 为一个中间值。 ]</p>
+</li>
+<li>
+<p>[ 将 $N​$ 长度的列表以 $O(\sqrt{n})​$ 长度断成 $O(\sqrt{n})​$ 块，每块用链表连起来，这样链表的长度为 $O(\sqrt{n})​$ 同时列表的长度为 $O(\sqrt{n})​$，我们可以在 $O(\sqrt{n})​$ 的时间范围内完成寻址插入和删除。 ]</p>
+</li>
+<li>
+<p>[ 另一个需要注意的是在移动数组元素时，使用 memove 能够大大提升程序的性能 ]</p>
+</li>
+</ul>
+<h2>思路</h2>
+<h2>实现</h2>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/09/CST2018-1-4-Stock/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/09/CST2018-1-4-Stock/" itemprop="url">CST2018 1-4 Stock</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-09T09:32:29+08:00">
+                2019-02-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/THUOJ/" itemprop="url" rel="index">
+                    <span itemprop="name">THUOJ</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/09/CST2018-1-4-Stock/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/09/CST2018-1-4-Stock/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2>题目描述</h2>
+<ul>
+<li>从发行到退出之间的时段称为股票的活跃期</li>
+<li>若某股票在第123天发行并于130天退出，则认为活跃期为123-129共7天，记作 $[123,130)$</li>
+<li>假定股票在活跃期内价格不变</li>
+<li>在该王国中，禁止不同股票的活跃期相互包含，也就是说，每天发行和退市的股票累积不超过一支</li>
+<li>M先生是公认的股神，他任何时候的投资总额都保持固定，如此可保证风险有限。每天都将所有的投资集中用于购入当日价格最低的一支股票（为此可能需要先卖出原持有股票）</li>
+<li>M先生希望知道自己一段时期内的日均持股量</li>
+</ul>
+<h2>输入输出</h2>
+<ul>
+<li>输入：
+<ul>
+<li>第 $1$ 行：$N$</li>
+<li>以下 $2N$ 行：按日期升序描述股票历史</li>
+</ul>
+</li>
+</ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D X // 在上一事件之后的第D天有一支股票发行，且按M先生的投资额可购入X股</span><br><span class="line">D // 在上一事件之后的第D天有一支股票退市</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>其中，除首个事件的D值可能为0，其余D值均为正整数。X均为非负整数</li>
+<li>输入的时间序列合法，即保证活跃股票数始终非负</li>
+<li>输出：
+<ul>
+<li>输出自股市开市至最后一支股票退出期间，M先生的日均持股量乘以天数</li>
+</ul>
+</li>
+</ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">6</span><br><span class="line">2 100</span><br><span class="line">2 200</span><br><span class="line">5</span><br><span class="line">1 150</span><br><span class="line">1</span><br><span class="line">2 100</span><br><span class="line">2 300</span><br><span class="line">2 200</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">output:</span><br><span class="line">5000    // 5000 = 200.00股 * 25天</span><br></pre></td></tr></table></figure></p>
+<h2>数据范围及限制</h2>
+<ul>
+<li>$1\le N\le 1,000,000$</li>
+<li>$0\le X\lt 2^{31}$</li>
+<li>股市的营业期不超过 $2^{31}-1$ 天</li>
+<li>时间：1 sec</li>
+<li>空间：256 MB</li>
+</ul>
+<h2>提示</h2>
+<ul>
+<li>在队列结构的基础上，扩充操作接口</li>
+</ul>
+<h2>思路</h2>
+<h2>实现</h2>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/09/CST2018-1-3-filename/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3856,975 +4264,11 @@ $$</li>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/03/人工智能原理-Part-II-Searching-Ch6-Constraint-Satisfaction-Problems/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/03/人工智能原理-Part-II-Searching-Ch6-Constraint-Satisfaction-Problems/" itemprop="url">人工智能原理 Part II. Searching Ch6.Constraint Satisfaction Problems</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-03T22:40:38+08:00">
-                2019-02-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/02/03/人工智能原理-Part-II-Searching-Ch6-Constraint-Satisfaction-Problems/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/02/03/人工智能原理-Part-II-Searching-Ch6-Constraint-Satisfaction-Problems/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2>Ch6. Constraint Satisfaction Problems</h2>
-<h3>6.1 Constraint Satisfaction Problems</h3>
-<p>约束满足问题</p>
-<h4>6.1.1 What is CSP?</h4>
-<ul>
-<li>是数学问题，定义为其状态必须满足若干约束和限制的一组对象</li>
-<li>将问题中的实体表示为对变量进行有限约束的同质集合，通过约束满足方法加以解决。</li>
-<li>是人工智能和运筹学共同的研究课题
-<ul>
-<li>因为其形式化的规则性提供了用于分析和解决许多不相关问题的共同基础</li>
-</ul>
-</li>
-</ul>
-<h4>6.1.2 Standard Search vs. Constraint Satisfaction Problem</h4>
-<ul>
-<li>Standard search problem 标准搜索问题
-<ul>
-<li>其状态是原子的或不可分割的，一个没有内部结构的黑盒子</li>
-</ul>
-</li>
-<li>Constraint satisfaction problem 约束满足问题
-<ul>
-<li>状态用因子表示，是一系列变量，每个有相应的值</li>
-<li>发挥状态结构的长处</li>
-<li>采用一般用途而不是问题特有的启发式</li>
-</ul>
-</li>
-</ul>
-<h4>6.1.3 Why Study CSP?</h4>
-<ul>
-<li>CSP 通常呈现出高复杂性，需要将启发式与组合搜索方法相结合</li>
-<li>某些形式的 CSP
-<ul>
-<li>Boolean Satisfiability Problem 布尔可满足性问题</li>
-<li>Satisfiability Modulo Theories 可满足性模理论</li>
-<li>Answer Set Programming 答案集编排</li>
-</ul>
-</li>
-<li>可建模为 CSP 的例子
-<ul>
-<li>8-queens puzzle 8 皇后问题</li>
-<li>Map coloring problem 地图着色问题</li>
-<li>Ctyptarithmetic 密码算术</li>
-<li>Sudoku 数独</li>
-</ul>
-</li>
-</ul>
-<h4>6.1.4 Formal Def of CSP</h4>
-<ul>
-<li>A CSP is defined as a triple &lt;X,D,C&gt;
-<ul>
-<li>X is a set of variables, ${X_1,...,X_n}$</li>
-<li>D is a set of domains, ${ D_1, ..., D_n}$. One $D_i$ for each variable $X_i$ , consisting of a set of values ${V_1,...,V_k}$</li>
-<li>C is a set of constraints, ${ C_1,...,C_m}$. Each $C_i$ consists of a pair &lt;scope,rel&gt; where, scope is a tuple of variables that participate in the constraint, rel is a relation that defines the values that those variables can take on.</li>
-</ul>
-</li>
-<li>To solve a CSP, we need to define a state space and the notion of a solution.</li>
-<li>Each state is defined by assignment of values to variables: ${X_i=v_i,X_j=v_j,...}$.
-<ul>
-<li>Consistent assignment 一致性赋值
-<ul>
-<li>一种不违反任何约束的合法赋值</li>
-</ul>
-</li>
-<li>Complete assignment 完整性赋值
-<ul>
-<li>每个变量都被赋值，并且该赋值是一致的，完整的</li>
-</ul>
-</li>
-<li>Partial assignment 局部性赋值
-<ul>
-<li>仅对某些变量进行赋值</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4>6.1.5 Appendix: Four Color Theorem</h4>
-<ul>
-<li>四色定理</li>
-</ul>
-<h4>6.1.6 Why Formulate a Problem as a CSP?</h4>
-<ul>
-<li>是对很多种问题的一种自然表示</li>
-<li>与其他搜索技术相比，CSP求解系统更容易解决问题</li>
-<li>CSP 求解速度比状态空间搜索更快，因为可以快速排除大的搜索空间样本</li>
-</ul>
-<h4>6.1.7 Variations on the CSP Formalism</h4>
-<ul>
-<li>Domains</li>
-<li>Constraints</li>
-</ul>
-<h4>6.1.8 Cryptarithmetic 算式迷</h4>
-<ul>
-<li>是一种数学游戏，由未知数字之间的数学等式组成，这些数字被表示成字母</li>
-<li>目标是识别出每个字母的值</li>
-</ul>
-<h4>6.1.9 A Theoretical Aspect of CSPs: Decision Problems</h4>
-<ul>
-<li>CSPs 也是计算复杂性理论和优有限模型论所要研究的问题</li>
-<li>大多数被认为是易处理的 CSPs 是这样一些问题
-<ul>
-<li>约束的超图具有有界的树宽</li>
-<li>约束本质上存在约束关系集的非一元多态性</li>
-</ul>
-</li>
-<li>每个 CSP 也可以被看做是合取查询包含问题</li>
-</ul>
-<h4>6.1.10 Real-World CSPs</h4>
-<ul>
-<li>许多现实世界的问题涉及实值变量</li>
-</ul>
-<h4>6.1.11 Resolution of CSPs</h4>
-<ul>
-<li>有限范畴中的 CSPs 问题通常采用某种形式的搜索来解决</li>
-<li>常用的技法如下：
-<ul>
-<li>Constraint Propagation 约束传播</li>
-<li>Backtracking Search 回溯</li>
-<li>Local Search 局部搜索</li>
-</ul>
-</li>
-</ul>
-<h3>6.2 Constraint Propagation: Inference in CSPs</h3>
-<h4>6.2.1 Overview of Constraint Propagation</h4>
-<ul>
-<li>Regular state-space search
-<ul>
-<li>can do only one thing: search</li>
-</ul>
-</li>
-<li>CSPs:
-<ul>
-<li>can do search, choose a new variable assignment from several possibilities</li>
-<li>can also do a specific type of inference, called constraint propagation</li>
-</ul>
-</li>
-<li>Constraint Propagation
-<ul>
-<li>uses the constraints to reduce the number of legal values for a variable, which in turn can reduce the legal values for another variable, and so on.</li>
-</ul>
-</li>
-<li>Those techniques are used to modify a constraint satisfaction problem</li>
-<li>More precisely, they enforce a form of local consistency, which are conditions related to the consistency of a group of variables and/or constraints</li>
-<li>Constraint propagation has various uses:
-<ul>
-<li>
-<ol>
-<li>turns a problem into one that is equivalent but is usually simpler to solve,</li>
-</ol>
-</li>
-<li>
-<ol start="2">
-<li>may prove satisfiability/unsatisfiability of problems</li>
-</ol>
-</li>
-</ul>
-</li>
-<li>This always happens for some certain kinds of problems.</li>
-<li>There are different types of local consistency:
-<ul>
-<li>Node consistency 结点一致性</li>
-<li>Arc consistency 弧一致性</li>
-<li>Path consistency 路径一致性</li>
-<li>k-consistency k 一致性</li>
-</ul>
-</li>
-<li>Most popular method is AC-3 algorithm which enforces arc consistency</li>
-</ul>
-<h4>6.2.2 Node Consistency</h4>
-<ul>
-<li>Def: A single variable(node) is node-consistent, if all the values in the variable's domain satisfy the variable's unary constraints.</li>
-</ul>
-<h4>6.2.3 Arc Consistency</h4>
-<ul>
-<li>Def: A variable is arc-consistent, if every value in its domain satisfies the variable's binary constraints.</li>
-</ul>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function AC-3(csp) returns false if an inconsistency is found and true otherwise</span><br><span class="line">  inputs: csp, a binary CSP with components(X,D,C)</span><br><span class="line">  local variables: queue, a queue of arcs, initially all the arcs in csp</span><br><span class="line">  while queue is not empty do</span><br><span class="line">    (X_i,X_j)&lt;-REMOVE-FIRST(queue)</span><br><span class="line">    if REVISE(csp,X_i,X_j)then</span><br><span class="line">      if size of D_i=0 then return false</span><br><span class="line">      for each X_k in X_i.NEIGHBORS-&#123;X_j&#125; do</span><br><span class="line">        add(X_k,X_i)to queue</span><br><span class="line">  return true</span><br></pre></td></tr></table></figure></p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function REVISE(csp,X_i,X_j) returns true iff we revise the domain of X_i</span><br><span class="line">  revised &lt;- false</span><br><span class="line">  for each x in D_i do</span><br><span class="line">    if no value y in D_j allows (x,y) to satisfy the constraint between X_i and X_j then</span><br><span class="line">      delete x from D_i</span><br><span class="line">  revised &lt;- true</span><br><span class="line">  return revised</span><br></pre></td></tr></table></figure></p>
-<h4>6.2.4 Path Consistency</h4>
-<ul>
-<li>Def: A two-variable set ${X_i,X_j}$ is path-consistent with respect to a third variable $X_m$ if, for every assignment ${X_i=a,X_j=b}$ consistent with the constraints on ${X_i,X_j}$, there is an assignment to $X_m$ that satisfies the constraints on ${X_i,X_m}$ and ${X_m,X_j}$.</li>
-<li>Why called path consistency
-<ul>
-<li>because it as looking at a path from $X_i$ to $X_j$ with $X_m$ in the middle.</li>
-</ul>
-</li>
-</ul>
-<h4>6.2.5 k-Consistency</h4>
-<ul>
-<li>Def: A CSP is k-consistent if, for any set of k-1 variables and for any consistent assignment to those variables, a consistent value can always be assigned to any $k^{th}$ variable.</li>
-<li>The notion of k-consistency is the stronger forms of propagation.</li>
-<li>Features of k-consistency
-<ul>
-<li>k=1: same as node consistency</li>
-<li>k=2: same as arc consistency</li>
-<li>k=3: same as path consistency</li>
-</ul>
-</li>
-</ul>
-<h3>6.3 Backtracking Search for CSPs</h3>
-<h4>6.3.1 Overview of Backtracking Search</h4>
-<ul>
-<li>是一种深度优先搜索的通用算法，用于查找某些计算问题的答案，尤其是 CSPs</li>
-<li>回溯搜索递增地构建解的候选，而且一旦确定部分候选c不能成为一个合法的解，就将c抛弃（回溯）</li>
-<li>例：8皇后</li>
-<li>是基本的无信息算法，一种具有两种改进的深度优先搜索，用于求解 CSPs 问题</li>
-</ul>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function BACKTRACK-SEARCH(csp) returns a solution, or failure</span><br><span class="line">  return BACKTRACK(&#123;&#125;,csp)</span><br><span class="line">function BACKTRACK(assignment,csp) returns a solution, or failure</span><br><span class="line">  if assignment is complete then return assignment</span><br><span class="line">  var &lt;- SELECT-UNASSIGNED-VALUES(var,assignment,csp) do</span><br><span class="line">  for each value in ORDER-DOMAIN-VALUES(var,assignment,csp)do</span><br><span class="line">    if value is consistent with assignment then</span><br><span class="line">      add &#123;var=value&#125; to assignment</span><br><span class="line">      inferences &lt;- INFERENCE(csp,var,value)</span><br><span class="line">      if inferences!=failure then</span><br><span class="line">        add inferences to assignment</span><br><span class="line">        result&lt;-BACKTRACK(assignment,csp)</span><br><span class="line">        if result=failure then return result</span><br><span class="line">  remove &#123;var=value&#125; and inferences from assignment</span><br><span class="line">return failure</span><br></pre></td></tr></table></figure></p>
-<h4>6.3.2 Questions to Improve Backtracking</h4>
-<h3>6.4 Local Search for CSPs</h3>
-<h4>6.4.1 Local Search for CSPs</h4>
-<ul>
-<li>CSPs 中的局部搜索算法，采用完整状态形式化
-<ul>
-<li>初始状态：为每个变量赋值</li>
-<li>搜索：一次改变一个变量的值</li>
-</ul>
-</li>
-</ul>
-<h4>6.4.2 Min-conflicts Heuristic 最小冲突启发式</h4>
-<ul>
-<li>
-<p>一个最明显的启发式是对一个变量选择一个新的值</p>
-</li>
-<li>
-<p>特点</p>
-<ul>
-<li>变量选择：随机选择任意一个冲突变量</li>
-<li>值得选择：选择导致与其他变量呈现最少冲突的新值</li>
-</ul>
-</li>
-<li>
-<p>对许多CSPs出奇有效</p>
-</li>
-</ul>
-<h4>6.4.3 Algorithm Solving CSPs by Local Search</h4>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function MIN-CONFLiCTS(csp,max_steps) returns a solution or failure</span><br><span class="line">  inputs:csp, a constraint satisfaction problem</span><br><span class="line">  		 max_steps, the number of steps allowed befre giving up</span><br><span class="line">  current &lt;- an initial complete assignment for csp</span><br><span class="line">  for i=1 to max_steps do</span><br><span class="line">    if current is a solution for csp then return current</span><br><span class="line">    var &lt;- a randomly chosen conflicted variable from csp.VARIABLES</span><br><span class="line">    value &lt;- the value v for var that minimizes CONFLICTS(var,v,current,csp)</span><br><span class="line">    set var=value in current</span><br><span class="line">  return failure</span><br></pre></td></tr></table></figure></p>
-<h4>6.4.4 Constraint Weighting</h4>
-<ul>
-<li>Constraint Weighting 约束加权
-<ul>
-<li>能聚焦于重要的约束</li>
-</ul>
-</li>
-</ul>
-<h3>6.5 The Structure of Problems</h3>
-<h4>6.5.1 Decomposing Problem</h4>
-<ul>
-<li>问题分解
-<ul>
-<li>由约束图所表征的问题结构，可以用于寻找解</li>
-<li>求解一个 CSP 问题的复杂性，与约束图的结构密切相关</li>
-<li>现实世界的问题可以被分解为许多子问题</li>
-</ul>
-</li>
-</ul>
-<h4>6.5.2 Independent Sub-problems</h4>
-<ul>
-<li>独立子问题可被标识为约束图的连接组件</li>
-<li>设 $n$ 个变量的图可分解为仅有c个变量的子问题：每个最坏解的代价是 $O((n/c)\cdot d^c)$ ，与 $n$ 成线性关系</li>
-<li>如果不分解，则总的运行时间是 $O(dn)$</li>
-</ul>
-<h4>6.5.3 Tree-structured Problems</h4>
-<ul>
-<li>任何树结构的 CSP 都可以用变量数中的时间线性加以解决</li>
-<li>求解树结构 CSP 的方法：先挑选任意变量作为树的根，然后再选择一个序列（称为拓扑排序）</li>
-</ul>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function TREE-CSP-SOLVER(csp) returns a solution, or failure</span><br><span class="line">  inputs: csp, a CSP with components X,D,C</span><br><span class="line">  n &lt;- number of variables in X</span><br><span class="line">  assignment &lt;- an empty assignment</span><br><span class="line">  root &lt;- any variable in X</span><br><span class="line">  X &lt;- TOPOLOGICAL-SORT(X,root)</span><br><span class="line">  for j=n downto 2 do</span><br><span class="line">    MAKE-ARC-CONSISTENT(PARENT(X_j),X_j)</span><br><span class="line">    if it cannot be made consistent then return failure</span><br><span class="line">  for i=1 to n do</span><br><span class="line">    assignment[X_i] &lt;- any consistent value from D_i</span><br><span class="line">    if there is no consistent value then return failure</span><br><span class="line">  return assignment</span><br></pre></td></tr></table></figure></p>
-<h4>6.5.4 Reduce Constraint Graphs to Tree Structures</h4>
-<ul>
-<li>$1^{st}$ approach: cutset conditioning 割集调节
-<ul>
-<li>可以将一个通用CSP问题简化为一个树结构CSP，并且若能够找到一个小割集则相当有效</li>
-</ul>
-</li>
-<li>Conditioning: Instantiate a variable, prune its neighbors' domains</li>
-<li>$2^{nd}$ approach: tree decomposition 树分解
-<ul>
-<li>将CSP转换为一棵子问题树，并且当该约束图的树宽较小时很有效</li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/03/人工智能原理-Part-II-Searching-Ch5-Adversarial-Search/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/03/人工智能原理-Part-II-Searching-Ch5-Adversarial-Search/" itemprop="url">人工智能原理 Part II. Searching Ch5.Adversarial Search</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-03T07:38:29+08:00">
-                2019-02-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/02/03/人工智能原理-Part-II-Searching-Ch5-Adversarial-Search/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/02/03/人工智能原理-Part-II-Searching-Ch5-Adversarial-Search/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2>Ch5 Adversarial Search</h2>
-<ul>
-<li>To examine the problems that arise when we try to plan ahead in a world where other agents are planning against us.</li>
-</ul>
-<h3>5.1 Games</h3>
-<h4>Search vs. Adversarial Search 搜索与对抗搜索</h4>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Search 搜索</th>
-<th style="text-align:center">Adversarial Search 对抗搜索</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">Single agent</td>
-<td style="text-align:center">Multiple agents</td>
-</tr>
-<tr>
-<td style="text-align:center">Solution is (heuristic) method for finding goal</td>
-<td style="text-align:center">Solution is strategy (strategy specifies move for every possible opponent reply)</td>
-</tr>
-<tr>
-<td style="text-align:center">Heuristics can find optimal solution</td>
-<td style="text-align:center">Time limits force an approximate solution</td>
-</tr>
-<tr>
-<td style="text-align:center">Evaluation function: estimate of cost from start to goal through given node</td>
-<td style="text-align:center">Evaluation function: evaluate &quot;goodness&quot; of game position</td>
-</tr>
-</tbody>
-</table>
-<h4>Adversarial Search often Known as Games 对抗搜索通常称为博弈</h4>
-<ul>
-<li>Definitions of Game theory
-<ul>
-<li>Study of strategic decision making. Specifically, study of mathematical models of conflict and cooperation between intelligent rational decision-makers.</li>
-<li>An alternative term is interactive decision decision theory.</li>
-</ul>
-</li>
-<li>Applications of Game theory
-<ul>
-<li>Economics, political science, psychology, logic, computer science, and biology</li>
-<li>Behavioral relations and decision science, including both humans and non-humans(e.g. computers)</li>
-</ul>
-</li>
-</ul>
-<h4>Games are Good Problems for AI</h4>
-<ul>
-<li>Machines need &quot;human-like&quot; intelligence</li>
-<li>Requiring to make decision within limited time</li>
-<li>Features of games:
-<ul>
-<li>Two, or more players(agents)</li>
-<li>Turn-taking vs. simultaneous moves</li>
-<li>Perfect information vs. imperfect information</li>
-<li>Deterministic vs. stochastic</li>
-<li>Cooperative vs. competitive</li>
-<li>Zero-sum vs. non-zero-sum</li>
-</ul>
-</li>
-</ul>
-<h4>Zero Sum vs. Non-zero Sum</h4>
-<ul>
-<li>Zero sum games 零和博弈</li>
-<li>Non-zero sum games 非零和博弈</li>
-</ul>
-<h4>Games are Interesting but Too Hard to Solve</h4>
-<h4>Types of Games</h4>
-<table>
-<thead>
-<tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">Deterministic</th>
-<th style="text-align:center">Stochastic</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">Perfect information(fully observable)</td>
-<td style="text-align:center">Chess, Checkers, Go, Othello</td>
-<td style="text-align:center">Backgammon, Monopoly</td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">Deterministic</th>
-<th style="text-align:center">Stochastic</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">Imperfect information(partially observable)</td>
-<td style="text-align:center">Stratego 西洋陆军棋, Battleships 海战棋</td>
-<td style="text-align:center">Bridge 桥牌,Poker 扑克, Scrabble 拼字游戏</td>
-</tr>
-</tbody>
-</table>
-<h4>Origins of Game Playing Algorithms</h4>
-<ul>
-<li>1912 Ernst Zermelo: Minimax algorithm</li>
-<li>1949 Claude Shannon: Chess playing with evaluation function, selective search</li>
-<li>1956 John McCarthy: Alpha-beta search</li>
-<li>1956 Arthur Samuel: Checkers program that learns its own evaluation function</li>
-</ul>
-<h4>Two Players Game</h4>
-<ul>
-<li>Feature
-<ul>
-<li>deterministic, perfect information, turn-taking, two players, zero-sum</li>
-</ul>
-</li>
-<li>Calling the two players:
-<ul>
-<li>MAX, MIN</li>
-</ul>
-</li>
-<li>MAX move first, and then they take turns moving, until the game is over</li>
-<li>At game end
-<ul>
-<li>winner: award points</li>
-<li>loser: give penalties</li>
-</ul>
-</li>
-</ul>
-<h4>Formally Defined as a Search Problem</h4>
-<ul>
-<li>$S_0$ : Initial state, specifies how the game is set up at the start</li>
-<li>$PLAYER(s)$ : Defines which player has the move in a state</li>
-<li>$ACTIONS(s)$ : Returns the set of legal moves in a state</li>
-<li>$RESULT(s, a)$ : Transition model, defines the result of a move</li>
-<li>$TERMINAL-TEST(s)$: Terminal test, true when the game is over and false otherwise</li>
-<li>$UTILITY(s,p)$ : Utility function, defines the value in state s for a player p</li>
-</ul>
-<h3>5.2 Optimal Decisions in Games</h3>
-<h4>Optimal Solution 最优解</h4>
-<ul>
-<li>In normal search
-<ul>
-<li>The optimal solution would be a sequence of actions leading to a goal state (terminal state) that is a win</li>
-</ul>
-</li>
-<li>In adversarial search
-<ul>
-<li>Both of MAX and MIN could have an optimal strategy
-<ul>
-<li>In initial state, MAX must find a strategy to specify MAX's move,</li>
-<li>then MAX's moves in the states resulting from every possible response by MIN, and so on.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4>Minimax Theorem</h4>
-<blockquote>
-<p>For every two-player, zero-sum game with finitely many strategies, there exists a value V and a mixed strategy for each player, s.t.</p>
-<p>(a) Given player 2's strategy, the best payoff possible for player 1 is V</p>
-<p>(b) Given player 1's strategy, the best payoff possible for player 2 is -V</p>
-</blockquote>
-<ul>
-<li>对于零和博弈来说，其名称 minimax 由来是因为每个玩家会使对手可能的最大收益变得最小，还会使自己的最大损失变得最小。</li>
-</ul>
-<h4>Optimal Solution in Adversarial Search</h4>
-<ul>
-<li>Given a game tree, the optimal strategy can be determined from the minimax value of each node, write as MINIMAX(n)</li>
-<li>Assume that both players play optimally from there to the end of the game</li>
-</ul>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function MINIMAX(s) returns an action</span><br><span class="line">  if TERMINAL-TEST(s) then return UTILITY(s)</span><br><span class="line">  if PLAYER(s) = MAX then return max_&#123;a\in ACTION(s)&#125;MINIMAX(RESULT(s,a))</span><br><span class="line">  if PLAYER(s) = MIN then return min_&#123;a\in ACTION(s)&#125;MINIMAX(RESULT(s,a))</span><br></pre></td></tr></table></figure></p>
-<h4>Minimax Algorithm</h4>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function MINIMAX-DECISION(state) returns an action</span><br><span class="line">  return argmax_&#123;a\in ACTION(s)&#125;MIN-VALUE(RESULT(state,a))</span><br><span class="line">function MAX-VALUE(state) returns a utility value</span><br><span class="line">  if TERMINAL-TEST(state) then return UTILITY(state)</span><br><span class="line">  v &lt;- -infinite</span><br><span class="line">  for each a in ACTIONS(sate) do v &lt;- MAX(v, MIN-VALUE(RESULT(state,a)))</span><br><span class="line">  return v</span><br><span class="line">function MIN-VALUE(state) returns a utility value</span><br><span class="line">  if TERMINAL-TEST(state) then return UTILITY(state)</span><br><span class="line">  v &lt;- +infinite</span><br><span class="line">  for each a in ACTIONS(state) do v&lt;- MIN(v, MAX-VALUE(RESULT(state,a)))</span><br><span class="line">  return v</span><br></pre></td></tr></table></figure></p>
-<h4>Properties of Minimax Decision 最小最大决策的性质</h4>
-<ul>
-<li>最小最大算法表现为博弈树的深度优先搜索</li>
-<li>Time: $O(b^m)$</li>
-<li>Space:
-<ul>
-<li>$O(bm)$ 算法同时生成所有动作</li>
-<li>$O(m)$ 算法一次生成一个动作</li>
-<li>b: 分支因子</li>
-<li>m: 任一结点的最大深度</li>
-</ul>
-</li>
-</ul>
-<h4>Optimal Decisions in Multi-player Games 多玩家博弈中最优决策</h4>
-<ul>
-<li>将minimax思想扩展到多玩家博弈</li>
-<li>将每个节点的单一值-&gt;一个值得向量</li>
-<li>对于终端状态，从每个玩家的角度来看，这个向量给定该状态的效用。实现的最简单方法是拥有一个返回效用向量的 $UTILITY$ 函数</li>
-</ul>
-<h3>5.3 Alpha-Beta Pruning</h3>
-<h4>Overview</h4>
-<ul>
-<li>The problem with minimax search:
-<ul>
-<li>Number of game states is exponential in depth of the tree.</li>
-<li>We can't eliminate the exponent, but we can effectively cut it in half.</li>
-</ul>
-</li>
-<li>The trick to solve the problem:
-<ul>
-<li>Compute correct minimax decision without looking at every node in game tree.</li>
-<li>That is, use &quot;pruning&quot; to eliminate large parts of the tree</li>
-</ul>
-</li>
-<li>What is alpha-beta pruning?
-<ul>
-<li>It is a search algorithm that seeks to decrease the number of nodes that are evaluated by the minimax algorithm</li>
-</ul>
-</li>
-</ul>
-<h4>Why Called Alpha-Beta</h4>
-<ul>
-<li>Alpha-beta pruning gets its name from the following two parameters:
-<ul>
-<li>$\alpha$ : 沿着 MAX 路径上的任意选择点，迄今为止我们已经发现的最高值</li>
-<li>$\beta$ : 沿着 MIN 路径上的任意选择点，迄今为止我们已经发现的最低值</li>
-</ul>
-</li>
-<li>Alpha-beta search respectively:
-<ul>
-<li>updates the values of $\alpha$ and $\beta$ as it goes along, and</li>
-<li>prunes the remaining branches at a node as soon as the value of the current node is known to be worse than the current $\alpha$ or $\beta$ value for MAX or MIN.</li>
-</ul>
-</li>
-</ul>
-<h4>Alpha-Beta Search Algorithm</h4>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function ALPHA-BETA-SEARCH(state)returns an action</span><br><span class="line">  v &lt;- MAX-VALUE(state, -inf, +inf)</span><br><span class="line">  return the action in ACTIONS(state) with value v</span><br><span class="line">function MAX-VALUE(state, \alpha, \beta) returns a utility value</span><br><span class="line">  if TERMINAL-TEST(state) then return UTILITY(state)</span><br><span class="line">  v &lt;- -inf</span><br><span class="line">  for each a in ACTIONS(state) do</span><br><span class="line">    v &lt;- MAX(v, MIN-VALUE(RESULT(state,a),\alpha,\beta))</span><br><span class="line">    if v &gt;= \beta then return v else \alpha &lt;- MAX(a,v)</span><br><span class="line">  return v</span><br><span class="line">function MIN-VALUE(state, \alpha, \beta)returns a utility value</span><br><span class="line">  if TERMINAL-TEST(state) then return UTILITY(state)</span><br><span class="line">  v &lt;- +inf</span><br><span class="line">  for each a in ACTIONS(state)do</span><br><span class="line">    v &lt;- MIN(v,MAX-VALUE(RESULT(state,a),\alpha,\beta))</span><br><span class="line">    if v &gt;= \alpha then return v else \beta &lt;- MIN(\beta,v)</span><br><span class="line">  return v</span><br></pre></td></tr></table></figure></p>
-<h3>5.4 Imperfect Real-time Decisions</h3>
-<h4>Overview</h4>
-<ul>
-<li>minimax 算法生成整个博弈搜索空间</li>
-<li>alpha-beta 剪枝算法允许我们将其剪去大部分</li>
-<li>然而，alpha-beta 仍然需要搜索抵达终端状态的所有途径，至少是搜索空间的一部分</li>
-<li>这个深度通常是不实际的，因为移动必须在合理的时间内完成</li>
-</ul>
-<h4>Apply a Heuristic Evaluation Function</h4>
-<ul>
-<li>香农提出：程序应该早一些剪断搜索，并在搜索中对状态应用启发式评估函数，有效地将非终端节点转换为终端叶节点，建议使用方法：
-<ul>
-<li>用 EVAL 来代替 UTILITY
-<ul>
-<li>EVAL: 一个启发式评价函数，用于估计位置的效用</li>
-</ul>
-</li>
-<li>用 CUTOFF-TEST 来代替 TERMINAL-TEST
-<ul>
-<li>CUTOFF-TEST: 确定何时应用 EVAL 函数</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4>Heuristic H-Minimax vs. Minimax</h4>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function H-MINIMAX(s,d) returns an action</span><br><span class="line">  if CUTOFF-TEST(s,d) then return EVAL(s)</span><br><span class="line">  if PLAYER(s)=MAX then return max_&#123;a\in ACTION(s)&#125;H-MINIMAX(RESULT(s,a),d+1)</span><br><span class="line">  if PLAYER(s)=MIN then return min_&#123;a\in ACTION(s)&#125;H-MINIMAX(RESULT(s,a),d+1)</span><br></pre></td></tr></table></figure></p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function MINIMAX(s) returns an action</span><br><span class="line">  if TERMINAL-TEST(s) then return UTILITY(s)</span><br><span class="line">  if PLAYER(s)=MAX then return max_&#123;a\in ACTION(s)&#125;MINIMAX(RESULT(s,a))</span><br><span class="line">  if PLAYER(s)=MIN then return min_&#123;a\in ACTION(s)&#125;MINIMAX(RESULT(s,a)</span><br></pre></td></tr></table></figure></p>
-<h4>Evaluation Functions</h4>
-<ul>
-<li>一个评价函数返回从一个给定位置该博弈的期望效用估计
-<ul>
-<li>应与真实效用函数相同的方式对终端状态进行整理
-<ul>
-<li>获胜状态必须评价为优于平局</li>
-<li>平局状态必须评价为优于失败</li>
-</ul>
-</li>
-<li>计算的时间不能太长</li>
-<li>非终端状态应该与实际获胜的机会密切相关</li>
-</ul>
-</li>
-</ul>
-<h4>Weighted Linear Function</h4>
-<p>$$
-\begin{align*}
-EVAL(s)&amp;=w_1f_1(s)+w_2f_2(s)+...+w_nf_n(s)\
-&amp;=\sum_{i=1}^nw_if_i(s)
-\end{align*}
-$$</p>
-<ul>
-<li>$w_i$ 为权重</li>
-<li>$f_i$ 为位置的特征</li>
-<li>对于国际象棋
-<ul>
-<li>$f_i$ 为棋盘上每种棋子的数量</li>
-<li>$w_i$ 为棋子的数值：1 表示兵，3 表示象...</li>
-</ul>
-</li>
-</ul>
-<h4>Chess</h4>
-<h3>5.5 Stochastic Games 随机博弈</h3>
-<ul>
-<li>随机博弈？
-<ul>
-<li>是一种具有概率转换的动态博弈，有一个或多个玩家</li>
-<li>许多博弈通过引入一种随机元素来仿照这种不可预测性</li>
-</ul>
-</li>
-<li>Backgammon 西洋双陆棋</li>
-</ul>
-<h3>5.6 Monte-Carlo Methods</h3>
-<h4>Go vs. Chess</h4>
-<h4>Algorithm of AlphaGo</h4>
-<ul>
-<li>Deep neural networks
-<ul>
-<li>value network: used to evaluate board positions</li>
-<li>policy network: used to select moves</li>
-</ul>
-</li>
-<li>Monte-Carlo tree search
-<ul>
-<li>Combines Monte-Carlo simulation with value networks</li>
-</ul>
-</li>
-<li>Reinforcement learning
-<ul>
-<li>used to improve its play</li>
-</ul>
-</li>
-</ul>
-<h4>About Monte-Carlo Methods</h4>
-<ul>
-<li>a broad class of computational algorithms that rely on repeated random sampling to obtain numerical results</li>
-<li>tend to follow a particular pattern:
-<ul>
-<li>define a domain of possible inputs</li>
-<li>generate inputs randomly from a probability distribution over the domain</li>
-<li>perform a deterministic computation on the inputs</li>
-<li>aggregate the results</li>
-</ul>
-</li>
-</ul>
-<h4>Family of Monte-Carlo Methods</h4>
-<ul>
-<li>Classical Monte-Carlo 经典
-<ul>
-<li>样本来自于概率分布，往往是经典波兹曼分布（Boltzmann distribution）</li>
-</ul>
-</li>
-<li>Quantum Monte-Carlo 量子
-<ul>
-<li>采用随机走查方法来计算量子力学的能量和波函数</li>
-</ul>
-</li>
-<li>Volumetric Monte-Carlo 容积式
-<ul>
-<li>采用随机数生成的方法产生每个原子的容量，或进行其他类型几何分析</li>
-</ul>
-</li>
-<li>Kinetic Monte-Carlo 动力学
-<ul>
-<li>仿真过程采用尺度分析来建立时间尺度，或者将随机效应引入分子动力学</li>
-</ul>
-</li>
-</ul>
-<h4>Monte-Carlo Tree Search</h4>
-<ul>
-<li>将蒙特卡洛仿真与博弈搜索树相结合</li>
-<li>和 minimax 一样，每个节点对应于一个博弈状态</li>
-<li>不同于 minimax，结点的值通过蒙特卡洛仿真来估值</li>
-<li>$W(a)/N(a)=$ the value of action a
-<ul>
-<li>$W(a)=$ the total reward</li>
-<li>$N(a)=$ the number of simulations</li>
-</ul>
-</li>
-</ul>
-<h4>Algorithm of AlphaGo</h4>
-<ul>
-<li>采用机器学习和树搜索技术相结合的方式，并且用人类和计算机走棋的棋局进行大量的训练</li>
-<li>两个深度神经网络
-<ul>
-<li>价值网络来评价棋盘位置，策略网络来选择走棋</li>
-</ul>
-</li>
-<li>树搜索
-<ul>
-<li>蒙特卡洛树搜索</li>
-</ul>
-</li>
-<li>强化学习
-<ul>
-<li>用于改善其走棋</li>
-</ul>
-</li>
-</ul>
-<h4>Monte-Carlo Tree Search in AlphaGo</h4>
-<ul>
-<li>(a) Selection: Each simulation traverses the tree by selecting edge with maximum action value Q + bonus u(P) that depends on a stored prior probability P for that edge.</li>
-<li>(b) Expansion: The leaf node may be expanded; the new node is processed once by the policy network $p_\sigma$ and the output probabilities are stored as prior probabilities P for each action.</li>
-<li>(c) Evaluation(Simulation): The leaf node is evaluated in two ways: 1) using the value network $v_\theta$; 2) by running a rollout to the end of the game with the fast rollout policy $p_\pi$ , then computing the winner with function r</li>
-<li>(d) Backup(Back propagation): Action values Q are updated to track the mean value of all evaluations $r(\cdot)$ and $v_\theta(\cdot)$ in the subtree below that action.</li>
-</ul>
-<h4>Neural Network Training Pipeline in AlphaGo</h4>
-<ul>
-<li>A fast rollout policy $p_\pi$ and supervised learning(SL) policy network $p_\sigma$ are trained to predict human expert moves in a data set of positions</li>
-<li>A reinforcement learning(RL) policy network $p_\rho$ is initialized to the SL policy network, and then improved by policy gradient learning to maximize the outcome</li>
-<li>A new data set is generated by playing games of self-play with the RL policy network</li>
-<li>A value network $v_\theta$ is trained by regression to predict the expected outcome</li>
-</ul>
-<h4>Neural Network Architecture in AlphaGo</h4>
-<ul>
-<li>
-<p>The policy network 策略网络</p>
-<ul>
-<li>input: the board position</li>
-<li>passes s through convolutional layers with parameters $\sigma$ or $\rho$</li>
-<li>outputs: a prbability distribution over legal moves a.</li>
-</ul>
-</li>
-<li>
-<p>The value network 价值网络</p>
-<ul>
-<li>input: the board position s'</li>
-<li>similarly uses many convolutional layers with parameters $\theta$</li>
-<li>output: a scalar value $v_\theta(s')$ that predicts the expected outcome.</li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -4874,7 +4318,7 @@ $$</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">190</span>
+                  <span class="site-state-item-count">192</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -4896,7 +4340,7 @@ $$</p>
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-count">74</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
