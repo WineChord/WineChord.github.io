@@ -296,6 +296,170 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题5-替换空格/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/31/剑指Offer-面试题5-替换空格/" itemprop="url">剑指Offer 面试题5 替换空格</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T10:06:35+08:00">
+                2018-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/剑指Offer/" itemprop="url" rel="index">
+                    <span itemprop="name">剑指Offer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/31/剑指Offer-面试题5-替换空格/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/31/剑指Offer-面试题5-替换空格/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1>替换空格</h1>
+<h3>问题描述</h3>
+<p>将字符串中的每一个空格替换为 &quot;%20&quot;</p>
+<h3>思路</h3>
+<ul>
+<li>如果从前往后替换，边替换边移动的话需要的时间复杂度是 $O(n^2)$。</li>
+<li>考虑首先遍历字符串，得到空格个数，然后计算出替换之后的字符串长度，替换时从后往前进行替换。</li>
+</ul>
+<h3>实现</h3>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ReplaceBlank</span><span class="params">(<span class="keyword">char</span> <span class="built_in">string</span>[], <span class="keyword">int</span> length)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">string</span> == <span class="literal">nullptr</span> || length &lt;= <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> len0 = <span class="number">0</span>; <span class="comment">// 原始长度</span></span><br><span class="line">    <span class="keyword">int</span> len1 = <span class="number">0</span>; <span class="comment">// 替换后长度</span></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">string</span>[i] != <span class="string">'\0'</span>)&#123;</span><br><span class="line">        len0++;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">string</span>[i] == <span class="string">' '</span>) len1 += <span class="number">3</span>;</span><br><span class="line">        i++; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(len1 &gt; length) <span class="keyword">return</span>; <span class="comment">// 字符串的空间不够</span></span><br><span class="line">    <span class="keyword">int</span> p2 = len1;  <span class="comment">// p2 指向新长度尾</span></span><br><span class="line">    <span class="keyword">int</span> p1 = len0;  <span class="comment">// p1 指向旧长度尾</span></span><br><span class="line">    <span class="keyword">while</span>(p1 &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">string</span>[p1] == <span class="string">' '</span>)&#123;  <span class="comment">// 遇到空格则替换</span></span><br><span class="line">            <span class="built_in">string</span>[p2--] = <span class="string">'0'</span>;</span><br><span class="line">            <span class="built_in">string</span>[p2--] = <span class="string">'2'</span>;</span><br><span class="line">            <span class="built_in">string</span>[p2--] = <span class="string">'%'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;  <span class="comment">// 未遇到空格则直接复制</span></span><br><span class="line">            <span class="built_in">string</span>[p2--] = <span class="built_in">string</span>[p1];</span><br><span class="line">        &#125;</span><br><span class="line">        p1--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>复杂度分析</h3>
+<p>从后往前，每个元素只复制或者移动了一次，所以时间复杂度是 $O(n)$</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题4-二维数组中的查找/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2210,166 +2374,6 @@ If you want to expand IO buffer you can add code like this:</p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/08/TwoSum/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/08/TwoSum/" itemprop="url">1.TwoSum</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-08T11:04:17+08:00">
-                2018-08-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/08/08/TwoSum/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/08/08/TwoSum/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3>问题描述</h3>
-<p>给定一个数组和一个目标值，问数组中的哪两个元素相加可以得到这个值，返回这两个元素的下标</p>
-<h3>思路</h3>
-<p>使用散列表，对于每一个元素 $num[i]$，另一半的值应为 $numToFind=target-num[i]$，直接在散列表中查找该关键码是否存在，若存在，该关键码对应的值即为其下标 $j$，有因为当前元素的下标为 $i$，故应返回 $[i,j]$；若不存在，则将 ${num[i],i}$ 这一 $key-value \ pair$ 存入散列表中。</p>
-<h3>实现</h3>
-<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; twoSum(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target)&#123;</span><br><span class="line">	<span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; hash;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> numberToFind = target - nums[i]; <span class="comment">// 找到要查找的值</span></span><br><span class="line">		<span class="keyword">if</span>(hash.find(numberToFind) != hash.end())&#123;</span><br><span class="line">			result.push_back(hash[numberToFind]); <span class="comment">// 找到了</span></span><br><span class="line">			result.push_back(i);</span><br><span class="line">			<span class="keyword">return</span> result;</span><br><span class="line">		&#125;</span><br><span class="line">		hash[nums[i]] = i;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3>复杂度分析</h3>
-<p>对每个元素只需操作一次，故时间复杂度为 $O(n)$，需要维护一个 $O(n)$ 的散列表，故空间复杂度为 $O(n)$</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2424,7 +2428,7 @@ If you want to expand IO buffer you can add code like this:</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">192</span>
+                  <span class="site-state-item-count">193</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

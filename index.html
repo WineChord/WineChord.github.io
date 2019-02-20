@@ -296,6 +296,208 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/Merge-algorithm总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/20/Merge-algorithm总结/" itemprop="url">Merge algorithm总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-20T15:42:38+08:00">
+                2019-02-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/20/Merge-algorithm总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/20/Merge-algorithm总结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这是一个 In-class lab，主要解决多个关键词的查询问题，实现了基于位置索引的合并算法（Merge algorithm for proximity queries using a positional index）</p>
+<p><a href="https://github.com/manning/MergeAlgorithms" target="_blank" rel="noopener">starter code</a>  <a href="https://github.com/manning/MergeAlgorithms" target="_blank" rel="noopener">some answers</a></p>
+<p>前置知识：Boolean Retrieval</p>
+<hr>
+<h4>问题引出</h4>
+<p>为了实现多关键词索引，先看一个在 Linux 下的例子：</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">comm -12 &lt;(grep -Riwl &quot;apple&quot; /) &lt;(grep -Riwl &quot;computer&quot; /)</span><br></pre></td></tr></table></figure></p>
+<p>该命令实现了找到同时含有 &quot;apple&quot; 和 &quot;computer&quot; 的文件。</p>
+<blockquote>
+<p>comm: compare two sorted files line by line</p>
+<p>comm -12 file1 file2 : Print only lines present in both file1 and file2</p>
+</blockquote>
+<blockquote>
+<p>grep:</p>
+<p>-R: 递归读取每个目录下的所有文件</p>
+<p>-i: 不区分大小写</p>
+<p>-w: 准确匹配这个单词（前后都得有空格或是开头结尾）</p>
+<p>-l: 输出匹配到的文件</p>
+</blockquote>
+<p>好，那么如何在一个小机器上实现一个文本查找系统？</p>
+<p>故而有以下要求：</p>
+<ol>
+<li>为了速度，需要索引（index）</li>
+<li>时空进行权衡：字典（dictionary）在内存中，列表信息（postings lists）在磁盘上。</li>
+<li>实现 &quot;merge algorithms&quot;，即找到列表中的交集，&quot;intersect&quot; 更准确些</li>
+<li>算法高效的关键在于保持 &quot;postings lists&quot; 是有序的。本实验中列表都在内存中，但在实际中需要写出算法来支持列表在磁盘中</li>
+</ol>
+<h4>文档级别的索引</h4>
+<ul>
+<li>实现&quot;AND&quot;: intersect two postings lists</li>
+</ul>
+<p>一种可能的实现：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> List&lt;Posting&gt; <span class="title">listFromIterator</span><span class="params">(Iterator&lt;Posting&gt; iter)</span></span>&#123;</span><br><span class="line">    List&lt;Posting&gt; list = <span class="keyword">new</span> ArrayList&lt;Posting&gt;();</span><br><span class="line">    Posting p;</span><br><span class="line">    <span class="keyword">while</span>((p=popNextOrNull(iter)) != <span class="keyword">null</span>) list.add(p);</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">static</span> List&lt;Integer&gt; <span class="title">intersect</span><span class="params">(Iterator&lt;Posting&gt; p1, Iterator&lt;Posting&gt; p2)</span></span>&#123;</span><br><span class="line">    List&lt;Integer&gt; answer = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">    List&lt;Posting&gt; lp1 = listFromIterator(p1);</span><br><span class="line">    List&lt;Posting&gt; lp2 = listFromIterator(p2);</span><br><span class="line">    <span class="keyword">for</span>(Posting posting1: lp1)</span><br><span class="line">        <span class="keyword">for</span>(Posting posting2: lp2)</span><br><span class="line">            <span class="keyword">if</span>(posting1.docID==posting2.docID)</span><br><span class="line">                answer.add(posting1.docID);</span><br><span class="line">    <span class="keyword">return</span> answer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>该算法先通过迭代器得到了两个完整的列表，然后又用了双重循环来比较出两个列表相同的文档ID，从而实现取交集的操作。显然效率非常低，假设两个列表的长度分别是 $x$ 和 $y$，则易得总的时间复杂度为 $O(x+y+xy)$</p>
+<p>好，现在我们来改进这个算法，参考 <em>Introduction to Information retrieval</em> 中的 <em>Figure 1.6</em>，伪代码如下：</p>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">INTERSECT(p1,p2)</span><br><span class="line">answer &lt;- []</span><br><span class="line"><span class="keyword">while</span> p1!=NIL <span class="keyword">and</span> p2!= NIL</span><br><span class="line">  <span class="keyword">if</span> docID(p1)==docID(p2)</span><br><span class="line">    ADD(answer,docID(p1))</span><br><span class="line">    p1&lt;-next(p1)</span><br><span class="line">    p2&lt;-next(p2)</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="keyword">if</span> docID(p1)&lt;docID(p2)</span><br><span class="line">      p1&lt;-next(p1)</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">      p2&lt;-next(p2)</span><br></pre></td></tr></table></figure></p>
+<p>实现如下：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(pp1 != <span class="keyword">null</span> &amp;&amp; pp2 != <span class="keyword">null</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(pp1.docID == pp2.docID)&#123;</span><br><span class="line">        answer.add(pp1.docID);</span><br><span class="line">        pp1 = popNextOrNull(p1);</span><br><span class="line">        pp2 = popNextOrNull(p2);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pp1.docID &lt; pp2.docID)</span><br><span class="line">            pp1 = popNextOrNull(p1);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            pp2 = popNextOrNull(p2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>改进的算法时间复杂度为 $O(x+y)$</p>
+<p>再尝试实现 &quot;OR&quot; 的算法：这就很简单了。。只需要修改一下下面的 <code>else</code> 语句，相等时只添加一个，不相等时分别添加就好（另外需要注意每个列表的元素要遍历完）：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(pp1 != <span class="keyword">null</span> &amp;&amp; pp2 != <span class="keyword">null</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(pp1.docID == pp2.docID)&#123;</span><br><span class="line">        answer.add(pp1.docID);</span><br><span class="line">        pp1 = popNextOrNull(p1);</span><br><span class="line">        pp2 = popNextOrNull(p2);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pp1.docID &lt; pp2.docID)&#123;</span><br><span class="line">            answer.add(pp1.docID);</span><br><span class="line">            pp1 = popNextOrNull(p1);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            answer.add(pp2.docID);</span><br><span class="line">            pp2 = popNextOrNull(p2);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span>(pp1 != <span class="keyword">null</span>)&#123;</span><br><span class="line">    answer.add(pp1.docID);</span><br><span class="line">    pp1 = popNextOrNull(p1);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span>(pp2 != <span class="keyword">null</span>)&#123;</span><br><span class="line">    answer.add(pp2.docID);</span><br><span class="line">    pp2 = popNextOrNull(p2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4>位置索引（Positional indices）</h4>
+<p>这里解决的问题是找到多个相邻的关键字，比如 <code>[student /3 drunk]</code> 意思是同时查找 <code>student</code> 和 <code>drunk</code> 这两个关键字，并且要求这两个关键字相邻的距离不超过 $3$</p>
+<p>为了实现这个目的，对 &quot;postings lists&quot; 的数据结构实现进行了加强，添加了关键字在每个文档中出现的位置，如：</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1:7,18,33; 2:1,17; ...</span><br></pre></td></tr></table></figure></p>
+<p>意思是这个关键字在文档1中第 7,18,33 位出现，在文档2 中第 1,17 位出现。</p>
+<p>好，现在问题变成了：同时索引两个关键字，这两个关键字之间相距小于 $k$</p>
+<p>实现思路：在上一步的基础上，先找到共同的文档，然后在文档中找复合条件的距离。</p>
+<p>实现的关键是怎么在文档中找符合条件的距离？</p>
+<p>问题定义：给定两个序列 $L1,L2$，每个序列依次代表这两个关键词（$t1,t2$）在同一篇文档中的位置，给定 $k$ ，表示这两个关键词的距离 $d\le k$ ，求出所有符合条件的 <code>(p1pos,p2pos)</code></p>
+<p>思路（错误的）：双指针法，定义序列下标 $i,j$，，初始化均为 $0$，若 $|L1[i]-L1[j]|\le k$，则将这两个位置添加到结果中，否则若 $L1[i]\lt L2[j]$，则 $i++$，否则 $j++$</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">posWithinK</span><span class="params">(List&lt;AnswerElement&gt; answer, Iterator&lt;Integer&gt; pos1, Iterator&lt;Integer&gt; pos2, Integer dID, <span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">    Integer pp1 = popNextOrNull(pos1);</span><br><span class="line">    Integer pp2 = popNextOrNull(pos2);</span><br><span class="line">    <span class="keyword">while</span>(pp1 != <span class="keyword">null</span> &amp;&amp; pp2 != <span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(Math.abs(pp1-pp2) &lt;= k)&#123;</span><br><span class="line">            AnswerElement ans = <span class="keyword">new</span> AnswerElement(dID, pp1, pp2);</span><br><span class="line">            answer.add(ans);</span><br><span class="line">            <span class="keyword">if</span>(pp1 &lt; pp2) pp2 = popNextOrNull(pos2);</span><br><span class="line">            <span class="keyword">else</span> pp1 = popNextOrNull(pos1);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(pp1 &lt; pp2) pp1 = popNextOrNull(pos1);</span><br><span class="line">        <span class="keyword">else</span> pp2 = popNextOrNull(pos2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>整体实现：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(p1posting != <span class="keyword">null</span> &amp;&amp; p2posting != <span class="keyword">null</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(p1posting.docID == p2posting.docID)&#123;</span><br><span class="line">        posWithinK(answer, p1posting.positions(), p2posting.positions(), p1posting.docID, k);</span><br><span class="line">        p1posting = popNextOrNull(p1);</span><br><span class="line">        p2posting = popNextOrNull(p2);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(p1posting.docID &lt; p2posting.docID)</span><br><span class="line">            p1posting = popNextOrNull(p1);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            p2posting = popNextOrNull(p2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然而这种思路是错误的，会漏掉一些 <code>pp2</code> 在 <code>pp1</code> 前的情况，参考 <em>IIR Figure 2.12</em> 后，提取其算法思路如下：</p>
+<ol>
+<li>
+<p>首先固定 <code>pp1</code>，将所有距离小于 $k$ 的 <code>pp2</code> 储存在一个列表 $l$ 中，直到 <code>pp2</code> 与 <code>pp1</code> 的距离超过了 $k$。</p>
+</li>
+<li>
+<p>此时剔除 $l$ 前面与 <code>pp1</code> 不符合距离小于等于 $k$ 的元素，然后将剩下的添加到答案中。</p>
+</li>
+<li>
+<p>更新 <code>pp1</code> 为下一个元素</p>
+</li>
+</ol>
+<p>此算法的关键在于保留了一个 $l$，使得上一次 <code>pp1</code> 使用过的 <code>pp2</code> 不会丢失，这样即使当 <code>pp1</code> 向后移动较大时仍然能够保证所有 <code>pp2</code> 在前 <code>pp1</code> 在后的解不会遗漏。</p>
+<p>实现更新如下：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(p1posting != <span class="keyword">null</span> &amp;&amp; p2posting != <span class="keyword">null</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(p1posting.docID == p2posting.docID)&#123;</span><br><span class="line">        List&lt;Integer&gt; l = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        Iterator&lt;Integer&gt; pos1 = p1posting.positions();</span><br><span class="line">        Iterator&lt;Integer&gt; pos2 = p2posting.positions();</span><br><span class="line">        Integer pp1 = popNextOrNull(pos1);</span><br><span class="line">        Integer pp2 = popNextOrNull(pos2);</span><br><span class="line">        <span class="keyword">while</span>(pp1 != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">while</span>(pp2 != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span>(Math.abs(pp1-pp2) &lt;= k) </span><br><span class="line">                    l.add(pp2);</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(pp2 &gt; pp1)</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                pp2 = popNextOrNull(pos2);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(l.size() != <span class="number">0</span> &amp;&amp; Math.abs(l.get(<span class="number">0</span>) - pp1) &gt; k)</span><br><span class="line">                l.remove(<span class="number">0</span>);</span><br><span class="line">            <span class="keyword">for</span>(Integer ps: l)</span><br><span class="line">                answer.add(<span class="keyword">new</span> AnswerElement(p1posting.docID, pp1, ps));</span><br><span class="line">            pp1 = popNextOrNull(pos1);</span><br><span class="line">        &#125;</span><br><span class="line">        p1posting = popNextOrNull(p1);</span><br><span class="line">        p2posting = popNextOrNull(p2);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(p1posting.docID &lt; p2posting.docID)</span><br><span class="line">            p1posting = popNextOrNull(p1);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            p2posting = popNextOrNull(p2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后一个是实现 &quot;AND NOT&quot;，即包含第一个关键字但是不包含第二个关键字。</p>
+<p>实现起来也很简单，如下：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">answer.add(pp1.docID);</span><br><span class="line"><span class="keyword">while</span>(pp1 != <span class="keyword">null</span> &amp;&amp; pp2 != <span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>(pp1.docID == pp2.docID) &#123;</span><br><span class="line">        answer.remove(answer.size()-<span class="number">1</span>);</span><br><span class="line">        pp1 = popNextOrNull(p1);</span><br><span class="line">        pp2 = popNextOrNull(p2);</span><br><span class="line">        <span class="keyword">if</span>(pp1 != <span class="keyword">null</span>) answer.add(pp1.docID);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(pp1.docID &lt; pp2.docID) &#123;</span><br><span class="line">            pp1 = popNextOrNull(p1);</span><br><span class="line">            <span class="keyword">if</span>(pp1 != <span class="keyword">null</span>) answer.add(pp1.docID);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            pp2 = popNextOrNull(p2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">pp1 = popNextOrNull(p1);</span><br><span class="line"><span class="keyword">while</span>(pp1 != <span class="keyword">null</span>) </span><br><span class="line">    answer.add(pp1.docID);</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/Notes-for-CS-276-Intro-to-IR/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2690,191 +2892,6 @@ $$</p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/09/CST2018-3-8-Shortest/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/09/CST2018-3-8-Shortest/" itemprop="url">CST2018 3-8 Shortest</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-09T09:36:29+08:00">
-                2019-02-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/THUOJ/" itemprop="url" rel="index">
-                    <span itemprop="name">THUOJ</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/02/09/CST2018-3-8-Shortest/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/02/09/CST2018-3-8-Shortest/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2>题目描述</h2>
-<ul>
-<li>给定一张 $n$ 个点 $m$ 条边的带权无向图，算出从 $1$ 到 $n$ 的最短路径</li>
-<li>注意，请不要使用 spfa 或队列优化的 bellman-ford 算法，如果使用了该算法，有可能无法通过全部测试点。</li>
-</ul>
-<h2>输入输出</h2>
-<ul>
-<li>输入：
-<ul>
-<li>第 $1$ 行：$n\ m$</li>
-<li>以下 $m$ 行：每行三个数 $a,b,c$ ，其中 $1\le a,b\le n, 1\le c\le 1000$ ，代表有一条 $a$ 到 $b$ 的无向边，边权为 $c$</li>
-</ul>
-</li>
-<li>输出：
-<ul>
-<li>一个整数，代表最短路径长度</li>
-</ul>
-</li>
-</ul>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">intput:</span><br><span class="line">6 13</span><br><span class="line">5 1 65</span><br><span class="line">5 1 883</span><br><span class="line">5 4 220</span><br><span class="line">6 6 698</span><br><span class="line">3 6 128</span><br><span class="line">3 2 381</span><br><span class="line">2 1 731</span><br><span class="line">1 2 72</span><br><span class="line">2 4 676</span><br><span class="line">4 5 878</span><br><span class="line">2 4 91</span><br><span class="line">2 3 161</span><br><span class="line">1 4 897</span><br><span class="line">output:</span><br><span class="line">361</span><br></pre></td></tr></table></figure></p>
-<h2>数据范围及限制</h2>
-<ul>
-<li>$1\le n\le 100000$, $1\le m\le 300000$</li>
-<li>边权 $\in [1,1000]$</li>
-<li>1 sec</li>
-<li>256 MB</li>
-</ul>
-<h2>提示</h2>
-<ul>
-<li>堆优化 Dijkstra</li>
-</ul>
-<h2>思路</h2>
-<h2>实现</h2>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2929,7 +2946,7 @@ $$</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">192</span>
+                  <span class="site-state-item-count">193</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
