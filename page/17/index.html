@@ -296,6 +296,174 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/6-ZigZag-Conversion/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/01/6-ZigZag-Conversion/" itemprop="url">6. ZigZag Conversion</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-01T19:44:11+08:00">
+                2018-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/01/6-ZigZag-Conversion/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/01/6-ZigZag-Conversion/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3>问题描述</h3>
+<p>给一个字符串，再给一个行数，把这个字符串按照一个ZigZag的方式进行排列。比如字符串为 $&quot;ABCDEFGHIJ&quot;$，行数为3，排列如下：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A   E   I</span><br><span class="line">B D F H J</span><br><span class="line">C   G</span><br></pre></td></tr></table></figure></p>
+<p>然后每一行依次读为 $&quot;AEIBDFHJCG&quot;$，目标就是求出对应的字符串</p>
+<h3>方法一：按行来排</h3>
+<p>遍历这个字符串，用一个标记来记录当前运动的方向，运动的方向决定了下一个字符要存放在哪一行中。
+时间空间复杂度均为 $O(n)$
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">convert</span><span class="params">(<span class="built_in">string</span> s, <span class="keyword">int</span> numRows)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(numRows == <span class="number">1</span>) <span class="keyword">return</span> s; </span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; rows(min(numRows, <span class="keyword">int</span>(s.size())));</span><br><span class="line">    <span class="keyword">int</span> curRow = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">bool</span> goingdown = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> c: s)&#123;</span><br><span class="line">        rows[curRow] += c;</span><br><span class="line">        <span class="keyword">if</span>(curRow == <span class="number">0</span> || curRow == numRows<span class="number">-1</span>) goingdown = !goingdown;</span><br><span class="line">        curRow += (goingdown? <span class="number">1</span>: <span class="number">-1</span>);</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="built_in">string</span> ret;</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">string</span> row: rows) ret += row;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>方法二：根据行来访问</h3>
+<p>可知，对于一个数 $k$，有</p>
+<ul>
+<li>第0行的字符在下标 $k(2 \cdot numRows-2)$</li>
+<li>第numRows-1行的字符在 $k(2 \cdot numRows-2)+numRows-1$</li>
+<li>中间第i行的字符在 $k(2 \cdot numRows-2)+i$ 和 $(k+1)(2 \cdot numRows-2)-i$
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">convert</span><span class="params">(<span class="built_in">string</span> s, <span class="keyword">int</span> numRows)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(numRows == <span class="number">1</span>) <span class="keyword">return</span> s;</span><br><span class="line">    <span class="built_in">string</span> ret;</span><br><span class="line">    <span class="keyword">int</span> n = s.size();</span><br><span class="line">    <span class="keyword">int</span> cycleLen = <span class="number">2</span> * numRows - <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numRows; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j+i &lt; n; j += cycleLen)&#123;</span><br><span class="line">            ret += s[j+i];</span><br><span class="line">            <span class="keyword">if</span>(i != <span class="number">0</span> &amp;&amp; numRows<span class="number">-1</span> &amp;&amp; j+cycleLen-i &lt; n)</span><br><span class="line">                ret += s[j+cycleLen-i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/5-Longest-Palindromic-Substring/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1766,193 +1934,6 @@ $$
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/编程之美-2-14-求数组的子数组之和的最大值/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/31/编程之美-2-14-求数组的子数组之和的最大值/" itemprop="url">编程之美 2.14 求数组的子数组之和的最大值</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T22:46:27+08:00">
-                2018-10-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程之美/" itemprop="url" rel="index">
-                    <span itemprop="name">编程之美</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/31/编程之美-2-14-求数组的子数组之和的最大值/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/10/31/编程之美-2-14-求数组的子数组之和的最大值/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3>问题描述</h3>
-<p>RT</p>
-<h3>解法一：$O(n^3), O(n^2)$ 暴力</h3>
-<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// O(n^3)</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MaxSum</span><span class="params">(<span class="keyword">int</span>* A, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> maximum = -INF;</span><br><span class="line">    <span class="keyword">int</span> sum;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i; j &lt; n; j++)&#123;</span><br><span class="line">            sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k = i; k &lt;= j; k++) sum += A[k];</span><br><span class="line">            <span class="keyword">if</span>(sum &gt; maximum) maximum = sum;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// O(n^2)</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MaxSum</span><span class="params">(<span class="keyword">int</span>* A, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> maximum = -INF;</span><br><span class="line">    <span class="keyword">int</span> sum;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i; j &lt; n; j++)&#123;</span><br><span class="line">            sum += A[j];</span><br><span class="line">            <span class="keyword">if</span>(sum &gt; maximum) maximum = sum;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maximum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3>解法二：分治法</h3>
-<p>最大子数组有以下三种情况：</p>
-<ul>
-<li>左半部分最大子数组</li>
-<li>左半部分最大子数组</li>
-<li>跨越中间元素的子数组</li>
-</ul>
-<p>每次比较出三者中最大的即可。</p>
-<h3>解法三：动态规划</h3>
-<p>$$
-All[0] = max{A[0], A[0]+Start[1], All[1]}
-$$
-其中</p>
-<ul>
-<li>$All[0]$ 代表 $A[0 \sim n-1]$ 中和最大的一段数组之和</li>
-<li>$Start[1]$ 代表 $A[1 \sim n-1]$ 中包含 $A[1]$ 的和最大的一段数组之和
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">max</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123; <span class="keyword">return</span> (x &gt; y) ? x : y; &#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MaxSum</span><span class="params">(<span class="keyword">int</span>* A, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    Start[n<span class="number">-1</span>] = A[n<span class="number">-1</span>];</span><br><span class="line">    All[n<span class="number">-1</span>] = A[n<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">for</span>(i = n - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--)&#123; <span class="comment">// 从末尾到开头</span></span><br><span class="line">        Start[i] = max(A[i], A[i]+Start[i+<span class="number">1</span>]);</span><br><span class="line">        All[i] = max(Start[i], All[i+<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> All[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 改进空间，因为 Start[i+1] 和 All[i+1] 只使用了一次</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MaxSum</span><span class="params">(<span class="keyword">int</span>* A, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    nStart = A[n<span class="number">-1</span>];</span><br><span class="line">    nAll = A[n<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">for</span>(i = n<span class="number">-2</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">        nStart = max(A[i], nStart + A[i]);</span><br><span class="line">        nAll = max(nStart, nAll);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nAll;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 还可以换一种写法</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MaxSum</span><span class="params">(<span class="keyword">int</span>* A, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    nStart = A[n<span class="number">-1</span>];</span><br><span class="line">    nAll = A[n<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">for</span>(i = n<span class="number">-2</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">        <span class="keyword">if</span>(nStart &lt; <span class="number">0</span>) nStart = <span class="number">0</span>;</span><br><span class="line">        nStart += A[i];</span><br><span class="line">        <span class="keyword">if</span>(nStart &gt; nAll) nAll = nStart;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nAll;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>From Wikipedia:
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Kadane's Algorithm</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">max_subarray</span><span class="params">(A)</span>:</span></span><br><span class="line">    max_ending_here = max_so_far = A[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> A[<span class="number">1</span>:]:</span><br><span class="line">        max_ending_here = max(x, max_ending_here + x)</span><br><span class="line">        max_so_far = max(max_so_far, max_ending_here)</span><br><span class="line">    <span class="keyword">return</span> max_so_far</span><br></pre></td></tr></table></figure></p>
-<h3>扩展1</h3>
-<p>如果数组首尾相连，再求一段子数组使得其和最大。分为两种情况：</p>
-<ul>
-<li>没有跨过 $A[n-1]$ 到 $A[0]$</li>
-<li>跨过 $A[n-1]$ 到 $A[0]$</li>
-</ul>
-<p>对于第二种情况，未被包含的那一部分之和肯定为负，且其负的绝对值为最大。则求解类似第一种其情况。</p>
-<p>最后再取两种情况的最大值即可。</p>
-<h3>扩展2</h3>
-<p>若要求同时返回最大子数组位置：
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">int</span>, <span class="keyword">int</span>, <span class="keyword">int</span>) MaxSum(<span class="keyword">int</span>* A, <span class="keyword">int</span> n)&#123;</span><br><span class="line">    nStart = A[n<span class="number">-1</span>];</span><br><span class="line">    nAll = A[n<span class="number">-1</span>];</span><br><span class="line">    </span><br><span class="line">    currentEnd = n<span class="number">-1</span>;</span><br><span class="line">    allEnd = n<span class="number">-1</span>;</span><br><span class="line">    allStart = n<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>(i = n<span class="number">-2</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">        <span class="keyword">if</span>(nStart &lt; <span class="number">0</span>) &#123; nStart = <span class="number">0</span>; currentEnd = i; &#125;</span><br><span class="line">        nStart += A[i];</span><br><span class="line">        <span class="keyword">if</span>(nStart &gt; nAll) &#123; </span><br><span class="line">            nAll = nStart; </span><br><span class="line">            allEnd = currentEnd; </span><br><span class="line">            allStart = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (nAll, allStart, allEnd);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2007,7 +1988,7 @@ $$
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">195</span>
+                  <span class="site-state-item-count">196</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -296,6 +296,168 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/27/2018-THU-上机考试：1葱的战争/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/27/2018-THU-上机考试：1葱的战争/" itemprop="url">2018 THU 上机考试：1葱的战争</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-27T19:52:19+08:00">
+                2019-01-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/27/2018-THU-上机考试：1葱的战争/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/01/27/2018-THU-上机考试：1葱的战争/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2>题目描述</h2>
+<ul>
+<li>一个 $n\times m$ 的棋盘，上面有 $k$ 根葱，每根葱的面朝方向为 $d$ （0123分别代表上下左右），每根葱的战斗力为 $f$。</li>
+<li>每隔一段时间葱会向面朝方向走一格，如果遇到棋盘边界，则将面朝方向转 $180^{\circ}$（此回合葱不会走动）。</li>
+<li>如果某个时刻有两个或以上的葱在同一位置，则他们将发生战争，只有战斗力最高的葱存活，其他的葱全部原地枯萎，不再走动。</li>
+<li>求经过时间 $t$ 之后所有葱的位置。</li>
+</ul>
+<h2>输入输出</h2>
+<ul>
+<li>输入：
+<ul>
+<li>第一行：$n\ m\ k$</li>
+<li>以下 $k$ 行：每根葱的信息 $x\ y\ d\ f$ （坐标，方向，战斗力）</li>
+<li>最后一行：$t$</li>
+</ul>
+</li>
+<li>输出：
+<ul>
+<li>$k$ 行：分别代表每根葱的位置</li>
+</ul>
+</li>
+</ul>
+<h2>限制</h2>
+<ul>
+<li>$n, m \le 100$</li>
+<li>$k \le 1000$</li>
+<li>$t \le 1000$</li>
+<li>$f \le 1000$</li>
+<li>保证初始每根葱位置不同，战斗力不同</li>
+</ul>
+<h2>生成输入输出文件</h2>
+<p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line">n = random.randrange(<span class="number">1</span>, <span class="number">101</span>) <span class="comment"># 生成[1, 101) 之间的整数，实际上就是[1, 100]</span></span><br><span class="line">m = random.randrange(<span class="number">1</span>, <span class="number">101</span>)</span><br><span class="line">k = random.randrange(<span class="number">1</span>, <span class="number">1001</span>)</span><br><span class="line"><span class="comment"># 棋盘上总共有 n*m 个位置，所以只需要生成 k 个互不相同的下标</span></span><br><span class="line"><span class="comment"># 再根据下标找对应的位置即可</span></span><br><span class="line"><span class="comment"># random.sample(list, n): 即是从 list 中选取 n 个不相互重复的元素</span></span><br><span class="line">loca = random.sample(range(n*m), k)</span><br><span class="line">d = [random.randrange(<span class="number">0</span>, <span class="number">4</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> range(k)]</span><br><span class="line">f = random.sample(range(<span class="number">1000</span>), k)</span><br><span class="line">t = random.randrange(<span class="number">1</span>, <span class="number">1001</span>)</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'in.txt'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> f0:</span><br><span class="line">    print(n, m, k, file=f0)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</span><br><span class="line">        print(loca[i]//m, loca[i]%m, d[i], f[i]+<span class="number">1</span>, file=f0)</span><br><span class="line">    print(t, file=f0)</span><br><span class="line"></span><br><span class="line">map = &#123;i: <span class="keyword">True</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(len(loca))&#125; <span class="comment"># 代表该葱是否存活</span></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(t): <span class="comment"># 总过经过时间t</span></span><br><span class="line">    <span class="keyword">for</span> li <span class="keyword">in</span> [k <span class="keyword">for</span> k, v <span class="keyword">in</span> map.items() <span class="keyword">if</span> v == <span class="keyword">True</span>]: <span class="comment"># 找还存活着的葱，遍历每根葱li，移动每根葱</span></span><br><span class="line">        <span class="keyword">if</span> loca[li]//m == <span class="number">0</span> <span class="keyword">and</span> d[li] == <span class="number">0</span>: <span class="comment"># 如果葱在第0行，且朝上</span></span><br><span class="line">            d[li] = <span class="number">1</span> <span class="comment"># 让它朝下</span></span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">if</span> loca[li]//m == n<span class="number">-1</span> <span class="keyword">and</span> d[li] == <span class="number">1</span>: <span class="comment"># 葱在最后一行，且朝下</span></span><br><span class="line">            d[li] = <span class="number">0</span> <span class="comment"># 让它朝上</span></span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">if</span> loca[li]%m == <span class="number">0</span> <span class="keyword">and</span> d[li] == <span class="number">2</span>: <span class="comment"># 葱在第0列，且朝左</span></span><br><span class="line">            d[li] = <span class="number">3</span> <span class="comment"># 让它朝右</span></span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">if</span> loca[li]%m == m<span class="number">-1</span> <span class="keyword">and</span> d[li] == <span class="number">3</span>: <span class="comment"># 葱在最后一列，且朝右</span></span><br><span class="line">            d[li] = <span class="number">2</span> <span class="comment"># 让它朝左</span></span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="comment"># 至此，葱都可以正常移动</span></span><br><span class="line">        <span class="keyword">if</span> d[li] == <span class="number">0</span>:</span><br><span class="line">            loca[li] = (loca[li]//m - <span class="number">1</span>)*m + loca[li]%m <span class="comment"># 行数减一，列数不变</span></span><br><span class="line">        <span class="keyword">if</span> d[li] == <span class="number">1</span>:</span><br><span class="line">            loca[li] = (loca[li]//m + <span class="number">1</span>)*m + loca[li]%m <span class="comment"># 行数加一，列数不变</span></span><br><span class="line">        <span class="keyword">if</span> d[li] == <span class="number">2</span>:</span><br><span class="line">            loca[li] -= <span class="number">1</span> <span class="comment"># 行数不变，列数减一</span></span><br><span class="line">        <span class="keyword">if</span> d[li] == <span class="number">3</span>:</span><br><span class="line">            loca[li] += <span class="number">1</span> <span class="comment"># 行数不变，列数加一 </span></span><br><span class="line">    <span class="keyword">for</span> li <span class="keyword">in</span> [k <span class="keyword">for</span> k, v <span class="keyword">in</span> map.items() <span class="keyword">if</span> v == <span class="keyword">True</span>]: <span class="comment"># 找还存活着的葱，遍历每根葱li，判断各自存活情况</span></span><br><span class="line">        samep = [k <span class="keyword">for</span> k, v <span class="keyword">in</span> enumerate(loca) <span class="keyword">if</span> v == li <span class="keyword">and</span> map[k] == <span class="keyword">True</span>] <span class="comment"># 找到和葱li在同一个位置的葱的下标集合</span></span><br><span class="line">        <span class="keyword">if</span> len(samep) &gt; <span class="number">1</span>:</span><br><span class="line">            maxindex = f.index(max([ff <span class="keyword">for</span> i, ff <span class="keyword">in</span> enumerate(f) <span class="keyword">if</span> map[i]==<span class="keyword">True</span>])) <span class="comment"># 找到战斗力最大的那根葱的下标</span></span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> [k <span class="keyword">for</span> k <span class="keyword">in</span> samep <span class="keyword">if</span> k != maxindex]: <span class="comment"># 其余的葱宣告死亡</span></span><br><span class="line">                map[j] = <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'out.txt'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> loca:</span><br><span class="line">        print(i//m, i%m, file=f)</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/25/THUOJ-PA2-2-2-2-凸包2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2100,137 +2262,6 @@ code 为 [0, 2^31) 的整数</li>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/22/2017-THU-上机考试：1面试/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/22/2017-THU-上机考试：1面试/" itemprop="url">2017 THU 上机考试：1面试</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-22T19:47:38+08:00">
-                2019-01-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/01/22/2017-THU-上机考试：1面试/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/01/22/2017-THU-上机考试：1面试/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>主要参考文献：<a href="https://zhanghuimeng.github.io/files/code+-5-5.pdf" target="_blank" rel="noopener">机试讲解</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2285,7 +2316,7 @@ code 为 [0, 2^31) 的整数</li>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">195</span>
+                  <span class="site-state-item-count">196</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
