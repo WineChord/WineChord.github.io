@@ -296,6 +296,175 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/198-House-Robber-DP-4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/02/198-House-Robber-DP-4/" itemprop="url">198. House Robber-DP-4</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T14:36:53+08:00">
+                2018-11-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/02/198-House-Robber-DP-4/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/02/198-House-Robber-DP-4/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3>问题描述</h3>
+<p>抢劫房子，数组中表示的是每一个房子里的财产，不能抢劫连续的两座房子，问怎么抢劫才能收益最高？</p>
+<h3>第一步：找到递归关系</h3>
+<p>对于i个房子而言，他可以选择抢或者不抢，选择抢的话，就不能抢前一个，只能抢两个以前的房子，如果不抢的话，就可以抢一个以前的房子，故有递推关系：
+$$
+rob(i) = max(rob(i-2)+currentHouseValue, rob(i-1)
+$$</p>
+<h3>第二步：递归版（自顶向下top-down）</h3>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rob</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> rob(nums, nums.length-<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">rob</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(i &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> Math.max(rob(nums, i-<span class="number">2</span>) + nums[i], rob(nums, i-<span class="number">1</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>第三步：递归+记忆（memo top-down）</h3>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] memo;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rob</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">    memo = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length + <span class="number">1</span>];</span><br><span class="line">    Arrays.fill(memo, -<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> rob(nums, nums.length-<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">rob</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(i &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(memo[i] &gt;= <span class="number">0</span>) <span class="keyword">return</span> memo[i];</span><br><span class="line">    <span class="keyword">int</span> result = Math.max(rob(nums, i-<span class="number">2</span>)+nums[i], rob(nums, i-<span class="number">1</span>));</span><br><span class="line">    memo[i] = result;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>time: O(n),
+space: O(n)</p>
+<h3>第四步：迭代+记忆（memo bottom-up）</h3>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rob</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(nums.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span>[] memo = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length+<span class="number">1</span>];</span><br><span class="line">    memo[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    memo[<span class="number">1</span>] = nums[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> val = nums[i];</span><br><span class="line">        memo[i+<span class="number">1</span>] = Math.max(memo[i], memo[i-<span class="number">1</span>] + val);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> memo[nums.length];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>第五步：迭代+2变量（bottom-up）</h3>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 因为在上一种方法中我们实际上每次迭代只使用了 memo[i] 和 memo[i-1]</span></span><br><span class="line"><span class="comment">// the order is: prev2, prev1, num</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rob</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(nums.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> prev1 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> prev2 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> num : nums)&#123;</span><br><span class="line">        <span class="keyword">int</span> tmp = prev1;</span><br><span class="line">        prev1 = Math.max(prev2 + num, prev1);</span><br><span class="line">        prev2 = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> prev1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/53-Maximum-Subarray-DP-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1768,170 +1937,6 @@ f[i]为从第i级台阶往后走的最大花费。
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/283-Move-Zeros-10/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/02/283-Move-Zeros-10/" itemprop="url">283. Move Zeros-10</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T09:24:24+08:00">
-                2018-11-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/02/283-Move-Zeros-10/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/02/283-Move-Zeros-10/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3>问题描述</h3>
-<p>给一个数组，把里面的0移动到最后，并且不能改变其他元素的相对位置。</p>
-<h3>方法一</h3>
-<p>数出0的个数，然后把非0元素放到向量中，最后再把0放入向量中。time: O(n), space: O(n)
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">moveZers</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = nums.size();</span><br><span class="line">    <span class="keyword">int</span> numZeros = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) numZeros += (nums[i] == <span class="number">0</span>);</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        <span class="keyword">if</span>(nums[i] != <span class="number">0</span>) ans.push_back(nums[i]);</span><br><span class="line">    <span class="keyword">while</span>(numZeros--) ans.push_back(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) nums[i] = ans[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3>方法二：使用两个指针</h3>
-<p>一个指针用来遍历整个数组，另外一个指针将非0元素重写到数组前面。
-time: O(n), space: O(1)
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">moveZeros</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> lastNonZeroFoundAt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num.size(); i++)</span><br><span class="line">        <span class="keyword">if</span>(nums[i] != <span class="number">0</span>)</span><br><span class="line">            nums[lastNonZeroFoundAt++] = nums[i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = lastNonZeroFoundAt; i &lt; nums.size(); i++)</span><br><span class="line">        nums[i] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3>方法三：最优解，使操作同时也最少</h3>
-<p>碰到一个非0时只需与前面的进行交换。
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">moveZeros</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> lastNonZeroFoundAt = <span class="number">0</span>, cur = <span class="number">0</span>; cur &lt; nums.size(); cur++)</span><br><span class="line">        <span class="keyword">if</span>(nums[cur] != <span class="number">0</span>)</span><br><span class="line">            swap(nums[lastNonZeroFoundAt++], nums[cur]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1986,7 +1991,7 @@ time: O(n), space: O(1)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">194</span>
+                  <span class="site-state-item-count">195</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

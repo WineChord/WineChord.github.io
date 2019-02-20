@@ -296,6 +296,472 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/Notes-for-CS-276-4-Index-Construction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/20/Notes-for-CS-276-4-Index-Construction/" itemprop="url">Notes for CS 276 4 Index Construction</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-20T20:33:41+08:00">
+                2019-02-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS-276-IR/" itemprop="url" rel="index">
+                    <span itemprop="name">CS 276 IR</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/20/Notes-for-CS-276-4-Index-Construction/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/20/Notes-for-CS-276-4-Index-Construction/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>主要讲索引的结构</p>
+<ul>
+<li>Index construction
+<ul>
+<li>how?</li>
+<li>limited main memory?</li>
+</ul>
+</li>
+</ul>
+<h2>Hardware basics</h2>
+<ul>
+<li>
+<p>access in memory is <strong>much faster</strong> than on disk</p>
+</li>
+<li>
+<p>Disk I/O is block-based: 8 KB to 256 KB</p>
+</li>
+<li>
+<p>Hardware assumptions</p>
+</li>
+</ul>
+<p><strong>(s)</strong> ave. seek time: 5ms</p>
+<p><strong>(b)</strong> transfer time per byte: 0.02 us</p>
+<p>processor's clock rate: 10^9 Hz</p>
+<p><strong>(p)</strong> low-level operation: 0.01 us</p>
+<p>size of main memory: several GB</p>
+<p>size of disk: 1 TB or more</p>
+<ul>
+<li>Our collection for this lecture: RCV1
+<ul>
+<li>One year of Reuters newswire</li>
+</ul>
+</li>
+</ul>
+<p><strong>(N)</strong> doc: 800,000</p>
+<p><strong>(L)</strong> avg. $ tokens per doc: 200</p>
+<p><strong>(M)</strong> terms(word types): 400,000</p>
+<p>avg. # bytes per token(includ. spaces/punct.): 6</p>
+<p>avg. # bytes per token(without s/p): 4.5</p>
+<p>avg. # bytes per term: 7.5</p>
+<p>non-positional postings: 100,000,000</p>
+<ul>
+<li>
+<p>Recall IIR 1 index construction</p>
+</li>
+<li>
+<p>Key step: inverted file is sorted by terms</p>
+<ul>
+<li>focus on this sort step: <strong>100M items to sort</strong></li>
+</ul>
+</li>
+<li>
+<p>Scaling index construction</p>
+<ul>
+<li>In-memory index construction does not scale</li>
+<li>How to construct an index for very large collections?</li>
+</ul>
+</li>
+<li>
+<p>Sort-based index construction</p>
+<ul>
+<li>As we build the index, we parse docs one at a time</li>
+<li>The final postings for any term are incomplete until the end</li>
+<li>At 12 bytes per non-positional postings entry(term, doc, freq), demands a lot of space for large collections.</li>
+<li>T = 100,000,000 in the case of RCV1</li>
+<li>Thus: We need to store intermediate results on disk</li>
+</ul>
+</li>
+<li>
+<p>Sort using disk as &quot;memory&quot;?</p>
+<ul>
+<li>Too slow: many disk seeks</li>
+<li>need external sorting algorithm</li>
+</ul>
+</li>
+<li>
+<p>Bottleneck</p>
+<ul>
+<li>Parse and build postings entries one doc at a time</li>
+<li>Now sort postings entries by term (then by doc within each term)</li>
+<li>Doing this with random disk seeks would be too slow</li>
+</ul>
+</li>
+<li>
+<p>BSBI: Blocked Sorted-Based Indexing(Sorting with fewer disk seeks)</p>
+<ul>
+<li>12-byte (4+4+4) records (term, doc, freq)</li>
+<li>These are generated as we parse docs</li>
+<li>Must now sort 100M such 12-byte records by term</li>
+<li>Define a Block ~10M such records
+<ul>
+<li>10 such blocks</li>
+</ul>
+</li>
+<li>Basic idea of algorithm:
+<ul>
+<li>Accumulate postings for each block, sort, write to disk</li>
+<li>Then merge the blocks into one long sorted order</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Sorting 10 blocks of 10M records</p>
+<ul>
+<li>First, read each block and sort within:
+<ul>
+<li>Qsort: 2NlnN expected steps</li>
+</ul>
+</li>
+<li>10 times this estimate -- gives us 10 sorted runs of 10M records each</li>
+<li>Done straightforwardly, need 2 copies of data on disk
+<ul>
+<li>can be optimized</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>How to merge the sorted runs?</p>
+<ul>
+<li>Can do binary merges</li>
+<li>more efficient to do a multi-way merge</li>
+</ul>
+</li>
+<li>
+<p>Remaining problem with sort-based algorithm</p>
+<ul>
+<li>assumption: can keep the dictionary in memory</li>
+<li>dictionary to implement a term to term ID mapping</li>
+<li>but: could work with term instead of termID
+<ul>
+<li>intermediate files become very large</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>SPIMI: Single-Pass In-Memory Indexing</p>
+<ul>
+<li>Key idea1: Generate separate dictionaries for each block -- no need to maintain term-termID mapping across blocks</li>
+<li>Key idea2: Don't sort. Accumulate postings in postings lists as they occur</li>
+<li>With these two ideas we can generate a complete inverted index for each block</li>
+<li>These separate indexes can then be merged into one big index</li>
+</ul>
+</li>
+<li>
+<p>SPIMI: Compression</p>
+<ul>
+<li>makes it even more efficient
+<ul>
+<li>Compression of terms</li>
+<li>Compression of postings</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Distributed indexing</p>
+<ul>
+<li>web-scale indexing: use a distributed computing cluster</li>
+</ul>
+</li>
+<li>
+<p>Web search engine data centers</p>
+</li>
+<li>
+<p>Massive data centers</p>
+</li>
+<li>
+<p>Distributed indexing</p>
+<ul>
+<li>Maintain a master machine directing the indexing job
+<ul>
+<li>-- considered &quot;safe&quot;</li>
+</ul>
+</li>
+<li>Break up indexing into sets of (parallel) tasks</li>
+<li>Master machine assigns each task to an idle machine from a pool</li>
+</ul>
+</li>
+<li>
+<p>Parallel tasks</p>
+<ul>
+<li>use two sets of parallel tasks
+<ul>
+<li>Parsers/Inverters</li>
+</ul>
+</li>
+<li>Break the input document collection into splits</li>
+<li>Each split is a subset of documents(corresponding to blocks in BSBI/SPIMI)</li>
+</ul>
+</li>
+<li>
+<p>Parsers</p>
+<ul>
+<li>Master assigns a split to an idle parser machine</li>
+<li>Parser reads a document at a time and emits (term, doc) pairs</li>
+<li>Parser writes pairs into j partitions</li>
+<li>Each partition is for a range of terms' first letters
+<ul>
+<li>a-f, g-p, q-z ( j=3 )</li>
+</ul>
+</li>
+<li>Now to complete the index inversion</li>
+</ul>
+</li>
+<li>
+<p>Inverters</p>
+<ul>
+<li>An inverter collects all (term, doc) pairs (= postings) for one term-partition</li>
+<li>Sorts and writes to postings lists</li>
+</ul>
+</li>
+<li>
+<p>MapReduce</p>
+<ul>
+<li>Google indexing system consists of a number of phases, each implemented in MapReduce.</li>
+<li>Index construction was just one phase</li>
+<li>Another phase: transforming a term-partitioned index into a document-partitioned index
+<ul>
+<li>Term-partitioned: one machine handles a subrange of terms</li>
+<li>Document-partitioned: one machine handles a subrange of documents</li>
+</ul>
+</li>
+<li>in the web part of the course, most search engines use a document-partitioned index</li>
+</ul>
+</li>
+<li>
+<p>Schema for index construction in MapReduce</p>
+<ul>
+<li>Schema of map and reduce functions</li>
+<li>map: input $\rightarrow$ list(k,v),    reduce: (k, list(v)) $\rightarrow$ output</li>
+<li>Instantiation of the schema for index construction</li>
+<li>map: collection $\rightarrow$ list(termID, docID)</li>
+<li>reduce: (&lt;termID1, list(docID)&gt;, &lt;termID2, list(docID)&gt;,...) $\rightarrow$ (postings list1, postings list2,...)</li>
+</ul>
+</li>
+<li>
+<p>Dynamic indexing</p>
+<ul>
+<li>all above... are static</li>
+<li>Doc being added or deleted or modified</li>
+</ul>
+</li>
+<li>
+<p>Simplest approach</p>
+<ul>
+<li>Maintain &quot;big&quot; main index</li>
+<li>New docs go into &quot;small&quot; auxiliary index</li>
+<li>Search across both, merge results</li>
+<li>Deletions
+<ul>
+<li>Invalidation bit-vector for deleted docs</li>
+<li>Filter docs output on a search result by this invalidation bit-vector</li>
+</ul>
+</li>
+<li>Periodically, re-index into one main index</li>
+</ul>
+</li>
+<li>
+<p>Issues with main and auxiliary indexes</p>
+<ul>
+<li>Problem of frequent merges -- you touch stuff a lot</li>
+<li>Poor performance during merge</li>
+<li>Assumption for the rest of the lecture: The index is one big file</li>
+<li>In reality: Use a scheme somewhere in between(e.g., split very large postings lists, collect postings lists of length 1 in one file etc.)</li>
+</ul>
+</li>
+<li>
+<p>Logarithmic merge</p>
+<ul>
+<li>Maintain a series of indexes, each twice as large as the previous one</li>
+<li>Keep smallest ($Z_0$) in memory</li>
+<li>Larger ones ($I_0,I_1,...$) on disk</li>
+<li>If $Z_0$ gets too big ($\gt n$), write to disk as $I_0$</li>
+<li>or merge with $I_0$ (if $I_0$ already exists) as $Z_1$</li>
+<li>Either write merge $Z_1$ to disk as $I_1$ (if no $I_1$)</li>
+<li>Or merge with $I_1$ to form $Z_2$</li>
+</ul>
+</li>
+<li>
+<p>Further issues with multiple indexes</p>
+<ul>
+<li>Collection-wide statistics are hard to maintain</li>
+</ul>
+</li>
+<li>
+<p>Dynamic indexing at search engines</p>
+<ul>
+<li>All the large search engines now do dynamic indexing</li>
+<li>Their indices have frequent incremental changes</li>
+<li>But they also periodically reconstruct the index from scratch</li>
+</ul>
+</li>
+<li>
+<p>Other sorts of indexes</p>
+<ul>
+<li>Positional indexes
+<ul>
+<li>Same sort of sorting problem ... just larger</li>
+</ul>
+</li>
+<li>Building character n-gram indexes:
+<ul>
+<li>As text is parsed, enumerate n-grams</li>
+<li>For each n-gram, need pointers to all dictionary terms containing it -- the &quot;postings&quot;</li>
+<li>Note that the same &quot;postings entry&quot; will arise repeatedly in parsing the docs -- need efficient hashing to keep track of this</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>ref: <a href="http://web.stanford.edu/class/cs276/handouts/lecture4-indexconstruction.ppt" target="_blank" rel="noopener">Index Construction</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/Notes-for-CS-276-2-Term-Vocabulary-and-Postings-Lists/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2787,193 +3253,6 @@ $$</p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/15/谓词归结法总结/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/15/谓词归结法总结/" itemprop="url">谓词归结法总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-15T19:44:33+08:00">
-                2019-02-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/02/15/谓词归结法总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/02/15/谓词归结法总结/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2>人工智能导论 第四章 第四节</h2>
-<ul>
-<li>当一个结论成立时，归结法可以证明该结论成立</li>
-<li>而，证明 $(\exist x)W(x)$ 成立固然重要，但有时更关心使得 $W(x)$ 成立的那个 $x$ 是什么，即，希望得到问题的答案</li>
-<li>基于归结的问答就是利用归结方法获得问题答案的方法</li>
-<li>基本方法：
-<ul>
-<li>用归结法证明问题的正确性，给出归结树</li>
-<li>根据该归结树构造一个修改证明树，构造方法：
-<ul>
-<li>将结论的否定对应的子句 $S1$ 再次求反得到一个新子句 $S2$</li>
-<li>$S1$ 和 $S2$ 构造一个重言式 $S1 \or S2$</li>
-<li>用该重言式代替归结树中的子句 $S1$</li>
-<li>最后在归结树得到空子句的地方得到的子句就是问题的答案</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<hr>
-<ul>
-<li>归结反演系统主要用来解决证明问题，即给定公式集 $F0$ ，要求证明存在量词量化的目标公式 $(x)W(x)$</li>
-<li>对于直接回答 $x=A$ 时 $W(A)$ 是否为真这种问题，可以直接使用归结反演系统证明</li>
-<li>而对于 $x=?$ 时 $W(x)$ 为真或填空类型的问题，则应先证明一个与回答问题语句中提问项有对应匹配关系的一般语句，然后再找某一个具体的匹配值，该值就给出问题的回答。</li>
-<li>这种要求产生满足条件的 $x$ 的例子需要构造性的证明方法，即如果能给出对问题的构造性证明过程，则可给出具体问题的答案。</li>
-</ul>
-<h3>提取回答的方法</h3>
-<ul>
-<li>已知条件：&quot;John 在什么地方，Fido 就在什么地方&quot;，&quot;John 在学校&quot;</li>
-<li>问：&quot;Fido 在什么地方？&quot;</li>
-<li>首先用归结法证明 Fido 确实在一个地方，然后再回答出 Fido 在什么地方</li>
-<li>&quot;If Fido goes wherever John goes and if John is at school, where is Fido?&quot;</li>
-<li>分析：该问题给出两个已知事实和一个询问，该询问答案应从事实出发演绎得到</li>
-<li>先将问题用谓词逻辑公式表示：
-<ul>
-<li>前提公式集：$(\forall x)(AT(John,x)\rightarrow AT(Fido,x))$ ，$AT(John,School)$</li>
-<li>目标公式：$(\exist x)AT(Fido,x)$</li>
-</ul>
-</li>
-<li>首先证明目标公式是前提公式集的逻辑推理</li>
-<li>然后找出一个 $x$ 的例子，如此完成回答</li>
-<li>关键：将询问表达为一个有存在量词约束的目标公式，如此便容易用归结法给出证明，反演树如图（courtesy of 人工智能导论课件）：</li>
-</ul>
-<p><img src="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/rl4.8.gif" alt="反演树"></p>
-<ol>
-<li>用一个重言式来取代目标公式的否定式这个子句，该重言式为 $\sim AT(Fido,x)\or AT(Fido,x)$</li>
-<li>按反演树的构造进行归结，给出重言式替代目标否定式子句后的证明树，此时根子句不为空，称此证明树为修改证明树，修改证明树如图（courtesy of 人工智能导论课件）：</li>
-</ol>
-<p><img src="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/rl4.9.gif" alt="修改证明树"></p>
-<ol start="3">
-<li>用根部子句作为回答语句</li>
-</ol>
-<ul>
-<li>从图中可以看出根部有子句 $AT(Fido,School)$ 即为一个正确答案，该回答与目标公式形式相同，其为目标公式中约束变量 $x$ 用常量 $School$ 替代的结果，即求得目标公式中 $x$ 的一个例</li>
-<li>可以看出，回答的提取过程是把一棵反演树转化为根部带有回答语句的一棵修改证明树的过程。</li>
-<li>从证明树可以得出根部的语句是公理集（前提公式集）与一个重言式（由目标否定式构成）的逻辑推论，也就是扩大公理集的逻辑推论，因而修改证明树构造的本身就证明这种提取回答的办法是正确的。</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3028,7 +3307,7 @@ $$</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">194</span>
+                  <span class="site-state-item-count">195</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

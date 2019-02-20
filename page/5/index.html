@@ -296,6 +296,413 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/07/人工智能原理-Part-V-Learning-Ch9-Perspectives-about-Machine-Learning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/07/人工智能原理-Part-V-Learning-Ch9-Perspectives-about-Machine-Learning/" itemprop="url">人工智能原理 Part V. Learning Ch9.Perspectives about Machine Learning</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-07T09:28:43+08:00">
+                2019-02-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/07/人工智能原理-Part-V-Learning-Ch9-Perspectives-about-Machine-Learning/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/07/人工智能原理-Part-V-Learning-Ch9-Perspectives-about-Machine-Learning/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2>Ch9 Perspectives about Machine Learning</h2>
+<h3>9.1 What is Machine Learning</h3>
+<ul>
+<li>
+<p>是人工智能的一个分支，从事构建和研究可以从数据中学习的系统</p>
+</li>
+<li>
+<p>Artificial Intelligence</p>
+<ul>
+<li>研究感知外部环境并为某个目标采取行动的“智能体”</li>
+</ul>
+</li>
+<li>
+<p>Machine Learning</p>
+<ul>
+<li>人工智能的一个分支，从事构建可以从数据中学习的系统</li>
+</ul>
+</li>
+<li>
+<p>与其他学科的关系</p>
+<ul>
+<li>统计学习
+<ul>
+<li>取自统计学的机器学习框架</li>
+</ul>
+</li>
+<li>模式识别
+<ul>
+<li>识别数据中的模式（$\approx$ 机器学习+数据模式）</li>
+</ul>
+</li>
+<li>数据挖掘
+<ul>
+<li>发现数据中的未知特性（$\approx$ 机器学习+数据库）</li>
+</ul>
+</li>
+<li>计算机视觉
+<ul>
+<li>从图像中提取信息（$\approx$ 机器学习+图像处理）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>两种通用的学习类型</p>
+<ul>
+<li>Inductive Learning 归纳学习（bottom-up logic）
+<ul>
+<li>从特定的训练实例中获得或发现通用的规则或事实</li>
+</ul>
+</li>
+<li>Deductive Learning 演绎学习（top-down logic）
+<ul>
+<li>使用一套已知的规则和事实去推导适合该训练数据的猜测</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>机器学习的形式化定义</p>
+<ul>
+<li>
+<p>Tom Mitchell</p>
+<ul>
+<li>1997:</li>
+</ul>
+<blockquote>
+<p>A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3>9.2 History of Machine Learning</h3>
+<p><img src="http://www.erogol.com/wp-content/uploads/2014/05/test.jpg" alt="history"></p>
+<ul>
+<li>三个学派
+<ul>
+<li>Connectionism 联结主义
+<ul>
+<li>Perceptron, ANN, DL</li>
+</ul>
+</li>
+<li>Symbolicism 符号主义
+<ul>
+<li>Association Rules, Decision tree, Random Forests</li>
+</ul>
+</li>
+<li>Behaviorism 行为主义
+<ul>
+<li>Reinforcement learning</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>9.3 Why Different Perspectives</h3>
+<ul>
+<li>难点
+<ul>
+<li>应该选择哪种算法</li>
+<li>有多少种算法</li>
+<li>难点是什么</li>
+<li>一个视角够吗?</li>
+</ul>
+</li>
+<li>三个观点
+<ul>
+<li>做什么 $\Rightarrow$ 问题 $\Rightarrow$ 学习任务
+<ul>
+<li>任务：表示可以用机器学习解决的基本问题</li>
+</ul>
+</li>
+<li>什么形式 $\Rightarrow$ 场景 $\Rightarrow$ 学习范式
+<ul>
+<li>范式：表示机器学习中发生的典型场景</li>
+</ul>
+</li>
+<li>如何做 $\Rightarrow$ 手段 $\Rightarrow$ 学习模型
+<ul>
+<li>模型：表示可以处理完成一个学习任务的方法</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>9.4 Three Perspectives on Machine Learning</h3>
+<h4>9.4.1 Learning Tasks</h4>
+<ul>
+<li>学习任务用于表示可以用机器学习解决的基本问题</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Tasks</th>
+<th style="text-align:center">Brief Statements</th>
+<th style="text-align:center">Typical algorithm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Classification 分类</td>
+<td style="text-align:center">将输入分成多个类别</td>
+<td style="text-align:center">SVM 支持向量机</td>
+</tr>
+<tr>
+<td style="text-align:center">Regression 回归</td>
+<td style="text-align:center">输出是连续的而不是离散的</td>
+<td style="text-align:center">Bayesian linear regression 贝叶斯线性回归</td>
+</tr>
+<tr>
+<td style="text-align:center">Clustering 聚类</td>
+<td style="text-align:center">输入被划分为若干事先位置的组</td>
+<td style="text-align:center">k-means</td>
+</tr>
+<tr>
+<td style="text-align:center">Ranking 排名</td>
+<td style="text-align:center">将值来换成排名</td>
+<td style="text-align:center">PageRank</td>
+</tr>
+<tr>
+<td style="text-align:center">Density estimation 密度估计</td>
+<td style="text-align:center">寻找某个空间中输入的分布</td>
+<td style="text-align:center">Boosting Density Estimation 增强式密度估计</td>
+</tr>
+<tr>
+<td style="text-align:center">Dimensionality reduction 降维</td>
+<td style="text-align:center">通过将输入映射到低维空间来将其简化</td>
+<td style="text-align:center">Isomap 等距特征映射</td>
+</tr>
+<tr>
+<td style="text-align:center">Optimization 优化</td>
+<td style="text-align:center">从所有可能的解中寻找最优解</td>
+<td style="text-align:center">Q-learning</td>
+</tr>
+</tbody>
+</table>
+<h4>9.4.2 Learning Paradigms</h4>
+<ul>
+<li>用于表示机器学习中发生的典型场景</li>
+<li>根据机器学习的典型场景或样式来区分学习范式
+<ul>
+<li>它怎样从数据中学习</li>
+<li>它如何同环境互动</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Paradigms</th>
+<th style="text-align:center">Brief Statements</th>
+<th style="text-align:center">Typical Algorithm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Supervised 有监督</td>
+<td style="text-align:center">采用一组标注好的数据进行训练，再对未知点进行预测</td>
+<td style="text-align:center">SVM</td>
+</tr>
+<tr>
+<td style="text-align:center">Unsupervised 无监督</td>
+<td style="text-align:center">仅接受未标注数据，再对所有的未知点做出预测</td>
+<td style="text-align:center">k-means</td>
+</tr>
+<tr>
+<td style="text-align:center">Reinforcement 强化</td>
+<td style="text-align:center">算法与外部环境交互，每个动作得到一个回报</td>
+<td style="text-align:center">Q-learning</td>
+</tr>
+</tbody>
+</table>
+<h4>9.4.3 Learning Models</h4>
+<ul>
+<li>用于表示可以处理完成一个学习任务的方法</li>
+<li>ML的效果在很大程度上取决于解决该学习任务时所选用的方法</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Models</th>
+<th style="text-align:center">Brief Statements</th>
+<th style="text-align:center">Sub-models</th>
+<th style="text-align:center">Typical Algorithm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Geometric 几何</td>
+<td style="text-align:center">采用线，面，距离或流形来构建学习算法</td>
+<td style="text-align:center">线，面，距离，流形(Manifold)</td>
+<td style="text-align:center">线性回归，SVM，k-NN，Isomap等距映射</td>
+</tr>
+<tr>
+<td style="text-align:center">Logical 逻辑</td>
+<td style="text-align:center">采用逻辑模型</td>
+<td style="text-align:center">逻辑，规则</td>
+<td style="text-align:center">Inductive Logic Program 归纳逻辑编程，Association Rule 相关规则</td>
+</tr>
+<tr>
+<td style="text-align:center">Networked 网络</td>
+<td style="text-align:center">采用网络模式</td>
+<td style="text-align:center">浅层，深层</td>
+<td style="text-align:center">Perceptron 感知机，CNN 卷积神经网络</td>
+</tr>
+<tr>
+<td style="text-align:center">Probabilistic 概率</td>
+<td style="text-align:center">采用概率模式来表示随机变量之间的条件相关性</td>
+<td style="text-align:center">Bayes贝叶斯，Generative 生成，Statistic 统计</td>
+<td style="text-align:center">贝叶斯网络，概率规划，线性回归</td>
+</tr>
+</tbody>
+</table>
+<h3>9.5 Applications and Terminologies</h3>
+<ul>
+<li>应用领域</li>
+<li>样本</li>
+<li>特征
+<ul>
+<li>手工式特征：SIFT,HOG,SURF,LBP,GLOH,LESH,CENTRIST</li>
+<li>学习式特征：CNN
+<ul>
+<li>特征学习也被称为表示学习</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>标记</li>
+<li>训练样本</li>
+<li>验证样本</li>
+<li>测试样本</li>
+<li>损失函数</li>
+<li>假设集</li>
+<li>抽象</li>
+<li>泛化</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/07/人工智能原理-Part-IV-Planning-Ch8-Classic-and-Real-world-Planning/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -4919,446 +5326,6 @@ $$</p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/01/近世代数-1-1-若干基本概念/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/01/近世代数-1-1-若干基本概念/" itemprop="url">近世代数 1.1 若干基本概念</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-01T22:40:35+08:00">
-                2019-02-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/近世代数/" itemprop="url" rel="index">
-                    <span itemprop="name">近世代数</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/02/01/近世代数-1-1-若干基本概念/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/02/01/近世代数-1-1-若干基本概念/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2>1.1 若干基本概念</h2>
-<h3>良序定理</h3>
-<ul>
-<li>
-<p>最小数原理，良序原理，$Well-Ordering Principle$</p>
-<blockquote>
-<p>集合 $\mathbb{Z}^+$ 的每一个非空子集都有一个最小元素。</p>
-</blockquote>
-</li>
-</ul>
-<h3>数学归纳法</h3>
-<ul>
-<li>
-<p>第一数学归纳法</p>
-<blockquote>
-<p>设 $P(n)$ 是关于正整数 $n$ 的一个命题，如果下面的两个事实成立：</p>
-<p>（1）$P(1)$ 是真的；</p>
-<p>（2）对于每一个正整数 $k$，如果 $P(k)$ 是真的，那么 $P(k+1)$ 也是真的。</p>
-<p>在这种情况下，我们就能够得出结论：对于所有的正整数 $n$，$P(n)$ 都是真的。</p>
-</blockquote>
-<blockquote>
-<p>证明：用反证法。假如结论不成立，即集合 $\mathbb{Z_1}$ $={n|n\in \mathbb{N},P(n)不真}$ 不为空集。再由良序原理，非空集合中必定有一个最小元素，设 $m$ 为 $\mathbb{Z_1}$ 中的最小元素，则有：
-$$
-m &gt; 1, P(m)不真，P(m-1)为真
-$$
-$P(m-1)为真$，则 $m-1\ge 1$ ，推出$P(m)为真$ ，矛盾！从而 $\mathbb{Z_1}=\varnothing$ ，即原结论成立。</p>
-</blockquote>
-</li>
-<li>
-<p>第二数学归纳法</p>
-<blockquote>
-<p>设 $P(n)$ 是关于正整数 $n$ 的一个命题，如果下面的两个事实成立：</p>
-<p>（1）$P(1)$ 是真的；</p>
-<p>（2）对于每一个正整数 $m$，如果对于所有正整数 $k\lt m$，$P(k)$ 是真的，那么 $P(m)$ 也是真的。</p>
-<p>在这种情况下，我们就能够得出结论：对于所有的正整数 $n$，$P(n)$ 都是真的。</p>
-</blockquote>
-</li>
-<li>
-<p>归纳法的练习</p>
-<blockquote>
-<p>the Fibonacci sequence $f_1,f_2,f_3,...$ is defined as follows:
-$$
-f_1 = f_2 = 1, f_n = f_{n-1} + f_{n-2}\ for\ all\ a\ge 3
-$$
-Prove that $f_{5k}$ is divisible by 5 for every $k\ge 1$ , that is, 5 divides every 5th member of the sequence.</p>
-</blockquote>
-<blockquote>
-<p>证明：采用第一数学归纳法。先罗列前几项：$1,1,2,3,5,8,13,21,...$ 发现 $5|f_5$ ，设 $5|f_{5m}$ ，由：
-$$
-\begin{align*}
-f_{5m+5} &amp;= f_{5m+4}+f_{5m+3}\
-&amp;= 2f_{5m+3}+f_{5m+2}\
-&amp;= 3f_{5m+2}+2f_{5m+1}\
-&amp;= 5f_{5m+1}+3f_{5m}
-\end{align*}
-$$
-可得 $5|f_{5(m+1)}$ ，由第一数学归纳法可得 $\forall m\ge 1, 5|f_{5m}$ 。</p>
-</blockquote>
-</li>
-<li>
-<p>错误的证明举例</p>
-<blockquote>
-<p>证明所有的马都有同样的颜色</p>
-</blockquote>
-<blockquote>
-<p>可以对比参考<a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-042j-mathematics-for-computer-science-spring-2015/lecture-slides/MIT6_042JS16_BogusInductn.pdf" target="_blank" rel="noopener">MIT6.042 Bogus Induction</a> 。</p>
-<p>显然$P(1)$ 是真的。假设 $P(m)$ 是真的，我们来证明 $P(m+1)$ 也是真的。设 $S$ 是 $m+1$ 匹马组成的集合，$S={h_1,h_2,...,h_{m+1} }$ ，因为 $h_1,h_2,...,h_m$ 是 $m$ 匹马，所以由于 $P(m)$ 成立，$h_1,h_2,...,h_m$ 具有相同的颜色，同理由于 $h_2,h_3,...,h_{m+1}$ 也是 $m$ 匹马，所以 $h_2,h_3,...,h_{m+1}$ 也具有同样的颜色。从而所有的 $m+1$ 匹马都具有同样的颜色。</p>
-<p>哪里出了问题？$P(n)\rightarrow P(n+1)$ 出了问题，因为在 $n=1$ 的时候并没有中间地带的马！所以 $n=1$ 和 $n\not= 1$ 是两种不同的情况！</p>
-</blockquote>
-</li>
-</ul>
-<h3>$Cayley$ 乘法表</h3>
-<ul>
-<li>
-<p>基本概念回顾：<a href="https://zh.wikipedia.org/wiki/%E6%98%A0%E5%B0%84" target="_blank" rel="noopener">映射</a>，函数，变换，泛函数</p>
-<blockquote>
-<p>映射：设 $\mathbb{A},\mathbb{B}$ 为两个非空集合，若对 $\mathbb{A}$ 中的任一元素 $x$ ，依照某种规律 $f$ ，恒有 $\mathbb{B}$ 中的唯一确定的元素 $y$ 与之对应，则称 $f$ 为从 $\mathbb{A}$ 到 $\mathbb{B}$ 的映射。</p>
-<p>函数：一种特殊的映射，要求集合中的元素必须是数。</p>
-<p>变换：$\mathbb{A}$ 上的变换即为 $\mathbb{A}$ 到 $\mathbb{A}$ 的映射。</p>
-<p>泛函数：是从由函数组成的向量空间到实数的一个映射。</p>
-</blockquote>
-</li>
-<li>
-<p>定义 1.1</p>
-<blockquote>
-<p>设 $X$ 是一个集合，一个从 $X\times X$ 到 $X$ 的一个映射 $\varphi$ 称为 $X$ 上的一个二元代数运算。</p>
-</blockquote>
-<blockquote>
-<p>举例：$\varphi: \mathbb{X^2}\rightarrow \mathbb{X}$为 $\mathbb{X}$ 上的二元代数运算。</p>
-<p>$\mathbb{X}={a,b}$</p>
-<p>$\mathbb{X^2}={(a,a),(a,b),(b,a),(b,b)}$</p>
-<p>$\varphi (a,a)=a,...\varphi (b,b)=a$</p>
-</blockquote>
-</li>
-<li>
-<p>$Cayley$ 乘法表：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center"></th>
-<th style="text-align:center"></th>
-<th style="text-align:center"></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">$\varphi$</td>
-<td style="text-align:center">$a$</td>
-<td style="text-align:center">$b$</td>
-</tr>
-<tr>
-<td style="text-align:center">$a$</td>
-<td style="text-align:center">$a$</td>
-<td style="text-align:center">$b$</td>
-</tr>
-<tr>
-<td style="text-align:center">$b$</td>
-<td style="text-align:center">$b$</td>
-<td style="text-align:center">$a$</td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>二元代数运算的表示，前缀表示与中缀表示</p>
-</li>
-</ul>
-<h3>一元和多元代数运算</h3>
-<ul>
-<li>
-<p>定义 1.2</p>
-<blockquote>
-<p>一个从集合 $\mathbb{X}$ 到集合 $\mathbb{Y}$ 的映射称为 $\mathbb{X}$ 到 $\mathbb{Y}$ 的一个一元代数运算。当 $\mathbb{X}=\mathbb{Y}$ 时，称此一元代数运算为 $\mathbb{X}$ 上的一元代数运算。</p>
-</blockquote>
-</li>
-<li>
-<p>$\mathbb{X}$ 上的一元二元代数运算对于运算是封闭的。（说到代数运算一定是封闭的）</p>
-</li>
-</ul>
-<h3>代数运算的结合律和交换律</h3>
-<ul>
-<li>
-<p>定义 1.3</p>
-<blockquote>
-<p>设“$\circ$”是 $\mathbb{X}$ 上的二元代数运算，如果对于 $\forall a, b, c \in \mathbb{X}$ 恒有
-$$
-(a\circ b)\circ c = a\circ (b\circ c)
-$$
-则称二元代数运算“$\circ $”满足结合律。如果对于 $\forall a,b\in \mathbb{X}$，恒有
-$$
-(a\circ b) = (b\circ a)
-$$
-则称二元代数运算“$\circ  $” 满足交换律。</p>
-</blockquote>
-</li>
-<li>
-<p>满足交换律的话，在 $Cayley$ 乘法表上的体现是：乘法表按对角线对称。</p>
-</li>
-</ul>
-<h3>代数系</h3>
-<ul>
-<li>
-<p>定义 1.4</p>
-<blockquote>
-<p>设“$ \circ $”是非空集合 $\mathbb{S}$ 上的一个二元代数运算，则称二元组 $(\mathbb{S},\circ )$ 为一个（有一个代数运算的）代数系。</p>
-</blockquote>
-</li>
-<li>
-<p>定理 1.1</p>
-<blockquote>
-<p>设 $(\mathbb{S} , \circ )$ 为一个代数系。如果二元代数运算“$\circ $”满足结合律，则 $\forall a_i \in \mathbb{S}$，$i=1,2,...,n$ ，$a_1,a_2,...,a_n$ 的乘积仅与这 $n$ 个元素及其次序有关而唯一确定。</p>
-</blockquote>
-<blockquote>
-<p>证明：使用数学归纳法。当 $n=3$ 时，$(a_1\circ a_2)\circ a_3 = a_1(a_2\circ a_3)$ ，对于 $1\le k\lt n$，
-$$
-\begin{align*}
-&amp; (a_1\circ a_2\circ ...\circ a_k)\circ (a_{k+1}\circ ... \circ a_n)\
-=&amp;(a_1\circ ...\circ a_k)\circ((a_{k+1}\circ ...a_{n-1})\circ a_n)\
-=&amp;((a_1\circ ...\circ a_k)\circ (a_{k+1}\circ ...\circ a_{n-1}))\circ a_n \ （归纳假设）\
-=&amp;(a_1\circ a_2\circ ...\circ a_{n-1})\circ a_n
-\end{align*}
-$$</p>
-</blockquote>
-</li>
-<li>
-<p>定理 1.2</p>
-<blockquote>
-<p>设 $(\mathbb{S} , \circ )$ 为一个代数系。如果二元代数运算“$ \circ $”满足结合律和交换律，则 $\forall a_i \in \mathbb{S}, i=1,2,...,n$，$a_1,a_2,...,a_n$ 的乘积仅与这 $n$ 个元素有关而与它们的次序无关。</p>
-</blockquote>
-</li>
-</ul>
-<h3>两个代数运算间的分配律</h3>
-<ul>
-<li>
-<p>定义 1.5</p>
-<blockquote>
-<p>设 $(\mathbb{S}, \circ , +)$ 是具有两个代数运算“ $\circ$” 和“$+$”的代数系。 如果对于 $\forall a,b,c \in \mathbb{S}$ 恒有
-$$
-a\circ (b+c) = a\circ b+a\circ c
-$$
-则称“$\circ$”对“$+$”满足左分配律。如果对于 $\forall a,b,c\in \mathbb{S}$，总有
-$$
-(b+c)\circ a = b\circ a + c\circ a
-$$
-则称“$\circ$”对“$+$”满足右分配律。</p>
-</blockquote>
-</li>
-<li>
-<p>定理 1.3</p>
-<blockquote>
-<p>$(\mathbb{S},\circ ,+)$ 是具有两个代数运算“$\circ$”和“$+$”的代数系。如果“$+$”满足结合律，“$\circ$”对“$+$”满足左（右）分配律，则 $\forall a, a_i \in \mathbb{S},$ $i=1,2,...,n$ ，我们有
-$$
-a\circ (a_1+a_2+...+a_n)=(a\circ a_1)+(a\circ a_2)+...+(a\circ a_n)\
-(a_1+a_2+...+a_n)\circ a = (a_1\circ a)+(a_2\circ a)+...+(a_n\circ a)
-$$</p>
-</blockquote>
-</li>
-</ul>
-<h3>幺元（单位元）</h3>
-<ul>
-<li>
-<p>定义 1.6</p>
-<blockquote>
-<p>设 $(\mathbb{S}, \circ )$ 是以恶搞代数系，如果存在一个元素 $a_l\in \mathbb{S}$ ，使得 $\forall a\in \mathbb{S}$ 都有
-$$
-a_l\circ a=a
-$$
-则称 $a_l$ 为乘法“$\circ$”的左单位元素（左幺元）。如果存在一个元素 $a_r\in \mathbb{S}$ ，使得 $\forall a\in \mathbb{S}$ 都有
-$$
-a\circ a_r = a
-$$
-则称 $a_r$ 为乘法“$\circ$”的右单位元素（右幺元）。如果存在一个元素 $e\in \mathbb{S}$，使得 $\forall a\in \mathbb{S}$ 都有
-$$
-e\circ a = a\circ e = a
-$$
-则称 $e$ 为乘法“$\circ$”的单位元素（幺元）。</p>
-</blockquote>
-</li>
-<li>
-<p>定理 1.4</p>
-<blockquote>
-<p>$(S, \circ)$ 是一个代数系。如果二元代数运算“$\circ$”既有左单位元素 $a_l$，又有右单元元素 $a_r$ ，则 $a_l = a_r$，从而有单位元素。</p>
-</blockquote>
-<blockquote>
-<p>证明：
-$$
-a_l\circ a = a\ \ \ \ \ \forall a\in S \
-a\circ a_r = a\ \ \ \ \ \forall a\in S \
-$$
-又：
-$$
-a_l\circ a_r = a_r \
-a_l = a_l\circ a_r \
-$$
-有：
-$$
-a_l = a_l\circ a_r = a_r
-$$</p>
-</blockquote>
-</li>
-</ul>
-<h3>零元</h3>
-<ul>
-<li>
-<p>定理 1.7</p>
-<blockquote>
-<p>设 $(\mathbb{S}, \circ)$ 是一个代数系，如果存在一个元素 $z\in \mathbb{S}$ ，使得 $\forall a\in \mathbb{S}$ 都有
-$$
-z\circ a = a\circ z = z
-$$
-则称 $z$ 为乘法“$\circ$”的零元素。</p>
-</blockquote>
-</li>
-<li>
-<p>同样可以定义左零元素和右零元素。</p>
-</li>
-</ul>
-<h3>一些记号</h3>
-<p>设 $(\mathbb{S}, \circ)$ 是一个具有二元代数运算“$\circ$”的代数系。$A,B \subseteq \mathbb{S}$，则定义
-$$
-A\circ B={a\circ b|a\in A,b\in B}
-$$
-也常把 $A\circ B$ 写成 $AB$ ，把 $a\circ b$ 写成 $ab$ 。</p>
-<p>当 $A = {a}$ 时，$AB={a}B$ ，简记为 $aB$。于是
-$$
-aB={a\circ b|b\in B}\
-Ba={b\circ a|b\in B}
-$$</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -5413,7 +5380,7 @@ $$</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">194</span>
+                  <span class="site-state-item-count">195</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

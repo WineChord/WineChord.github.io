@@ -296,6 +296,172 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/15/博客Win10本地配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/15/博客Win10本地配置/" itemprop="url">博客Win10本地配置+添加搜索和Disqus</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-15T21:31:10+08:00">
+                2019-01-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/15/博客Win10本地配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/01/15/博客Win10本地配置/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>大概2019.1.10左右的时候在电脑的SSD上装了一个Win10（顿时觉得这孩子寿命又长了两年）。需要重新配置一下本地运行blog的环境，故记录之。</p>
+<h2>安装Node.js</h2>
+<p><a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js</a></p>
+<h2>安装git</h2>
+<p><a href="http://git-scm.com/download/" target="_blank" rel="noopener">http://git-scm.com/download/</a></p>
+<h2>安装Hexo</h2>
+<p>在blog目录下右键：'Git Bash here'
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install -g hexo-cli</span></span><br></pre></td></tr></table></figure></p>
+<p>PS:执行上一步时出现了一个小插曲，显示了如下错误：
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">npm ERR! code ECONNRESET</span><br><span class="line">npm ERR! errno ECONNRESET</span><br><span class="line">npm ERR! network request to https://registry.npmjs.org/escape-string-regexp failed, reason: Client network socket disconnected before secure TLS connection was established</span><br><span class="line">npm ERR! network This is a problem related to network connectivity.</span><br><span class="line">npm ERR! network In most cases you are behind a proxy or have bad network settings.</span><br><span class="line">npm ERR! network</span><br><span class="line">npm ERR! network If you are behind a proxy, please make sure that the</span><br><span class="line">npm ERR! network 'proxy' config is set properly.  See: 'npm help config'</span><br><span class="line"></span><br><span class="line">npm ERR! A complete log of this run can be found in:</span><br><span class="line">npm ERR!     C:\Users\wine&amp;chord\AppData\Roaming\npm-cache\_logs\2019-01-15T13_08_57_636Z-debug.log</span><br></pre></td></tr></table></figure></p>
+<p>解决方法：换成淘宝的npm源。<a href="https://www.oschina.net/question/2443995_2155065" target="_blank" rel="noopener">参考资料</a>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm config <span class="built_in">set</span> registry <span class="string">"https://registry.npm.taobao.org"</span></span></span><br></pre></td></tr></table></figure></p>
+<h2>常用命令</h2>
+<p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo g <span class="comment"># 生成静态文件</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo s <span class="comment"># 启动本地服务器</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo d <span class="comment"># 部署远端服务器</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo d -g <span class="comment"># 生成部署</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo s -g <span class="comment"># 生成预览</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo new <span class="string">"Post Name"</span> <span class="comment"># 新建一篇文章</span></span></span><br></pre></td></tr></table></figure></p>
+<p>2019.1.20 Update:</p>
+<h2>添加搜索功能</h2>
+<p><a href="https://juejin.im/post/5ad8b40c6fb9a07abd0d314c" target="_blank" rel="noopener">参考资料</a></p>
+<ul>
+<li>
+<p>Git Bash Here
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>blog/_config.yml中添加：
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">search：</span></span><br><span class="line">	<span class="attr">path:</span> <span class="string">search.xml</span></span><br><span class="line">	<span class="attr">field:</span> <span class="string">post</span></span><br><span class="line">	<span class="attr">format:</span> <span class="string">html</span></span><br><span class="line">	<span class="attr">limit:</span> <span class="number">10000</span></span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<p>以上每一个冒号后都有空格。</p>
+<ul>
+<li>blog/themes/next/_config.yml中修改
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">local_search:</span></span><br><span class="line"><span class="attr">    enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2>添加 DISQUS</h2>
+<p><a href="https://www.jianshu.com/p/d68de067ea74" target="_blank" rel="noopener">参考资料</a>
+先按Disqus网站步骤来，然后在<code>blog/themes/next/_config.yml</code>中进行修改：
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">disqus:</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  shortname:</span> <span class="string">wineandchord</span>    <span class="comment">#your name</span></span><br><span class="line"><span class="attr">  count:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/883-Projection-Area-of-3D-Shapes-Math-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1700,162 +1866,6 @@ $$
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/344-Reverse-String-String-6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/04/344-Reverse-String-String-6/" itemprop="url">344. Reverse String-String-6</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T19:50:57+08:00">
-                2018-11-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/04/344-Reverse-String-String-6/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/04/344-Reverse-String-String-6/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3>问题描述</h3>
-<p>翻转字符串</p>
-<h3>实现</h3>
-<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>, j = s.size() - <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>(i &lt; j)</span><br><span class="line">    swap(s[i++], s[j--]);</span><br><span class="line"><span class="keyword">return</span> s;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1910,7 +1920,7 @@ $$
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">194</span>
+                  <span class="site-state-item-count">195</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
