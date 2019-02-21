@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Wine&amp;Chord">
 <meta property="og:description" content="Probabilistic Information Retrieval   From boolean to ranked retrieval ... in two steps   Ranked retrieval   Why probabilities in IR?  Probabilities provide a principled foundation for uncertain reaso">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-21T14:24:39.950Z">
+<meta property="og:updated_time" content="2019-02-21T14:40:02.187Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Notes for CS 276 11 Probabilistic Information Retrieval">
 <meta name="twitter:description" content="Probabilistic Information Retrieval   From boolean to ranked retrieval ... in two steps   Ranked retrieval   Why probabilities in IR?  Probabilities provide a principled foundation for uncertain reaso">
@@ -466,20 +466,25 @@
 <li>$C'$ -- cost of retrieving a non-relevant document</li>
 </ul>
 </li>
-<li>Probability Ranking Principle: if
-<ul>
-<li>$C'\cdot p(R=0|d)-C\cdot p(R=1|d)\le C'\cdot p(R=0|d')-C\cdot p(R=1|d')$</li>
-<li>for all d' not yet retrieved, then $d$ is the next document to be retrieved</li>
+<li>Probability Ranking Principle: if</li>
 </ul>
+<p>$C'\cdot p(R=0|d)-C\cdot p(R=1|d)\le C'\cdot p(R=0|d')-C\cdot p(R=1|d')$</p>
+<ul>
+<li>
+<p>for all d' not yet retrieved, then $d$ is the next document to be retrieved</p>
 </li>
-<li>won't further consider cost/utility from now on</li>
-<li>How to compute all those probabilities?
+<li>
+<p>won't further consider cost/utility from now on</p>
+</li>
+<li>
+<p>How to compute all those probabilities?</p>
 <ul>
 <li>Do not know exact probabilities, have to use estimates</li>
 <li>Binary Independence Model (BIM) -- which we discuss next -- is the simplest model</li>
 </ul>
 </li>
-<li>Questionable assumptions
+<li>
+<p>Questionable assumptions</p>
 <ul>
 <li>&quot;Relevance&quot; of each document is independent of relevance of other documents
 <ul>
@@ -553,7 +558,7 @@
 <li>
 <p>Will use odds and Bayes' Rule
 $$
-O(R|q,\vec{x}) =\frac{p(R=1|q,\vec{x})}{p(R=0|q,\vec{x})}=\frac{\frac{p(R=1|q)p(\vec{x}|R=1,q)}{p(\vec{x}|q)}}{\frac{p(R=0|q)p(\vec{x}|R=0,q)}{p(\vec{x}|q)}}\
+O(R|q,\vec{x}) =\frac{p(R=1|q,\vec{x})}{p(R=0|q,\vec{x})}=\frac{\frac{p(R=1|q)p(\vec{x}|R=1,q)}{p(\vec{x}|q)}}{\frac{p(R=0|q)p(\vec{x}|R=0,q)}{p(\vec{x}|q)}}\\
 = \frac{p(R=1|q)}{p(R=0|q)}\cdot \frac{p(\vec{x}|R=1,q)}{p(\vec{x}|R=0,q)}
 $$</p>
 <ul>
@@ -576,12 +581,12 @@ $$</p>
 <li>Assume, for all terms not occurring in the query ($q_i=0$) $p_i=r_i$</li>
 </ul>
 <p>$$
-O(R|q,\vec{x})=O(R|q)\cdot \prod_{x_i=1\q_i=1}\frac{p_i}{r_i}\cdot \prod_{x_i=0\q_i=1}\frac{(1-p_i)}{(1-r_i)}
+O(R|q,\vec{x})=O(R|q)\cdot \prod_{x_i=1\\q_i=1}\frac{p_i}{r_i}\cdot \prod_{x_i=0\\q_i=1}\frac{(1-p_i)}{(1-r_i)}
 $$</p>
 <p>(All matching terms $\cdot$ Non-matching query terms)
 $$
 \begin{align*}
-O(R|q,\vec{x})&amp;=O(R|q)\cdot \prod_{x_i=1\q_i=1}\frac{p_i}{r_i}\cdot \prod_{x_i=1\q_i=1}(\frac{1-r_i}{1-p_i}\cdot \frac{1-p_i}{1-r_i})\prod_{x_i=0\q_i=1}\frac{1-p_i}{1-r_i}\
+O(R|q,\vec{x})&amp;=O(R|q)\cdot \prod_{x_i=1\q_i=1}\frac{p_i}{r_i}\cdot \prod_{x_i=1\q_i=1}(\frac{1-r_i}{1-p_i}\cdot \frac{1-p_i}{1-r_i})\prod_{x_i=0\q_i=1}\frac{1-p_i}{1-r_i}\\
 &amp;=O(R|q)\cdot\prod_{x_i=q_i=1}\frac{p_i(1-r_i)}{r_i(1-p_i)}\cdot \prod_{q_i=1}\frac{1-p_i}{1-r_i}
 \end{align*}
 $$
