@@ -448,31 +448,51 @@
 <li>
 <p>Probability Ranking Principle</p>
 <ul>
-<li>Let $x$ represent a document in the collection</li>
-<li>Let $R$ represent <strong>relevance</strong> of a document w.r.t. given (fixed)</li>
-<li>query and let <strong>R=1</strong> represent relevant and <strong>R=0</strong> not relevant</li>
-<li>Need to find $p(R=1|x)$ -- probability that a document $x$ is relevant</li>
-<li>$p(R=1|x)=\frac{p(x|R=1)p(R=1)}{p(x)}$</li>
-<li>$p(R=0|x)=\frac{p(x|R=0)p(R=0)}{p(x)}$</li>
-<li>$p(R=0|x)+p(R=1|x)=1$</li>
-<li>Simple case: no selection costs or other utility concerns that would differentially weight errors</li>
-<li>PRP in action: Rank all documents by $p(R=1|x)$</li>
-<li>Theorem: Using the PRP is optimal, in that it minimizes the loss(Bayes risk) under 1/0 loss
+<li>
+<p>Let $x$ represent a document in the collection</p>
+</li>
+<li>
+<p>Let $R$ represent <strong>relevance</strong> of a document w.r.t. given (fixed)</p>
+</li>
+<li>
+<p>query and let <strong>R=1</strong> represent relevant and <strong>R=0</strong> not relevant</p>
+</li>
+<li>
+<p>Need to find $p(R=1|x)$ -- probability that a document $x$ is relevant</p>
+</li>
+<li>
+<p>$p(R=1|x)=\frac{p(x|R=1)p(R=1)}{p(x)}$</p>
+</li>
+<li>
+<p>$p(R=0|x)=\frac{p(x|R=0)p(R=0)}{p(x)}$</p>
+</li>
+<li>
+<p>$p(R=0|x)+p(R=1|x)=1$</p>
+</li>
+<li>
+<p>Simple case: no selection costs or other utility concerns that would differentially weight errors</p>
+</li>
+<li>
+<p>PRP in action: Rank all documents by $p(R=1|x)$</p>
+</li>
+<li>
+<p>Theorem: Using the PRP is optimal, in that it minimizes the loss(Bayes risk) under 1/0 loss</p>
 <ul>
 <li>Provable if all probabilities correct</li>
 </ul>
 </li>
-<li>More complex case: retrieval costs
+<li>
+<p>More complex case: retrieval costs</p>
 <ul>
 <li>Let $d$ be a document</li>
 <li>$C$ -- cost of not retrieving a relevant document</li>
 <li>$C'$ -- cost of retrieving a non-relevant document</li>
 </ul>
 </li>
-<li>Probability Ranking Principle: if</li>
-</ul>
+<li>
+<p>Probability Ranking Principle: if</p>
 <p>$C'\cdot p(R=0|d)-C\cdot p(R=1|d)\le C'\cdot p(R=0|d')-C\cdot p(R=1|d')$</p>
-<ul>
+</li>
 <li>
 <p>for all d' not yet retrieved, then $d$ is the next document to be retrieved</p>
 </li>
