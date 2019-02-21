@@ -296,6 +296,203 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题10-斐波那契数列/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/31/剑指Offer-面试题10-斐波那契数列/" itemprop="url">剑指Offer 面试题10 斐波那契数列</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T12:10:25+08:00">
+                2018-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/剑指Offer/" itemprop="url" rel="index">
+                    <span itemprop="name">剑指Offer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/31/剑指Offer-面试题10-斐波那契数列/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/31/剑指Offer-面试题10-斐波那契数列/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2>题目一：斐波那契数列</h2>
+<h3>问题描述</h3>
+<p>求斐波那契数列的第 $n$ 项</p>
+<h3>思路</h3>
+<ul>
+<li>使用动态规划，自底向上求。时间复杂度 $O(n)$</li>
+<li>使用矩阵乘方公式法。时间复杂度 $O(logn)$
+$$
+\begin{bmatrix}
+f(n) &amp; f(n-1) \
+f(n-1) &amp; f(n-2) \
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 &amp; 1 \
+1 &amp; 0 \
+\end{bmatrix} ^{n-1} \tag{1}
+$$
+使用分而治之法求：
+$$
+a^n = \begin{cases}<br>
+a^{n/2} \cdot a^{n/2}  &amp; n 为偶数 \
+a^{(n-1)/2} \cdot a^{(n-1)/2} \cdot a &amp; n为奇数
+\end{cases}  \tag{2}
+$$</li>
+</ul>
+<h3>实现</h3>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// O(n) 自底向上</span></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">Fibonacci</span><span class="params">(<span class="keyword">unsigned</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> result[<span class="number">2</span>] = &#123;<span class="number">0</span>, <span class="number">1</span>&#125;;</span><br><span class="line">    <span class="keyword">if</span>(n &lt; <span class="number">2</span>) <span class="keyword">return</span> result[n];</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> f = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> g = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++)&#123;</span><br><span class="line">        g = g + f;</span><br><span class="line">        f = g - f;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> g;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// O(long) 矩阵乘法</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Matrix</span>&#123;</span></span><br><span class="line">    Matrix(<span class="keyword">long</span> <span class="keyword">long</span> m00=<span class="number">0</span>, <span class="keyword">long</span> <span class="keyword">long</span> m01=<span class="number">0</span>, <span class="keyword">long</span> <span class="keyword">long</span> m10=<span class="number">0</span>, <span class="keyword">long</span> <span class="keyword">long</span> m11=<span class="number">0</span>):m_00(m00),m_01(m01),m_10(m10),m_11(m11)&#123;&#125;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> m_00, m_01, m_10, m_11;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function">Matrix <span class="title">MMultiply</span><span class="params">(<span class="keyword">const</span> Matrix m1, Matrix m2)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Matrix(</span><br><span class="line">        matrix1.m_00 * matrix2.m_00 + matrix1.m_01 * matrix2.m_10,</span><br><span class="line">        matrix1.m_00 * matrix2.m_01 + matrix1.m_01 * matrix2.m_11,</span><br><span class="line">        matrix1.m_10 * matrix2.m_00 + matrix1.m_11 * matrix2.m_10,</span><br><span class="line">        matrix1.m_10 * matrix2.m_01 + matrix1.m_11 * matrix2.m_11);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">Matrix <span class="title">MPower</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    Matrix m;</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">1</span>) m = Matrix(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(n % <span class="number">2</span> == <span class="number">0</span>)&#123; <span class="comment">// n 为偶数</span></span><br><span class="line">        m = MPower(n / <span class="number">2</span>);</span><br><span class="line">        m = MMultiply(m, m);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(n % <span class="number">2</span> == <span class="number">1</span>)&#123;  <span class="comment">// n 为奇数</span></span><br><span class="line">        m = MPower((n - <span class="number">1</span>) / <span class="number">2</span>);</span><br><span class="line">        m = MMultiply(m, m);</span><br><span class="line">        m = MMultiply(m, Matrix(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> m;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">Fib</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> result[<span class="number">2</span>] = &#123;<span class="number">0</span>, <span class="number">1</span>&#125;;</span><br><span class="line">    <span class="keyword">if</span>(n &lt; <span class="number">2</span>) <span class="keyword">return</span> result[n];</span><br><span class="line">    Matrix m = MPower(n - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> m.m_00;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2>题目二：青蛙跳台阶问题</h2>
+<h3>问题描述</h3>
+<p>青蛙一次可以跳 $1$ 级或者 $2$ 级台阶，总共有 $n$ 级台阶，问总共有多少种跳法。</p>
+<h3>思路</h3>
+<p>$$
+frog(1) = 1
+$$
+$$
+frog(2) = 2
+$$
+$$
+frog(3) = frog(2) + frog(1)
+$$
+故有：
+$$
+frog(n) = fib(n+1)
+$$</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题9-用两个栈实现队列/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2029,212 +2226,6 @@ So that we can determine the left child and right child for root P. Use recursio
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/19/THUOJ-PA2-Train/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/19/THUOJ-PA2-Train/" itemprop="url">THUOJ PA2 Train</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-19T12:15:34+08:00">
-                2018-08-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/THUOJ/" itemprop="url" rel="index">
-                    <span itemprop="name">THUOJ</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/08/19/THUOJ-PA2-Train/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/08/19/THUOJ-PA2-Train/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1>Description</h1>
-<p>Figure below shows the structure of a station for train dispatching
-<img src="https://dsa.cs.tsinghua.edu.cn/oj/attachment/03bc/03bc70595803464554b5f6b69a21962beb038264.png" alt="Train">
-A is the entrance and B is the exit. S is the transfer end. All single tracks are one-way, which means that the train can enter the station from A to S, and pull out from S to B. Note that the overtaking is not allowed. Because of the limited capacity of S, no more than m compartments can reside at S simultaneously.
-Assume that a train consist of n compartments labeled {1,2,...,n}. A dispatcher wants to know whether these compartments can pull out at B in the order of {a1, a2, ... an}(a sequence). If can, in what order he should operate it?</p>
-<h1>Input</h1>
-<ul>
-<li>1st line: two integers n and m.</li>
-<li>2nd line: n integers separated by spaces, which is a permutation of {1,2,...,n}. This is a compartment sequence that is to be judged regarding the feasibility.</li>
-</ul>
-<h1>Output</h1>
-<ul>
-<li>If feasible, output the sequence of operations using &quot;push&quot; and &quot;pop&quot;</li>
-<li>If infeasible, output a &quot;No&quot;</li>
-</ul>
-<h1>Example 1</h1>
-<ul>
-<li>
-<p>Input
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5 2</span><br><span class="line">1 2 3 5 4</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>Output
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">push</span><br><span class="line">pop</span><br><span class="line">push</span><br><span class="line">pop</span><br><span class="line">push</span><br><span class="line">pop</span><br><span class="line">push</span><br><span class="line">push</span><br><span class="line">pop</span><br><span class="line">pop</span><br></pre></td></tr></table></figure></p>
-</li>
-</ul>
-<h1>Example 2</h1>
-<ul>
-<li>
-<p>Input
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5 5</span><br><span class="line">3 1 2 4 5</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>Output
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">No</span><br></pre></td></tr></table></figure></p>
-</li>
-</ul>
-<h1>Restrictions</h1>
-<ul>
-<li>1 &lt;= n &lt;= 1,600,000</li>
-<li>0 &lt;= m &lt;= 1,600,000</li>
-<li>Time: 2 s</li>
-<li>Memory: 256MB</li>
-</ul>
-<h1>Idea</h1>
-<p>Trivial thought is that enumerate all the possibilities and see whether the output sequence is possible. However time consumption will be unbearable.
-In my code I use one stack to simulate the stack permutation.</p>
-<ul>
-<li>given one number in the left list, check whether the top of the Stack equals it.</li>
-<li>If not, push another number into the stack until check succeed or stack is full or numbers are exhausted.</li>
-</ul>
-<p>Note that we only need to check whether the top of the stack equals to current number instead of check the whole stack.</p>
-<h1>Code</h1>
-<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Stack</span> &#123;</span>            <span class="comment">// form a stack</span></span><br><span class="line">	<span class="keyword">int</span>* nums;<span class="comment">// stack that implemented using array</span></span><br><span class="line">	<span class="keyword">int</span> size = <span class="number">-1</span>;      <span class="comment">// current size, also used to denote the top of the stack</span></span><br><span class="line">	<span class="keyword">int</span> maxSize = <span class="number">0</span>;    <span class="comment">// max size, defined by the input</span></span><br><span class="line">	Stack() &#123;&#125;   <span class="comment">// constructor</span></span><br><span class="line">	Stack(<span class="keyword">int</span> m) :maxSize(m) &#123;</span><br><span class="line">		nums = <span class="keyword">new</span> <span class="keyword">int</span>[m];</span><br><span class="line">	&#125;  <span class="comment">// initialized using the max size m.</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> </span>&#123; size = <span class="number">-1</span>; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> ((size + <span class="number">1</span>) &gt;= maxSize)</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			nums[++size] = num;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;  <span class="comment">// push operation</span></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span> </span>&#123; </span><br><span class="line">		<span class="keyword">if</span> (size &gt;= <span class="number">0</span>)</span><br><span class="line">			<span class="keyword">return</span> nums[size--];</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;  <span class="comment">// pop operation</span></span><br><span class="line">	<span class="keyword">int</span>&amp; <span class="keyword">operator</span>[](<span class="keyword">int</span> n) &#123; <span class="keyword">return</span> nums[n]; &#125; <span class="comment">// subscript operator overload</span></span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> e)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">bool</span> flag = <span class="literal">false</span>;</span><br><span class="line">		<span class="keyword">if</span> (e == nums[size])   <span class="comment">// only need to check the top</span></span><br><span class="line">			flag = <span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">return</span> flag;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">simulate the operation of stack permutation.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n, m;   <span class="comment">// m is the size of the stack</span></span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;m);</span><br><span class="line">	<span class="function">Stack <span class="title">S</span><span class="params">(m)</span></span>;  <span class="comment">// now S have the size m</span></span><br><span class="line">	<span class="keyword">int</span> opnum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">char</span> (*op)[<span class="number">6</span>] = <span class="keyword">new</span> <span class="keyword">char</span>[n * <span class="number">2</span>][<span class="number">6</span>];</span><br><span class="line">	<span class="keyword">bool</span> flag = <span class="literal">true</span>;  <span class="comment">// meas that the sequence is true</span></span><br><span class="line">	<span class="keyword">int</span> A = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;  <span class="comment">// for all elements in B</span></span><br><span class="line">		<span class="keyword">int</span> num;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;num);</span><br><span class="line">		<span class="keyword">while</span> (!S.find(num)) &#123; <span class="comment">// if S don't find B[i]</span></span><br><span class="line">			<span class="keyword">if</span> (A &lt;= n) &#123;   <span class="comment">// make sure A don't exceed n</span></span><br><span class="line">				<span class="keyword">if</span> (!S.push(++A)) &#123;<span class="comment">// A pops one element and S pushes one element, if stack full, push fails</span></span><br><span class="line">					flag = <span class="literal">false</span>;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span> <span class="built_in">sprintf</span>(*(op + (opnum++)), <span class="string">"push\0"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				flag = <span class="literal">false</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (!flag) <span class="keyword">break</span>;</span><br><span class="line">		<span class="comment">// now that S has the element that B needs</span></span><br><span class="line">		<span class="keyword">if</span> (S.pop() != num) &#123;</span><br><span class="line">			flag = <span class="literal">false</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="built_in">sprintf</span>(*(op + (opnum++)), <span class="string">"pop\0"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (flag) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; opnum; i++)&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%s"</span>, *(op + i));</span><br><span class="line">			<span class="keyword">if</span> (opnum - <span class="number">1</span> - i) <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"No"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2289,7 +2280,7 @@ In my code I use one stack to simulate the stack permutation.</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">197</span>
+                  <span class="site-state-item-count">198</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

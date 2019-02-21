@@ -296,6 +296,192 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/CS-276-索引压缩/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/21/CS-276-索引压缩/" itemprop="url">CS 276 索引压缩</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-21T10:03:23+08:00">
+                2019-02-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/21/CS-276-索引压缩/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/21/CS-276-索引压缩/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>当当当当（sol sol sol mi），这又是一个 in-class lab，主要研究对象是索引压缩，前置知识请看第五章笔记。</p>
+<p>参考资料：<a href="https://github.com/manning/CompressionAlgorithms" target="_blank" rel="noopener">starter code</a> , <a href="https://docs.google.com/spreadsheets/d/1znmKYjuj4hIehTrotqvkT_HLHTH6WSEEZ0ActjX1xo0/edit#gid=0" target="_blank" rel="noopener">class results</a></p>
+<p>两种基本的压缩方法：</p>
+<ol>
+<li>传统方法：bit-level such as Huffman, Golumb, Gamma, Delta, Rice ...</li>
+<li>对齐方法：&quot;Byte aligned&quot; or &quot;Word aligned&quot; encodings, where roughly there are stretches of bits that you can use directly as numbers, and you mainly access them by masking and shifting</li>
+</ol>
+<p>后一种打败了前一种方法，虽然不是压缩率最高的，但是后一种方法的解压速度更快，并且更容易实现</p>
+<p>在索引压缩中，考虑两个点：</p>
+<ol>
+<li>size</li>
+<li>speed</li>
+</ol>
+<p>在某种程度上，减小大小可以提高速度，但是不能太过，字节对齐所带来的速度提升要比它增加的大小要划算得多。</p>
+<p>这个 lab 主要关注于大小</p>
+<p>对于任何一个压缩方法，在中间都必须有一组字节，比如放在 <code>ByteArrayOutputStream</code> 或者 <code>byte[]</code> 中</p>
+<h3>bytes and bitwise operations</h3>
+<p>Java 支持十六进制和二进制表示：<code>0xFC</code> <code>0b1100</code></p>
+<p><code>int,short,byte</code> 分别为4，2，1个字节，可以使用强制类型转换：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">32</span>;</span><br><span class="line"><span class="keyword">byte</span> b = (<span class="keyword">byte</span>) a;</span><br></pre></td></tr></table></figure></p>
+<p><code>byte</code> 总为带符号的，若要用无符号：<code>Byte.toUnsignedInt(byte)</code></p>
+<p><code>&gt;&gt;&gt;</code> 表示右移，左填充0</p>
+<p>有用的类：</p>
+<ul>
+<li><code>BitSet</code></li>
+<li><code>byte[]</code></li>
+<li><code>ByteArrayOutputStream</code> 可以用 I/O 方法写数据，最后用 <code>toByteArray()</code> 来得到这些字节组</li>
+<li>与之相反的是 <code>ByteArrayInputStream</code> ，可以初始化一个 <code>byte[]</code> ，然后从中读取字节</li>
+</ul>
+<h3>Tasks to do</h3>
+<ul>
+<li>实现 <code>gapEncode,gapDecode</code></li>
+</ul>
+<p>思路：直接写，每次取差值就好了，解码的时候一个个加前面的就行（注意一下操作的顺序）</p>
+<ul>
+<li>实现 <code>VBEncodeInteger,VBDecodeInteger</code></li>
+</ul>
+<p>思路：参考 <em>IIR 5.3.1 Figure 5.8</em> 的伪代码进行实现 （记得抛出异常）</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// VBEncoderInteger</span></span><br><span class="line"><span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = numBytes; i &gt; <span class="number">0</span>; i--)</span><br><span class="line">        outputVBCode[i] = outputVBCode[i-<span class="number">1</span>];</span><br><span class="line">    outputVBCode[<span class="number">0</span>] = (<span class="keyword">byte</span>) Math.floorMod(gap, <span class="number">128</span>);</span><br><span class="line">    numBytes++;</span><br><span class="line">    <span class="keyword">if</span>(gap &lt; <span class="number">128</span>) <span class="keyword">break</span>;</span><br><span class="line">    gap &gt;&gt;&gt;= <span class="number">7</span>;</span><br><span class="line">&#125;</span><br><span class="line">outputVBCode[numBytes-<span class="number">1</span>] += <span class="number">128</span>;</span><br><span class="line"><span class="comment">// VBDecodeInteger</span></span><br><span class="line"><span class="keyword">int</span> i = startIndex; </span><br><span class="line"><span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>(i &gt;= inputVBCode.length) <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br><span class="line">    <span class="keyword">int</span> uintVB = Byte.toUnsignedInt(inputVBCode[i]);</span><br><span class="line">    <span class="keyword">if</span>(uintVB &lt; <span class="number">128</span>)</span><br><span class="line">        ans = (ans &lt;&lt; <span class="number">7</span>) + uintVB;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        ans = (ans &lt;&lt; <span class="number">7</span>) + (uintVB-<span class="number">128</span>);</span><br><span class="line">        numberEndIndex[<span class="number">0</span>] = ans;</span><br><span class="line">        numberEndIndex[<span class="number">1</span>] = i + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    i++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当间隔非常小时，这种方法非的空间比较多，比如对于 <code>the</code> 来说，每个文档都会出现，gap为1，但是每次都要用一个字节来存储。</p>
+<ul>
+<li>实现 <code>unaryEncodeInteger, unaryDecodeInteger</code>，提示：使用 <code>BitSet</code> 类</li>
+</ul>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">unaryEncodeInteger</span><span class="params">(<span class="keyword">int</span> number, BitSet outputUnaryCode, <span class="keyword">int</span> startIndex)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> nextIndex = startIndex;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> Fill in your code here</span></span><br><span class="line">    <span class="keyword">for</span>(; nextIndex &lt; startIndex + number; nextIndex++)</span><br><span class="line">        outputUnaryCode.set(nextIndex);</span><br><span class="line">    outputUnaryCode.set(nextIndex++, <span class="keyword">false</span>);</span><br><span class="line">    <span class="keyword">return</span> nextIndex;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">unaryDecodeInteger</span><span class="params">(BitSet inputUnaryCode, <span class="keyword">int</span> startIndex, <span class="keyword">int</span>[] numberEndIndex)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> Fill in your code here</span></span><br><span class="line">    <span class="keyword">int</span> nextIndex = startIndex;</span><br><span class="line">    <span class="keyword">int</span> number = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(inputUnaryCode.get(nextIndex++) != <span class="keyword">false</span>) &#123;</span><br><span class="line">        number++;</span><br><span class="line">    &#125;</span><br><span class="line">    numberEndIndex[<span class="number">0</span>] = number;</span><br><span class="line">    numberEndIndex[<span class="number">1</span>] = nextIndex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>实现 <code>gammaEncodeInteger, gammaDecodeInteger</code>，也是使用 <code>BitSet</code> 类，需要更多的操作</li>
+</ul>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">gammaEncodeInteger</span><span class="params">(<span class="keyword">int</span> number, BitSet outputGammaCode, <span class="keyword">int</span> startIndex)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> nextIndex = startIndex;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> Fill in your code here</span></span><br><span class="line">    <span class="keyword">if</span>(number &gt;= <span class="number">1</span>) &#123;	</span><br><span class="line">        BitSet offset = <span class="keyword">new</span> BitSet();</span><br><span class="line">        <span class="keyword">int</span> length = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(number != <span class="number">0</span>) &#123;</span><br><span class="line">            offset.set(length, (number%<span class="number">2</span>)==<span class="number">1</span>);</span><br><span class="line">            length++;</span><br><span class="line">            number &gt;&gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length-<span class="number">1</span>; i++)</span><br><span class="line">            outputGammaCode.set(nextIndex++, <span class="keyword">true</span>);</span><br><span class="line">        outputGammaCode.set(nextIndex++, <span class="keyword">false</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = length-<span class="number">2</span>; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">            outputGammaCode.set(nextIndex++, offset.get(i));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nextIndex;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">gammaDecodeInteger</span><span class="params">(BitSet inputGammaCode, <span class="keyword">int</span> startIndex, <span class="keyword">int</span>[] numberEndIndex)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> Fill in your code here</span></span><br><span class="line">    <span class="keyword">if</span>(inputGammaCode.length() == <span class="number">0</span>) &#123;</span><br><span class="line">        numberEndIndex[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        numberEndIndex[<span class="number">1</span>] = startIndex;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">int</span> nextIndex = startIndex;</span><br><span class="line">        <span class="keyword">int</span> length = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(inputGammaCode.get(nextIndex++) != <span class="keyword">false</span>) &#123;</span><br><span class="line">            length++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> num = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(length != <span class="number">0</span>) &#123;</span><br><span class="line">            length--;</span><br><span class="line">            <span class="keyword">int</span> numToAdd = inputGammaCode.get(nextIndex++) == <span class="keyword">true</span> ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">            num = (num&lt;&lt;<span class="number">1</span>) + numToAdd;	</span><br><span class="line">        &#125;</span><br><span class="line">        numberEndIndex[<span class="number">0</span>] = num;</span><br><span class="line">        numberEndIndex[<span class="number">1</span>] = nextIndex;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>try out Huffman or Golumb codes??</li>
+<li>Simple 9 implementation</li>
+</ul>
+<p>&quot;Simple-9&quot; 是一个 32-bit 字对齐的编码方式，它试图尽可能地将 gaps 塞到 32-bit 的字中，使用的方法是对每一个 gap 都分配相同数量的比特，并将 gap g 编码为二进制的 g-1 。</p>
+<p>最前面的 4 个比特是用来确定一个字中要编码多少个间隔的（表见<a href="https://github.com/manning/CompressionAlgorithms" target="_blank" rel="noopener">https://github.com/manning/CompressionAlgorithms</a>），后面的 28 个比特则是来表示这些间隔的</p>
+<p>比如，the postings list: 16384 16400 可以编码为：</p>
+<p>0111 01111111111111 00000000001111</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/Notes-for-CS-276-5-Index-Compression/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3177,281 +3363,6 @@ $$</p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/18/产生式系统要点总结/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/18/产生式系统要点总结/" itemprop="url">产生式系统要点总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-18T09:08:59+08:00">
-                2019-02-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/02/18/产生式系统要点总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/02/18/产生式系统要点总结/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/001.gif" alt=""></p>
-<ul>
-<li><strong>产生系统的三要素</strong>：综合数据库（Global Database），产生规则集（Set of Rules），控制系统（Control System）</li>
-<li>综合数据库：一个数据的集合，用于存放在推理过程中的已知条件，推导出的中间结果和最终结论等</li>
-<li>产生规则集：相当于知识库，IF 前件 THEN 后件，来表达求解问题需要的知识
-<ul>
-<li>规则可以表达求解问题时的客观规律，如“马走日，象走田”</li>
-<li>也可以是对求解问题有帮助的策略方面的知识，如“什么局面有利”</li>
-</ul>
-</li>
-<li>控制系统：又称控制策略或搜索策略，用于控制系统的运行，根据综合数据库当前数据来选择合适的规则，也称推理引擎</li>
-<li>（Production System）主要是使用类似于文法的规则，对符号串作替换运算</li>
-<li>产生式系统模拟了人类的思考过程</li>
-<li>特点：
-<ul>
-<li>数据驱动：系统在数据的变化下进行行为的变化</li>
-<li>独立性：三要素之间是相互独立的</li>
-</ul>
-</li>
-</ul>
-<hr>
-<p>八数码游戏（Eight-Puzzle）实例</p>
-<p><img src="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/t1%20(1).gif" alt=""></p>
-<ul>
-<li>
-<p>将问题的叙述转化为产生式系统的三个组成部分，称为问题的表示</p>
-</li>
-<li>
-<p>综合数据库：</p>
-<ul>
-<li>$(S_{ij})$，$1\le i,j\le 3$，$S_{ij}\in { 0,1,...,8}$且互不相等</li>
-<li>有 $9!=3628800$ 个状态，但实际问题空间只有 $\frac{1}{2}9!=181440$</li>
-</ul>
-</li>
-<li>
-<p>规则集合：</p>
-<ul>
-<li>模拟空格的上下左右四种走法</li>
-<li>左：$if\ j_0-1\ge 1\ then\ S_{i0j0}:=S_{i0(j0-1)},S_{i0(j0-1)}:=0 $</li>
-<li>上：$if\ i_0-1\ge 1\ then\ S_{i0j0}:=S_{(i0-1)j0},S_{(i0-1)j0}:=0 $</li>
-<li>右：$if\ j_0+1\le 3\ then\ S_{i0j0}:=S_{i0(j0+1)},S_{i0(j0+1)}:=0 $</li>
-<li>下：$if\ i_0+1\le 3\ then\ S_{i0j0}:=S_{(i0+1)j0},S_{(i0+1)j0}:=0 $</li>
-</ul>
-</li>
-<li>
-<p>搜索策略：</p>
-<ul>
-<li>是从规则集中选取规则并作用于状态的一种广义选取函数，以算法形式给出</li>
-<li>如何求解以及如何找具有最小耗散解属于搜索策略问题</li>
-</ul>
-</li>
-</ul>
-<hr>
-<p>传教士和野人问题（Missionaries and Cannibals）</p>
-<ul>
-<li>$N$ 个野人，$N$ 个传教士渡船，有一条船，可载 $k$ 人</li>
-<li>保证任何情况下河的两岸和船上的野人数 $\le$ 传教士数</li>
-<li>即 $M(传教士数)\ge C(野人数) 且 M+C\le k$</li>
-<li>隐含条件：某一岸只有野人，没有传教士也是合法的</li>
-<li>设 $N=3,k=2$：</li>
-</ul>
-<p><img src="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/t2%20(1).gif" alt=""></p>
-<ul>
-<li>
-<p>综合数据库：</p>
-<ul>
-<li>$(M_L,C_L,B_L)$</li>
-<li>$0\le M_L,C_L\le 3$，表示左岸的传教士和野人人数</li>
-<li>$B_L=1$ 表示船在左岸，$B_L=0$ 表示船在右岸</li>
-<li>则问题描述简化为 $(3,3,1)\rightarrow (0,0,0)$</li>
-</ul>
-</li>
-<li>
-<p>规则集合：</p>
-</li>
-</ul>
-<p><img src="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/012.gif" alt=""></p>
-<ul>
-<li>初始和目标状态：$(3,3,1),(0,0,0)$</li>
-<li>状态空间图：结点表示各种状态（综合数据库），结点间弧线表示操作（产生式规则）</li>
-</ul>
-<p><img src="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/m-c.gif" alt=""></p>
-<hr>
-<p>用产生式系统进行问题求解时的基本算法形式：</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DATA &lt;- 初始数据库</span><br><span class="line">until DATA 满足条件以前，do:</span><br><span class="line">	在规则集中，选某一天可以应用于 DATA 的规则 R</span><br><span class="line">	DATA &lt;- R 应用到 DATA 得到的结果</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>实际上就是一个搜索过程</li>
-</ul>
-<p>控制策略的分类：</p>
-<ul>
-<li>不可撤回方式（Irrevocable）：一条路到黑</li>
-<li>试探性方式（Tentative）
-<ul>
-<li>回溯（Backtracking）：不保留完整的搜索树，对当前路径进行修正</li>
-<li>图搜索（Graph-search）：记下完整搜索树</li>
-</ul>
-</li>
-</ul>
-<hr>
-<p>产生式系统的类型</p>
-<ul>
-<li>
-<p>正向</p>
-<ul>
-<li>即正推，称规则为 $F$ 规则（Forward?）</li>
-</ul>
-</li>
-<li>
-<p>逆向</p>
-<ul>
-<li>目标描述为初始综合数据库，称规则为 $B$ 规则（Backward?）</li>
-</ul>
-</li>
-<li>
-<p>双向</p>
-<ul>
-<li>正逆同时</li>
-<li>状态和目标描述合并构成综合数据库</li>
-<li>控制策略使用的结束条件要表示为状态描述部分与目标描述部分之间某种形式的匹配条件</li>
-</ul>
-</li>
-<li>
-<p>可交换的产生式系统</p>
-<ul>
-<li>规则的使用次序无关（如谓词逻辑的归结方法）</li>
-</ul>
-<ol>
-<li>可应用于D的规则集合，应用规则后生成的任何数据库，该规则集合还适用</li>
-<li>满足目标条件的某数据库D，应用规则后生成的数据库仍满足目标条件</li>
-<li>应用规则后得D'，当改变D中规则次序后，仍可求解</li>
-</ol>
-<ul>
-<li>求解时只需搜索任意一条路径，不可撤回的控制方式在此处适用</li>
-</ul>
-</li>
-<li>
-<p>可分解的产生式系统</p>
-<ul>
-<li>可分解为子问题进行求解</li>
-<li>子问题之间存在联系——表示为与或树（图）</li>
-</ul>
-</li>
-</ul>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> (1）DATA:＝初始数据库</span><br><span class="line">（2）&#123;Di&#125;:＝DATA的分解式；每个Di元素都看成单独的数据库</span><br><span class="line">（3）Until &#123;Di&#125;的所有元素都满足结束条件之前，do：</span><br><span class="line">（4）begin</span><br><span class="line">（5） 从&#123;Di&#125;中选一个不满足结束条件的D*</span><br><span class="line">（6） 从&#123;Di&#125;中删去D*</span><br><span class="line">（7） 在规则集中选择一条可应用于D*的规则R</span><br><span class="line">（8） D:＝R应用于D*的结果</span><br><span class="line">（9） &#123;di&#125;:＝D的分解式</span><br><span class="line">（10） 在&#123;Di&#125;上添加di</span><br><span class="line">（11）end</span><br></pre></td></tr></table></figure></p>
-<p><img src="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/1.15.gif" alt=""></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3506,7 +3417,7 @@ $$</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">197</span>
+                  <span class="site-state-item-count">198</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
