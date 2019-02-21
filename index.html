@@ -589,31 +589,24 @@ $$</p>
 <p>(All matching terms $\cdot$ Non-matching query terms)
 $$
 \begin{align*}
-O(R|q,\vec{x})&amp;=O(R|q)\cdot \prod_{x_i=1\q_i=1}\frac{p_i}{r_i}\cdot \prod_{x_i=1\q_i=1}(\frac{1-r_i}{1-p_i}\cdot \frac{1-p_i}{1-r_i})\prod_{x_i=0\q_i=1}\frac{1-p_i}{1-r_i}\\
+O(R|q,\vec{x})&amp;=O(R|q)\cdot \prod_{x_i=1\\q_i=1}\frac{p_i}{r_i}\cdot \prod_{x_i=1\\q_i=1}(\frac{1-r_i}{1-p_i}\cdot \frac{1-p_i}{1-r_i})\prod_{x_i=0\\q_i=1}\frac{1-p_i}{1-r_i}\\
 &amp;=O(R|q)\cdot\prod_{x_i=q_i=1}\frac{p_i(1-r_i)}{r_i(1-p_i)}\cdot \prod_{q_i=1}\frac{1-p_i}{1-r_i}
 \end{align*}
 $$
 (All matching terms $\cdot​$ All query terms)</p>
-<p>$\prod_{x_i=q_i=1}\frac{p_i(1-r_i)}{r_i(1-p_i)}$ is the only quantity to be estimated for rankings</p>
+<p>$\prod_{x_i=q_i=1}\frac{p_i(1-r_i)}{r_i(1-p_i)}​$ is the only quantity to be estimated for rankings</p>
 <p>Retrieval Status Value:
 $$
 RSV=log\prod_{x_i=q_i=1}\frac{p_i(1-r_i)}{r_i(1-p_i)}=\sum_{x_i=q_i=1}log\frac{pi(1-r_i)}{r_i(1-p_i)}
-$$</p>
-</li>
-</ul>
-</li>
-</ul>
-<pre><code>All boils down to computing RSV.
+$$
+All boils down to computing RSV.
 $$
 RSV=\sum_{x_i=q_i=1}c_i;\ c_i=log\frac{p_i(1-r_i)}{r_i(1-p_i)}
 $$
-The $c_i$ are log odds ratios
-
-They function as the term weights in this model
-
-$\rightarrow$ So, how do we compute $c_i$'s from our data?
-</code></pre>
-<ul>
+The $c_i$ are log odds ratios</p>
+<p>They function as the term weights in this model</p>
+<p>$\rightarrow$ So, how do we compute $c_i$'s from our data?</p>
+</li>
 <li>
 <p>Estimating RSV coefficients in theory</p>
 </li>
@@ -661,7 +654,7 @@ $$</p>
 c_i\approx K(M,n,S,s)=log\frac{s/(S-s)}{(n-s)/(N-n-S+s)}
 $$</p>
 <p>For now, assume no zero terms. Remember smoothing.</p>
-<ul>
+</li>
 <li>
 <p>Estimation -- key challenge</p>
 <ul>
