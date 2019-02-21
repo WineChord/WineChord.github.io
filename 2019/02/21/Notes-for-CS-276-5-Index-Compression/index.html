@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/blog-logo180.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog-logo32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog-logo16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="IR," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="主要讲索引压缩，先讲了一下数据集的规模信息，一些理论，然后分别讲了 &amp;quot;Dictionary compression&amp;quot; 和 &amp;quot;Postings compression&amp;quot;  Collection statistics in more detail (with RCV1) Dictionary compression Postings compression">
+<meta name="keywords" content="IR">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notes for CS 276 5 Index Compression">
+<meta property="og:url" content="http://yoursite.com/2019/02/21/Notes-for-CS-276-5-Index-Compression/index.html">
+<meta property="og:site_name" content="Wine&amp;Chord">
+<meta property="og:description" content="主要讲索引压缩，先讲了一下数据集的规模信息，一些理论，然后分别讲了 &amp;quot;Dictionary compression&amp;quot; 和 &amp;quot;Postings compression&amp;quot;  Collection statistics in more detail (with RCV1) Dictionary compression Postings compression">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-21T01:55:03.382Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Notes for CS 276 5 Index Compression">
+<meta name="twitter:description" content="主要讲索引压缩，先讲了一下数据集的规模信息，一些理论，然后分别讲了 &amp;quot;Dictionary compression&amp;quot; 和 &amp;quot;Postings compression&amp;quot;  Collection statistics in more detail (with RCV1) Dictionary compression Postings compression">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/21/Notes-for-CS-276-5-Index-Compression/"/>
+
+
+
+
+
+  <title>Notes for CS 276 5 Index Compression | Wine&Chord</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <!-- <a href="https://github.com/WineChord"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a> -->
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wine&Chord</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/Notes-for-CS-276-5-Index-Compression/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Notes for CS 276 5 Index Compression</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-21T08:15:55+08:00">
+                2019-02-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS-276-IR/" itemprop="url" rel="index">
+                    <span itemprop="name">CS 276 IR</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/21/Notes-for-CS-276-5-Index-Compression/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/21/Notes-for-CS-276-5-Index-Compression/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>主要讲索引压缩，先讲了一下数据集的规模信息，一些理论，然后分别讲了 &quot;Dictionary compression&quot; 和 &quot;Postings compression&quot;</p>
+<ul>
+<li>Collection statistics in more detail (with RCV1)</li>
+<li>Dictionary compression</li>
+<li>Postings compression</li>
+</ul>
+<hr>
+<ul>
+<li>Why compression?
+<ul>
+<li>save memory</li>
+<li>increase speed</li>
+<li>increase speed of data transfer from disk to memory</li>
+</ul>
+</li>
+<li>Why compression for inverted indexes?
+<ul>
+<li>Dictionary
+<ul>
+<li>small enough to keep in main memory</li>
+<li>so small that can keep some postings lists in memory too</li>
+</ul>
+</li>
+<li>Postings files
+<ul>
+<li>reduce disk space needed</li>
+<li>decrease time needed to read postings lists from disk</li>
+<li>large se keep a significant part of the postings in memory</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Lossless vs. lossy compression
+<ul>
+<li>lossless: mostly we do in IR</li>
+<li>lossy: case folding/stop words/stemming/number elimination</li>
+</ul>
+</li>
+<li>Vocabulary vs. collection size
+<ul>
+<li>How big is the term vocabulary?</li>
+<li>can assume an upper bound?</li>
+<li>In practice, the vocabulary will keep growing with the collection size</li>
+<li>Heaps' law: $M=kT^b$</li>
+<li>$M$ is the size of the vocabulary, $T$ is the number of tokens in the collection</li>
+<li>Typical values: $30\le k\le 100$ and $b\approx 0.5$</li>
+<li>In a log-log plot of vocabulary size M vs. T, Heaps' law predicts a line with slope about $\frac{1}{2}$
+<ul>
+<li>An empirical finding</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Zipf's law
+<ul>
+<li>Heaps' law gives the vocabulary size in collections</li>
+<li>also study the relative frequencies of terms</li>
+<li>In natural language, there are a few very frequent terms and very many very rare terms</li>
+<li>Zipf's law: The ith most frequent term has frequency proportional to 1/i</li>
+<li>$cf_i\propto \frac{1}{i} = \frac{K}{i}$ where $K$ is a normalizing constant</li>
+<li>$cf_i$ is collection frequency: the number of occurrences of the term $t_i$ in the collection</li>
+</ul>
+</li>
+<li>Zipf consequences
+<ul>
+<li>If the most frequent term (<code>the</code>) occurs $cf_1$ times
+<ul>
+<li>then the second most frequent term (<code>of</code>) occurs $cf_1/2$ times</li>
+<li>the third most frequent term (<code>and</code>) occurs $cf_1/3$ times</li>
+</ul>
+</li>
+<li>Equivalent: $cf_i=K/i$ where $K$ is a normalizing factor, so
+<ul>
+<li>$log(cf_i)=log(K)-log(i)$</li>
+<li>Linear relationship between $log(cf_i)$ and $log(i)$</li>
+</ul>
+</li>
+<li>Another power law relationship</li>
+</ul>
+</li>
+<li>Compression
+<ul>
+<li>Basic Boolean index only</li>
+<li>No study of positional indexes</li>
+<li>consider compression schemes</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>Dictionary Compression</h2>
+<ul>
+<li>Why compress the dictionary?
+<ul>
+<li>Search begins with the dictionary</li>
+<li>want to keep it in memory</li>
+<li>Memory foorprint competition with other applications</li>
+</ul>
+</li>
+<li>Dictionary storage -- first cut
+<ul>
+<li>Array of fixed-width entries
+<ul>
+<li>~400,000 terms;  28 bytes/term = 11.2 MB</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Fixed-width terms are wasteful</li>
+<li>Compressing the term list: Dictionary-as-a-String
+<ul>
+<li>Store dictionary as a (long) string of characters:
+<ul>
+<li>Pointer to next word shows end of current word</li>
+<li>Hope to save up to 60% of dictionary space</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Space for dictionary as a string
+<ul>
+<li>4 bytes per term for Freq.</li>
+<li>4 bytes per term for pointer to Postings</li>
+<li>3 bytes per term pointer</li>
+<li>Avg. 8 bytes per term in term string</li>
+<li>400K terms $\times$ 19 $\Rightarrow$ 7.6 MB (against 11.2 MB for fixed width)</li>
+</ul>
+</li>
+<li>Blocking
+<ul>
+<li>Store pointers to every kth term string</li>
+<li>Need to store term lengths (1 extra byte)</li>
+</ul>
+</li>
+<li>Dictionary search without blocking</li>
+<li>Dictionary search with blocking</li>
+<li>Front coding
+<ul>
+<li>Sorted words commonly have long common prefix -- store differences only</li>
+<li>$\color{red}{8}$$automata$$\color{red}{8}$$automate$$\color{red}{9}$$automatic$$\color{red}{10}$$automation$</li>
+<li>$\rightarrow$ $\color{red}{8}$$automat^*a$$\color{red}{1}$$\Diamond e$$\color{red}{2}$$\Diamond ic$$\color{red}{3}$$\Diamond ion$</li>
+<li>$^*$ encodes $automat$ $\color{red}{1}$ is the extra length beyond $automat$</li>
+</ul>
+</li>
+</ul>
+<h2>Postings Compression</h2>
+<ul>
+<li>Postings compression
+<ul>
+<li>Postings file is much larger than the dictionary, factor of at least 10.</li>
+<li>Key desideratum: store each posting compactly</li>
+<li>A posting for our purposes is a docID</li>
+<li>For Reuters (800,000 documents), we would use 32 bits per docID when using 4-byte integers</li>
+<li>Or, use $log_2800,000\approx 20$ bits per docID</li>
+<li>Our goal: use far fewer than 20 bits per docID</li>
+</ul>
+</li>
+<li>Postings: two conflicting forces
+<ul>
+<li>A term like <strong>arachnocentric</strong> occurs in maybe one doc out of a million -- we would like to store this posting using $log_21M$ ~ 20 bits</li>
+<li>A term like <strong>the</strong> occurs in virtually every doc, so 20 bits/posting is too expensive
+<ul>
+<li>Prefer 0/1 bitmap vector in this case</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Postings file entry
+<ul>
+<li>current: store the list of docs containing a term in increasing order of docID
+<ul>
+<li><strong>computer</strong>: 33,47,154,159,202...</li>
+</ul>
+</li>
+<li>Consequence: it suffices to store <em>gaps</em>
+<ul>
+<li>33,14,107,5,43</li>
+</ul>
+</li>
+<li>Hope: most gaps can be encoded/stored with far fewer than 20 bits</li>
+</ul>
+</li>
+<li>Variable length encoding
+<ul>
+<li>Aim:
+<ul>
+<li>For <strong>arachnocentric</strong>, we will use ~ 20 bits/gap entry</li>
+<li>For <strong>the</strong>, we will use ~ 1 bit/gap entry</li>
+</ul>
+</li>
+<li>If the average gap for a term is G, we want to use ~$log_2G$ bits/gap entry</li>
+<li>Key challenge: encode every integer (gap) with about as few bits as needed for that integer</li>
+<li>This requires <em>a variable length encoding</em></li>
+<li>Variable length codes achieve this by using short codes for small numbers</li>
+</ul>
+</li>
+<li>Variable Bytes (VB) codes
+<ul>
+<li>For a gap value G, we want to use close to the fewest bytes needed to hold $log_2G$ bits</li>
+<li>Begin with one byte to store G and dedicate 1 bit in it to be continuation bit c</li>
+<li>if G $\le 127$, binary-encode it in the 7 available bits and set c=1</li>
+<li>Else encode G's lower-order 7 bits and then use additional bytes to encode the higher order bits using the same algorithm</li>
+<li>At the end set the continuation bit of the last byte to 1 (c=1) -- and for the other bytes c=0</li>
+</ul>
+</li>
+<li>Other variable unit codes
+<ul>
+<li>Instead of bytes, we can also use a different &quot;unit of alignment&quot;: 32 bits (words), 16 bits, 4 bits (nibbles)</li>
+<li>Variable byte alignment wastes space if you have many small gaps -- nibbles do better in such cases</li>
+<li>Variable byte codes:
+<ul>
+<li>Used by many commerical/research systems</li>
+<li>Good low-tech blend of variable-length coding and sensitivity to computer memory alignment matches (vs. bit-level codes, which we look at next)</li>
+</ul>
+</li>
+<li>There is also recent work on word-aligned codes that pack a variable number of gaps into one word</li>
+</ul>
+</li>
+<li>Unary code
+<ul>
+<li>Represent n as n 1s with a final 0.</li>
+<li>e.g., unary code for 3 is 1110</li>
+</ul>
+</li>
+<li>Gamma codes
+<ul>
+<li>can compress better with bit-level codes
+<ul>
+<li>The Gamma code is the best known of these</li>
+</ul>
+</li>
+<li>Represent a gap G as a pair length and offset</li>
+<li><em>offset</em> is G in binary, with the leading bit cut off
+<ul>
+<li>e.g., 13 $\rightarrow$ 1101 $\rightarrow$ 101</li>
+</ul>
+</li>
+<li><em>length</em> is the length of offset
+<ul>
+<li>e.g., 13 (offset 101), this is 3</li>
+</ul>
+</li>
+<li>We encode <em>length</em> with unary code: 1110</li>
+<li>Gamma code of 13 is the concatenation of <em>length</em> and <em>offset</em>: 1110101</li>
+</ul>
+</li>
+<li>Gamma code properties
+<ul>
+<li>G is encoded using $2\lfloor logG\rfloor+1$ bits
+<ul>
+<li>Length of offset is $\lfloor logG\rfloor$ bits</li>
+<li>Length of length is $\lfloor logG\rfloor +1$ bits</li>
+</ul>
+</li>
+<li>All gamma codes have an odd number of bits</li>
+<li>Almost within a factor of 2 of best possible, $log_2G$</li>
+<li>Gamma code is uniquely prefix-decodable, like VB</li>
+<li>Gamma code can be used for any distribution</li>
+<li>Gamma code is parameter-free</li>
+</ul>
+</li>
+<li>Gamma seldom used in practice
+<ul>
+<li>Machines have word boundaries -- 8,16,32,64 bits
+<ul>
+<li>Operations that cross word boundaries are slower</li>
+</ul>
+</li>
+<li>Compressing and manipulating at the granularity of bits can be slow</li>
+<li>Variable byte encoding is aligned and thus potentially more efficient</li>
+<li>Regardless of efficiency, variable byte is conceptually simpler at little additional space cost</li>
+</ul>
+</li>
+<li>Index compression summary
+<ul>
+<li>We can now create an index for highly efficient Boolean retrieval that is very space efficient</li>
+<li>Only 4% of the total size of the collection</li>
+<li>Only 10-15% of the total size of the text in the collection</li>
+<li>However, we've ignored positional information</li>
+<li>Hence, space savings are less for indexes used in preactice
+<ul>
+<li>But techniques substantially the same</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>ref: <a href="http://web.stanford.edu/class/cs276/handouts/lecture5-compression.ppt" target="_blank" rel="noopener">Index Compression</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/IR/" rel="tag"># IR</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/20/Notes-for-CS-276-3-Dictionaries-and-tolerant-retrieval/" rel="next" title="Notes for CS 276 3 Dictionaries and tolerant retrieval">
+                <i class="fa fa-chevron-left"></i> Notes for CS 276 3 Dictionaries and tolerant retrieval
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/blog-logo.png"
+                alt="Wine&Chord" />
+            
+              <p class="site-author-name" itemprop="name">Wine&Chord</p>
+              <p class="site-description motion-element" itemprop="description">记录学习经历</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">197</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Dictionary Compression</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Postings Compression</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" >Wine&Chord</span>
+
+  
+</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://wineandchord.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/02/21/Notes-for-CS-276-5-Index-Compression/';
+          this.page.identifier = '2019/02/21/Notes-for-CS-276-5-Index-Compression/';
+          this.page.title = 'Notes for CS 276 5 Index Compression';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://wineandchord.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"all"},"extensions":["mediawiki-texvc.js"]}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- <script type="text/javascript" src="/js/src/love.js"></script>script> -->

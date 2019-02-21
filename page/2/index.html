@@ -296,6 +296,289 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/17/基于规则的正向演绎系统/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/17/基于规则的正向演绎系统/" itemprop="url">基于规则的正向演绎系统</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-17T16:42:13+08:00">
+                2019-02-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/17/基于规则的正向演绎系统/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/17/基于规则的正向演绎系统/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>归结方法的特点是简单，易于程序实现，不足是效率低，不直观，难以理解证明过程</li>
+<li>原因：归结方法将所有的谓词公式均化简为子句，致使一些信息得不到充分利用</li>
+<li>如：只用了蕴涵关系中的逻辑含义，忽略了其中xx推出xx的关系</li>
+<li>基于规则的演绎系统则使用了蕴涵关系作为规则，这类方法称为直接法</li>
+</ul>
+<hr>
+<ul>
+<li>表述问题的知识：规则和事实</li>
+<li>规则公式由蕴涵形给出的若干语句组成，表示某一特定领域中的一般知识，并可以当作产生式规则来使用</li>
+<li>事实公式表示该问题领域的专门知识</li>
+<li>演绎系统即为根据事实和规则来证明一个目标公式，属于直接法而不是反演系统</li>
+<li>不一定高效，但是易于理解</li>
+<li>强调用规则来演绎，故称为基于规则的演绎系统</li>
+</ul>
+<h3>事实表达式的与或形式及其表示</h3>
+<ul>
+<li>先将事实表达式表示为与或式</li>
+</ul>
+<ol>
+<li>将否定号只作用于原子公式，所有量词移左侧</li>
+<li>去掉存在量词，对受存在量词约束的变量进行 $Skolem$ 化</li>
+<li>变量换名，不同的主合取元有不同的变量名</li>
+<li>去全称</li>
+</ol>
+<ul>
+<li>事实表达式为前提条件，为初始数据库描述</li>
+<li>可以用与或图形式来表示，每一个节点代表一个子表达式</li>
+<li>图中的与或关系与式中的与或关系是相反的，见下图：</li>
+</ul>
+<p><img src="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/47004.gif" alt="事实表达式的与或树"></p>
+<ul>
+<li>可以得到对应的三个子句：
+<ul>
+<li>$Q(w,A)$</li>
+<li>~$R(v)\or$~$S(A,v)$</li>
+<li>~$P(v)\or$~$S(A,v)$</li>
+</ul>
+</li>
+<li>即为其解图集（结束在文字结点上的子图）</li>
+</ul>
+<h3>应用规则对与或图进行变换</h3>
+<ul>
+<li>为了讨论问题更加简单，对规则形式进行限制</li>
+<li>$L\rightarrow W$ 其中 $L$ 为单文字，$W$ 是任一化成与或形的公式</li>
+<li>该公式都假定有全称量词的约束，且变量已经换名</li>
+<li>即要根据一些步骤进行化简（消蕴涵，限否定，去存在，左全称，复蕴涵）</li>
+<li>而对于非单文字前项：$(L1\or L2)\rightarrow W$，化为$L1\rightarrow W$ 和 $L2\rightarrow W$</li>
+</ul>
+<p>演绎过程讨论：</p>
+<h4>命题逻辑的情况</h4>
+<ul>
+<li>设初始综合数据库的与或形表达式为 $((P\or Q)\and R)\or(S\and(T\or U))$</li>
+<li>规则为：$S\rightarrow (X\and Y)\or Z$</li>
+<li>将叶节点与 $S$ 用一个匹配弧连接起来，从而对与或图进行了更新，如下图：</li>
+</ul>
+<p><img src="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/47005.gif" alt="应用一条规则后的与或图"></p>
+<ul>
+<li>如此得到四个新的子句：
+<ul>
+<li>$X\or Z\or P\or Q​$</li>
+<li>$X\or Z\or R$</li>
+<li>$Y\or Z\or P\or Q$</li>
+<li>$Y\or Z\or R$</li>
+</ul>
+</li>
+<li>刚好是该规则所对应的子句参与归结所得到的四个归结式</li>
+<li>即不断地对与或图施以规则变换，直到找到一个解图，该解图中所有叶节点全部与目标公式中的文字相匹配</li>
+<li>当目标公式中有匹配时，通过匹配弧将目标文字添加到图上，匹配弧的后裔结点称为目标结点</li>
+<li>例：
+<ul>
+<li>事实表达式：$A\or B$</li>
+<li>规则集：$A\rightarrow C\or D$， $B\rightarrow E\or G$</li>
+<li>目标公式：$C\or G​$</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/47006.gif" alt="满足结束条件的与或图"></p>
+<h4>谓词逻辑的情况</h4>
+<ul>
+<li>与命题逻辑的区别：需要合一，还要检查同一个解图中的合一置换是否一致</li>
+<li>具有一致置换的解图称为一致解图</li>
+<li>对于目标表达式，用<strong>对偶形式</strong>进行 $Skolem$ 化，即消全称，省存在，改变名</li>
+<li>例：事实与或形表示 $P(x,y)\or(Q(x,A)\and R(B,y))$</li>
+<li>规则蕴涵式：$P(A,B)\rightarrow (S(A)\or X(B))$</li>
+<li>$P(x,y)$ 与 $P(A,B)$ 进行合一，置换为 ${ A/x,B/y }$，将该规则连接至图中</li>
+<li>若规则中含有变量，则对规则的结论部分也要施以该置换，如：</li>
+<li>事实与或形：$P(A,y)\or(Q(x,A)\and R(B,y))$</li>
+<li>规则蕴涵式：$P(z,B)\rightarrow (S(z)\or X(B))$</li>
+<li>则相应与或图如下：</li>
+</ul>
+<p><img src="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/47007.gif" alt=""></p>
+<ul>
+<li>
+<p>图中可以看出对规则的置换只作用于规则的结论部分</p>
+</li>
+<li>
+<p><strong>如何判断是否一致解</strong>：看该解图所涉及的若干个置换组成的置换集是否存在矛盾。当置换集没有矛盾存在时，该置换集是一致的，否则不一致。</p>
+</li>
+<li>
+<p>只有当解图所涉及的置换集一致时，解图才是一致的。</p>
+</li>
+<li>
+<p>置换集一致的充分必要条件是该置换集存在合一复合。</p>
+</li>
+<li>
+<p>置换集的合一复合也是一个置换，表示置换集中所有置换“综合”以后的结果</p>
+</li>
+<li>
+<p>如何求一个置换集的合一复合：</p>
+<ul>
+<li>先构造$U1,U2$ 两个表达式，其中 $U1$ 由置换集中所有被置换的变量组成，$U2$ 由与 $U1$ 中的变量所对应的置换项组成</li>
+<li>当两个表达式可以合一时，所对应的置换集是一致的（一致置换），其mgu即为合一复合</li>
+</ul>
+</li>
+<li>
+<p>合一复合可结合，可交换</p>
+</li>
+<li>
+<p>置换的一致集和置换的合一复合概念：</p>
+</li>
+<li>
+<p>设一个置换集 ${ u_1,u_2,...,u_n }$，其中 $u_i={ t_{i1}/v_{i1}...,t_{im}/v_{im} }$ 为置换对集合</p>
+</li>
+<li>
+<p>$U_1=(v_{11},...,v_{1m},...,v_{n1},...,v_{nm})​$</p>
+</li>
+<li>
+<p>$U_2=(t_{11},...,t_{1m},...,t_{n1},...,t_{nm})​$</p>
+</li>
+<li>
+<p>置换集为一致的当且仅当 $U1,U2$ 可合一。</p>
+</li>
+<li>
+<p>置换集的合一复合(unifying composition) $u$ 是 $U1,U2$ 的最一般的合一者</p>
+</li>
+</ul>
+<p>用一个例子来完整地说明正向产生式系统的演绎过程：</p>
+<ul>
+<li>Fido barks and bites, or Fido is not a dog.</li>
+<li>$F:$~$DOG(FIDO)\or(BARKS(FIDO)\and BITES(FIDO))$</li>
+<li>All terriers are dogs.</li>
+<li>$R1:$~$DOG(x)\rightarrow$~$TERRIER(x)$</li>
+<li>Anyone who barks is noisy.</li>
+<li>$R2:BARKS(y)\rightarrow NOISY(y)$</li>
+<li>证明目标：There exists someone who is not a terriers or who is noisy.</li>
+<li>~$TERRIER(z)\or NOISY(z)$</li>
+</ul>
+<p><img src="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/rl4.25.gif" alt=""></p>
+<ul>
+<li>图中结束在目标结点的一个一致解图，有置换集 ${ { FIDO/x} ,{ FIDO/y} ,{ FIDO/z} }​$ ，合一复合为 $u={ FIDO/x,FIDO/y,FIDO/z }​$</li>
+<li>根据这个一致解图，目标公式是事实和规则的逻辑推论，因而得到了证明</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/16/谓词演算及归结树/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2323,201 +2606,6 @@ $$</p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/09/CST2018-3-2-Not-Found/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/09/CST2018-3-2-Not-Found/" itemprop="url">CST2018 3-2 Not Found</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-09T09:35:39+08:00">
-                2019-02-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/THUOJ/" itemprop="url" rel="index">
-                    <span itemprop="name">THUOJ</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/02/09/CST2018-3-2-Not-Found/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/02/09/CST2018-3-2-Not-Found/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2>题目描述</h2>
-<ul>
-<li>给 01串 A，请输出一个最短的01串 B，使得 B 在 A 中从未出现过</li>
-<li>多解时输出字典序最小的</li>
-</ul>
-<h2>输入输出</h2>
-<ul>
-<li>输入：
-<ul>
-<li>共 $1$ 行：01串 A，输入文件将以换行符结尾</li>
-</ul>
-</li>
-<li>输出：
-<ul>
-<li>共 $1$ 行：01串 B，建议输出文件以换行符结尾</li>
-</ul>
-</li>
-</ul>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">10100011</span><br><span class="line">output:</span><br><span class="line">110</span><br></pre></td></tr></table></figure></p>
-<h2>限制</h2>
-<ul>
-<li>$1\le len(A) \le 16,777,216$</li>
-<li>1 sec</li>
-<li>20 MB</li>
-</ul>
-<h2>提示</h2>
-<ul>
-<li>
-<p>即使提交一个只包含空的 main 函数的程序，也会占用一定空间，大约为 12 MB。</p>
-</li>
-<li>
-<p>这题的编译流程做了特殊设置，提交 .c 文件也会占用跟 .cpp 相同的运行空间。</p>
-</li>
-<li>
-<p>[如何将输入数据存下来？]</p>
-</li>
-<li>
-<p>[答案的长度不会太大，可以枚举，但是之后如何判断？]</p>
-</li>
-<li>
-<p>[如何减少判断答案所需要的空间？]</p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2572,7 +2660,7 @@ $$</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">196</span>
+                  <span class="site-state-item-count">197</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

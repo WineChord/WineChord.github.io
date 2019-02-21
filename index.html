@@ -296,6 +296,445 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/Notes-for-CS-276-5-Index-Compression/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/21/Notes-for-CS-276-5-Index-Compression/" itemprop="url">Notes for CS 276 5 Index Compression</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-21T08:15:55+08:00">
+                2019-02-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS-276-IR/" itemprop="url" rel="index">
+                    <span itemprop="name">CS 276 IR</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/21/Notes-for-CS-276-5-Index-Compression/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/21/Notes-for-CS-276-5-Index-Compression/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>主要讲索引压缩，先讲了一下数据集的规模信息，一些理论，然后分别讲了 &quot;Dictionary compression&quot; 和 &quot;Postings compression&quot;</p>
+<ul>
+<li>Collection statistics in more detail (with RCV1)</li>
+<li>Dictionary compression</li>
+<li>Postings compression</li>
+</ul>
+<hr>
+<ul>
+<li>Why compression?
+<ul>
+<li>save memory</li>
+<li>increase speed</li>
+<li>increase speed of data transfer from disk to memory</li>
+</ul>
+</li>
+<li>Why compression for inverted indexes?
+<ul>
+<li>Dictionary
+<ul>
+<li>small enough to keep in main memory</li>
+<li>so small that can keep some postings lists in memory too</li>
+</ul>
+</li>
+<li>Postings files
+<ul>
+<li>reduce disk space needed</li>
+<li>decrease time needed to read postings lists from disk</li>
+<li>large se keep a significant part of the postings in memory</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Lossless vs. lossy compression
+<ul>
+<li>lossless: mostly we do in IR</li>
+<li>lossy: case folding/stop words/stemming/number elimination</li>
+</ul>
+</li>
+<li>Vocabulary vs. collection size
+<ul>
+<li>How big is the term vocabulary?</li>
+<li>can assume an upper bound?</li>
+<li>In practice, the vocabulary will keep growing with the collection size</li>
+<li>Heaps' law: $M=kT^b$</li>
+<li>$M$ is the size of the vocabulary, $T$ is the number of tokens in the collection</li>
+<li>Typical values: $30\le k\le 100$ and $b\approx 0.5$</li>
+<li>In a log-log plot of vocabulary size M vs. T, Heaps' law predicts a line with slope about $\frac{1}{2}$
+<ul>
+<li>An empirical finding</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Zipf's law
+<ul>
+<li>Heaps' law gives the vocabulary size in collections</li>
+<li>also study the relative frequencies of terms</li>
+<li>In natural language, there are a few very frequent terms and very many very rare terms</li>
+<li>Zipf's law: The ith most frequent term has frequency proportional to 1/i</li>
+<li>$cf_i\propto \frac{1}{i} = \frac{K}{i}$ where $K$ is a normalizing constant</li>
+<li>$cf_i$ is collection frequency: the number of occurrences of the term $t_i$ in the collection</li>
+</ul>
+</li>
+<li>Zipf consequences
+<ul>
+<li>If the most frequent term (<code>the</code>) occurs $cf_1$ times
+<ul>
+<li>then the second most frequent term (<code>of</code>) occurs $cf_1/2$ times</li>
+<li>the third most frequent term (<code>and</code>) occurs $cf_1/3$ times</li>
+</ul>
+</li>
+<li>Equivalent: $cf_i=K/i$ where $K$ is a normalizing factor, so
+<ul>
+<li>$log(cf_i)=log(K)-log(i)$</li>
+<li>Linear relationship between $log(cf_i)$ and $log(i)$</li>
+</ul>
+</li>
+<li>Another power law relationship</li>
+</ul>
+</li>
+<li>Compression
+<ul>
+<li>Basic Boolean index only</li>
+<li>No study of positional indexes</li>
+<li>consider compression schemes</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>Dictionary Compression</h2>
+<ul>
+<li>Why compress the dictionary?
+<ul>
+<li>Search begins with the dictionary</li>
+<li>want to keep it in memory</li>
+<li>Memory foorprint competition with other applications</li>
+</ul>
+</li>
+<li>Dictionary storage -- first cut
+<ul>
+<li>Array of fixed-width entries
+<ul>
+<li>~400,000 terms;  28 bytes/term = 11.2 MB</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Fixed-width terms are wasteful</li>
+<li>Compressing the term list: Dictionary-as-a-String
+<ul>
+<li>Store dictionary as a (long) string of characters:
+<ul>
+<li>Pointer to next word shows end of current word</li>
+<li>Hope to save up to 60% of dictionary space</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Space for dictionary as a string
+<ul>
+<li>4 bytes per term for Freq.</li>
+<li>4 bytes per term for pointer to Postings</li>
+<li>3 bytes per term pointer</li>
+<li>Avg. 8 bytes per term in term string</li>
+<li>400K terms $\times$ 19 $\Rightarrow$ 7.6 MB (against 11.2 MB for fixed width)</li>
+</ul>
+</li>
+<li>Blocking
+<ul>
+<li>Store pointers to every kth term string</li>
+<li>Need to store term lengths (1 extra byte)</li>
+</ul>
+</li>
+<li>Dictionary search without blocking</li>
+<li>Dictionary search with blocking</li>
+<li>Front coding
+<ul>
+<li>Sorted words commonly have long common prefix -- store differences only</li>
+<li>$\color{red}{8}$$automata$$\color{red}{8}$$automate$$\color{red}{9}$$automatic$$\color{red}{10}$$automation$</li>
+<li>$\rightarrow$ $\color{red}{8}$$automat^*a$$\color{red}{1}$$\Diamond e$$\color{red}{2}$$\Diamond ic$$\color{red}{3}$$\Diamond ion$</li>
+<li>$^*$ encodes $automat$ $\color{red}{1}$ is the extra length beyond $automat$</li>
+</ul>
+</li>
+</ul>
+<h2>Postings Compression</h2>
+<ul>
+<li>Postings compression
+<ul>
+<li>Postings file is much larger than the dictionary, factor of at least 10.</li>
+<li>Key desideratum: store each posting compactly</li>
+<li>A posting for our purposes is a docID</li>
+<li>For Reuters (800,000 documents), we would use 32 bits per docID when using 4-byte integers</li>
+<li>Or, use $log_2800,000\approx 20$ bits per docID</li>
+<li>Our goal: use far fewer than 20 bits per docID</li>
+</ul>
+</li>
+<li>Postings: two conflicting forces
+<ul>
+<li>A term like <strong>arachnocentric</strong> occurs in maybe one doc out of a million -- we would like to store this posting using $log_21M$ ~ 20 bits</li>
+<li>A term like <strong>the</strong> occurs in virtually every doc, so 20 bits/posting is too expensive
+<ul>
+<li>Prefer 0/1 bitmap vector in this case</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Postings file entry
+<ul>
+<li>current: store the list of docs containing a term in increasing order of docID
+<ul>
+<li><strong>computer</strong>: 33,47,154,159,202...</li>
+</ul>
+</li>
+<li>Consequence: it suffices to store <em>gaps</em>
+<ul>
+<li>33,14,107,5,43</li>
+</ul>
+</li>
+<li>Hope: most gaps can be encoded/stored with far fewer than 20 bits</li>
+</ul>
+</li>
+<li>Variable length encoding
+<ul>
+<li>Aim:
+<ul>
+<li>For <strong>arachnocentric</strong>, we will use ~ 20 bits/gap entry</li>
+<li>For <strong>the</strong>, we will use ~ 1 bit/gap entry</li>
+</ul>
+</li>
+<li>If the average gap for a term is G, we want to use ~$log_2G$ bits/gap entry</li>
+<li>Key challenge: encode every integer (gap) with about as few bits as needed for that integer</li>
+<li>This requires <em>a variable length encoding</em></li>
+<li>Variable length codes achieve this by using short codes for small numbers</li>
+</ul>
+</li>
+<li>Variable Bytes (VB) codes
+<ul>
+<li>For a gap value G, we want to use close to the fewest bytes needed to hold $log_2G$ bits</li>
+<li>Begin with one byte to store G and dedicate 1 bit in it to be continuation bit c</li>
+<li>if G $\le 127$, binary-encode it in the 7 available bits and set c=1</li>
+<li>Else encode G's lower-order 7 bits and then use additional bytes to encode the higher order bits using the same algorithm</li>
+<li>At the end set the continuation bit of the last byte to 1 (c=1) -- and for the other bytes c=0</li>
+</ul>
+</li>
+<li>Other variable unit codes
+<ul>
+<li>Instead of bytes, we can also use a different &quot;unit of alignment&quot;: 32 bits (words), 16 bits, 4 bits (nibbles)</li>
+<li>Variable byte alignment wastes space if you have many small gaps -- nibbles do better in such cases</li>
+<li>Variable byte codes:
+<ul>
+<li>Used by many commerical/research systems</li>
+<li>Good low-tech blend of variable-length coding and sensitivity to computer memory alignment matches (vs. bit-level codes, which we look at next)</li>
+</ul>
+</li>
+<li>There is also recent work on word-aligned codes that pack a variable number of gaps into one word</li>
+</ul>
+</li>
+<li>Unary code
+<ul>
+<li>Represent n as n 1s with a final 0.</li>
+<li>e.g., unary code for 3 is 1110</li>
+</ul>
+</li>
+<li>Gamma codes
+<ul>
+<li>can compress better with bit-level codes
+<ul>
+<li>The Gamma code is the best known of these</li>
+</ul>
+</li>
+<li>Represent a gap G as a pair length and offset</li>
+<li><em>offset</em> is G in binary, with the leading bit cut off
+<ul>
+<li>e.g., 13 $\rightarrow$ 1101 $\rightarrow$ 101</li>
+</ul>
+</li>
+<li><em>length</em> is the length of offset
+<ul>
+<li>e.g., 13 (offset 101), this is 3</li>
+</ul>
+</li>
+<li>We encode <em>length</em> with unary code: 1110</li>
+<li>Gamma code of 13 is the concatenation of <em>length</em> and <em>offset</em>: 1110101</li>
+</ul>
+</li>
+<li>Gamma code properties
+<ul>
+<li>G is encoded using $2\lfloor logG\rfloor+1$ bits
+<ul>
+<li>Length of offset is $\lfloor logG\rfloor$ bits</li>
+<li>Length of length is $\lfloor logG\rfloor +1$ bits</li>
+</ul>
+</li>
+<li>All gamma codes have an odd number of bits</li>
+<li>Almost within a factor of 2 of best possible, $log_2G$</li>
+<li>Gamma code is uniquely prefix-decodable, like VB</li>
+<li>Gamma code can be used for any distribution</li>
+<li>Gamma code is parameter-free</li>
+</ul>
+</li>
+<li>Gamma seldom used in practice
+<ul>
+<li>Machines have word boundaries -- 8,16,32,64 bits
+<ul>
+<li>Operations that cross word boundaries are slower</li>
+</ul>
+</li>
+<li>Compressing and manipulating at the granularity of bits can be slow</li>
+<li>Variable byte encoding is aligned and thus potentially more efficient</li>
+<li>Regardless of efficiency, variable byte is conceptually simpler at little additional space cost</li>
+</ul>
+</li>
+<li>Index compression summary
+<ul>
+<li>We can now create an index for highly efficient Boolean retrieval that is very space efficient</li>
+<li>Only 4% of the total size of the collection</li>
+<li>Only 10-15% of the total size of the text in the collection</li>
+<li>However, we've ignored positional information</li>
+<li>Hence, space savings are less for indexes used in preactice
+<ul>
+<li>But techniques substantially the same</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>ref: <a href="http://web.stanford.edu/class/cs276/handouts/lecture5-compression.ppt" target="_blank" rel="noopener">Index Compression</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/Notes-for-CS-276-3-Dictionaries-and-tolerant-retrieval/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3013,289 +3452,6 @@ $$</p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/17/基于规则的正向演绎系统/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/17/基于规则的正向演绎系统/" itemprop="url">基于规则的正向演绎系统</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-17T16:42:13+08:00">
-                2019-02-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/02/17/基于规则的正向演绎系统/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/02/17/基于规则的正向演绎系统/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>归结方法的特点是简单，易于程序实现，不足是效率低，不直观，难以理解证明过程</li>
-<li>原因：归结方法将所有的谓词公式均化简为子句，致使一些信息得不到充分利用</li>
-<li>如：只用了蕴涵关系中的逻辑含义，忽略了其中xx推出xx的关系</li>
-<li>基于规则的演绎系统则使用了蕴涵关系作为规则，这类方法称为直接法</li>
-</ul>
-<hr>
-<ul>
-<li>表述问题的知识：规则和事实</li>
-<li>规则公式由蕴涵形给出的若干语句组成，表示某一特定领域中的一般知识，并可以当作产生式规则来使用</li>
-<li>事实公式表示该问题领域的专门知识</li>
-<li>演绎系统即为根据事实和规则来证明一个目标公式，属于直接法而不是反演系统</li>
-<li>不一定高效，但是易于理解</li>
-<li>强调用规则来演绎，故称为基于规则的演绎系统</li>
-</ul>
-<h3>事实表达式的与或形式及其表示</h3>
-<ul>
-<li>先将事实表达式表示为与或式</li>
-</ul>
-<ol>
-<li>将否定号只作用于原子公式，所有量词移左侧</li>
-<li>去掉存在量词，对受存在量词约束的变量进行 $Skolem$ 化</li>
-<li>变量换名，不同的主合取元有不同的变量名</li>
-<li>去全称</li>
-</ol>
-<ul>
-<li>事实表达式为前提条件，为初始数据库描述</li>
-<li>可以用与或图形式来表示，每一个节点代表一个子表达式</li>
-<li>图中的与或关系与式中的与或关系是相反的，见下图：</li>
-</ul>
-<p><img src="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/47004.gif" alt="事实表达式的与或树"></p>
-<ul>
-<li>可以得到对应的三个子句：
-<ul>
-<li>$Q(w,A)$</li>
-<li>~$R(v)\or$~$S(A,v)$</li>
-<li>~$P(v)\or$~$S(A,v)$</li>
-</ul>
-</li>
-<li>即为其解图集（结束在文字结点上的子图）</li>
-</ul>
-<h3>应用规则对与或图进行变换</h3>
-<ul>
-<li>为了讨论问题更加简单，对规则形式进行限制</li>
-<li>$L\rightarrow W$ 其中 $L$ 为单文字，$W$ 是任一化成与或形的公式</li>
-<li>该公式都假定有全称量词的约束，且变量已经换名</li>
-<li>即要根据一些步骤进行化简（消蕴涵，限否定，去存在，左全称，复蕴涵）</li>
-<li>而对于非单文字前项：$(L1\or L2)\rightarrow W$，化为$L1\rightarrow W$ 和 $L2\rightarrow W$</li>
-</ul>
-<p>演绎过程讨论：</p>
-<h4>命题逻辑的情况</h4>
-<ul>
-<li>设初始综合数据库的与或形表达式为 $((P\or Q)\and R)\or(S\and(T\or U))$</li>
-<li>规则为：$S\rightarrow (X\and Y)\or Z$</li>
-<li>将叶节点与 $S$ 用一个匹配弧连接起来，从而对与或图进行了更新，如下图：</li>
-</ul>
-<p><img src="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/47005.gif" alt="应用一条规则后的与或图"></p>
-<ul>
-<li>如此得到四个新的子句：
-<ul>
-<li>$X\or Z\or P\or Q​$</li>
-<li>$X\or Z\or R$</li>
-<li>$Y\or Z\or P\or Q$</li>
-<li>$Y\or Z\or R$</li>
-</ul>
-</li>
-<li>刚好是该规则所对应的子句参与归结所得到的四个归结式</li>
-<li>即不断地对与或图施以规则变换，直到找到一个解图，该解图中所有叶节点全部与目标公式中的文字相匹配</li>
-<li>当目标公式中有匹配时，通过匹配弧将目标文字添加到图上，匹配弧的后裔结点称为目标结点</li>
-<li>例：
-<ul>
-<li>事实表达式：$A\or B$</li>
-<li>规则集：$A\rightarrow C\or D$， $B\rightarrow E\or G$</li>
-<li>目标公式：$C\or G​$</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/47006.gif" alt="满足结束条件的与或图"></p>
-<h4>谓词逻辑的情况</h4>
-<ul>
-<li>与命题逻辑的区别：需要合一，还要检查同一个解图中的合一置换是否一致</li>
-<li>具有一致置换的解图称为一致解图</li>
-<li>对于目标表达式，用<strong>对偶形式</strong>进行 $Skolem$ 化，即消全称，省存在，改变名</li>
-<li>例：事实与或形表示 $P(x,y)\or(Q(x,A)\and R(B,y))$</li>
-<li>规则蕴涵式：$P(A,B)\rightarrow (S(A)\or X(B))$</li>
-<li>$P(x,y)$ 与 $P(A,B)$ 进行合一，置换为 ${ A/x,B/y }$，将该规则连接至图中</li>
-<li>若规则中含有变量，则对规则的结论部分也要施以该置换，如：</li>
-<li>事实与或形：$P(A,y)\or(Q(x,A)\and R(B,y))$</li>
-<li>规则蕴涵式：$P(z,B)\rightarrow (S(z)\or X(B))$</li>
-<li>则相应与或图如下：</li>
-</ul>
-<p><img src="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/47007.gif" alt=""></p>
-<ul>
-<li>
-<p>图中可以看出对规则的置换只作用于规则的结论部分</p>
-</li>
-<li>
-<p><strong>如何判断是否一致解</strong>：看该解图所涉及的若干个置换组成的置换集是否存在矛盾。当置换集没有矛盾存在时，该置换集是一致的，否则不一致。</p>
-</li>
-<li>
-<p>只有当解图所涉及的置换集一致时，解图才是一致的。</p>
-</li>
-<li>
-<p>置换集一致的充分必要条件是该置换集存在合一复合。</p>
-</li>
-<li>
-<p>置换集的合一复合也是一个置换，表示置换集中所有置换“综合”以后的结果</p>
-</li>
-<li>
-<p>如何求一个置换集的合一复合：</p>
-<ul>
-<li>先构造$U1,U2$ 两个表达式，其中 $U1$ 由置换集中所有被置换的变量组成，$U2$ 由与 $U1$ 中的变量所对应的置换项组成</li>
-<li>当两个表达式可以合一时，所对应的置换集是一致的（一致置换），其mgu即为合一复合</li>
-</ul>
-</li>
-<li>
-<p>合一复合可结合，可交换</p>
-</li>
-<li>
-<p>置换的一致集和置换的合一复合概念：</p>
-</li>
-<li>
-<p>设一个置换集 ${ u_1,u_2,...,u_n }$，其中 $u_i={ t_{i1}/v_{i1}...,t_{im}/v_{im} }$ 为置换对集合</p>
-</li>
-<li>
-<p>$U_1=(v_{11},...,v_{1m},...,v_{n1},...,v_{nm})​$</p>
-</li>
-<li>
-<p>$U_2=(t_{11},...,t_{1m},...,t_{n1},...,t_{nm})​$</p>
-</li>
-<li>
-<p>置换集为一致的当且仅当 $U1,U2$ 可合一。</p>
-</li>
-<li>
-<p>置换集的合一复合(unifying composition) $u$ 是 $U1,U2$ 的最一般的合一者</p>
-</li>
-</ul>
-<p>用一个例子来完整地说明正向产生式系统的演绎过程：</p>
-<ul>
-<li>Fido barks and bites, or Fido is not a dog.</li>
-<li>$F:$~$DOG(FIDO)\or(BARKS(FIDO)\and BITES(FIDO))$</li>
-<li>All terriers are dogs.</li>
-<li>$R1:$~$DOG(x)\rightarrow$~$TERRIER(x)$</li>
-<li>Anyone who barks is noisy.</li>
-<li>$R2:BARKS(y)\rightarrow NOISY(y)$</li>
-<li>证明目标：There exists someone who is not a terriers or who is noisy.</li>
-<li>~$TERRIER(z)\or NOISY(z)$</li>
-</ul>
-<p><img src="https://github.com/WineChord/Blog-pic/raw/master/AI_intro/rl4.25.gif" alt=""></p>
-<ul>
-<li>图中结束在目标结点的一个一致解图，有置换集 ${ { FIDO/x} ,{ FIDO/y} ,{ FIDO/z} }​$ ，合一复合为 $u={ FIDO/x,FIDO/y,FIDO/z }​$</li>
-<li>根据这个一致解图，目标公式是事实和规则的逻辑推论，因而得到了证明</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3350,7 +3506,7 @@ $$</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">196</span>
+                  <span class="site-state-item-count">197</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

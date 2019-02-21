@@ -296,6 +296,185 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题9-用两个栈实现队列/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/31/剑指Offer-面试题9-用两个栈实现队列/" itemprop="url">剑指Offer 面试题9 用两个栈实现队列</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T11:47:16+08:00">
+                2018-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/剑指Offer/" itemprop="url" rel="index">
+                    <span itemprop="name">剑指Offer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/31/剑指Offer-面试题9-用两个栈实现队列/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/31/剑指Offer-面试题9-用两个栈实现队列/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1>用两个栈实现队列</h1>
+<h3>问题描述</h3>
+<p>用两个栈来实现队列，该队列的部分定义如下：
+请实现他的 <code>appendTail</code> 和 <code>deleteHead</code> 函数。
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="class"><span class="keyword">class</span> <span class="title">CQueue</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    CQueue(<span class="keyword">void</span>);</span><br><span class="line">    ~CQueue(<span class="keyword">void</span>);</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">appendTail</span><span class="params">(<span class="keyword">const</span> T&amp; node)</span></span>;</span><br><span class="line">    <span class="function">T <span class="title">deleteHead</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">stack</span>&lt;T&gt; stack1;</span><br><span class="line">    <span class="built_in">stack</span>&lt;T&gt; stack2;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3>思路</h3>
+<ul>
+<li>插入时直接压入栈 <code>stack1</code> 中。</li>
+<li>删除时：
+<ul>
+<li>若 <code>stack2</code> 为空，则将 <code>stack1</code> 中的元素依次弹出到 <code>stack2</code> 中。<code>stack2</code> 顶部元素即为要出队的元素。</li>
+<li>若 <code>stack2</code> 不为空，其顶部元素即为要出队元素。</li>
+</ul>
+</li>
+</ul>
+<h3>实现</h3>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">void</span> CQueue&lt;T&gt;::appendTail(<span class="keyword">const</span> T&amp; element)&#123;</span><br><span class="line">    stack1.push(element);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; T CQueue&lt;T&gt;::deleteHead()&#123;</span><br><span class="line">    <span class="keyword">if</span>(stack2.size() &lt;= <span class="number">0</span>)&#123; <span class="comment">// stack2 为空，则把 stack1 中的元素依次压入</span></span><br><span class="line">        <span class="keyword">while</span>(stack1.size() &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            T&amp; data = stack1.top();</span><br><span class="line">            stack1.pop();</span><br><span class="line">            stack2.push(data);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(stack2.size() == <span class="number">0</span>) <span class="comment">// 说明两个栈都没有元素</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> exception(<span class="string">"queue is empty"</span>);</span><br><span class="line">    T head = stack2.top();  <span class="comment">// stack2 的顶部元素即是队首元素</span></span><br><span class="line">    stack2.pop();</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>拓展</h3>
+<p>考虑用两个队列来实现栈：</p>
+<ul>
+<li>入栈时寻找一个不为空的队列（若都为空则任意）入队</li>
+<li>出栈时：
+<ul>
+<li>两个队列中必有一个为空，一个不为空。把不为空的队列中的元素依次入队到空队列中，原队列只剩下最后一个元素，这个元素出队即是出栈操作需要的元素。</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题8-二叉树的下一个结点/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2056,257 +2235,6 @@ In my code I use one stack to simulate the stack permutation.</p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/18/Lesson-1-Finding-fossil-man/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/18/Lesson-1-Finding-fossil-man/" itemprop="url">Lesson 1 Finding fossil man</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-18T23:44:02+08:00">
-                2018-08-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/New-Concept-English-4/" itemprop="url" rel="index">
-                    <span itemprop="name">New Concept English 4</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/08/18/Lesson-1-Finding-fossil-man/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/08/18/Lesson-1-Finding-fossil-man/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1>Words</h1>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Words</th>
-<th style="text-align:center">Explanation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">recount</td>
-<td style="text-align:center">tell someone about something; give an account of an event or experience</td>
-</tr>
-<tr>
-<td style="text-align:center">saga</td>
-<td style="text-align:center">a long history of heroic achievement, especially a medieval prose narrative in Old Norse or Old Icelandic</td>
-</tr>
-<tr>
-<td style="text-align:center">flint</td>
-<td style="text-align:center">a hard gray rock consisting of nearly pure chert, occurring chiefly as nodules in chalk</td>
-</tr>
-</tbody>
-</table>
-<h1>Phrases</h1>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Phrase</th>
-<th style="text-align:center">Explanation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">read of</td>
-<td style="text-align:center">same meaning as read about</td>
-</tr>
-<tr>
-<td style="text-align:center">the first people</td>
-<td style="text-align:center">primitive people</td>
-</tr>
-</tbody>
-</table>
-<h1>Comprehension</h1>
-<ul>
-<li>How can anthropologists learn about the history of ancient peoples who have not left written records?
-<ul>
-<li>Anthropologists can use sagas that left by storytellers to learn about the history of ancient people.</li>
-</ul>
-</li>
-<li>Why did ancient men prefer to use flint for making tools?
-<ul>
-<li>Because flint is easier to shape than other kinds.</li>
-</ul>
-</li>
-</ul>
-<h1>Vocabulary</h1>
-<ul>
-<li>preserve
-<ul>
-<li>The only way that they can preserve their history is to recount it as sagas--legands handed down from one generation of storytellers to another.</li>
-<li>Only when the rare china is broken have we realized the emergency to preserve such valuable cultural relics.</li>
-</ul>
-</li>
-<li>recount
-<ul>
-<li>He recounted the concept of entropy as something that is the measure of uncertainty.</li>
-</ul>
-</li>
-<li>migrations
-<ul>
-<li>These legends are useful because they can tell us something about migrations of people who lived long ago, but none could write down what they did.</li>
-<li>Repid migrations to these ancient continent lead to the irreversible climat change and environmental damage.</li>
-</ul>
-</li>
-<li>anthropologists
-<ul>
-<li>Anthropologists wondered where the remote ancestors of the Polynesian peoples now living in the Pacific Islands came from.</li>
-<li>Some anthropologists firmly hold the belief that sagas can perfectly explain the history of the Polynesian peoples.</li>
-</ul>
-</li>
-<li>remote
-<ul>
-<li>Knowing that Qichao Liang is one of his remote ancestor who still have great influence on today's world, he uplifted his spirit and carried on writing his first monography.</li>
-</ul>
-</li>
-<li>decay
-<ul>
-<li>Stone does not decay, and so the tools of long ago have remained when even the bones of the men who made them have disappeared without trace.</li>
-<li>The role of the extended family has been decaying for some time.</li>
-<li>Pollution has decayed the surface of the stonework on the front of the cathedral.</li>
-<li>the smell of decaying meat.</li>
-</ul>
-</li>
-<li>without trace
-<ul>
-<li>My notebook is haunted, every time I put it in my desk, the next morning it will disappear without trace.</li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2361,7 +2289,7 @@ In my code I use one stack to simulate the stack permutation.</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">196</span>
+                  <span class="site-state-item-count">197</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
