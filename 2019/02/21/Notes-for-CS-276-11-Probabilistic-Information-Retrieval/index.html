@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="多媒体技术," />
+  <meta name="keywords" content="IR," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="多媒体技术的定义，特征，关键技术 定义：  计算机综合处理多种媒体信息：文本，图形，图像，音频和视频，使多种信息建立逻辑连接，集成为一个系统并具有交互性。  综合处理声，文，图信息 集成性，交互性 总之：信息载体多样性，集成性，交互性    关键技术：  视频音频信号获取技术  多媒体计算机和传统计算机相比就是能处理声文图，所以首先要解决视音频信号获取技术   多媒体数据压缩编码和解码技术  压缩">
-<meta name="keywords" content="多媒体技术">
+<meta name="description" content="Probabilistic Information Retrieval   From boolean to ranked retrieval ... in two steps   Ranked retrieval   Why probabilities in IR?  Probabilities provide a principled foundation for uncertain reaso">
+<meta name="keywords" content="IR">
 <meta property="og:type" content="article">
-<meta property="og:title" content="多媒体技术概论">
-<meta property="og:url" content="http://yoursite.com/2019/02/19/多媒体技术概论/index.html">
+<meta property="og:title" content="Notes for CS 276 11 Probabilistic Information Retrieval">
+<meta property="og:url" content="http://yoursite.com/2019/02/21/Notes-for-CS-276-11-Probabilistic-Information-Retrieval/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="多媒体技术的定义，特征，关键技术 定义：  计算机综合处理多种媒体信息：文本，图形，图像，音频和视频，使多种信息建立逻辑连接，集成为一个系统并具有交互性。  综合处理声，文，图信息 集成性，交互性 总之：信息载体多样性，集成性，交互性    关键技术：  视频音频信号获取技术  多媒体计算机和传统计算机相比就是能处理声文图，所以首先要解决视音频信号获取技术   多媒体数据压缩编码和解码技术  压缩">
+<meta property="og:description" content="Probabilistic Information Retrieval   From boolean to ranked retrieval ... in two steps   Ranked retrieval   Why probabilities in IR?  Probabilities provide a principled foundation for uncertain reaso">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-19T02:56:30.646Z">
+<meta property="og:updated_time" content="2019-02-21T14:24:39.950Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="多媒体技术概论">
-<meta name="twitter:description" content="多媒体技术的定义，特征，关键技术 定义：  计算机综合处理多种媒体信息：文本，图形，图像，音频和视频，使多种信息建立逻辑连接，集成为一个系统并具有交互性。  综合处理声，文，图信息 集成性，交互性 总之：信息载体多样性，集成性，交互性    关键技术：  视频音频信号获取技术  多媒体计算机和传统计算机相比就是能处理声文图，所以首先要解决视音频信号获取技术   多媒体数据压缩编码和解码技术  压缩">
+<meta name="twitter:title" content="Notes for CS 276 11 Probabilistic Information Retrieval">
+<meta name="twitter:description" content="Probabilistic Information Retrieval   From boolean to ranked retrieval ... in two steps   Ranked retrieval   Why probabilities in IR?  Probabilities provide a principled foundation for uncertain reaso">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/02/19/多媒体技术概论/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/02/21/Notes-for-CS-276-11-Probabilistic-Information-Retrieval/"/>
 
 
 
 
 
-  <title>多媒体技术概论 | Wine&Chord</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Notes for CS 276 11 Probabilistic Information Retrieval | Wine&Chord</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -297,7 +297,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/19/多媒体技术概论/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/Notes-for-CS-276-11-Probabilistic-Information-Retrieval/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -314,7 +314,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">多媒体技术概论</h1>
+          <h1 class="post-title" itemprop="name headline">Notes for CS 276 11 Probabilistic Information Retrieval</h1>
         
 
         <div class="post-meta">
@@ -326,8 +326,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-19T09:16:24+08:00">
-                2019-02-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-21T20:29:20+08:00">
+                2019-02-21
               </time>
             
 
@@ -337,6 +337,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS-276-IR/" itemprop="url" rel="index">
+                    <span itemprop="name">CS 276 IR</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -345,9 +367,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/02/19/多媒体技术概论/#comments" itemprop="discussionUrl">
+                <a href="/2019/02/21/Notes-for-CS-276-11-Probabilistic-Information-Retrieval/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/02/19/多媒体技术概论/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2019/02/21/Notes-for-CS-276-11-Probabilistic-Information-Retrieval/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -375,76 +397,407 @@
       
 
       
-        <h2><strong>多媒体技术的定义，特征，关键技术</strong></h2>
-<p>定义：</p>
+        <h2>Probabilistic Information Retrieval</h2>
 <ul>
-<li>计算机综合处理多种媒体信息：文本，图形，图像，音频和视频，使多种信息建立逻辑连接，集成为一个系统并具有交互性。
+<li>
+<p>From boolean to ranked retrieval ... in two steps</p>
+</li>
+<li>
+<p>Ranked retrieval</p>
+</li>
+<li>
+<p>Why probabilities in IR?</p>
 <ul>
-<li>综合处理声，文，图信息</li>
-<li>集成性，交互性</li>
-<li>总之：信息载体多样性，集成性，交互性</li>
+<li>Probabilities provide a principled foundation for uncertain reasoning</li>
+</ul>
+</li>
+<li>
+<p>Probabilistic IR topics</p>
+<ol>
+<li>Classical probabilistic retrieval model</li>
+<li>Bayesian networks for text retrieval</li>
+<li>Language model approach to IR</li>
+</ol>
+<ul>
+<li>Probabilistic methods are one of the oldest but also one of the currently hot topics in IR</li>
+</ul>
+</li>
+<li>
+<p>The document ranking problem</p>
+<ul>
+<li>Ranking method is the core of modern IR systems:</li>
+<li>Idea: Rank by probability of relevance of the document w.r.t. information need
+<ul>
+<li>$P(R=1|document_i,query)$</li>
 </ul>
 </li>
 </ul>
-<p>关键技术：</p>
+</li>
+<li>
+<p>Bayes' Rule</p>
 <ul>
-<li>视频音频信号获取技术
-<ul>
-<li>多媒体计算机和传统计算机相比就是能处理声文图，所以首先要解决视音频信号获取技术</li>
+<li>$P(A|B)=\frac{p(B|A)p(A)}{p(B)}=\frac{p(B|A)p(A)}{\sum_{X=A,\bar{A}}p(B|X)p(X)}$</li>
 </ul>
 </li>
-<li>多媒体数据压缩编码和解码技术
+<li>
+<p>Odds: $O(A)=\frac{p(A)}{p(\bar{A})}=\frac{p(A)}{1-p(A)}$</p>
+</li>
+<li>
+<p>Probability Ranking Principle</p>
 <ul>
-<li>压缩编解码解决的是文件量过大的问题</li>
+<li>Let $x$ represent a document in the collection</li>
+<li>Let $R$ represent <strong>relevance</strong> of a document w.r.t. given (fixed)</li>
+<li>query and let <strong>R=1</strong> represent relevant and <strong>R=0</strong> not relevant</li>
+<li>Need to find $p(R=1|x)$ -- probability that a document $x$ is relevant</li>
+<li>$p(R=1|x)=\frac{p(x|R=1)p(R=1)}{p(x)}$</li>
+<li>$p(R=0|x)=\frac{p(x|R=0)p(R=0)}{p(x)}$</li>
+<li>$p(R=0|x)+p(R=1|x)=1$</li>
+<li>Simple case: no selection costs or other utility concerns that would differentially weight errors</li>
+<li>PRP in action: Rank all documents by $p(R=1|x)$</li>
+<li>Theorem: Using the PRP is optimal, in that it minimizes the loss(Bayes risk) under 1/0 loss
+<ul>
+<li>Provable if all probabilities correct</li>
 </ul>
 </li>
-<li>视频音频数据的实时处理和特技</li>
-<li>视频音频数据的输出技术
+<li>More complex case: retrieval costs
 <ul>
-<li>视频输出：多个视频窗口，画中画电视</li>
-<li>音频输出：单声道$\rightarrow$ 环绕立体声</li>
+<li>Let $d$ be a document</li>
+<li>$C$ -- cost of not retrieving a relevant document</li>
+<li>$C'$ -- cost of retrieving a non-relevant document</li>
+</ul>
+</li>
+<li>Probability Ranking Principle: if
+<ul>
+<li>$C'\cdot p(R=0|d)-C\cdot p(R=1|d)\le C'\cdot p(R=0|d')-C\cdot p(R=1|d')$</li>
+<li>for all d' not yet retrieved, then $d$ is the next document to be retrieved</li>
+</ul>
+</li>
+<li>won't further consider cost/utility from now on</li>
+<li>How to compute all those probabilities?
+<ul>
+<li>Do not know exact probabilities, have to use estimates</li>
+<li>Binary Independence Model (BIM) -- which we discuss next -- is the simplest model</li>
+</ul>
+</li>
+<li>Questionable assumptions
+<ul>
+<li>&quot;Relevance&quot; of each document is independent of relevance of other documents
+<ul>
+<li>Really, it's bad to keep on returning <strong>duplicates</strong></li>
+</ul>
+</li>
+<li>Boolean model of relevance</li>
+<li>That one has a single step information need
+<ul>
+<li>Seeing a range of results might let user refine query</li>
 </ul>
 </li>
 </ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Probabilistic Retrieval Strategy</p>
+<ul>
+<li>Estimate how terms contribute to relevance
+<ul>
+<li>How do other things like term frequency and document length influence your judgments about document relevance?</li>
+</ul>
+</li>
+<li>Combine to find document relevance probability</li>
+<li>Order documents by decreasing probability</li>
+</ul>
+</li>
+<li>
+<p>Probabilistic Ranking</p>
+<ul>
+<li>
+<p>Basic concept:</p>
 <blockquote>
-<p>即：视音频的信号获取/实时处理和特技/输出/压缩编解码</p>
+<p>For a given query, if we know some documents that are relevant, terms that occur in those documents should be given greater weighting in searching for other relevant documents.</p>
+<p>By making assumptions about the distribution of terms and applying Bayes Theorem, it is possible to derive weights theoretically.</p>
 </blockquote>
-<h2>DPCM编码原理</h2>
-<ul>
-<li>差分量化编码是利用样本与样本之间存在的信息冗余度来进行编码的一种数据压缩技术。其根据过去的样本来估计下一个样本信号的幅度大小，此估计值为预测值，然后对实际信号值与预测值之间的差进行量化编码，从而减少了表示每个样本信号的位数</li>
-<li>即存储或传送的是差值</li>
+</li>
 </ul>
-<h2>参数编码的国际标准</h2>
-<p>音频编码的分类：</p>
+</li>
+<li>
+<p>Binary Independence Model</p>
 <ul>
-<li>基于音频数据的统计特性进行编码：波形编码</li>
-<li>基于音频的声学参数：参数编码</li>
-<li>基于人的听觉特性进行编码</li>
-</ul>
-<p>音频编码标准：</p>
+<li>
+<p>Traditionally used in conjunction with PRP</p>
+</li>
+<li>
+<p>&quot;Binary&quot; = Boolean: documents are represented as binary incidence vectors of terms (cf. IIR Chapter 1):</p>
 <ul>
-<li>G.711 64Kbps A律 PCM 编码标准</li>
-<li>G.721 32Kbps ADPCM</li>
-<li>G.722 64Kbps</li>
-<li>G.723 40Kbps &amp; 24Kbps</li>
-<li>G.726 16Kbps</li>
-<li>G.727 16-40Kbps ADPCM</li>
-<li>G.728</li>
-<li>RPE-LTP 长时预测规则码激励</li>
-<li>VSELP 矢量和激励线性预测 6.7Kbps</li>
+<li>$\vec{x}=(x_1,...,x_n)$</li>
+<li>$x_i=1$ iff term $i$ is present in document $x$</li>
 </ul>
-<p>参数编码：</p>
+</li>
+<li>
+<p>&quot;Independence&quot;: terms occur in documents independently</p>
+</li>
+<li>
+<p>Different documents can be modeled as the same vector</p>
+</li>
+<li>
+<p>Queries: binary term incidence vectors</p>
+</li>
+<li>
+<p>Given query $q$,</p>
 <ul>
-<li>LPC 线性预测编码 2.4kb/s</li>
-<li>预测方式：前向/后向，短时/长时</li>
+<li>for each document $d$ need to compute $p(R|q,d)$</li>
+<li>replace with computing $p(R|q,x)$ where $x$ is binary term incidence vector representing $d$</li>
+<li>Interested only in ranking</li>
 </ul>
-<h2>JPEG 压缩的基本原理</h2>
-<p>两种基本压缩算法：</p>
+</li>
+<li>
+<p>Will use odds and Bayes' Rule
+$$
+O(R|q,\vec{x}) =\frac{p(R=1|q,\vec{x})}{p(R=0|q,\vec{x})}=\frac{\frac{p(R=1|q)p(\vec{x}|R=1,q)}{p(\vec{x}|q)}}{\frac{p(R=0|q)p(\vec{x}|R=0,q)}{p(\vec{x}|q)}}\
+= \frac{p(R=1|q)}{p(R=0|q)}\cdot \frac{p(\vec{x}|R=1,q)}{p(\vec{x}|R=0,q)}
+$$</p>
 <ul>
-<li>基于 DCT 变换有失真的压缩算法</li>
-<li>基于空间预测编码 DPCM 的无失真压缩算法</li>
-<li></li>
+<li>Using <strong>Independence</strong> Assumption:</li>
 </ul>
+<p>$$
+\frac{p(\vec{x}|R=1,q)}{p(\vec{x}|R=0,q)}=\prod_{i=1}^n\frac{p(x_i|R=1,q)}{p(x_i|R=0,q)}
+$$</p>
+<p>$$
+O(R|q,\vec{x})=O(R|q)\cdot\prod_{i=1}^n\frac{p(x_i|R=1,q)}{p(x_i|R=0,q)}
+$$</p>
+<ul>
+<li>Since $x_i$ is either 0 or 1:</li>
+</ul>
+<p>$$
+O(R|q,\vec{x})=O(R|q)\cdot \prod_{x_i=1}\frac{p(x_i=1|R=1,q)}{p(x_i=1|R=0,q)}\cdot\prod_{x_i=0}\frac{p(x_i=0|R=1,q)}{p(x_i=0|R=0,q)}
+$$</p>
+<ul>
+<li>Let $p_i=p(x_i=1|R=1,q)$; $r_i=p(x_i=1|R=0,q)$</li>
+<li>Assume, for all terms not occurring in the query ($q_i=0$) $p_i=r_i$</li>
+</ul>
+<p>$$
+O(R|q,\vec{x})=O(R|q)\cdot \prod_{x_i=1\q_i=1}\frac{p_i}{r_i}\cdot \prod_{x_i=0\q_i=1}\frac{(1-p_i)}{(1-r_i)}
+$$</p>
+<p>(All matching terms $\cdot$ Non-matching query terms)
+$$
+\begin{align*}
+O(R|q,\vec{x})&amp;=O(R|q)\cdot \prod_{x_i=1\q_i=1}\frac{p_i}{r_i}\cdot \prod_{x_i=1\q_i=1}(\frac{1-r_i}{1-p_i}\cdot \frac{1-p_i}{1-r_i})\prod_{x_i=0\q_i=1}\frac{1-p_i}{1-r_i}\
+&amp;=O(R|q)\cdot\prod_{x_i=q_i=1}\frac{p_i(1-r_i)}{r_i(1-p_i)}\cdot \prod_{q_i=1}\frac{1-p_i}{1-r_i}
+\end{align*}
+$$
+(All matching terms $\cdot​$ All query terms)</p>
+<p>$\prod_{x_i=q_i=1}\frac{p_i(1-r_i)}{r_i(1-p_i)}$ is the only quantity to be estimated for rankings</p>
+<p>Retrieval Status Value:
+$$
+RSV=log\prod_{x_i=q_i=1}\frac{p_i(1-r_i)}{r_i(1-p_i)}=\sum_{x_i=q_i=1}log\frac{pi(1-r_i)}{r_i(1-p_i)}
+$$</p>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>All boils down to computing RSV.
+$$
+RSV=\sum_{x_i=q_i=1}c_i;\ c_i=log\frac{p_i(1-r_i)}{r_i(1-p_i)}
+$$
+The $c_i$ are log odds ratios
+
+They function as the term weights in this model
+
+$\rightarrow$ So, how do we compute $c_i$'s from our data?
+</code></pre>
+<ul>
+<li>
+<p>Estimating RSV coefficients in theory</p>
+</li>
+<li>
+<p>For each term $i$ look at this table of document counts:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Documents</th>
+<th style="text-align:center">Relevant</th>
+<th style="text-align:center">Non-Relevant</th>
+<th style="text-align:center">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$x_i=1$</td>
+<td style="text-align:center">$s$</td>
+<td style="text-align:center">$n-s$</td>
+<td style="text-align:center">$n$</td>
+</tr>
+<tr>
+<td style="text-align:center">$x_i=0$</td>
+<td style="text-align:center">$S-s$</td>
+<td style="text-align:center">$N-n-S+s$</td>
+<td style="text-align:center">$N-n$</td>
+</tr>
+<tr>
+<td style="text-align:center">Total</td>
+<td style="text-align:center">$S$</td>
+<td style="text-align:center">$N-S$</td>
+<td style="text-align:center">$N$</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Estimates:</p>
+</li>
+</ul>
+<p>$$
+p_i\approx \frac{s}{S}\ \ \ r_i\approx\frac{(n-s)}{(N-S)}
+$$</p>
+<p>$$
+c_i\approx K(M,n,S,s)=log\frac{s/(S-s)}{(n-s)/(N-n-S+s)}
+$$</p>
+<p>For now, assume no zero terms. Remember smoothing.</p>
+<ul>
+<li>
+<p>Estimation -- key challenge</p>
+<ul>
+<li>If non-relevant documents are approximated by the whole collection, then $r_i$ (prob. of occurrence is non-relevant documents for query) is $n/N$ and</li>
+</ul>
+<p>$$
+log\frac{1-r_i}{r_i}=log\frac{N-n-S+s}{n-s}\approx log\frac{N-n}{n}\approx\frac{N}{n}=IDF!
+$$</p>
+</li>
+<li>
+<p>Collection vs. Document frequency</p>
+<ul>
+<li>Collection frequency of $t$ is the total number of occurrences of $t$ in the collection (incl. multiples)</li>
+<li>Document frequency is number of docs $t$ is in</li>
+</ul>
+</li>
+<li>
+<p>Estimation -- key challenge</p>
+<ul>
+<li>
+<p>$p_i$ (probability of occurrence in relevant documents) cannot be approximated as easily</p>
+</li>
+<li>
+<p>$p_i$ can be estimated in various ways:</p>
+<ul>
+<li>from relevant documents if you know some
+<ul>
+<li>Relevance weighting can be used in a feedback loop</li>
+</ul>
+</li>
+<li>constant (Croft and Harper combination match) -- then just get idf weighting of terms (with $p_i$=0.5)</li>
+</ul>
+<p>$$
+RSV=\sum_{x_i=q_i=1}log\frac{N}{n_i}
+$$</p>
+<ul>
+<li>proportional to prob. of occurrence in collection</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Probabilistic Relevance Feedback</p>
+<ol>
+<li>
+<p>Guess a preliminary probabilistic description of $R=1$ documents; use it to retrieve a set of documents</p>
+</li>
+<li>
+<p>Interact with the user to refine the description:</p>
+<p>learn some definite members with $R=1$ and $R=0$</p>
+</li>
+<li>
+<p>Re-estimate $p_i$ and $r_i$ on the basis of these</p>
+<ul>
+<li>
+<p>If $i$ appears in $V_i$ within set of documents $V$: $p_i=|V_i|/|V|$</p>
+</li>
+<li>
+<p>Or can combine new information with original guess (use Bayesian prior):
+$$
+p_i^{(2)}=\frac{|V_i|+\kappa p_i^{(1)}}{|V|+\kappa}
+$$
+$\kappa$ is prior weight</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Repeat, thus generating a succession of approximations to relevant documents</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Iteratively estimating $p_i$ and $r_i$ (=Pseudo-relevance feedback)</p>
+<ol>
+<li>
+<p>Assume that $p_i$ is constant over all $x_i$ in query and $r_i$ as before</p>
+<ul>
+<li>$p_i=0.5$ (even odds) for any given doc</li>
+</ul>
+</li>
+<li>
+<p>Determine guess of relevant document set:</p>
+<ul>
+<li>$V$ is fixed size set of highest ranked documents on this model</li>
+</ul>
+</li>
+<li>
+<p>We need to improve our guesses for $p_i$ and $r_i$, so</p>
+<ul>
+<li>Use distribution of $x_i$ in docs in $V$. Let $V_i$ be set of documents containing $x_i$
+<ul>
+<li>$p_i=|V_i|/|V|$</li>
+</ul>
+</li>
+<li>Assume if not retrieved then not relevant
+<ul>
+<li>$r_i=(n_i-|V_i|)/(N-|V|)$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Go to 2. until converges then return ranking</p>
+</li>
+</ol>
+</li>
+<li>
+<p>PRP and BIM</p>
+<ul>
+<li>Getting reasonable approximations of probabilities is possible</li>
+<li>Requires restrictive assumptions:
+<ul>
+<li>Term independence</li>
+<li>Terms not in query don't affect the outcome</li>
+<li>Boolean representation of documents/queries/relevance</li>
+<li>Document relevance values are independent</li>
+</ul>
+</li>
+<li>Some of these assumptions can be removed</li>
+<li>Problem: either require partial relevance information or seemingly only can derive somewhat inferior term weights</li>
+</ul>
+</li>
+<li>
+<p>Removing term independence</p>
+<ul>
+<li>In general, index terms aren't independent</li>
+<li>Dependencies can be complex</li>
+</ul>
+</li>
+<li>
+<p>Second step: Term frequency</p>
+<ul>
+<li>Right in the first lecture, we said that a page should rank higher if it mentions a word more
+<ul>
+<li>Perhaps modulated by things like page length</li>
+</ul>
+</li>
+<li>We might want a model with term frequency in it</li>
+<li>We'll see a probabilistic one next time -- <strong>BM25</strong></li>
+<li>Quick summary of vector space model</li>
+</ul>
+</li>
+</ul>
+<p>ref: <a href="http://web.stanford.edu/class/cs276/handouts/lecture11-probir.pdf" target="_blank" rel="noopener"><strong>Probabilistic IR: the binary independence model</strong></a></p>
 
       
     </div>
@@ -462,7 +815,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/多媒体技术/" rel="tag"># 多媒体技术</a>
+            <a href="/tags/IR/" rel="tag"># IR</a>
           
         </div>
       
@@ -475,8 +828,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/18/产生式系统的搜索策略/" rel="next" title="产生式系统的搜索策略">
-                <i class="fa fa-chevron-left"></i> 产生式系统的搜索策略
+              <a href="/2019/02/21/Notes-for-CS-276-6-Scoring-Term-Weighting-and-the-Vector-Space-Model/" rel="next" title="Notes for CS 276 6 Scoring, Term Weighting and the Vector Space Model">
+                <i class="fa fa-chevron-left"></i> Notes for CS 276 6 Scoring, Term Weighting and the Vector Space Model
               </a>
             
           </div>
@@ -484,10 +837,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/20/Notes-for-CS-276-Intro-to-IR/" rel="prev" title="Notes for CS 276 Intro to IR">
-                Notes for CS 276 Intro to IR <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -633,7 +982,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">多媒体技术的定义，特征，关键技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">DPCM编码原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">参数编码的国际标准</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">JPEG 压缩的基本原理</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Probabilistic Information Retrieval</span></a></li></ol></div>
             
 
           </div>
@@ -792,9 +1141,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2019/02/19/多媒体技术概论/';
-          this.page.identifier = '2019/02/19/多媒体技术概论/';
-          this.page.title = '多媒体技术概论';
+          this.page.url = 'http://yoursite.com/2019/02/21/Notes-for-CS-276-11-Probabilistic-Information-Retrieval/';
+          this.page.identifier = '2019/02/21/Notes-for-CS-276-11-Probabilistic-Information-Retrieval/';
+          this.page.title = 'Notes for CS 276 11 Probabilistic Information Retrieval';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://wineandchord.disqus.com/embed.js';

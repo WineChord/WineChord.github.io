@@ -296,6 +296,166 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题12-矩阵中的路径/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/31/剑指Offer-面试题12-矩阵中的路径/" itemprop="url">剑指Offer 面试题12 矩阵中的路径</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T19:30:05+08:00">
+                2018-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/剑指Offer/" itemprop="url" rel="index">
+                    <span itemprop="name">剑指Offer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/31/剑指Offer-面试题12-矩阵中的路径/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/31/剑指Offer-面试题12-矩阵中的路径/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2>矩阵中的路径</h2>
+<h3>问题描述</h3>
+<p>一个矩阵中包含各种字母，给定一个字符串，问是否能在该矩阵中找到一条路径，使路径上的字母可以形成字符串。矩阵中的每个元素只能走一次。</p>
+<h3>思路</h3>
+<p>使用回溯法。
+走到每一格时递归判断走上下左右格子是否存在路径，如果不存在，则回退一步。</p>
+<h3>实现</h3>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">hasPath</span><span class="params">(<span class="keyword">char</span>* matrix, <span class="keyword">int</span> rows, <span class="keyword">int</span> cols, <span class="keyword">char</span>* str)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(matrix == <span class="literal">nullptr</span> || rows &lt; <span class="number">1</span> || cols &lt; <span class="number">1</span> || str == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">bool</span> *visited = <span class="keyword">new</span> <span class="keyword">bool</span>[rows*cols];</span><br><span class="line">    <span class="built_in">memset</span>(visited, <span class="number">0</span>, rows*cols);</span><br><span class="line">    <span class="keyword">int</span> pathLength = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> row = <span class="number">0</span>; row &lt; rows; row++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> col = <span class="number">0</span>; col &lt; cols; col++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(hasPathCore(matrix, rows, cols, row, col, str, pathLength, visited)) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">delete</span>[] visited;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">hasPathCore</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* matrix, <span class="keyword">int</span> rows, <span class="keyword">int</span> cols, <span class="keyword">int</span> row, <span class="keyword">int</span> col, <span class="keyword">const</span> <span class="keyword">char</span>* str, <span class="keyword">int</span>&amp; pathLength, <span class="keyword">bool</span>* visited)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(str[pathLength] == <span class="string">'\0'</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">bool</span> hasPath = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(row &gt;= <span class="number">0</span> &amp;&amp; row &lt; rows &amp;&amp; col &gt;= <span class="number">0</span> &amp;&amp; col &lt; cols &amp;&amp; matrix[row * cols + col] == str[pathLength] &amp;&amp; !visited[row * cols + col])&#123;</span><br><span class="line">        pathLength++;</span><br><span class="line">        visited[row * cols + col] = <span class="literal">true</span>;</span><br><span class="line">        hasPath = hasPathCore(matrix, rows, cols, row, col<span class="number">-1</span>, str, pathLength, visited) || hasPathcore(matrix, rows, cols, row<span class="number">-1</span>, col, str, pathLength, visited) || hasPathCore(matrix, rows, cols, row, col+<span class="number">1</span>, str, pathLength, visited) || hasPathCore(matrix, rows, cols, row+<span class="number">1</span>, col, str, pathLength, visited);</span><br><span class="line">        <span class="keyword">if</span>(!hasPath)&#123; <span class="comment">// 如果相邻的四个格子都没有匹配的，则需要回到前一个字符</span></span><br><span class="line">            pathLength--;</span><br><span class="line">            visited[row * cols + col] = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> hasPath;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题11-旋转数组的最小数字/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1816,386 +1976,6 @@ $$</p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/20/compiler-intro/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/20/compiler-intro/" itemprop="url">compiler intro</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-20T18:36:14+08:00">
-                2018-09-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Compiler/" itemprop="url" rel="index">
-                    <span itemprop="name">Compiler</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/09/20/compiler-intro/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/09/20/compiler-intro/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1>6.004 Fall 2015 L11: Compilers</h1>
-<h2>Implementations: Interpretation vs compilation</h2>
-<h3>Interpretation</h3>
-<h4>Model of Interpretation:</h4>
-<p><img src="/images/Model_of_Interpretation.png" alt=""></p>
-<ul>
-<li>Start with some hard-to-program machine, say $M_1$</li>
-<li>Write a single program for $M_1$ that mimics the behavior of some easier machine, $M_2$</li>
-<li>Result: a &quot;virtual&quot; $M_2$</li>
-</ul>
-<h4>Layers of interpretation:</h4>
-<p><img src="/images/Layers_of_interpretation.png" alt=""></p>
-<ul>
-<li>Often we use several layers of interpretation to achieve desired behavior.</li>
-<li>x86 CPU, running
-<ul>
-<li>Python, running
-<ul>
-<li>Application, interpreting
-<ul>
-<li>Data.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3>Compilation</h3>
-<h4>Model of Compilation</h4>
-<p><img src="/images/Model_of_Compilation.png" alt=""></p>
-<ul>
-<li>Given some hard-to-program machine, say $M_1$...</li>
-<li>Find some easier-to-program language $L_2$ (perhaps for a more complicated machine, $M_2$); write programs in that language</li>
-<li>Build a translator (compiler) that translates programs from $M_2$$'s$ language to $M_1$$'s$ language. May run on $M_1$, $M_2$, or some other machine.</li>
-</ul>
-<p>Interpretation and compilation: two ways to execute high-level languages</p>
-<ul>
-<li><code>Both</code> allow changes in the programming labguage</li>
-<li><code>Both</code> afford programming applications in platform (e.g., processor) independent languages</li>
-<li><code>Both</code> are widely used in modern computer systems!</li>
-</ul>
-<h2>Interpretation vs Compilation</h2>
-<ul>
-<li>Characteristic differences:</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">\</th>
-<th style="text-align:center">Interpretation</th>
-<th style="text-align:center">Compilation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">How it treats input &quot;x+2&quot;</td>
-<td style="text-align:center">Computes x+2</td>
-<td style="text-align:center">Generates a program that computes x+2</td>
-</tr>
-<tr>
-<td style="text-align:center">When it happens</td>
-<td style="text-align:center">During execution</td>
-<td style="text-align:center">Before execution</td>
-</tr>
-<tr>
-<td style="text-align:center">What it complicates/slows</td>
-<td style="text-align:center">Program execution</td>
-<td style="text-align:center">Program development</td>
-</tr>
-<tr>
-<td style="text-align:center">Decisions made at</td>
-<td style="text-align:center">Run time</td>
-<td style="text-align:center">Compile time</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>Major choice we'll see repeatedly: do it at compile time or at un time?
-<ul>
-<li>Which is faster?</li>
-<li>Which is more general?</li>
-</ul>
-</li>
-</ul>
-<h2>Compilers</h2>
-<ul>
-<li>Bare minimum for a functional compiler:
-<img src="/images/Compilers.png" alt=""></li>
-<li>Good compilers:
-<ul>
-<li>Produce meaningful errors on incorrect programs
-<ul>
-<li>Even better: meaningful warnings</li>
-</ul>
-</li>
-<li>Produce fast, optimized code</li>
-</ul>
-</li>
-<li>This lecture:
-<ul>
-<li>Simple techniques to compile a C procedure into assembly</li>
-<li>Overview of how modern compilers work</li>
-</ul>
-</li>
-</ul>
-<h2>Anatomy of a Modern Compiler</h2>
-<p><img src="/images/anatomy.png" alt=""></p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left"></th>
-<th style="text-align:left"></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Read source program</td>
-<td style="text-align:left">Optimize IR</td>
-</tr>
-<tr>
-<td style="text-align:left">Break it up into basic elements</td>
-<td style="text-align:left">Translate IR to ASM</td>
-</tr>
-<tr>
-<td style="text-align:left">Check correctness, produce errors</td>
-<td style="text-align:left">Optimize ASM</td>
-</tr>
-<tr>
-<td style="text-align:left">Translate to generic <code>intermediate representation(IR)</code></td>
-<td style="text-align:left"></td>
-</tr>
-</tbody>
-</table>
-<h2>Frontend Stages</h2>
-<ul>
-<li>Lexical analysis (scanning): Source -&gt; List of tokens
-<img src="/images/lexical.png" alt=""></li>
-<li>Syntactic analysis (parsing): Tokens -&gt; Syntax tree
-<img src="/images/syntactic.png" alt=""></li>
-<li>Semantic analysis (mainly, type checking)
-<img src="/images/semantic.png" alt=""></li>
-</ul>
-<h2>Intermediate Representation (IR)</h2>
-<ul>
-<li>Internal compiler language that is:
-<ul>
-<li>Language-independent</li>
-<li>Machine-independent</li>
-<li>Easy to optimize
-<img src="/images/IR.png" alt=""></li>
-</ul>
-</li>
-<li>Why yet another language?
-<ul>
-<li>Assembly does not have enough info to optimize it well</li>
-<li>Enables modularity and reuse
-<img src="/images/reuse.png" alt=""></li>
-</ul>
-</li>
-</ul>
-<h2>Common IR: Control Flow Graph</h2>
-<ul>
-<li>
-<p>Assignments:
-<img src="/images/assignment.png" alt=""></p>
-</li>
-<li>
-<p>Basic block: Sequence of assignments with an optional branch at the end<br>
-<img src="/images/block.png" alt=""></p>
-</li>
-<li>
-<p>Control flow graph:</p>
-<ul>
-<li>Nodes: Basic blocks</li>
-<li>Edges: Jumps or branches between basic blocks</li>
-</ul>
-</li>
-</ul>
-<h2>Control Flow Graph for GCD</h2>
-<p><img src="/images%5Cgraph_GCD.png" alt=""></p>
-<h2>IR Optimization</h2>
-<ul>
-<li>Perform a set of passes over the CFG
-<ul>
-<li>Each pass does a specific, simple task over the CFG</li>
-<li>By repeating multiple simple passes on the CFG over and over, compilers achieve very complex optimizations</li>
-</ul>
-</li>
-<li>Example optimizations:
-<ul>
-<li>Dead code elimination: Eliminate assignments to variables that are never used, or basic blocks that are never reached</li>
-<li>Constant propagation: Identify variables that are constant, substitute the constant elsewhere</li>
-<li>Constant folding: Compute and substitute constant expressions</li>
-</ul>
-</li>
-</ul>
-<h2>Example IR Optimizations</h2>
-<p><img src="/images/IR_opt.png" alt="">
-<img src="/images/IR_done.png" alt=""></p>
-<ul>
-<li>More optimizations by adding passes: Common subexpression elimination, loop-invariant code motion, loop unrolling...</li>
-</ul>
-<h2>Code Generation</h2>
-<ul>
-<li>Translate generated IR to assembly</li>
-<li>Register allocation: Map variables to registers
-<ul>
-<li>If variables &gt; registers, map some to memory, and load/store them when needed</li>
-</ul>
-</li>
-<li>Translate each assignment to instructions
-<ul>
-<li>Some assignments may require &gt; 1 instr if our ISA doesn't have op</li>
-</ul>
-</li>
-<li>Emit each basic block: label, assignments, and branch or jump</li>
-<li>Lay out basic blocks, removing superfluous jumps</li>
-<li>ISA and CPU-specific optimizations
-<ul>
-<li>e.g., I possible, reorder instructions to improve performance</li>
-</ul>
-</li>
-</ul>
-<h2>Putting it All Together: GCD</h2>
-<p><img src="/images/all_together.png" alt=""></p>
-<h2>Summary: Modern Compilers</h2>
-<p><img src="/images/summary.png" alt=""></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2250,7 +2030,7 @@ $$</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">199</span>
+                  <span class="site-state-item-count">200</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
