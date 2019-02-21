@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Linked List,Stack,Recursive," />
+  <meta name="keywords" content="IR," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="从尾到头打印链表 问题描述 从尾到头输出链表中每个结点的值。 链表结点定义如下： 1234struct ListNode&amp;#123;    int m_nKey;    ListNode* m_pNext;&amp;#125; 思路 使用栈来实现 实现 12345678910111213void PrintListReversingly_Iteratively(ListNode* pHead)&amp;#123;">
-<meta name="keywords" content="Linked List,Stack,Recursive">
+<meta name="description" content="主要讲给文档评等级，和之前的 &amp;quot;Boolean queries&amp;quot; 相区别。 重点有：Vector space model 和 tf-idf   Ranked retrieval  之前讲的都是二元查询：一个文档有或者没有，但是这不适用于大众化的查询    二元查询出现的问题  结果时好时坏：正确匹配时结果很多，但是一旦不匹配一个结果都没有    引出评级检索模型  查询语句更加">
+<meta name="keywords" content="IR">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指Offer 面试题6 从尾到头打印链表">
-<meta property="og:url" content="http://yoursite.com/2018/10/31/剑指Offer-面试题6-从尾到头打印链表/index.html">
+<meta property="og:title" content="Notes for CS 276 6 Scoring, Term Weighting and the Vector Space Model">
+<meta property="og:url" content="http://yoursite.com/2019/02/21/Notes-for-CS-276-6-Scoring-Term-Weighting-and-the-Vector-Space-Model/index.html">
 <meta property="og:site_name" content="Wine&amp;Chord">
-<meta property="og:description" content="从尾到头打印链表 问题描述 从尾到头输出链表中每个结点的值。 链表结点定义如下： 1234struct ListNode&amp;#123;    int m_nKey;    ListNode* m_pNext;&amp;#125; 思路 使用栈来实现 实现 12345678910111213void PrintListReversingly_Iteratively(ListNode* pHead)&amp;#123;">
+<meta property="og:description" content="主要讲给文档评等级，和之前的 &amp;quot;Boolean queries&amp;quot; 相区别。 重点有：Vector space model 和 tf-idf   Ranked retrieval  之前讲的都是二元查询：一个文档有或者没有，但是这不适用于大众化的查询    二元查询出现的问题  结果时好时坏：正确匹配时结果很多，但是一旦不匹配一个结果都没有    引出评级检索模型  查询语句更加">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-26T14:15:10.741Z">
+<meta property="og:updated_time" content="2019-02-21T09:39:41.610Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指Offer 面试题6 从尾到头打印链表">
-<meta name="twitter:description" content="从尾到头打印链表 问题描述 从尾到头输出链表中每个结点的值。 链表结点定义如下： 1234struct ListNode&amp;#123;    int m_nKey;    ListNode* m_pNext;&amp;#125; 思路 使用栈来实现 实现 12345678910111213void PrintListReversingly_Iteratively(ListNode* pHead)&amp;#123;">
+<meta name="twitter:title" content="Notes for CS 276 6 Scoring, Term Weighting and the Vector Space Model">
+<meta name="twitter:description" content="主要讲给文档评等级，和之前的 &amp;quot;Boolean queries&amp;quot; 相区别。 重点有：Vector space model 和 tf-idf   Ranked retrieval  之前讲的都是二元查询：一个文档有或者没有，但是这不适用于大众化的查询    二元查询出现的问题  结果时好时坏：正确匹配时结果很多，但是一旦不匹配一个结果都没有    引出评级检索模型  查询语句更加">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/10/31/剑指Offer-面试题6-从尾到头打印链表/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/02/21/Notes-for-CS-276-6-Scoring-Term-Weighting-and-the-Vector-Space-Model/"/>
 
 
 
 
 
-  <title>剑指Offer 面试题6 从尾到头打印链表 | Wine&Chord</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Notes for CS 276 6 Scoring, Term Weighting and the Vector Space Model | Wine&Chord</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -297,7 +297,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/剑指Offer-面试题6-从尾到头打印链表/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/Notes-for-CS-276-6-Scoring-Term-Weighting-and-the-Vector-Space-Model/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wine&Chord">
@@ -314,7 +314,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">剑指Offer 面试题6 从尾到头打印链表</h1>
+          <h1 class="post-title" itemprop="name headline">Notes for CS 276 6 Scoring, Term Weighting and the Vector Space Model</h1>
         
 
         <div class="post-meta">
@@ -326,8 +326,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T10:52:36+08:00">
-                2018-10-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-21T16:20:41+08:00">
+                2019-02-21
               </time>
             
 
@@ -349,8 +349,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/剑指Offer/" itemprop="url" rel="index">
-                    <span itemprop="name">剑指Offer</span>
+                  <a href="/categories/CS-276-IR/" itemprop="url" rel="index">
+                    <span itemprop="name">CS 276 IR</span>
                   </a>
                 </span>
 
@@ -367,9 +367,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/31/剑指Offer-面试题6-从尾到头打印链表/#comments" itemprop="discussionUrl">
+                <a href="/2019/02/21/Notes-for-CS-276-6-Scoring-Term-Weighting-and-the-Vector-Space-Model/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/10/31/剑指Offer-面试题6-从尾到头打印链表/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2019/02/21/Notes-for-CS-276-6-Scoring-Term-Weighting-and-the-Vector-Space-Model/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -397,19 +397,226 @@
       
 
       
-        <h1>从尾到头打印链表</h1>
-<h3>问题描述</h3>
-<p>从尾到头输出链表中每个结点的值。
-链表结点定义如下：
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> m_nKey;</span><br><span class="line">    ListNode* m_pNext;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3>思路</h3>
-<p>使用栈来实现</p>
-<h3>实现</h3>
-<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PrintListReversingly_Iteratively</span><span class="params">(ListNode* pHead)</span></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">stack</span>&lt;ListNode*&gt; nodes;</span><br><span class="line">    ListNode* pNode = pHead;</span><br><span class="line">    <span class="keyword">while</span>(pNode != <span class="literal">nullptr</span>)&#123;</span><br><span class="line">        nodes.push(pNode);</span><br><span class="line">        pNode = pNode-&gt;m_pNext;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(!nodes.empty())&#123;</span><br><span class="line">        pNode = nodes.top();</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\t"</span>, pNode-&gt;m_nValue);</span><br><span class="line">        nodes.pop();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>也可用相应递归
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PrintListReversingly_Recursively</span><span class="params">(ListNode* pHead)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(pHead != <span class="literal">nullptr</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(pHead-&gt;m_pNext != <span class="literal">nullptr</span>)</span><br><span class="line">            PrintListReversingly_Recursively(pHead-&gt;m_pNext);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d\t"</span>, pHead-&gt;m_nValue);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3>复杂度分析</h3>
-<p>对于迭代版本而言，时间复杂度为 $O(n)$，空间复杂度为 $O(n)$</p>
+        <p>主要讲给文档评等级，和之前的 &quot;Boolean queries&quot; 相区别。</p>
+<p>重点有：Vector space model 和 tf-idf</p>
+<ul>
+<li>
+<p>Ranked retrieval</p>
+<ul>
+<li>之前讲的都是二元查询：一个文档有或者没有，但是这不适用于大众化的查询</li>
+</ul>
+</li>
+<li>
+<p>二元查询出现的问题</p>
+<ul>
+<li>结果时好时坏：正确匹配时结果很多，但是一旦不匹配一个结果都没有</li>
+</ul>
+</li>
+<li>
+<p>引出评级检索模型</p>
+<ul>
+<li>查询语句更加随意（Free text queries），给出的是一系列有序的回答</li>
+</ul>
+</li>
+<li>
+<p>只给出最好的 $k$ 个结果</p>
+</li>
+<li>
+<p>打分数是评级检索中的基础</p>
+<ul>
+<li>这些分数代表了文档和查询之间的符合程度</li>
+</ul>
+</li>
+<li>
+<p>需要一种手段来给一对（查询/文档）来打分</p>
+<ul>
+<li>查询中只有一个词？那么如果文档中没有这个词，评分为0</li>
+<li>文档中该词出现的次数越多，评分越高</li>
+</ul>
+</li>
+<li>
+<p>方法1：Jaccard coefficient</p>
+<ul>
+<li>$jaccard(A,B)=\frac{|A\cap B|}{|A\cup B|}$</li>
+<li>$jaccard(A,A)=1$</li>
+<li>$jaccard(A,B)=0\ if\ A\cap B=0$</li>
+<li>该方法的问题：
+<ul>
+<li>没有考虑到关键词的频率（term frequency）</li>
+<li>一些不常见的关键词提供了更多的信息，这个方法没有考虑这一点</li>
+<li>需要更加成熟的方式来归一化长度</li>
+<li>之后会用 $\frac{|A\cap B|}{\sqrt{|A\cup B|}}$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>关键词-文档矩阵</p>
+<ul>
+<li>每个文档用一个向量来表示，这个向量中每个值分别代表了一种关键字出现的次数</li>
+</ul>
+</li>
+<li>
+<p>词袋模型（Bag of words model）</p>
+<ul>
+<li>向量表示没有考虑关键字在文档中的次序</li>
+<li>这称为词袋模型</li>
+</ul>
+</li>
+<li>
+<p>关键词频率 tf（term frequency）</p>
+<ul>
+<li>$tf_{t,d}$ 表示关键词 $t$ 在文档 $d$ 中出现的频率</li>
+<li>如何用这个定义来计算分数？</li>
+<li>相关性并不正比于词频</li>
+</ul>
+</li>
+<li>
+<p>对数频率权重（Log-frequency weighting）</p>
+</li>
+</ul>
+<p>$$
+w_{t,d}=
+\begin{cases}
+1+log_{10}tf_{t,d},\ &amp;if\ tf_{t,d}\gt0\
+0,&amp;otherwise
+\end{cases}
+$$</p>
+<p>$$
+score=\sum_{t\in q\cap d}(1+log\ tf_{t,d})
+$$</p>
+<p>如果没有一个查询的关键词出现在文档中，分数为0</p>
+<ul>
+<li>
+<p>文档频率（Document frequency）</p>
+<ul>
+<li>不常见的关键字提供更多信息</li>
+<li>考虑在查询语句中不常见的关键词</li>
+<li>假如一个文档包含了这个不常见的关键词，那么这个文档很可能与查询相关</li>
+<li>因此我们希望提高不常见的关键词的权重</li>
+<li>而对于频率较高的关键词，也应有较高的权重，但是要低于不常见的词的权重</li>
+<li>用文档频率来进行表征（document frequency）</li>
+</ul>
+</li>
+<li>
+<p>idf weight</p>
+<ul>
+<li>$df_t$ 是关键词 $t$ 的文档频率：即多少个文档包含关键词 $t$
+<ul>
+<li>是对 $t$ 信息多少的反向评估</li>
+<li>$df_t\le N$ （$N$ 是文档的总数）</li>
+</ul>
+</li>
+<li>定义 idf (inverse document frequency) 反向文档频率如下：
+<ul>
+<li>$idf_t=log_{10}(\frac{N}{df_t})$</li>
+<li>使用对数是为了减弱 $idf$ 的影响</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>idf 对排名的影响</p>
+<ul>
+<li>idf 对单关键字的查询没有影响</li>
+<li>影响多关键字查询，比如查询 &quot;capricious person&quot;，idf 会使 &quot;capricious&quot; 出现的次数对评分影响重一些</li>
+</ul>
+</li>
+<li>
+<p>Collection vs. Document frequency</p>
+<ul>
+<li>collection frequency 指的是一个关键字在整个文集中出现的次数</li>
+<li>df 指的是该关键字出现在了多少篇文章当中</li>
+</ul>
+</li>
+<li>
+<p>tf-idf weighting</p>
+<ul>
+<li>$w_{t,d}=log(1+tf_{t,d})\times log_{10}(\frac{N}{df_t})$</li>
+<li>是 $tf$ 和 $idf$ 的乘积</li>
+<li>是一个很有名的权重方案</li>
+<li>当文档中词频上升或关键词的稀有程度较高时，该值较大</li>
+</ul>
+</li>
+<li>
+<p>Score for a document given a query</p>
+<ul>
+<li>$Score(q,d)=\sum_{t\in q\cap d}tf.idf_{t,d}$</li>
+<li>变种有很多：比如 $tf$ 是怎么计算的啊（是否取对数），查询中的关键字是否也参与权重计算当中啊...</li>
+</ul>
+</li>
+<li>
+<p>现在每一个文档都被表示成了使之向量，向量中的每一个值是 $tf-idf$ 权重 $\in \mathbb{R}^{|V|}$</p>
+</li>
+<li>
+<p>文档就变成了向量！</p>
+<ul>
+<li>至此我们有了 $|V|$ 维向量空间</li>
+<li>关键字是空间的坐标轴</li>
+<li>文档是这个空间中的向量</li>
+<li>把这个应用到网络搜索引擎中去时，可以达到非常高的维度</li>
+<li>同时也是非常稀疏的向量：很多值都是0</li>
+</ul>
+</li>
+<li>
+<p>查询语句也可以作为向量</p>
+<ul>
+<li>关键思想1：将查询语句也表示成空间中的向量</li>
+<li>关键思想2：根据文档与查询在空间中的临近程度来对文档进行排序</li>
+<li>proximity = similarity of vectors</li>
+<li>proximity $\approx$ inverse of distance</li>
+<li>即文档和查询语句之间的相似程度</li>
+</ul>
+</li>
+<li>
+<p>形式化向量空间的临近度</p>
+<ul>
+<li>第一想法：两点之间的距离？（两个向量末端点的距离）</li>
+<li>欧几里得距离？？</li>
+<li>并不好：对于不同长度的向量而言，这个距离过大了</li>
+</ul>
+</li>
+<li>
+<p>使用角度来衡量！</p>
+<ul>
+<li>想象一下：把一个文档复制一下加到它自己后面，复制前后文档的相似度应该是一样的！</li>
+<li>关键思路：根据文档和查询之间的夹角大小来对文档进行排序</li>
+</ul>
+</li>
+<li>
+<p>从角度到余弦值</p>
+<ul>
+<li>该角度距离可以用余弦值的大小来衡量！</li>
+<li>因为余弦函数在 $[0^{\circ}, 180^{\circ}]$ 内单调递减！</li>
+</ul>
+</li>
+<li>
+<p>长度归一化（Length normalization）</p>
+<ul>
+<li>使用 $L_2$ 范数：$||\vec{x}||_2=\sqrt{\sum_i{x_i^2}}$</li>
+</ul>
+</li>
+<li>
+<p>cosine(query, document)</p>
+</li>
+</ul>
+<p>$$
+cos(\vec{q},\vec{d})=\frac{\vec{q}\cdot \vec{d}}{|\vec{q}||\vec{d}|}=\frac{\sum_{i=1}^{|V|}q_id_i}{\sqrt{\sum_{i=1}^{|V|}q_i^2}\sqrt{\sum_{i=1}^{|V|}d_i^2}}
+$$</p>
+<ul>
+<li>$q_i$ 是第i个关键字在查询中的 tf-idf 权重</li>
+<li>$d_i$ 是第i个关键字在文档中的 tf-idf 权重</li>
+<li>idf 中 log 的底是多少是无所谓的</li>
+</ul>
+<p>总结：向量空间排名</p>
+<ul>
+<li>把查询语句表示成一个 tf-idf 向量</li>
+<li>把每个文档表示成一个 tf-idf 向量</li>
+<li>计算查询语句与每一个文档的余弦相似度</li>
+<li>根据余弦相似度来对文档进行排名</li>
+<li>给用户分数最高的 $k$ （比如 $k=10$）个答案</li>
+</ul>
+<p>ref:<a href="http://web.stanford.edu/class/cs276/handouts/lecture6-tfidf-handout-1-per.pdf" target="_blank" rel="noopener">Vector Space Model</a></p>
 
       
     </div>
@@ -427,11 +634,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Linked-List/" rel="tag"># Linked List</a>
-          
-            <a href="/tags/Stack/" rel="tag"># Stack</a>
-          
-            <a href="/tags/Recursive/" rel="tag"># Recursive</a>
+            <a href="/tags/IR/" rel="tag"># IR</a>
           
         </div>
       
@@ -444,8 +647,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/31/剑指Offer-面试题5-替换空格/" rel="next" title="剑指Offer 面试题5 替换空格">
-                <i class="fa fa-chevron-left"></i> 剑指Offer 面试题5 替换空格
+              <a href="/2019/02/21/CS-276-索引压缩/" rel="next" title="CS 276 索引压缩">
+                <i class="fa fa-chevron-left"></i> CS 276 索引压缩
               </a>
             
           </div>
@@ -453,10 +656,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/10/31/剑指Offer-面试题7-重建二叉树/" rel="prev" title="剑指Offer 面试题7 重建二叉树">
-                剑指Offer 面试题7 重建二叉树 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -518,17 +717,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -592,22 +782,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">从尾到头打印链表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.3.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.4.</span> <span class="nav-text">复杂度分析</span></a></li></ol></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -761,9 +935,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/10/31/剑指Offer-面试题6-从尾到头打印链表/';
-          this.page.identifier = '2018/10/31/剑指Offer-面试题6-从尾到头打印链表/';
-          this.page.title = '剑指Offer 面试题6 从尾到头打印链表';
+          this.page.url = 'http://yoursite.com/2019/02/21/Notes-for-CS-276-6-Scoring-Term-Weighting-and-the-Vector-Space-Model/';
+          this.page.identifier = '2019/02/21/Notes-for-CS-276-6-Scoring-Term-Weighting-and-the-Vector-Space-Model/';
+          this.page.title = 'Notes for CS 276 6 Scoring, Term Weighting and the Vector Space Model';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://wineandchord.disqus.com/embed.js';

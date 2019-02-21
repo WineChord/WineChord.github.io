@@ -296,6 +296,194 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/18/软件工程概述/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/18/软件工程概述/" itemprop="url">软件工程概述</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-18T11:28:41+08:00">
+                2019-02-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/18/软件工程概述/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/18/软件工程概述/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>软件=程序+数据+文档</li>
+<li>具有复杂性，一致性，可变性和不可变性</li>
+<li>产生与发展：
+<ul>
+<li>史前时代：1956-1967</li>
+<li>瀑布过程模型：1968-1982</li>
+<li>质量标准体系：1983-1995</li>
+<li>敏捷开发：20世纪90年代至今</li>
+</ul>
+</li>
+<li>基本策略：软件复用，分而治之，逐步演进，优化折中</li>
+<li>Python 编程规范：程序模板</li>
+</ul>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">__author__ = <span class="string">'YourName'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(argv)</span>:</span></span><br><span class="line">    <span class="string">"""Do something..."""</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    exit(main(sys.argv[<span class="number">1</span>:]))</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>注释
+<ul>
+<li>当前实现的原因，以&quot;#&quot;开头</li>
+<li>文档字符串，说明如何使用，甚至包括示例和单元测试</li>
+</ul>
+</li>
+</ul>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gold_divide</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="comment"># 黄金分割点比例约为 0.618034</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> n * <span class="number">0.618</span> <span class="comment"># 直接取0.618以加速</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gold_divide</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="string">""" Get gold divide value of n.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">    	n: input number</span></span><br><span class="line"><span class="string">    	</span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    	A float value</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">return</span> n * <span class="number">0.618</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>
+<p>注重注释的质量而不是数量，解释为什么而不是怎么样</p>
+</li>
+<li>
+<p>语句：</p>
+<ul>
+<li>
+<p>使用四个空格来进行缩进</p>
+</li>
+<li>
+<p>类名为驼峰风格且首字母大写（如：<code>BookShelf</code>）</p>
+</li>
+<li>
+<p>变量名应为下划线风格（如：<code>book_shelf</code>）</p>
+</li>
+<li>
+<p>使用文件时注意显式调用 <code>close()</code> 或使用 <code>with</code>：</p>
+<ul>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'output.txt'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>
+<p>每行写一个语句</p>
+</li>
+</ul>
+</li>
+<li>
+<p>import：先 import Python 内置模块，再 import 第三方模块，最后 import 自己开发的其他模块</p>
+</li>
+<li>
+<p>不要使用 from module import *，除非是 import 常量定义模块或其他能够确保不会出现命名空间冲突的模块</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/18/产生式系统要点总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2469,228 +2657,6 @@ $$</p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/09/CST2018-3-4-kth/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/09/CST2018-3-4-kth/" itemprop="url">CST2018 3-4 kth</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-09T09:35:56+08:00">
-                2019-02-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/THUOJ/" itemprop="url" rel="index">
-                    <span itemprop="name">THUOJ</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/02/09/CST2018-3-4-kth/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/02/09/CST2018-3-4-kth/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2>题目描述</h2>
-<ul>
-<li>三个数组 a[1...n], b[1...n], c[1...n]，在所有数对$(x,y,z)$ $(1\le x,y,z\le n)$ 中，找到 $a[x]+b[y]+c[z]$ 的值第 $k$ 小的那对，若有多对，找出任何一对即可</li>
-<li>不能直接访问三个数组中的元素，只能给出两种方案，两个数对，通过函数接口，来比较值得大小</li>
-</ul>
-<h2>接口说明</h2>
-<ul>
-<li>kth.h</li>
-<li>kth_lib.cpp</li>
-</ul>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void get_kth(int n, int k, int *x, int *y, int *z);</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>需要实现 <code>get_kth</code>，找到第 $k$ 小的数对后，需要将该数对的三个值分别存在 <code>*x</code>,<code>*y</code>,<code>*z</code>  中</li>
-</ul>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int compare(int x, int y, int z, int u, int v, int w);</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>当 $a[x]+b[y]+c[z]\lt a[u]+b[v]+c[w]$ 时，返回 $1$ ，否则返回 $0$</li>
-<li><code>compare</code> 的实现为 $O(1)$ ，可认为每秒钟至少能调用 1e7 次该函数</li>
-</ul>
-<h2>测试说明</h2>
-<ul>
-<li>首先读入 $n\ k$</li>
-<li>然后读入并生成 a,b,c 数组中的数</li>
-<li>接着调用 <code>get_kth</code> 函数</li>
-<li>在实现的 <code>get_kth</code> 函数中，可以调用 <code>compare</code> 函数来对两个数进行比较，若传入参数不在 $1\sim n$ 的范围内，判为 WA</li>
-<li><code>get_kth</code> 返回后，输出 $a[x]+b[y]+c[z]$ 的值</li>
-<li>本地测试：<code>g++ kth_lib.cpp your_code.cpp -O2 -o kth.exe</code></li>
-<li>样例程序：<code>kth_sample.cpp</code></li>
-</ul>
-<h2>输入输出</h2>
-<ul>
-<li>输入：
-<ul>
-<li>第 $1$ 行：$n\ k$</li>
-<li>$n$ 个整数，第 $i$ 个表示 $a[i]$</li>
-<li>$n$ 个整数，第 $i$ 个表示 $b[i]$</li>
-<li>$n$ 个整数，第 $i$ 个表示 $c[i]$</li>
-<li>每个整数 $\in [1,10^8]$</li>
-</ul>
-</li>
-<li>输出：
-<ul>
-<li>正确时输出方案的值，错误时输出错误信息</li>
-</ul>
-</li>
-</ul>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">3 6</span><br><span class="line">3 1 5</span><br><span class="line">4 2 1</span><br><span class="line">200 300 100</span><br><span class="line">output:</span><br><span class="line">106</span><br></pre></td></tr></table></figure></p>
-<h2>限制</h2>
-<ul>
-<li>4 sec</li>
-<li>256 MB</li>
-</ul>
-<h2>提示</h2>
-<ul>
-<li>
-<p>[n 特别大，枚举所有方案好像不太可能]</p>
-</li>
-<li>
-<p>[如果只有一个数组，要求第 k 小，可以怎么求？]</p>
-</li>
-<li>
-<p>[如果有两个数组，该怎么求？]</p>
-</li>
-<li>
-<p>[如果有三个数组呢？　　　　]</p>
-</li>
-<li>
-<p>[堆　　　　　　　　　　　　]</p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2745,7 +2711,7 @@ $$</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">198</span>
+                  <span class="site-state-item-count">199</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

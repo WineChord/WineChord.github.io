@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Notes for CS 276 6 Scoring, Term Weighting and the Vector Space Model]]></title>
+    <url>%2F2019%2F02%2F21%2FNotes-for-CS-276-6-Scoring-Term-Weighting-and-the-Vector-Space-Model%2F</url>
+    <content type="text"><![CDATA[主要讲给文档评等级，和之前的 &quot;Boolean queries&quot; 相区别。 重点有：Vector space model 和 tf-idf Ranked retrieval 之前讲的都是二元查询：一个文档有或者没有，但是这不适用于大众化的查询 二元查询出现的问题 结果时好时坏：正确匹配时结果很多，但是一旦不匹配一个结果都没有 引出评级检索模型 查询语句更加随意（Free text queries），给出的是一系列有序的回答 只给出最好的 $k$ 个结果 打分数是评级检索中的基础 这些分数代表了文档和查询之间的符合程度 需要一种手段来给一对（查询/文档）来打分 查询中只有一个词？那么如果文档中没有这个词，评分为0 文档中该词出现的次数越多，评分越高 方法1：Jaccard coefficient $jaccard(A,B)=\frac{|A\cap B|}{|A\cup B|}$ $jaccard(A,A)=1$ $jaccard(A,B)=0\ if\ A\cap B=0$ 该方法的问题： 没有考虑到关键词的频率（term frequency） 一些不常见的关键词提供了更多的信息，这个方法没有考虑这一点 需要更加成熟的方式来归一化长度 之后会用 $\frac{|A\cap B|}{\sqrt{|A\cup B|}}$ 关键词-文档矩阵 每个文档用一个向量来表示，这个向量中每个值分别代表了一种关键字出现的次数 词袋模型（Bag of words model） 向量表示没有考虑关键字在文档中的次序 这称为词袋模型 关键词频率 tf（term frequency） $tf_{t,d}$ 表示关键词 $t$ 在文档 $d$ 中出现的频率 如何用这个定义来计算分数？ 相关性并不正比于词频 对数频率权重（Log-frequency weighting） $$ w_{t,d}= \begin{cases} 1+log_{10}tf_{t,d},\ &amp;if\ tf_{t,d}\gt0\ 0,&amp;otherwise \end{cases} $$ $$ score=\sum_{t\in q\cap d}(1+log\ tf_{t,d}) $$ 如果没有一个查询的关键词出现在文档中，分数为0 文档频率（Document frequency） 不常见的关键字提供更多信息 考虑在查询语句中不常见的关键词 假如一个文档包含了这个不常见的关键词，那么这个文档很可能与查询相关 因此我们希望提高不常见的关键词的权重 而对于频率较高的关键词，也应有较高的权重，但是要低于不常见的词的权重 用文档频率来进行表征（document frequency） idf weight $df_t$ 是关键词 $t$ 的文档频率：即多少个文档包含关键词 $t$ 是对 $t$ 信息多少的反向评估 $df_t\le N$ （$N$ 是文档的总数） 定义 idf (inverse document frequency) 反向文档频率如下： $idf_t=log_{10}(\frac{N}{df_t})$ 使用对数是为了减弱 $idf$ 的影响 idf 对排名的影响 idf 对单关键字的查询没有影响 影响多关键字查询，比如查询 &quot;capricious person&quot;，idf 会使 &quot;capricious&quot; 出现的次数对评分影响重一些 Collection vs. Document frequency collection frequency 指的是一个关键字在整个文集中出现的次数 df 指的是该关键字出现在了多少篇文章当中 tf-idf weighting $w_{t,d}=log(1+tf_{t,d})\times log_{10}(\frac{N}{df_t})$ 是 $tf$ 和 $idf$ 的乘积 是一个很有名的权重方案 当文档中词频上升或关键词的稀有程度较高时，该值较大 Score for a document given a query $Score(q,d)=\sum_{t\in q\cap d}tf.idf_{t,d}$ 变种有很多：比如 $tf$ 是怎么计算的啊（是否取对数），查询中的关键字是否也参与权重计算当中啊... 现在每一个文档都被表示成了使之向量，向量中的每一个值是 $tf-idf$ 权重 $\in \mathbb{R}^{|V|}$ 文档就变成了向量！ 至此我们有了 $|V|$ 维向量空间 关键字是空间的坐标轴 文档是这个空间中的向量 把这个应用到网络搜索引擎中去时，可以达到非常高的维度 同时也是非常稀疏的向量：很多值都是0 查询语句也可以作为向量 关键思想1：将查询语句也表示成空间中的向量 关键思想2：根据文档与查询在空间中的临近程度来对文档进行排序 proximity = similarity of vectors proximity $\approx$ inverse of distance 即文档和查询语句之间的相似程度 形式化向量空间的临近度 第一想法：两点之间的距离？（两个向量末端点的距离） 欧几里得距离？？ 并不好：对于不同长度的向量而言，这个距离过大了 使用角度来衡量！ 想象一下：把一个文档复制一下加到它自己后面，复制前后文档的相似度应该是一样的！ 关键思路：根据文档和查询之间的夹角大小来对文档进行排序 从角度到余弦值 该角度距离可以用余弦值的大小来衡量！ 因为余弦函数在 $[0^{\circ}, 180^{\circ}]$ 内单调递减！ 长度归一化（Length normalization） 使用 $L_2$ 范数：$||\vec{x}||_2=\sqrt{\sum_i{x_i^2}}$ cosine(query, document) $$ cos(\vec{q},\vec{d})=\frac{\vec{q}\cdot \vec{d}}{|\vec{q}||\vec{d}|}=\frac{\sum_{i=1}^{|V|}q_id_i}{\sqrt{\sum_{i=1}^{|V|}q_i^2}\sqrt{\sum_{i=1}^{|V|}d_i^2}} $$ $q_i$ 是第i个关键字在查询中的 tf-idf 权重 $d_i$ 是第i个关键字在文档中的 tf-idf 权重 idf 中 log 的底是多少是无所谓的 总结：向量空间排名 把查询语句表示成一个 tf-idf 向量 把每个文档表示成一个 tf-idf 向量 计算查询语句与每一个文档的余弦相似度 根据余弦相似度来对文档进行排名 给用户分数最高的 $k$ （比如 $k=10$）个答案 ref:Vector Space Model]]></content>
+      <categories>
+        <category>CS 276 IR</category>
+      </categories>
+      <tags>
+        <tag>IR</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[CS 276 索引压缩]]></title>
     <url>%2F2019%2F02%2F21%2FCS-276-%E7%B4%A2%E5%BC%95%E5%8E%8B%E7%BC%A9%2F</url>
     <content type="text"><![CDATA[当当当当（sol sol sol mi），这又是一个 in-class lab，主要研究对象是索引压缩，前置知识请看第五章笔记。 参考资料：starter code , class results 两种基本的压缩方法： 传统方法：bit-level such as Huffman, Golumb, Gamma, Delta, Rice ... 对齐方法：&quot;Byte aligned&quot; or &quot;Word aligned&quot; encodings, where roughly there are stretches of bits that you can use directly as numbers, and you mainly access them by masking and shifting 后一种打败了前一种方法，虽然不是压缩率最高的，但是后一种方法的解压速度更快，并且更容易实现 在索引压缩中，考虑两个点： size speed 在某种程度上，减小大小可以提高速度，但是不能太过，字节对齐所带来的速度提升要比它增加的大小要划算得多。 这个 lab 主要关注于大小 对于任何一个压缩方法，在中间都必须有一组字节，比如放在 ByteArrayOutputStream 或者 byte[] 中 bytes and bitwise operations Java 支持十六进制和二进制表示：0xFC 0b1100 int,short,byte 分别为4，2，1个字节，可以使用强制类型转换： 12int a = 32;byte b = (byte) a; byte 总为带符号的，若要用无符号：Byte.toUnsignedInt(byte) &gt;&gt;&gt; 表示右移，左填充0 有用的类： BitSet byte[] ByteArrayOutputStream 可以用 I/O 方法写数据，最后用 toByteArray() 来得到这些字节组 与之相反的是 ByteArrayInputStream ，可以初始化一个 byte[] ，然后从中读取字节 Tasks to do 实现 gapEncode,gapDecode 思路：直接写，每次取差值就好了，解码的时候一个个加前面的就行（注意一下操作的顺序） 实现 VBEncodeInteger,VBDecodeInteger 思路：参考 IIR 5.3.1 Figure 5.8 的伪代码进行实现 （记得抛出异常） 1234567891011121314151617181920212223242526// VBEncoderIntegerwhile(true) &#123; for(int i = numBytes; i &gt; 0; i--) outputVBCode[i] = outputVBCode[i-1]; outputVBCode[0] = (byte) Math.floorMod(gap, 128); numBytes++; if(gap &lt; 128) break; gap &gt;&gt;&gt;= 7;&#125;outputVBCode[numBytes-1] += 128;// VBDecodeIntegerint i = startIndex; int ans = 0;while(true) &#123; if(i &gt;= inputVBCode.length) throw new IllegalArgumentException(); int uintVB = Byte.toUnsignedInt(inputVBCode[i]); if(uintVB &lt; 128) ans = (ans &lt;&lt; 7) + uintVB; else &#123; ans = (ans &lt;&lt; 7) + (uintVB-128); numberEndIndex[0] = ans; numberEndIndex[1] = i + 1; break; &#125; i++;&#125; 当间隔非常小时，这种方法非的空间比较多，比如对于 the 来说，每个文档都会出现，gap为1，但是每次都要用一个字节来存储。 实现 unaryEncodeInteger, unaryDecodeInteger，提示：使用 BitSet 类 123456789101112131415161718public static int unaryEncodeInteger(int number, BitSet outputUnaryCode, int startIndex) &#123; int nextIndex = startIndex; // TODO: Fill in your code here for(; nextIndex &lt; startIndex + number; nextIndex++) outputUnaryCode.set(nextIndex); outputUnaryCode.set(nextIndex++, false); return nextIndex;&#125;public static void unaryDecodeInteger(BitSet inputUnaryCode, int startIndex, int[] numberEndIndex) &#123; // TODO: Fill in your code here int nextIndex = startIndex; int number = 0; while(inputUnaryCode.get(nextIndex++) != false) &#123; number++; &#125; numberEndIndex[0] = number; numberEndIndex[1] = nextIndex;&#125; 实现 gammaEncodeInteger, gammaDecodeInteger，也是使用 BitSet 类，需要更多的操作 1234567891011121314151617181920212223242526272829303132333435363738394041public static int gammaEncodeInteger(int number, BitSet outputGammaCode, int startIndex) &#123; int nextIndex = startIndex; // TODO: Fill in your code here if(number &gt;= 1) &#123; BitSet offset = new BitSet(); int length = 0; while(number != 0) &#123; offset.set(length, (number%2)==1); length++; number &gt;&gt;&gt;= 1; &#125; for(int i = 0; i &lt; length-1; i++) outputGammaCode.set(nextIndex++, true); outputGammaCode.set(nextIndex++, false); for(int i = length-2; i &gt;= 0; i--) outputGammaCode.set(nextIndex++, offset.get(i)); &#125; return nextIndex;&#125;public static void gammaDecodeInteger(BitSet inputGammaCode, int startIndex, int[] numberEndIndex) &#123; // TODO: Fill in your code here if(inputGammaCode.length() == 0) &#123; numberEndIndex[0] = 0; numberEndIndex[1] = startIndex; &#125; else &#123; int nextIndex = startIndex; int length = 0; while(inputGammaCode.get(nextIndex++) != false) &#123; length++; &#125; int num = 1; while(length != 0) &#123; length--; int numToAdd = inputGammaCode.get(nextIndex++) == true ? 1 : 0; num = (num&lt;&lt;1) + numToAdd; &#125; numberEndIndex[0] = num; numberEndIndex[1] = nextIndex; &#125;&#125; try out Huffman or Golumb codes?? Simple 9 implementation &quot;Simple-9&quot; 是一个 32-bit 字对齐的编码方式，它试图尽可能地将 gaps 塞到 32-bit 的字中，使用的方法是对每一个 gap 都分配相同数量的比特，并将 gap g 编码为二进制的 g-1 。 最前面的 4 个比特是用来确定一个字中要编码多少个间隔的（表见https://github.com/manning/CompressionAlgorithms），后面的 28 个比特则是来表示这些间隔的 比如，the postings list: 16384 16400 可以编码为： 0111 01111111111111 00000000001111]]></content>
@@ -169,8 +180,8 @@
         <category>THUOJ</category>
       </categories>
       <tags>
-        <tag>平衡树</tag>
         <tag>Hash</tag>
+        <tag>平衡树</tag>
       </tags>
   </entry>
   <entry>
@@ -1226,8 +1237,8 @@
         <tag>LeetCode</tag>
         <tag>Two Pointers</tag>
         <tag>Hash Table</tag>
-        <tag>Binary Search</tag>
         <tag>Sort</tag>
+        <tag>Binary Search</tag>
       </tags>
   </entry>
   <entry>
@@ -1726,8 +1737,8 @@
       </categories>
       <tags>
         <tag>LeetCode</tag>
-        <tag>Math</tag>
         <tag>String</tag>
+        <tag>Math</tag>
       </tags>
   </entry>
   <entry>
@@ -1739,8 +1750,8 @@
       </categories>
       <tags>
         <tag>LeetCode</tag>
-        <tag>Math</tag>
         <tag>String</tag>
+        <tag>Math</tag>
       </tags>
   </entry>
   <entry>
