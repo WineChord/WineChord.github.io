@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/blog-logo180.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog-logo32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog-logo16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="IR," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="This lecture:  Speeding up vector space ranking Putting together a complete search system  Will require learning about a number of miscellaneous topics and heuristics    Efficient cosine ranking  Find">
+<meta name="keywords" content="IR">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notes for CS 276 7 Scoring and results assembly">
+<meta property="og:url" content="http://yoursite.com/2019/02/21/Notes-for-CS-276-7-Scoring-and-results-assembly/index.html">
+<meta property="og:site_name" content="Wine&amp;Chord">
+<meta property="og:description" content="This lecture:  Speeding up vector space ranking Putting together a complete search system  Will require learning about a number of miscellaneous topics and heuristics    Efficient cosine ranking  Find">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://nlp.stanford.edu/IR-book/html/htmledition/img508.png">
+<meta property="og:updated_time" content="2019-02-22T02:07:59.771Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Notes for CS 276 7 Scoring and results assembly">
+<meta name="twitter:description" content="This lecture:  Speeding up vector space ranking Putting together a complete search system  Will require learning about a number of miscellaneous topics and heuristics    Efficient cosine ranking  Find">
+<meta name="twitter:image" content="https://nlp.stanford.edu/IR-book/html/htmledition/img508.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/21/Notes-for-CS-276-7-Scoring-and-results-assembly/"/>
+
+
+
+
+
+  <title>Notes for CS 276 7 Scoring and results assembly | Wine&Chord</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <!-- <a href="https://github.com/WineChord"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a> -->
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wine&Chord</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/Notes-for-CS-276-7-Scoring-and-results-assembly/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Notes for CS 276 7 Scoring and results assembly</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-21T22:51:11+08:00">
+                2019-02-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS-276-IR/" itemprop="url" rel="index">
+                    <span itemprop="name">CS 276 IR</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/21/Notes-for-CS-276-7-Scoring-and-results-assembly/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/21/Notes-for-CS-276-7-Scoring-and-results-assembly/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>This lecture:</p>
+<ul>
+<li>Speeding up vector space ranking</li>
+<li>Putting together a complete search system
+<ul>
+<li>Will require learning about a number of miscellaneous topics and heuristics</li>
+</ul>
+</li>
+</ul>
+<p>Efficient cosine ranking</p>
+<ul>
+<li>Find the K docs in the collection &quot;nearest&quot; to the query $\Rightarrow$ K largest query-doc cosines</li>
+<li>Efficient ranking:
+<ul>
+<li>Computing a single cosine efficiently</li>
+<li>Choosing the K largest cosine values efficiently
+<ul>
+<li>Can we do this without computing all N cosines?</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>What we're doing in effect: solving the K-nearest neighbor problem for a query vector</li>
+<li>In general, we do not know how to do this efficiently for high-dimensional spaces</li>
+<li>But it is solvable for short queries, and standard indexes support this well</li>
+</ul>
+<p>Special case -- unweighted queries</p>
+<ul>
+<li>No weighting on query terms
+<ul>
+<li>Assume each query term occurs only once</li>
+</ul>
+</li>
+<li>Then for ranking, don't need to normalize query vector
+<ul>
+<li>Slight simplification of algorithm from Lecture 6</li>
+</ul>
+</li>
+</ul>
+<p>Computing the K largest cosines: selection vs. sorting</p>
+<ul>
+<li>Typically we want to retrieve the top K docs (in the cosine ranking for the query)
+<ul>
+<li>not to totally order all docs in the collection</li>
+</ul>
+</li>
+<li>Can we pick off docs with K highest cosines?</li>
+<li>Let J=number of docs with nonzero cosines
+<ul>
+<li>We seek the K best of these J</li>
+</ul>
+</li>
+</ul>
+<p>Use heap for selecting top K</p>
+<ul>
+<li>Binary tree in which each node's value $\gt$ the values of children</li>
+<li>Takes 2J operations to construct, then each of K &quot;winners&quot; read off in 2log J steps</li>
+</ul>
+<p>Bottlenecks</p>
+<ul>
+<li>Primary computational bottleneck in scoring: cosine computation</li>
+<li>Can we avoid all this computation?</li>
+<li>Yes, but may sometimes get it wrong
+<ul>
+<li>a doc not in the top K may creep into the list of K output docs</li>
+<li>Is this such a bad thing?</li>
+</ul>
+</li>
+</ul>
+<p>Cosine similarity is only a proxy</p>
+<ul>
+<li>User has a task and a query formulation</li>
+<li>Cosine matches docs to query</li>
+<li>Thus cosine is anyway a proxy for user happiness</li>
+<li>If we get a list of K docs &quot;close&quot; to the top K by cosine measure, should be ok</li>
+</ul>
+<p>Generic approach</p>
+<ul>
+<li>Find a set $A$ of contenders, with $K\lt |A|\ll N$
+<ul>
+<li>$A$ does not necessarily contain the top $K$, but has many docs from among the top $K$</li>
+<li>Return the top $K$ docs in A</li>
+</ul>
+</li>
+<li>Think of $A$ as pruning non-contenders</li>
+<li>The same approach is also used for other (non-cosine) scoring functions</li>
+<li>Will look at several schemes following this approach</li>
+</ul>
+<p>Index elimination</p>
+<ul>
+<li>Basic algorithm cosine computation algorithm only considers docs containing at least one query term</li>
+<li>Take this further:
+<ul>
+<li>Only consider high-idf query terms</li>
+<li>Only consider docs containing many query terms</li>
+</ul>
+</li>
+</ul>
+<p>High-idf query terms only</p>
+<ul>
+<li>For a query such as <code>catcher in the rye</code></li>
+<li>Only accumulate scores from <code>catcher</code> and <code>rye</code></li>
+<li>Intuition: <code>in</code> and <code>the</code> contribute little to the scores and so don't alter rank-ordering much</li>
+<li>Benefit:
+<ul>
+<li>Postings of low-idf terms have many docs $\rightarrow$ these (many) docs get eliminated from set $A$ of contenders</li>
+</ul>
+</li>
+</ul>
+<p>Docs containing many query terms</p>
+<ul>
+<li>Any doc with at least one query term is a candidate for the top $K$ output list</li>
+<li>For multi-term queries, only compute scores for docs containing several of the query terms</li>
+<li>Easy to implement in postings traversal</li>
+</ul>
+<p>Champion lists</p>
+<ul>
+<li>Precompute for each dictionary term $t$, the $r$ docs of highest weight in $t$'s postings
+<ul>
+<li>Call this the champion list for $t$</li>
+<li>(aka fancy list or top docs for $t$)</li>
+</ul>
+</li>
+<li>Note that $r$ has to be chosen at index build time
+<ul>
+<li>Thus, it's possible that $r\lt K$</li>
+</ul>
+</li>
+<li>At query time, only compute scores for docs in the champion list of some query term
+<ul>
+<li>Pick the $K$ top-scoring docs from amongst these</li>
+</ul>
+</li>
+</ul>
+<p>Static quality scores</p>
+<ul>
+<li>We want top-ranking documents to be both <em>relevant</em> and <em>authoritative</em></li>
+<li><em>Relevance</em> is being modeled by cosine scores</li>
+<li><em>Authority</em> is typically a query-independent property of a document</li>
+<li>Examples of authority signals
+<ul>
+<li>Wikipedia among websites</li>
+<li>Articles in certain newspapers</li>
+<li>A paper with many citations</li>
+<li>(Pagerank)</li>
+</ul>
+</li>
+</ul>
+<p>Modeling authority</p>
+<ul>
+<li>Assign to each document a query-independent quality score in $[0,1]$ to each document $d$
+<ul>
+<li>Denote this by $g(d)$</li>
+</ul>
+</li>
+<li>Thus, a quantity like the number of citations is scaled into $[0,1]$</li>
+</ul>
+<p>Net score</p>
+<ul>
+<li>Consider a simple total score combining cosine relevance and authority</li>
+<li>net-score(q,d) = g(d) + cosine(q,d)</li>
+<li>Now we seek the top $K$ docs by net score</li>
+</ul>
+<p>Top $K$ by net score -- fast methods</p>
+<ul>
+<li>First idea: Order all postings by $g(d)$</li>
+<li>Key: this is a common ordering for all postings</li>
+<li>Thus, can concurrently traverse query terms' postings for
+<ul>
+<li>Postings intersection</li>
+<li>Cosine score computation</li>
+</ul>
+</li>
+</ul>
+<p>Why order postings by $g(d)$?</p>
+<ul>
+<li>Under $g(d)$-ordering, top-scoring docs likely to appear early in postings traversal</li>
+<li>In time-bound applications (say, we have to return whatever search results we can in 50ms), this allows us to stop postings traversal early
+<ul>
+<li>Short of computing scores for all docs in postings</li>
+</ul>
+</li>
+</ul>
+<p>Champion lists in $g(d)$-ordering</p>
+<ul>
+<li>Can combine champion lists with $g(d)$-ordering</li>
+<li>Maintain for each term a champion list of the $r$ docs with highest $g(d)+tf-idf_{td}$</li>
+<li>Seek top-$K$ results from only the docs in these champion lists</li>
+</ul>
+<p>High and low lists</p>
+<ul>
+<li>For each term, we maintain two postings lists called <em>high</em> and <em>low</em>
+<ul>
+<li>Think of <em>high</em> as the champion list</li>
+</ul>
+</li>
+<li>When traversing postings on a query, only traverse <em>high</em> lists first
+<ul>
+<li>If we get more than $K$ docs, select the top $K$ and stop</li>
+<li>Else proceed to get docs from the <em>low</em> lists</li>
+</ul>
+</li>
+<li>Can be used even for simple cosine scores, without global quality $g(d)$</li>
+<li>A means for segmenting index into two tiers</li>
+</ul>
+<p>Impact-ordered postings</p>
+<ul>
+<li>We only want to compute scores for docs for which $wf_{t,d}$ is high enough</li>
+<li>We sort each postings list by $wf_{t,d}$</li>
+<li>Now: not all postings in a common order!</li>
+<li>How do we compute scores in order to pick off top $K$?
+<ul>
+<li>Two ideas follow</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>Early termination</li>
+</ol>
+<ul>
+<li>When traversing $t$'s postings, stop early after either
+<ul>
+<li>a fixed number of $r$ docs</li>
+<li>$wf_{t,d}$ drops below some threshold</li>
+</ul>
+</li>
+<li>Take the union of the resulting sets of docs
+<ul>
+<li>One from the postings of each query term</li>
+</ul>
+</li>
+<li>Compute only the scores for docs in this union</li>
+</ul>
+<ol start="2">
+<li>idf-ordered terms</li>
+</ol>
+<ul>
+<li>When considering the postings of query terms</li>
+<li>Look at them in order of decreasing idf
+<ul>
+<li>High idf terms likely to contribute most to score</li>
+</ul>
+</li>
+<li>As we update score contribution from each query term
+<ul>
+<li>Stop if doc scores relatively unchanged</li>
+</ul>
+</li>
+<li>Can apply to cosine or some other net scores</li>
+</ul>
+<p>Cluster pruning: preprocessing</p>
+<ul>
+<li>Pick $\sqrt{N}$ docs at random: call these <em>leaders</em></li>
+<li>For every other doc, pre-compute nearest leader
+<ul>
+<li>Docs attached to a leader: its <em>followers</em></li>
+<li>Likely: each leader has ~$\sqrt{N}$ followers</li>
+</ul>
+</li>
+</ul>
+<p>Clustering pruning: query processing</p>
+<ul>
+<li>Process a query as follows:
+<ul>
+<li>Given query $Q$, find its nearest <em>leader</em> $L$.</li>
+<li>Seek $K$ nearest docs from among $L$'s followers</li>
+</ul>
+</li>
+</ul>
+<p>Why use random sampling</p>
+<ul>
+<li>Fast</li>
+<li>Leaders reflect data distribution</li>
+</ul>
+<p>General variants</p>
+<ul>
+<li>Have each follower attached to $b1=3$ (say) nearest leaders</li>
+<li>From query, find $b2=4$ (say) nearest leaders and their followers</li>
+<li>Can recurse on leader/follower construction</li>
+</ul>
+<p>Parametric and zone indexes</p>
+<ul>
+<li>Thus far, a doc has been a sequence of terms</li>
+<li>In fact documents have multiple parts, some with special semantics:
+<ul>
+<li>Author/Title/Date/Language/Format</li>
+</ul>
+</li>
+<li>These constitute the metadata about a document</li>
+</ul>
+<p>Fields</p>
+<ul>
+<li>We sometimes wish to search by these metadata
+<ul>
+<li>e.g., find docs authored by William Shakespeare in the year o 1601, containing <code>alas poor Yorick</code></li>
+</ul>
+</li>
+<li>Year=1601 is an example of a field</li>
+<li>Also, author last name=shakespeare, etc.</li>
+<li>Field or parametric index: postings for each field value
+<ul>
+<li>Sometimes build range trees (e.g., for dates)</li>
+</ul>
+</li>
+<li>Field query typically treated as conjunction
+<ul>
+<li>(doc <em>must</em> be authored by shakespeare)</li>
+</ul>
+</li>
+</ul>
+<p>Zone</p>
+<ul>
+<li>A zone is a region of the doc that can contain an arbitrary amount of text, e.g.,
+<ul>
+<li>Title/Abstract/References ...</li>
+</ul>
+</li>
+<li>Build inverted indexes on zones as well to permit querying</li>
+<li>E.g., &quot;find docs with <em>merchant</em> in the title zone and matching the query <em>gentle rain</em>&quot;</li>
+</ul>
+<p>Tiered indexes</p>
+<ul>
+<li>Break postings up into a hierarchy of lists
+<ul>
+<li>Most important</li>
+<li>..</li>
+<li>Least important</li>
+</ul>
+</li>
+<li>Can be done by $g(d)$ or another measure</li>
+<li>Inverted index thus broken up into tiers of decreasing importance</li>
+<li>At query time use top tier unless it fails to yield $K$ docs
+<ul>
+<li>If so drop to lower tiers</li>
+</ul>
+</li>
+</ul>
+<p>Query term proximity</p>
+<ul>
+<li>Free text queries: just a set of terms typed into the query box -- common on the web</li>
+<li>Users prefer docs in which query terms occur within close proximity of each other</li>
+<li>Let $w$ be the smallest window in a doc containing all query terms, e.g.,</li>
+<li>For the query <em>strained mercy</em> the smallest window in the doc <em>The quality of mercy is not strained</em> is 4 (words)</li>
+<li>Would like scoring function to take this into account
+<ul>
+<li>-- how?</li>
+</ul>
+</li>
+</ul>
+<p>Query parsers</p>
+<ul>
+<li>Free text query from user may in fact spawn one or more queries to the indexes, e.g., query <em>rising interest rates</em>
+<ul>
+<li>Run the query as a phrase query</li>
+<li>If $\lt K$ docs contain the phrase <em>rising interest rates</em>, run the two phrase queries <em>rising interest</em> and <em>interest rates</em></li>
+<li>If we still have $\lt K$ docs, run the vector space query <em>rising interest rates</em></li>
+<li>Rank matching docs by vector space scoring</li>
+</ul>
+</li>
+<li>This sequence is issued by a query parser</li>
+</ul>
+<p>Aggregate scores</p>
+<ul>
+<li>We've seen that score functions can combine cosine, static quality, proximity, etc.</li>
+<li>How do we know the best combination?</li>
+<li>Some applications -- expert-turned</li>
+<li>Increasingly common: machine-learned</li>
+</ul>
+<p>Putting it all together</p>
+<p><img src="https://nlp.stanford.edu/IR-book/html/htmledition/img508.png" alt=""></p>
+<p>ref: <a href="http://web.stanford.edu/class/cs276/handouts/lecture7-vectorspace-1per.pdf" target="_blank" rel="noopener">Computing Scores</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/IR/" rel="tag"># IR</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/21/Notes-for-CS-276-11-Probabilistic-Information-Retrieval/" rel="next" title="Notes for CS 276 11 Probabilistic Information Retrieval">
+                <i class="fa fa-chevron-left"></i> Notes for CS 276 11 Probabilistic Information Retrieval
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/blog-logo.png"
+                alt="Wine&Chord" />
+            
+              <p class="site-author-name" itemprop="name">Wine&Chord</p>
+              <p class="site-description motion-element" itemprop="description">记录学习经历</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">201</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" >Wine&Chord</span>
+
+  
+</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://wineandchord.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/02/21/Notes-for-CS-276-7-Scoring-and-results-assembly/';
+          this.page.identifier = '2019/02/21/Notes-for-CS-276-7-Scoring-and-results-assembly/';
+          this.page.title = 'Notes for CS 276 7 Scoring and results assembly';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://wineandchord.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"all"},"extensions":["mediawiki-texvc.js"]}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- <script type="text/javascript" src="/js/src/love.js"></script>script> -->

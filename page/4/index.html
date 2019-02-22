@@ -296,6 +296,242 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/09/CST2018-2-5-ChromPoly/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/09/CST2018-2-5-ChromPoly/" itemprop="url">CST2018 2-5 ChromPoly</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-09T09:34:41+08:00">
+                2019-02-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/THUOJ/" itemprop="url" rel="index">
+                    <span itemprop="name">THUOJ</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/09/CST2018-2-5-ChromPoly/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/09/CST2018-2-5-ChromPoly/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2>题目描述</h2>
+<ul>
+<li>
+<p>考察无向图 $G=(V,E)$，$G$ 的一个 $k-$染色（coloring）是从 $V$ 到 $[1,k]$ 的一个映射：</p>
+<p>$\pi:V\rightarrow {1,2,...,k}$</p>
+<p>且满足</p>
+<p>$\forall v,u\in V,\pi(v)\not= \pi(u) if (v,u)\in E$</p>
+</li>
+<li>
+<p>即：将所有顶点归入不超过 $k$ 个等价类，且保证相邻顶点不属同类</p>
+</li>
+<li>
+<p>若将图 $G$ 和 $k$ 视作变量，则可用函数 $CP(G,k)$ 表示图 $G$ 的 $k-$染色方案数。而对于任一图 $G$，该函数都是 $k$ 的多项式形式，称作色多项式（chromatic polynomial）</p>
+</li>
+<li>
+<p>例子：</p>
+</li>
+<li>
+<p>对于包含 $n$ 个顶点，不含任何边的图 $Sn$，有</p>
+<ul>
+<li>$CP(Sn,k)=k^n$</li>
+</ul>
+</li>
+<li>
+<p>对于完全图 $Kn$，有</p>
+<ul>
+<li>$CP(Kn,k)=0,if\ k\lt n$</li>
+<li>$CP(Kn,k)=\frac{k!}{(k-n)!},if\ k\ge n$</li>
+</ul>
+</li>
+<li>
+<p>对于二部图（bipartition）$B(2,3)$，有（在这个语境里其实是完全二分图）</p>
+<ul>
+<li>$CP(B(2,3),1)=0$</li>
+<li>$CP(B(2,3),2)=2$</li>
+<li>$CP(B(2,3),3)=6(2*3)+6\times 8\div 2=30$</li>
+<li>$CP(B(2,3),k)=k^5-6<em>k^4+15</em>k^3-17<em>k^2+7</em>k$</li>
+</ul>
+</li>
+<li>
+<p>对于 5 阶环 $C5$，有</p>
+<ul>
+<li>$CP(C5,1)=P(2,C5)=0$</li>
+<li>$CP(C5,3)=30$</li>
+<li>$CP(C5,k)=k^5-5<em>k^4+10</em>k^3+4*k$</li>
+</ul>
+</li>
+<li>
+<p>请编写程序，求对于给定的图 $G$，计算并输出对应的色多项式 $CP(G,k)$</p>
+</li>
+</ul>
+<h2>输入输出</h2>
+<ul>
+<li>输入：
+<ul>
+<li>第 $1$ 行：$n\ m$ 顶点数和边数</li>
+<li>以下每行：$(u,v)$表示图中的一条边，且保证满足 $0\le u,v\lt n$</li>
+</ul>
+</li>
+<li>输出：
+<ul>
+<li>$n+1$ 行：每一行表示该图色多项式各项的系数（依 $k$ 的次数由低向高排列）</li>
+</ul>
+</li>
+</ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">input: # 为一个十字形图</span><br><span class="line">5 4</span><br><span class="line">1 0</span><br><span class="line">1 3</span><br><span class="line">1 2</span><br><span class="line">1 4</span><br><span class="line">output: </span><br><span class="line">0</span><br><span class="line">1</span><br><span class="line">-4</span><br><span class="line">6</span><br><span class="line">-4</span><br><span class="line">1</span><br></pre></td></tr></table></figure></p>
+<h2>数据范围</h2>
+<ul>
+<li>$1\le n\lt 30$</li>
+<li>$1\le m\lt 70$</li>
+<li>保证图中无自环</li>
+<li>各项系数的值保证在带符号64位整数范围内</li>
+<li>time：7 sec</li>
+<li>space：1024 MB</li>
+</ul>
+<h2>说明</h2>
+<ul>
+<li>$CP(G,k)=CP(G\backslash {e},k)-CP(G/{e},k)$</li>
+<li>其中 $\backslash$ 为减除（subtraction）操作，即为从图中将某一边抹去。</li>
+<li>$/$ 为收缩（contraction）操作，即为收缩边 $e$ ，直到其顶点 $v$ 和 $u$ 粘连为同一个顶点 $w$；而与之关联的边除 $e$ 外依然保留。</li>
+<li>更多：<a href="https://dsa.cs.tsinghua.edu.cn/~deng/ds/00240074@2004spring/handout/assignment/chromaticpolynomial/" target="_blank" rel="noopener">https://dsa.cs.tsinghua.edu.cn/~deng/ds/00240074@2004spring/handout/assignment/chromaticpolynomial/</a></li>
+</ul>
+<h2>思路</h2>
+<h2>实现</h2>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/09/CST2018-2-4-Sort/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2103,206 +2339,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/09/CST2018-1-4-Stock/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/09/CST2018-1-4-Stock/" itemprop="url">CST2018 1-4 Stock</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-09T09:32:29+08:00">
-                2019-02-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/THUOJ/" itemprop="url" rel="index">
-                    <span itemprop="name">THUOJ</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/02/09/CST2018-1-4-Stock/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/02/09/CST2018-1-4-Stock/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2>题目描述</h2>
-<ul>
-<li>从发行到退出之间的时段称为股票的活跃期</li>
-<li>若某股票在第123天发行并于130天退出，则认为活跃期为123-129共7天，记作 $[123,130)$</li>
-<li>假定股票在活跃期内价格不变</li>
-<li>在该王国中，禁止不同股票的活跃期相互包含，也就是说，每天发行和退市的股票累积不超过一支</li>
-<li>M先生是公认的股神，他任何时候的投资总额都保持固定，如此可保证风险有限。每天都将所有的投资集中用于购入当日价格最低的一支股票（为此可能需要先卖出原持有股票）</li>
-<li>M先生希望知道自己一段时期内的日均持股量</li>
-</ul>
-<h2>输入输出</h2>
-<ul>
-<li>输入：
-<ul>
-<li>第 $1$ 行：$N$</li>
-<li>以下 $2N$ 行：按日期升序描述股票历史</li>
-</ul>
-</li>
-</ul>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D X // 在上一事件之后的第D天有一支股票发行，且按M先生的投资额可购入X股</span><br><span class="line">D // 在上一事件之后的第D天有一支股票退市</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>其中，除首个事件的D值可能为0，其余D值均为正整数。X均为非负整数</li>
-<li>输入的时间序列合法，即保证活跃股票数始终非负</li>
-<li>输出：
-<ul>
-<li>输出自股市开市至最后一支股票退出期间，M先生的日均持股量乘以天数</li>
-</ul>
-</li>
-</ul>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">6</span><br><span class="line">2 100</span><br><span class="line">2 200</span><br><span class="line">5</span><br><span class="line">1 150</span><br><span class="line">1</span><br><span class="line">2 100</span><br><span class="line">2 300</span><br><span class="line">2 200</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">output:</span><br><span class="line">5000    // 5000 = 200.00股 * 25天</span><br></pre></td></tr></table></figure></p>
-<h2>数据范围及限制</h2>
-<ul>
-<li>$1\le N\le 1,000,000$</li>
-<li>$0\le X\lt 2^{31}$</li>
-<li>股市的营业期不超过 $2^{31}-1$ 天</li>
-<li>时间：1 sec</li>
-<li>空间：256 MB</li>
-</ul>
-<h2>提示</h2>
-<ul>
-<li>在队列结构的基础上，扩充操作接口</li>
-</ul>
-<h2>思路</h2>
-<h2>实现</h2>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2352,7 +2393,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">200</span>
+                  <span class="site-state-item-count">201</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

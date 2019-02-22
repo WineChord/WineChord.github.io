@@ -296,6 +296,237 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/23/THUOJ-PA1-1-2-Company/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/23/THUOJ-PA1-1-2-Company/" itemprop="url">THUOJ PA1 1-2 Company</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T11:02:56+08:00">
+                2019-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/THUOJ/" itemprop="url" rel="index">
+                    <span itemprop="name">THUOJ</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/23/THUOJ-PA1-1-2-Company/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/01/23/THUOJ-PA1-1-2-Company/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2>问题描述</h2>
+<ul>
+<li>公司有n个员工，编号为1~n。</li>
+<li>员工上班时登陆管理系统登记一个code，离开时进行注销。</li>
+<li>管理人员随时想知道多少员工上班以及任一个员工登记的code。</li>
+</ul>
+<h2>输入输出</h2>
+<ul>
+<li>第一行是两个整数n,m。接下来是m行，每行是以下内容之一：
+<ul>
+<li>I a c		// Log In：员工 a 登录，code 为 c。若 a 已登录，则将 code 更新为 c</li>
+<li>O a		// Log Out：编号为 a 的员工注销。若 a 未登录，则注销无效</li>
+<li>C		// Close：到下班时间，所有员工注销</li>
+<li>N		// Number：询问有多少员工正在上班</li>
+<li>Q a		// Query：询问员工 a 的 code（若未登录或已注销，视为 -1）</li>
+</ul>
+</li>
+</ul>
+<h2>输入输出举例：</h2>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">10 8</span><br><span class="line">I 1 2</span><br><span class="line">I 1 4</span><br><span class="line">Q 1</span><br><span class="line">C</span><br><span class="line">I 2 4</span><br><span class="line">O 2</span><br><span class="line">Q 2</span><br><span class="line">N</span><br><span class="line">output:</span><br><span class="line">3   # 输出为所有答案之和</span><br><span class="line">//“Q 1” 答案是 4，“Q 2” 答案是 -1，“N” 答案是 0，所有答案之和为 3</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>限制
+<ul>
+<li>n &lt;= 10,000,000</li>
+<li>m &lt;= 1,000,000
+1 &lt;= a &lt;= n
+code 为 [0, 2^31) 的整数</li>
+</ul>
+</li>
+</ul>
+<h2>提示</h2>
+<h3>一级提示</h3>
+<blockquote>
+<p>测试数据中，每种操作都可能频繁出现，或很少出现。因此，你的算法需要应对所有可能的情况。</p>
+</blockquote>
+<blockquote>
+<p>答案会超出 int 范围，要注意各种数据类型可表示的范围，尤其是溢出问题。可选用 long long int 或 int64_t 等类型。注意各种数据类型的正确输入、输出方式。</p>
+</blockquote>
+<ul>
+<li>Bitmap / 常数时间初始化的数组——讲义 02XA</li>
+<li>Bitmap: 习题解析 <code>[2-34]</code></li>
+</ul>
+<h3>二级提示</h3>
+<ul>
+<li>避免频繁初始化整个数组。</li>
+<li>可以借助Bitmap记录数组的各元素是否已被初始化。将一个（或所有）元素置为未初始化状态，实质上只需要打破“校验环”两个验证条件中的任何一个，考虑如何打破校验条件的复杂度最低。</li>
+<li>另一种解题思路是，数组初始化 1 次后，记录改变了的元素，今后不再初始化整个数组，只初始化改变了的元素。</li>
+</ul>
+<blockquote>
+<p>用 scanf(&quot;%c&quot;, ...) 或 getchar() 读入一个字符时，可能会读到空格、制表符、回车符或换行符，尽量避免使用这个方法。使用 scanf(&quot;%s&quot;, ...) 会自动过滤空白字符。</p>
+</blockquote>
+<blockquote>
+<p>Windows 和 Linux 上换行符有 &quot;\r\n&quot; 跟 &quot;\n&quot; 的差别，你的程序最好有一定鲁棒性，能处理两种情况。</p>
+</blockquote>
+<h2>思路</h2>
+<ul>
+<li>先实现低效版，再思考改进。</li>
+</ul>
+<h2>低效版</h2>
+<ul>
+<li>先写一个低效版。其中通过<code>while (isspace(op)) scanf(&quot;%c&quot;, &amp;op);</code>来滤去空格以及换行制表等符号。</li>
+<li>算法低效之处主要在于<code>close()</code>函数，当下班时只能对所有的元素进行赋值-1，而不能仅仅只针对已上班的员工。其他的主要函数时间复杂度都是O(1).</li>
+<li>总的时间复杂度为O(n)，空间复杂都为O(n)</li>
+<li>除了9,10,19测试点超时，其余测试点均可以通过。</li>
+<li>将此算法生成的执行文件作为对拍的标准程序。
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 低效版</span></span><br><span class="line"><span class="comment">// std_company.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Company</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> num, N;</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> score;</span><br><span class="line">	<span class="keyword">int</span>* code;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Company(<span class="keyword">int</span> n) &#123;</span><br><span class="line">		N = n;</span><br><span class="line">		code = <span class="keyword">new</span> <span class="keyword">int</span>[N + <span class="number">1</span>];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N + <span class="number">1</span>; i++) code[i] = <span class="number">-1</span>;</span><br><span class="line">		num = <span class="number">0</span>;</span><br><span class="line">		score = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	~Company() &#123;</span><br><span class="line">		<span class="keyword">delete</span>[] code;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">log_in</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> c)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (code[a] == <span class="number">-1</span>) num++;</span><br><span class="line">		code[a] = c;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">log_out</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (code[a] != <span class="number">-1</span>) &#123;</span><br><span class="line">			code[a] = <span class="number">-1</span>;</span><br><span class="line">			num--;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N + <span class="number">1</span>; i++) code[i] = <span class="number">-1</span>;</span><br><span class="line">		num = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">number</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		score += num;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">		score += code[a];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">show_ans</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, score);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n, m;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">	<span class="function">Company <span class="title">mycp</span><span class="params">(n)</span></span>;</span><br><span class="line">	<span class="keyword">while</span> (m--) &#123;</span><br><span class="line">		<span class="keyword">char</span> op;</span><br><span class="line">		<span class="keyword">int</span> a, c;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%c"</span>, &amp;op);</span><br><span class="line">		<span class="keyword">while</span> (<span class="built_in">isspace</span>(op)) <span class="built_in">scanf</span>(<span class="string">"%c"</span>, &amp;op);</span><br><span class="line">		<span class="keyword">switch</span> (op) &#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'I'</span>: <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;a, &amp;c); mycp.log_in(a, c); <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'O'</span>: <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a); mycp.log_out(a); <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'C'</span>: mycp.close(); <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'N'</span>: mycp.number(); <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'Q'</span>: <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a); mycp.query(a); <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">default</span>: <span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	mycp.show_ans();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2>思考改进</h2>
+<ul>
+<li>考虑加上习题解析<code>[2-34]</code>中bitmap的思路</li>
+<li>采用同时支持<code>set()</code> <code>clear()</code>这两样操作的类，参考代码<code>x2.9</code>。</li>
+<li>可以在O(1)时间隐式初始化（但是还有至少要有O(n)的分配内存的时间的）</li>
+<li>查上班人数时还是沿用低效版的思路，用一个变量表示上班人数，log_in时加一，log_out时减一，都下班时清零。</li>
+<li>仿照bitmap设置两个向量，<code>F[]</code>来记录<code>[k]</code>被标记的次序，向量<code>T[]</code>来记录依次被标记的值。</li>
+<li><code>clear()</code>时的改进：只需将top置零，时间复杂度O(1)</li>
+<li>同时，<code>code[]</code>也不用全部初始化，只需每次修改<code>code[F[k]]</code>即可</li>
+<li>如此，所有的操作时间复杂度都是O(1)
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Company</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> num, N;</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> score;</span><br><span class="line">	<span class="keyword">int</span>* code; <span class="keyword">int</span>* F; <span class="keyword">int</span>* T; <span class="keyword">int</span> top;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">valid</span><span class="params">(<span class="keyword">int</span> r)</span> </span>&#123;<span class="keyword">return</span> (<span class="number">0</span>&lt;=r)&amp;&amp;(r&lt;top);&#125;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">erased</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> valid(F[a])&amp;&amp;!(T[F[a]]+<span class="number">1</span>+a); <span class="comment">// 删除时T[F[a]] = -1-a</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Company(<span class="keyword">int</span> n) &#123;</span><br><span class="line">		N = n;</span><br><span class="line">		code = <span class="keyword">new</span> <span class="keyword">int</span>[N + <span class="number">1</span>];</span><br><span class="line">        F = <span class="keyword">new</span> <span class="keyword">int</span>[N + <span class="number">1</span>];</span><br><span class="line">        T = <span class="keyword">new</span> <span class="keyword">int</span>[N + <span class="number">1</span>];</span><br><span class="line">        top = <span class="number">0</span>; num = <span class="number">0</span>; score = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	~Company() &#123;</span><br><span class="line">		<span class="keyword">delete</span>[] code; <span class="keyword">delete</span>[] F; <span class="keyword">delete</span>[] T;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> a)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> valid(F[a]) &amp;&amp; (a==T[F[a]]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    登陆需要考虑：</span></span><br><span class="line"><span class="comment">    1.从未登陆过</span></span><br><span class="line"><span class="comment">    2.登陆过又再次登陆</span></span><br><span class="line"><span class="comment">    3.登陆后进行注销后又再次登陆</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">log_in</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> c)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!test(a))&#123;  <span class="comment">// 测试不对，说明注销过或者从未登陆</span></span><br><span class="line">            <span class="keyword">if</span>(!erased(a)) <span class="comment">// 从未登陆过</span></span><br><span class="line">                F[a] = top++; <span class="comment">// 创建新的校验环</span></span><br><span class="line">            num++;  <span class="comment">// 登陆人数加一 </span></span><br><span class="line">            T[F[a]] = a; <span class="comment">// 若注销过则需恢复原校验环</span></span><br><span class="line">        &#125;</span><br><span class="line">		code[F[a]] = c;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">log_out</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(test(a)) &#123;  <span class="comment">// 已登陆</span></span><br><span class="line">            T[F[a]] = <span class="number">-1</span>-a;</span><br><span class="line">            num--;  <span class="comment">// 登陆人数减一</span></span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		top = <span class="number">0</span>; <span class="comment">// 直接 top 置零，和低效版相比有所改进</span></span><br><span class="line">		num = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">number</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		score += num;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(test(a)) score += code[F[a]];</span><br><span class="line">        <span class="keyword">else</span> score += <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">show_ans</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, score);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n, m;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">	<span class="function">Company <span class="title">mycp</span><span class="params">(n)</span></span>;</span><br><span class="line">	<span class="keyword">while</span> (m--) &#123;</span><br><span class="line">		<span class="keyword">char</span> op;</span><br><span class="line">		<span class="keyword">int</span> a, c;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%c"</span>, &amp;op);</span><br><span class="line">		<span class="keyword">while</span> (<span class="built_in">isspace</span>(op)) <span class="built_in">scanf</span>(<span class="string">"%c"</span>, &amp;op);</span><br><span class="line">		<span class="keyword">switch</span> (op) &#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'I'</span>: <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;a, &amp;c); mycp.log_in(a, c); <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'O'</span>: <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a); mycp.log_out(a); <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'C'</span>: mycp.close(); <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'N'</span>: mycp.number(); <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'Q'</span>: <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a); mycp.query(a); <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">default</span>: <span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	mycp.show_ans();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/23/THUOJ-PA1-1-1-Team/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1743,167 +1974,11 @@ $$
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/696-Count-Binary-Substrings-String-11/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/04/696-Count-Binary-Substrings-String-11/" itemprop="url">696. Count Binary Substrings-String-11</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T20:20:20+08:00">
-                2018-11-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/04/696-Count-Binary-Substrings-String-11/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/04/696-Count-Binary-Substrings-String-11/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3>问题描述</h3>
-<p>一个字符串中连续且长度相等的 '1' '0' 子串个数。</p>
-<h3>实现</h3>
-<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++</span></span><br><span class="line"><span class="keyword">int</span> cur = <span class="number">1</span>, pre = <span class="number">0</span>, res = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; s.size(); i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(s[i] == s[i<span class="number">-1</span>]) cur++;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        res += min(cur, pre);</span><br><span class="line">        pre = cur;</span><br><span class="line">        cur = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> res + min(cur, pre);</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1953,7 +2028,7 @@ $$
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">200</span>
+                  <span class="site-state-item-count">201</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

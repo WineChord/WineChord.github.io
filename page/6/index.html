@@ -296,6 +296,557 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/03/人工智能原理-Part-II-Searching-Ch5-Adversarial-Search/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wine&Chord">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wine&Chord">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/03/人工智能原理-Part-II-Searching-Ch5-Adversarial-Search/" itemprop="url">人工智能原理 Part II. Searching Ch5.Adversarial Search</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-03T07:38:29+08:00">
+                2019-02-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/03/人工智能原理-Part-II-Searching-Ch5-Adversarial-Search/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/03/人工智能原理-Part-II-Searching-Ch5-Adversarial-Search/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2>Ch5 Adversarial Search</h2>
+<ul>
+<li>To examine the problems that arise when we try to plan ahead in a world where other agents are planning against us.</li>
+</ul>
+<h3>5.1 Games</h3>
+<h4>Search vs. Adversarial Search 搜索与对抗搜索</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Search 搜索</th>
+<th style="text-align:center">Adversarial Search 对抗搜索</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Single agent</td>
+<td style="text-align:center">Multiple agents</td>
+</tr>
+<tr>
+<td style="text-align:center">Solution is (heuristic) method for finding goal</td>
+<td style="text-align:center">Solution is strategy (strategy specifies move for every possible opponent reply)</td>
+</tr>
+<tr>
+<td style="text-align:center">Heuristics can find optimal solution</td>
+<td style="text-align:center">Time limits force an approximate solution</td>
+</tr>
+<tr>
+<td style="text-align:center">Evaluation function: estimate of cost from start to goal through given node</td>
+<td style="text-align:center">Evaluation function: evaluate &quot;goodness&quot; of game position</td>
+</tr>
+</tbody>
+</table>
+<h4>Adversarial Search often Known as Games 对抗搜索通常称为博弈</h4>
+<ul>
+<li>Definitions of Game theory
+<ul>
+<li>Study of strategic decision making. Specifically, study of mathematical models of conflict and cooperation between intelligent rational decision-makers.</li>
+<li>An alternative term is interactive decision decision theory.</li>
+</ul>
+</li>
+<li>Applications of Game theory
+<ul>
+<li>Economics, political science, psychology, logic, computer science, and biology</li>
+<li>Behavioral relations and decision science, including both humans and non-humans(e.g. computers)</li>
+</ul>
+</li>
+</ul>
+<h4>Games are Good Problems for AI</h4>
+<ul>
+<li>Machines need &quot;human-like&quot; intelligence</li>
+<li>Requiring to make decision within limited time</li>
+<li>Features of games:
+<ul>
+<li>Two, or more players(agents)</li>
+<li>Turn-taking vs. simultaneous moves</li>
+<li>Perfect information vs. imperfect information</li>
+<li>Deterministic vs. stochastic</li>
+<li>Cooperative vs. competitive</li>
+<li>Zero-sum vs. non-zero-sum</li>
+</ul>
+</li>
+</ul>
+<h4>Zero Sum vs. Non-zero Sum</h4>
+<ul>
+<li>Zero sum games 零和博弈</li>
+<li>Non-zero sum games 非零和博弈</li>
+</ul>
+<h4>Games are Interesting but Too Hard to Solve</h4>
+<h4>Types of Games</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Deterministic</th>
+<th style="text-align:center">Stochastic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Perfect information(fully observable)</td>
+<td style="text-align:center">Chess, Checkers, Go, Othello</td>
+<td style="text-align:center">Backgammon, Monopoly</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Deterministic</th>
+<th style="text-align:center">Stochastic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Imperfect information(partially observable)</td>
+<td style="text-align:center">Stratego 西洋陆军棋, Battleships 海战棋</td>
+<td style="text-align:center">Bridge 桥牌,Poker 扑克, Scrabble 拼字游戏</td>
+</tr>
+</tbody>
+</table>
+<h4>Origins of Game Playing Algorithms</h4>
+<ul>
+<li>1912 Ernst Zermelo: Minimax algorithm</li>
+<li>1949 Claude Shannon: Chess playing with evaluation function, selective search</li>
+<li>1956 John McCarthy: Alpha-beta search</li>
+<li>1956 Arthur Samuel: Checkers program that learns its own evaluation function</li>
+</ul>
+<h4>Two Players Game</h4>
+<ul>
+<li>Feature
+<ul>
+<li>deterministic, perfect information, turn-taking, two players, zero-sum</li>
+</ul>
+</li>
+<li>Calling the two players:
+<ul>
+<li>MAX, MIN</li>
+</ul>
+</li>
+<li>MAX move first, and then they take turns moving, until the game is over</li>
+<li>At game end
+<ul>
+<li>winner: award points</li>
+<li>loser: give penalties</li>
+</ul>
+</li>
+</ul>
+<h4>Formally Defined as a Search Problem</h4>
+<ul>
+<li>$S_0$ : Initial state, specifies how the game is set up at the start</li>
+<li>$PLAYER(s)$ : Defines which player has the move in a state</li>
+<li>$ACTIONS(s)$ : Returns the set of legal moves in a state</li>
+<li>$RESULT(s, a)$ : Transition model, defines the result of a move</li>
+<li>$TERMINAL-TEST(s)$: Terminal test, true when the game is over and false otherwise</li>
+<li>$UTILITY(s,p)$ : Utility function, defines the value in state s for a player p</li>
+</ul>
+<h3>5.2 Optimal Decisions in Games</h3>
+<h4>Optimal Solution 最优解</h4>
+<ul>
+<li>In normal search
+<ul>
+<li>The optimal solution would be a sequence of actions leading to a goal state (terminal state) that is a win</li>
+</ul>
+</li>
+<li>In adversarial search
+<ul>
+<li>Both of MAX and MIN could have an optimal strategy
+<ul>
+<li>In initial state, MAX must find a strategy to specify MAX's move,</li>
+<li>then MAX's moves in the states resulting from every possible response by MIN, and so on.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4>Minimax Theorem</h4>
+<blockquote>
+<p>For every two-player, zero-sum game with finitely many strategies, there exists a value V and a mixed strategy for each player, s.t.</p>
+<p>(a) Given player 2's strategy, the best payoff possible for player 1 is V</p>
+<p>(b) Given player 1's strategy, the best payoff possible for player 2 is -V</p>
+</blockquote>
+<ul>
+<li>对于零和博弈来说，其名称 minimax 由来是因为每个玩家会使对手可能的最大收益变得最小，还会使自己的最大损失变得最小。</li>
+</ul>
+<h4>Optimal Solution in Adversarial Search</h4>
+<ul>
+<li>Given a game tree, the optimal strategy can be determined from the minimax value of each node, write as MINIMAX(n)</li>
+<li>Assume that both players play optimally from there to the end of the game</li>
+</ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function MINIMAX(s) returns an action</span><br><span class="line">  if TERMINAL-TEST(s) then return UTILITY(s)</span><br><span class="line">  if PLAYER(s) = MAX then return max_&#123;a\in ACTION(s)&#125;MINIMAX(RESULT(s,a))</span><br><span class="line">  if PLAYER(s) = MIN then return min_&#123;a\in ACTION(s)&#125;MINIMAX(RESULT(s,a))</span><br></pre></td></tr></table></figure></p>
+<h4>Minimax Algorithm</h4>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function MINIMAX-DECISION(state) returns an action</span><br><span class="line">  return argmax_&#123;a\in ACTION(s)&#125;MIN-VALUE(RESULT(state,a))</span><br><span class="line">function MAX-VALUE(state) returns a utility value</span><br><span class="line">  if TERMINAL-TEST(state) then return UTILITY(state)</span><br><span class="line">  v &lt;- -infinite</span><br><span class="line">  for each a in ACTIONS(sate) do v &lt;- MAX(v, MIN-VALUE(RESULT(state,a)))</span><br><span class="line">  return v</span><br><span class="line">function MIN-VALUE(state) returns a utility value</span><br><span class="line">  if TERMINAL-TEST(state) then return UTILITY(state)</span><br><span class="line">  v &lt;- +infinite</span><br><span class="line">  for each a in ACTIONS(state) do v&lt;- MIN(v, MAX-VALUE(RESULT(state,a)))</span><br><span class="line">  return v</span><br></pre></td></tr></table></figure></p>
+<h4>Properties of Minimax Decision 最小最大决策的性质</h4>
+<ul>
+<li>最小最大算法表现为博弈树的深度优先搜索</li>
+<li>Time: $O(b^m)$</li>
+<li>Space:
+<ul>
+<li>$O(bm)$ 算法同时生成所有动作</li>
+<li>$O(m)$ 算法一次生成一个动作</li>
+<li>b: 分支因子</li>
+<li>m: 任一结点的最大深度</li>
+</ul>
+</li>
+</ul>
+<h4>Optimal Decisions in Multi-player Games 多玩家博弈中最优决策</h4>
+<ul>
+<li>将minimax思想扩展到多玩家博弈</li>
+<li>将每个节点的单一值-&gt;一个值得向量</li>
+<li>对于终端状态，从每个玩家的角度来看，这个向量给定该状态的效用。实现的最简单方法是拥有一个返回效用向量的 $UTILITY$ 函数</li>
+</ul>
+<h3>5.3 Alpha-Beta Pruning</h3>
+<h4>Overview</h4>
+<ul>
+<li>The problem with minimax search:
+<ul>
+<li>Number of game states is exponential in depth of the tree.</li>
+<li>We can't eliminate the exponent, but we can effectively cut it in half.</li>
+</ul>
+</li>
+<li>The trick to solve the problem:
+<ul>
+<li>Compute correct minimax decision without looking at every node in game tree.</li>
+<li>That is, use &quot;pruning&quot; to eliminate large parts of the tree</li>
+</ul>
+</li>
+<li>What is alpha-beta pruning?
+<ul>
+<li>It is a search algorithm that seeks to decrease the number of nodes that are evaluated by the minimax algorithm</li>
+</ul>
+</li>
+</ul>
+<h4>Why Called Alpha-Beta</h4>
+<ul>
+<li>Alpha-beta pruning gets its name from the following two parameters:
+<ul>
+<li>$\alpha$ : 沿着 MAX 路径上的任意选择点，迄今为止我们已经发现的最高值</li>
+<li>$\beta$ : 沿着 MIN 路径上的任意选择点，迄今为止我们已经发现的最低值</li>
+</ul>
+</li>
+<li>Alpha-beta search respectively:
+<ul>
+<li>updates the values of $\alpha$ and $\beta$ as it goes along, and</li>
+<li>prunes the remaining branches at a node as soon as the value of the current node is known to be worse than the current $\alpha$ or $\beta$ value for MAX or MIN.</li>
+</ul>
+</li>
+</ul>
+<h4>Alpha-Beta Search Algorithm</h4>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function ALPHA-BETA-SEARCH(state)returns an action</span><br><span class="line">  v &lt;- MAX-VALUE(state, -inf, +inf)</span><br><span class="line">  return the action in ACTIONS(state) with value v</span><br><span class="line">function MAX-VALUE(state, \alpha, \beta) returns a utility value</span><br><span class="line">  if TERMINAL-TEST(state) then return UTILITY(state)</span><br><span class="line">  v &lt;- -inf</span><br><span class="line">  for each a in ACTIONS(state) do</span><br><span class="line">    v &lt;- MAX(v, MIN-VALUE(RESULT(state,a),\alpha,\beta))</span><br><span class="line">    if v &gt;= \beta then return v else \alpha &lt;- MAX(a,v)</span><br><span class="line">  return v</span><br><span class="line">function MIN-VALUE(state, \alpha, \beta)returns a utility value</span><br><span class="line">  if TERMINAL-TEST(state) then return UTILITY(state)</span><br><span class="line">  v &lt;- +inf</span><br><span class="line">  for each a in ACTIONS(state)do</span><br><span class="line">    v &lt;- MIN(v,MAX-VALUE(RESULT(state,a),\alpha,\beta))</span><br><span class="line">    if v &gt;= \alpha then return v else \beta &lt;- MIN(\beta,v)</span><br><span class="line">  return v</span><br></pre></td></tr></table></figure></p>
+<h3>5.4 Imperfect Real-time Decisions</h3>
+<h4>Overview</h4>
+<ul>
+<li>minimax 算法生成整个博弈搜索空间</li>
+<li>alpha-beta 剪枝算法允许我们将其剪去大部分</li>
+<li>然而，alpha-beta 仍然需要搜索抵达终端状态的所有途径，至少是搜索空间的一部分</li>
+<li>这个深度通常是不实际的，因为移动必须在合理的时间内完成</li>
+</ul>
+<h4>Apply a Heuristic Evaluation Function</h4>
+<ul>
+<li>香农提出：程序应该早一些剪断搜索，并在搜索中对状态应用启发式评估函数，有效地将非终端节点转换为终端叶节点，建议使用方法：
+<ul>
+<li>用 EVAL 来代替 UTILITY
+<ul>
+<li>EVAL: 一个启发式评价函数，用于估计位置的效用</li>
+</ul>
+</li>
+<li>用 CUTOFF-TEST 来代替 TERMINAL-TEST
+<ul>
+<li>CUTOFF-TEST: 确定何时应用 EVAL 函数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4>Heuristic H-Minimax vs. Minimax</h4>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function H-MINIMAX(s,d) returns an action</span><br><span class="line">  if CUTOFF-TEST(s,d) then return EVAL(s)</span><br><span class="line">  if PLAYER(s)=MAX then return max_&#123;a\in ACTION(s)&#125;H-MINIMAX(RESULT(s,a),d+1)</span><br><span class="line">  if PLAYER(s)=MIN then return min_&#123;a\in ACTION(s)&#125;H-MINIMAX(RESULT(s,a),d+1)</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function MINIMAX(s) returns an action</span><br><span class="line">  if TERMINAL-TEST(s) then return UTILITY(s)</span><br><span class="line">  if PLAYER(s)=MAX then return max_&#123;a\in ACTION(s)&#125;MINIMAX(RESULT(s,a))</span><br><span class="line">  if PLAYER(s)=MIN then return min_&#123;a\in ACTION(s)&#125;MINIMAX(RESULT(s,a)</span><br></pre></td></tr></table></figure></p>
+<h4>Evaluation Functions</h4>
+<ul>
+<li>一个评价函数返回从一个给定位置该博弈的期望效用估计
+<ul>
+<li>应与真实效用函数相同的方式对终端状态进行整理
+<ul>
+<li>获胜状态必须评价为优于平局</li>
+<li>平局状态必须评价为优于失败</li>
+</ul>
+</li>
+<li>计算的时间不能太长</li>
+<li>非终端状态应该与实际获胜的机会密切相关</li>
+</ul>
+</li>
+</ul>
+<h4>Weighted Linear Function</h4>
+<p>$$
+\begin{align*}
+EVAL(s)&amp;=w_1f_1(s)+w_2f_2(s)+...+w_nf_n(s)\
+&amp;=\sum_{i=1}^nw_if_i(s)
+\end{align*}
+$$</p>
+<ul>
+<li>$w_i$ 为权重</li>
+<li>$f_i$ 为位置的特征</li>
+<li>对于国际象棋
+<ul>
+<li>$f_i$ 为棋盘上每种棋子的数量</li>
+<li>$w_i$ 为棋子的数值：1 表示兵，3 表示象...</li>
+</ul>
+</li>
+</ul>
+<h4>Chess</h4>
+<h3>5.5 Stochastic Games 随机博弈</h3>
+<ul>
+<li>随机博弈？
+<ul>
+<li>是一种具有概率转换的动态博弈，有一个或多个玩家</li>
+<li>许多博弈通过引入一种随机元素来仿照这种不可预测性</li>
+</ul>
+</li>
+<li>Backgammon 西洋双陆棋</li>
+</ul>
+<h3>5.6 Monte-Carlo Methods</h3>
+<h4>Go vs. Chess</h4>
+<h4>Algorithm of AlphaGo</h4>
+<ul>
+<li>Deep neural networks
+<ul>
+<li>value network: used to evaluate board positions</li>
+<li>policy network: used to select moves</li>
+</ul>
+</li>
+<li>Monte-Carlo tree search
+<ul>
+<li>Combines Monte-Carlo simulation with value networks</li>
+</ul>
+</li>
+<li>Reinforcement learning
+<ul>
+<li>used to improve its play</li>
+</ul>
+</li>
+</ul>
+<h4>About Monte-Carlo Methods</h4>
+<ul>
+<li>a broad class of computational algorithms that rely on repeated random sampling to obtain numerical results</li>
+<li>tend to follow a particular pattern:
+<ul>
+<li>define a domain of possible inputs</li>
+<li>generate inputs randomly from a probability distribution over the domain</li>
+<li>perform a deterministic computation on the inputs</li>
+<li>aggregate the results</li>
+</ul>
+</li>
+</ul>
+<h4>Family of Monte-Carlo Methods</h4>
+<ul>
+<li>Classical Monte-Carlo 经典
+<ul>
+<li>样本来自于概率分布，往往是经典波兹曼分布（Boltzmann distribution）</li>
+</ul>
+</li>
+<li>Quantum Monte-Carlo 量子
+<ul>
+<li>采用随机走查方法来计算量子力学的能量和波函数</li>
+</ul>
+</li>
+<li>Volumetric Monte-Carlo 容积式
+<ul>
+<li>采用随机数生成的方法产生每个原子的容量，或进行其他类型几何分析</li>
+</ul>
+</li>
+<li>Kinetic Monte-Carlo 动力学
+<ul>
+<li>仿真过程采用尺度分析来建立时间尺度，或者将随机效应引入分子动力学</li>
+</ul>
+</li>
+</ul>
+<h4>Monte-Carlo Tree Search</h4>
+<ul>
+<li>将蒙特卡洛仿真与博弈搜索树相结合</li>
+<li>和 minimax 一样，每个节点对应于一个博弈状态</li>
+<li>不同于 minimax，结点的值通过蒙特卡洛仿真来估值</li>
+<li>$W(a)/N(a)=$ the value of action a
+<ul>
+<li>$W(a)=$ the total reward</li>
+<li>$N(a)=$ the number of simulations</li>
+</ul>
+</li>
+</ul>
+<h4>Algorithm of AlphaGo</h4>
+<ul>
+<li>采用机器学习和树搜索技术相结合的方式，并且用人类和计算机走棋的棋局进行大量的训练</li>
+<li>两个深度神经网络
+<ul>
+<li>价值网络来评价棋盘位置，策略网络来选择走棋</li>
+</ul>
+</li>
+<li>树搜索
+<ul>
+<li>蒙特卡洛树搜索</li>
+</ul>
+</li>
+<li>强化学习
+<ul>
+<li>用于改善其走棋</li>
+</ul>
+</li>
+</ul>
+<h4>Monte-Carlo Tree Search in AlphaGo</h4>
+<ul>
+<li>(a) Selection: Each simulation traverses the tree by selecting edge with maximum action value Q + bonus u(P) that depends on a stored prior probability P for that edge.</li>
+<li>(b) Expansion: The leaf node may be expanded; the new node is processed once by the policy network $p_\sigma$ and the output probabilities are stored as prior probabilities P for each action.</li>
+<li>(c) Evaluation(Simulation): The leaf node is evaluated in two ways: 1) using the value network $v_\theta$; 2) by running a rollout to the end of the game with the fast rollout policy $p_\pi$ , then computing the winner with function r</li>
+<li>(d) Backup(Back propagation): Action values Q are updated to track the mean value of all evaluations $r(\cdot)$ and $v_\theta(\cdot)$ in the subtree below that action.</li>
+</ul>
+<h4>Neural Network Training Pipeline in AlphaGo</h4>
+<ul>
+<li>A fast rollout policy $p_\pi$ and supervised learning(SL) policy network $p_\sigma$ are trained to predict human expert moves in a data set of positions</li>
+<li>A reinforcement learning(RL) policy network $p_\rho$ is initialized to the SL policy network, and then improved by policy gradient learning to maximize the outcome</li>
+<li>A new data set is generated by playing games of self-play with the RL policy network</li>
+<li>A value network $v_\theta$ is trained by regression to predict the expected outcome</li>
+</ul>
+<h4>Neural Network Architecture in AlphaGo</h4>
+<ul>
+<li>
+<p>The policy network 策略网络</p>
+<ul>
+<li>input: the board position</li>
+<li>passes s through convolutional layers with parameters $\sigma$ or $\rho$</li>
+<li>outputs: a prbability distribution over legal moves a.</li>
+</ul>
+</li>
+<li>
+<p>The value network 价值网络</p>
+<ul>
+<li>input: the board position s'</li>
+<li>similarly uses many convolutional layers with parameters $\theta$</li>
+<li>output: a scalar value $v_\theta(s')$ that predicts the expected outcome.</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/02/人工智能原理-Part-II-Searching-Ch4-Local-Search-and-Swarm-Intelligence/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3748,293 +4299,11 @@ $$</p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/29/THU2018推研机试-贪吃蛇/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wine&Chord">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wine&Chord">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/29/THU2018推研机试-贪吃蛇/" itemprop="url">THU2018推研机试 贪吃蛇</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-29T22:41:17+08:00">
-                2019-01-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/THU-机试/" itemprop="url" rel="index">
-                    <span itemprop="name">THU 机试</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/01/29/THU2018推研机试-贪吃蛇/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/01/29/THU2018推研机试-贪吃蛇/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>时间：2018年9月16日 13:30~17:30</li>
-</ul>
-<h2>题目描述</h2>
-<ul>
-<li>贪吃蛇($snake​$)</li>
-<li>模拟贪吃蛇游戏，规则如下：</li>
-<li>游戏地图为 $64\times 64$ 的网格地图，左上角格子坐标为 $(0,0)$，右下角格子坐标为 $(63,63)$，格子 $(x,y)$ 代表位于从上往下数第 $x$ 行，从左往右数第 $y$ 列的格子。</li>
-<li>游戏可以有任意多个玩家，每个玩家有一定数量的蛇（数量在游戏开始时设定）。同一时刻每个玩家只能有最多一条蛇在场上。当某个玩家的蛇死亡后，若他还有剩余的蛇，则在一段时间后重新上场，若无剩余的蛇，则他游戏失败。</li>
-<li>每条蛇出生时长度为 $2$，在系统指定位置出生，且保证出生位置一定为空，若出生指令涉及的坐标在指令执行的时刻被其他物体（蛇，墙，豆子）占据或坐标不合法，该出生指令无效，保证出生指令指定的蛇的头尾位置一定相邻。蛇出生后若无玩家操作则静止不动，直至玩家发出移动指令后才开始移动（若玩家指定的移动方向恰好从头指向尾，则视为头尾交换），并且直至死亡再也不会停止。</li>
-<li>蛇每一秒移动一格，若玩家在这一秒指定了蛇头的移动方向，则蛇头按指定方向移动；若未指定，则按上一秒的方向移动；若指定的移动方向与原先移动方向正好相反，则不会生效。若在某一秒蛇头移动到了豆子的位置，则豆子被吃掉，同时蛇身长度增加。每吃掉一个豆子，身子长度加一。</li>
-<li>蛇头碰到自己的蛇身，对方的蛇身，墙或越过地图边界，即会死亡；若碰撞时刻恰好有多条蛇且长度均为最大，则发生碰撞的所有蛇均死亡。</li>
-<li>系统会不定期通过指令指示随机撒一些豆子在某些格子上，或者在一些格子上随机生成墙。若该指令涉及的某些坐标再指令执行的时刻被其他物体（蛇，墙，豆子）占据或坐标不合法，整条指令作废；若该指令中有重复的坐标，只在该坐标生成一个豆子（墙）。</li>
-<li>已知按时间顺序给出的玩家操作记录（若某玩家在同一秒进行了多个移动操作，只取记录顺序最后的一个，无论它是否有效）和系统生成墙和豆子的记录，请根据这份记录来判断哪位玩家取得了胜利。</li>
-<li>若同一秒内同时有系统的操作和玩家的操作，系统的操作会首先按记录顺序执行，玩家的操作按照记录的先后顺序依次执行。</li>
-<li>同一秒内，每条蛇的移动操作也有先后顺序，若这一秒内玩家通过有效的操作指定了蛇的移动方向，则这条蛇在这条操作得到执行时发生移动，否则按原有顺序移动；按原有方向移动的蛇，在这一秒内所有的操作执行完成后，按最开始给出玩家 $ID$ 时的顺序发生移动。发生移动后触发的事件（如蛇变长，碰撞等）均在当前移动发生后立即结算。</li>
-<li>若某条指令执行时刻条件不能满足或与上述规则冲突，如玩家发出移动指令但场上并没有他的蛇存在，或系统给出了蛇出生指令但该玩家已经没有剩余的蛇，系统给出了蛇出生指令但该玩家场上尚有存活的蛇等，则该指令自动忽略。</li>
-<li>在记录内容结束时场上仍有存活或剩余的蛇的玩家（们）取得游戏的胜利，若记录结束时所有玩家的蛇均死亡且没有剩余的蛇，则没有玩家取得胜利。</li>
-</ul>
-<h2>输入</h2>
-<ul>
-<li>从标准输入读入数据。</li>
-<li>第一行：$n$  表示有 $n$ 个玩家</li>
-<li>以下 $n$ 行：每行一个字符串（保证仅由英文字母，下划线，阿拉伯数字组成，不会超过 $20$ 个字符，且不会是 <code>&quot;System&quot;</code> <code>&quot;Bean&quot;</code> <code>Wall</code>）和一个正整数，字符串表示一个玩家的 $ID$，正整数表示该玩家的蛇的数量。</li>
-<li>接下来一行：$L$  表示有 $L$ 条记录</li>
-<li>以下 $L$ 行：每行表示一条记录，行内的字符串或整数以一个空格分开。
-<ul>
-<li>每一行开头有一个非负整数 $S$，表示该操作发生在游戏开始后的第几秒。</li>
-<li>若接下来的字符串为某个玩家的 $ID$，则表示是这个玩家进行的操作。再接下来的字符串若为 <code>&quot;UP&quot;</code> <code>&quot;DOWN&quot;</code> <code>&quot;LEFT&quot;</code> <code>&quot;RIGHT&quot;</code>，则分别表示操作自己的蛇向上下左右移动。</li>
-<li>若 $S​$ 后面的字符串为 <code>&quot;System&quot;</code>，表示是游戏系统进行的操作，若接下来的字符串为 <code>&quot;Wall&quot;</code>，表示生成墙，若接下来字符串为 <code>&quot;Bean&quot;</code>，表示生成豆子，接下来跟着一个正整数 $n​$，后面跟着 $2n​$ 个整数 $x_1,y_1,x_2,y_2,...,x_n,y_n​$，代表在坐标分别为 $(x_1,y_1),(x_2,y_2),...,(x_n,y_n)​$ 的格子添加墙或一个豆子。若 <code>&quot;System&quot;</code> 后面的字符串是一个玩家的 $ID​$，表示该玩家的蛇出生了，后面跟着四个整数 $x_1,y_1,x_2,y_2​$，表示该蛇蛇头在 $(x_1,y_1)​$，蛇身在 $(x_2,y_2)​$。</li>
-<li>保证 $S\le 3,000​$，保证后给出的 $S​$ 一定不小于先给出的 $S​$。</li>
-</ul>
-</li>
-<li>保证输入数据中所有整数均在 $32​$ 位带符号整型范围内。</li>
-</ul>
-<h2>输出</h2>
-<ul>
-<li>输出到标准输出</li>
-<li>输出 $n$ 行</li>
-<li>每行开头一个字符串，为一个玩家 $ID​$，若该玩家胜利，后面跟一字符串 <code>&quot;WIN&quot;</code>，若失败，后面跟一个整数，表示在第多少秒失败。</li>
-<li>各玩家按游戏失败的时间顺序输出，若有多个胜者，按照输入最开始给出玩家的相对顺序输出所有胜者。</li>
-</ul>
-<h2>样例输入</h2>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">Wangxz 1</span><br><span class="line">Bakser 1</span><br><span class="line">8</span><br><span class="line">0 System Wangxz 1 0 0 0</span><br><span class="line">0 System Bakser 62 63 63 63</span><br><span class="line">1 Bakser UP</span><br><span class="line">1 Wangxz DOWN</span><br><span class="line">5 System Wall 2 20 20 26 23</span><br><span class="line">30 Wangxz RIGHT</span><br><span class="line">38 Wangxz DOWN</span><br><span class="line">65 System Wall 2 20 20 26 23</span><br></pre></td></tr></table></figure></p>
-<h2>样例输出</h2>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Bakser 63</span><br><span class="line">Wangxz WIN</span><br></pre></td></tr></table></figure></p>
-<h2>样例解释</h2>
-<ul>
-<li>第 $63​$ 秒，$Bakser​$ 的蛇越过地图上边界而死，$Wangxz​$ 胜利。</li>
-</ul>
-<h2>子任务</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">子任务</th>
-<th style="text-align:center">$n$</th>
-<th style="text-align:center">$L$</th>
-<th style="text-align:center">每个玩家蛇的数量</th>
-<th style="text-align:center">特殊性质</th>
-<th style="text-align:center">分值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">$1$</td>
-<td style="text-align:center">$=1$</td>
-<td style="text-align:center">$\le 10^2$</td>
-<td style="text-align:center">$\le1$</td>
-<td style="text-align:center">没有墙和豆子</td>
-<td style="text-align:center">$15$</td>
-</tr>
-<tr>
-<td style="text-align:center">$2$</td>
-<td style="text-align:center">$=1$</td>
-<td style="text-align:center">$\le 10^2$</td>
-<td style="text-align:center">$\le1$</td>
-<td style="text-align:center">没有豆子</td>
-<td style="text-align:center">$15$</td>
-</tr>
-<tr>
-<td style="text-align:center">$3$</td>
-<td style="text-align:center">$=1$</td>
-<td style="text-align:center">$\le 10^2$</td>
-<td style="text-align:center">$\le1$</td>
-<td style="text-align:center">无</td>
-<td style="text-align:center">$15$</td>
-</tr>
-<tr>
-<td style="text-align:center">$4$</td>
-<td style="text-align:center">$=2$</td>
-<td style="text-align:center">$\le 3,000$</td>
-<td style="text-align:center">$\le1$</td>
-<td style="text-align:center">无</td>
-<td style="text-align:center">$15$</td>
-</tr>
-<tr>
-<td style="text-align:center">$5$</td>
-<td style="text-align:center">$=10$</td>
-<td style="text-align:center">$\le 3,000$</td>
-<td style="text-align:center">$\le1$</td>
-<td style="text-align:center">无</td>
-<td style="text-align:center">$20$</td>
-</tr>
-<tr>
-<td style="text-align:center">$6$</td>
-<td style="text-align:center">$=10$</td>
-<td style="text-align:center">$\le 3,000$</td>
-<td style="text-align:center">$\le10$</td>
-<td style="text-align:center">无</td>
-<td style="text-align:center">$20$</td>
-</tr>
-</tbody>
-</table>
-<h2>思路</h2>
-<ul>
-<li>大模拟</li>
-</ul>
-<h2>生成随机数据</h2>
-<ul>
-<li>为了生成数据的合理性以及直观性，写了一个<a href="TODO">辅助工具</a></li>
-</ul>
-<h4>子任务$1$, $n=1$, $L\le 10^2$ , 每个玩家蛇的数量 $\le 1$, 没有墙和豆子。(15')</h4>
-<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random </span><br><span class="line">n = <span class="number">1</span></span><br><span class="line">Name = [<span class="string">"Wangxz"</span>] <span class="comment"># 玩家名字</span></span><br><span class="line">SnakeN = [<span class="number">1</span>] <span class="comment"># 玩家蛇的数量</span></span><br><span class="line">L = random.randrange(<span class="number">1</span>, <span class="number">101</span>) <span class="comment"># log的数量	</span></span><br><span class="line">S = []</span><br><span class="line">S.append(random.randrange(<span class="number">1</span>,<span class="number">10</span>)) <span class="comment"># 第一个操作发生在游戏开始的十秒内</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(L):</span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    S.append(random.randrange(S[i],))</span><br></pre></td></tr></table></figure></p>
-<h4>子任务$2$, $n=1$, $L\le 10^2$ , 每个玩家蛇的数量 $\le 1$, 没有豆子。(15')</h4>
-<h4>子任务$3$, $n=1$, $L\le 10^2$ , 每个玩家蛇的数量 $\le 1$ 。(15')</h4>
-<h4>子任务$4$, $n=2$, $L\le 3,000​$ , 每个玩家蛇的数量 $\le 1​$ 。(15')</h4>
-<h4>子任务$5$, $n=10$, $L\le 3,000$ , 每个玩家蛇的数量 $\le 1$  。(20')</h4>
-<h4>子任务$6$, $n=10$, $L\le 3,000$ , 每个玩家蛇的数量 $\le 10$ 。(20')</h4>
-<h2>实现</h2>
-<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -4084,7 +4353,7 @@ $$</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">200</span>
+                  <span class="site-state-item-count">201</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
