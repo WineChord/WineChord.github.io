@@ -579,9 +579,9 @@ body {
 .wide2 {
   .page {
     float: left;
-//     width: 100%;
-    width: calc(100% - #{$right-sidebar-width-narrow});
-    padding-right: $right-sidebar-width-narrow;
+    width: 100%;
+//     width: calc(100% - #{$right-sidebar-width-narrow});
+//     padding-right: $right-sidebar-width-narrow;
     @include breakpoint($large) {
       padding-left: 0;
     }
@@ -592,8 +592,8 @@ body {
   }
 
   .page__related {
-    width: calc(100% - #{$right-sidebar-width-narrow});
-    padding-right: $right-sidebar-width-narrow;
+//     width: calc(100% - #{$right-sidebar-width-narrow});
+//     padding-right: $right-sidebar-width-narrow;
     @include breakpoint($large) {
       padding-left: 0;
     }
