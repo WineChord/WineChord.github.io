@@ -1018,3 +1018,113 @@ int main(){
     }
 }
 ```
+
+# 19. Codeforces Round #744 (Div. 3) E1. Permutation Minimization by Deque 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1579/E1
+
+Codeforces Round #744 (Div. 3) E1. Permutation Minimization by Deque 
+
+In fact, the problems E1 and E2 do not have much in common. You should 
+probably think of them as two separate problems.
+
+A permutation p of size n is given. A permutation of size n is an array of 
+size n in which each integer from 1 to n occurs exactly once. For example, 
+[1, 4, 3, 2] and [4, 2, 1, 3] are correct permutations while [1, 2, 4] and 
+[1, 2, 2] are not.
+
+Let us consider an empty <a href="https://tinyurl.com/pfeucbux">deque
+
+ (double-ended queue). A deque is a data structure that supports adding 
+elements to both the beginning and the end. So, if there are elements [1, 
+5, 2] currently in the deque, adding an element 4 to the beginning will 
+produce the sequence [\color{red}{4}, 1, 5, 2], and adding same element to 
+the end will produce [1, 5, 2, \color{red}{4}].
+
+The elements of the permutation are sequentially added to the initially 
+empty deque, starting with p_1 and finishing with p_n. Before adding each 
+element to the deque, you may choose whether to add it to the beginning or 
+the end.
+
+For example, if we consider a permutation p = [3, 1, 2, 4], one of the 
+possible sequences of actions looks like this: <table 
+class="tex-tabular"><td class="tex-tabular-text-align-left">\quad 1.
+
+<td class="tex-tabular-text-align-left">add 3 to the end of the deque:
+
+<td class="tex-tabular-text-align-left">deque has a sequence 
+[\color{red}{3}] in it;
+
+
+
+<td class="tex-tabular-text-align-left">\quad 2.
+
+<td class="tex-tabular-text-align-left">add 1 to the beginning of the 
+deque:
+
+<td class="tex-tabular-text-align-left">deque has a sequence 
+[\color{red}{1}, 3] in it;
+
+
+
+<td class="tex-tabular-text-align-left">\quad 3.
+
+<td class="tex-tabular-text-align-left">add 2 to the end of the deque:
+
+<td class="tex-tabular-text-align-left">deque has a sequence [1, 3, 
+\color{red}{2}] in it;
+
+
+
+<td class="tex-tabular-text-align-left">\quad 4.
+
+<td class="tex-tabular-text-align-left">add 4 to the end of the deque:
+
+<td class="tex-tabular-text-align-left">deque has a sequence [1, 3, 2, 
+\color{red}{4}] in it;
+
+
+Find the lexicographically smallest possible sequence of elements in the 
+deque after the entire permutation has been processed. 
+
+A sequence [x_1, x_2, \ldots, x_n] is lexicographically smaller than the 
+sequence [y_1, y_2, \ldots, y_n] if there exists such i \leq n that x_1 = 
+y_1, x_2 = y_2, \ldots, x_{i - 1} = y_{i - 1} and x_i &lt; y_i. In other 
+words, if the sequences x and y have some (possibly empty) matching 
+prefix, and the next element of the sequence x is strictly smaller than 
+the corresponding element of the sequence y. For example, the sequence [1, 
+3, 2, 4] is smaller than the sequence [1, 3, 4, 2] because after the two 
+matching elements [1, 3] in the start the first sequence has an element 2 
+which is smaller than the corresponding element 4 in the second sequence.
+*/
+#define MAXN 200202
+int a[MAXN];
+void run(){
+    int n;scanf("%d",&n);
+    deque<int> q;
+    for(int i=0;i<n;i++){
+        scanf("%d",&a[i]);
+        if(i==0)q.push_back(a[i]);
+        else{
+            if(a[i]<q.front())q.push_front(a[i]);
+            else q.push_back(a[i]);
+        }
+    }
+    for(const auto& x:q)printf("%d ",x);
+    printf("\n");
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
