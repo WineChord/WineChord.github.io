@@ -958,3 +958,63 @@ int main(){
     }
 }
 ```
+
+# 18. CodeCraft-22 and Codeforces Round #795 (Div. 2) B. Shoe Shuffling 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1691/B
+
+CodeCraft-22 and Codeforces Round #795 (Div. 2) B. Shoe Shuffling 
+
+A class of students got bored wearing the same pair of shoes every day, so 
+they decided to shuffle their shoes among themselves. In this problem, a 
+pair of shoes is inseparable and is considered as a single object.
+
+There are n students in the class, and you are given an array s in 
+non-decreasing order, where s_i is the shoe size of the i-th student. A 
+shuffling of shoes is valid only if no student gets their own shoes and if 
+every student gets shoes of size greater than or equal to their size. 
+
+You have to output a permutation p of \{1,2,\ldots,n\} denoting a valid 
+shuffling of shoes, where the i-th student gets the shoes of the p_i-th 
+student (p_i \ne i). And output -1 if a valid shuffling does not exist.
+
+A permutation is an array consisting of n distinct integers from 1 to n in 
+arbitrary order. For example, [2,3,1,5,4] is a permutation, but [1,2,2] is 
+not a permutation (2 appears twice in the array) and [1,3,4] is also not a 
+permutation (n=3 but there is 4 in the array).
+*/
+#define MAXN 100010
+ll a[MAXN];
+void run(){
+    int n;scanf("%d",&n);
+    for(int i=1;i<=n;i++)scanf("%lld",&a[i]);
+    vector<ll> res;
+    for(int i=1;i<=n;i++){
+        int j=i;
+        while(j<=n&&a[j]==a[i])j++;
+        if(j==i+1){
+            printf("-1\n");
+            return;
+        }
+        res.push_back(j-1);
+        for(int k=i;k<j-1;k++)res.push_back(k);
+        i=j-1;
+    }
+    for(const auto& x:res)printf("%lld ",x);
+    printf("\n");
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
