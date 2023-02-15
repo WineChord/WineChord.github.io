@@ -576,3 +576,30 @@ body {
     }
   }
 }
+.wide2 {
+  .page {
+    float: left;
+//     width: 100%;
+    width: calc(100% - #{$right-sidebar-width-narrow});
+    padding-right: $right-sidebar-width-narrow;
+    @include breakpoint($large) {
+      padding-left: 0;
+    }
+
+    @include breakpoint($x-large) {
+      padding-left: 0;
+    }
+  }
+
+  .page__related {
+    width: calc(100% - #{$right-sidebar-width-narrow});
+    padding-right: $right-sidebar-width-narrow;
+    @include breakpoint($large) {
+      padding-left: 0;
+    }
+
+    @include breakpoint($x-large) {
+      padding-left: 0;
+    }
+  }
+}
