@@ -1,5 +1,5 @@
 ---
-classes: splash
+<!-- classes: splash -->
 title: "Codeforces Constructive Problems"
 excerpt: "Practices of some codeforces constructive problems."
 categories: 
