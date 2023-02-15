@@ -864,8 +864,50 @@ int main(){
 }
 ```
 
-$a+b\times c\cdots d = e$, full math:
+# 16. Codeforces Round #356 (Div. 2) B. Bear and Finding Criminals 
 
-$$
-f(x) = e^x + \mathcal{X} + \mathcal{Y} + \mathcal{Z} + \mathbb{y} + \frac{1}{x}
-$$
+```
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/680/B
+
+Codeforces Round #356 (Div. 2) B. Bear and Finding Criminals 
+
+There are n cities in Bearland, numbered 1 through n. Cities are arranged 
+in one long row. The distance between cities i and j is equal to |i - j|.
+
+Limak is a police officer. He lives in a city a. His job is to catch 
+criminals. It's hard because he doesn't know in which cities criminals 
+are. Though, he knows that there is at most one criminal in each city.
+
+Limak is going to use a BCD (Bear Criminal Detector). The BCD will tell 
+Limak how many criminals there are for every distance from a city a. After 
+that, Limak can catch a criminal in each city for which he is sure that 
+there must be a criminal.
+
+You know in which cities criminals are. Count the number of criminals 
+Limak will catch, after he uses the BCD.
+*/
+#define MAXN 200
+int a[MAXN];
+void run(){
+    int n,b;scanf("%d%d",&n,&b);
+    for(int i=1;i<=n;i++)scanf("%d",&a[i]);
+    int res=0;
+    for(int i=0;;i++){
+        if(b+i>n&&b-i<1)break;
+        if(b-i<1&&a[b+i]==1)res++;
+        if(b+i>n&&a[b-i]==1)res++;
+        if(b-i>=1&&b+i<=n&&a[b+i]==a[b-i])res+=a[b+i]+(i==0?0:a[b+i]);
+    }
+    printf("%d\n",res);
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    run();
+}
+```
