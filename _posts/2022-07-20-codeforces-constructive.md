@@ -1,30 +1,12 @@
 ---
-layout: post
 title: "Codeforces Constructive Problems"
-author: "Wine&Chord"
-categories: coding
-tags: [coding]
+excerpt: "Practices of some codeforces constructive problems."
+categories: 
+  - coding
+tags: 
+  - constructive
+toc: true
 ---
-
-- [1. Codeforces Round #720 (Div. 2) A. Nastia and Nearly Good Numbers](#1-codeforces-round-720-div-2-a-nastia-and-nearly-good-numbers)
-- [2. Educational Codeforces Round 103 A. K-divisible Sum](#2-educational-codeforces-round-103-a-k-divisible-sum)
-- [3. Codeforces Round #719 (Div. 3) C. Not Adjacent Matrix](#3-codeforces-round-719-div-3-c-not-adjacent-matrix)
-- [4. Codeforces Global Round 7 A. Bad Ugly Numbers](#4-codeforces-global-round-7-a-bad-ugly-numbers)
-- [5. Codeforces Round #360 (Div. 2) B. Lovely Palindromes](#5-codeforces-round-360-div-2-b-lovely-palindromes)
-- [6. Codeforces Round #396 (Div. 2) B. Mahmoud and a Triangle](#6-codeforces-round-396-div-2-b-mahmoud-and-a-triangle)
-- [7. Codeforces Beta Round #89 (Div. 2) B. Present from Lena](#7-codeforces-beta-round-89-div-2-b-present-from-lena)
-- [8. Educational Codeforces Round 101 (Rated for Div. 2) A. Regular Bracket Sequence](#8-educational-codeforces-round-101-rated-for-div-2-a-regular-bracket-sequence)
-- [9. Codeforces Round #396 (Div. 2) A. Mahmoud and Longest Uncommon Subsequence](#9-codeforces-round-396-div-2-a-mahmoud-and-longest-uncommon-subsequence)
-- [10. Codeforces Round #702 (Div. 3) B. Balanced Remainders](#10-codeforces-round-702-div-3-b-balanced-remainders)
-- [11. Codeforces Round #632 (Div. 2) A. Little Artem](#11-codeforces-round-632-div-2-a-little-artem)
-- [12. Codeforces Round #696 (Div. 2) B. Different Divisors](#12-codeforces-round-696-div-2-b-different-divisors)
-  - [Method 1: Prime Checking.](#method-1-prime-checking)
-  - [Method 2: Save Next Prime.](#method-2-save-next-prime)
-  - [Method 3: Binary Search on Saved Primes.](#method-3-binary-search-on-saved-primes)
-- [13. Educational Codeforces Round 83 (Rated for Div. 2) B. Bogosort](#13-educational-codeforces-round-83-rated-for-div-2-b-bogosort)
-- [14. Codeforces Round #671 (Div. 2) D1. Sage's Birthday (easy version)](#14-codeforces-round-671-div-2-d1-sages-birthday-easy-version)
-- [15. Educational Codeforces Round 96 (Rated for Div. 2) C. Numbers on Whiteboard](#15-educational-codeforces-round-96-rated-for-div-2-c-numbers-on-whiteboard)
-
 
 # 1. Codeforces Round #720 (Div. 2) A. Nastia and Nearly Good Numbers
 
