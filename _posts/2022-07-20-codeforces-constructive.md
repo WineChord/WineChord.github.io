@@ -911,3 +911,50 @@ int main(){
     run();
 }
 ```
+
+# 17. Codeforces Round #668 (Div. 2) B. Array Cancellation 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1405/B
+
+Codeforces Round #668 (Div. 2) B. Array Cancellation 
+
+You're given an array a of n integers, such that a_1 + a_2 + \cdots + a_n 
+= 0.
+
+In one operation, you can choose two different indices i and j (1 \le i, j 
+\le n), decrement a_i by one and increment a_j by one. If i &lt; j this 
+operation is free, otherwise it costs one coin.
+
+How many coins do you have to spend in order to make all elements equal to 
+0?
+*/
+#define MAXN 100100
+ll a[MAXN];
+void run(){
+    int n;scanf("%d",&n);
+    for(int i=1;i<=n;i++)scanf("%lld",&a[i]);
+    ll neg=0,res=0;
+    for(int i=n;i>=1;i--){
+        neg+=a[i];
+        if(neg>0){
+            res+=neg;
+            neg=0;
+        }
+    }
+    printf("%lld\n",res);
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
