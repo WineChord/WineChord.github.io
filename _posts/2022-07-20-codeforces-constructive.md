@@ -867,5 +867,5 @@ int main(){
 $a+b\times c\cdots d = e$, full math:
 
 $$
-f(x) = e^x + \mathcal{x} + \mathbb{y} + \frac{1}{x}
+f(x) = e^x + \mathcal{X} + \mathcal{Y} + \mathcal{Z} + \mathbb{y} + \frac{1}{x}
 $$
