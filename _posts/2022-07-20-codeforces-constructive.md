@@ -1128,3 +1128,57 @@ int main(){
     }
 }
 ```
+
+# 20. Codeforces Round #812 (Div. 2) B. Optimal Reduction 
+
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1713/B
+
+Codeforces Round #812 (Div. 2) B. Optimal Reduction 
+
+Consider an array a of n positive integers.
+
+You may perform the following operation: 
+
+ select two indices l and r (1 \leq l \leq r \leq n), then 
+
+ decrease all elements a_l, a_{l + 1}, \dots, a_r by 1. 
+
+Let's call f(a) the minimum number of operations needed to change array a 
+into an array of n zeros.
+
+Determine if for all permutations^\dagger b of a, f(a) \leq f(b) is true. 
+
+^\dagger An array b is a permutation of an array a if b consists of the 
+elements of a in arbitrary order. For example, [4,2,3,4] is a permutation 
+of [3,2,4,4] while [1,2,2] is not a permutation of [1,2,3].
+*/
+#define MAXN 100101
+ll a[MAXN];
+void run(){
+    int n;scanf("%d",&n);
+    for(int i=0;i<n;i++){
+        scanf("%lld",&a[i]);
+    }
+    int pre=0;
+    while(pre+1<n&&a[pre+1]>=a[pre])pre++;
+    int suf=0;
+    while(n-2-suf>=0&&a[n-2-suf]>=a[n-1-suf])suf++;
+    if(pre+suf>=n-1)printf("YES\n");
+    else printf("NO\n");
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
