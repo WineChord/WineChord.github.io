@@ -866,7 +866,7 @@ int main(){
 
 # 16. Codeforces Round #356 (Div. 2) B. Bear and Finding Criminals 
 
-```
+```cpp
 #include<bits/stdc++.h>
 using namespace std;
 using ll=long long;
