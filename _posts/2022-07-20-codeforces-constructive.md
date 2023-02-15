@@ -8,6 +8,7 @@ tags:
   - constructive
 toc: true
 toc_sticky: true
+mathjax: true
 ---
 
 # 1. Codeforces Round #720 (Div. 2) A. Nastia and Nearly Good Numbers
