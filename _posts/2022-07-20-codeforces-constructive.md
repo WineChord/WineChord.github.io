@@ -862,3 +862,9 @@ int main(){
     }
 }
 ```
+
+$a+b\times c\cdots d = e$, full math:
+
+$$
+f(x) = e^x + \mathcal{x} + \mathbb{y} + \frac{1}{x}
+$$
