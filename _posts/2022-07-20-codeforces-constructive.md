@@ -1182,3 +1182,57 @@ int main(){
     }
 }
 ```
+
+
+# 21. Codeforces Round #769 (Div. 2) B. Roof Construction 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1632/B
+
+Codeforces Round #769 (Div. 2) B. Roof Construction 
+
+It has finally been decided to build a roof over the football field in 
+School 179. Its construction will require placing n consecutive vertical 
+pillars. Furthermore, the headmaster wants the heights of all the pillars 
+to form a permutation p of integers from 0 to n - 1, where p_i is the 
+height of the i-th pillar from the left (1 \le i \le n).
+
+As the chief, you know that the cost of construction of consecutive 
+pillars is equal to the maximum value of the bitwise XOR of heights of all 
+pairs of adjacent pillars. In other words, the cost of construction is 
+equal to \max\limits_{1 \le i \le n - 1}{p_i \oplus p_{i + 1}}, where 
+\oplus denotes the <a 
+href="https://en.wikipedia.org/wiki/Bitwise_operation#XOR">bitwise XOR 
+operation.
+
+Find any sequence of pillar heights p of length n with the smallest 
+construction cost.
+
+In this problem, a permutation is an array consisting of n distinct 
+integers from 0 to n - 1 in arbitrary order. For example, [2,3,1,0,4] is a 
+permutation, but [1,0,1] is not a permutation (1 appears twice in the 
+array) and [1,0,3] is also not a permutation (n=3, but 3 is in the array).
+*/
+void run(){
+    int n;scanf("%d",&n);
+    int lz=__builtin_clz(n-1);
+    int mx=1<<(31-lz);
+    for(int i=1;i<mx;i++)printf("%d ",i);
+    printf("0 %d ",mx);
+    for(int i=mx+1;i<n;i++)printf("%d ",i);
+    printf("\n");
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
