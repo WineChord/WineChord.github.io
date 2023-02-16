@@ -1237,7 +1237,7 @@ int main(){
 }
 ```
 
-# 21. Codeforces Round #410 (Div. 2) A. Mike and palindrome 
+# 22. Codeforces Round #410 (Div. 2) A. Mike and palindrome 
 
 ```cpp
 #include<bits/stdc++.h>
