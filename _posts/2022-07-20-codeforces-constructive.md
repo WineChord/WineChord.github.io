@@ -1236,3 +1236,38 @@ int main(){
     }
 }
 ```
+
+# 21. Codeforces Round #410 (Div. 2) A. Mike and palindrome 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/798/A
+
+Codeforces Round #410 (Div. 2) A. Mike and palindrome 
+
+Mike has a string s consisting of only lowercase English letters. He wants 
+to change exactly one character from the string so that the resulting one 
+is a palindrome. 
+
+A palindrome is a string that reads the same backward as forward, for 
+example strings "z", "aaa", "aba", "abccba" are palindromes, but strings 
+"codeforces", "reality", "ab" are not.
+*/
+void run(){
+    string s;cin>>s;
+    int n=s.length();
+    int cnt=0;
+    for(int i=0;i<n/2;i++)if(s[i]!=s[n-1-i])cnt++;
+    if(cnt==1||(cnt==0&&n%2))cout<<"YES"<<endl;
+    else cout<<"NO"<<endl;
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    run();
+}
+```
