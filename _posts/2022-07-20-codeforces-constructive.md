@@ -1272,7 +1272,7 @@ int main(){
 }
 ```
 
-## 23. Codeforces Round #741 (Div. 2) B. Scenes From a Memory 
+# 23. Codeforces Round #741 (Div. 2) B. Scenes From a Memory 
 
 ```cpp
 #include<bits/stdc++.h>
