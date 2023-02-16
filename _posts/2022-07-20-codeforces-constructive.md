@@ -1339,3 +1339,57 @@ int main(){
     }
 }
 ```
+
+## 24. Codeforces Round #839 (Div. 3) C. Different Differences 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1772/C
+
+Codeforces Round #839 (Div. 3) C. Different Differences 
+
+An array a consisting of k integers is strictly increasing if a_1 &lt; a_2 
+&lt; \dots &lt; a_k. For example, the arrays [1, 3, 5], [1, 2, 3, 4], [3, 
+5, 6] are strictly increasing; the arrays [2, 2], [3, 7, 5], [7, 4, 3], 
+[1, 2, 2, 3] are not.
+
+For a strictly increasing array a of k elements, let's denote the 
+characteristic as the number of different elements in the array [a_2 - 
+a_1, a_3 - a_2, \dots, a_k - a_{k-1}]. For example, the characteristic of 
+the array [1, 3, 4, 7, 8] is 3 since the array [2, 1, 3, 1] contains 3 
+different elements: 2, 1 and 3.
+
+You are given two integers k and n (k \le n). Construct an increasing 
+array of k integers from 1 to n with maximum possible characteristic.
+*/
+void run(){
+    int k,n;scanf("%d%d",&k,&n);
+    int x=1,cnt=0;
+    int d=1;
+    while(true){
+        if(n-x>=k-cnt-1){
+            printf("%d ",x);
+        }else{
+            for(int i=cnt;i<k;i++)printf("%d ",x-d+2+i-cnt);
+            printf("\n");
+            return;
+        }
+        cnt++;
+        if(cnt>=k)break;
+        x+=d;d++;
+    }
+    printf("\n");
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
