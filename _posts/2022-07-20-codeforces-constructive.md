@@ -1340,7 +1340,7 @@ int main(){
 }
 ```
 
-## 24. Codeforces Round #839 (Div. 3) C. Different Differences 
+# 24. Codeforces Round #839 (Div. 3) C. Different Differences 
 
 ```cpp
 #include<bits/stdc++.h>
