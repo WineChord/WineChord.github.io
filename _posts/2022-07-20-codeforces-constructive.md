@@ -1271,3 +1271,71 @@ int main(){
     run();
 }
 ```
+
+## 23. Codeforces Round #741 (Div. 2) B. Scenes From a Memory 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1562/B
+
+Codeforces Round #741 (Div. 2) B. Scenes From a Memory 
+
+During the hypnosis session, Nicholas suddenly remembered a positive 
+integer n, which doesn't contain zeros in decimal notation. 
+
+Soon, when he returned home, he got curious: what is the maximum number of 
+digits that can be removed from the number so that the number becomes not 
+prime, that is, either composite or equal to one?
+
+For some numbers doing so is impossible: for example, for number 53 it's 
+impossible to delete some of its digits to obtain a not prime integer. 
+However, for all n in the test cases of this problem, it's guaranteed that 
+it's possible to delete some of their digits to obtain a not prime number.
+
+Note that you cannot remove all the digits from the number.
+
+A prime number is a number that has no divisors except one and itself. A 
+composite is a number that has more than two divisors. 1 is neither a 
+prime nor a composite number.
+*/
+bool isp[200];
+void init(){
+    memset(isp,true,sizeof(isp));
+    isp[0]=isp[1]=false;
+    for(int i=2;i<200;i++)if(isp[i])for(int j=i*i;j<200;j+=i)isp[j]=false;
+}
+void run(){
+    int n;scanf("%d",&n);
+    string s;cin>>s;
+    vector<int> a;
+    int pcnt=0;
+    for(int i=0;i<n;i++){
+        a.push_back(s[i]-'0');
+        if(!isp[a[i]]){
+            printf("1\n%d\n",a[i]);
+            return;
+        }
+    }
+    for(int i=0;i<n;i++)
+        for(int j=i+1;j<n;j++){
+            int x=a[i]*10+a[j];
+            if(!isp[x]){
+                printf("2\n%d\n",x);
+                return;
+            }
+        }
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    init();
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
