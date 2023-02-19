@@ -1573,3 +1573,49 @@ int main(){
     }
 }
 ```
+
+# 28. Good Bye 2022: 2023 is NEAR B. Koxia and Permutation 
+
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1770/B
+
+Good Bye 2022: 2023 is NEAR B. Koxia and Permutation 
+
+Reve has two integers n and k.
+
+Let p be a permutation^\dagger of length n. Let c be an array of length n 
+- k + 1 such that c_i = \max(p_i, \dots, p_{i+k-1}) + \min(p_i, \dots, 
+p_{i+k-1}). Let the cost of the permutation p be the maximum element of c.
+
+Koxia wants you to construct a permutation with the minimum possible cost.
+
+^\dagger A permutation of length n is an array consisting of n distinct 
+integers from 1 to n in arbitrary order. For example, [2,3,1,5,4] is a 
+permutation, but [1,2,2] is not a permutation (2 appears twice in the 
+array), and [1,3,4] is also not a permutation (n=3 but there is 4 in the 
+array).
+*/
+void run(){
+    int n,k;scanf("%d%d",&n,&k);
+    int l=1,r=n;bool flag=true;
+    while(l<=r){
+        printf("%d ",flag==true?r--:l++);
+        flag=!flag;
+    }
+    printf("\n");
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
