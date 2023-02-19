@@ -1442,3 +1442,60 @@ int main(){
     }
 }
 ```
+
+# 26. Codeforces Round #682 (Div. 2) B. Valerii Against Everyone 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1438/B
+
+Codeforces Round #682 (Div. 2) B. Valerii Against Everyone 
+
+You're given an array b of length n. Let's define another array a, also of 
+length n, for which a_i = 2^{b_i} (1 \leq i \leq n). 
+
+Valerii says that every two non-intersecting subarrays of a have different 
+sums of elements. You want to determine if he is wrong. More formally, you 
+need to determine if there exist four integers l_1,r_1,l_2,r_2 that 
+satisfy the following conditions: 
+
+ 1 \leq l_1 \leq r_1 \lt l_2 \leq r_2 \leq n; 
+
+ a_{l_1}+a_{l_1+1}+\ldots+a_{r_1-1}+a_{r_1} = 
+a_{l_2}+a_{l_2+1}+\ldots+a_{r_2-1}+a_{r_2}. 
+
+If such four integers exist, you will prove Valerii wrong. Do they exist?
+
+An array c is a subarray of an array d if c can be obtained from d by 
+deletion of several (possibly, zero or all) elements from the beginning 
+and several (possibly, zero or all) elements from the end.
+*/
+#define MAXN 1101
+ll b[MAXN];
+void run(){
+    int n;scanf("%d",&n);
+    unordered_map<ll,int> mp;
+    bool res=false;
+    for(int i=0;i<n;i++){
+        scanf("%lld",&b[i]);
+        if(mp.find(b[i])!=mp.end()){
+            res=true;
+        }
+        mp[b[i]]=1;
+    }
+    if(res)printf("YES\n");
+    else printf("NO\n");
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
