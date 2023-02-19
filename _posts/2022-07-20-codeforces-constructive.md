@@ -1393,3 +1393,52 @@ int main(){
     }
 }
 ```
+
+# 25. Codeforces Round #816 (Div. 2) B. Beautiful Array 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1715/B
+
+Codeforces Round #816 (Div. 2) B. Beautiful Array 
+
+Stanley defines the beauty of an array a of length n, which contains 
+non-negative integers, as follows: \sum\limits_{i = 1}^{n} \left \lfloor 
+\frac{a_{i}}{k} \right \rfloor, which means that we divide each element by 
+k, round it down, and sum up the resulting values.
+
+Stanley told Sam the integer k and asked him to find an array a of n 
+non-negative integers, such that the beauty is equal to b and the sum of 
+elements is equal to s. Help Sam — find any of the arrays satisfying the 
+conditions above.
+*/
+void run(){
+    ll n,k,b,s;
+    scanf("%lld%lld%lld%lld",&n,&k,&b,&s);
+    // [kb,kb+n*(k-1)]
+    ll mi=k*b;
+    ll mx=mi+n*(k-1);
+    if(s<mi||s>mx){
+        printf("-1\n");
+        return;
+    }
+    ll r=s-mi;
+    ll base=r/n;
+    ll rem=r%n;
+    for(int i=0;i<rem;i++)printf("%lld ",base+1);
+    for(int i=rem;i<n-1;i++)printf("%lld ",base);
+    printf("%lld\n",base+mi);
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
