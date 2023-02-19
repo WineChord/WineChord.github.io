@@ -1499,3 +1499,77 @@ int main(){
     }
 }
 ```
+
+# 27. Codeforces Round #770 (Div. 2) C. OKEA 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1634/C
+
+Codeforces Round #770 (Div. 2) C. OKEA 
+
+<div class="epigraph"><div class="epigraph-text">People worry that 
+computers will get too smart and take over the world, but the real problem 
+is that they're too stupid and they've already taken over the world.
+
+<div class="epigraph-source">— Pedro Domingos
+
+You work for a well-known department store that uses leading technologies 
+and employs mechanistic work — that is, robots!
+
+The department you work in sells n \cdot k items. The first item costs 1 
+dollar, the second item costs 2 dollars, and so on: i-th item costs i 
+dollars. The items are situated on shelves. The items form a rectangular 
+grid: there are n shelves in total, and each shelf contains exactly k 
+items. We will denote by a_{i,j} the price of j-th item (counting from the 
+left) on the i-th shelf, 1 \le i \le n, 1 \le j \le k.
+
+Occasionally robots get curious and ponder on the following question: what 
+is the mean price (arithmetic average) of items a_{i,l}, a_{i,l+1}, 
+\ldots, a_{i,r} for some shelf i and indices l \le r? Unfortunately, the 
+old robots can only work with whole numbers. If the mean price turns out 
+not to be an integer, they break down.
+
+You care about robots' welfare. You want to arrange the items in such a 
+way that the robots cannot theoretically break. Formally, you want to 
+choose such a two-dimensional array a that:
+
+ Every number from 1 to n \cdot k (inclusively) occurs exactly once. 
+
+ For each i, l, r, the mean price of items from l to r on i-th shelf is an 
+integer. 
+
+Find out if such an arrangement is possible, and if it is, give any 
+example of such arrangement.
+*/
+void run(){
+    int n,k;scanf("%d%d",&n,&k);
+    if(k==1){
+        printf("YES\n");
+        for(int i=1;i<=n;i++)printf("%d\n",i);
+        return;
+    }
+    if(n%2){
+        printf("NO\n");
+        return;
+    }
+    printf("YES\n");
+    for(int i=1;i<=n;i++){
+        for(int j=0;j<k;j++){
+            printf("%d%c",i+j*n," \n"[j==k-1]);
+        }
+    }
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
