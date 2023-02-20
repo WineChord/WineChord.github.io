@@ -1619,3 +1619,83 @@ int main(){
     }
 }
 ```
+
+# 29. Codeforces Round #756 (Div. 3) C. Polycarp Recovers the Permutation 
+
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1611/C
+
+Codeforces Round #756 (Div. 3) C. Polycarp Recovers the Permutation 
+
+Polycarp wrote on a whiteboard an array p of length n, which is a 
+permutation of numbers from 1 to n. In other words, in p each number from 
+1 to n occurs exactly once.
+
+He also prepared a resulting array a, which is initially empty (that is, 
+it has a length of 0).
+
+After that, he did exactly n steps. Each step looked like this:
+
+ Look at the leftmost and rightmost elements of p, and pick the smaller of 
+the two.
+
+ If you picked the leftmost element of p, append it to the left of a; 
+otherwise, if you picked the rightmost element of p, append it to the 
+right of a.
+
+ The picked element is erased from p. 
+
+Note that on the last step, p has a length of 1 and its minimum element is 
+both leftmost and rightmost. In this case, Polycarp can choose what role 
+the minimum element plays. In other words, this element can be added to a 
+both on the left and on the right (at the discretion of Polycarp).
+
+Let's look at an example. Let n=4, p=[3, 1, 4, 2]. Initially a=[]. Then:
+
+ During the first step, the minimum is on the right (with a value of 2), 
+so after this step, p=[3,1,4] and a=[2] (he added the value 2 to the 
+right). 
+
+ During the second step, the minimum is on the left (with a value of 3), 
+so after this step, p=[1,4] and a=[3,2] (he added the value 3 to the 
+left). 
+
+ During the third step, the minimum is on the left (with a value of 1), so 
+after this step, p=[4] and a=[1,3,2] (he added the value 1 to the left). 
+
+ During the fourth step, the minimum is both left and right (this value is 
+4). Let's say Polycarp chose the right option. After this step, p=[] and 
+a=[1,3,2,4] (he added the value 4 to the right).
+
+Thus, a possible value of a after n steps could be a=[1,3,2,4].
+
+You are given the final value of the resulting array a. Find any possible 
+initial value for p that can result the given a, or determine that there 
+is no solution.
+*/
+#define MAXN 200200
+int a[MAXN];
+void run(){
+    int n;scanf("%d",&n);
+    for(int i=0;i<n;i++)scanf("%d",&a[i]);
+    if(a[0]!=n&&a[n-1]!=n){
+        printf("-1\n");
+        return;
+    }
+    for(int i=n-1;i>=0;i--)printf("%d%c",a[i]," \n"[i==0]);
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
