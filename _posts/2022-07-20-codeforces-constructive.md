@@ -1699,3 +1699,66 @@ int main(){
     }
 }
 ```
+
+# 30. Codeforces Round #757 (Div. 2) B. Divan and a New Project  
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1614/B
+
+Codeforces Round #757 (Div. 2) B. Divan and a New Project  
+
+The company "Divan's Sofas" is planning to build n + 1 different buildings 
+on a coordinate line so that: 
+
+ the coordinate of each building is an integer number; 
+
+ no two buildings stand at the same point. 
+
+Let x_i be the coordinate of the i-th building. To get from the building i 
+to the building j, Divan spends |x_i - x_j| minutes, where |y| is the 
+absolute value of y.
+
+All buildings that Divan is going to build can be numbered from 0 to n. 
+The businessman will live in the building 0, the new headquarters of 
+"Divan's Sofas". In the first ten years after construction Divan will 
+visit the i-th building a_i times, each time spending 2 \cdot |x_0-x_i| 
+minutes for walking.
+
+Divan asks you to choose the coordinates for all n + 1 buildings so that 
+over the next ten years the businessman will spend as little time for 
+walking as possible.
+*/
+void run(){
+    int n;scanf("%d",&n);
+    vector<pair<int,int>> a;
+    for(int i=1;i<=n;i++){
+        int x;scanf("%d",&x);
+        a.push_back({-x,i});
+    }
+    sort(a.begin(),a.end());
+    vector<int> res(n+1,0);
+    int cnt=1;
+    ll ans=0;
+    for(int i=0;i<n;i++){
+        res[a[i].second]=cnt;
+        ans+=2ll*abs(cnt)*(-a[i].first);
+        if(cnt<0)cnt=-cnt+1;
+        else cnt=-cnt;
+    }
+    printf("%lld\n",ans);
+    for(int i=0;i<=n;i++)printf("%d%c",res[i]," \n"[i==n]);
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
