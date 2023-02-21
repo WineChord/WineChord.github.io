@@ -1832,3 +1832,35 @@ int main(){
     }
 }
 ```
+
+# 32. Codeforces Round #563 (Div. 2) A. Ehab Fails to Be Thanos 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1174/A
+
+Codeforces Round #563 (Div. 2) A. Ehab Fails to Be Thanos 
+
+You're given an array a of length 2n. Is it possible to reorder it in such 
+way so that the sum of the first n elements isn't equal to the sum of the 
+last n elements?
+*/
+#define MAXN 3030
+int a[MAXN];
+void run(){
+    int n;scanf("%d",&n);
+    for(int i=0;i<2*n;i++)scanf("%d",&a[i]);
+    sort(a,a+2*n);
+    if(accumulate(a,a+n,0)==accumulate(a+n,a+2*n,0)){printf("-1\n");return;}
+    for(int i=0;i<2*n;i++)printf("%d%c",a[i]," \n"[i==2*n-1]);
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    run();
+}
+```
