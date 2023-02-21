@@ -2098,3 +2098,83 @@ int main(){
     }
 }
 ```
+
+# 38. Codeforces Round #550 (Div. 3) C. Two Shuffled Sequences 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1144/C
+
+Codeforces Round #550 (Div. 3) C. Two Shuffled Sequences 
+
+Two integer sequences existed initially — one of them was strictly 
+increasing, and the other one — strictly decreasing.
+
+Strictly increasing sequence is a sequence of integers [x_1 &lt; x_2 &lt; 
+\dots &lt; x_k]. And strictly decreasing sequence is a sequence of 
+integers [y_1 > y_2 > \dots > y_l]. Note that the empty sequence and the 
+sequence consisting of one element can be considered as increasing or 
+decreasing.
+
+They were merged into one sequence a. After that sequence a got shuffled. 
+For example, some of the possible resulting sequences a for an increasing 
+sequence [1, 3, 4] and a decreasing sequence [10, 4, 2] are sequences [1, 
+2, 3, 4, 4, 10] or [4, 2, 1, 10, 4, 3].
+
+This shuffled sequence a is given in the input.
+
+Your task is to find any two suitable initial sequences. One of them 
+should be strictly increasing and the other one — strictly decreasing. 
+Note that the empty sequence and the sequence consisting of one element 
+can be considered as increasing or decreasing.
+
+If there is a contradiction in the input and it is impossible to split the 
+given sequence a to increasing and decreasing sequences, print "NO".
+*/
+#define MAXN 200202
+int a[MAXN];
+void run(){
+    int n;scanf("%d",&n);
+    unordered_map<int,int> mp;
+    bool flag=false;
+    for(int i=0;i<n;i++){
+        scanf("%d",&a[i]);
+        mp[a[i]]++;
+        if(mp[a[i]]>=3)flag=true;
+    }
+    if(flag){
+        printf("NO\n");
+        return;
+    }
+    sort(a,a+n);
+    vector<int> x,y;
+    for(int i=0;i<n;i++){
+        if(i==0)x.push_back(a[i]);
+        else{
+            if(a[i]==a[i-1])y.push_back(a[i]);
+            else x.push_back(a[i]);
+        }
+    }
+    if(y.empty()){
+        y.push_back(x.back());
+        x.pop_back();
+    }
+    reverse(y.begin(),y.end());
+    printf("YES\n");
+    printf("%d\n",x.size());
+    for(const auto&v:x)printf("%d ",v);
+    printf("\n");
+    printf("%d\n",y.size());
+    for(const auto&v:y)printf("%d ",v);
+    printf("\n");
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    run();
+}
+```
