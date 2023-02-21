@@ -2039,3 +2039,62 @@ int main(){
     run();
 }
 ```
+
+# 37. Codeforces Round #604 (Div. 2) A. Beautiful String 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1265/A
+
+Codeforces Round #604 (Div. 2) A. Beautiful String 
+
+A string is called beautiful if no two consecutive characters are equal. 
+For example, "ababcb", "a" and "abab" are beautiful strings, while 
+"aaaaaa", "abaa" and "bb" are not.
+
+Ahcl wants to construct a beautiful string. He has a string s, consisting 
+of only characters 'a', 'b', 'c' and '?'. Ahcl needs to replace each 
+character '?' with one of the three characters 'a', 'b' or 'c', such that 
+the resulting string is beautiful. Please help him!
+
+More formally, after replacing all characters '?', the condition s_i \neq 
+s_{i+1} should be satisfied for all 1 \leq i \leq |s| - 1, where |s| is 
+the length of the string s.
+*/
+void run(){
+    string s;cin>>s;
+    int n=s.length();
+    for(int i=0;i<n-1;i++){
+        if(s[i]!='?'&&s[i]==s[i+1]){
+            printf("-1\n");
+            return;
+        }
+    }
+    int pre=0;
+    for(int i=0;i<n;i++){
+        if(s[i]!='?'){
+            pre=s[i]-'a';
+            continue;
+        }
+        pre=(pre+1)%3;
+        s[i]='a'+pre;
+        if(i+1<n&&s[i+1]==s[i]){
+            pre=(pre+1)%3;
+            s[i]='a'+pre;
+        }
+    }
+    cout<<s<<"\n";
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
