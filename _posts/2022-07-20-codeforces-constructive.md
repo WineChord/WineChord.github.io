@@ -2003,3 +2003,39 @@ int main(){
     run();
 }
 ```
+
+# 36. Codeforces Round #411 (Div. 1) A. Find Amir 
+
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/804/A
+
+Codeforces Round #411 (Div. 1) A. Find Amir 
+
+A few years ago Sajjad left his school and register to another one due to 
+security reasons. Now he wishes to find Amir, one of his schoolmates and 
+good friends.
+
+There are n schools numerated from 1 to n. One can travel between each 
+pair of them, to do so, he needs to buy a ticket. The ticker between 
+schools i and j costs <img align="middle" class="tex-formula" 
+src="https://espresso.codeforces.com/48a4e5770c4d95918ab20e59965b1361f52acc
+70.png" style="max-width: 100.0%;max-height: 100.0%;" /> and can be used 
+multiple times. Help Sajjad to find the minimum cost he needs to pay for 
+tickets to visit all schools. He can start and finish in any school.
+*/
+void run(){
+    int n;scanf("%d",&n);
+    printf("%d\n",(n-1)/2);
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    run();
+}
+```
