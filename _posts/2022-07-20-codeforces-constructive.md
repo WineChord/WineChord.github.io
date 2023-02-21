@@ -1864,3 +1864,53 @@ int main(){
     run();
 }
 ```
+
+# 33. Codeforces Round #352 (Div. 2) B. Different is Good 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/672/B
+
+Codeforces Round #352 (Div. 2) B. Different is Good 
+
+A wise man told Kerem "Different is good" once, so Kerem wants all things 
+in his life to be different. 
+
+Kerem recently got a string s consisting of lowercase English letters. 
+Since Kerem likes it when things are different, he wants all substrings of 
+his string s to be distinct. Substring is a string formed by some number 
+of consecutive characters of the string. For example, string "aba" has 
+substrings "" (empty substring), "a", "b", "a", "ab", "ba", "aba".
+
+If string s has at least two equal substrings then Kerem will change 
+characters at some positions to some other lowercase English letters. 
+Changing characters is a very tiring job, so Kerem want to perform as few 
+changes as possible.
+
+Your task is to find the minimum number of changes needed to make all the 
+substrings of the given string distinct, or determine that it is 
+impossible.
+*/
+void run(){
+    int n;string s;
+    cin>>n>>s;
+    unordered_map<char,int> mp;
+    for(const auto& c:s)mp[c]++;
+    int res=0;
+    for(const auto&[k,v]:mp)res+=v-1;
+    if(mp.size()+res>26){
+        printf("-1\n");
+        return;
+    }
+    printf("%d\n",res);
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    run();
+}
+```
