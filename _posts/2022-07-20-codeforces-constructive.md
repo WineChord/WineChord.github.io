@@ -1762,3 +1762,73 @@ int main(){
     }
 }
 ```
+
+# 31. Codeforces Global Round 16 C. MAX-MEX Cut 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1566/C
+
+Codeforces Global Round 16 C. MAX-MEX Cut 
+
+A binary string is a string that consists of characters 0 and 1. A 
+bi-table is a table that has exactly two rows of equal length, each being 
+a binary string.
+
+Let \operatorname{MEX} of a bi-table be the smallest digit among 0, 1, or 
+2 that does not occur in the bi-table. For example, \operatorname{MEX} for 
+\begin{bmatrix} 0011\\ 1010 \end{bmatrix} is 2, because 0 and 1 occur in 
+the bi-table at least once. \operatorname{MEX} for \begin{bmatrix} 111\\ 
+111 \end{bmatrix} is 0, because 0 and 2 do not occur in the bi-table, and 
+0 &lt; 2.
+
+You are given a bi-table with n columns. You should cut it into any number 
+of bi-tables (each consisting of consecutive columns) so that each column 
+is in exactly one bi-table. It is possible to cut the bi-table into a 
+single bi-table — the whole bi-table.
+
+What is the maximal sum of \operatorname{MEX} of all resulting bi-tables 
+can be?
+*/
+int solve(const string& s){
+    int res=count(s.begin(),s.end(),'0');
+    bool x=false,y=false;
+    for(const auto& c:s){
+        if(c=='0')x=true;
+        if(c=='1')y=true;
+        if(x&&y){
+            res++;
+            x=false;y=false;
+        }
+    }
+    return res;
+}
+void run(){
+    int n;cin>>n;
+    string s,t;cin>>s>>t;
+    int res=0;
+    string k;
+    for(int i=0;i<n;i++){
+        if(s[i]!=t[i]){
+            res+=2;
+            res+=solve(k);
+            k="";
+        }else k+=s[i];
+    }
+    cout<<res+solve(k)<<"\n";
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    cin.tie(0);cout.tie(0);
+    ios_base::sync_with_stdio(false);
+    int T;cin>>T;
+    while(T--){
+        run();
+    }
+}
+```
