@@ -1914,3 +1914,54 @@ int main(){
     run();
 }
 ```
+
+# 34. Codeforces Round #782 (Div. 2) A. Red Versus Blue 
+
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1659/A
+
+Codeforces Round #782 (Div. 2) A. Red Versus Blue 
+
+Team Red and Team Blue competed in a competitive FPS. Their match was 
+streamed around the world. They played a series of n matches.
+
+In the end, it turned out Team Red won r times and Team Blue won b times. 
+Team Blue was less skilled than Team Red, so b was strictly less than r.
+
+You missed the stream since you overslept, but you think that the match 
+must have been neck and neck since so many people watched it. So you 
+imagine a string of length n where the i-th character denotes who won the 
+i-th match  — it is R if Team Red won or B if Team Blue won. You imagine 
+the string was such that the maximum number of times a team won in a row 
+was as small as possible. For example, in the series of matches RBBRRRB, 
+Team Red won 3 times in a row, which is the maximum.
+
+You must find a string satisfying the above conditions. If there are 
+multiple answers, print any.
+*/
+void run(){
+    int n,r,b;scanf("%d%d%d",&n,&r,&b);
+    int base=r/(b+1);
+    int rem=r%(b+1);
+    for(int i=0;i<b+1;i++){
+        if(i<rem)printf("R");
+        for(int j=0;j<base;j++)printf("R");
+        if(i<b)printf("B");
+    }
+    printf("\n");
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
