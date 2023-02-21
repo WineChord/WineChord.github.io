@@ -2221,3 +2221,60 @@ int main(){
     run();
 }
 ```
+
+# 40. Codeforces Global Round 6 B. Dice Tower 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1266/B
+
+Codeforces Global Round 6 B. Dice Tower 
+
+Bob is playing with 6-sided dice. A net of such standard cube is shown 
+below.
+
+<img class="tex-graphics" 
+src="https://espresso.codeforces.com/0065ec3465bffc3d36eefbdb4a5cab1e259814
+6d.png" style="max-width: 100.0%;max-height: 100.0%;" />
+
+He has an unlimited supply of these dice and wants to build a tower by 
+stacking multiple dice on top of each other, while choosing the 
+orientation of each dice. Then he counts the number of visible pips on the 
+faces of the dice.
+
+For example, the number of visible pips on the tower below is 29 — the 
+number visible on the top is 1, from the south 5 and 3, from the west 4 
+and 2, from the north 2 and 4 and from the east 3 and 5.
+
+<img class="tex-graphics" 
+src="https://espresso.codeforces.com/8b7b0bd353a0dc7abd2f410cbb90999b99b2a2
+a7.png" style="max-width: 100.0%;max-height: 100.0%;" />
+
+The one at the bottom and the two sixes by which the dice are touching are 
+not visible, so they are not counted towards total.
+
+Bob also has t favourite integers x_i, and for every such integer his goal 
+is to build such a tower that the number of visible pips is exactly x_i. 
+For each of Bob's favourite integers determine whether it is possible to 
+build a tower that has exactly that many visible pips.
+*/
+void run(){
+    ll x;scanf("%lld",&x);
+    ll y=x/14;
+    ll r=x%14;
+    if(y>=1&&(r>=1&&r<=6))printf("YES\n");
+    else printf("NO\n");
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
