@@ -2178,3 +2178,46 @@ int main(){
     run();
 }
 ```
+
+# 39. Codeforces Round #394 (Div. 2) A. Dasha and Stairs 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/761/A
+
+Codeforces Round #394 (Div. 2) A. Dasha and Stairs 
+
+On her way to programming school tiger Dasha faced her first test — a huge 
+staircase!
+
+ <img class="tex-graphics" 
+src="https://espresso.codeforces.com/31ae258b18250cd0831c18db6108441e9b6731
+17.png" style="max-width: 100.0%;max-height: 100.0%;" /> 
+
+The steps were numbered from one to infinity. As we know, tigers are very 
+fond of all striped things, it is possible that it has something to do 
+with their color. So on some interval of her way she calculated two values 
+— the number of steps with even and odd numbers. 
+
+You need to check whether there is an interval of steps from the l-th to 
+the r-th (1 ≤ l ≤ r), for which values that Dasha has found are correct.
+*/
+void run(){
+    int a,b;scanf("%d%d",&a,&b);
+    if(a==b&&a==0){
+        printf("NO\n");
+        return;
+    }
+    if(abs(a-b)<2)printf("YES\n");
+    else printf("NO\n");
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    run();
+}
+```
