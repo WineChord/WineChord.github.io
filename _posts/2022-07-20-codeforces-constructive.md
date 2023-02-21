@@ -1965,3 +1965,41 @@ int main(){
     }
 }
 ```
+
+# 35. Codeforces Round #411 (Div. 2) B. 3-palindrome 
+
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/805/B
+
+Codeforces Round #411 (Div. 2) B. 3-palindrome 
+
+In the beginning of the new year Keivan decided to reverse his name. He 
+doesn't like palindromes, so he changed Naviek to Navick.
+
+He is too selfish, so for a given n he wants to obtain a string of n 
+characters, each of which is either 'a', 'b' or 'c', with no palindromes 
+of length 3 appearing in the string as a substring. For example, the 
+strings "abc" and "abca" suit him, while the string "aba" doesn't. He also 
+want the number of letters 'c' in his string to be as little as possible.
+*/
+void run(){
+    int n;scanf("%d",&n);
+    for(int i=0;i<n;i++){
+        int k=i%4;
+        if(k<2)printf("b");
+        else printf("a");
+    }
+    printf("\n");
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    run();
+}
+```
