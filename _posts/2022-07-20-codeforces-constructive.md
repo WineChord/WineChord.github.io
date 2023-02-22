@@ -2278,3 +2278,58 @@ int main(){
     }
 }
 ```
+
+# 41. Codeforces Round #830 (Div. 2) A. Bestie 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1732/A
+
+Codeforces Round #830 (Div. 2) A. Bestie 
+
+You are given an array a consisting of n integers a_1, a_2, \ldots, a_n. 
+Friends asked you to make the <a 
+href="https://en.wikipedia.org/wiki/Greatest_common_divisor">greatest 
+common divisor (GCD)
+
+ of all numbers in the array equal to 1. In one operation, you can do the 
+following:
+
+ Select an arbitrary index in the array 1 \leq i \leq n;
+
+ Make a_i = \gcd(a_i, i), where \gcd(x, y) denotes the GCD of integers x 
+and y. The cost of such an operation is n - i + 1.
+
+You need to find the minimum total cost of operations we need to perform 
+so that the GCD of the all array numbers becomes equal to 1.
+*/
+unordered_set<ll> mp={2,3,5,7,11,13,17,19};
+void run(){
+    int n;scanf("%d",&n);
+    int res=INT_MAX;
+    int tot=-1;
+    vector<int> can;
+    for(int i=1;i<=n;i++){
+        int x;scanf("%d",&x);
+        if(tot==-1)tot=x;
+        else tot=__gcd(tot,x);
+    }
+    if(tot==1)res=0;
+    else if(__gcd(tot,n)==1)res=1;
+    else if(__gcd(tot,n-1)==1)res=2;
+    else res=3;
+    printf("%d\n",res);
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
