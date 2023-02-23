@@ -2333,3 +2333,64 @@ int main(){
     }
 }
 ```
+
+# 42. Codeforces Round #546 (Div. 2) B. Nastya Is Playing Computer Games 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1136/B
+
+Codeforces Round #546 (Div. 2) B. Nastya Is Playing Computer Games 
+
+Finished her homework, Nastya decided to play computer games. Passing 
+levels one by one, Nastya eventually faced a problem. Her mission is to 
+leave a room, where a lot of monsters live, as quickly as possible.
+
+There are n manholes in the room which are situated on one line, but, 
+unfortunately, all the manholes are closed, and there is one stone on 
+every manhole. There is exactly one coin under every manhole, and to win 
+the game Nastya should pick all the coins. Initially Nastya stands near 
+the k-th manhole from the left. She is thinking what to do.
+
+In one turn, Nastya can do one of the following: 
+
+ if there is at least one stone on the manhole Nastya stands near, throw 
+exactly one stone from it onto any other manhole (yes, Nastya is strong). 
+
+ go to a neighboring manhole; 
+
+ if there are no stones on the manhole Nastya stays near, she can open it 
+and pick the coin from it. After it she must close the manhole immediately 
+(it doesn't require additional moves). 
+
+
+
+ <img class="tex-graphics" 
+src="https://espresso.codeforces.com/d67a584d94f164baaa23c9f6ada7b629599b01
+b9.png" style="max-width: 100.0%;max-height: 100.0%;" />   The figure 
+shows the intermediate state of the game. At the current position Nastya 
+can throw the stone to any other manhole or move left or right to the 
+neighboring manholes. If she were near the leftmost manhole, she could 
+open it (since there are no stones on it). 
+
+Nastya can leave the room when she picks all the coins. Monsters are 
+everywhere, so you need to compute the minimum number of moves Nastya has 
+to make to pick all the coins.
+
+Note one time more that Nastya can open a manhole only when there are no 
+stones onto it.
+*/
+void run(){
+    int n,k;scanf("%d%d",&n,&k);
+    printf("%d\n",6+3*(n-2)+min(n-k,k-1));
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    run();
+}
+```
