@@ -2452,3 +2452,53 @@ int main(){
     }
 }
 ```
+
+# 44. Codeforces Round #401 (Div. 2) A. Shell Game 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/777/A
+
+Codeforces Round #401 (Div. 2) A. Shell Game 
+
+Bomboslav likes to look out of the window in his room and watch lads 
+outside playing famous shell game. The game is played by two persons: 
+operator and player. Operator takes three similar opaque shells and places 
+a ball beneath one of them. Then he shuffles the shells by swapping some 
+pairs and the player has to guess the current position of the ball.
+
+Bomboslav noticed that guys are not very inventive, so the operator always 
+swaps the left shell with the middle one during odd moves (first, third, 
+fifth, etc.) and always swaps the middle shell with the right one during 
+even moves (second, fourth, etc.).
+
+Let's number shells from 0 to 2 from left to right. Thus the left shell is 
+assigned number 0, the middle shell is 1 and the right shell is 2. 
+Bomboslav has missed the moment when the ball was placed beneath the 
+shell, but he knows that exactly n movements were made by the operator and 
+the ball was under shell x at the end. Now he wonders, what was the 
+initial position of the ball?
+*/
+int a[][3]={
+    {0,1,2},
+    {1,0,2},
+    {1,2,0},
+    {2,1,0},
+    {2,0,1},
+    {0,2,1},
+    {0,1,2},
+};
+void run(){
+    int n,x;scanf("%d%d",&n,&x);
+    printf("%d\n",a[n%6][x]);
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    run();
+}
+```
