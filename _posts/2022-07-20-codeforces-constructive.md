@@ -2394,3 +2394,61 @@ int main(){
     run();
 }
 ```
+
+# 43. Pinely Round 1 (Div. 1 + Div. 2) B. Elimination of a Ring 
+
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1761/B
+
+Pinely Round 1 (Div. 1 + Div. 2) B. Elimination of a Ring 
+
+Define a cyclic sequence of size n as an array s of length n, in which s_n 
+is adjacent to s_1.
+
+Muxii has a ring represented by a cyclic sequence a of size n.
+
+However, the ring itself hates equal adjacent elements. So if two adjacent 
+elements in the sequence are equal at any time, one of them will be erased 
+immediately. The sequence doesn't contain equal adjacent elements 
+initially.
+
+Muxii can perform the following operation until the sequence becomes empty:
+
+ Choose an element in a and erase it. 
+
+For example, if ring is [1, 2, 4, 2, 3, 2], and Muxii erases element 4, 
+then ring would erase one of the elements equal to 2, and the ring will 
+become [1, 2, 3, 2].
+
+Muxii wants to find the maximum number of operations he could perform.
+
+Note that in a ring of size 1, its only element isn't considered adjacent 
+to itself (so it's not immediately erased).
+*/
+void run(){
+    int n;scanf("%d",&n);
+    unordered_map<int,int> mp;
+    for(int i=0;i<n;i++){
+        int x;
+        scanf("%d",&x);
+        mp[x]++;
+
+    }
+    if(mp.size()==2)printf("%d\n",n/2+1);
+    else printf("%d\n",n);
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
