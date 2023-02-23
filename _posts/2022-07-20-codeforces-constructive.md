@@ -2696,3 +2696,44 @@ int main(){
     // }
 }
 ```
+
+# 48. VK Cup 2016 - Qualification Round 1 A. Voting for Photos 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/637/A
+
+VK Cup 2016 - Qualification Round 1 A. Voting for Photos 
+
+After celebrating the midcourse the students of one of the faculties of 
+the Berland State University decided to conduct a vote for the best photo. 
+They published the photos in the social network and agreed on the rules to 
+choose a winner: the photo which gets most likes wins. If multiple photoes 
+get most likes, the winner is the photo that gets this number first.
+
+Help guys determine the winner photo by the records of likes.
+*/
+void run(){
+    int n;scanf("%d",&n);
+    int mx=0,idx=-1;
+    unordered_map<int,int> mp;
+    for(int i=1;i<=n;i++){
+        int x;scanf("%d",&x);
+        mp[x]++;
+        if(mp[x]>mx){
+            mx=mp[x];
+            idx=x;
+        }
+    }
+    printf("%d\n",idx);
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    run();
+}
+```
