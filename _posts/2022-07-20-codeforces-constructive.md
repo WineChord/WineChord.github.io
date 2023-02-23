@@ -2640,3 +2640,59 @@ int main(){
     run();
 }
 ```
+
+# 47. Codeforces Round #209 (Div. 2) A. Table 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/359/A
+
+Codeforces Round #209 (Div. 2) A. Table 
+
+Simon has a rectangular table consisting of n rows and m columns. Simon 
+numbered the rows of the table from top to bottom starting from one and 
+the columns — from left to right starting from one. We'll represent the 
+cell on the x-th row and the y-th column as a pair of numbers (x, y). The 
+table corners are cells: (1, 1), (n, 1), (1, m), (n, m).
+
+Simon thinks that some cells in this table are good. Besides, it's known 
+that no good cell is the corner of the table. 
+
+Initially, all cells of the table are colorless. Simon wants to color all 
+cells of his table. In one move, he can choose any good cell of table 
+(x_1, y_1), an arbitrary corner of the table (x_2, y_2) and color all 
+cells of the table (p, q), which meet both inequations: min(x_1, x_2) ≤ p 
+≤ max(x_1, x_2), min(y_1, y_2) ≤ q ≤ max(y_1, y_2).
+
+Help Simon! Find the minimum number of operations needed to color all 
+cells of the table. Note that you can color one cell multiple times.
+*/
+#define MAXN 100
+int a[MAXN][MAXN];
+void run(){
+    int n,m;scanf("%d%d",&n,&m);
+    bool flag=false;
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            scanf("%d",&a[i][j]);
+            if(a[i][j]){
+                if(i==0||i==n-1||j==0||j==m-1)flag=true;
+            }
+        }
+    }
+    if(flag)printf("2\n");
+    else printf("4\n");
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    // int T;scanf("%d",&T);
+    // while(T--){
+        run();
+    // }
+}
+```
