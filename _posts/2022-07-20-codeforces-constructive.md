@@ -2502,3 +2502,64 @@ int main(){
     run();
 }
 ```
+
+# 45. Codeforces Round #493 (Div. 2) A. Balloons 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/998/A
+
+Codeforces Round #493 (Div. 2) A. Balloons 
+
+There are quite a lot of ways to have fun with inflatable balloons. For 
+example, you can fill them with water and see what happens.
+
+Grigory and Andrew have the same opinion. So, once upon a time, they went 
+to the shop and bought n packets with inflatable balloons, where i-th of 
+them has exactly a_i balloons inside.
+
+They want to divide the balloons among themselves. In addition, there are 
+several conditions to hold:
+
+ Do not rip the packets (both Grigory and Andrew should get unbroken 
+packets); 
+
+ Distribute all packets (every packet should be given to someone); 
+
+ Give both Grigory and Andrew at least one packet; 
+
+ To provide more fun, the total number of balloons in Grigory's packets 
+should not be equal to the total number of balloons in Andrew's packets. 
+
+Help them to divide the balloons or determine that it's impossible under 
+these conditions.
+*/
+#define MAXN 20
+int a[MAXN];
+void run(){
+    int n;scanf("%d",&n);
+    int mi=INT_MAX,idx=-1;
+    for(int i=0;i<n;i++){
+        scanf("%d",&a[i]);
+        if(a[i]<mi){
+            mi=a[i];
+            idx=i;
+        }
+    }
+    if(n==1||(n==2&&a[0]==a[1])){
+        printf("-1\n");
+        return;
+    }
+    printf("1\n%d\n",idx+1);
+
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    run();
+}
+```
