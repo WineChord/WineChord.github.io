@@ -2805,3 +2805,47 @@ int main(){
     run();
 }
 ```
+
+# 50. Testing Round #11 A. Up the hill 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/491/A
+
+Testing Round #11 A. Up the hill 
+
+Hiking club "Up the hill" just returned from a walk. Now they are trying 
+to remember which hills they've just walked through.
+
+It is known that there were N stops, all on different integer heights 
+between 1 and N kilometers (inclusive) above the sea level. On the first 
+day they've traveled from the first stop to the second stop, on the second 
+day they've traveled from the second to the third and so on, and on the 
+last day they've traveled from the stop N - 1 to the stop N and 
+successfully finished their expedition.
+
+They are trying to find out which heights were their stops located at. 
+They have an entry in a travel journal specifying how many days did they 
+travel up the hill, and how many days did they walk down the hill.
+
+Help them by suggesting some possible stop heights satisfying numbers from 
+the travel journal.
+*/
+void run(){
+    int a,b;scanf("%d%d",&a,&b);
+    int n=a+b+1;
+    vector<int> v;
+    for(int i=1;i<=n;i++)v.push_back(i);
+    reverse(v.begin()+a,v.end());
+    for(int i=0;i<n;i++)printf("%d%c",v[i]," \n"[i==n-1]);
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    run();
+}
+```
