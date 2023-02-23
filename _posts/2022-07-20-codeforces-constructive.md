@@ -2737,3 +2737,71 @@ int main(){
     run();
 }
 ```
+
+# 49. CROC 2016 - Qualification A. Parliament of Berland 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/644/A
+
+CROC 2016 - Qualification A. Parliament of Berland 
+
+There are n parliamentarians in Berland. They are numbered with integers 
+from 1 to n. It happened that all parliamentarians with odd indices are 
+Democrats and all parliamentarians with even indices are Republicans.
+
+New parliament assembly hall is a rectangle consisting of a × b chairs — a 
+rows of b chairs each. Two chairs are considered neighbouring if they 
+share as side. For example, chair number 5 in row number 2 is neighbouring 
+to chairs number 4 and 6 in this row and chairs with number 5 in rows 1 
+and 3. Thus, chairs have four neighbours in general, except for the chairs 
+on the border of the hall
+
+We know that if two parliamentarians from one political party (that is two 
+Democrats or two Republicans) seat nearby they spent all time discussing 
+internal party issues.
+
+Write the program that given the number of parliamentarians and the sizes 
+of the hall determine if there is a way to find a seat for any 
+parliamentarian, such that no two members of the same party share 
+neighbouring seats.
+*/
+void run(){
+    int n,a,b;scanf("%d%d%d",&n,&a,&b);
+    if(a*b<n){
+        printf("-1\n");
+        return;
+    }
+    vector<vector<int>> v(a+1,vector<int>(b+1,0));
+    int odd=1,even=2,cnt=0;;
+    for(int i=1;i<=a;i++){
+        for(int j=1;j<=b;j++){
+            if(cnt<n){
+                if(i%2==j%2){
+                    if(odd<=n){
+                        v[i][j]=odd;
+                        odd+=2;
+                        cnt++;
+                    }
+                }else{
+                    if(even<=n){
+                        v[i][j]=even;
+                        even+=2;
+                        cnt++;
+                    }
+                }
+            }
+            printf("%d%c",v[i][j]," \n"[j==b]);
+        }
+    }
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    run();
+}
+```
