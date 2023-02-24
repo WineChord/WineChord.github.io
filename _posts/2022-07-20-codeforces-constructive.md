@@ -2961,3 +2961,71 @@ int main(){
     }
 }
 ```
+
+# 53. Educational Codeforces Round 86 (Rated for Div. 2) B. Binary Period 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1342/B
+
+Educational Codeforces Round 86 (Rated for Div. 2) B. Binary Period 
+
+Let's say string s has period k if s_i = s_{i + k} for all i from 1 to |s| 
+- k (|s| means length of string s) and k is the minimum positive integer 
+with this property.
+
+Some examples of a period: for s="0101" the period is k=2, for s="0000" 
+the period is k=1, for s="010" the period is k=2, for s="0011" the period 
+is k=4.
+
+You are given string t consisting only of 0's and 1's and you need to find 
+such string s that:
+
+ String s consists only of 0's and 1's; 
+
+ The length of s doesn't exceed 2 \cdot |t|; 
+
+ String t is a subsequence of string s; 
+
+ String s has smallest possible period among all strings that meet 
+conditions 1—3. 
+
+Let us recall that t is a subsequence of s if t can be derived from s by 
+deleting zero or more elements (any) without changing the order of the 
+remaining elements. For example, t="011" is a subsequence of s="10101".
+*/
+void run(){
+    string s;cin>>s;
+    int n=s.length();
+    int z=0,o=0;
+    for(int i=0;i<n;i++){
+        if(s[i]=='0')z++;
+        else o++;
+    }
+    if(!z||!o){
+        cout<<s<<"\n";
+        return;
+    }
+    string t;
+    for(int i=0;i<n;i++){
+        if(i==n-1||s[i]!=s[i+1])t+=s[i];
+        else {
+            t+=s[i];
+            t+='0'+(s[i]=='0');
+        }
+    }
+    cout<<t<<"\n";
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
