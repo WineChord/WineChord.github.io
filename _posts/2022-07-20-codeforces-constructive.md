@@ -3029,3 +3029,69 @@ int main(){
     }
 }
 ```
+
+# 54. Codeforces Round #651 (Div. 2) B. GCD Compression 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1370/B
+
+Codeforces Round #651 (Div. 2) B. GCD Compression 
+
+Ashish has an array a of consisting of 2n positive integers. He wants to 
+compress a into an array b of size n-1. To do this, he first discards 
+exactly 2 (any two) elements from a. He then performs the following 
+operation until there are no elements left in a: 
+
+ Remove any two elements from a and append their sum to b. 
+
+The compressed array b has to have a special property. The greatest common 
+divisor (\mathrm{gcd}) of all its elements should be greater than 1.
+
+Recall that the \mathrm{gcd} of an array of positive integers is the 
+biggest integer that is a divisor of all integers in the array.
+
+It can be proven that it is always possible to compress array a into an 
+array b of size n-1 such that gcd(b_1, b_2..., b_{n-1}) > 1. 
+
+Help Ashish find a way to do so.
+*/
+#define MAXN 10001
+int a[MAXN];
+void run(){
+    int n;scanf("%d",&n);
+    vector<int> odd,even;
+    for(int i=1;i<=2*n;i++){
+        scanf("%d",&a[i]);
+        if(a[i]%2)odd.push_back(i);
+        else even.push_back(i);
+    }
+    int cnt=0;
+    for(int i=0;i<odd.size();i+=2){
+        if(cnt>=2*n-2)break;
+        if(i+1<odd.size()){
+            printf("%d %d\n",odd[i],odd[i+1]);
+            cnt+=2;
+        }
+    }
+    for(int i=0;i<even.size();i+=2){
+        if(cnt>=2*n-2)break;
+        if(i+1<even.size()){
+            printf("%d %d\n",even[i],even[i+1]);
+            cnt+=2;
+        }
+    }
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
