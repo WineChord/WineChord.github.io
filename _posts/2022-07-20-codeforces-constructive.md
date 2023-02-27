@@ -3395,3 +3395,58 @@ int main(){
     run();
 }
 ```
+
+# 60. Educational Codeforces Round 99 (Rated for Div. 2) C. Ping-pong 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1455/C
+
+Educational Codeforces Round 99 (Rated for Div. 2) C. Ping-pong 
+
+Alice and Bob play ping-pong with simplified rules.
+
+During the game, the player serving the ball commences a play. The server 
+strikes the ball then the receiver makes a return by hitting the ball 
+back. Thereafter, the server and receiver must alternately make a return 
+until one of them doesn't make a return.
+
+The one who doesn't make a return loses this play. The winner of the play 
+commences the next play. Alice starts the first play.
+
+Alice has x stamina and Bob has y. To hit the ball (while serving or 
+returning) each player spends 1 stamina, so if they don't have any 
+stamina, they can't return the ball (and lose the play) or can't serve the 
+ball (in this case, the other player serves the ball instead). If both 
+players run out of stamina, the game is over.
+
+Sometimes, it's strategically optimal not to return the ball, lose the 
+current play, but save the stamina. On the contrary, when the server 
+commences a play, they have to hit the ball, if they have some stamina 
+left.
+
+Both Alice and Bob play optimally and want to, firstly, maximize their 
+number of wins and, secondly, minimize the number of wins of their 
+opponent.
+
+Calculate the resulting number of Alice's and Bob's wins.
+*/
+void run(){
+    // The best strategy for Bob is to not hit the ball for the
+    // first x-1 turn.
+    int x,y;scanf("%d%d",&x,&y);
+    printf("%d %d\n",x-1,y);
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
