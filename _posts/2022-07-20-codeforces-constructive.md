@@ -3343,3 +3343,55 @@ int main(){
     }
 }
 ```
+
+# 59. Codeforces Round #181 (Div. 2) A. Array 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/300/A
+
+Codeforces Round #181 (Div. 2) A. Array 
+
+Vitaly has an array of n distinct integers. Vitaly wants to divide this 
+array into three non-empty sets so as the following conditions hold: 
+
+ The product of all numbers in the first set is less than zero ( &lt; 0). 
+
+ The product of all numbers in the second set is greater than zero ( > 0). 
+
+ The product of all numbers in the third set is equal to zero. 
+
+ Each number from the initial array must occur in exactly one set. 
+
+Help Vitaly. Divide the given array.
+*/
+void run(){
+    int n;scanf("%d",&n);
+    vector<int> v1,v2,v3;
+    for(int i=0;i<n;i++){
+        int x;scanf("%d",&x);
+        if(x<0)v1.push_back(x);
+        if(x==0)v3.push_back(x);
+        if(x>0)v2.push_back(x);
+    }
+    if(v2.empty()){
+        v2.push_back(v1.back());v1.pop_back();
+        v2.push_back(v1.back());v1.pop_back();
+    }
+    if(v1.size()%2==0){
+        v3.push_back(v1.back());v1.pop_back();
+    }
+    printf("%d ",v1.size());for(const auto& x:v1)printf("%d ",x);printf("\n");
+    printf("%d ",v2.size());for(const auto& x:v2)printf("%d ",x);printf("\n");
+    printf("%d ",v3.size());for(const auto& x:v3)printf("%d ",x);printf("\n");
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    run();
+}
+```
