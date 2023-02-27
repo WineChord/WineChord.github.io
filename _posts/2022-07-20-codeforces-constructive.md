@@ -3291,3 +3291,55 @@ int main(){
     }
 }
 ```
+
+# 58. Codeforces Round #669 (Div. 2) A. Ahahahahahahahaha 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1407/A
+
+Codeforces Round #669 (Div. 2) A. Ahahahahahahahaha 
+
+Alexandra has an even-length array a, consisting of 0s and 1s. The 
+elements of the array are enumerated from 1 to n. She wants to remove at 
+most \frac{n}{2} elements (where n — length of array) in the way that 
+alternating sum of the array will be equal 0 (i.e. a_1 - a_2 + a_3 - a_4 + 
+\dotsc = 0). In other words, Alexandra wants sum of all elements at the 
+odd positions and sum of all elements at the even positions to become 
+equal. The elements that you remove don't have to be consecutive.
+
+For example, if she has a = [1, 0, 1, 0, 0, 0] and she removes 2nd and 4th 
+elements, a will become equal [1, 1, 0, 0] and its alternating sum is 1 - 
+1 + 0 - 0 = 0.
+
+Help her!
+*/
+void run(){
+    int n;scanf("%d",&n);
+    int c0=0,c1=0;
+    for(int i=0;i<n;i++){
+        int x;scanf("%d",&x);
+        if(x)c1++;
+        else c0++;
+    }
+    if(c1<=n/2){
+        printf("%d\n",n/2);
+        for(int i=0;i<n/2;i++)printf("0%c"," \n"[i==n/2-1]);
+        return;
+    }
+    printf("%d\n",c1-c1%2);
+    for(int i=0;i<c1-c1%2;i++)printf("1%c"," \n"[i==n/2-1]);
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
