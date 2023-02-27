@@ -3239,3 +3239,55 @@ int main(){
     }
 }
 ```
+
+# 57. Educational Codeforces Round 107 (Rated for Div. 2) B. GCD Length 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1511/B
+
+Educational Codeforces Round 107 (Rated for Div. 2) B. GCD Length 
+
+You are given three integers a, b and c.
+
+Find two positive integers x and y (x > 0, y > 0) such that: 
+
+ the decimal representation of x without leading zeroes consists of a 
+digits; 
+
+ the decimal representation of y without leading zeroes consists of b 
+digits; 
+
+ the decimal representation of gcd(x, y) without leading zeroes consists 
+of c digits. 
+
+gcd(x, y) denotes the <a 
+href="https://en.wikipedia.org/wiki/Greatest_common_divisor">greatest 
+common divisor (GCD)
+
+ of integers x and y.
+
+Output x and y. If there are multiple answers, output any of them.
+*/
+void run(){
+    int a,b,c;scanf("%d%d%d",&a,&b,&c);
+    printf("1");
+    for(int i=0;i<a-1;i++)printf("0");
+    printf(" ");
+    for(int i=0;i<b-c+1;i++)printf("1");
+    for(int i=0;i<c-1;i++)printf("0");
+    printf("\n");
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
