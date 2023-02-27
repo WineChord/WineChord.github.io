@@ -3166,3 +3166,76 @@ int main(){
     }
 }
 ```
+
+# 56. Codeforces Round #665 (Div. 2) B. Ternary Sequence 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1401/B
+
+Codeforces Round #665 (Div. 2) B. Ternary Sequence 
+
+You are given two sequences a_1, a_2, \dots, a_n and b_1, b_2, \dots, b_n. 
+Each element of both sequences is either 0, 1 or 2. The number of elements 
+0, 1, 2 in the sequence a is x_1, y_1, z_1 respectively, and the number of 
+elements 0, 1, 2 in the sequence b is x_2, y_2, z_2 respectively.
+
+You can rearrange the elements in both sequences a and b however you like. 
+After that, let's define a sequence c as follows:
+
+c_i = \begin{cases} a_i b_i &amp; \mbox{if }a_i > b_i \\ 0 &amp; \mbox{if 
+}a_i = b_i \\ -a_i b_i &amp; \mbox{if }a_i &lt; b_i \end{cases}
+
+You'd like to make \sum_{i=1}^n c_i (the sum of all elements of the 
+sequence c) as large as possible. What is the maximum possible sum?
+*/
+void run(){
+    int x1,y1,z1,x2,y2,z2;
+    scanf("%d%d%d%d%d%d",&x1,&y1,&z1,&x2,&y2,&z2);
+    // x1 0 y1 1 z1 2
+    // x2 0 y2 1 z2 2
+    // 00000 11111 22222
+    // 22111 11111 11100
+    ll res=0;
+    int p02=min(x1,z2);
+    x1-=p02;
+    z2-=p02;
+    // 000 11111 22222
+    // 111 11111 11100
+    if(z2==0){
+        printf("%d\n",min(z1,y2)*2);
+        return;
+    }
+    // 111 11111 22222
+    // 222 11111 11100
+
+    // 11111 22222
+    // 22222 11100
+    int p21=min(z1,y2);
+    z1-=p21;
+    y2-=p21;
+    res+=p21*2;
+    // 111 11111
+    // 222 11100
+
+    int p22=min(z1,z2);
+    z1-=p22;
+    z2-=p22;
+    // 111 22222
+    // 222 22200
+    res-=min(y1,z2)*2;
+    printf("%lld\n",res);
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
