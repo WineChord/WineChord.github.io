@@ -3095,3 +3095,74 @@ int main(){
     }
 }
 ```
+
+# 55. Codeforces Round #764 (Div. 3) C. Division by Two and Permutation 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1624/C
+
+Codeforces Round #764 (Div. 3) C. Division by Two and Permutation 
+
+You are given an array a consisting of n positive integers. You can 
+perform operations on it.
+
+In one operation you can replace any element of the array a_i with \lfloor 
+\frac{a_i}{2} \rfloor, that is, by an integer part of dividing a_i by 2 
+(rounding down).
+
+See if you can apply the operation some number of times (possible 0) to 
+make the array a become a permutation of numbers from 1 to n —that is, so 
+that it contains all numbers from 1 to n, each exactly once.
+
+For example, if a = [1, 8, 25, 2], n = 4, then the answer is yes. You 
+could do the following:
+
+ Replace 8 with \lfloor \frac{8}{2} \rfloor = 4, then a = [1, 4, 25, 2]. 
+
+ Replace 25 with \lfloor \frac{25}{2} \rfloor = 12, then a = [1, 4, 12, 
+2]. 
+
+ Replace 12 with \lfloor \frac{12}{2} \rfloor = 6, then a = [1, 4, 6, 2]. 
+
+ Replace 6 with \lfloor \frac{6}{2} \rfloor = 3, then a = [1, 4, 3, 2]. 
+*/
+#define MAXN 100
+int a[MAXN];
+void run(){
+    int n;scanf("%d",&n);
+    int res=0;
+    unordered_map<int,int> mp;
+    bool flag=false;
+    for(int i=0;i<n;i++){
+        scanf("%d",&a[i]);
+        while(a[i]>n){
+            a[i]/=2;
+            res++;
+        }
+        while(a[i]!=0&&mp.find(a[i])!=mp.end()){
+            a[i]/=2;
+            res++;
+        }
+        if(a[i]==0)flag=true;
+        else if(mp.find(a[i])==mp.end()){
+            res++;
+            mp[a[i]]=1;
+        }
+    }
+    if(flag)printf("NO\n");
+    else printf("YES\n");
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
