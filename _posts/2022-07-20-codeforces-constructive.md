@@ -3450,3 +3450,81 @@ int main(){
     }
 }
 ```
+
+# 61. Codeforces Round #674 (Div. 3) C. Increase and Copy 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1426/C
+
+Codeforces Round #674 (Div. 3) C. Increase and Copy 
+
+Initially, you have the array a consisting of one element 1 (a = [1]).
+
+In one move, you can do one of the following things:
+
+ Increase some (single) element of a by 1 (choose some i from 1 to the 
+current length of a and increase a_i by one); 
+
+ Append the copy of some (single) element of a to the end of the array 
+(choose some i from 1 to the current length of a and append a_i to the end 
+of the array). 
+
+For example, consider the sequence of five moves:
+
+ You take the first element a_1, append its copy to the end of the array 
+and get a = [1, 1]. 
+
+ You take the first element a_1, increase it by 1 and get a = [2, 1]. 
+
+ You take the second element a_2, append its copy to the end of the array 
+and get a = [2, 1, 1]. 
+
+ You take the first element a_1, append its copy to the end of the array 
+and get a = [2, 1, 1, 2]. 
+
+ You take the fourth element a_4, increase it by 1 and get a = [2, 1, 1, 
+3]. 
+
+Your task is to find the minimum number of moves required to obtain the 
+array with the sum at least n.
+
+You have to answer t independent test cases.
+*/
+void run(){
+    // I: increase
+    // A: append
+    // The pattern must be like: IIII..IIIAAAA.AAAA
+    // The resule array must be like: [v,v,v,v,v...,v,v] (all the same)
+    // Let k be the final length of the array
+    // Then v = \lceil \frac{n}{k} \rceil
+    // # of I = v - 1
+    // # of A = k - 1
+    // # of I+A = v + k - 2 = \lceil n/k \rceil + k - 2
+    // Observe that the min is reached when k = \sqrt{n} for f(k) = n/k+k
+    // Therefore we can try a few values around \sqrt{n}
+    ll n;scanf("%lld",&n);
+    auto f=[&](ll k){
+        if(k<=0||k>n)return ll(2e9);
+        return 1ll*((n+k-1)/k+k-2); // v + k - 2
+    };
+    ll k=sqrt(n);
+    ll res=2e9;
+    res=min(res,1ll*f(k));
+    res=min(res,1ll*f(k-1));
+    res=min(res,1ll*f(k+1));
+    printf("%lld\n",res);
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
