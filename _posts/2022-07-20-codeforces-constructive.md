@@ -3528,3 +3528,56 @@ int main(){
     }
 }
 ```
+
+# 62. Educational Codeforces Round 136 (Rated for Div. 2) B. Array Recovery 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1739/B
+
+Educational Codeforces Round 136 (Rated for Div. 2) B. Array Recovery 
+
+For an array of non-negative integers a of size n, we construct another 
+array d as follows: d_1 = a_1, d_i = |a_i - a_{i - 1}| for 2 \le i \le n.
+
+Your task is to restore the array a from a given array d, or to report 
+that there are multiple possible arrays. 
+*/
+#define MAXN 110
+int d[MAXN];
+void run(){
+    int n;scanf("%d",&n);
+    for(int i=0;i<n;i++){
+        scanf("%d",&d[i]);
+    }
+    int x=d[0];
+    vector<int> res;
+    res.push_back(x);
+    for(int i=1;i<n;i++){
+        if(d[i]==0){
+            res.push_back(x);
+            continue;
+        }
+        if(x-d[i]>=0){
+            printf("-1\n");
+            return;
+        }
+        x+=d[i];
+        res.push_back(x);
+    }
+    for(const auto& x:res)printf("%d ",x);
+    printf("\n");
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
