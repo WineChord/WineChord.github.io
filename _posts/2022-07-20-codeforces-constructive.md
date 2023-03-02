@@ -3581,3 +3581,50 @@ int main(){
     }
 }
 ```
+
+# 63. Codeforces Global Round 9 A. Sign Flipping 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1375/A
+
+Codeforces Global Round 9 A. Sign Flipping 
+
+You are given n integers a_1, a_2, \dots, a_n, where n is odd. You are 
+allowed to flip the sign of some (possibly all or none) of them. You wish 
+to perform these flips in such a way that the following conditions hold:
+
+ At least \frac{n - 1}{2} of the adjacent differences a_{i + 1} - a_i for 
+i = 1, 2, \dots, n - 1 are greater than or equal to 0. 
+
+ At least \frac{n - 1}{2} of the adjacent differences a_{i + 1} - a_i for 
+i = 1, 2, \dots, n - 1 are less than or equal to 0. 
+
+Find any valid way to flip the signs. It can be shown that under the given 
+constraints, there always exists at least one choice of signs to flip that 
+satisfies the required condition. If there are several solutions, you can 
+find any of them.
+*/
+void run(){
+    int n;scanf("%d",&n);
+    for(int i=0;i<n;i++){
+        int x;scanf("%d",&x);
+        if(i%2&&x>0)x=-x;
+        if(i%2==0&&x<0)x=-x;
+        printf("%d ",x);
+    }
+    printf("\n");
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
