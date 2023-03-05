@@ -910,6 +910,7 @@ int main(){
 ### Trie
 
 ```cpp
+// Count occurrence of string.
 #include<iostream>
 #include<cstdio>
 #define MAXN 100020
@@ -1219,6 +1220,103 @@ int main(){
 }
 ```
 
+### Hashmap
+
+#### Constructing Hashmap
+
+```cpp
+// Open Hashing (Separate chaining)
+#include<bits/stdc++.h>
+#define N 100003
+using namespace std;
+int h[N],e[N],ne[N],idx;
+void insert(int x){
+    int k=(x%N+N)%N;
+    e[idx]=x;ne[idx]=h[k],h[k]=idx++;
+}
+bool find(int x){
+    int k=(x%N+N)%N;
+    for(int i=h[k];i!=-1;i=ne[i]){
+        if(e[i]==x)return true;
+    }
+    return false;
+}
+int main(){
+    int n;scanf("%d",&n);
+    memset(h,-1,sizeof(h));
+    for(int i=0;i<n;i++){
+        char op;int x;
+        scanf(" %c %d",&op,&x);
+        if(op=='I')insert(x);
+        else{
+            if(find(x))puts("Yes");
+            else puts("No");
+        }
+    }
+    return 0;
+}
+```
+
+```cpp
+// Closed Hashing (Open Addressing)
+#include<bits/stdc++.h>
+#define N 200003
+#define INF 0x3f3f3f3f
+using namespace std;
+int h[N];
+int find(int x){
+    int k=(x%N+N)%N;
+    while(h[k]!=INF&&h[k]!=x)k=(k+1)%N;
+    return k;
+}
+int main(){
+    int n;scanf("%d",&n);
+    memset(h,INF,sizeof(h));
+    for(int i=0;i<n;i++){
+        char op;int x;
+        scanf(" %c %d",&op,&x);
+        int k=find(x);
+        if(op=='I')h[k]=x;
+        else{
+            if(h[k]!=INF)puts("Yes");
+            else puts("No");
+        }
+    }
+    return 0;
+}
+```
+
+#### String Hashing
+
+```cpp
+// Given a string, query whether two substrings are equal.
+#include<bits/stdc++.h>
+#define P 131
+#define MAXN 100010
+using namespace std;
+using ull=unsigned long long;
+ull p[MAXN],h[MAXN];
+char s[MAXN];
+ull get(int l,int r){
+    return h[r]-h[l-1]*p[r-l+1];
+}
+int main(){
+    int n,m;scanf("%d%d %s",&n,&m,s+1);
+    p[0]=1;
+    for(int i=1;i<=n;i++){
+        p[i]=p[i-1]*P;
+        h[i]=h[i-1]*P+s[i];
+    }
+    while(m--){
+        int l1,r1,l2,r2;
+        scanf("%d%d%d%d",&l1,&r1,&l2,&r2);
+        if(get(l1,r1)==get(l2,r2))puts("Yes");
+        else puts("No");
+    }
+    return 0;
+}
+```
+
 ## Basic Mathematics
 
 ### Prime
@@ -1234,7 +1332,3 @@ void sieve(int n){
 ```
 
 Time Complexity: $O(n\log\log(n))$.
-
-Proof:
-
-$n\over k$

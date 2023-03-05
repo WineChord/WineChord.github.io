@@ -9,7 +9,7 @@ declare -i line_width=75
 
 for i in {1..$tot}
 do
-    curl --proto '=https' --tlsv1.3 -sSf $url 2>&1 > $tmpfile
+    curl --proto '=https' -k --tlsv1.3 -sSf $url 2>&1 > $tmpfile
     if [ "$?" == "0" ]; then
         break
     fi
