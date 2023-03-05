@@ -1291,7 +1291,7 @@ int main(){
 ```cpp
 // Given a string, query whether two substrings are equal.
 #include<bits/stdc++.h>
-#define P 131
+#define P 131 // OR 13331
 #define MAXN 100010
 using namespace std;
 using ull=unsigned long long;
@@ -1316,6 +1316,133 @@ int main(){
     return 0;
 }
 ```
+
+## Searching and Graph
+
+### DFS
+
+```cpp
+// Print every permutations of 1-n.
+#include<bits/stdc++.h>
+#define MAXN 100
+using namespace std;
+int n;
+bool used[MAXN];
+int a[MAXN];
+void dfs(int k){
+    if(k==n){
+        for(int i=0;i<n;i++)printf("%d%c",a[i]," \n"[i==n-1]);
+        return;
+    }
+    for(int i=1;i<=n;i++)if(!used[i]){
+        used[i]=true;
+        a[k]=i;
+        dfs(k+1);
+        used[i]=false;
+    }
+}
+int main(){
+    scanf("%d",&n);
+    dfs(0);
+    return 0;
+}
+```
+
+```cpp
+// N-Queens
+#include<bits/stdc++.h>
+#define MAXN 11
+using namespace std;
+char g[MAXN][MAXN];
+int n;
+bool cc[MAXN],d1[MAXN],d2[MAXN];
+void dfs(int r){
+    if(r==n){
+        for(int i=0;i<n;i++)puts(g[i]);
+        puts("");
+        return;
+    }
+    for(int c=0;c<n;c++){
+        if(cc[c]||d1[r+c]||d2[n-r+c])continue;
+        cc[c]=d1[r+c]=d2[n-r+c]=true;
+        g[r][c]='Q';
+        dfs(r+1);
+        g[r][c]='.';
+        cc[c]=d1[r+c]=d2[n-r+c]=false;
+    }
+}
+
+int main(){
+    scanf("%d",&n);
+    for(int i=0;i<n;i++)
+        for(int j=0;j<n;j++)
+            g[i][j]='.';
+    dfs(0);
+    return 0;
+}
+```
+
+```cpp
+// N-Queues: another approach
+#include<bits/stdc++.h>
+#define MAXN 11
+using namespace std;
+char g[MAXN][MAXN];
+int n;
+bool rr[MAXN],cc[MAXN],d1[MAXN],d2[MAXN];
+void dfs(int r,int c,int t){
+    if(c==n)c=0,r++;
+    if(r==n){
+        if(t==n){
+            for(int i=0;i<n;i++)puts(g[i]);
+            puts("");
+        }
+        return;
+    }
+    dfs(r,c+1,t);
+    if(rr[r]||cc[c]||d1[r+c]||d2[n-r+c])return;
+    rr[r]=cc[c]=d1[r+c]=d2[n-r+c]=true;
+    g[r][c]='Q';
+    dfs(r,c+1,t+1);
+    g[r][c]='.';
+    rr[r]=cc[c]=d1[r+c]=d2[n-r+c]=false;
+}
+
+int main(){
+    scanf("%d",&n);
+    for(int i=0;i<n;i++)
+        for(int j=0;j<n;j++)
+            g[i][j]='.';
+    dfs(0,0,0);
+    return 0;
+}
+```
+
+### BFS
+
+### DFS for Trees and Graphs
+
+### BFS for Trees and Graphs
+
+### Topological Sort
+
+### Dijkstra
+
+### Bellman-Ford
+
+### SPFA
+
+### Floyd
+
+### Prim
+
+### Kruskal
+
+### Coloring Method to Determine Bipartite Graph
+
+### Hungarian Algorithm
+
+
 
 ## Basic Mathematics
 
