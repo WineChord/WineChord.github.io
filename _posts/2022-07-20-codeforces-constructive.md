@@ -3675,3 +3675,131 @@ int main(){
     run();
 }
 ```
+
+# 65. Codeforces Round 808 (Div. 2) B. Difference of GCDs 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1708/B
+
+Codeforces Round 808 (Div. 2) B. Difference of GCDs 
+
+You are given three integers n, l, and r. You need to construct an array 
+a_1,a_2,\dots,a_n (l\le a_i\le r) such that \gcd(i,a_i) are all distinct 
+or report there's no solution.
+
+Here \gcd(x, y) denotes the <a 
+href="https://en.wikipedia.org/wiki/Greatest_common_divisor">greatest 
+common divisor (GCD)
+
+ of integers x and y.
+*/
+void run(){
+    int n,l,r;scanf("%d%d%d",&n,&l,&r);
+    vector<int> res;
+    for(int i=1;i<=n;i++){
+        int k=((l-1)/i+1)*i;
+        if(k>r){
+            puts("No\n");
+            return;
+        }
+        res.push_back(k);
+    }
+    puts("Yes\n");
+    for(auto x:res)printf("%d ",x);
+    puts("");
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    int T;scanf("%d",&T);
+    while(T--){
+        run();
+    }
+}
+```
+
+# 66. Codeforces Round 620 (Div. 2) B. Longest Palindrome 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+/*
+https://codeforces.com/problemset/problem/1304/B
+
+Codeforces Round 620 (Div. 2) B. Longest Palindrome 
+
+Returning back to problem solving, Gildong is now studying about 
+palindromes. He learned that a palindrome is a string that is the same as 
+its reverse. For example, strings "pop", "noon", "x", and "kkkkkk" are 
+palindromes, while strings "moon", "tv", and "abab" are not. An empty 
+string is also a palindrome.
+
+Gildong loves this concept so much, so he wants to play with it. He has n 
+distinct strings of equal length m. He wants to discard some of the 
+strings (possibly none or all) and reorder the remaining strings so that 
+the concatenation becomes a palindrome. He also wants the palindrome to be 
+as long as possible. Please help him find one.
+*/
+void run(){
+    int n,m;scanf("%d%d",&n,&m);
+    string center;
+    deque<string> dq;
+    unordered_map<string,int> mp;
+    for(int i=0;i<n;i++){
+        string s;cin>>s;
+        mp[s]++;
+    }
+    for(auto [k,v]:mp){
+        int x=v;
+        string t=k;
+        reverse(t.begin(),t.end());
+        if(t!=k){
+            int y=mp[t];
+            int d=min(x,y);
+            mp[k]-=d;
+            mp[t]-=d;
+            for(int i=0;i<d;i++){
+                dq.push_front(k);
+                dq.push_back(t);
+            }
+        }
+        if(k==t){
+            if(mp[k]>1){
+                int d=mp[k]/2;
+                mp[k]-=d;
+                mp[t]-=d;
+                for(int i=0;i<d;i++){
+                    dq.push_front(k);
+                    dq.push_back(t);
+                }
+            }
+            if(mp[k])center=k,mp[k]--;
+            else if(mp[t])center=t,mp[t]--;
+        }
+    }
+    int z=dq.size();
+    cout<<z*m+center.size()<<"\n";
+    for(int i=0;i<z/2;i++){
+        cout<<dq.front();
+        dq.pop_front();
+    }
+    cout<<center;
+    for(int i=z/2;i<z;i++){
+        cout<<dq.front();
+        dq.pop_front();
+    }
+    cout<<"\n";
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    run();
+}
+```

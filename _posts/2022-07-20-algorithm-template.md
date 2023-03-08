@@ -1420,7 +1420,124 @@ int main(){
 
 ### BFS
 
+```cpp
+// Walk through a maze.
+#include<bits/stdc++.h>
+#define MAXN 110
+#define INF 0x3f3f3f3f
+using namespace std;
+using pii=pair<int,int>;
+int a[MAXN][MAXN];
+int d[MAXN][MAXN];
+int dx[4]={1,-1,0,0};
+int dy[4]={0,0,1,-1};
+int main(){
+    int n,m;
+    scanf("%d%d",&n,&m);
+    for(int i=0;i<n;i++)
+        for(int j=0;j<m;j++)
+            scanf("%d",&a[i][j]);
+    memset(d,INF,sizeof(d));
+    d[0][0]=0;
+    queue<pii> q;
+    q.push({0,0});
+    while(!q.empty()){
+        auto [x,y]=q.front();q.pop();
+        for(int i=0;i<4;i++){
+            int nx=x+dx[i];
+            int ny=y+dy[i];
+            if(nx<0||ny<0||nx>=n||ny>=m)continue;
+            if(a[nx][ny]||d[nx][ny]!=INF)continue;
+            d[nx][ny]=d[x][y]+1;
+            q.push({nx,ny});
+        }
+    }
+    printf("%d\n",d[n-1][m-1]);
+}
+```
+
+```cpp
+// Eight Digit
+#include<bits/stdc++.h>
+using namespace std;
+int dx[4]={0,0,1,-1};
+int dy[4]={1,-1,0,0};
+int main(){
+    string s;
+    for(int i=0;i<9;i++){
+        char c;scanf(" %c ",&c);
+        s+=c;
+    }
+    queue<string> q;
+    q.push(s);
+    unordered_map<string,int> d;
+    d[s]=0;
+    string end="12345678x";
+    while(q.size()){
+        auto t=q.front();q.pop();
+        int dis=d[t];
+        // cout<<"# "<<t<<" "<<dis<<endl;
+        if(t==end){
+            printf("%d\n",dis);
+            return 0;
+        }
+        int k=t.find('x');
+        int x=k/3,y=k%3;
+        for(int i=0;i<4;i++){
+            int nx=x+dx[i];
+            int ny=y+dy[i];
+            if(nx<0||ny<0||nx>=3||ny>=3)continue;
+            swap(t[k],t[nx*3+ny]);
+            if(d.find(t)==d.end()){
+                d[t]=dis+1;
+                q.push(t);
+            }
+            swap(t[k],t[nx*3+ny]);
+        }
+    }
+    printf("-1\n");
+}
+```
+
 ### DFS for Trees and Graphs
+
+```cpp
+// The center of gravity of a tree.
+#include<bits/stdc++.h>
+#define MAXN 200010
+using namespace std;
+int h[MAXN],e[MAXN],ne[MAXN],idx;
+bool vis[MAXN];
+void add(int u,int v){
+    e[idx]=v;ne[idx]=h[u];h[u]=idx++;
+}
+int main(){
+    int n;scanf("%d",&n);
+    memset(h,-1,sizeof(h));
+    for(int i=0;i<n-1;i++){
+        int u,v;scanf("%d%d",&u,&v);
+        add(u,v);add(v,u);
+    }
+    int res=n;
+    function<int(int)> dfs=[&](int u){
+        vis[u]=true;
+        int sum=1,cnt=0;
+        for(int i=h[u];i!=-1;i=ne[i]){
+            int v=e[i];
+            if(vis[v])continue;
+            int s=dfs(v);
+            cnt=max(cnt,s);
+            sum+=s;
+        }
+        cnt=max(cnt,n-sum);
+        res=min(res,cnt);
+        return sum;
+    };
+    dfs(1);
+    printf("%d\n",res);
+    return 0;
+}
+```
 
 ### BFS for Trees and Graphs
 
