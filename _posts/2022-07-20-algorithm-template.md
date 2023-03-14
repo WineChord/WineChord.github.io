@@ -1981,6 +1981,9 @@ int main(){
 using namespace std;
 struct Edge{
     int u,v,w;
+    // bool operator<(const Edge &W)const{
+    //     return w<W.w;
+    // }
 }e[MAXM];
 int n,m,p[MAXN];
 int find(int x){
