@@ -1542,19 +1542,478 @@ int main(){
 
 ### BFS for Trees and Graphs
 
+```cpp
+// Levels of points in a graph.
+#include<bits/stdc++.h>
+#define MAXN 200020
+#define INF 0x3f3f3f3f
+using namespace std;
+int h[MAXN],e[MAXN],ne[MAXN],idx;
+int d[MAXN];
+void add(int u,int v){
+    e[idx]=v;ne[idx]=h[u];h[u]=idx++;
+}
+int main(){
+    int n,m;scanf("%d%d",&n,&m);
+    memset(h,-1,sizeof(h));
+    while(m--){
+        int u,v;scanf("%d%d",&u,&v);
+        add(u,v);
+    }
+    queue<int> q;
+    q.push(1);
+    memset(d,-1,sizeof(d));
+    d[1]=0;
+    while(!q.empty()){
+        auto u=q.front();q.pop();
+        for(int i=h[u];i!=-1;i=ne[i]){
+            int v=e[i];
+            if(d[v]!=-1)continue;
+            d[v]=d[u]+1;
+            q.push(v);
+        }
+    }
+    printf("%d\n",d[n]);
+}
+```
+
 ### Topological Sort
+
+```cpp
+// Output a topological sort of a graph.
+#include<bits/stdc++.h>
+#define MAXN 200020
+using namespace std;
+int h[MAXN],e[MAXN],ne[MAXN],idx;
+int in[MAXN];
+bool vis[MAXN];
+void add(int u,int v){
+    e[idx]=v;ne[idx]=h[u];h[u]=idx++;
+}
+int main(){
+    int n,m;scanf("%d%d",&n,&m);
+    memset(h,-1,sizeof(h));
+    while(m--){
+        int u,v;scanf("%d%d",&u,&v);
+        add(u,v);
+        in[v]++;
+    }
+    queue<int> q;
+    vector<int> res;
+    for(int i=1;i<=n;i++)if(!in[i])q.push(i);
+    while(!q.empty()){
+        int u=q.front();q.pop();
+        res.push_back(u);
+        for(int i=h[u];i!=-1;i=ne[i]){
+            int v=e[i];
+            in[v]--;
+            if(!in[v]){
+                q.push(v);
+            }
+        }
+    }
+    if(res.size()==n){
+        for(int i=0;i<n;i++)printf("%d%c",res[i]," \n"[i==n-1]);
+        return 0;
+    }
+    printf("-1\n");
+    return 0;
+}
+```
 
 ### Dijkstra
 
+```
+                        All weights are positive: Dijkstra O(n^2) or O(m\log(n))
+                      /
+            Single Source 
+              /       \ 
+Shortest Path          Have negative weights: Bellman-Ford O(nm) 
+              \                            or SPFA general O(m) worst O(nm)
+           Multiple Sources: Floyd O(n^3)
+```
+
+```cpp
+// Dijkstra O(n^2)
+#include<bits/stdc++.h>
+#define MAXN 550
+#define INF 0x3f3f3f3f
+using namespace std;
+int n,m;
+bool vis[MAXN];
+int g[MAXN][MAXN],d[MAXN];
+int dijkstra(){
+    memset(d,INF,sizeof(d));
+    d[1]=0;
+    for(int i=0;i<n-1;i++){
+        int t=-1;
+        for(int j=1;j<=n;j++)
+            if(!vis[j]&&(t==-1||d[j]<d[t]))t=j;
+        vis[t]=true;
+        for(int j=1;j<=n;j++)d[j]=min(d[j],d[t]+g[t][j]);
+    }
+    if(d[n]==INF)return -1;
+    return d[n];
+}
+int main(){
+    scanf("%d%d",&n,&m);
+    memset(g,INF,sizeof(g));
+    while(m--){
+        int u,v,w;scanf("%d%d%d",&u,&v,&w);
+        g[u][v]=min(g[u][v],w);
+    }
+    printf("%d\n",dijkstra());
+}
+```
+
+```cpp
+// Dijkstra O(m\log(n))
+#include<bits/stdc++.h>
+#define INF 0x3f3f3f3f
+#define MAXN 200020
+using namespace std;
+using pii=pair<int,int>;
+int n,m,idx;
+struct Edge{
+    int v,w;
+}e[MAXN*3];
+bool vis[MAXN];
+int h[MAXN],ne[MAXN],d[MAXN];
+void add(int u,int v,int w){
+    e[idx]={v,w};ne[idx]=h[u];h[u]=idx++;
+}
+int dijkstra(){
+    memset(d,INF,sizeof(d));
+    priority_queue<pii,vector<pii>,greater<pii>> q;
+    q.push({0,1});
+    d[1]=0;
+    while(q.size()){
+        auto [dis,u]=q.top();q.pop();
+        if(vis[u])continue;vis[u]=true;
+        for(int i=h[u];i!=-1;i=ne[i]){
+            int v=e[i].v,w=e[i].w;
+            if(d[v]>dis+w){
+                d[v]=dis+w;
+                q.push({d[v],v});
+            }
+        }
+    }
+    if(d[n]==INF)return -1;
+    return d[n];
+}
+int main(){
+    scanf("%d%d",&n,&m);
+    memset(h,-1,sizeof(h));
+    while(m--){
+        int u,v,w;scanf("%d%d%d",&u,&v,&w);
+        add(u,v,w);
+    }
+    printf("%d\n",dijkstra());
+}
+```
+
 ### Bellman-Ford
+
+```cpp
+// Negative weights, at most k jumps to node n.
+// Possible negative cycles.
+// 1 <= n,k <= 500
+// 1 <= m <= 10000
+#include<bits/stdc++.h>
+#define MAXN 550
+#define MAXM 20020
+#define INF 0x3f3f3f3f
+using namespace std;
+int n,m,k;
+struct Edge{
+    int u,v,w;
+}e[MAXM];
+int d[MAXN],bk[MAXN];
+int bf(){
+    memset(d,INF,sizeof(d));
+    d[1]=0;
+    for(int i=0;i<k;i++){
+        memcpy(bk,d,sizeof(d));
+        for(int j=0;j<m;j++){
+            auto [u,v,w]=e[j];
+            if(bk[u]!=INF)d[v]=min(d[v],bk[u]+w);
+        }
+    }
+    return d[n];
+}
+int main(){
+    scanf("%d%d%d",&n,&m,&k);
+    for(int i=0;i<m;i++){
+        int u,v,w;scanf("%d%d%d",&u,&v,&w);
+        e[i]={u,v,w};
+    }
+    int t=bf();
+    if(t==INF)puts("impossible");
+    else printf("%d\n",d[n]);
+}
+```
 
 ### SPFA
 
+```cpp
+// Negative weights.
+// No negative cycles.
+// 1 <= n,m <= 10^5
+#include<bits/stdc++.h>
+#define MAXN 200020
+#define INF 0x3f3f3f3f
+using namespace std;
+struct Edge{
+    int v,w;
+}e[MAXN*3];
+bool inq[MAXN];
+int h[MAXN],ne[MAXN],idx,d[MAXN];
+int n,m;
+void add(int u,int v,int w){
+    e[idx]={v,w};ne[idx]=h[u];h[u]=idx++;
+}
+int spfa(){
+    memset(d,INF,sizeof(d));
+    d[1]=0;
+    queue<int> q;q.push(1);inq[1]=true;
+    while(q.size()){
+        auto u=q.front();q.pop();inq[u]=false;
+        for(int i=h[u];i!=-1;i=ne[i]){
+            auto [v,w]=e[i];
+            if(d[v]>d[u]+w){
+                d[v]=d[u]+w;
+                if(!inq[v])q.push(v);
+                inq[v]=true;
+            }
+        }
+    }
+    return d[n];
+}
+int main(){
+    scanf("%d%d",&n,&m);
+    memset(h,-1,sizeof(h));
+    while(m--){
+        int u,v,w;scanf("%d%d%d",&u,&v,&w);
+        add(u,v,w);
+    }
+    int t=spfa();
+    if(t==INF)puts("impossible");
+    else printf("%d\n",t);
+}
+```
+
+```cpp
+// Check negative cycle.
+#include<bits/stdc++.h>
+#define MAXN 200020
+#define INF 0x3f3f3f3f
+using namespace std;
+struct Edge{
+    int v,w;
+}e[MAXN*3];
+bool inq[MAXN];
+int h[MAXN],ne[MAXN],idx,d[MAXN],cnt[MAXN];
+int n,m;
+void add(int u,int v,int w){
+    e[idx]={v,w};ne[idx]=h[u];h[u]=idx++;
+}
+bool spfa(){
+    queue<int> q;
+    for(int i=1;i<=n;i++){
+        q.push(i);inq[i]=true;
+    }
+    while(q.size()){
+        auto u=q.front();q.pop();inq[u]=false;
+        for(int i=h[u];i!=-1;i=ne[i]){
+            auto [v,w]=e[i];
+            if(d[v]>d[u]+w){
+                d[v]=d[u]+w;
+                cnt[v]=cnt[u]+1;
+                if(cnt[v]>=n)return true;
+                if(!inq[v])q.push(v);
+                inq[v]=true;
+            }
+        }
+    }
+    return false;
+}
+int main(){
+    scanf("%d%d",&n,&m);
+    memset(h,-1,sizeof(h));
+    while(m--){
+        int u,v,w;scanf("%d%d%d",&u,&v,&w);
+        add(u,v,w);
+    }
+    if(spfa())puts("Yes");
+    else puts("No");
+}
+```
+
 ### Floyd
+
+```cpp
+// Weights can be negative, multiple queries
+// O(n^3)
+#include<bits/stdc++.h>
+#define INF 0x3f3f3f3f
+#define MAXN 220
+using namespace std;
+int g[MAXN][MAXN],n,m,k;
+void floyd(){
+    for(int k=1;k<=n;k++)
+        for(int i=1;i<=n;i++)
+            for(int j=1;j<=n;j++){
+                if(g[i][k]==INF||g[k][j]==INF)continue;
+                g[i][j]=min(g[i][j],g[i][k]+g[k][j]);
+            }
+}
+int main(){
+    scanf("%d%d%d",&n,&m,&k);
+    for(int i=1;i<=n;i++)
+        for(int j=1;j<=n;j++)
+            if(i==j)g[i][j]=0;
+            else g[i][j]=INF;
+    while(m--){
+        int u,v,w;
+        scanf("%d%d%d",&u,&v,&w);
+        g[u][v]=min(g[u][v],w);
+    }
+    floyd();
+    while(k--){
+        int u,v;scanf("%d%d",&u,&v);
+        if(g[u][v]==INF)printf("impossible\n");
+        else printf("%d\n",g[u][v]);
+    }
+}
+```
 
 ### Prim
 
+```cpp
+// O(n^2)
+#include<bits/stdc++.h>
+#define INF 0x3f3f3f3f
+#define MAXN 550
+using namespace std;
+int g[MAXN][MAXN],d[MAXN],n,m;
+bool vis[MAXN];
+int prim(){
+    memset(d,INF,sizeof(d));
+    d[1]=0;
+    int res=0;
+    for(int i=0;i<n;i++){
+        int k=-1;
+        for(int j=1;j<=n;j++)
+            if(!vis[j]&&(k==-1||d[k]>d[j]))k=j;
+        if(d[k]==INF)return INF;
+        res+=d[k];
+        for(int j=1;j<=n;j++)d[j]=min(d[j],g[k][j]);
+        vis[k]=true;
+    }
+    return res;
+}
+int main(){
+    scanf("%d%d",&n,&m);
+    memset(g,INF,sizeof(g));
+    while(m--){
+        int u,v,w;scanf("%d%d%d",&u,&v,&w);
+        g[u][v]=g[v][u]=min(g[u][v],w);
+    }
+    int t=prim();
+    if(t==INF)printf("impossible\n");
+    else printf("%d\n",t);
+}
+```
+
+```cpp
+// O(m\log(n))
+#include<bits/stdc++.h>
+#define INF 0x3f3f3f3f
+#define MAXN 550
+using namespace std;
+using pii=pair<int,int>;
+int g[MAXN][MAXN],d[MAXN],n,m;
+bool vis[MAXN];
+int prim(){
+    memset(d,INF,sizeof(d));
+    priority_queue<pii,vector<pii>,greater<pii>> q;
+    q.push({0,1});
+    d[1]=0;
+    int res=0,cnt=0;
+    while(q.size()){
+        auto [dis,u]=q.top();q.pop();
+        if(vis[u])continue;vis[u]=true;
+        cnt++;
+        res+=dis;
+        for(int v=1;v<=n;v++){
+            if(g[u][v]==INF)continue;
+            int w=g[u][v];
+            if(d[v]>w){
+                d[v]=w;
+                q.push({d[v],v});
+            }
+        }
+    }
+    if(cnt!=n)return INF;
+    return res;
+}
+int main(){
+    scanf("%d%d",&n,&m);
+    memset(g,INF,sizeof(g));
+    while(m--){
+        int u,v,w;scanf("%d%d%d",&u,&v,&w);
+        g[u][v]=g[v][u]=min(g[u][v],w);
+    }
+    int t=prim();
+    if(t==INF)printf("impossible\n");
+    else printf("%d\n",t);
+}
+```
+
 ### Kruskal
+
+```cpp
+// O(m\log(m))
+#include<bits/stdc++.h>
+#define MAXM 200200
+#define MAXN 100100
+#define INF 0x3f3f3f3f
+using namespace std;
+struct Edge{
+    int u,v,w;
+}e[MAXM];
+int n,m,p[MAXN];
+int find(int x){
+    if(p[x]==x)return x;
+    return p[x]=find(p[x]);
+}
+int kruskal(){
+    sort(e,e+m,[&](const Edge& a,const Edge& b){return a.w<b.w;});
+    for(int i=1;i<=n;i++)p[i]=i;
+    int res=0,cnt=0;
+    for(int i=0;i<m;i++){
+        auto [u,v,w]=e[i];
+        u=find(u);v=find(v);
+        if(u!=v){
+            p[u]=v;
+            res+=w;
+            cnt++;
+        }
+    }
+    if(cnt<n-1)return INF;
+    return res;
+}
+int main(){
+    scanf("%d%d",&n,&m);
+    for(int i=0;i<m;i++){
+        int u,v,w;scanf("%d%d%d",&u,&v,&w);
+        e[i]={u,v,w};
+    }
+    int t=kruskal();
+    if(t==INF)puts("impossible");
+    else printf("%d\n",t);
+}
+```
 
 ### Coloring Method to Determine Bipartite Graph
 
