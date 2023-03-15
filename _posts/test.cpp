@@ -1,33 +1,34 @@
-// 9
+// 2
 #include<bits/stdc++.h>
-#define MAXN 100010
-#define MAXM 200020
+#define MAXN 550
+#define MAXM 100010
 using namespace std;
-int n,m,h[MAXN],e[MAXM],ne[MAXM],idx,col[MAXN];
+int n1,n2,m,h[MAXN],e[MAXM],ne[MAXM],idx,match[MAXN],st[MAXN];
 void add(int u,int v){
-    e[idx]=v;ne[idx]=h[u];h[u]=idx++;
+    e[++idx]=v;ne[idx]=h[u];h[u]=idx;
 }
-bool dfs(int u,int c){
-    col[u]=c;
-    for(int i=h[u];i!=-1;i=ne[i]){
+bool dfs(int u){
+    for(int i=h[u];i;i=ne[i]){
         int v=e[i];
-        if(!col[v]&&!dfs(v,3-c)||col[v]==c)return false;
+        if(st[v])continue;
+        st[v]=1;
+        if(!match[v]||dfs(match[v])){
+            match[v]=u;
+            return true;
+        }
     }
-    return true;
+    return false;
 }
 int main(){
-    scanf("%d%d",&n,&m);
-    memset(h,-1,sizeof(h));
+    scanf("%d%d%d",&n1,&n2,&m);
     while(m--){
         int u,v;scanf("%d%d",&u,&v);
-        add(u,v);add(v,u);
+        add(u,v);
     }
-    bool flag=true;
-    for(int i=1;i<=n;i++)
-        if(!col[i]&&!dfs(i,1)){
-            flag=false;
-            break;
-        }
-    if(flag)puts("Yes");
-    else puts("No");
+    int res=0;
+    for(int i=1;i<=n1;i++){
+        memset(st,0,sizeof(st));
+        if(dfs(i))res++;
+    }
+    printf("%d\n",res);
 }
