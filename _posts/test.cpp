@@ -1,34 +1,26 @@
-// 2
-#include<bits/stdc++.h>
-#define MAXN 550
-#define MAXM 100010
+// O(sqrt(n))
+#include <iostream>
+#include <algorithm>
 using namespace std;
-int n1,n2,m,h[MAXN],e[MAXM],ne[MAXM],idx,match[MAXN],st[MAXN];
-void add(int u,int v){
-    e[++idx]=v;ne[idx]=h[u];h[u]=idx;
+bool isp(int x)
+{
+    if (x < 2) return false;
+    for (int i = 2; i <= x / i; i ++ )
+        if (x % i == 0)
+            return false;
+    return true;
 }
-bool dfs(int u){
-    for(int i=h[u];i;i=ne[i]){
-        int v=e[i];
-        if(st[v])continue;
-        st[v]=1;
-        if(!match[v]||dfs(match[v])){
-            match[v]=u;
-            return true;
-        }
+
+int main()
+{
+    int n;
+    cin >> n;
+    while (n -- )
+    {
+        int x;
+        cin >> x;
+        if (isp(x)) puts("Yes");
+        else puts("No");
     }
-    return false;
-}
-int main(){
-    scanf("%d%d%d",&n1,&n2,&m);
-    while(m--){
-        int u,v;scanf("%d%d",&u,&v);
-        add(u,v);
-    }
-    int res=0;
-    for(int i=1;i<=n1;i++){
-        memset(st,0,sizeof(st));
-        if(dfs(i))res++;
-    }
-    printf("%d\n",res);
+    return 0;
 }
