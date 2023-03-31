@@ -2161,10 +2161,21 @@ int main(){
 ```cpp
 // Eratosthenes Sieve
 // Time Complexity: $O(n\log\log(n))$.
-void sieve(int n){
-    for(int i=0;i<=n;i++)isp[i]=1;
-    isp[0]=isp[1]=0;
-    for(int i=2;i<=n;i++)if(isp[i])for(int j=i*i;j<=n;j+=i)isp[j]=0;
+#include<bits/stdc++.h>
+#define MAXN 1000010
+using namespace std;
+int notp[MAXN],ps[MAXN],cnt;
+int getp(int n){
+    for(int i=2;i<=n;i++){
+        if(notp[i])continue;
+        ps[cnt++]=i;
+        for(int j=i+i;j<=n;j+=i)notp[j]=1;
+    }
+}
+int main(){
+    int n;cin>>n;
+    getp(n);
+    cout<<cnt<<endl;
 }
 ```
 

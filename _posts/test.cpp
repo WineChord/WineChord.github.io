@@ -1,26 +1,17 @@
-// O(sqrt(n))
-#include <iostream>
-#include <algorithm>
+// 2
+#include<bits/stdc++.h>
+#define MAXN 1000010
 using namespace std;
-bool isp(int x)
-{
-    if (x < 2) return false;
-    for (int i = 2; i <= x / i; i ++ )
-        if (x % i == 0)
-            return false;
-    return true;
-}
-
-int main()
-{
-    int n;
-    cin >> n;
-    while (n -- )
-    {
-        int x;
-        cin >> x;
-        if (isp(x)) puts("Yes");
-        else puts("No");
+int notp[MAXN],ps[MAXN],cnt;
+int getp(int n){
+    for(int i=2;i<=n;i++){
+        if(notp[i])continue;
+        ps[cnt++]=i;
+        for(int j=i+i;j<=n;j+=i)notp[j]=1;
     }
-    return 0;
+}
+int main(){
+    int n;cin>>n;
+    getp(n);
+    cout<<cnt<<endl;
 }

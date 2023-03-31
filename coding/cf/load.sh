@@ -13,6 +13,14 @@ do
     if [ "$?" == "0" ]; then
         break
     fi
+    curl --proto '=https' -k --tlsv1.1 -sSf $url 2>&1 > $tmpfile
+    if [ "$?" == "0" ]; then
+        break
+    fi
+    curl --proto '=https' -k -sSf $url 2>&1 > $tmpfile
+    if [ "$?" == "0" ]; then
+        break
+    fi
 done
 
 if [ "$?" != "0" ]; then
