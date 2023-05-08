@@ -2179,3 +2179,172 @@ int main(){
 }
 ```
 
+
+## String 
+
+### Aho–Corasick algorithm
+
+```cpp
+// Count unique occurrence of patterns.
+#include<bits/stdc++.h>
+#define N 500050
+using namespace std;
+int ch[N][26],tot,cnt[N],fail[N];
+void insert(const string& s){
+    int u=0;
+    for(auto cc:s){
+        int c=cc-'a';
+        if(!ch[u][c])ch[u][c]=++tot;
+        u=ch[u][c];
+    }
+    cnt[u]++;
+}
+void build(){
+    queue<int> q;
+    for(int i=0;i<26;i++)if(ch[0][i])q.push(ch[0][i]);
+    while(!q.empty()){
+        auto u=q.front();q.pop();
+        for(int i=0;i<26;i++){
+            int v=ch[u][i];
+            if(v)fail[v]=ch[fail[u]][i],q.push(v);
+            else ch[u][i]=ch[fail[u]][i];
+        }
+    }
+}
+void run(){
+    memset(ch,0,sizeof(ch));
+    memset(fail,0,sizeof(fail));
+    memset(cnt,0,sizeof(cnt));
+    tot=0;
+    int n;scanf("%d",&n);
+    for(int i=0;i<n;i++){
+        string s;cin>>s;insert(s);
+    }
+    build();
+    string s;cin>>s;
+    int res=0,u=0;
+    for(auto cc:s){
+        int c=cc-'a';
+        u=ch[u][c];
+        for(int i=u;i&&cnt[i]!=-1;i=fail[i]){
+            res+=cnt[i];cnt[i]=-1;
+        }
+    }
+    printf("%d\n",res);
+}
+int main(){
+    run();
+}
+```
+
+```cpp
+// Count max occurrence of patterns.
+#include<bits/stdc++.h>
+#define N 206000
+using namespace std;
+int ch[N][26],tot,cnt[N],fail[N],idx,id[N],q[N],hh,tt,dup[N];
+string ss[N];
+int n;
+void insert(const string& s){
+    int u=0;
+    for(auto cc:s){
+        int c=cc-'a';
+        if(!ch[u][c])ch[u][c]=++tot;
+        u=ch[u][c];
+    }
+    id[idx++]=u;
+}
+void build(){
+    for(int i=0;i<26;i++)if(ch[0][i])q[++tt]=ch[0][i];
+    while(hh!=tt+1){
+        auto u=q[hh++];
+        for(int i=0;i<26;i++){
+            int v=ch[u][i];
+            if(v)fail[v]=ch[fail[u]][i],q[++tt]=v;
+            else ch[u][i]=ch[fail[u]][i];
+        }
+    }
+}
+void run(){
+    memset(ch,0,sizeof(ch));
+    memset(fail,0,sizeof(fail));
+    memset(cnt,0,sizeof(cnt));
+    memset(id,0,sizeof(id));
+    tot=idx=0;hh=0,tt=-1;
+    for(int i=0;i<n;i++){
+        string s;cin>>s;insert(s);
+        ss[i]=s;
+    }
+    build();
+    string s;cin>>s;
+    int u=0;
+    for(auto cc:s){
+        int c=cc-'a';
+        u=ch[u][c];
+        cnt[u]++;
+    }
+    for(int i=tot-1;i>=0;i--)cnt[fail[q[i]]]+=cnt[q[i]];
+    int mx=0;
+    for(int i=0;i<idx;i++)mx=max(mx,cnt[id[i]]);
+    printf("%d\n",mx);
+    for(int i=0;i<idx;i++)if(mx==cnt[id[i]])cout<<ss[i]<<endl;
+}
+int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
+    while(scanf("%d",&n)!=EOF&&n)run();
+}
+```
+
+```cpp
+// Count every occurrence of patterns.
+#include<bits/stdc++.h>
+#define N 1000060
+using namespace std;
+int ch[N][26],tot,cnt[N],fail[N],idx,id[N],q[N],hh,tt,dup[N];
+void insert(const string& s){
+    int u=0;
+    for(auto cc:s){
+        int c=cc-'a';
+        if(!ch[u][c])ch[u][c]=++tot;
+        u=ch[u][c];
+    }
+    id[idx++]=u;
+}
+void build(){
+    for(int i=0;i<26;i++)if(ch[0][i])q[++tt]=ch[0][i];
+    while(hh!=tt+1){
+        auto u=q[hh++];
+        for(int i=0;i<26;i++){
+            int v=ch[u][i];
+            if(v)fail[v]=ch[fail[u]][i],q[++tt]=v;
+            else ch[u][i]=ch[fail[u]][i];
+        }
+    }
+}
+void run(){
+    memset(ch,0,sizeof(ch));
+    memset(fail,0,sizeof(fail));
+    memset(cnt,0,sizeof(cnt));
+    memset(id,0,sizeof(id));
+    tot=idx=0;hh=0,tt=-1;
+    int n;scanf("%d",&n);
+    for(int i=0;i<n;i++){
+        string s;cin>>s;insert(s);
+    }
+    build();
+    string s;cin>>s;
+    int u=0;
+    for(auto cc:s){
+        int c=cc-'a';
+        int u=ch[u][c];
+        cnt[u]++;
+    }
+    for(int i=tot-1;i>=0;i--)cnt[fail[q[i]]]+=cnt[q[i]];
+    for(int i=0;i<idx;i++)printf("%d\n",cnt[id[i]]);
+}
+int main(){
+    run();
+}
+```
