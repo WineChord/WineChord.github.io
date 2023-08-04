@@ -3,11 +3,13 @@ using namespace std;
 using ll=long long;
 void run(){
     ll x,y;scanf("%lld%lld",&x,&y);
-    if((x-1)%4==0&&y==0){
-        puts("1");return;
-    }
+    while((x>>y)&1)y++;
+    printf("%lld\n",(1LL<<y)-1);
 }
 int main(){
+#ifdef WINE
+    freopen("data.in","r",stdin);
+#endif
     int T;scanf("%d",&T);
     while(T--)run();
 }
