@@ -2348,3 +2348,255 @@ int main(){
     run();
 }
 ```
+
+## Dynamic Programming
+
+### Digit DP
+
+```cpp
+// Get occurrence of 0-9 in [L,R]
+#include<bits/stdc++.h>
+using namespace std;
+int get(const vector<int>& num,int high,int low){
+    int res=0;
+    while(high>=low)res=res*10+num[high--];
+    return res;
+}
+int pow10(int x){
+    int res=1;
+    while(x--)res*=10;
+    return res;
+}
+int count(int n,int x){
+    if(!n)return 0;
+    vector<int> num;
+    while(n)num.push_back(n%10),n/=10;
+    n=num.size();
+    int res=0;
+    for(int i=n-1-!x;i>=0;i--){
+        if(i<n-1){ // 1. 000~abc * 000~999
+            res+=get(num,n-1,i+1)*pow10(i);
+            if(!x)res-=pow10(i); // 001~abc * 000~999
+        }
+        if(num[i]==x)res+=get(num,i-1,0)+1; // 000~efg
+        else if(num[i]>x)res+=pow10(i); // 000~999
+    }
+    return res;
+}
+int main(){
+    int a,b;
+    while(scanf("%d%d",&a,&b)&&a&&b){
+        if(a>b)swap(a,b);
+        for(int i=0;i<=9;i++)
+            printf("%d ",count(b,i)-count(a-1,i));
+        printf("\n");
+    }
+}
+```
+
+```cpp
+// Find the number of base-B numbers in the range [L,R] 
+// that have K ones and all other digits are zero.
+#include<bits/stdc++.h>
+#define N 33
+using namespace std;
+int C[N][N];
+void init(){
+    for(int i=0;i<N;i++){
+        for(int j=0;j<=i;j++){
+            if(j==0)C[i][j]=1;
+            else C[i][j]=C[i-1][j]+C[i-1][j-1];
+        }
+    }
+}
+int K,B;
+int dp(int n){
+    if(!n)return 0;
+    vector<int> nums;
+    while(n)nums.push_back(n%B),n/=B;
+    int res=0,last=0;
+    for(int i=nums.size()-1;i>=0;i--){
+        int x=nums[i];
+        if(x){
+            res+=C[i][K-last];
+            if(x>1){
+                if(K-last-1>=0)res+=C[i][K-last-1];
+                return res;
+            }else{
+                last++;
+                if(last>K)return res;
+            }
+        }
+        if(!i&&last==K)res++;
+    }
+    return res;
+}
+int main(){
+    init();
+    int X,Y;scanf("%d%d%d%d",&X,&Y,&K,&B);
+    printf("%d\n",dp(Y)-dp(X-1));
+}
+```
+
+```cpp
+// Find the number of integers in the range [L,R] that 
+// have non-decreasing digits from left to right.
+#include<bits/stdc++.h>
+#define N 12
+using namespace std;
+int f[N][10];
+void init(){
+    for(int i=0;i<=9;i++)f[1][i]=1;
+    for(int i=2;i<N;i++)
+        for(int j=0;j<=9;j++)
+            for(int k=j;k<=9;k++)
+                f[i][j]+=f[i-1][k];
+}
+int dp(int n){
+    if(!n)return 1;
+    vector<int> nums;
+    while(n)nums.push_back(n%10),n/=10;
+    int res=0,last=0;
+    for(int i=nums.size()-1;i>=0;i--){
+        int x=nums[i];
+        for(int k=last;k<x;k++)
+            res+=f[i+1][k];
+        if(x<last)return res;
+        last=x;
+    }
+    return res+1;
+}
+int main(){
+    init();
+    int l,r;
+    while(scanf("%d%d",&l,&r)!=EOF){
+        printf("%d\n",dp(r)-dp(l-1));
+    }
+}
+```
+
+```cpp
+// Find the number of integers in the range [L,R] that 
+// have no leading zeros and the absolute difference
+// between adjacent digits is at least 2.
+#include<bits/stdc++.h>
+#define N 11
+using namespace std;
+int f[N][10];
+void init(){
+    for(int i=0;i<=9;i++)f[1][i]=1;
+    for(int i=2;i<N;i++)
+        for(int j=0;j<=9;j++)
+            for(int k=0;k<=9;k++)
+                if(abs(j-k)>1)f[i][j]+=f[i-1][k];
+}
+int dp(int n){
+    if(!n)return 1;
+    vector<int> nums;
+    while(n)nums.push_back(n%10),n/=10;
+    int res=0,last=-2;
+    n=nums.size();
+    for(int i=n-1;i>=0;i--){
+        int x=nums[i];
+        if(i==n-1){
+            for(int j=1;j<x;j++)res+=f[i+1][j]; // highest is not 0
+            for(int k=i;k>0;k--)for(int j=1;j<=9;j++)res+=f[k][j]; // highest is 0
+            res++; // plus case `0`
+        }else{
+            for(int j=0;j<x;j++)if(abs(j-last)>1)res+=f[i+1][j];
+        }
+        if(abs(last-x)>1)last=x;
+        else break;
+        if(!i)res++;
+    }
+    return res;
+}
+int main(){
+    init();
+    int l,r;scanf("%d%d",&l,&r);
+    printf("%d\n",dp(r)-dp(l-1));
+}
+```
+
+```cpp
+// Find the number of integers in the range [L,R] whose digits sum to a multiple of P.
+#include<bits/stdc++.h>
+#define N 11
+using namespace std;
+int P,f[N][10][110];
+void init(){
+    memset(f,0,sizeof(f));
+    for(int i=0;i<=9;i++)f[1][i][i%P]++;
+    for(int i=2;i<N;i++)
+        for(int j=0;j<=9;j++)
+            for(int k=0;k<P;k++)
+                for(int x=0;x<=9;x++)
+                    f[i][j][k]+=f[i-1][x][((k-j)%P+P)%P];
+}
+int dp(int n){
+    if(!n)return 1;
+    vector<int> nums;
+    while(n)nums.push_back(n%10),n/=10;
+    n=nums.size();
+    int res=0,last=0;
+    for(int i=n-1;i>=0;i--){
+        int x=nums[i];
+        for(int j=0;j<x;j++)res+=f[i+1][j][((-last)%P+P)%P];
+        last=(last+x)%P;
+        if(!i&&!last)res++;
+    }
+    return res;
+}
+int main(){
+    int a,b;
+    while(scanf("%d%d%d",&a,&b,&P)!=EOF){
+        init();
+        printf("%d\n",dp(b)-dp(a-1));
+    }
+}
+```
+
+```cpp
+// Find the number of integers in the range [L,R] that do not 
+// contain the digit 4 and do not contain the substring 62.
+#include<bits/stdc++.h>
+#define N 11
+using namespace std;
+int f[N][10];
+void init(){
+    for(int i=0;i<=9;i++)if(i!=4)f[1][i]=1;
+    for(int i=2;i<N;i++)
+        for(int j=0;j<=9;j++)
+            for(int k=0;k<=9;k++){
+                if(j==4||k==4)continue;
+                if(j==6&&k==2)continue;
+                f[i][j]+=f[i-1][k];
+            }
+}
+int dp(int n){
+    if(!n)return 1;
+    vector<int> nums;
+    while(n)nums.push_back(n%10),n/=10;
+    int res=0,last=0;
+    n=nums.size();
+    for(int i=n-1;i>=0;i--){
+        int x=nums[i];
+        for(int j=0;j<x;j++){
+            if(j==4)continue;
+            if(last==6&&j==2)continue;
+            res+=f[i+1][j];
+        }
+        if(last==6&&x==2||x==4)return res;
+        last=x;
+        if(!i)res++;
+    }
+    return res;
+}
+int main(){
+    init();
+    int l,r;
+    while(scanf("%d%d",&l,&r)&&l&&r){
+        printf("%d\n",dp(r)-dp(l-1));
+    }
+}
+```
