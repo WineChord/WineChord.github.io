@@ -2,7 +2,7 @@
 using namespace std;
 using ll=long long;
 /*
-https://codeforces.com/contest/1873/problem/D
+https://codeforces.com/problemset/problem/1873/D
 
 Codeforces Round 898 (Div. 4) D. 1D Eraser 
 
@@ -13,7 +13,13 @@ make them all white.
 Find the minimum number of operations needed to remove all black cells.
 */
 void run(){
-    // Welcome, your majesty.
+    int n,k;scanf("%d%d",&n,&k);
+    string s;cin>>s;
+    int res=0;
+    for(int i=0;i<n;i++){
+        if(s[i]=='B')res++,i+=k-1;
+    }
+    printf("%d\n",res);
 }
 int main(){
 #ifdef WINE

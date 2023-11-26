@@ -2161,9 +2161,7 @@ int main(){
 ```cpp
 // Eratosthenes Sieve
 // Time Complexity: $O(n\log\log(n))$.
-#include<bits/stdc++.h>
 #define MAXN 1000010
-using namespace std;
 int notp[MAXN],ps[MAXN],cnt;
 int getp(int n){
     for(int i=2;i<=n;i++){
@@ -2172,10 +2170,22 @@ int getp(int n){
         for(int j=i+i;j<=n;j+=i)notp[j]=1;
     }
 }
-int main(){
-    int n;cin>>n;
-    getp(n);
-    cout<<cnt<<endl;
+```
+
+```cpp
+// Linear Sieve
+// O(n)
+#define N 1000010
+int ps[N],notp[N],cnt;
+void init(){
+    int n=N-9;
+    for(int i=2;i<=n;i++){
+        if(!notp[i])ps[cnt++]=i;
+        for(int j=0;ps[j]<=n/i;j++){
+            notp[ps[j]*i]=1;
+            if(i%ps[j]==0)break;
+        }
+    }
 }
 ```
 

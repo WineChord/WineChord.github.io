@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+#define N 300030
 using namespace std;
 using ll=long long;
 /*
@@ -18,8 +19,26 @@ or equal to 0 after Monocarp uses his ability, then it dies.
 Monocarp uses his ability until all monsters die. Your task is to 
 determine the order in which monsters will die.
 */
+int a[N];
 void run(){
-    // Welcome, your majesty.
+    int n,k;scanf("%d%d",&n,&k);
+    using pii=pair<int,int>;
+    priority_queue<pii> q;
+    for(int i=1;i<=n;i++){
+        scanf("%d",&a[i]);
+        a[i]%=k;if(a[i]==0)a[i]=k;
+        q.push({a[i],-i});
+    }
+    vector<int> res;
+    while(q.size()){
+        auto [h,id]=q.top();q.pop();
+        if(h<=k){
+            res.push_back(-id);continue;
+        }
+        q.push({h-k,id});
+    }
+    for(auto x:res)printf("%d ",x);
+    puts("");
 }
 int main(){
 #ifdef WINE
