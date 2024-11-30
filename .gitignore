@@ -30,3 +30,8 @@ _site
 
 *a.out
 *data.in
+**venv**
+**data_http**
+**load.sh**
+**load2.sh**
+**coding/** 
