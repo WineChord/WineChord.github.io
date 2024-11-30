@@ -2,7 +2,7 @@
 using namespace std;
 using ll=long long;
 /*
-https://codeforces.com/contest/1872/problem/D
+https://codeforces.com/problemset/problem/1872/D
 
 Codeforces Round 895 (Div. 3) D. Plus Minus Permutation 
 
@@ -34,7 +34,15 @@ in the array) and [1,3,4] is also not a permutation (n=3, but the array
 contains 4).
 */
 void run(){
-    // Welcome, your majesty.
+    ll n,x,y;cin>>n>>x>>y;
+    ll nx=n/x;
+    ll ny=n/y;
+    ll m=x*y/gcd(x,y);
+    ll nm=n/m;
+    nx-=nm;ny-=nm;
+    // n+(n-1)+..+(n-nx+1)
+    // 1+2+..+ny
+    cout<<(2*n-nx+1)*nx/2-(1+ny)*ny/2<<endl;
 }
 int main(){
 #ifdef WINE

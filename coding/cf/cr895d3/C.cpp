@@ -2,7 +2,7 @@
 using namespace std;
 using ll=long long;
 /*
-https://codeforces.com/contest/1872/problem/C
+https://codeforces.com/problemset/problem/1872/C
 
 Codeforces Round 895 (Div. 3) C. Non-coprime Split 
 
@@ -12,8 +12,6 @@ and b such that the following conditions are simultaneously satisfied:
  l \le a + b \le r
 
  \gcd(a, b) \neq 1
-
-
 
 or report that they do not exist.
 
@@ -25,7 +23,25 @@ common divisor
 2) = 2.
 */
 void run(){
-    // Welcome, your majesty.
+    int l,r;cin>>l>>r;
+    if(l==r){
+        for(int i=2;i<=l/i;i++)
+            if(l%i==0){
+                int x=l/i;
+                cout<<x<<" "<<x*(i-1)<<endl;
+                return;
+            }
+        puts("-1");
+        return;
+    }
+    if(r<4){
+        puts("-1");
+        return;
+    }
+    r-=r%2;
+    int x=r/2;
+    x-=x%2;
+    cout<<x<<" "<<r-x<<endl;
 }
 int main(){
 #ifdef WINE
