@@ -1,4 +1,7 @@
 ---
+# layout: post
+# classes: wide
+# layout: post
 classes: wide
 title: "手撕 Softmax 和 Cross-entropy 公式及代码"
 excerpt: "回归基础，返璞归真"
