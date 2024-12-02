@@ -1,7 +1,7 @@
 ---
-classes: wide2
+classes: wide
 title: "手撕 Softmax 和 Cross-entropy 公式及代码"
-excerpt: "从公式以及代码的角度入手"
+excerpt: "回归基础，返璞归真"
 categories: 
   - coding
 tags: 
@@ -11,17 +11,17 @@ toc_sticky: true
 mathjax: true
 ---
 
-# 前言
+## 前言
 
 Softmax 通常用于将网络的输出控制到 [0,1] 范围内，而 Cross-entropy（交叉熵）通常用在分类任务，将模型的对 $k$ 个类别的预测结果与实际的标签之间计算出一个 loss，而这个 loss 通常使用交叉熵来实现。
 
 > 注：本文假设读者有基础的机器学习知识。
 
-# 理论
+## 理论
 
 Softmax 本质上是把模型的输出做一个归一化，由于模型直接输出的数值有正有负，首先对所有 $k$ 个类别输出的结果做一个指数，得到 $k$ 个大于等于 0 的数，然后结果除以总和，使得最终的 $k$ 个数的和是 1。
 
-## 正向传播
+### 正向传播
 
 术语：
 
@@ -50,7 +50,7 @@ $\ell_{ce}(h(x),y) = -\log(\dfrac{\exp(h_y(x))}{\sum_{j=1}^k\exp(h_j(x))}) =-h_y
 
 因此单独算交叉熵损失的时候，Softmax 其实不用全部算出来。
 
-## 反向传播
+### 反向传播
 
 如果使用梯度下降算法对这个 loss 进行优化的话，需要求解模型参数的梯度，也就是对 $h$ 求导：
 
@@ -69,7 +69,7 @@ $\nabla_h\ell_{ce}(h,y)=-e_y+z$
 
 其中 $e_y$ 是一个长度为 $k$ 的单位向量，只在第 $y$ 个位置上是 1，其余地方是 0，这个时候我们可以发现，交叉熵的梯度实际上有一项直接就是 Softmax 的值。
 
-## 小结
+### 小结
 
 小结一下，目前我们推出来了两个式子：
 
@@ -83,7 +83,7 @@ $$
 
 分别对应正向和反向传播。
 
-## 线性模型
+### 线性模型
 
 下面具体来看看 $h_\theta(x) = \theta^Tx$ ，也就是线性模型的场景。
 
@@ -146,7 +146,7 @@ $\dfrac{\partial}{\partial\theta}\ell_{ce}(X\theta,y)=X^T(Z-I_y)$
 
 其中 $Z=\text{normalize}(\exp(X\theta))$ ，注意是按行做归一化。
 
-# 代码
+## 代码
 
 Softmax 实现如下：
 
@@ -176,7 +176,7 @@ def softmax_loss(Z, y):
     Returns:
         Average softmax loss over the sample.
     """
-    # \log(\sum(\exp(z))) - z
+    ## \log(\sum(\exp(z))) - z
     return np.mean(np.log(np.sum(np.exp(Z), axis=1)) - Z[np.arange(Z.shape[0]), y])
 ```
 
@@ -230,19 +230,19 @@ def softmax_regression_epoch(XX, y, theta, lr = 0.1, batch=100):
     """
     total = XX.shape[0]
     iteration = total // batch 
-    k = theta.shape[1] # number of class
+    k = theta.shape[1] ## number of class
     for i in range(iteration):
-        # \theta = \theta - \alpha * 1/m * X^T (Z - I_y)
-        # \theta: n * k
-        X = XX[i*batch: (i+1)*batch] # m * n
-        xt = np.exp(np.matmul(X, theta)) # m * k
-        Z = xt / xt.sum(axis=1, keepdims=True) # m * k
-        Iy = np.zeros((batch, k), dtype=np.float32) # m * k
+        ## \theta = \theta - \alpha * 1/m * X^T (Z - I_y)
+        ## \theta: n * k
+        X = XX[i*batch: (i+1)*batch] ## m * n
+        xt = np.exp(np.matmul(X, theta)) ## m * k
+        Z = xt / xt.sum(axis=1, keepdims=True) ## m * k
+        Iy = np.zeros((batch, k), dtype=np.float32) ## m * k
         Iy[np.arange(batch), y[i*batch: (i+1)*batch]] = 1
         theta -= lr * np.matmul(X.T, (Z - Iy)) / batch 
 ```
 
-# 参考资料
+## 参考资料
 
 [CMU 10-414/714: 机器学习系统 Deep Learning Systems](https://www.bilibili.com/video/BV1Rg4y137jH?spm_id_from=333.788.videopod.episodes&vd_source=aab0831003bc6e9f85163bf5cc0f8408&p=3)
 
