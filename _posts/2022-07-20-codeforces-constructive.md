@@ -3725,6 +3725,8 @@ int main(){
 
 # 66. Codeforces Round 620 (Div. 2) B. Longest Palindrome 
 
+![alt text](image-9.png)
+
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
