@@ -163,7 +163,7 @@ $$
 
 其中 $\log\sum_{j=1}^k\exp(h_j(x))$ 对应 `np.log(np.sum(mp.exp(Z), axis=1))`，其中 `axis=1` 保证了按行做求和，这部分对应的维度是 $m\times 1$ ，然后我们需要构造一个向量，维度为 $m\times 1$ ，其中的每个值是每个样本对应的 $-h_y(x)$ ，即 `-Z[np.arange(Z.shape[0]), y]`，两者相加然后求平均值即为最终结果 
 
-```python3
+```python
 def softmax_loss(Z, y):
     """ Return softmax loss.  Note that for the purposes of this assignment,
     you don't need to worry about "nicely" scaling the numerical properties
@@ -212,7 +212,7 @@ $$
 `theta -= lr * np.matmul(X.T, (Z - Iy)) / batch` 
 
 
-```python3
+```python
 def softmax_regression_epoch(XX, y, theta, lr = 0.1, batch=100):
     """ Run a single epoch of SGD for softmax regression on the data, using
     the step size lr and specified batch size.  This function should modify the
