@@ -128,7 +128,7 @@ $$平均编码长度 = P(A) \times 2 + P(B) \times 2 + P(C) \times 2 + P(D) \tim
 
 * 当使用为 $$Q$$ 优化的编码方案来编码 $$P$$ 分布的数据时，平均每个符号需要 2.00 比特，这个值就是交叉熵 $$H(P,Q)$$
 
-* 这个差值 2.00 - 1.60 = 0.40 比特实际上表示的是由于使用了次优编码方案（为 Q 优化而不是为 P 优化）而导致的每个符号的额外开销，这里实际上就是 KL 散度 $$D(P||Q)=H(P,Q)-H(P)$$
+* 这个差值 2.00 - 1.60 = 0.40 比特实际上表示的是由于使用了次优编码方案（为 Q 优化而不是为 P 优化）而导致的每个符号的额外开销，这里实际上就是 KL 散度 $$D(P\|Q)=H(P,Q)-H(P)$$
 
 ## 为什么最优编码长度是概率的负对数？
 
@@ -138,7 +138,7 @@ $$平均编码长度 = P(A) \times 2 + P(B) \times 2 + P(C) \times 2 + P(D) \tim
 
 那么为什么是这样？
 
-![](https://et1q7qdh0g.feishu.cn/space/api/box/stream/download/asynccode/?code=MDBmNTJmZGZiOWVkNmUxY2I4YmFmNTYxZjE5NTFmODVfcUF3bmlSajFwMmhhc08zMmh6NzdVMWc0TWhzOUtQaHRfVG9rZW46SGo5WWJ0Zzc3b3BEc3F4Q2o3TWMwMVc0bm8yXzE3NDE3NTk5MTc6MTc0MTc2MzUxN19WNA)
+![](https://et1q7qdh0g.feishu.cn/space/api/box/stream/download/asynccode/?code=NGVlNzE1NDZhOGZmYTVmYzdhZDA4OTJhOTk0MGVhMTlfZ1oyQ0VsTnpsUHYzMXJnYUNxc1huOTVGU2Jvc0tCMmxfVG9rZW46SGo5WWJ0Zzc3b3BEc3F4Q2o3TWMwMVc0bm8yXzE3NDE3NjA1NDk6MTc0MTc2NDE0OV9WNA)
 
 ### 直观理解
 
@@ -192,7 +192,7 @@ $$\begin{align}
 \sum_{i=1}^n2^{-l_i}=1
 \end{align}$$
 
-联立 $$(7),(8)$$ 可以得到 $$2^{-l_i}=p_i$$，即 $$l_i=-\log_2(p_i)$$。
+联立上面两个式子，可以得到 $$2^{-l_i}=p_i$$，即 $$l_i=-\log_2(p_i)$$。
 
 ## 交叉熵的下界是什么？
 
@@ -253,7 +253,7 @@ D_{KL}(P\|Q)&=\sum_i p_i\log_2(\frac{p_i}{q_i})\\
 &=0
 \end{align}$$
 
-这里的证明技巧是你要记得取个负号让 $$p_i$$ 放到分母上，也就是 $$(15)$$。
+这里的证明技巧是你要记得取个负号让 $$p_i$$ 放到分母上，也就是公式的第二步。
 
 此处 $$H(P,Q)\ge H(P)$$ 实际上就是 Gibbs 不等式。
 
@@ -274,6 +274,5 @@ D_{KL}(P\|Q)=\sum_ip_i\log(\frac{p_i}{q_i})&\not=\sum_iq_i\log(\frac{q_i}{p_i})=
 
 下图来自 *Machine Learning: A Probabilistic Perspective&#x20;*&#x7B2C; 21.2.2 节
 
-![](https://et1q7qdh0g.feishu.cn/space/api/box/stream/download/asynccode/?code=OTJhNzU0ZjBhOTVjYjk0YTY0YjgwN2I3ZjgyNTU0NzFfajl3enBINGpsRFFLMW9Va3NuRks4VzdQS0JXdk1vRElfVG9rZW46R3k3WGJsOXlzbzA3bU94cHdTQmNCREFybmlkXzE3NDE3NTk5MTc6MTc0MTc2MzUxN19WNA)
-
+![](https://et1q7qdh0g.feishu.cn/space/api/box/stream/download/asynccode/?code=N2RhMzA2Y2ZhY2U2Njc4NGQ0Zjg4ZWQ0NzQxZmViYzVfWU9URlM1TkI1ZDh1d0JUeG83WmpqbUpCT2pjVHhGR01fVG9rZW46R3k3WGJsOXlzbzA3bU94cHdTQmNCREFybmlkXzE3NDE3NjA1NDk6MTc0MTc2NDE0OV9WNA)
 
