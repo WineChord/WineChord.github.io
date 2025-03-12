@@ -16,7 +16,7 @@ toc_sticky: true
 mathjax: true
 ---
 
-原文来自我的飞书：https://et1q7qdh0g.feishu.cn/wiki/WwW0wyHMZiLcqEkCf2Lc5Jgeneh
+原文来自我的飞书：[交叉熵](https://et1q7qdh0g.feishu.cn/wiki/WwW0wyHMZiLcqEkCf2Lc5Jgeneh)
 
 ## 什么是交叉熵？
 
