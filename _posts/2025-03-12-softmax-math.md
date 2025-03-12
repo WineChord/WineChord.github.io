@@ -62,23 +62,23 @@ H(P, Q) = -\sum_{x}P(x)\log{Q(x)}
 
 因此，假如我们根据真实分布 $$P$$来做最优编码的话，每个符号对应的最优编码长度为：
 
-* $$l_A=-\log_2P(A)=0.51\text{ bit}$$
+* $l_A=-\log_2P(A)=0.51\text{ bit}$
 
-* $$l_B=-\log_2P(B)=3.32\text{ bit}$$
+* $l_B=-\log_2P(B)=3.32\text{ bit}$
 
-* $$l_C=-\log_2P(C)=3.32 \text{ bit}$$
+* $l_C=-\log_2P(C)=3.32 \text{ bit}$
 
-* $$l_D=-\log_2P(D)=3.32 \text{ bit}$$
+* $l_D=-\log_2P(D)=3.32 \text{ bit}$
 
 而假如我们用估计分布 $$Q$$ 来做最优编码的话，每个符号对应的最优编码长度为：
 
-* $$l_A=-\log_2P(A)=2.00\text{ bit}$$
+* $l_A=-\log_2P(A)=2.00\text{ bit}$
 
-* $$l_B=-\log_2P(B)=2.00\text{ bit}$$
+* $l_B=-\log_2P(B)=2.00\text{ bit}$
 
-* $$l_C=-\log_2P(C)=2.00 \text{ bit}$$
+* $l_C=-\log_2P(C)=2.00 \text{ bit}$
 
-* $$l_D=-\log_2P(D)=2.00 \text{ bit}$$
+* $l_D=-\log_2P(D)=2.00 \text{ bit}$
 
 ### 实际编码方案
 
