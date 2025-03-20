@@ -138,7 +138,7 @@ $$平均编码长度 = P(A) \times 2 + P(B) \times 2 + P(C) \times 2 + P(D) \tim
 
 那么为什么是这样？
 
-![](https://et1q7qdh0g.feishu.cn/space/api/box/stream/download/asynccode/?code=NGVlNzE1NDZhOGZmYTVmYzdhZDA4OTJhOTk0MGVhMTlfZ1oyQ0VsTnpsUHYzMXJnYUNxc1huOTVGU2Jvc0tCMmxfVG9rZW46SGo5WWJ0Zzc3b3BEc3F4Q2o3TWMwMVc0bm8yXzE3NDE3NjA1NDk6MTc0MTc2NDE0OV9WNA)
+![](2025-03-12-softmax-math.assets/.png)
 
 ### 直观理解
 
@@ -274,5 +274,5 @@ D_{KL}(P\|Q)=\sum_ip_i\log(\frac{p_i}{q_i})&\not=\sum_iq_i\log(\frac{q_i}{p_i})=
 
 下图来自 *Machine Learning: A Probabilistic Perspective&#x20;*&#x7B2C; 21.2.2 节
 
-![](https://et1q7qdh0g.feishu.cn/space/api/box/stream/download/asynccode/?code=N2RhMzA2Y2ZhY2U2Njc4NGQ0Zjg4ZWQ0NzQxZmViYzVfWU9URlM1TkI1ZDh1d0JUeG83WmpqbUpCT2pjVHhGR01fVG9rZW46R3k3WGJsOXlzbzA3bU94cHdTQmNCREFybmlkXzE3NDE3NjA1NDk6MTc0MTc2NDE0OV9WNA)
+![](2025-03-12-softmax-math.assets/.png%5B1%5D)
 
