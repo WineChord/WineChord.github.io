@@ -138,7 +138,7 @@ $$平均编码长度 = P(A) \times 2 + P(B) \times 2 + P(C) \times 2 + P(D) \tim
 
 那么为什么是这样？
 
-![](/assets/images/posts/2025-03-12-softmax-math/.png%5B4%5D)
+![](../assets/images/posts/2025-03-12-softmax-math/1%5B1%5D.png)
 
 ### 直观理解
 
@@ -274,5 +274,5 @@ D_{KL}(P\|Q)=\sum_ip_i\log(\frac{p_i}{q_i})&\not=\sum_iq_i\log(\frac{q_i}{p_i})=
 
 下图来自 *Machine Learning: A Probabilistic Perspective&#x20;*&#x7B2C; 21.2.2 节
 
-![](/assets/images/posts/2025-03-12-softmax-math/1.png)
+![](../assets/images/posts/2025-03-12-softmax-math/2.png)
 
