@@ -284,7 +284,7 @@ $$\begin{align}
 至此，我们可以得到一个 Decoder Layer 所需要的显存大小为：
 
 $$\begin{align}
-(11sbh+5as^b)+19sbh+4sbh=\purple{sbh(34+5\frac{as}{h})}
+(11sbh+5as^2b)+19sbh+4sbh=\purple{sbh(34+5\frac{as}{h})}
 \end{align}$$
 
 也就是我们一开始给的公式。
