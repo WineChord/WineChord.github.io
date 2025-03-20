@@ -242,49 +242,49 @@ L\cdot seq\cdot bs\cdot h\cdot(34+\frac{5n_{heads}\cdot seq}{h})
 
 Attention 模块：
 
-* 输入会走到一个大的线性层，线性层的输出分成三份得到 $$Q,K,V$$，从之前的第一个例子我们可以知道，线性层的所有输入激活值都是需要保存的，因此此处保存输入激活值，其大小为：$$\red{2sbh}$$ （注意这里已经都是字节数，所以乘了 $$2$$）
+* 输入会走到一个大的线性层，线性层的输出分成三份得到 $$Q,K,V$$，从之前的第一个例子我们可以知道，线性层的所有输入激活值都是需要保存的，因此此处保存输入激活值，其大小为：$$\color{red}{2sbh}$$ （注意这里已经都是字节数，所以乘了 $$2$$）
 
-* 接下来我们看 $$QK^\top$$ 矩阵乘法，其后面的梯度要往前传播的话，这里类似线性层的乘法，因此两个输入激活值都要保存，$$Q,K$$ 一块保存的显存大小是 $$\red{4sbh}$$
+* 接下来我们看 $$QK^\top$$ 矩阵乘法，其后面的梯度要往前传播的话，这里类似线性层的乘法，因此两个输入激活值都要保存，$$Q,K$$ 一块保存的显存大小是 $$\color{red}{4sbh}$$
 
-* 然后看 Softmax 运算，这一块可以推一下他的导数（此处略去），可以发现回传梯度的话同样是需要他的所有输入的，因此 Softmax 的输入 $$QK^\top$$ 需要保存下来，对应的显存大小是 $$\red{2as^2b}$$
+* 然后看 Softmax 运算，这一块可以推一下他的导数（此处略去），可以发现回传梯度的话同样是需要他的所有输入的，因此 Softmax 的输入 $$QK^\top$$ 需要保存下来，对应的显存大小是 $$\color{red}{2as^2b}$$
 
-* 如前所述，我们假设 Softmax 后面有一个 Dropout，他的操作实际上是 $$y=\text{dropout}(x)=\frac{\text{mask}\odot x}{1-p}$$，其中 $$p$$ 是 dropout 的概率，$$\text{mask}$$ 则是此次被 dropout 的元素位置信息掩膜，这里面 $$\text{mask}, p$$ 这些都是不需要梯度的，只有 $$x$$ 需要梯度，而他的梯度是 $$\frac{\partial L}{\partial x}=\frac{\text{mask}}{1-p}\odot \frac{\partial L}{\partial y}$$，此处我们发现计算 $$x$$ 的梯度是不需要 $$x$$的，因此 Dropout 的输入激活值不需要被保存，但是 Dropout 本身这个 $$\text{mask}$$ 是需要保存的，对于他来说我们认为每个位置占用一个字节，因此对应的显存大小是 $$\red{as^2b}$$
+* 如前所述，我们假设 Softmax 后面有一个 Dropout，他的操作实际上是 $$y=\text{dropout}(x)=\frac{\text{mask}\odot x}{1-p}$$，其中 $$p$$ 是 dropout 的概率，$$\text{mask}$$ 则是此次被 dropout 的元素位置信息掩膜，这里面 $$\text{mask}, p$$ 这些都是不需要梯度的，只有 $$x$$ 需要梯度，而他的梯度是 $$\frac{\partial L}{\partial x}=\frac{\text{mask}}{1-p}\odot \frac{\partial L}{\partial y}$$，此处我们发现计算 $$x$$ 的梯度是不需要 $$x$$的，因此 Dropout 的输入激活值不需要被保存，但是 Dropout 本身这个 $$\text{mask}$$ 是需要保存的，对于他来说我们认为每个位置占用一个字节，因此对应的显存大小是 $$\color{red}{as^2b}$$
 
-* Softmax + Dropout 后得到的就是 attention score 了，这个 score 需要乘上 $$V$$ 得到 $$O$$，显然乘法操作需要保存所有的输入激活值以便回传梯度，因此 score 和 $$V$$ 都要保存，分别对应显存大小为 $$\red{2as^2b}$$ 和 $$\red{2sbh}$$
+* Softmax + Dropout 后得到的就是 attention score 了，这个 score 需要乘上 $$V$$ 得到 $$O$$，显然乘法操作需要保存所有的输入激活值以便回传梯度，因此 score 和 $$V$$ 都要保存，分别对应显存大小为 $$\color{red}{2as^2b}$$ 和 $$\color{red}{2sbh}$$
 
-* 接下来 $$O$$ 又会经过另一个线性层，对于线性层，我们需要保存其输入以回传梯度，也就是 $$O$$ 要保存，对应显存大小 $$\red{2sbh}$$
+* 接下来 $$O$$ 又会经过另一个线性层，对于线性层，我们需要保存其输入以回传梯度，也就是 $$O$$ 要保存，对应显存大小 $$\color{red}{2sbh}$$
 
-* 如前所说，我们在最后还会加一个 Dropout，而 Dropout 不需要保存其输入，但是需要保存 $$\text{mask}$$，也就是 $$\red{sbh}$$
+* 如前所说，我们在最后还会加一个 Dropout，而 Dropout 不需要保存其输入，但是需要保存 $$\text{mask}$$，也就是 $$\color{red}{sbh}$$
 
 把这些值加起来，就可以得到 Attention 模块总共需要显存量&#x20;
 
 $$\begin{align}
-2sbh+4sbh+2as^2b+as^2b+2as^2b+2sbh+2sbh+sbh=\blue{11sbh+5as^2b}
+2sbh+4sbh+2as^2b+as^2b+2as^2b+2sbh+2sbh+sbh=\color{blue}{11sbh+5as^2b}
 \end{align}$$
 
 MLP 模块：
 
-* 首先是一个线性层做升维，把 $$h$$ 升到 $$4h$$（假设是四倍），之前我们知道，线性层要保存输入激活值，此时的输入激活值显存大小是 $$\red{2sbh}$$
+* 首先是一个线性层做升维，把 $$h$$ 升到 $$4h$$（假设是四倍），之前我们知道，线性层要保存输入激活值，此时的输入激活值显存大小是 $$\color{red}{2sbh}$$
 
-* 然后经过一个非线性激活函数，比如 ReLU，GeLU 啥的，这里就比较微妙了，假如用的是 ReLU 的话，实际上其正象限对应的导数是 $$1$$，负象限则是 $$0$$，就和输入 $$x$$ 没啥关系了，不用存输入激活值，但是我们这里按照 paper 里的假设来，认为他是 GeLU（Gaussian Error Linear Units），$$\text{GeLU}(x)=x\cdot \Phi(x)$$，其中 $$\Phi(x)$$ 为标准正态分布的累积分布函数，他的导数是这个样子 $$x\cdot\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}+\Phi(x)$$，明显是和 $$x$$ 相关的，因此这个输入激活值需要保存，对应显存大小为 $$\red{8sbh}$$
+* 然后经过一个非线性激活函数，比如 ReLU，GeLU 啥的，这里就比较微妙了，假如用的是 ReLU 的话，实际上其正象限对应的导数是 $$1$$，负象限则是 $$0$$，就和输入 $$x$$ 没啥关系了，不用存输入激活值，但是我们这里按照 paper 里的假设来，认为他是 GeLU（Gaussian Error Linear Units），$$\text{GeLU}(x)=x\cdot \Phi(x)$$，其中 $$\Phi(x)$$ 为标准正态分布的累积分布函数，他的导数是这个样子 $$x\cdot\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}+\Phi(x)$$，明显是和 $$x$$ 相关的，因此这个输入激活值需要保存，对应显存大小为 $$\color{red}{8sbh}$$
 
-* 然后再经过一个线性层做降为，同样保存激活值，显存大小为 $$\red{8sbh}$$
+* 然后再经过一个线性层做降为，同样保存激活值，显存大小为 $$\color{red}{8sbh}$$
 
-* 最后再经过一个 Dropout，保存他的 $$\text{mask}$$，显存大小为 $$\red{sbh}$$
+* 最后再经过一个 Dropout，保存他的 $$\text{mask}$$，显存大小为 $$\color{red}{sbh}$$
 
 把这些值加起来，就可以得到 MLP 模块总共需要显存量
 $$\begin{align}
-2sbh+8sbh+8sbh+sbh=\blue{19sbh}
+2sbh+8sbh+8sbh+sbh=\color{blue}{19sbh}
 \end{align}$$
 
-最后别忘了 Attention 模块和 MLP 模块前面各自都有一个 PreNorm Layer，需要保存他们的输入攻击$$\blue{4sbh}$$（计算时忽略掉保存的均值和方差）
+最后别忘了 Attention 模块和 MLP 模块前面各自都有一个 PreNorm Layer，需要保存他们的输入攻击$$\color{blue}{4sbh}$$（计算时忽略掉保存的均值和方差）
 
 是不是还有每个模块后面的残差连接？是否需要额外再保存什么激活值？比如 Attention 和 MLP 模块最后 Dropout 的输出是否有可能需要保存？正如之前分析，残差连接本质是个加法，直接把输出的梯度送给两个输入就行了，不需要通过输入本身来计算梯度，所以不需要保存额外的激活值
 
 至此，我们可以得到一个 Decoder Layer 所需要的显存大小为：
 
 $$\begin{align}
-(11sbh+5as^2b)+19sbh+4sbh=\purple{sbh(34+5\frac{as}{h})}
+(11sbh+5as^2b)+19sbh+4sbh=\color{purple}{sbh(34+5\frac{as}{h})}
 \end{align}$$
 
 也就是我们一开始给的公式。
