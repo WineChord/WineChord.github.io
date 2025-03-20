@@ -28,20 +28,38 @@
 {% endif %}
 
 {% if page.mathjax %}
-<script type="text/javascript" async
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    packages: {'[+]': ['color']},
+    macros: {
+      red: ["\\color{#FF4444}{#1}", 1],
+      blue: ["\\color{#2196F3}{#1}", 1],
+      purple: ["\\color{#9C27B0}{#1}", 1]
+    }
+  },
+  loader: {
+    load: ['[tex]/color']
+  },
+  options: {
+    renderActions: {
+      findScript: [10, function (doc) {
+        document.querySelectorAll('script[type^="math/tex"]').forEach(function(node) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        });
+      }, '']
+    }
+  }
+};
 </script>
-{% endif %}
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    extensions: ["tex2jax.js"],
-    jax: ["input/TeX", "output/HTML-CSS"],
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-      processEscapes: true
-    },
-    "HTML-CSS": { availableFonts: ["TeX"] }
-  });
-</script> 
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+{% endif %} 
