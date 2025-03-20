@@ -274,5 +274,5 @@ D_{KL}(P\|Q)=\sum_ip_i\log(\frac{p_i}{q_i})&\not=\sum_iq_i\log(\frac{q_i}{p_i})=
 
 下图来自 *Machine Learning: A Probabilistic Perspective&#x20;*&#x7B2C; 21.2.2 节
 
-![](/assets/images/posts/2025-03-12-softmax-math/.png%5B5%5D)
+![](/assets/images/posts/2025-03-12-softmax-math/1.png)
 
