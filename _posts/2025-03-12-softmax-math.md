@@ -38,23 +38,23 @@ H(P, Q) = -\sum_{x}P(x)\log{Q(x)}
 
 其真实分布 $$P$$ 满足：
 
-* $P(A)=0.7$
+* $$P(A)=0.7$$
 
-* $P(B)=0.1$
+* $$P(B)=0.1$$
 
-* $P(C)=0.1$
+* $$P(C)=0.1$$
 
-* $P(D)=0.1$
+* $$P(D)=0.1$$
 
 而我们所做的估计分布 $$Q$$ 为：
 
-* $Q(A)=0.25$
+* $$Q(A)=0.25$$
 
-* $Q(B)=0.25$
+* $$Q(B)=0.25$$
 
-* $Q(C)=0.25$
+* $$Q(C)=0.25$$
 
-* $Q(D)=0.25$
+* $$Q(D)=0.25$$
 
 ### 最优编码长度
 
@@ -62,23 +62,23 @@ H(P, Q) = -\sum_{x}P(x)\log{Q(x)}
 
 因此，假如我们根据真实分布 $$P$$来做最优编码的话，每个符号对应的最优编码长度为：
 
-* $l_A=-\log_2P(A)=0.51\text{ bit}$
+* $$l_A=-\log_2P(A)=0.51\text{ bit}$$
 
-* $l_B=-\log_2P(B)=3.32\text{ bit}$
+* $$l_B=-\log_2P(B)=3.32\text{ bit}$$
 
-* $l_C=-\log_2P(C)=3.32 \text{ bit}$
+* $$l_C=-\log_2P(C)=3.32 \text{ bit}$$
 
-* $l_D=-\log_2P(D)=3.32 \text{ bit}$
+* $$l_D=-\log_2P(D)=3.32 \text{ bit}$$
 
 而假如我们用估计分布 $$Q$$ 来做最优编码的话，每个符号对应的最优编码长度为：
 
-* $l_A=-\log_2P(A)=2.00\text{ bit}$
+* $$l_A=-\log_2P(A)=2.00\text{ bit}$$
 
-* $l_B=-\log_2P(B)=2.00\text{ bit}$
+* $$l_B=-\log_2P(B)=2.00\text{ bit}$$
 
-* $l_C=-\log_2P(C)=2.00 \text{ bit}$
+* $$l_C=-\log_2P(C)=2.00 \text{ bit}$$
 
-* $l_D=-\log_2P(D)=2.00 \text{ bit}$
+* $$l_D=-\log_2P(D)=2.00 \text{ bit}$$
 
 ### 实际编码方案
 
@@ -138,7 +138,7 @@ $$平均编码长度 = P(A) \times 2 + P(B) \times 2 + P(C) \times 2 + P(D) \tim
 
 那么为什么是这样？
 
-![](../assets/images/posts/2025-03-12-softmax-math/250320163531.png/.png)
+![](../assets/images/posts/2025-03-12-softmax-math/.png%5B4%5D)
 
 ### 直观理解
 
@@ -274,5 +274,5 @@ D_{KL}(P\|Q)=\sum_ip_i\log(\frac{p_i}{q_i})&\not=\sum_iq_i\log(\frac{q_i}{p_i})=
 
 下图来自 *Machine Learning: A Probabilistic Perspective&#x20;*&#x7B2C; 21.2.2 节
 
-![](../assets/images/posts/2025-03-12-softmax-math/250320163531.png/.png%5B1%5D)
+![](../assets/images/posts/2025-03-12-softmax-math/.png%5B5%5D)
 
