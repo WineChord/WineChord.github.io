@@ -24,23 +24,23 @@ mathjax: true
 
 如下图所示：
 
-![](../assets/images/posts/2025-04-02-data-parallel/1m8zh78zx67.png)
+![](/assets/images/posts/2025-04-02-data-parallel/1m8zh78zx67.png)
 
 所谓的 all-reduce 就是将各个 GPU 的数据经过一个 $$f$$ 函数（在这里就是求平均）进行计算，然后把计算结果再分布到所有 GPU 上，如图：
 
-![](../assets/images/posts/2025-04-02-data-parallel/2m8zh7arr03.png)
+![](/assets/images/posts/2025-04-02-data-parallel/2m8zh7arr03.png)
 
 这里我们对比下多卡和单卡，发现多卡这里会多一个这样的 all-reduce 通信，这意味着，每个 micro batch 计算完之后，GPU 需要互相等待同步，之后才能一块开始下一轮的训练，计算与通信的时序如下：
 
-![](../assets/images/posts/2025-04-02-data-parallel/3m8zh7cif67.png)
+![](/assets/images/posts/2025-04-02-data-parallel/3m8zh7cif67.png)
 
 这里的一个常见的优化思路其实是将计算和通信进行重叠，上图中我们可以看到 all-reduce 操作其实可以和反向传播同时执行，当反向传播每计算完一个参数的梯度之后，这个参数的梯度就可以开始执行 all-reduce 操作了，如下图所示：
 
-![](../assets/images/posts/2025-04-02-data-parallel/4m8zh7e8s82.png)
+![](/assets/images/posts/2025-04-02-data-parallel/4m8zh7e8s82.png)
 
 但是就像系统调用一样，通信原语 all-reduce 本身执行的开销就比较大，所以如果每个参数都执行 all-reduce，就会执行非常多次的 all-reduce，一个很自然的想法是将梯度分块，按块来执行 all-reduce，如下图所示，我们可以将梯度分为三块，每块计算完梯度之后执行一次 all-reduce，这样的话总共就只需要三次 all-reduce 操作：
 
-![](../assets/images/posts/2025-04-02-data-parallel/5m8zh7fyj74.png)
+![](/assets/images/posts/2025-04-02-data-parallel/5m8zh7fyj74.png)
 
 此处数据并行还可以和梯度累积（gradient accumulation）相结合，结合的时候需要注意，只用在 gradient accumulation 的最后一步进行 all-reduce 即可，前面的 accumulation 步骤中可以通过 pytorch 的 `model.no_sync()` 来避免梯度同步。
 
@@ -84,11 +84,11 @@ ZeRO 的全称是 **Ze**ro **R**edundancy **O**ptimizer，起源于 2020 年的 
 
 这里我们先不考虑模型梯度的 32 位副本，那么总显存占用为 $$2\Psi+2\Psi+12\Psi=16\Psi$$，其中模型副本可以和优化器状态归到一项中进行计算优化，因为模型副本的更新时机实际上和优化器状态的更新时机一致，那么我们可以得到论文中的这个图：
 
-![](../assets/images/posts/2025-04-02-data-parallel/6m8zh7hnk31.png)
+![](/assets/images/posts/2025-04-02-data-parallel/6m8zh7hnk31.png)
 
 其中 $$N_d$$ 是数据并行的度数，首先我们考虑 ZeRO1，也就是将优化器状态（包括模型参数 32 位副本）分成 $$N_d$$ 份，每 $$\frac{1}{N_d}$$ 份存储到一个节点上，同样，每个节点也只存储了 $$\frac{1}{N_d}$$ 份的模型参数的 32 位副本，因此要做前向传播的第一步就是执行一下 all-gather，以在所有节点上获得模型的完整参数（先转成 BF16 然后 all-gather 以准备做前向传播）：
 
-![](../assets/images/posts/2025-04-02-data-parallel/7m8zh7jc712.png)
+![](/assets/images/posts/2025-04-02-data-parallel/7m8zh7jc712.png)
 
 然后进行正式的训练步骤：
 
@@ -104,11 +104,11 @@ ZeRO 的全称是 **Ze**ro **R**edundancy **O**ptimizer，起源于 2020 年的 
 
 整体的流程图如下所示：
 
-![](../assets/images/posts/2025-04-02-data-parallel/8m8zh7l4s12.png)
+![](/assets/images/posts/2025-04-02-data-parallel/8m8zh7l4s12.png)
 
 回忆一下普通的数据并行，只需要 all-reduce 操作，而 ZeRO1 是将 all-reduce 操作变成了 reduce-scatter，并且额外增加了一个 all-gather 操作，示意图如下：
 
-![](../assets/images/posts/2025-04-02-data-parallel/9m8zh7muf35.png)
+![](/assets/images/posts/2025-04-02-data-parallel/9m8zh7muf35.png)
 
 但是实际上 ZeRO1 和普通的数据并行相比并没有增加通信开销量，因为 all-reduce 一般是使用 reduce-scatter 和 all-gather 实现的（比如 ring-all-reduce）。
 
@@ -116,23 +116,23 @@ ZeRO 的全称是 **Ze**ro **R**edundancy **O**ptimizer，起源于 2020 年的 
 
 由于 ZeRO1 只分割了优化器状态，每个节点依然会保存所有参数的梯度，我们可以观察到每个节点更新优化器状态的时候其实只需要一部分梯度就行了，因此不需要的梯度可以在 reduce-scatter 之后直接释放掉，从而将梯度也做分割，如下图所示：
 
-![](../assets/images/posts/2025-04-02-data-parallel/10m8zh7oit75.png)
+![](/assets/images/posts/2025-04-02-data-parallel/10m8zh7oit75.png)
 
 从图中可以发现，ZeRO2 和 ZeRO1 其实非常像，都是使用了 reduce-scatter 以及 all-gather 操作，他们相较于普通数据并行的通信量没有增加。
 
 进一步我们可以将模型参数也进行分割，这就是 ZeRO3，在 pytorch 中也叫做 FSDP(Fully Sharded Data Parallelism)，当我们把模型参数也分散到多卡上时，每次前向传播的时候就需要执行一下 all-gather 来得到当前计算所需要的所有参数，如下图所示：
 
-![](../assets/images/posts/2025-04-02-data-parallel/11m8zh7q8l52.png)
+![](/assets/images/posts/2025-04-02-data-parallel/11m8zh7q8l52.png)
 
 相当于计算到每一层的时候，先通过 all-gather 来获取所需要的参数，使用完之后立马丢弃他们。
 
 当反向传播的时候同样需要先试用 all-gather 获取计算梯度所需要的参数，计算完梯度后则使用 reduce-scatter 来将梯度分散到各个节点上，如下图所示：
 
-![](../assets/images/posts/2025-04-02-data-parallel/12m8zh7rxc97.png)
+![](/assets/images/posts/2025-04-02-data-parallel/12m8zh7rxc97.png)
 
 因此 ZeRO3 总共需要 $$2L$$ 次 all-gather，其中 $$L$$ 是层数，相比于 ZeRO2 增加了 $$2L-1$$ 次，导致引入了很大的通信开销：
 
-![](../assets/images/posts/2025-04-02-data-parallel/13m8zh7tme56.png)
+![](/assets/images/posts/2025-04-02-data-parallel/13m8zh7tme56.png)
 
 对于 ZeRO3 而言，前向传播的时候所有参数都会进行一下 all-gather，带来 $$\Psi$$ 的通信开销，而在反向传播的时候，所有参数同样会进行一下 all-gather，对应另外的 $$\Psi$$ 通信开销，此外还有反向传播时的 reduce-scatter 带来的 $$\Psi$$ 通信开销，因此 ZeRO3 的总通信开销量为 $$3\Psi$$，而对比一下 ZeRO2，只需要一开始的 all-gather 以及梯度的 reduce-scatter 即可，也就是 $$2\Psi$$。
 
