@@ -1,6 +1,6 @@
 ---
 classes: wide2
-title: "从零实现 LLM Training：11. Checkpoints"
+title: "从零实现 LLM Training：011. Checkpoints"
 excerpt: "为训练过程加入 checkpoint 容错机制，支持从中间状态恢复。"
 categories: 
   - LLM

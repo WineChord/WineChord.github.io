@@ -1,6 +1,6 @@
 ---
 classes: wide2
-title: "从零实现 LLM Training：2. Loss and Train Loop"
+title: "从零实现 LLM Training：002. Loss and Train Loop"
 excerpt: "为 mini-GPT 加上最基本的 loss 和最小 train loop。"
 categories: 
   - LLM

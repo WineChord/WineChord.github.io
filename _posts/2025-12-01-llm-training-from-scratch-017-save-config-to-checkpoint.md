@@ -1,6 +1,6 @@
 ---
 classes: wide2
-title: "从零实现 LLM Training：17. Save Config to Checkpoint"
+title: "从零实现 LLM Training：017. Save Config to Checkpoint"
 excerpt: "将模型配置写入 checkpoint，简化加载与推理时的配置管理。"
 categories: 
   - LLM

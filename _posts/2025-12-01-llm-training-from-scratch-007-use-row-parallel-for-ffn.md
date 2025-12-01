@@ -1,6 +1,6 @@
 ---
 classes: wide2
-title: "从零实现 LLM Training：7. Use Row Parallel for FFN"
+title: "从零实现 LLM Training：007. Use Row Parallel for FFN"
 excerpt: "把 Row Parallel Linear 引入 FFN 模块，配合 Column Parallel 完成张量并行。"
 categories: 
   - LLM

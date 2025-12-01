@@ -1,6 +1,6 @@
 ---
 classes: wide2
-title: "从零实现 LLM Training：8. Use Row Parallel for Attention"
+title: "从零实现 LLM Training：008. Use Row Parallel for Attention"
 excerpt: "将 Row Parallel Linear 引入 Attention 层，搭配 Column Parallel 完成张量并行。"
 categories: 
   - LLM

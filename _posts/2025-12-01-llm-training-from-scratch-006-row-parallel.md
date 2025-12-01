@@ -1,6 +1,6 @@
 ---
 classes: wide2
-title: "从零实现 LLM Training：6. Row Parallel"
+title: "从零实现 LLM Training：006. Row Parallel"
 excerpt: "在已有 Column Parallel 基础上实现 Row Parallel Linear。"
 categories: 
   - LLM

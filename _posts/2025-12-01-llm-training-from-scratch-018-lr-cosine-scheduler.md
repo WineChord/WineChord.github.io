@@ -1,6 +1,6 @@
 ---
 classes: wide2
-title: "从零实现 LLM Training：18. LR Cosine Scheduler"
+title: "从零实现 LLM Training：018. LR Cosine Scheduler"
 excerpt: "为学习率引入 cosine scheduler，并将调度状态写入 checkpoint。"
 categories: 
   - LLM

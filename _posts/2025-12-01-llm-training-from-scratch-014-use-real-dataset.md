@@ -1,6 +1,6 @@
 ---
 classes: wide2
-title: "从零实现 LLM Training：14. Use Real Data"
+title: "从零实现 LLM Training：014. Use Real Data"
 excerpt: "将 toy 数据集替换为更真实的文本数据，完善训练链路。"
 categories: 
   - LLM

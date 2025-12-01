@@ -1,6 +1,6 @@
 ---
 classes: wide2
-title: "从零实现 LLM Training：9. True Tensor Parallel for Attention"
+title: "从零实现 LLM Training：009. True Tensor Parallel for Attention"
 excerpt: "通过按 head 维度切分 QKV，让 Attention 形成真正的张量并行。"
 categories: 
   - LLM

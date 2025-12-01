@@ -1,6 +1,6 @@
 ---
 classes: wide2
-title: "从零实现 LLM Training：5. Use Column Parallel"
+title: "从零实现 LLM Training：005. Use Column Parallel"
 excerpt: "把 Column Parallel Linear 集成到 GPTModel 中并用训练循环验证。"
 categories: 
   - LLM

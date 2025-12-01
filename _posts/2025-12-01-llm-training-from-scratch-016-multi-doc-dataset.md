@@ -1,6 +1,6 @@
 ---
 classes: wide2
-title: "从零实现 LLM Training：16. Multi Doc Dataset"
+title: "从零实现 LLM Training：016. Multi Doc Dataset"
 excerpt: "重构 Dataset，支持多文档输入与更合理的切分策略。"
 categories: 
   - LLM

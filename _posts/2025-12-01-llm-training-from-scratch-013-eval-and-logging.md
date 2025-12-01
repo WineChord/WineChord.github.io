@@ -1,6 +1,6 @@
 ---
 classes: wide2
-title: "从零实现 LLM Training：13. Eval and Logging"
+title: "从零实现 LLM Training：013. Eval and Logging"
 excerpt: "加入验证集评估和日志记录，用 loss 与 PPL 监控训练效果。"
 categories: 
   - LLM

@@ -1,6 +1,6 @@
 ---
 classes: wide2
-title: "从零实现 LLM Training：3. Simple DDP"
+title: "从零实现 LLM Training：003. Simple DDP"
 excerpt: "使用 PyTorch DDP 实现最简单的数据并行训练。"
 categories: 
   - LLM

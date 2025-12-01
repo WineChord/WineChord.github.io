@@ -1,6 +1,6 @@
 ---
 classes: wide2
-title: "从零实现 LLM Training：12. Argparse"
+title: "从零实现 LLM Training：012. Argparse"
 excerpt: "为训练脚本引入 argparse 命令行参数，向工业级实现迈进。"
 categories: 
   - LLM

@@ -1,6 +1,6 @@
 ---
 classes: wide2
-title: "从零实现 LLM Training：20. PyTorch Profiler and NVTX"
+title: "从零实现 LLM Training：020. PyTorch Profiler and NVTX"
 excerpt: "使用 PyTorch profiler 与 NVTX 捕捉 trace，深入分析训练性能瓶颈。"
 categories: 
   - LLM

@@ -1,6 +1,6 @@
 ---
 classes: wide2
-title: "从零实现 LLM Training：15. Simple Generate"
+title: "从零实现 LLM Training：015. Simple Generate"
 excerpt: "在完成基础训练后，实现一个最简单的文本生成脚本。"
 categories: 
   - LLM

@@ -1,6 +1,6 @@
 ---
 classes: wide2
-title: "从零实现 LLM Training：4. Column Parallel"
+title: "从零实现 LLM Training：004. Column Parallel"
 excerpt: "引入列张量并行（Column Parallel）作为张量并行的第一步。"
 categories: 
   - LLM

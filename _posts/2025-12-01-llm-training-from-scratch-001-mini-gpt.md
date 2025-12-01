@@ -1,6 +1,6 @@
 ---
 classes: wide2
-title: "从零实现 LLM Training：1. mini-GPT"
+title: "从零实现 LLM Training：001. mini-GPT"
 excerpt: "从零实现 mini-GPT 的配置、模型和简单前向。"
 categories: 
   - LLM

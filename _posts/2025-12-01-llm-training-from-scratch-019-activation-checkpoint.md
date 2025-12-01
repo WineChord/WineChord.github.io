@@ -1,6 +1,6 @@
 ---
 classes: wide2
-title: "从零实现 LLM Training：19. Activation Checkpoint"
+title: "从零实现 LLM Training：019. Activation Checkpoint"
 excerpt: "通过 activation checkpointing 以重计算换显存，优化大模型训练。"
 categories: 
   - LLM

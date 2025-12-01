@@ -1,6 +1,6 @@
 ---
 classes: wide2
-title: "从零实现 LLM Training：10. Mixed Precision"
+title: "从零实现 LLM Training：010. Mixed Precision"
 excerpt: "在完成张量并行后，引入混合精度训练以提高算力利用率。"
 categories: 
   - LLM
