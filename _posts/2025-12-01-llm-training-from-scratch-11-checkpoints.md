@@ -13,8 +13,6 @@ toc_sticky: true
 mathjax: true
 ---
 
-# 从零实现 LLM Training：11. Checkpoints
-
 我们已经依次做了张量并行，混合精度训练，下面我们来做一些容错，也就是 checkpoint，在训练过程中定期保存 checkpoint，这样在失败的时候可以从中间某个 checkpoint 加载然后继续训练。
 
 为了简单起见，这个 PR 在 DDP 时仅在 rank0 上存完整的 checkpoint，成熟的实现应该在每张卡上去存 shard。

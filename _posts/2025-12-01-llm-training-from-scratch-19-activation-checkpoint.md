@@ -13,8 +13,6 @@ toc_sticky: true
 mathjax: true
 ---
 
-# 从零实现 LLM Training：19. Activation Checkpoint
-
 在做了各种基础训练以及相关展示，我们来做一些优化，第一个引入的优化叫做 activation checkpointing，也就是在前向的时候只保留部分的 activation （而非全部保留），然后在反向的时候对需要的 activation 进行重新计算。
 
 ## `model.py`

@@ -13,8 +13,6 @@ toc_sticky: true
 mathjax: true
 ---
 
-# 从零实现 LLM Training：3. Simple DDP
-
 在实现了 mini-GPT 以及简单的 training loop 之后，我们可以上一些最简单的分布式训练，比如数据并行。数据并行本质上就是每张卡跑相同的模型，但是使用不同的数据，每张卡各自 forward backward 之后通过 all-reduce 来得到平均梯度。
 
 为了简单起见，这里我们直接使用 pytorch 的数据并行，只需要额外添加一个 `train_ddp.py` 文件即可。

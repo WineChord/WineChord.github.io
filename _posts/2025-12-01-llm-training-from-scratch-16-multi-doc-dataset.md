@@ -13,8 +13,6 @@ toc_sticky: true
 mathjax: true
 ---
 
-# 从零实现 LLM Training：16. Multi Doc Dataset
-
 我们已经实现了张量并行、混合精度、checkpoint、eval and logging，并使用了真实数据做了一些小训练，并且做了很简单的生成，这个 PR 可以来好好修一修目前项目中 Dataset 不合理的处理，比如目前是每行后加 eos，是不合理的，我们自然引入多文档（多 txt），可以在每个文档本身看成一个整体，只在文档之间加 eos，并且我们之前取 index 的位置实际上是固定的（需要是 seq_len 的倍数），这里也是不合理的，应该以任意位置都可以做起点。
 
 本文对应 PR 的整体目标还是简洁，能够满足最小的需求，大概是处理上百篇 txt 这种级别，再高的话需要引入 megatron 的工业级方案：

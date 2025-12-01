@@ -13,8 +13,6 @@ toc_sticky: true
 mathjax: true
 ---
 
-# 从零实现 LLM Training：9. True Tensor Parallel for Attention
-
 上一个 PR 我们给 Attention layer 加上了 Row Parallel Linear，但是实际上和 QKV 所使用的 Column Parallel Linear 没有形成搭配，会造成额外的 all-gather 开销，在本文对应 PR 中，我们将 QKV 的结果自然按 head 做切分，从而避免额外的 all-gather 开销。
 
 ## `model.py`

@@ -13,8 +13,6 @@ toc_sticky: true
 mathjax: true
 ---
 
-# 从零实现 LLM Training：20. PyTorch Profiler and NVTX
-
 在实现了基础的模型训练，以及 activation checkpointing 之后，我们通过日志以及 nvidia-smi 可以大概看出来开了一些功能之后，耗时以及显存的变化，但是对整个程序运行的认知其实还不够彻底，此时我们需要引入 pytorch profiler 以及 nvtx 等工具来捕捉 trace，以更好地理解程序的行为。
 
 ## profile 对比

@@ -13,8 +13,6 @@ toc_sticky: true
 mathjax: true
 ---
 
-# 从零实现 LLM Training：17. Save Config to Checkpoint
-
 本文这个 PR 解决一些小问题，比如我们之前做简单 generate 的时候，还需要手动指定模型的各种层数等信息，这是非常不合理的，我们在新的 PR 里把 config 保存到 checkpoint 当中，从而加载 checkpoint 的时候可以把模型相关的信息加载出来以进行使用。
 
 ## `checkpont.py`

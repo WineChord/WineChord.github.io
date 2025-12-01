@@ -13,8 +13,6 @@ toc_sticky: true
 mathjax: true
 ---
 
-# 从零实现 LLM Training：7. Use Row Parallel for FFN
-
 在实现了 Row Parallel Linear 之后，我们在新的 PR 中使用他，之前我们仅使用了 Column Parallel Linear，现在需要搭配 Row Parallel Linear 一块用，这样才组成完整的张量并行。
 
 我们需要在 FFN 和 Attention 模块去引入 Row Parallel Linear，鉴于 Attention 模块较为复杂，本文新的 PR 将只改造 FFN 部分，以降低单 PR 引入的复杂度。

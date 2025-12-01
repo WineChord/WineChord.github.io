@@ -13,8 +13,6 @@ toc_sticky: true
 mathjax: true
 ---
 
-# 从零实现 LLM Training：5. Use Column Parallel
-
 在我们上一个 PR 中已经实现了 Column Parallel Linear，这个 PR 里我们把它集成到 GPTModel，并用 train loop 去验证他。
 
 ## `config.py`

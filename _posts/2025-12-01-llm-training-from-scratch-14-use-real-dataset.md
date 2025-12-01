@@ -13,8 +13,6 @@ toc_sticky: true
 mathjax: true
 ---
 
-# 从零实现 LLM Training：14. Use Real Data
-
 前面我们已经实现了张量并行，混合精度训练，checkpoint，argparse，eval and logging，现在我们可以考虑把数据搞成真实一些的，而不是只在 toy 上玩。
 
 ## `dataset.py`

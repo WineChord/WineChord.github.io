@@ -13,8 +13,6 @@ toc_sticky: true
 mathjax: true
 ---
 
-# 从零实现 LLM Training：2. Loss and Train Loop
-
 在实现了第一步 mini-GPT 后，第二个 PR 我们来添加下最基本的 loss，并写一个最小的 train loop，使用一个非常简单的 toy 数据集。
 
 我们已经有了 `config.py, model.py, test_forward.py` 三个文件，依次实现了配置、模型、简单前向。

@@ -13,8 +13,6 @@ toc_sticky: true
 mathjax: true
 ---
 
-# 从零实现 LLM Training：6. Row Parallel
-
 我们已经实现并集成了 Column Parallel Linear，下面我们来做 Row Parallel Linear。
 
 他本质上是对参数矩阵做按行切分，那么就需要输入按列切分。

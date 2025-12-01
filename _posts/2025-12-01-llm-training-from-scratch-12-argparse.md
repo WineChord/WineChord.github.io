@@ -13,8 +13,6 @@ toc_sticky: true
 mathjax: true
 ---
 
-# 从零实现 LLM Training：12. Argparse
-
 我们已经实现了基础的张量并行、混合精度训练、checkpoint 等，为了走向工业级别的实现，是时候给他加上命令行选项了！
 
 ## `train_minimal.py`

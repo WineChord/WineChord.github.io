@@ -13,8 +13,6 @@ toc_sticky: true
 mathjax: true
 ---
 
-# 从零实现 LLM Training：1. mini-GPT
-
 这个系列旨在学以致用，目标是从零一步步地写出一个 LLM 分布式训练框架，通过这个过程来学习 Megatron-LM / DeepSpeed 等业界成熟框架的原理。在实现过程中会尽可能保持简洁，每个 PR 保持最小可理解的修改量，避免一头扎进代码的海洋中陷入迷途。
 
 对于第一个 PR 而言，主要包含以下三个文件：

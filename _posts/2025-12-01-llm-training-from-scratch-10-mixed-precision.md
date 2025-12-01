@@ -13,8 +13,6 @@ toc_sticky: true
 mathjax: true
 ---
 
-# 从零实现 LLM Training：10. Mixed Precision
-
 我们已经实现了 mini-GPT，较为完整的张量并行，在走其他更复杂的并行之前，我们不妨引入一下混合精度训练。
 
 对于一般的情况来说，默认是 FP32 精度的训练，但是为了提高 arithmetic intensity，一般会采用混合精度训练，也就是前向使用 FP16/BF16，在更新 optimizer states 的时候使用 FP32。

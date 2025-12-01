@@ -13,8 +13,6 @@ toc_sticky: true
 mathjax: true
 ---
 
-# 从零实现 LLM Training：8. Use Row Parallel for Attention
-
 之前我们实现了 Row Parallel Linear，并将其应用到了 FFN 上，本文对应的 PR 将把他用到 Attention Layer 上，这个 PR 依然会比较简单，是直接把 Row Parallel Linear 来替换 out_proj，并且保持，QKV 的 Column Parallel Linear 的 gather_output 为 true，Row Parallel Linear 的 input_is_parallel 为 false，这意味着 Attention layer 会有一次 all-gather 加一次 all-reduce，理想情况下 QKV 应该是按照 head 维度进行切分的，我们在下一个 PR 会做这种切分，到时候 gather_output 就会是 false，input_is_parallel 就会是 true 了。
 
 ## `model.py`

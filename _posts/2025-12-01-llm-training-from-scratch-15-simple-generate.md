@@ -13,8 +13,6 @@ toc_sticky: true
 mathjax: true
 ---
 
-# 从零实现 LLM Training：15. Simple Generate
-
 我们已经实现了张量并行、混合精度、checkpoint、eval and logging，并使用了真实数据做了一些小训练，现在我们可以搞一些简单的生成，来看看我们训练好的模型能吐出什么东西来。
 
 ## `generate.py`

@@ -13,8 +13,6 @@ toc_sticky: true
 mathjax: true
 ---
 
-# 从零实现 LLM Training：13. Eval and Logging
-
 在实现了张量并行，混合精度，checkpoint，argparse 之后，我们可以再引入一些正儿八经但是没有那么激动的技术，比如 eval 和 logging。
 
 对于 eval 来说，实际上就是划分训练集和验证集，通过观察验证集上的 loss 以及 PPL（perplexity，困惑度），来客观评价当前模型学习的效果。
