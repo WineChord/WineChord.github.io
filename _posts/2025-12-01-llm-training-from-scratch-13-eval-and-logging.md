@@ -1,6 +1,6 @@
 ---
 classes: wide2
-title: "从零实现 LLM Training：13. Eval and logging"
+title: "从零实现 LLM Training：13. Eval and Logging"
 excerpt: "加入验证集评估和日志记录，用 loss 与 PPL 监控训练效果。"
 categories: 
   - LLM
@@ -13,7 +13,7 @@ toc_sticky: true
 mathjax: true
 ---
 
-# 从零实现 LLM Training：13. Eval and logging
+# 从零实现 LLM Training：13. Eval and Logging
 
 在实现了张量并行，混合精度，checkpoint，argparse 之后，我们可以再引入一些正儿八经但是没有那么激动的技术，比如 eval 和 logging。
 

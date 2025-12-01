@@ -1,6 +1,6 @@
 ---
 classes: wide2
-title: "从零实现 LLM Training：18. lr cosine scheduler"
+title: "从零实现 LLM Training：18. LR Cosine Scheduler"
 excerpt: "为学习率引入 cosine scheduler，并将调度状态写入 checkpoint。"
 categories: 
   - LLM
@@ -13,7 +13,7 @@ toc_sticky: true
 mathjax: true
 ---
 
-# 从零实现 LLM Training：18. lr cosine scheduler
+# 从零实现 LLM Training：18. LR Cosine Scheduler
 
 这个 PR 为我们现在的 learning rate 加上一个 scheduler，之前我们的 learning rate 每次训练是固定的 3e-4，然后后面 resume 再去降 learning rate，使用不是很友好，我们可以使用 cosine learning rate，并把 scheduler 相关信息存到 checkpoint 中，这样当 resume 的时候，当时使用的 learning rate 也可以一并 resume。
 
