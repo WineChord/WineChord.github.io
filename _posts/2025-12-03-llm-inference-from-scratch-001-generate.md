@@ -4,10 +4,10 @@ title: "从零实现 LLM Inference：001. Generate"
 excerpt: "实现最基本的 greedy generate。"
 categories: 
   - LLM
-  - Training
+  - Inference
 tags: 
   - LLM
-  - Training
+  - Inference
 toc: true
 toc_sticky: true
 mathjax: true

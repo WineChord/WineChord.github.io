@@ -4,10 +4,10 @@ title: "从零实现 LLM Inference：002. KV-Cache"
 excerpt: "实现 kv-cache 部分，让模型能够处理推理时的 kv-cache。"
 categories: 
   - LLM
-  - Training
+  - Inference
 tags: 
   - LLM
-  - Training
+  - Inference
 toc: true
 toc_sticky: true
 mathjax: true
