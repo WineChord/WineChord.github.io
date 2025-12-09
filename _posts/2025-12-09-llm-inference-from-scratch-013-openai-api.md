@@ -15,6 +15,8 @@ mathjax: true
 
 上一个 PR 我们实现了简单的 inference server，基于 FastAPI 和 uvicorn，这个 PR 我们支持一个非常简单的 openai api server。
 
+![Gemini_Generated_Image_rdkr19rdkr19rdkr](https://cdn.jsdelivr.net/gh/WineChord/typora-images/img/Gemini_Generated_Image_rdkr19rdkr19rdkr.png)
+
 ## 代码变更
 
 ### `server.py`
