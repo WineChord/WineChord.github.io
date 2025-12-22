@@ -155,6 +155,14 @@ pytest -q
 22 passed, 1 warning in 1.66s
 ```
 
+## Trace 图对比
+
+修改之前，我们可以发现在 build block tables 的时候会有很多次 HtoD 的 kernel launch，修改之后就只有一次 HtoD 的 kernel launch 了：
+
+![image-20251223072850324](https://cdn.jsdelivr.net/gh/WineChord/typora-images/img/image-20251223072850324.png)
+
+![image-20251223072906701](https://cdn.jsdelivr.net/gh/WineChord/typora-images/img/image-20251223072906701.png)
+
 ## Benchmark（HF GPT-2）
 
 为了让对比更稳定：
@@ -187,6 +195,8 @@ TTFT p50/mean: 2.68/2.67 ms
 TPOT p50/mean: 8.45/8.46 ms/token
 Latency p50/mean: 2157.70/2159.16 ms
 ```
+
+
 
 ### After
 
