@@ -17,6 +17,8 @@ mathjax: true
 
 但我在继续看 profile 的时候发现：decode 里还有一个非常“阴间”的点 —— **sampling 的 `.item()`**。
 
+![image-20251223200412775](https://cdn.jsdelivr.net/gh/WineChord/typora-images/img/image-20251223200412775.png)
+
 现在的执行流程大概是：
 
 - `decode_step_sessions()` 一次算出 `[B, V]` 的 logits
@@ -34,6 +36,10 @@ mathjax: true
 仅仅 `.item()` 就是 `64*512=32768` 次。CPU thread 会被这些同步点打成碎片，GPU 也更容易出现空洞。
 
 这一版就做一件事：把 sampling 改成 batch，并且把同步次数从 “每步 B 次” 降到 “每步 1 次（或按参数分组后的 G 次）”。
+
+修改完之后的 profile 图，可以看到 item 相关的同步开销都没有了：
+
+![image-20251223201211835](https://cdn.jsdelivr.net/gh/WineChord/typora-images/img/image-20251223201211835.png)
 
 ## 代码变更
 
