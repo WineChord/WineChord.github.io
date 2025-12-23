@@ -193,13 +193,13 @@ python -m rosellm.roseinfer.benchmark_scheduler \
 === online summary ===
 Warmup runs: 1
 Measured runs: 3
-Decode time p50/mean: 7.920469/7.920546 s
-Total time p50/mean: 8.096134/8.097390 s
-Throughput(completion,decode) p50/mean: 4137.13/4137.12 tokens/s
-Throughput(completion,total) p50/mean: 4047.36/4046.76 tokens/s
-TTFT p50/mean: 2.72/2.74 ms
-TPOT p50/mean: 15.54/15.54 ms/token
-Latency p50/mean: 7942.58/7944.01 ms
+Decode time p50/mean: 7.815151/7.817639 s
+Total time p50/mean: 7.984901/7.988579 s
+Throughput(completion,decode) p50/mean: 4192.88/4191.55 tokens/s
+Throughput(completion,total) p50/mean: 4103.75/4101.86 tokens/s
+TTFT p50/mean: 2.64/2.64 ms
+TPOT p50/mean: 15.32/15.33 ms/token
+Latency p50/mean: 7831.53/7834.13 ms
 ```
 
 ### After
@@ -218,13 +218,13 @@ python -m rosellm.roseinfer.benchmark_scheduler \
 === online summary ===
 Warmup runs: 1
 Measured runs: 3
-Decode time p50/mean: 7.523172/7.521661 s
-Total time p50/mean: 7.694787/7.694283 s
-Throughput(completion,decode) p50/mean: 4355.61/4356.49 tokens/s
-Throughput(completion,total) p50/mean: 4258.47/4258.75 tokens/s
-TTFT p50/mean: 2.64/2.68 ms
-TPOT p50/mean: 14.76/14.76 ms/token
-Latency p50/mean: 7545.16/7544.32 ms
+Decode time p50/mean: 7.633327/7.628122 s
+Total time p50/mean: 7.806813/7.802436 s
+Throughput(completion,decode) p50/mean: 4292.75/4295.69 tokens/s
+Throughput(completion,total) p50/mean: 4197.36/4199.72 tokens/s
+TTFT p50/mean: 2.69/2.71 ms
+TPOT p50/mean: 14.98/14.97 ms/token
+Latency p50/mean: 7655.36/7650.90 ms
 ```
 
 ## NVTX（可选）
@@ -242,3 +242,20 @@ sudo -E nsys profile -o out --trace=cuda,nvtx,osrt --wait=all \
    --paged-attn
 ```
 
+```bash
+sudo -E ncu -o paged_attn \
+  --target-processes all \
+  --set full \
+  --kernel-name "_paged_attn_decode_kernel" \
+  --launch-count 1 \
+  env ROSEINFER_NVTX=1 \
+  /data/projects/rosellm/.conda/bin/python \
+  -m rosellm.roseinfer.benchmark_scheduler \
+  --hf-model-id gpt2 --device cuda \
+  --prompt "Hello" --num-requests 64 --max-new-tokens 512 \
+  --mode online --max-batch-size 64 \
+  --no-stop-on-eos --no-prefix-cache --pretok \
+  --warmup-runs 0 --repeat-runs 1 \
+  --paged-attn
+
+```
