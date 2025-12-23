@@ -26,6 +26,10 @@ CUDA Graph 的核心价值就是：**把这段固定形状的 CUDA work 录下�
 
 这版只做一件事：给 paged decode(T=1) 加一个可选的 CUDA Graph fast-path。
 
+不使用 cuda graph 和使用 cuda graph 的 profile 对比：
+
+![image-20251223203415698](https://cdn.jsdelivr.net/gh/WineChord/typora-images/img/image-20251223203415698.png)
+
 ## 代码变更
 
 ### `roseinfer/engine.py`

@@ -27,6 +27,10 @@ paged-attn + CUDA Graph 把 `model.forward()` 的 CPU dispatch 压下去之后�
 
 这一版的目标很明确：把 fast-path 的 KV 写入 fuse 成 **一次 Triton kernel**，并且提供一个 batch size gate（默认 `>=128` 才启用），避免小 batch 退化。
 
+前后 torch profile 对比：
+
+![image-20251223212827732](https://cdn.jsdelivr.net/gh/WineChord/typora-images/img/image-20251223212827732.png)
+
 ## 代码变更
 
 ### `roseinfer/kv_append_triton.py`
