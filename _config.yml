@@ -182,6 +182,7 @@ exclude:
   - Gemfile
   - Gruntfile.js
   - gulpfile.js
+  - incomplete
   - LICENSE
   - log
   - node_modules
