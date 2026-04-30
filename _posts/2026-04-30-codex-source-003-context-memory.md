@@ -1,4 +1,5 @@
 ---
+classes: wide2
 title: "Codex 源码剖析：003. 上下文、记忆与压缩"
 excerpt: "Codex 不是简单拼 prompt，而是把 base instructions、动态上下文、AGENTS.md、skills、plugins、apps、memory、tracked settings diff、compaction 和 rollout 组织成可恢复的状态。"
 categories:

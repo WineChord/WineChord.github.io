@@ -1,4 +1,5 @@
 ---
+classes: wide2
 title: "Codex 源码剖析：002. 工具、审批与沙箱"
 excerpt: "拆开 Codex 的 ToolRouter、ToolRegistry、ToolCallRuntime、ToolOrchestrator，看模型工具调用如何变成受控执行。"
 categories:

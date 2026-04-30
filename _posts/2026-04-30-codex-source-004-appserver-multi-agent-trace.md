@@ -1,4 +1,5 @@
 ---
+classes: wide2
 title: "Codex 源码剖析：004. App Server、多 Agent 与 Trace"
 excerpt: "从 App Server 协议生命周期看 Codex 如何把 TUI、远程客户端、多 Agent、审批请求和 trace 统一成可路由的线程系统。"
 categories:

@@ -1,4 +1,5 @@
 ---
+classes: wide2
 title: "Codex 源码剖析：005. 和 Claude Code 以及行业形态对照"
 excerpt: "把 Codex 和 WineChord/claude-code 对照仓库的源码组织放在一起看：一个更像可复用 harness，一个更像集成式 TypeScript CLI runtime。"
 categories:
