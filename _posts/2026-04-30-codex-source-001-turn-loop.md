@@ -1,4 +1,5 @@
 ---
+classes: wide2
 title: "Codex 源码剖析：001. 从 TUI 到 run_turn"
 excerpt: "从一个用户输入出发，顺着 Codex CLI、TUI、in-process App Server、core Session 和 run_turn，把 Codex 的主循环走一遍。"
 categories:
