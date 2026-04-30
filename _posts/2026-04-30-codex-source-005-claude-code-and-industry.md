@@ -18,9 +18,9 @@ mathjax: true
 
 源码版本：
 
-- Codex: [`openai/codex@ac4332c05b11e00ae775a24cb762edc05c5b5932`](https://github.com/openai/codex/tree/ac4332c05b11e00ae775a24cb762edc05c5b5932)
-- Claude Code 对照仓库: [`WineChord/claude-code@5a774a2b62d7949c1d94e0b726281554d7893cfd`](https://github.com/WineChord/claude-code/tree/5a774a2b62d7949c1d94e0b726281554d7893cfd)
-- OpenClaw: [`openclaw/openclaw@5d8ca42c7de8118b15782bad9cbac6240585e13a`](https://github.com/openclaw/openclaw/tree/5d8ca42c7de8118b15782bad9cbac6240585e13a)
+- Codex: [`openai/codex@ac4332c`](https://github.com/openai/codex/tree/ac4332c05b11e00ae775a24cb762edc05c5b5932)
+- Claude Code 对照仓库: [`WineChord/claude-code@5a774a2`](https://github.com/WineChord/claude-code/tree/5a774a2b62d7949c1d94e0b726281554d7893cfd)
+- OpenClaw: [`openclaw/openclaw@5d8ca42`](https://github.com/openclaw/openclaw/tree/5d8ca42c7de8118b15782bad9cbac6240585e13a)
 
 这里先把边界说清楚：`WineChord/claude-code` 是本文用来做公开源码链接和结构对照的仓库样本，我不会把它当作 Anthropic 官方内部实现的完整代表。Claude Code 的产品行为和公开能力，以 Anthropic 的官方文档为准；仓库里的 TypeScript 结构只用来帮助我们理解一种 terminal-first runtime 的代码组织方式。
 

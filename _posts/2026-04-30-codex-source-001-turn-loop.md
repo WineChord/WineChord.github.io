@@ -15,7 +15,7 @@ mathjax: true
 
 这个系列从源码角度看 Codex。
 
-我用的 Codex 版本是 [`openai/codex@ac4332c05b11e00ae775a24cb762edc05c5b5932`](https://github.com/openai/codex/tree/ac4332c05b11e00ae775a24cb762edc05c5b5932)。如果后面源码演进了，具体文件名和行号可能会变，但本文关心的是当前这套 harness 的结构。
+我用的 Codex 版本是 [`openai/codex@ac4332c`](https://github.com/openai/codex/tree/ac4332c05b11e00ae775a24cb762edc05c5b5932)。如果后面源码演进了，具体文件名和行号可能会变，但本文关心的是当前这套 harness 的结构。
 
 第一篇先不急着看工具、沙箱、MCP、memory 这些局部模块，而是从最朴素的问题开始：
 
