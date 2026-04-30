@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="780" viewBox="0 0 1400 780" role="img" aria-label="Codex TUI to core turn loop">
+  <defs>
+    <style>
+      .bg { fill: #f7faf9; }
+      .panel { fill: #ffffff; stroke: #c9d7d2; stroke-width: 2; rx: 16; }
+      .node { fill: #ffffff; stroke: #2d6a6a; stroke-width: 2.4; rx: 14; }
+      .core { fill: #fff7e8; stroke: #b26a00; stroke-width: 2.4; rx: 14; }
+      .model { fill: #eef5ff; stroke: #3c5f91; stroke-width: 2.4; rx: 14; }
+      .title { font: 700 34px Arial, sans-serif; fill: #1f2f2c; }
+      .label { font: 700 22px Arial, sans-serif; fill: #193a38; }
+      .small { font: 17px Arial, sans-serif; fill: #41524e; }
+      .tiny { font: 15px Arial, sans-serif; fill: #5c6966; }
+      .arrow { stroke: #52635f; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .loop { stroke: #b26a00; stroke-width: 3; fill: none; marker-end: url(#arrow-amber); stroke-dasharray: 8 8; }
+      .band { fill: #e7f2ef; stroke: #b7ccc6; stroke-width: 1.4; rx: 12; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#52635f"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#b26a00"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1400" height="780"/>
+  <text x="64" y="72" class="title">Codex 主循环：app-server-backed turn path</text>
+  <text x="64" y="108" class="small">当前 TUI 仍处在 hybrid migration period；本文聚焦已经迁到 app-server surface 的 turn 路径。</text>
+
+  <rect x="54" y="145" width="340" height="560" class="panel"/>
+  <text x="84" y="190" class="label">Terminal / TUI</text>
+  <rect x="90" y="230" width="250" height="82" class="node"/>
+  <text x="118" y="263" class="label">codex.js</text>
+  <text x="118" y="289" class="tiny">选择平台 native binary</text>
+  <rect x="90" y="352" width="250" height="82" class="node"/>
+  <text x="118" y="385" class="label">cli/main.rs</text>
+  <text x="118" y="411" class="tiny">无 subcommand 进入 TUI</text>
+  <rect x="90" y="474" width="250" height="82" class="node"/>
+  <text x="118" y="507" class="label">ChatWidget</text>
+  <text x="118" y="533" class="tiny">按键、粘贴、图片、mention</text>
+  <rect x="90" y="596" width="250" height="82" class="node"/>
+  <text x="118" y="629" class="label">AppCommand</text>
+  <text x="118" y="655" class="tiny">UserInput + turn context</text>
+
+  <rect x="480" y="145" width="370" height="560" class="panel"/>
+  <text x="510" y="190" class="label">In-process App Server</text>
+  <rect x="535" y="248" width="260" height="88" class="node"/>
+  <text x="562" y="282" class="label">thread/start</text>
+  <text x="562" y="310" class="tiny">创建或恢复 thread</text>
+  <rect x="535" y="390" width="260" height="88" class="node"/>
+  <text x="562" y="424" class="label">turn/start</text>
+  <text x="562" y="452" class="tiny">转换 v2 input 到 core input</text>
+  <rect x="535" y="532" width="260" height="88" class="node"/>
+  <text x="562" y="566" class="label">notifications</text>
+  <text x="562" y="594" class="tiny">delta、approval、complete</text>
+
+  <rect x="936" y="145" width="410" height="560" class="panel"/>
+  <text x="966" y="190" class="label">codex-core</text>
+  <rect x="1002" y="225" width="280" height="76" class="core"/>
+  <text x="1030" y="256" class="label">Codex queue pair</text>
+  <text x="1030" y="282" class="tiny">Submission in / Event out</text>
+  <rect x="1002" y="340" width="280" height="76" class="core"/>
+  <text x="1030" y="371" class="label">Session</text>
+  <text x="1030" y="397" class="tiny">同一时刻最多一个 task</text>
+  <rect x="1002" y="455" width="280" height="76" class="core"/>
+  <text x="1030" y="486" class="label">RegularTask</text>
+  <text x="1030" y="512" class="tiny">发 TurnStarted 后进入 loop</text>
+  <rect x="1002" y="570" width="280" height="76" class="model"/>
+  <text x="1030" y="601" class="label">Model stream</text>
+  <text x="1030" y="627" class="tiny">assistant text 或 tool call</text>
+
+  <path d="M340 271 C420 271 450 292 535 292" class="arrow"/>
+  <path d="M340 393 C430 393 445 434 535 434" class="arrow"/>
+  <path d="M340 637 C435 637 450 576 535 576" class="arrow"/>
+  <path d="M795 434 C875 434 910 263 1002 263" class="arrow"/>
+  <path d="M1142 301 L1142 340" class="arrow"/>
+  <path d="M1142 416 L1142 455" class="arrow"/>
+  <path d="M1142 531 L1142 570" class="arrow"/>
+  <path d="M1282 608 C1335 608 1335 493 1282 493" class="loop"/>
+  <text x="1172" y="552" class="tiny">tool output 触发下一次 sampling</text>
+  <path d="M1002 608 C905 608 880 576 795 576" class="arrow"/>
+  <path d="M535 576 C430 576 415 637 340 637" class="arrow"/>
+
+  <rect x="485" y="720" width="500" height="36" class="band"/>
+  <text x="515" y="744" class="small">核心判断：app-server 层正在把本地交互迁向统一协议边界。</text>
+</svg>

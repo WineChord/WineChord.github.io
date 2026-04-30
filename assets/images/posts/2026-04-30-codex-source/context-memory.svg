@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="780" viewBox="0 0 1400 780" role="img" aria-label="Codex context memory compaction rollout">
+  <defs>
+    <style>
+      .bg { fill: #f8faf7; }
+      .title { font: 700 34px Arial, sans-serif; fill: #24302d; }
+      .label { font: 700 22px Arial, sans-serif; fill: #1b3b38; }
+      .small { font: 17px Arial, sans-serif; fill: #4b5a56; }
+      .tiny { font: 15px Arial, sans-serif; fill: #5f6b68; }
+      .node { fill: #ffffff; stroke: #2f6964; stroke-width: 2.4; rx: 14; }
+      .dev { fill: #eef6ff; stroke: #426c9c; stroke-width: 2.4; rx: 14; }
+      .user { fill: #fff7e8; stroke: #b26a00; stroke-width: 2.4; rx: 14; }
+      .trace { fill: #f4efff; stroke: #7858a6; stroke-width: 2.4; rx: 14; }
+      .arrow { stroke: #52635f; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .dash { stroke: #7858a6; stroke-width: 3; fill: none; stroke-dasharray: 8 8; marker-end: url(#arrow-purple); }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#52635f"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#7858a6"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1400" height="780"/>
+  <text x="64" y="72" class="title">Codex 上下文工程：初始注入、tracked diff、恢复与压缩</text>
+  <text x="64" y="108" class="small">base instructions 留在模型请求的 instructions 字段；动态上下文以 developer/user message 注入历史；rollout 和 compaction 让长会话可以恢复。</text>
+
+  <rect x="78" y="178" width="250" height="86" class="dev"/>
+  <text x="106" y="212" class="label">Base Instructions</text>
+  <text x="106" y="239" class="tiny">模型内置 / config override</text>
+  <rect x="78" y="310" width="250" height="86" class="user"/>
+  <text x="106" y="344" class="label">AGENTS.md</text>
+  <text x="106" y="371" class="tiny">global + project hierarchy</text>
+  <rect x="78" y="442" width="250" height="86" class="dev"/>
+  <text x="106" y="476" class="label">Skills / Plugins / Apps</text>
+  <text x="106" y="503" class="tiny">摘要先注入，显式调用再展开</text>
+  <rect x="78" y="574" width="250" height="86" class="dev"/>
+  <text x="106" y="608" class="label">Memory Read</text>
+  <text x="106" y="635" class="tiny">只读长期记忆摘要</text>
+
+  <rect x="445" y="250" width="270" height="112" class="node"/>
+  <text x="478" y="291" class="label">build_initial_context</text>
+  <text x="478" y="321" class="tiny">developer sections + user sections</text>
+  <rect x="445" y="438" width="270" height="112" class="node"/>
+  <text x="478" y="479" class="label">reference_context_item</text>
+  <text x="478" y="509" class="tiny">后续补 tracked settings diff</text>
+
+  <rect x="840" y="155" width="285" height="90" class="node"/>
+  <text x="872" y="191" class="label">ContextManager</text>
+  <text x="872" y="219" class="tiny">模型可见历史 + token usage</text>
+  <rect x="840" y="300" width="285" height="90" class="user"/>
+  <text x="872" y="336" class="label">run_turn / build_prompt</text>
+  <text x="872" y="364" class="tiny">history.for_prompt + tools + schema</text>
+  <rect x="840" y="445" width="285" height="90" class="trace"/>
+  <text x="872" y="481" class="label">CompactedItem</text>
+  <text x="872" y="509" class="tiny">summary + replacement_history</text>
+  <rect x="840" y="590" width="285" height="90" class="trace"/>
+  <text x="872" y="626" class="label">Rollout JSONL</text>
+  <text x="872" y="654" class="tiny">SessionMeta / ResponseItem / EventMsg</text>
+
+  <rect x="1185" y="335" width="145" height="90" class="trace"/>
+  <text x="1212" y="371" class="label">Resume</text>
+  <text x="1212" y="399" class="tiny">反向找 checkpoint</text>
+
+  <path d="M328 221 C378 221 390 306 445 306" class="arrow"/>
+  <path d="M328 353 L445 306" class="arrow"/>
+  <path d="M328 485 C378 485 390 306 445 306" class="arrow"/>
+  <path d="M328 617 C378 617 390 306 445 306" class="arrow"/>
+  <path d="M580 362 L580 438" class="arrow"/>
+  <path d="M715 306 C770 306 785 200 840 200" class="arrow"/>
+  <path d="M982 245 L982 300" class="arrow"/>
+  <path d="M982 390 L982 445" class="arrow"/>
+  <path d="M982 535 L982 590" class="arrow"/>
+  <path d="M1125 635 C1195 635 1210 425 1257 425" class="dash"/>
+  <path d="M1185 380 C1110 380 1085 245 982 245" class="dash"/>
+
+  <text x="78" y="722" class="small">关键思想：上下文被工程化成状态机。tracked diff 降低重注入成本，compaction checkpoint 和 rollout replay 维持长会话。</text>
+</svg>

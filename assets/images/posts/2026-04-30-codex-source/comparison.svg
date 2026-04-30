@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="780" viewBox="0 0 1400 780" role="img" aria-label="Codex Claude Code comparison">
+  <defs>
+    <style>
+      .bg { fill: #fbfaf7; }
+      .title { font: 700 34px Arial, sans-serif; fill: #24302d; }
+      .small { font: 17px Arial, sans-serif; fill: #4c5a58; }
+      .label { font: 700 23px Arial, sans-serif; fill: #1b3b38; }
+      .tiny { font: 15px Arial, sans-serif; fill: #5f6b68; }
+      .card { fill: #ffffff; stroke: #d0d7d5; stroke-width: 2; rx: 18; }
+      .codex { fill: #eef6ff; stroke: #426c9c; stroke-width: 2.4; rx: 14; }
+      .claude { fill: #fff7e8; stroke: #b26a00; stroke-width: 2.4; rx: 14; }
+      .industry { fill: #f4efff; stroke: #7858a6; stroke-width: 2.4; rx: 14; }
+      .axis { stroke: #52635f; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#52635f"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1400" height="780"/>
+  <text x="64" y="72" class="title">Coding Agent 的两种源码形态：集成式 CLI 与可复用 harness</text>
+  <text x="64" y="108" class="small">Claude Code 更接近一个 TS CLI runtime；Codex 把协议、core、工具、安全、trace 拆成可复用边界。差异来自产品形态，不是单纯语言选择。</text>
+
+  <rect x="74" y="158" width="365" height="470" class="card"/>
+  <text x="110" y="206" class="label">Claude Code</text>
+  <rect x="112" y="246" width="285" height="64" class="claude"/>
+  <text x="138" y="285" class="tiny">entrypoints / main.tsx</text>
+  <rect x="112" y="332" width="285" height="64" class="claude"/>
+  <text x="138" y="371" class="tiny">QueryEngine / query.ts</text>
+  <rect x="112" y="418" width="285" height="64" class="claude"/>
+  <text x="138" y="457" class="tiny">Tool + permission + UI render</text>
+  <rect x="112" y="504" width="285" height="64" class="claude"/>
+  <text x="138" y="543" class="tiny">CLAUDE.md / .claude / skills</text>
+  <text x="110" y="600" class="small">优势是功能接入路径短，CLI 体验整体性强。</text>
+
+  <rect x="518" y="158" width="365" height="470" class="card"/>
+  <text x="554" y="206" class="label">Codex</text>
+  <rect x="556" y="246" width="285" height="64" class="codex"/>
+  <text x="582" y="285" class="tiny">CLI / TUI / app-server protocol</text>
+  <rect x="556" y="332" width="285" height="64" class="codex"/>
+  <text x="582" y="371" class="tiny">Session / turn / model stream</text>
+  <rect x="556" y="418" width="285" height="64" class="codex"/>
+  <text x="582" y="457" class="tiny">Router / registry / sandbox</text>
+  <rect x="556" y="504" width="285" height="64" class="codex"/>
+  <text x="582" y="543" class="tiny">rollout / memory / trace / multi-agent</text>
+  <text x="554" y="600" class="small">优势是边界稳定，多端、远程和异步任务可复用。</text>
+
+  <rect x="962" y="158" width="365" height="470" class="card"/>
+  <text x="998" y="206" class="label">Industry Direction</text>
+  <rect x="1000" y="246" width="285" height="64" class="industry"/>
+  <text x="1026" y="285" class="tiny">ReAct: reason + act loop</text>
+  <rect x="1000" y="332" width="285" height="64" class="industry"/>
+  <text x="1026" y="371" class="tiny">SWE-agent: agent-computer interface</text>
+  <rect x="1000" y="418" width="285" height="64" class="industry"/>
+  <text x="1026" y="457" class="tiny">Cloud agent: branch + logs + PR</text>
+  <rect x="1000" y="504" width="285" height="64" class="industry"/>
+  <text x="1026" y="543" class="tiny">Local pair + async delegation converge</text>
+  <text x="998" y="600" class="small">行业在从聊天助手走向可审计的软件执行环境。</text>
+
+  <path d="M232 690 L1138 690" class="axis"/>
+  <text x="210" y="728" class="tiny">短路径集成</text>
+  <text x="1060" y="728" class="tiny">协议化 harness</text>
+</svg>

@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="780" viewBox="0 0 1400 780" role="img" aria-label="Codex tool router registry sandbox chain">
+  <defs>
+    <style>
+      .bg { fill: #fbfbf8; }
+      .title { font: 700 34px Arial, sans-serif; fill: #242d2b; }
+      .small { font: 17px Arial, sans-serif; fill: #4d5b58; }
+      .label { font: 700 22px Arial, sans-serif; fill: #193a38; }
+      .tiny { font: 15px Arial, sans-serif; fill: #5d6765; }
+      .node { fill: #ffffff; stroke: #2f6964; stroke-width: 2.4; rx: 14; }
+      .policy { fill: #fff4dd; stroke: #b37200; stroke-width: 2.4; rx: 14; }
+      .runtime { fill: #eef5ff; stroke: #446d9c; stroke-width: 2.4; rx: 14; }
+      .mcp { fill: #f4efff; stroke: #7858a6; stroke-width: 2.4; rx: 14; }
+      .arrow { stroke: #52635f; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .dash { stroke: #9a6a1d; stroke-width: 3; fill: none; stroke-dasharray: 8 8; marker-end: url(#arrow-amber); }
+      .panel { fill: #ffffff; stroke: #d0d7d5; stroke-width: 1.6; rx: 18; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#52635f"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#9a6a1d"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1400" height="780"/>
+  <text x="64" y="72" class="title">Codex 工具系统：模型看到的是 spec，core 维护的是策略边界</text>
+  <text x="64" y="108" class="small">Function、Custom、LocalShell、MCP 最终都会变成 ToolCall；是否并行、是否审批、是否进 sandbox、是否触发 hook，都在统一链路上完成。</text>
+
+  <rect x="62" y="152" width="1276" height="520" class="panel"/>
+  <rect x="98" y="230" width="220" height="82" class="node"/>
+  <text x="126" y="263" class="label">ResponseItem</text>
+  <text x="126" y="289" class="tiny">模型流里的 tool call</text>
+
+  <rect x="386" y="185" width="240" height="84" class="node"/>
+  <text x="414" y="220" class="label">ToolRouter</text>
+  <text x="414" y="246" class="tiny">解析 Function / MCP / LocalShell</text>
+  <rect x="386" y="330" width="240" height="84" class="node"/>
+  <text x="414" y="365" class="label">ToolCallRuntime</text>
+  <text x="414" y="391" class="tiny">读写锁控制并行工具</text>
+
+  <rect x="704" y="185" width="252" height="84" class="node"/>
+  <text x="732" y="220" class="label">ToolRegistry</text>
+  <text x="732" y="246" class="tiny">telemetry、mutating gate、hooks</text>
+  <rect x="704" y="330" width="252" height="84" class="policy"/>
+  <text x="732" y="365" class="label">ToolOrchestrator</text>
+  <text x="732" y="391" class="tiny">approval + sandbox attempts</text>
+
+  <rect x="1032" y="120" width="240" height="74" class="runtime"/>
+  <text x="1060" y="151" class="label">shell / exec</text>
+  <text x="1060" y="175" class="tiny">命令、TTY、长会话</text>
+  <rect x="1032" y="230" width="240" height="74" class="runtime"/>
+  <text x="1060" y="261" class="label">apply_patch</text>
+  <text x="1060" y="285" class="tiny">文件级 diff 和审批</text>
+  <rect x="1032" y="340" width="240" height="74" class="mcp"/>
+  <text x="1060" y="371" class="label">MCP / Apps</text>
+  <text x="1060" y="395" class="tiny">server/tool 还原后调用</text>
+  <rect x="1032" y="450" width="240" height="74" class="policy"/>
+  <text x="1060" y="481" class="label">Hooks</text>
+  <text x="1060" y="505" class="tiny">pre / permission / post</text>
+
+  <rect x="386" y="505" width="570" height="90" class="policy"/>
+  <text x="422" y="541" class="label">Permission Profile</text>
+  <text x="422" y="568" class="tiny">AskForApproval、filesystem sandbox、network、additional permissions</text>
+
+  <path d="M318 271 C355 271 355 227 386 227" class="arrow"/>
+  <path d="M506 269 L506 330" class="arrow"/>
+  <path d="M626 227 L704 227" class="arrow"/>
+  <path d="M626 372 L704 372" class="arrow"/>
+  <path d="M830 269 L830 330" class="arrow"/>
+  <path d="M956 227 C990 227 990 157 1032 157" class="arrow"/>
+  <path d="M956 372 C990 372 990 267 1032 267" class="arrow"/>
+  <path d="M956 372 L1032 377" class="arrow"/>
+  <path d="M830 414 L830 505" class="dash"/>
+  <path d="M956 372 C998 405 1000 487 1032 487" class="dash"/>
+  <path d="M704 550 C590 550 560 450 506 414" class="dash"/>
+
+  <text x="98" y="710" class="small">设计重点：工具不是散落的 if/else。Codex 先把模型输出还原为内部 ToolCall，再让统一分发层处理安全、观测、并发和扩展点。</text>
+</svg>

@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="780" viewBox="0 0 1400 780" role="img" aria-label="Codex app server multi agent trace">
+  <defs>
+    <style>
+      .bg { fill: #f7f9fb; }
+      .title { font: 700 34px Arial, sans-serif; fill: #24302d; }
+      .small { font: 17px Arial, sans-serif; fill: #4c5a58; }
+      .label { font: 700 22px Arial, sans-serif; fill: #1b3b38; }
+      .tiny { font: 15px Arial, sans-serif; fill: #5f6b68; }
+      .client { fill: #ffffff; stroke: #2f6964; stroke-width: 2.4; rx: 14; }
+      .server { fill: #fff7e8; stroke: #b26a00; stroke-width: 2.4; rx: 14; }
+      .agent { fill: #eef6ff; stroke: #426c9c; stroke-width: 2.4; rx: 14; }
+      .trace { fill: #f4efff; stroke: #7858a6; stroke-width: 2.4; rx: 14; }
+      .arrow { stroke: #52635f; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .dash { stroke: #7858a6; stroke-width: 3; fill: none; stroke-dasharray: 8 8; marker-end: url(#arrow-purple); }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#52635f"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#7858a6"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1400" height="780"/>
+  <text x="64" y="72" class="title">App Server、多 Agent 和 Trace：把一次协作变成可路由、可观察的线程树</text>
+  <text x="64" y="108" class="small">App Server 用 JSON-RPC 管 thread/turn 生命周期；多 Agent 不直接写彼此 history，而是用 mailbox 和 trace edge 表达信息流。</text>
+
+  <rect x="78" y="180" width="250" height="92" class="client"/>
+  <text x="108" y="218" class="label">Client</text>
+  <text x="108" y="246" class="tiny">TUI / VS Code / remote</text>
+  <rect x="78" y="430" width="250" height="92" class="client"/>
+  <text x="108" y="468" class="label">Approval UI</text>
+  <text x="108" y="496" class="tiny">ServerRequest 回填 decision</text>
+
+  <rect x="425" y="150" width="280" height="92" class="server"/>
+  <text x="456" y="188" class="label">initialize</text>
+  <text x="456" y="216" class="tiny">capabilities + feature flags</text>
+  <rect x="425" y="300" width="280" height="92" class="server"/>
+  <text x="456" y="338" class="label">thread / turn lifecycle</text>
+  <text x="456" y="366" class="tiny">start、steer、notifications</text>
+  <rect x="425" y="450" width="280" height="92" class="server"/>
+  <text x="456" y="488" class="label">bespoke event handling</text>
+  <text x="456" y="516" class="tiny">core EventMsg 转 v2 protocol</text>
+
+  <rect x="820" y="170" width="250" height="92" class="agent"/>
+  <text x="850" y="208" class="label">Root Session</text>
+  <text x="850" y="236" class="tiny">AgentControl + registry</text>
+  <rect x="820" y="360" width="250" height="92" class="agent"/>
+  <text x="850" y="398" class="label">Child Session</text>
+  <text x="850" y="426" class="tiny">AgentPath /root/task_name</text>
+  <rect x="820" y="550" width="250" height="92" class="agent"/>
+  <text x="850" y="588" class="label">Mailbox</text>
+  <text x="850" y="616" class="tiny">assistant commentary envelope</text>
+
+  <rect x="1160" y="245" width="170" height="92" class="trace"/>
+  <text x="1192" y="283" class="label">Trace bundle</text>
+  <text x="1192" y="311" class="tiny">raw events</text>
+  <rect x="1160" y="455" width="170" height="92" class="trace"/>
+  <text x="1192" y="493" class="label">state graph</text>
+  <text x="1192" y="521" class="tiny">threads + edges</text>
+
+  <path d="M328 226 L425 196" class="arrow"/>
+  <path d="M328 226 C370 226 380 346 425 346" class="arrow"/>
+  <path d="M328 476 L425 496" class="arrow"/>
+  <path d="M705 346 C770 346 775 216 820 216" class="arrow"/>
+  <path d="M945 262 L945 360" class="arrow"/>
+  <path d="M945 452 L945 550" class="arrow"/>
+  <path d="M820 596 C740 596 740 496 705 496" class="arrow"/>
+  <path d="M1070 216 C1125 216 1125 291 1160 291" class="dash"/>
+  <path d="M1070 406 C1135 406 1125 291 1160 291" class="dash"/>
+  <path d="M1245 337 L1245 455" class="dash"/>
+
+  <text x="78" y="704" class="small">重点不是“能起子任务”，而是父子线程的任务、消息、结果、关闭都能在协议和 trace 中落成稳定对象。</text>
+</svg>

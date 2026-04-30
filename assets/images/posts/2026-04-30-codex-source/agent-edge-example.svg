@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="720" viewBox="0 0 1000 720" role="img" aria-label="Codex multi-agent trace edge example">
+  <defs>
+    <style>
+      .bg { fill: #f9fafb; }
+      .title { font: 700 32px Arial, sans-serif; fill: #202b33; }
+      .note { font: 20px Arial, sans-serif; fill: #43515a; }
+      .thread { fill: #ffffff; stroke: #b8c7d1; stroke-width: 2; rx: 16; }
+      .parent { fill: #eef5ff; stroke: #426b9a; stroke-width: 2; rx: 14; }
+      .child { fill: #fff4e5; stroke: #ba7817; stroke-width: 2; rx: 14; }
+      .trace { fill: #eef8f1; stroke: #4a8d61; stroke-width: 2; rx: 14; }
+      .head { font: 700 24px Arial, sans-serif; fill: #16303a; }
+      .body { font: 19px Arial, sans-serif; fill: #3b4a52; }
+      .arrow { stroke: #5d6b73; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .dash { stroke: #4a8d61; stroke-width: 3; fill: none; stroke-dasharray: 8 8; marker-end: url(#green); }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5d6b73"/>
+    </marker>
+    <marker id="green" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4a8d61"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1000" height="720"/>
+  <text x="54" y="72" class="title">多 Agent trace：不是 transcript，而是线程关系图</text>
+  <text x="54" y="112" class="note">parent / child 的消息会留下可解释的 edge。</text>
+
+  <rect x="70" y="165" width="360" height="360" class="thread"/>
+  <text x="104" y="212" class="head">Parent thread</text>
+  <rect x="115" y="255" width="270" height="72" class="parent"/>
+  <text x="140" y="300" class="body">spawn_agent(task)</text>
+  <rect x="115" y="385" width="270" height="72" class="parent"/>
+  <text x="140" y="430" class="body">observe child result</text>
+
+  <rect x="570" y="165" width="360" height="360" class="thread"/>
+  <text x="604" y="212" class="head">Child thread</text>
+  <rect x="615" y="255" width="270" height="72" class="child"/>
+  <text x="640" y="300" class="body">new turn / own tools</text>
+  <rect x="615" y="385" width="270" height="72" class="child"/>
+  <text x="640" y="430" class="body">final message</text>
+
+  <rect x="310" y="575" width="380" height="82" class="trace"/>
+  <text x="346" y="626" class="head">InteractionEdge</text>
+
+  <path d="M385 291 L615 291" class="arrow"/>
+  <path d="M615 421 L385 421" class="arrow"/>
+  <path d="M250 525 C250 565 370 570 500 575" class="dash"/>
+  <path d="M750 525 C750 565 630 570 500 575" class="dash"/>
+
+  <text x="98" y="560" class="note">运行时做任务，trace reducer 事后把 spawn / result / send 还原成边。</text>
+</svg>
