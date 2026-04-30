@@ -1,47 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="720" viewBox="0 0 1000 720" role="img" aria-label="Codex context diff scope">
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="420" viewBox="0 0 980 420" role="img" aria-label="Codex tracked context diff scope">
   <defs>
     <style>
-      .bg { fill: #fbfbf5; }
-      .title { font: 700 32px Arial, sans-serif; fill: #1f2f2c; }
-      .note { font: 20px Arial, sans-serif; fill: #43504c; }
-      .box { fill: #ffffff; stroke: #b9c8c3; stroke-width: 2; rx: 14; }
-      .warn { fill: #fff1e6; stroke: #c16d1a; stroke-width: 2; rx: 14; }
-      .good { fill: #edf7f1; stroke: #3d8a5d; stroke-width: 2; rx: 14; }
-      .head { font: 700 24px Arial, sans-serif; fill: #183d38; }
-      .body { font: 19px Arial, sans-serif; fill: #3c4b47; }
-      .arrow { stroke: #5d6a67; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .bg{fill:#fff}.box{fill:#fff;stroke:#d0d7de;stroke-width:1.3;rx:5}.blue{fill:#eef6ff;stroke:#4b84c4}.warn{fill:#fff7ed;stroke:#c27a2c}
+      .h{font:700 16px Arial,sans-serif;fill:#24292f}.t{font:14px Arial,sans-serif;fill:#57606a}.arrow{stroke:#57606a;stroke-width:1.7;fill:none;marker-end:url(#arrow)}
     </style>
-    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5d6a67"/>
-    </marker>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#57606a"/></marker>
   </defs>
-  <rect class="bg" width="1000" height="720"/>
-  <text x="54" y="72" class="title">Context diff 的边界：只追踪一部分可见上下文</text>
-  <text x="54" y="112" class="note">初始上下文很大，后续 diff 目前覆盖的是 tracked settings。</text>
-
-  <rect x="70" y="165" width="360" height="210" class="box"/>
-  <text x="104" y="210" class="head">Initial context</text>
-  <text x="104" y="252" class="body">AGENTS.md</text>
-  <text x="104" y="286" class="body">environment</text>
-  <text x="104" y="320" class="body">skills / plugins / apps</text>
-  <text x="104" y="354" class="body">memory prompt</text>
-
-  <rect x="570" y="165" width="360" height="210" class="good"/>
-  <text x="604" y="210" class="head">Tracked settings diff</text>
-  <text x="604" y="252" class="body">model switch</text>
-  <text x="604" y="286" class="body">permission / approval</text>
-  <text x="604" y="320" class="body">realtime / personality</text>
-  <text x="604" y="354" class="body">environment update</text>
-
-  <rect x="240" y="470" width="520" height="128" class="warn"/>
-  <text x="278" y="518" class="head">源码里明确留下 TODO</text>
-  <text x="278" y="558" class="body">build_settings_update_items 尚未覆盖</text>
-  <text x="278" y="590" class="body">build_initial_context 的所有 model-visible item</text>
-
-  <path d="M430 270 L570 270" class="arrow"/>
-  <path d="M750 375 C750 430 650 455 610 470" class="arrow"/>
-  <path d="M250 375 C250 430 350 455 390 470" class="arrow"/>
-
-  <text x="90" y="665" class="note">所以准确说法是：Codex 用 baseline + tracked settings diff 降低重注入成本，</text>
-  <text x="90" y="696" class="note">但它还不是一个覆盖所有上下文字段的完整 diff 系统。</text>
+  <rect class="bg" width="980" height="420"/>
+  <rect x="80" y="80" width="270" height="190" class="box"/>
+  <text x="110" y="118" class="h">Initial context</text>
+  <text x="110" y="154" class="t">AGENTS.md</text><text x="110" y="184" class="t">environment</text><text x="110" y="214" class="t">skills / apps / plugins</text><text x="110" y="244" class="t">memory prompt</text>
+  <rect x="630" y="80" width="270" height="190" class="box blue"/>
+  <text x="660" y="118" class="h">Tracked settings diff</text>
+  <text x="660" y="154" class="t">model switch</text><text x="660" y="184" class="t">permission / approval</text><text x="660" y="214" class="t">realtime / personality</text><text x="660" y="244" class="t">environment update</text>
+  <rect x="350" y="308" width="280" height="58" class="box warn"/>
+  <text x="380" y="342" class="h">TODO: not a full context diff</text>
+  <path d="M350 175H630" class="arrow"/><path d="M490 270V308" class="arrow"/>
 </svg>

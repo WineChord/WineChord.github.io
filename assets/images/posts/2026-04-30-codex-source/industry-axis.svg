@@ -1,48 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="720" viewBox="0 0 1000 720" role="img" aria-label="Coding agent runtime evolution axis">
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="420" viewBox="0 0 980 420" role="img" aria-label="Coding agent runtime evolution axis">
   <defs>
     <style>
-      .bg { fill: #fbfaf8; }
-      .title { font: 700 32px Arial, sans-serif; fill: #202b33; }
-      .note { font: 20px Arial, sans-serif; fill: #43515a; }
-      .axis { stroke: #5c6a70; stroke-width: 5; marker-end: url(#arrow); }
-      .tick { stroke: #5c6a70; stroke-width: 4; }
-      .card { fill: #ffffff; stroke: #c4c9c7; stroke-width: 2; rx: 14; }
-      .left { fill: #eef5ff; stroke: #446d9d; stroke-width: 2; rx: 14; }
-      .right { fill: #eef8f1; stroke: #4a8d61; stroke-width: 2; rx: 14; }
-      .mid { fill: #fff4e5; stroke: #ba7817; stroke-width: 2; rx: 14; }
-      .head { font: 700 24px Arial, sans-serif; fill: #16303a; }
-      .body { font: 19px Arial, sans-serif; fill: #3b4a52; }
+      .bg{fill:#fff}.axis{stroke:#57606a;stroke-width:2;marker-end:url(#arrow)}.tick{stroke:#57606a;stroke-width:1.5}
+      .box{fill:#fff;stroke:#d0d7de;stroke-width:1.3;rx:5}.blue{fill:#eef6ff;stroke:#4b84c4}.orange{fill:#fff7ed;stroke:#c27a2c}.green{fill:#effaf4;stroke:#4d9566}
+      .h{font:700 16px Arial,sans-serif;fill:#24292f}.t{font:14px Arial,sans-serif;fill:#57606a}
     </style>
-    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5c6a70"/>
-    </marker>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#57606a"/></marker>
   </defs>
-  <rect class="bg" width="1000" height="720"/>
-  <text x="54" y="72" class="title">Coding agent 的工程重心在右移</text>
-  <text x="54" y="112" class="note">从“模型会写代码”走向“执行环境可约束、可恢复、可审计”。</text>
-
-  <line x1="120" y1="350" x2="880" y2="350" class="axis"/>
-  <line x1="180" y1="330" x2="180" y2="370" class="tick"/>
-  <line x1="395" y1="330" x2="395" y2="370" class="tick"/>
-  <line x1="615" y1="330" x2="615" y2="370" class="tick"/>
-  <line x1="820" y1="330" x2="820" y2="370" class="tick"/>
-
-  <rect x="70" y="180" width="220" height="112" class="left"/>
-  <text x="98" y="225" class="head">补全 / 聊天</text>
-  <text x="98" y="260" class="body">人复制、运行、修</text>
-
-  <rect x="300" y="455" width="220" height="112" class="mid"/>
-  <text x="328" y="500" class="head">ReAct loop</text>
-  <text x="328" y="535" class="body">reason + act</text>
-
-  <rect x="535" y="180" width="220" height="112" class="mid"/>
-  <text x="563" y="225" class="head">ACI / 工具界面</text>
-  <text x="563" y="260" class="body">工具质量决定表现</text>
-
-  <rect x="710" y="455" width="240" height="112" class="right"/>
-  <text x="738" y="500" class="head">Agent harness</text>
-  <text x="738" y="535" class="body">权限、trace、恢复</text>
-
-  <rect x="165" y="610" width="670" height="54" class="card"/>
-  <text x="200" y="645" class="note">Codex 这类源码最值得看的，正是右侧这套 harness 化能力。</text>
+  <rect class="bg" width="980" height="420"/>
+  <line x1="110" y1="210" x2="870" y2="210" class="axis"/>
+  <line x1="180" y1="195" x2="180" y2="225" class="tick"/>
+  <line x1="395" y1="195" x2="395" y2="225" class="tick"/>
+  <line x1="610" y1="195" x2="610" y2="225" class="tick"/>
+  <line x1="815" y1="195" x2="815" y2="225" class="tick"/>
+  <rect x="70" y="82" width="210" height="76" class="box blue"/><text x="98" y="120" class="h">Completion / Chat</text><text x="98" y="144" class="t">human runs code</text>
+  <rect x="300" y="262" width="210" height="76" class="box orange"/><text x="328" y="300" class="h">ReAct loop</text><text x="328" y="324" class="t">reason + action</text>
+  <rect x="530" y="82" width="210" height="76" class="box orange"/><text x="558" y="120" class="h">ACI / tool surface</text><text x="558" y="144" class="t">interface matters</text>
+  <rect x="700" y="262" width="220" height="76" class="box green"/><text x="728" y="300" class="h">Agent harness</text><text x="728" y="324" class="t">policy + trace + recovery</text>
 </svg>

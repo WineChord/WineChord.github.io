@@ -1,54 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="720" viewBox="0 0 1000 720" role="img" aria-label="Codex tool execution gates">
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="460" viewBox="0 0 980 460" role="img" aria-label="Codex tool execution gates">
   <defs>
     <style>
-      .bg { fill: #f8fafc; }
-      .title { font: 700 32px Arial, sans-serif; fill: #202b33; }
-      .note { font: 20px Arial, sans-serif; fill: #43515a; }
-      .box { fill: #ffffff; stroke: #b8c7d1; stroke-width: 2; rx: 14; }
-      .gate { fill: #fff3df; stroke: #c47a17; stroke-width: 2; rx: 14; }
-      .ok { fill: #ecf7ef; stroke: #3f8f5d; stroke-width: 2; rx: 14; }
-      .head { font: 700 24px Arial, sans-serif; fill: #162d38; }
-      .body { font: 19px Arial, sans-serif; fill: #3b4a52; }
-      .arrow { stroke: #5d6b73; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .bg{fill:#fff}.title{font:700 21px Arial,sans-serif;fill:#24292f}.t{font:14px Arial,sans-serif;fill:#57606a}
+      .h{font:700 16px Arial,sans-serif;fill:#24292f}.mono{font:13px Consolas,monospace;fill:#57606a}
+      .box{fill:#fff;stroke:#d0d7de;stroke-width:1.3;rx:5}.gate{fill:#fff7ed;stroke:#c27a2c;stroke-width:1.4;rx:5}
+      .ok{fill:#effaf4;stroke:#4d9566;stroke-width:1.4;rx:5}.arrow{stroke:#57606a;stroke-width:1.8;fill:none;marker-end:url(#arrow)}
     </style>
-    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5d6b73"/>
-    </marker>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#57606a"/></marker>
   </defs>
-  <rect class="bg" width="1000" height="720"/>
-  <text x="54" y="72" class="title">工具执行不是直接跑 handler，中间有几道门</text>
-  <text x="54" y="112" class="note">每道门都把“模型想做什么”变成“系统允许怎样做”。</text>
+  <rect class="bg" width="980" height="460"/>
+  <rect x="78" y="150" width="140" height="80" class="box"/><text x="102" y="184" class="h">Router</text><text x="102" y="208" class="mono">name + payload</text>
+  <rect x="278" y="150" width="140" height="80" class="gate"/><text x="302" y="184" class="h">Parallel gate</text><text x="302" y="208" class="mono">read vs write</text>
+  <rect x="478" y="150" width="140" height="80" class="box"/><text x="502" y="184" class="h">Registry</text><text x="502" y="208" class="mono">hooks + mutating</text>
+  <rect x="678" y="150" width="140" height="80" class="gate"/><text x="702" y="184" class="h">Approval</text><text x="702" y="208" class="mono">ask / deny / skip</text>
 
-  <rect x="80" y="170" width="240" height="105" class="box"/>
-  <text x="108" y="212" class="head">Router</text>
-  <text x="108" y="250" class="body">ResponseItem -> ToolCall</text>
+  <rect x="368" y="312" width="140" height="68" class="ok"/><text x="392" y="350" class="h">Sandbox</text>
+  <rect x="568" y="312" width="140" height="68" class="box"/><text x="592" y="350" class="h">Observation</text>
 
-  <rect x="380" y="170" width="240" height="105" class="gate"/>
-  <text x="408" y="212" class="head">Runtime lock</text>
-  <text x="408" y="250" class="body">并行读，保守串行写</text>
-
-  <rect x="680" y="170" width="240" height="105" class="box"/>
-  <text x="708" y="212" class="head">Registry</text>
-  <text x="708" y="250" class="body">找 handler，跑 hooks</text>
-
-  <rect x="230" y="390" width="240" height="105" class="gate"/>
-  <text x="258" y="432" class="head">Approval</text>
-  <text x="258" y="470" class="body">用户 / policy 决策</text>
-
-  <rect x="530" y="390" width="240" height="105" class="ok"/>
-  <text x="558" y="432" class="head">Sandbox</text>
-  <text x="558" y="470" class="body">受限执行或升级重试</text>
-
-  <rect x="380" y="575" width="240" height="82" class="box"/>
-  <text x="408" y="626" class="head">Tool output</text>
-
-  <path d="M320 222 L380 222" class="arrow"/>
-  <path d="M620 222 L680 222" class="arrow"/>
-  <path d="M800 275 C800 350 650 350 650 390" class="arrow"/>
-  <path d="M530 443 L470 443" class="arrow"/>
-  <path d="M350 495 C350 545 420 558 500 575" class="arrow"/>
-  <path d="M650 495 C650 545 580 558 500 575" class="arrow"/>
-
-  <text x="90" y="334" class="note">关键点：审批和 sandbox 不是 UI 逻辑，</text>
-  <text x="90" y="364" class="note">而是 core policy 计算后的执行约束。</text>
+  <path d="M218 190H278" class="arrow"/><path d="M418 190H478" class="arrow"/><path d="M618 190H678" class="arrow"/>
+  <path d="M748 230C728 284 612 306 508 344" class="arrow"/>
+  <path d="M508 346H568" class="arrow"/>
 </svg>
