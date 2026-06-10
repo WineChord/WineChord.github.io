@@ -33,6 +33,14 @@ mathjax: true
 
 这不是简单的“谁更好”。两种结构背后对应的是不同产品形态、不同部署方式、不同演进压力。
 
+## 阅读路线
+
+这一篇的重点不是给 Claude Code、Codex、OpenClaw 排名，而是用它们校准三个架构问题。
+
+第一，模型循环和应用状态应该放多近？集成式 CLI runtime 会让功能接入更快，但模型循环也更容易吸进 UI、权限、memory、hooks 等职责。第二，协议边界应该多早成为一等抽象？Codex 的代价是 crate 和类型转换更多，收益是 TUI、remote client、exec、App Server、trace 能围绕同一套 thread/turn 语义组合。第三，控制面应该落在哪里？OpenClaw 更 gateway-first，它把 operator、node、sandbox backend、ACP runtime 先挂到网关协议上。
+
+所以这篇不是在比较语言和代码量，而是在比较 execution environment 的边界放置。
+
 ## Claude Code：集成式 CLI runtime
 
 Claude Code 官方文档里把它描述成一个 agentic coding tool：能读代码库、编辑文件、运行命令，并集成到 terminal、IDE、desktop、browser 等开发工具里（见 [Claude Code overview](https://code.claude.com/docs/en/overview)）。它的工作方式文档也直接把工具分成 file operations、search、execution、web、code intelligence 等类别，并说明每次 tool use 的结果会反馈进下一步决策（见 [How Claude Code works](https://code.claude.com/docs/en/how-claude-code-works)）。
@@ -106,7 +114,7 @@ Codex 则尽量让 core 不知道 TUI 怎么渲染。core 只发 `EventMsg`；ap
 
 如果只做本地 CLI，集成式结构更快、更顺。如果要同时服务本地交互、远程任务、VS Code、cloud delegation、多 Agent、trace graph，Codex 这种分层会更有后劲。
 
-![Codex、Claude Code 和 OpenClaw 对照：Claude Code 更像集成式 TypeScript CLI runtime，Codex 更像协议化 agent harness，OpenClaw 更像 gateway-first control plane](/assets/images/posts/2026-04-30-codex-source/comparison.svg)
+![Codex、Claude Code 和 OpenClaw 对照：Claude Code 更像集成式 TypeScript CLI runtime，Codex 更像协议化 agent harness，OpenClaw 更像 gateway-first control plane](/assets/images/posts/2026-04-30-codex-source/comparison.png)
 
 *图 1. 横向看，差异不是语言选择。Claude Code 对照仓库把很多应用状态放在 TypeScript CLI runtime 里；Codex 把 CLI、App Server、core、tools、sandbox、rollout、trace 拆成更硬的层；OpenClaw 则把 Gateway 作为 control plane，让 UI、节点、sandbox 和 ACP runtime 围着网关组织。*
 
@@ -137,7 +145,7 @@ OpenClaw 给了第三个参照系：它的 Gateway protocol 明确区分 operato
 
 这条线可以用一个很简单的坐标理解：越往右，越不只是模型能力，而是 execution environment 的工程能力。
 
-![Coding agent 演进轴：从补全聊天到 ReAct、ACI，再到可约束、可恢复、可审计的 agent harness](/assets/images/posts/2026-04-30-codex-source/industry-axis.svg)
+![Coding agent 演进轴：从补全聊天到 ReAct、ACI，再到可约束、可恢复、可审计的 agent harness](/assets/images/posts/2026-04-30-codex-source/industry-axis.png)
 
 *图 2. 行业演进的重心在右移。模型能力当然重要，但 coding agent 真正落地时，执行环境、权限、日志、恢复和 trace 会越来越像基础设施。*
 
@@ -181,6 +189,20 @@ Codex 把 memory read/write 拆开，并让写入走后台 Phase 1 / Phase 2 和
 第四，trace 会越来越重要。
 
 当一次任务里有模型请求、工具调用、终端进程、patch、MCP、子 agent、approval、compaction，普通聊天记录已经解释不了系统行为。Codex 的 rollout trace 把 raw evidence reduce 成 graph，这类能力未来会变成 debugging agent 的基础设施。
+
+## 判断规则
+
+如果把这些源码经验迁移到自己的 coding agent，可以先回答下面几个问题：
+
+| 选择点 | 更适合集成式 runtime | 更适合 harness / protocol |
+| --- | --- | --- |
+| 主要入口 | 单一 terminal / desktop 应用 | TUI、IDE、远程任务、无头执行共存 |
+| 状态所有权 | 应用内 async loop 统一携带 | client、protocol、core、tool runtime 分层 |
+| 工具扩展 | 少量内置工具快速接入 | MCP、Apps、plugins、dynamic tools 持续增长 |
+| 权限和 sandbox | 产品内逻辑集中即可 | 需要跨 client、跨环境保持一致策略 |
+| 恢复与审计 | 会话体验优先 | rollout、trace、thread tree、测试证据优先 |
+
+简单说，如果目标只是把本地结对体验做顺，集成式 runtime 更自然；如果目标是多端、多环境、多 Agent、可恢复、可审计，就要尽早把 harness 边界做硬。
 
 ## 小结
 
