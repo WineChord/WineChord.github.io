@@ -31,9 +31,24 @@ mathjax: true
 
 这不是“谁更好”的排序，而是三种产品压力在源码边界上的投影。
 
+![三种 coding agent 架构压力封面图：Claude Code sample、Codex 和 OpenClaw 分别对应 integrated CLI runtime、agent harness 和 gateway-first control plane](/assets/images/posts/2026-04-30-codex-source/industry-comparison-cover.png)
+
+*图 1. 差异不是语言选择，而是产品压力落在哪一层：集成体验、可恢复 harness，还是分布式 control plane。*
+
+## 阅读契约
+
+这篇对照不做产品排名，只看源码边界：
+
+1. Claude Code 对照仓库把模型循环、工具、UI、权限和 memory 聚合在哪一层？
+2. Codex 为什么要把 CLI、App Server、core、tools、context、rollout、trace 拆开？
+3. OpenClaw 的 Gateway-first 形态解决的是哪种分布式控制边界？
+4. 行业从补全、ReAct、ACI 走向 coding agent harness 时，真正新增的工程能力是什么？
+
+判断一套 agent 架构时，先问“边界在哪里、恢复靠什么、审计证据在哪”，比先问“用了什么语言、哪家模型”更有解释力。
+
 ![Codex、Claude Code 和 OpenClaw 对照：Claude Code 更像集成式 TypeScript CLI runtime，Codex 更像协议化 agent harness，OpenClaw 更像 gateway-first control plane](/assets/images/posts/2026-04-30-codex-source/comparison.png)
 
-*图 1. 横向看，差异不是语言选择。Claude Code 对照仓库把很多应用状态放在 TypeScript CLI runtime 里；Codex 把 CLI、App Server、core、tools、sandbox、rollout、trace 拆成更硬的层；OpenClaw 则把 Gateway 作为 control plane。*
+*图 2. 横向看，差异不是语言选择。Claude Code 对照仓库把很多应用状态放在 TypeScript CLI runtime 里；Codex 把 CLI、App Server、core、tools、sandbox、rollout、trace 拆成更硬的层；OpenClaw 则把 Gateway 作为 control plane。*
 
 ## 一、Claude Code：集成式 CLI runtime
 
@@ -51,6 +66,10 @@ Claude Code 官方文档把它描述成一个 agentic coding tool：能读代码
 - 模型设置：model / fallback model、thinking config、budget、json schema
 
 `query.ts` 导出 async generator `query()`，内部 `queryLoop()` 维护 messages、toolUseContext、autoCompactTracking、turnCount、pendingToolUseSummary、stopHookActive 等 mutable state，见 [`query.ts` 的 query loop][claude-query-loop]。
+
+![Claude Code 对照仓库集成式 CLI runtime 图：CLI bootstrap 进入 QueryEngine/query loop，再连接 UI state、tools/MCP、permissions、memory/skills 等 runtime state](/assets/images/posts/2026-04-30-codex-source/claude-cli-runtime-loop.png)
+
+*图 3. 集成式 runtime 的优势是功能接入路径短；代价是 surface 增多时，query loop 会承受更多边界压力。*
 
 这说明 Claude Code 对照仓库的核心循环更像“一个应用内的大型 async generator”。模型请求、tool use、compaction、memory prefetch、skill discovery、budget、stop hooks 都在同一条运行时轨迹里协作。
 
@@ -79,6 +98,10 @@ Codex 的入口完全不同。
 
 App Server 再把 external protocol 单独拆出去，v2 类型做 camelCase translation，core 错误类型映射成 client protocol 错误，见 [`app-server-protocol/v2.rs`][codex-v2-protocol]。
 
+![Codex harness 边界图：CLI/TUI、App Server、core Session、tools runtime、rollout/trace 形成稳定边界，context system 和 recovery system 作为旁路支撑](/assets/images/posts/2026-04-30-codex-source/codex-harness-boundaries.png)
+
+*图 4. Codex 的调用链更长，但 client、core、tools、context、恢复和 trace 的责任更清楚。*
+
 这套结构的好处不是代码少，而是边界稳定。TUI、VS Code、remote client、无头 exec、MCP server、cloud task、multi-agent child thread，都可以围绕同一个 core runtime 组合。
 
 代价也有：读源码时更绕，跨 crate 多，类型转换多，很多地方看起来像“为什么不直接调用”。但如果目标是构建一个多端、多权限、多运行环境、可恢复、可审计的 agent harness，这些中间层就是必要成本。
@@ -86,6 +109,10 @@ App Server 再把 external protocol 单独拆出去，v2 类型做 camelCase tra
 ## 三、OpenClaw：gateway-first control plane
 
 OpenClaw 给了第三个参照系。它的 Gateway protocol 明确区分 operator / node role，control UI 和 TUI 都是 Gateway client；ACP runtime 又被抽象成 `ensureSession`、`runTurn`、cancel、close 等接口，甚至可以通过 `acpx` 启动外部命令，见 [`control-ui.md`][openclaw-control-ui]、[`gateway-chat.ts`][openclaw-tui-gateway] 和 [`acp runtime types`][openclaw-acp-runtime]。
+
+![OpenClaw gateway-first control plane 图：clients 连接 Gateway，再路由到 ACP runtime、sandbox backend 和 agent work](/assets/images/posts/2026-04-30-codex-source/openclaw-gateway-control-plane.png)
+
+*图 5. OpenClaw 先定义 operator、node、sandbox backend 和 ACP runtime 的控制面，再把具体 agent 能力挂进去。*
 
 这种结构比 Codex 更 gateway-first，也比 Claude Code 对照仓库的 in-process query loop 更像一个分布式控制面。它强调的是：先定义 operator、node、sandbox backend、ACP runtime 之间的控制边界，再把具体 agent 能力挂进去。
 
@@ -97,13 +124,17 @@ OpenClaw 给了第三个参照系。它的 Gateway protocol 明确区分 operato
 | 协议化 agent harness | CLI / App Server / core / tools / trace | 多端复用、可恢复、可审计 | 调用链长、类型转换多 |
 | gateway-first control plane | Gateway / node / sandbox / ACP runtime | 分布式控制边界清楚 | 本地单机体验要再组合 |
 
+![Agent 架构 scorecard：Integrated CLI、Agent harness、Gateway plane 在主要边界、优势和压力上的对照](/assets/images/posts/2026-04-30-codex-source/agent-architecture-scorecard.png)
+
+*图 6. 源码对照要看边界，不看语言偏好。同一类能力在不同架构里会落在不同层。*
+
 ## 四、行业脉络：从补全到执行环境
 
 这条线可以用一个简单坐标理解：越往右，越不只是模型能力，而是 execution environment 的工程能力。
 
 ![Coding agent 演进轴：从补全聊天到 ReAct、ACI，再到可约束、可恢复、可审计的 agent harness](/assets/images/posts/2026-04-30-codex-source/industry-axis.png)
 
-*图 2. 行业演进的重心在右移。模型能力当然重要，但 coding agent 真正落地时，执行环境、权限、日志、恢复和 trace 会越来越像基础设施。*
+*图 7. 行业演进的重心在右移。模型能力当然重要，但 coding agent 真正落地时，执行环境、权限、日志、恢复和 trace 会越来越像基础设施。*
 
 第一步是补全和聊天：模型给建议，人自己复制、运行、修。这个阶段工具边界很弱，模型输出主要是文本。
 
