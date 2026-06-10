@@ -1,7 +1,7 @@
 ---
 classes: wide2
 title: "Codex 源码剖析：001. 从 TUI 到 run_turn"
-excerpt: "从用户输入、TUI、in-process App Server、core Session 到 run_turn，重建 Codex 一次 turn 的真实执行边界。"
+excerpt: "从用户输入、TUI、in-process App Server、core Session 到 run_turn，重建 Codex 一次 turn 的协议边界、模型上下文和事件回流。"
 categories:
   - LLM
   - Agent
@@ -14,21 +14,30 @@ toc_sticky: true
 mathjax: true
 ---
 
-如果把 Codex 当成一个终端聊天程序，源码会很容易读错。用户在 TUI 里输入一句话，表面上看只是“输入框提交，模型流式回复”。真正的路径更像一个小型 agent runtime：TUI 是 client，App Server 是协议边界，core 维护 session 和 task，`run_turn` 再把模型流、工具调用、history 和后续采样串起来。
+把 Codex 当成一个“终端里的聊天程序”，源码会很容易读错。用户在 TUI 里敲下一句话，表面上只是输入框提交、模型流式回复；真实路径却更像一个小型 agent runtime：TUI 是 client，App Server 是协议边界，core 维护 session 和 task，`run_turn` 再把模型流、工具调用、history 和下一次采样串成一个可恢复的用户任务。
 
-本文使用的源码版本是 [`openai/codex@ac4332c`](https://github.com/openai/codex/tree/ac4332c05b11e00ae775a24cb762edc05c5b5932)。行号后续可能漂移，但这篇关心的是一个更稳定的问题：
+本文使用的源码版本是 [`openai/codex@ac4332c`](https://github.com/openai/codex/tree/ac4332c05b11e00ae775a24cb762edc05c5b5932)。行号后续可能漂移，但这里关心的是更稳定的结构问题：
 
 > 一次用户输入到底穿过了哪些边界，才变成一次可恢复、可审计、可继续执行的 agent turn？
 
-先看整条路径。左边是 TUI client，中间是 in-process App Server，右边才是 core 里的 session、task 和模型循环。底部虚线表示 core 不直接操作 UI，而是用 event 回流。
+![Codex 一次 turn 的封面图：TUI client、App Server、Core Session、run_turn 和 EventMsg 围成可恢复的执行闭环](/assets/images/posts/2026-04-30-codex-source/turn-loop-cover.png)
 
-![Codex app-server-backed turn path：用户输入经过 TUI、in-process App Server、core Session、RegularTask 和模型流，再由事件回到界面](/assets/images/posts/2026-04-30-codex-source/main-loop.png)
+*图 1. 这篇文章只讨论 app-server-backed 主路径。TUI 仍处在 hybrid migration period，部分旧路径还没有完全迁出 direct-core 形态。*
 
-*图 1. app-server-backed turn path。这里讲的是已经迁到 app-server surface 的主路径；TUI 仍处在 hybrid migration period，并没有把所有行为都完全迁出 direct-core 旧路径。*
+## 阅读契约
 
-## 一、先把边界说清楚
+读这篇时可以只抓四个问题：
 
-### 1.1 本文不是在找一个“主函数”
+1. TUI 到底在哪一层停止，core 又从哪一层开始？
+2. `UserInput` 为什么不是一段直接喂给模型的字符串？
+3. 一次 turn 为什么可能包含多次模型请求？
+4. UI 为什么应该消费 protocol event，而不是自己推断 core 状态？
+
+如果这四个问题能回答清楚，后面读工具、审批、沙箱、上下文压缩和多 Agent trace 时，就不会把“界面看到的聊天记录”和“模型下一次请求看到的上下文”混在一起。
+
+## 一、先把 turn 看成一组边界
+
+### 1.1 不要从“主函数”开始找
 
 很多源码阅读会从“哪个函数调用模型 API”开始。这对 Codex 不够。`run_turn` 当然关键，但它不是用户输入的入口，也不是 UI 的出口。当前主路径可以压成这样：
 
@@ -48,7 +57,11 @@ codex.js
   -> TUI render
 ```
 
-这条链路换来的不是“多绕几层”，而是统一生命周期：本地 TUI、远程 client、无头执行和未来其他前端，都可以逐步共享 thread/turn 语义。源码里的 [`app_server_adapter.rs`][tui-app-server-adapter] 文件头也提醒我们：这是迁移期的 adapter，不能把它误读成所有 TUI 行为都已经完全协议化。
+这条链路换来的不是“多绕几层”，而是统一生命周期：本地 TUI、远程 client、无头执行和未来其他前端，都可以逐步共享 thread/turn 语义。[`app_server_adapter.rs`][tui-app-server-adapter] 文件头也提醒我们：这仍是迁移期 adapter，不能把它误读成所有 TUI 行为都已经完全协议化。
+
+![Codex app-server-backed turn path：用户输入经过 TUI、in-process App Server、core Session、RegularTask 和模型流，再由事件回到界面](/assets/images/posts/2026-04-30-codex-source/main-loop.png)
+
+*图 2. 主路径不是一条函数调用栈，而是 client surface、protocol boundary、core queue 和 model/runtime loop 的组合。*
 
 ### 1.2 五个词必须分开
 
@@ -56,7 +69,7 @@ codex.js
 
 ![Codex 主循环术语图：Thread、Turn、Submission、ResponseItem 和 EventMsg 的关系](/assets/images/posts/2026-04-30-codex-source/turn-terms.png)
 
-*图 2. `thread` 是会话线，`turn` 是一次用户任务，`submission` 是进入 core 的操作，`ResponseItem` 是模型可见历史项，`EventMsg` 是 core 对外吐出的事件。*
+*图 3. `Thread` 是会话线，`Turn` 是一次用户任务，`Submission/Op` 是进入 core 的操作，`ResponseItem` 是模型可见历史项，`EventMsg` 是 core 对外吐出的事件。*
 
 | 概念 | 它回答的问题 | 常见误读 |
 | --- | --- | --- |
@@ -74,11 +87,9 @@ codex.js
 
 安装包里的 `codex-cli/bin/codex.js` 很薄。它根据平台和架构选择 optional dependency，找到对应的 `codex` native binary，然后把控制权交给 Rust 程序。平台包映射在 [`codex.js` 的 `PLATFORM_PACKAGE_BY_TARGET`][codex-js-platform]。
 
-真正的 CLI 入口在 Rust 的 [`codex-rs/cli/src/main.rs`][cli-root]。`MultitoolCli` 把 interactive TUI、`exec`、`review`、`mcp-server`、`app-server`、`sandbox`、debug 等入口放在同一个 native 分发物里。
+真正的 CLI 入口在 Rust 的 [`codex-rs/cli/src/main.rs`][cli-root]。`MultitoolCli` 把 interactive TUI、`exec`、`review`、`mcp-server`、`app-server`、`sandbox`、debug 等入口放在同一个 native 分发物里。这意味着 Codex CLI 不是一个单一聊天命令，而是一个 multitool。TUI 只是其中一个 client surface。
 
-这意味着 Codex CLI 不是一个单一聊天命令，而是一个 multitool。TUI 只是其中一个 client surface。
-
-### 2.2 TUI 负责交互状态，不负责模型循环
+### 2.2 TUI 管交互状态，不管模型循环
 
 TUI 入口是 [`codex-rs/tui/src/lib.rs` 的 `run_main`][tui-run-main]。进入 ratatui 主循环前，它会决定 `AppServerTarget`：本地默认是 embedded，也就是 in-process app-server；远端可以走 websocket。这个目标枚举在 [`AppServerTarget`][tui-app-server-target]。
 
@@ -95,13 +106,21 @@ TUI 内部可以先分成两个角色：
 
 Codex 不会把输入框里的字符串直接塞给模型。底部输入框先产生 `InputResult::Submitted` 或其他命令结果；`ChatWidget` 再组装成 `UserInput`。`UserInput` 定义在 [`codex-rs/protocol/src/user_input.rs`][user-input]，里面不只有文本，还包括 remote image、local image、skill、structured mention 等类型。
 
+![UserInput 结构图：text、image、skill、mention 和 turn settings 共同组成 UserInputWithTurnContext](/assets/images/posts/2026-04-30-codex-source/input-structure.png)
+
+*图 4. UI 层保留用户意图，core 层再把它解释成模型可见上下文、工具集合和运行约束。*
+
 到真正喂给模型之前，`Vec<UserInput>` 会转换成 user `ResponseInputItem::Message`，转换逻辑在 [`protocol/src/models.rs`][user-input-models]。但 skill、mention 这类结构不会在 UI 层简单展开，因为 core 后面还要根据它们决定是否做技能注入、插件能力选择或 app connector 处理。
 
-这是 Codex 常见的工程模式：UI 层保留用户意图，core 层负责把意图解释成模型可见上下文和工具集合。
+这是 Codex 常见的工程模式：越靠近 UI，越保留用户意图；越靠近模型请求，越需要把意图投影成 provider API 可以理解的 message、tool 和 instruction。
 
 ### 2.4 `turn/start` 是进入 core 的窄门
 
 TUI 通过 active thread routing 把 `AppEvent::CodexOp` 发给 `AppServerSession::turn_start`，构造 app-server protocol 的 `ClientRequest::TurnStart`。协议中的 `TurnStartParams.input` 仍然是 `Vec<UserInput>`，v2 protocol 再映射回 core input 类型。
+
+![turn/start 边界图：ClientRequest 经过 validate、override、Op 构造和 submit_with_trace 后进入 core](/assets/images/posts/2026-04-30-codex-source/turn-start-boundary.png)
+
+*图 5. App Server 是 core 前的 protocol boundary：校验、转换、路由、兼容和状态管理都在这里发生。*
 
 app-server 的分发入口是 [`CodexMessageProcessor::process_request`][app-process-request]，`TurnStart` 分支最终进入 [`turn_start`][app-turn-start]。这里会做几件事：
 
@@ -111,7 +130,7 @@ app-server 的分发入口是 [`CodexMessageProcessor::process_request`][app-pro
 4. 构造 core 的 `Op::UserInputWithTurnContext` 或 `Op::UserInput`。
 5. 通过 `CodexThread::submit_with_trace` 投递给 core。
 
-App Server 因此不是传话筒。它是 client 请求进入 core 前的 protocol boundary：校验、转换、路由、兼容和状态管理都在这里发生。
+App Server 因此不是传话筒。它是 client 请求进入 core 前的窄门，也是把不同 client surface 收束到同一套 turn 语义上的地方。OpenAI 的 [Codex App Server 文章][openai-app-server] 讲的是产品化集成视角；从源码读，它的核心价值就是把 UI surface 和 agent harness 分开。
 
 ## 三、core 内部如何跑完一次 turn
 
@@ -134,7 +153,11 @@ App Server 因此不是传话筒。它是 client 请求进入 core 前的 protoc
 
 为什么是循环？因为一次用户 turn 不一定只对应一次 sampling request。模型可能先返回 tool call，Codex 执行工具，把工具输出写回 history，再发下一次模型请求。直到模型返回普通 assistant message，或者没有 follow-up 需要继续，turn 才算完成。
 
-压缩成控制流：
+![一次 turn 包含多次 sampling：TurnStarted、sampling A、tool output、history、sampling B、TurnComplete](/assets/images/posts/2026-04-30-codex-source/sampling-followup-loop.png)
+
+*图 6. `needs_follow_up` 是读 `run_turn` 的关键：工具输出不是 UI 展示后就结束，而是会变成下一次模型请求的一部分。*
+
+压成控制流：
 
 ```text
 emit TurnStarted
@@ -154,7 +177,7 @@ loop:
   break
 ```
 
-这段伪代码的核心是 `needs_follow_up`。工具输出不是给 UI 看完就结束，而是会变成下一次模型请求的一部分。所以 Codex 的 turn 是“用户任务生命周期”，不是“模型请求次数”。
+这段伪代码的核心是 `needs_follow_up`。工具输出不是给 UI 看完就结束，而是会变成下一次模型请求的一部分。所以 Codex 的 turn 是“用户任务生命周期”，不是“模型请求次数”。OpenAI 的 [Codex agent loop][openai-codex-loop] 文章讲的也是这个闭环：模型、工具、环境反馈持续交替，直到任务有明确收束点。
 
 ### 3.3 `build_prompt` 决定模型本次能看见什么
 
@@ -176,6 +199,10 @@ loop:
 ## 四、事件如何回到 UI
 
 core 不直接操作 TUI。它只发 `EventMsg`。app-server listener 循环读取 `conversation.next_event()`，再通过 `apply_bespoke_event_handling` 把 core 事件翻译成 app-server protocol 的 `ServerNotification` 或 `ServerRequest`。
+
+![事件回流图：EventMsg 经过 App Server 翻译成 ServerNotification/ServerRequest，再按 thread id 路由到 ChatWidget](/assets/images/posts/2026-04-30-codex-source/event-return-path.png)
+
+*图 7. UI 消费的是 protocol event，而不是重新读取 core 内部 task 状态。approval 这类安全请求必须沿着同一条事件链回到界面。*
 
 例如：
 
@@ -199,7 +226,7 @@ TUI 的 [`handle_app_server_event`][tui-handle-server-event] 再根据 thread id
 | `run_turn` | 这次 sampling 后是否需要 follow-up？ | 一次 turn 可以包含多次模型请求。 |
 | `EventMsg` | 事件是给谁消费的？ | core 只吐事件，UI 通过 app-server protocol 渲染。 |
 
-读 Codex 主循环时，不要追问“哪个函数就是整个 agent”。更稳的读法是沿着四条边界走：UI 边界、协议边界、core 队列边界、模型上下文边界。
+读 Codex 主循环时，不要追问“哪个函数就是整个 agent”。更稳的读法是沿着四条边界走：UI 边界、协议边界、core 队列边界、模型上下文边界。只要某个概念跨过边界，就先问它的形态有没有变：UI 看到的是 transcript，App Server 看到的是 protocol request，core 看到的是 `Op`，模型看到的是 `ResponseInputItem` 和 tool spec。
 
 ## 小结
 
@@ -210,10 +237,14 @@ Codex 主循环不是“CLI 调模型 API，然后解析工具调用”。它更
 ## 参考
 
 - [Introducing Codex](https://openai.com/index/introducing-codex/)
-- [Unrolling the Codex agent loop](https://openai.com/index/unrolling-the-codex-agent-loop/)
-- [Unlocking the Codex harness: how we built the App Server](https://openai.com/index/unlocking-the-codex-harness/)
+- [Unrolling the Codex agent loop][openai-codex-loop]
+- [Unlocking the Codex harness: how we built the App Server][openai-app-server]
+- [Using tools in the OpenAI API][openai-responses-tools]
 - [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629)
 
+[openai-codex-loop]: https://openai.com/index/unrolling-the-codex-agent-loop/
+[openai-app-server]: https://openai.com/index/unlocking-the-codex-harness/
+[openai-responses-tools]: https://developers.openai.com/api/docs/guides/tools
 [codex-js-platform]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-cli/bin/codex.js#L15-L22
 [cli-root]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/cli/src/main.rs#L70-L176
 [tui-run-main]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/tui/src/lib.rs#L678
