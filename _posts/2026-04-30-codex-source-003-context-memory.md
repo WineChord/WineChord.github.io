@@ -2,6 +2,16 @@
 classes: wide2
 title: "Codex 源码剖析：003. 上下文、记忆与压缩"
 excerpt: "Codex 不是简单拼 prompt，而是把 base instructions、AGENTS.md、skills、apps、memory、tracked settings diff、compaction 和 rollout 组织成可恢复状态。"
+last_modified_at: 2026-06-11
+locale: zh-CN
+toc: true
+toc_sticky: true
+toc_label: "目录"
+mathjax: true
+canonical_url: "https://www.wineandchord.com/llm/agent/codex-source-003-context-memory/"
+header:
+  og_image: /assets/images/posts/2026-04-30-codex-source/context-memory/cover.png
+  teaser: /assets/images/posts/2026-04-30-codex-source/context-memory/cover.png
 categories:
   - LLM
   - Agent
@@ -9,231 +19,438 @@ tags:
   - Codex
   - Coding Agent
   - Source
-toc: true
-toc_sticky: true
-mathjax: true
 ---
 
-前两篇看了主循环和工具系统。这一篇看更隐蔽、但更决定上限的部分：上下文工程。
+前两篇看了 turn loop 和工具系统。这一篇看 Codex 更容易被低估的一层：上下文工程。
 
-很多人说 agent 的核心是工具调用，这当然对。但如果上下文组织不好，工具越多越容易出问题：用户规则会丢，项目规范会被覆盖，长会话越跑越满，resume 之后 prompt 形状变了，memory 会把临时误解固化下来，多 Agent 之间也很难解释信息来源。
+很多 agent 失败不是因为不会调用工具，而是因为上下文没有边界。用户规则、项目文档、模型基线、权限策略、工具输出、长期记忆、压缩摘要和恢复日志一旦被混成“一段 prompt”，长会话里最先坏掉的就不是模型能力，而是状态语义。
 
-Codex 当前的做法不是把所有东西一次性拼成一个巨大 prompt，而是拆成几层：
+本文基于 `openai/codex` 固定源码快照 [`ac4332c05b11e00ae775a24cb762edc05c5b5932`][codex-snapshot]，复核日期为 2026-06-11。平台契约以 [OpenAI Responses API][responses-overview] 和 [Responses migration guide][responses-migrate] 为准，源码行号都指向该快照。
 
-1. `base_instructions`：作为 Responses API 的 `instructions`。
-2. 动态 developer/user 上下文：作为 `ResponseItem::Message` 放进 conversation input。
-3. `reference_context_item`：作为 tracked settings diff 的 baseline。
-4. compaction / rollout：保证长会话可压缩、可恢复。
-5. rollout trace：作为本地诊断图谱，不承担生产恢复。
+![Codex 上下文、记忆、压缩和 rollout 的手绘总览：base instructions、AGENTS.md、skills/apps、memory 进入 ContextManager，再投影到 model view、compaction 和 rollout JSONL](/assets/images/posts/2026-04-30-codex-source/context-memory/cover.png)
 
-![Codex 上下文状态系统封面图：base instructions、AGENTS.md、skills/apps、memory 进入 ContextManager，再投影为模型视图和 compaction/rollout 恢复路径](/assets/images/posts/2026-04-30-codex-source/context-memory-cover.png)
-
-*图 1. Codex 的上下文不是一段 prompt 字符串，而是一组有来源、生命周期、diff、压缩和恢复语义的状态。*
+*图 1. Codex 的 prompt 不是一段字符串，而是可追踪、可压缩、可恢复的状态系统。*
 
 ## 阅读契约
 
-这篇只抓四条线：
+这篇只回答一个问题：Codex 如何让模型每一轮看到足够上下文，同时又不把所有规则、能力、记忆和历史无条件塞进同一段 prompt？读完以后，应该能分清 provider contract、session baseline、model-visible context、history compression 和 durable recovery 五个视图。
 
-1. `base_instructions` 和动态上下文分别进入哪里？
-2. AGENTS.md、skills、apps、plugins、memory 为什么不能都当成同一种 prompt 片段？
-3. `reference_context_item` 到底覆盖哪些 tracked fields，又没有覆盖哪些字段？
-4. compaction、rollout 和 rollout trace 各自承担什么恢复或诊断职责？
+![Codex 上下文工程总览：SessionMeta、TurnContext、AGENTS.md、skills/apps 和 memory 进入 build_initial_context，再产生 developer items、user context items、tracked settings diff 和 CompactedItem/rollout](/assets/images/posts/2026-04-30-codex-source/context-memory/system-overview.png)
 
-读完后，判断一段上下文逻辑时应该先问它处在哪个视图里：配置基线、conversation history、model-visible projection、持久 rollout，还是 opt-in trace bundle。
+*图 2. 上下文工程的核心不是“拼得更长”，而是把来源、角色、可变性和恢复路径分开。*
 
-下图不是 prompt 模板图，而是状态来源图：哪些东西在 session 创建时确定，哪些东西在首个 turn 前注入，哪些东西随着 history、compaction 和 rollout 继续演进。
+## 一、Responses API 先划出两条通道
 
-![Codex 上下文工程总览：base instructions、AGENTS.md、skills、apps、memory、ContextManager、CompactedItem 和 rollout JSONL 的关系](/assets/images/posts/2026-04-30-codex-source/context-memory.png)
+### 1.1 `instructions` 是稳定基线，`input` 是会话材料
 
-*图 2. 左侧是初始上下文来源，中间是 initial context 和 `ContextManager`，右侧是 compaction 与 rollout。`reference_context_item` 是 tracked settings diff 的 baseline，不是所有动态上下文的万能快照。*
+[Responses API][responses-create] 的公开表面把稳定指令和 conversation input 分开。Codex 继承这条边界：稳定基线走 `base_instructions`，动态上下文以 `ResponseItem::Message` 进入 conversation input。
 
-## 一、初始上下文不是一整块 system prompt
+![Responses API 与 Codex 请求形状对照：OpenAI Responses API 的 instructions/input items 映射到 Codex 的 base_instructions 和 ResponseItem::Message](/assets/images/posts/2026-04-30-codex-source/context-memory/responses-contract.png)
 
-### 1.1 `base_instructions` 和动态上下文不是一回事
+*图 3. Provider contract 先规定两个表面；Codex 再决定哪些状态应该放进哪个表面。*
 
-`build_prompt` 里有一个字段叫 `base_instructions`，它会进入模型请求的 instructions。动态上下文则是 history 里的 message item。这个区分很重要。
+#### 稳定基线
 
-`base_instructions` 的来源有优先级：config override、rollout 里的 `SessionMeta.base_instructions`、当前模型内置 instructions。这个逻辑在 [`Codex::spawn` 附近][session-spawn-base-instructions]。
+`base_instructions` 不是每轮临时拼出来的文本。它属于 session configuration，是模型请求的稳定基线。
 
-为什么不把所有上下文都塞进 base instructions？因为很多上下文会随 turn 变化：
+#### 动态上下文
 
-- cwd
-- permission profile
-- approval policy
-- network policy
-- current date / timezone
-- realtime 状态
-- collaboration mode
-- personality
-- apps / skills / plugins 可用性
-- AGENTS.md 层级
+AGENTS.md、environment context、permissions update、model switch、memory read prompt、skills/apps/plugins 摘要会随着 turn context 变化。它们必须保留来源和 role，而不是混入同一块 system prompt。
 
-如果这些东西全塞进固定 system/developer prompt，resume、fork、model switch、compact 都会很难处理。Codex 的选择是：稳定系统基线放在 `base_instructions`，动态上下文作为可记录、部分可 diff、可恢复的 conversation item。
+### 1.2 分离带来三个后果
 
-### 1.2 AGENTS.md 是 user fragment，不是安全边界
+#### 可以 diff
 
-Codex 对 AGENTS.md 的处理在 [`agents_md.rs`][agents-md]。文件头注释说明了搜索规则：从 cwd 往上找 project root，默认 root marker 是 `.git`；从 project root 到 cwd 按顺序收集 `AGENTS.md`；不越过 project root。
+cwd、approval policy、realtime、model 变化时，Codex 可以基于 reference baseline 发 settings diff，而不是每轮重注入一大段上下文。
 
-默认文件名是 `AGENTS.md`，本地 override 是 `AGENTS.override.md`，见 [`DEFAULT_AGENTS_MD_FILENAME` / `LOCAL_AGENTS_MD_FILENAME`][agents-md-filenames]。全局 instructions 则会从 `$CODEX_HOME/AGENTS.override.md` 或 `$CODEX_HOME/AGENTS.md` 读入，逻辑在 [`load_global_instructions`][agents-global]。
+#### 可以 compact
 
-真正拼接用户 instructions 的入口是 [`AgentsMdManager::user_instructions`][agents-user-instructions]。它会把 config 里的 `user_instructions` 和项目 AGENTS.md 文档合起来。如果同时存在，中间用 `--- project-doc ---` 分隔。
+compaction 替换 history 时，Codex 需要知道哪些 initial context 要在特定阶段补回模型视图。
 
-然后这些内容会被包成 user-role contextual fragment。`UserInstructions` 的 `ROLE` 是 `"user"`，marker 是 `# AGENTS.md instructions for ...`，见 [`context/user_instructions.rs`][context-user-instructions]。
+#### 可以 resume
 
-![AGENTS.md 上下文边界图：从 project root 到 cwd 的 AGENTS.md 合并为 UserInstructions，进入 model context，但权限仍由 approval、sandbox 和 filesystem policy 决定](/assets/images/posts/2026-04-30-codex-source/agents-md-user-fragment.png)
+resume 不只是读回聊天记录，还要重建 history、previous turn settings、reference context baseline 和 surviving tail。
 
-*图 3. AGENTS.md 能指导模型行为，但不能替代执行权限检查。把它当成安全边界会读错后面的工具和沙箱代码。*
+## 二、`base_instructions` 是 session 级基线
 
-这个选择很关键：AGENTS.md 会强烈影响模型，但它不是不可变 system prompt。安全和权限边界仍然由 permission profile、approval、sandbox 这些代码路径决定。
+### 2.1 优先级在 `Codex::spawn` 里写死
 
-### 1.3 首个真实 turn 才完整注入
+[`Codex::spawn`][session-spawn-base-instructions] 选择 `base_instructions` 的顺序是：config override、rollout 里的 `SessionMeta.base_instructions`、当前模型默认 instructions。
 
-Codex 并不是 session 一创建就把所有上下文塞进 history。完整动态上下文在首个真实 turn 前注入。
+![base instructions 来源优先级：config override、rollout SessionMeta、model defaults 汇入 session 的 base_instructions](/assets/images/posts/2026-04-30-codex-source/context-memory/base-instructions-source.png)
 
-![首个真实 turn 注入上下文：base_instructions 进入 Prompt.instructions，developer/user context items 进入 conversation input，并记录 reference_context_item baseline](/assets/images/posts/2026-04-30-codex-source/initial-context-layers.png)
+*图 4. `base_instructions` 的优先级决定 resume/fork 时用哪个稳定基线，而不是让当前默认值覆盖过去会话。*
 
-*图 4. 稳定系统基线和动态上下文走不同通道；后续 turn 尽量发 tracked diff，而不是重建全部上下文。*
+#### config override
 
-`record_context_updates_and_set_reference_context_item` 会判断有没有 baseline：没有 baseline 时调用 `build_initial_context`，完整注入；有 baseline 时只构造 tracked settings update diff。这条逻辑在 [`record_context_updates_and_set_reference_context_item`][record-context-updates]。
+显式配置优先，适合受控环境或测试路径。
 
-`build_initial_context` 会构造 developer sections 和 user sections。developer 侧包括 permission instructions、config developer instructions、memory read prompt、collaboration mode / personality、apps instructions、available skills、available plugins、git commit trailer instructions 等；user 侧包括 AGENTS.md user instructions 和 environment context。这条聚合线在 [`build_initial_context`][build-initial-context]。
+#### rollout metadata
 
-这样做的好处是，动态上下文有一个可记录的起点。后续 turn 如果 cwd、权限、模型、realtime 状态变化，不需要总是重新注入一大坨上下文，而是可以基于 `reference_context_item` 生成 tracked settings diff。
+恢复旧会话时，如果 rollout 保存了 `SessionMeta.base_instructions`，Codex 会优先使用过去记录的基线。
 
-## 二、tracked settings diff 只覆盖一部分字段
+#### model defaults
 
-`ContextManager` 是 thread history 的管理器。它内部保存 `items`、`history_version`、`token_info`，还有一个很关键的字段：`reference_context_item`，见 [`ContextManager`][context-manager]。
+只有前两者都没有时，才回退到当前模型信息渲染出的默认 instructions。
 
-注释里说得很明确：`reference_context_item` 是 settings update diff 的 baseline。如果它是 `None`，下一次 turn 会认为没有 baseline，从而完整 reinject context。
+### 2.2 `SessionMeta` 与 `TurnContextItem` 分担恢复职责
 
-settings diff 的构造在 [`context_manager/updates.rs`][context-updates]。这里会分别比较 environment context、permission profile / approval policy、collaboration mode、realtime、personality、model 等字段。最后 developer update 和 contextual user message 分别作为 `ResponseItem::Message` 进入 history。
+[`RolloutItem`][rollout-item] 把 `SessionMeta`、`ResponseItem`、`CompactedItem`、`TurnContext` 和 `EventMsg` 放进同一个 tagged enum。
 
-但这里必须讲准确：[`build_settings_update_items`][context-updates] 只覆盖 tracked context fields，源码注释也说明它还没有覆盖 `build_initial_context` 发出的每一种 model-visible item。因此更准确的说法是：
+#### `SessionMeta` 解释起点
 
-> Codex 把一部分高频变化的上下文字段做成 baseline + diff，而不是已经实现了所有动态上下文的完整 diff 系统。
+`SessionMeta` 保存 session-level 事实，例如 cwd、source、base instructions、dynamic tools、memory mode。
 
-![Codex context diff 范围：initial context 很大，后续 tracked settings diff 目前只覆盖一部分字段，源码里也保留待覆盖说明](/assets/images/posts/2026-04-30-codex-source/context-diff-scope.png)
+#### `TurnContextItem` 解释每个 turn
 
-*图 5. 这是本篇最容易误读的地方。tracked settings diff 目前覆盖模型、权限、environment 等字段；它不是对所有 initial context 的完整语义 diff。*
+[`record_context_updates_and_set_reference_context_item`][record-context-updates] 会在 regular user turn 后持久化 `TurnContextItem`。即使这轮没有 model-visible diff，resume 也能恢复最新 durable baseline。
 
-把这段逻辑压成伪代码：
+## 三、首个真实 turn 才完整注入动态上下文
+
+### 3.1 `build_initial_context` 产出两类 message
+
+[`build_initial_context`][build-initial-context] 先收集 developer sections 和 contextual user sections，再分别构造成 `ResponseItem::Message`。
+
+![首个真实 turn 注入图：first real turn 产生 developer bundle、contextual user 和 reference baseline，再进入 history items 和 TurnContextItem](/assets/images/posts/2026-04-30-codex-source/context-memory/initial-injection.png)
+
+*图 5. 首个真实 turn 同时建立模型可见上下文和后续 diff 的 reference baseline。*
+
+#### developer sections
+
+developer 侧可能包括 permissions、developer instructions、memory read prompt、collaboration mode、realtime、personality、apps、skills、plugins 和 commit trailer instructions。
+
+#### contextual user sections
+
+user 侧主要包括 AGENTS.md user instructions 和 environment context。`UserInstructions` 的 role 是 `"user"`，marker 是 `# AGENTS.md instructions for ...`，见 [`context/user_instructions.rs`][context-user-instructions]。
+
+#### baseline
+
+首个真实 turn 建立 reference baseline；后续 turn 才能按 tracked settings diff 发送变化。
+
+### 3.2 全量注入与 diff 的分支
+
+[`record_context_updates_and_set_reference_context_item`][record-context-updates] 的核心分支可以压成：
 
 ```text
-if no reference_context_item:
-  items = build_initial_context(turn_context)
-  remember reference_context_item
+if reference_context_item is None:
+  build_initial_context(turn_context)
 else:
-  items = build_settings_update_items(
-    previous_reference,
-    previous_turn_settings,
-    next_turn_context,
-  )
-  append only non-empty tracked updates
+  build_settings_update_items(reference_context_item, turn_context)
 ```
 
-所以 `reference_context_item` 的价值不是“永远不再重注入上下文”，而是让 Codex 能区分“这轮真的需要重建上下文”还是“只补几个已追踪字段的变化”。
+#### 没有 baseline
 
-## 三、动态能力先摘要，按需展开
+Codex 必须完整注入动态上下文。
 
-### 3.1 Skills、Plugins、Apps 不一次性吃完上下文窗口
+#### 有 baseline
 
-skills 的可用列表不是直接把每个 `SKILL.md` 全塞进 prompt。`AvailableSkillsInstructions` 是 developer fragment，它只渲染可用 skills 摘要，见 [`AvailableSkillsInstructions`][available-skills-instructions]。
+Codex 尝试只发 settings diff，减少 token overhead。
 
-真正显式触发某个 skill 时，Codex 才会读取对应 skill 文件并构造成 turn-scoped injection。这样可以避免“技能系统”自己把上下文窗口吃光。
+#### baseline 仍会持久化
 
-plugins 又往上抽了一层。`AvailablePluginsInstructions` 说明 plugin 是 skills、MCP servers、apps 的本地 bundle，不是模型直接调用的东西，见 [`available_plugins_instructions.rs`][available-plugins-instructions]。所以 plugin 出现在上下文里，本质上是告诉模型有哪些组合能力可用，以及如何通过 underlying skills / MCP / apps 使用。
+函数最后持久化 `RolloutItem::TurnContext`，把 runtime view 和 durable recovery 连接起来。
 
-apps 则通过 `codex_apps` MCP server 暴露。`AppsInstructions` 只在存在 accessible 且 enabled 的 connector 时注入，见 [`AppsInstructions::from_connectors`][apps-instructions]。它告诉模型：app 可以显式用 `[$app-name](app://connector_id)` 触发，也可以由上下文隐式触发；app 等价于 `codex_apps` MCP 里的工具集合。
+## 四、AGENTS.md 是用户上下文，不是安全边界
 
-这里能看到 Codex 对上下文预算的克制：可用能力先摘要，具体能力按需展开，大工具空间靠 `tool_search` 懒加载，plugin 不直接变工具，而是变成 skills / MCP / apps 的组合入口。
+### 4.1 搜索与拼接规则
 
-### 3.2 Memory：主 agent 读，隔离 agent 写
+[`agents_md.rs`][agents-md] 文件头说明：Codex 从 cwd 向上找到 project root，再从 project root 到 cwd 依序收集 `AGENTS.md`，不越过 root。默认文件名和 local override 分别是 [`AGENTS.md` / `AGENTS.override.md`][agents-md-filenames]；全局文件由 [`load_global_instructions`][agents-global] 读取。
 
-memory 是最容易做坏的模块。因为一旦主 agent 在任务过程中可以随意自写长期记忆，它可能把临时误解、失败路径、用户一次性要求都固化下来。
+![AGENTS.md 边界图：project root、subdir、cwd 的 AGENTS.md 串接为 user fragments，旁边标出 approval policy 和 filesystem policy 才是执行边界](/assets/images/posts/2026-04-30-codex-source/context-memory/agents-boundary.png)
 
-Codex 把 memory 明确拆成 read / write 两个 crate。`memories/README.md` 里写得很清楚：read path 负责 memory developer-instruction injection、memory citation parsing、read telemetry；write path 负责 Phase 1 / Phase 2 prompt rendering、filesystem artifacts、workspace diff 和 extension pruning，见 [`memories/README.md`][memories-readme]。
+*图 6. AGENTS.md 是模型可见的用户上下文；执行权限仍然由 approval、sandbox 和 filesystem policy 决定。*
 
-read path 的效果是：在 initial-context construction 阶段，如果 `MemoryTool` feature 和 `use_memories` 都开启，并且本地 memory summary 存在，Codex 会读取 `~/.codex/memories/memory_summary.md`，截断后渲染 developer instructions，再进入 `build_initial_context`。
+#### 从根到叶
 
-write path 的触发条件更保守：root session 启动、非 ephemeral、memory feature enabled、不是 sub-agent、有 state DB。它异步后台运行，先 Phase 1 做 per-thread extraction，再 Phase 2 做 global consolidation。Phase 2 会启动内部 consolidation sub-agent；这个 agent 无网络、无 approvals、只允许写 memory root，并且禁 apps/plugins/collab/memory。
+越靠近 cwd 的规则越晚出现，但源码没有把它升级成不可覆盖的安全层。
 
-![Memory 读写分离图：root session 在 initial context 中读取 memory summary，后台 thread extraction 和隔离 consolidation sub-agent 才写入 memory root](/assets/images/posts/2026-04-30-codex-source/memory-read-write-split.png)
+#### config 与项目文档分隔
 
-*图 6. 主 agent 读取长期摘要；长期记忆写入交给受限后台流程，避免当前任务把临时误解直接固化成记忆。*
+[`AgentsMdManager::user_instructions`][agents-user-instructions] 在 config instructions 和项目文档之间插入 `--- project-doc ---`，保留来源感。
 
-这条设计的意思是：主 agent 只读长期记忆，长期记忆的写入交给隔离的内部 agent 和受控 workspace diff。它比“让当前 agent 直接记住一切”稳得多。
+### 4.2 为什么不是 sandbox
 
-## 四、压缩、rollout 与 trace 要分清
+#### 行为指导
 
-### 4.1 Compaction 不是删历史，而是安装 checkpoint
+AGENTS.md 指导模型如何工作。
 
-长会话迟早会撞上下文窗口。Codex 的自动 compaction 在几个地方触发：turn 前检查 token usage，sampling 后如果达到 auto compact limit 且还需要 follow-up，模型切换到更小 context window 时。触发逻辑可以从 [`run_pre_sampling_compact`][run-pre-compact] 和 `run_turn` 的 token usage 分支看。
+#### 执行约束
 
-本地 compaction 的入口在 [`compact.rs`][compact-rs]。这里有一个很关键的枚举：`InitialContextInjection`。pre-turn / manual compaction 用 `DoNotInject`，替换 history 后清掉 `reference_context_item`，下一次 regular turn 会完整 reinject initial context；mid-turn compaction 用 `BeforeLastUserMessage`，因为模型训练时预期 compaction summary 是 history 最后 item，所以要把 initial context 插到最后真实 user message 前。
+approval、sandbox、filesystem policy 和工具实现才约束实际 action。
 
-真正安装压缩结果时，Codex 会构造 `CompactedItem { message, replacement_history }`，然后调用 `replace_compacted_history`。这样 rollout 里不仅有摘要文本，还有 replacement history checkpoint。
+#### 恢复语义
 
-![Compaction 与 rollout 恢复图：old history 经过 compact 生成 replacement_history，写入 rollout JSONL，resume 时反向扫描最新 checkpoint](/assets/images/posts/2026-04-30-codex-source/compaction-rollout-recovery.png)
+AGENTS.md 属于 turn context 相关的 user fragment，不是 `SessionMeta.base_instructions`。
 
-*图 7. Compaction 不是简单删历史，而是把可恢复的替换历史写进 rollout。checkpoint 越新，resume/fork 越不需要从头 replay。*
+## 五、Skills、Plugins、Apps 先摘要，按需展开
 
-这点非常重要。很多系统 compaction 后只留一段 summary，resume 时只能依赖“重播到某个点再重新总结”。Codex 把 replacement history 作为 rollout item 持久化，后面 resume/fork 可以直接从最新 surviving checkpoint 继续。
+### 5.1 能力列表不一次性吃完整窗口
 
-### 4.2 Rollout 是生产恢复路径
+skills 的可用列表由 [`AvailableSkillsInstructions`][available-skills-instructions] 渲染；plugins 和 apps 分别由 [`available_plugins_instructions.rs`][available-plugins-instructions] 与 [`apps_instructions.rs`][apps-instructions] 渲染。
 
-Codex 的生产恢复不是靠 rollout trace，而是靠正常 rollout JSONL。rollout item 包含 `SessionMeta`、`ResponseItem`、`Compacted`、`TurnContext`、`EventMsg` 等类型，见 [`RolloutItem`][rollout-item]。
+![skills、plugins、apps 能力摘要图：skills list、plugins list、apps list 先汇成 summary instructions，再在需要时打开 tool_search 或 MCP 能力](/assets/images/posts/2026-04-30-codex-source/context-memory/capabilities-lazy.png)
 
-resume/fork 的重建逻辑在 [`rollout_reconstruction.rs`][rollout-reconstruction]。它不是从头线性 replay 全部历史，而是从后往前扫描 rollout，找最新 surviving `replacement_history` checkpoint，处理 rollback，恢复 previous turn settings 和 `reference_context_item`，再只把 checkpoint 后面的尾部正向 replay。
+*图 7. Codex 先暴露 capability metadata；具体 skill body、connector 或工具细节按需再加载。*
 
-这比全量 replay 更适合长会话。compaction 越多，checkpoint 越重要。
+#### 摘要节省预算
 
-### 4.3 Rollout Trace 是诊断图谱
+可用列表告诉模型“有哪些能力”和“什么时候该加载”，而不是把每个 `SKILL.md` 全塞进 prompt。
 
-`rollout-trace` 是另一条旁路。它的 README 第一段就强调：这是 opt-in diagnostic path，不是 telemetry；只有设置 `CODEX_ROLLOUT_TRACE_ROOT` 才写本地 bundle，且可能包含 prompts、responses、tool inputs/outputs、terminal output 和路径，见 [`rollout-trace/README.md`][rollout-trace-readme]。
+#### 来源仍然不同
 
-它的设计原则是 “observe first, interpret later”。运行时热路径只写 raw events 和 payload references；离线 reducer 再把 bundle 还原成 semantic graph。这个图谱对调试多 Agent、code mode、嵌套工具调用很有价值。但它不是恢复 session 的生产数据源。生产恢复依赖 rollout JSONL 和 `CompactedItem.replacement_history`。
+skills、plugins、apps 都可能提供工具，但来源和激活规则不同，所以不能混进 AGENTS.md user fragment。
 
-这层区分很工程化：恢复路径要稳定、低风险；诊断路径可以更丰富，但必须 opt-in、本地、best-effort。
+### 5.2 动态工具也需要恢复形状
 
-## 五、源码阅读规则
+`Codex::spawn` 在 dynamic tools 为空时，会对 resumed/forked thread 优先从 state DB 或 rollout-file 读 thread-start tools。
 
-| 读到的模块 | 先问什么 | 正确边界 |
-| --- | --- | --- |
-| `base_instructions` | 它是不是会随 turn 变化？ | 稳定基线进 instructions，动态上下文进 history item。 |
-| AGENTS.md | 它是硬安全边界吗？ | 不是。它是 user fragment，权限仍由 policy/sandbox 决定。 |
-| `reference_context_item` | 它是完整上下文快照吗？ | 不是。它是 tracked settings diff 的 baseline。 |
-| skills/plugins/apps | 是否一次性展开全部内容？ | 不。先摘要，显式触发或搜索后再展开。 |
-| memory | 主 agent 能不能随便写？ | 不。read/write 分离，写入走隔离后台流程。 |
-| compaction | 是删历史吗？ | 不是。它安装 `replacement_history` checkpoint。 |
-| rollout trace | 能用于生产恢复吗？ | 不。生产恢复靠 rollout JSONL。 |
+#### 工具集合不是当前进程快照
 
-## 小结
+resume 后工具集合不能随当前进程静默漂移。
 
-Codex 上下文工程不是“把规则拼进 prompt”这么简单。它更像一个状态系统：`base_instructions` 保持系统基线，AGENTS.md、environment、permission、skills、plugins、apps、memory 作为动态 context fragments 注入，`reference_context_item` 记录 baseline，后续 turn 对 tracked settings 发 diff，`ContextManager` 维护 history 和 token usage，compaction 安装 `replacement_history`，rollout JSONL 负责生产恢复，rollout-trace 负责本地诊断图谱。
+#### 能力摘要不是执行证据
 
-如果把 agent 当成“一个模型 + 一组工具”，这些东西看起来像附属模块。但从 Codex 源码看，真正的复杂度恰恰在这里：让一个 agent 在多轮、多工具、多端、多权限、多 Agent、多次恢复之后，仍然能保持相对稳定的上下文形状。
+真正的工具结果仍通过 `ResponseItem`、event 和 rollout 持久化。
+
+## 六、tracked settings diff 的范围
+
+### 6.1 `ContextManager` 持有 reference baseline
+
+[`ContextManager`][context-manager] 保存 `items`、`history_version`、`token_info` 和 `reference_context_item`。[`build_settings_update_items`][context-updates] 比较 environment、permissions、collaboration mode、realtime、personality、model 等字段。
+
+![tracked settings diff 范围图：tracked updates 包含 environment、permissions、collab mode、realtime、personality、model；not fully diffed yet 包含 apps details、skills body、some initial items](/assets/images/posts/2026-04-30-codex-source/context-memory/diff-scope.png)
+
+*图 8. `realtime` 属于 tracked updates；真正缺口是 initial context 中仍有部分 model-visible item 尚未完整 diff。*
+
+#### tracked 包括 realtime
+
+源码调用 `build_realtime_update_item`，所以把 realtime 归到 untracked 是错的。
+
+#### gap 不是丢失
+
+源码注释说明 settings diff 尚未覆盖 `build_initial_context` 的每一种 model-visible item。这是 coverage gap，不是说上下文一定丢。
+
+### 6.2 模型看到的是投影
+
+![模型视图分层图：instructions、developer items、user context、history messages、compact summary 汇入 Responses request](/assets/images/posts/2026-04-30-codex-source/context-memory/model-view-layers.png)
+
+*图 9. 模型看到的是投影后的请求形状，不等于 UI transcript 或 rollout storage 的原始形状。*
+
+#### history 不是唯一真相
+
+resume 还要读 rollout、replacement history 和 TurnContext metadata。
+
+#### diff 是优化
+
+tracked diff 减少重复注入，但不定义整个上下文系统的身份。
+
+## 七、memory：读路径进 prompt，写路径异步整理
+
+### 7.1 read path 是 developer prompt fragment
+
+[`build_memory_tool_developer_instructions`][memory-read-prompt] 读取 `memory_summary.md`，按 token limit 截断，渲染成 developer instructions；文件为空时返回 `None`。
+
+![memory read path 图：memory_summary.md 经 token limit 截断后进入 developer instructions，再成为 initial context；空文件不产生 item](/assets/images/posts/2026-04-30-codex-source/context-memory/memory-read-path.png)
+
+*图 10. memory read 有文件来源、截断策略和 developer-role 入口。*
+
+#### summary 存在才出现
+
+memory 开启不等于每轮都有额外上下文。
+
+#### 与 Claude Code 不同
+
+Claude Code 的 [Memory 文档][claude-memory] 描述的是可编辑的层级记忆文件；Codex 这里更像启动时读取 summary，再通过后台 pipeline 整理长期偏好。
+
+### 7.2 write path 是受限异步 pipeline
+
+[`start_memories_startup_task`][memory-start-task] 会跳过 ephemeral session、关闭 MemoryTool 的配置和 non-root agent session；通过 rate limit 后运行 phase 1 与 phase 2。
+
+![memory read/write 双通道图：read side 从 summary 进入 prompt，startup write side 执行 phase 1 filter 和 phase 2 consolidate](/assets/images/posts/2026-04-30-codex-source/context-memory/read-write.png)
+
+*图 11. 读路径进当前 prompt，写路径异步过滤并整理长期材料。*
+
+#### phase 1 过滤
+
+[`phase1.rs`][memory-phase1-filter] 会过滤 rollout response items、丢弃 developer messages、排除部分 contextual user fragment，并做 secret redaction。
+
+#### phase 2 收缩能力
+
+[`phase2.rs`][memory-phase2-agent] 把 consolidation agent 限制在 memory root，禁用 apps/plugins/memory/collab 等能力，并使用无网络 sandbox。
+
+## 八、compaction 是 history replacement
+
+### 8.1 pre-turn 与 mid-turn 不同
+
+[`InitialContextInjection`][compact-injection] 有 `DoNotInject` 和 `BeforeLastUserMessage` 两种策略。pre-turn/manual compaction 清掉 baseline；mid-turn compaction 要在最后一个真实 user message 前补回 initial context。
+
+![compaction checkpoint 图：old history 和 recent users 被 summary press 压缩为 CompactedItem 和 replacement history](/assets/images/posts/2026-04-30-codex-source/context-memory/compaction-checkpoint.png)
+
+*图 12. compaction 的产物不是普通 summary，而是带 replacement history 语义的 checkpoint。*
+
+#### pre-turn compact
+
+[`run_pre_sampling_compact`][run-pre-compact] 在超过 auto compact limit 时使用 `DoNotInject`。
+
+#### model downshift
+
+[`maybe_run_previous_model_inline_compact`][model-downshift-compact] 在切到更小 context window 时可能触发 pre-turn compact。
+
+#### mid-turn compact
+
+post-sampling 阶段若 token limit reached 且需要 follow-up，会用 [`BeforeLastUserMessage`][post-sampling-compact]。
+
+### 8.2 `CompactedItem` 是恢复锚点
+
+[`CompactedItem`][compacted-item] 包含 `message` 和可选 `replacement_history`；[`compact.rs`][compact-install] 会构造 replacement history 并调用 `replace_compacted_history`。
+
+#### summary 不是全部上下文
+
+summary 压缩旧 history；权限、cwd、model、memory、skills/apps 仍走自己的注入或 diff 路径。
+
+#### replacement history 决定 resume 起点
+
+没有 replacement history，恢复逻辑无法区分已替换的旧历史和仍需保留的新尾部。
+
+## 九、rollout 恢复与 rollout trace 要分开
+
+### 9.1 rollout JSONL 是生产恢复路径
+
+[`RolloutItem`][rollout-item] 是持久化结构；恢复逻辑在 [`rollout_reconstruction.rs`][rollout-reconstruction]。
+
+![rollout recovery 图：rollout JSONL newest-first reverse scan，找到 replacement history、TurnContext baseline 和 surviving tail](/assets/images/posts/2026-04-30-codex-source/context-memory/rollout-recovery.png)
+
+*图 13. Resume 从最新可存活 checkpoint 逆向扫描，再正向回放 surviving tail。*
+
+#### 逆向扫描
+
+`reconstruct_history_from_rollout` 从新到旧扫描，直到找到 replacement history、previous turn settings 和 reference context item。
+
+#### segment finalization
+
+`TurnStarted`、`TurnComplete`、`TurnAborted`、`UserMessage`、`TurnContext` 会被归并成可判断的 turn segment。
+
+#### tail replay
+
+拿到 checkpoint 后，还要向前 materialize newer suffix，保持 history semantics。
+
+### 9.2 rollout trace 是诊断图谱
+
+[`rollout-trace/README.md`][rollout-trace-readme] 明确说 tracing 不是 telemetry，只在 `CODEX_ROLLOUT_TRACE_ROOT` 设置时写本地 bundle，且 bundle 可能包含 prompts、responses、tool inputs/outputs、terminal output 和路径。
+
+![rollout trace 诊断图：opt-in trace bundle 写入 raw events，经 offline reducer 生成 semantic graph，同时标注 not resume state](/assets/images/posts/2026-04-30-codex-source/context-memory/trace-diagnostic.png)
+
+*图 14. trace 用来 observe first, interpret later；生产恢复语义仍在 rollout items 里。*
+
+#### trace 保存证据
+
+它解释某个 tool call、runtime output 或 agent notification 是怎么来的。
+
+#### trace 不决定 resume
+
+resume 走 rollout reconstruction，不走 trace graph。
+
+## 十、把系统压成可迁移规则
+
+<div class="wc-responsive-table-wrap">
+<table class="wc-responsive-table">
+  <thead><tr><th>层级</th><th>Codex 里的证据</th><th>读源码时要问的问题</th><th>常见误判</th></tr></thead>
+  <tbody>
+    <tr><td>Provider contract</td><td>Responses API 的 `instructions` / `input`</td><td>稳定基线和 conversation items 是否分开？</td><td>把 API 字段当成服务内部实现。</td></tr>
+    <tr><td>Initial context</td><td>`build_initial_context`、developer/user fragments</td><td>每个 fragment 的 role、来源和 feature gate 是什么？</td><td>把所有动态上下文都叫 system prompt。</td></tr>
+    <tr><td>Tracked diff</td><td>`reference_context_item`、`build_settings_update_items`</td><td>哪些字段被 diff，哪些仍需 full injection 或 replay？</td><td>认为 diff 已覆盖所有 initial items。</td></tr>
+    <tr><td>Memory</td><td>`memory_summary.md`、phase 1/phase 2 pipeline</td><td>这是读路径、写路径，还是整理 worker 的限制？</td><td>认为 memory 是无过滤的全量长期记录。</td></tr>
+    <tr><td>Compaction</td><td>`InitialContextInjection`、`CompactedItem.replacement_history`</td><td>这次 compact 是否补回 initial context？baseline 被清掉了吗？</td><td>把 compact summary 当成全部上下文。</td></tr>
+    <tr><td>Rollout recovery</td><td>`RolloutItem`、`reconstruct_history_from_rollout`</td><td>最新 surviving checkpoint 和 tail replay 怎么组合？</td><td>把 rollout trace 当成 resume 权威状态。</td></tr>
+  </tbody>
+</table>
+</div>
+
+![最终规则图：separate views、pin sources、diff tracked、compact with baseline、trace for diagnosis 汇成 prompt is a recoverable state system](/assets/images/posts/2026-04-30-codex-source/context-memory/final-rules.png)
+
+*图 15. 一个成熟 coding agent 的 prompt 不只是输入文本，而是可追踪、可压缩、可恢复的状态系统。*
+
+### 10.1 三条最短规则
+
+#### 先分视图
+
+UI transcript、model view、rollout storage、trace graph 不一定同形。
+
+#### 再看 baseline
+
+`base_instructions`、`reference_context_item`、`TurnContextItem` 分别解决不同恢复问题。
+
+#### 最后看替换语义
+
+compaction 和 resume 的关键不是摘要文本，而是 replacement history 与 surviving tail 如何接上。
 
 ## 参考
 
-- [OpenAI: Unrolling the Codex agent loop](https://openai.com/index/unrolling-the-codex-agent-loop/)
-- [Claude Code: How Claude remembers your project](https://code.claude.com/docs/en/memory)
+- Codex source snapshot: [`openai/codex@ac4332c05b11e00ae775a24cb762edc05c5b5932`][codex-snapshot]
+- OpenAI Responses API: [overview][responses-overview], [migration guide][responses-migrate], [`responses.create`][responses-create]
+- OpenAI: [Unrolling the Codex agent loop][openai-codex-loop]
+- Claude Code: [Memory][claude-memory]
 
-[session-spawn-base-instructions]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/session/mod.rs#L536
+[codex-snapshot]: https://github.com/openai/codex/tree/ac4332c05b11e00ae775a24cb762edc05c5b5932
+[responses-overview]: https://developers.openai.com/api/reference/responses/overview/
+[responses-migrate]: https://developers.openai.com/api/docs/guides/migrate-to-responses
+[responses-create]: https://developers.openai.com/api/reference/resources/responses/methods/create
+[openai-codex-loop]: https://openai.com/index/unrolling-the-codex-agent-loop/
+[claude-memory]: https://code.claude.com/docs/en/memory
+[session-spawn-base-instructions]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/session/mod.rs#L536-L547
+[build-initial-context]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/session/mod.rs#L2509-L2717
+[build-initial-context-memory]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/session/mod.rs#L2568-L2575
+[context-update-items]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/context_manager/updates.rs#L178-L201
+[record-context-updates]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/session/mod.rs#L2737-L2775
 [agents-md]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/agents_md.rs#L1-L17
 [agents-md-filenames]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/agents_md.rs#L36-L43
 [agents-global]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/agents_md.rs#L61-L78
-[agents-user-instructions]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/agents_md.rs#L82-L127
+[agents-user-instructions]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/agents_md.rs#L80-L127
 [context-user-instructions]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/context/user_instructions.rs#L1-L16
-[record-context-updates]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/session/mod.rs#L2737
-[build-initial-context]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/session/mod.rs#L2509
-[context-manager]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/context_manager/history.rs#L32-L51
-[context-updates]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/context_manager/updates.rs#L204-L238
 [available-skills-instructions]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/context/available_skills_instructions.rs#L23-L30
 [available-plugins-instructions]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/context/available_plugins_instructions.rs#L24-L57
 [apps-instructions]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/context/apps_instructions.rs#L11-L30
+[context-manager]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/context_manager/history.rs#L32-L51
+[context-updates]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/context_manager/updates.rs#L204-L238
 [memories-readme]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/memories/README.md#L1-L157
+[memory-read-prompt]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/memories/read/src/prompts.rs#L24-L52
+[memory-start-task]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/memories/write/src/start.rs#L16-L67
+[memory-phase1-filter]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/memories/write/src/phase1.rs#L394-L448
+[memory-phase2-agent]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/memories/write/src/phase2.rs#L291-L340
 [run-pre-compact]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/session/turn.rs#L701-L730
-[compact-rs]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/compact.rs#L46-L59
-[rollout-item]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/protocol/src/protocol.rs#L2791
-[rollout-reconstruction]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/session/rollout_reconstruction.rs#L89-L190
+[model-downshift-compact]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/session/turn.rs#L732-L777
+[post-sampling-compact]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/session/turn.rs#L456-L492
+[compact-injection]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/compact.rs#L46-L59
+[compact-install]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/compact.rs#L252-L279
+[rollout-item]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/protocol/src/protocol.rs#L2726-L2806
+[compacted-item]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/protocol/src/protocol.rs#L2801-L2806
+[rollout-reconstruction]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/core/src/session/rollout_reconstruction.rs#L86-L240
 [rollout-trace-readme]: https://github.com/openai/codex/blob/ac4332c05b11e00ae775a24cb762edc05c5b5932/codex-rs/rollout-trace/README.md#L1-L20
+
+<style>
+.wc-responsive-table-wrap { margin: 1.5rem 0 2rem; overflow-x: auto; }
+.wc-responsive-table { width: 100%; border-collapse: collapse; font-size: 0.94rem; }
+.wc-responsive-table th, .wc-responsive-table td { border: 1px solid rgba(15, 76, 129, 0.18); padding: 0.72rem 0.82rem; vertical-align: top; }
+.wc-responsive-table th { background: rgba(15, 76, 129, 0.08); color: #102a43; font-weight: 700; }
+.wc-responsive-table td:first-child { color: #0f4c81; font-weight: 700; white-space: nowrap; }
+@media (max-width: 760px) {
+  .wc-responsive-table-wrap { overflow-x: visible; }
+  .wc-responsive-table, .wc-responsive-table thead, .wc-responsive-table tbody, .wc-responsive-table th, .wc-responsive-table td, .wc-responsive-table tr { display: block; width: 100%; }
+  .wc-responsive-table thead { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; clip: rect(0 0 0 0); border: 0; }
+  .wc-responsive-table tr { margin: 0 0 1rem; border: 1px solid rgba(15, 76, 129, 0.18); border-radius: 8px; background: #fffffb; }
+  .wc-responsive-table td { border: 0; border-bottom: 1px solid rgba(15, 76, 129, 0.12); padding: 0.76rem 0.9rem; }
+  .wc-responsive-table td:last-child { border-bottom: 0; }
+  .wc-responsive-table td::before { content: attr(data-label); display: block; margin-bottom: 0.24rem; color: #52606d; font-size: 0.78rem; font-weight: 700; }
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".wc-responsive-table").forEach(function (table) {
+    const headers = Array.from(table.querySelectorAll("thead th")).map(function (th) { return th.textContent.trim(); });
+    table.querySelectorAll("tbody tr").forEach(function (row) {
+      Array.from(row.children).forEach(function (cell, index) { if (headers[index]) cell.setAttribute("data-label", headers[index]); });
+    });
+  });
+});
+</script>
