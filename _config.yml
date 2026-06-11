@@ -180,6 +180,7 @@ exclude:
   - CHANGELOG
   - config
   - Gemfile
+  - "*.gemspec"
   - Gruntfile.js
   - gulpfile.js
   - incomplete
