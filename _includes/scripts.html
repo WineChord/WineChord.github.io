@@ -6,6 +6,23 @@
   <script src="{{ '/assets/js/main.min.js' | relative_url }}"></script>
 {% endif %}
 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".page__content table").forEach(function (table) {
+      if (table.closest(".highlight")) return;
+      var headers = Array.from(table.querySelectorAll("thead th")).map(function (th) {
+        return th.textContent.trim();
+      });
+      if (!headers.length) return;
+      table.querySelectorAll("tbody tr").forEach(function (row) {
+        Array.from(row.children).forEach(function (cell, index) {
+          if (headers[index]) cell.setAttribute("data-label", headers[index]);
+        });
+      });
+    });
+  });
+</script>
+
 {% if site.search == true or page.layout == "search" %}
   {%- assign search_provider = site.search_provider | default: "lunr" -%}
   {%- case search_provider -%}
