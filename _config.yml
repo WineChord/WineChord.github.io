@@ -24,7 +24,7 @@ name                     : "" # "Wine & Chord"
 description              : ""
 url                      : "https://www.wineandchord.com" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "/" # the subpath of your site, e.g. "/blog"
-repository               : "winechord/minimal-mistakes" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
+repository               : "WineChord/WineChord.github.io" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
@@ -102,6 +102,7 @@ social:
   type                   : # Person or Organization (defaults to Person)
   name                   : # If the user or organization name differs from the site's name
   links: # An array of links to social media profiles
+    - "https://github.com/WineChord"
 
 # Analytics
 analytics:
@@ -113,9 +114,9 @@ analytics:
 
 # Site Author
 author:
-  name             : # "Wine & Chord"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : 
+  name             : "Wine & Chord"
+  avatar           : "/assets/images/wineandchord.png"
+  bio              : "工程、LLM、算法与源码阅读笔记。"
   location         : 
   email            : # guoqizhou19@gmail.com
   links:
@@ -149,7 +150,7 @@ footer:
       # url:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url:
+      url: "https://github.com/WineChord"
     - label: "GitLab"
       icon: "fab fa-fw fa-gitlab"
       # url:

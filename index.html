@@ -1,4 +1,53 @@
 ---
 layout: home
 author_profile: true
+classes: wc-home
+excerpt: "Wine & Chord 的工程笔记、在线书与源码阅读。"
 ---
+
+<section class="wc-home-hero" aria-labelledby="wc-home-title">
+  <div class="wc-home-hero__copy">
+    <p class="wc-home-kicker">Wine & Chord</p>
+    <h1 id="wc-home-title">工程笔记、在线书和源码阅读。</h1>
+    <p>
+      这里长期沉淀 LLM runtime、agent 工程、算法题册、系统设计和源码剖析。
+      短文留在博客流里，成体系的内容整理到 Books。
+    </p>
+    <div class="wc-home-actions">
+      <a class="wc-home-button wc-home-button--primary" href="/books/">进入 Books</a>
+      <a class="wc-home-button" href="https://github.com/WineChord" rel="nofollow noopener noreferrer">GitHub</a>
+    </div>
+  </div>
+  <a class="wc-home-mark" href="/books/" aria-label="Wine & Chord Books">
+    <img src="/assets/images/wineandchord.png" alt="Wine & Chord logo" loading="eager" decoding="async">
+  </a>
+</section>
+
+<section class="wc-home-books" aria-labelledby="wc-home-books-title">
+  <div class="wc-home-section-head">
+    <p class="wc-home-kicker">Books</p>
+    <h2 id="wc-home-books-title">更适合连续读的内容</h2>
+  </div>
+  <div class="wc-home-books__grid">
+    <a class="wc-home-book wc-home-book--featured" href="/books/codex-context-management/">
+      <span class="wc-home-book__eyebrow">Prompt Cache / Context / Compaction</span>
+      <strong>Codex Context Management</strong>
+      <span>从上下文预算、历史账本、typed fragments 到 compaction 和 replay，解释 agent runtime 怎样让长线程保持一致。</span>
+    </a>
+    <a class="wc-home-book" href="/books/leetcode/">
+      <span class="wc-home-book__eyebrow">Frequency / Hot 100 / Local Practice</span>
+      <strong>LeetCode Frequency 888</strong>
+      <span>力扣中国区高频题册，带筛选、题面预览、做题标记和本地提交辅助。</span>
+    </a>
+    <a class="wc-home-book" href="/books/codex-from-source/">
+      <span class="wc-home-book__eyebrow">Source Reading</span>
+      <strong>Codex From Source</strong>
+      <span>用源码路径重建 Codex CLI 的协议边界、工具执行、沙箱、插件和多 agent 协作。</span>
+    </a>
+    <a class="wc-home-book" href="/books/design/">
+      <span class="wc-home-book__eyebrow">System Design</span>
+      <strong>System Design Interview Book</strong>
+      <span>从设计 ChatGPT 出发，把产品面、推理服务、RAG、工具调用和安全边界串起来。</span>
+    </a>
+  </div>
+</section>
