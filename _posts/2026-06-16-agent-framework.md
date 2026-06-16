@@ -9,10 +9,10 @@ categories:
   - Thoughts
 tags:
   - Agent
-toc: true
-toc_sticky: true
-toc_label: "目录"
-toc_levels: 2..4
+# toc: true
+# toc_sticky: true
+# toc_label: "目录"
+# toc_levels: 2..4
 mathjax: true
 ---
 
